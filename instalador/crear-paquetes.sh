@@ -268,8 +268,12 @@ descargar_modelo_idioma() {
     # casa coa fixada, é mellor fallar aquí ca publicar outro paquete que
     # detecte peor en silencio
     local esixido
-    esixido=$(unzip -p "$destino/${MODELO_IDIOMA}-py3-none-any.whl" "*/meta.json" 2>/dev/null \
-        | tr ',' '\n' | grep -m1 '"spacy_version"' | cut -d'"' -f4)
+    # (en Python e non con unzip|tr|grep -m1: co "pipefail" de arriba, o
+    # grep que remata antes ca tr facía fallar o script -- visto no CI)
+    esixido=$(python3 -c 'import json, sys, zipfile
+z = zipfile.ZipFile(sys.argv[1])
+meta = [n for n in z.namelist() if n.endswith("/meta.json")]
+print(json.load(z.open(meta[0])).get("spacy_version", "") if meta else "")' "$destino/${MODELO_IDIOMA}-py3-none-any.whl")
     log "O modelo pide spaCy: ${esixido:-descoñecido}"
     case "$esixido" in
         *">=3.7"*) : ;;
