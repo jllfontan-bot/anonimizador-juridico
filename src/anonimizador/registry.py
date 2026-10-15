@@ -515,8 +515,8 @@ class RexistroCorrespondencias:
 
         if coincidencias:
             motivo = (
-                f"posible homonimo: o nome '{grupo.representante}' coincide con "
-                f"{', '.join(coincidencias)} sen DNI que o confirme — verificar se e a mesma persoa"
+                f"posible homónimo: o nome '{grupo.representante}' coincide con "
+                f"{', '.join(coincidencias)} sen DNI que o confirme"
             )
             self._rexistrar_auditoria("crear_posible_homonimo", codigo, motivo)
             return codigo, True, motivo, coincidencias

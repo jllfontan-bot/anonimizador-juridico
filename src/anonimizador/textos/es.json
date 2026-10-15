@@ -5,7 +5,7 @@
  "auto.correctos": "{n} de {total} archivo(s) anonimizado(s) correctamente",
  "auto.erros": "<strong>{n} archivo(s) NO se pudieron anonimizar</strong> (el resto del lote sí se procesó):",
  "auto.fugas": "⚠ {n} posible(s) fuga(s) sin detectar en total: ningún sistema de detección puede garantizar que cubre todos los formatos posibles de un documento real. Revisa los archivos marcados abajo con una lectura completa antes de darlos por buenos: cada uno tiene debajo el botón «Revisar este documento», que abre su revisión con los mismos códigos.",
- "auto.homonimos": "Cualquier posible homónimo detectado ha recibido por defecto un código NUEVO (nunca se fusiona automáticamente): revisa la columna «marcada(s)» de abajo si quieres confirmarlo a mano en la auditoría del registro.",
+ "auto.homonimos": "Cualquier posible homónimo detectado ha recibido un código NUEVO (nunca se fusiona): la columna «marcada(s)» de abajo indica cuántos hay en cada documento.",
  "auto.resumo": "{marcadas} persona(s) marcada(s) como posible homónimo, {mosaico} riesgo(s) de efecto mosaico",
  "auto.resumo_categoria": "{n} dato(s) de categoría especial (salud, religión, orientación sexual o afiliación sindical)",
  "auto.resumo_exentos": "{n} persona(s) exenta(s) por cargo público",
@@ -23,7 +23,7 @@
  "comun.motivo": "Motivo (obligatorio)",
  "comun.omitidos": "{n} archivo(s) omitido(s) (formato no soportado o resultados de una pasada anterior, .anonimizado).",
  "comun.outro_documento": "← Anonimizar otro documento",
- "confirmado.gardado": "Documento guardado en <code>{ruta}</code>. Las decisiones de la revisión (fusiones y personas descartadas) han quedado registradas en la auditoría cifrada del registro.",
+ "confirmado.gardado": "Documento guardado en <code>{ruta}</code>. Las decisiones de la revisión (personas mantenidas y descartadas) han quedado registradas en la auditoría cifrada del registro.",
  "confirmado.texto_final": "Texto final",
  "confirmado.titulo": "Revisión confirmada",
  "contrasinal.actual": "Contraseña actual",
@@ -117,7 +117,7 @@
  "inicio.listado": "Listado completo de correspondencias →",
  "inicio.listado_nota": "Todas las correspondencias de un registro de una vez. Misma contraseña y motivo obligatorio; queda registrado como acceso masivo.",
  "inicio.modo": "¿Cómo quieres procesar el/los documento(s)?",
- "inicio.modo_automatico": "Anonimización automática: guarda directamente, sin pedir confirmación (un posible homónimo nunca se fusiona solo; queda como persona nueva)",
+ "inicio.modo_automatico": "Anonimización automática: guarda directamente, sin pedir confirmación (un posible homónimo nunca se fusiona: queda como persona nueva)",
  "inicio.modo_revisar": "Comprobar antes de guardar: revisa las personas detectadas, las posibles fugas y los riesgos de efecto mosaico antes de confirmar",
  "inicio.outro_rexistro": "Ver revisiones pendientes de otra carpeta de registro (por ejemplo, tras reiniciar el programa)",
  "inicio.pendente_resumo": "{marcadas} persona(s) marcada(s), {mosaico} riesgo(s) de efecto mosaico",
@@ -170,6 +170,7 @@
  "msx.contrasinal_incorrecta": "contraseña de reversión incorrecta",
  "msx.dni_distintos": "{a} y {b} tienen DNI distintos confirmados: no se pueden fusionar",
  "msx.homonimo": "posible homónimo: el nombre '{nome}' coincide con {codigos} sin DNI que lo confirme",
+ "msx.homonimo_antigo": "posible homónimo: el nombre '{nome}' coincide con {codigos} sin DNI que lo confirme",
  "msx.listado_motivo": "el listado completo requiere un motivo; queda registrado en la auditoría",
  "msx.liñas": "el texto tiene {n} línea(s) pero el documento original espera {m} (contando saltos de línea manuales dentro de cada párrafo, en {p} párrafo(s)): no se puede conservar {resto}",
  "msx.modelo": "el modelo de idioma {modelo} {version} necesita spaCy {esixido}, pero está instalada la {instalada}: la detección de nombres empeora sin avisar (membretes marcados como personas, apellidos que se escapan). Reinstala el programa con un paquete en el que las dos versiones se correspondan.",
@@ -256,5 +257,6 @@
  "web.sen_rexistro_identidade": "No se ha encontrado ningún registro en \"{ruta}\": comprueba la ruta (un registro nuevo vacío no tiene ninguna identidad que revertir)",
  "web.sen_soportados": "No se ha encontrado ningún documento soportado en: {ruta}",
  "web.traballo_descoñecido": "Trabajo desconocido (¿se ha reiniciado el programa?)",
- "web.traballo_fallou": "El trabajo no se pudo completar: {erro}"
+ "web.traballo_fallou": "El trabajo no se pudo completar: {erro}",
+ "web.ficheiro_danado": "el archivo está dañado o no es del tipo que indica su extensión"
 }

@@ -88,7 +88,7 @@
   {% for p in persoas_marcadas %}
   <div class="tarxeta marcada">
     <span class="codigo">{{ p.codigo }}</span>
-    <div class="mencions">{{ t("revisar.mencions") }} {{ p.mencions|join(", ") }}</div>
+    <div class="mencions">{{ t("revisar.mencions") }} {{ p.mencions|unique|join(", ") }}</div>
     <div class="motivo">{{ traducir(p.motivo) }}</div>
     <div class="mencions">{{ t("revisar.homonimo_separado") }}</div>
   </div>
@@ -135,7 +135,7 @@
   <label class="tarxeta" style="display:block; margin-top:6px;">
     <input type="checkbox" name="anonimizar" value="{{ p.codigo }}"{% if not proposto_non %} checked{% endif %}>
     <span class="codigo">{{ p.codigo }}</span>
-    <span class="mencions">{{ p.mencions|join(", ") }}</span>
+    <span class="mencions">{{ p.mencions|unique|join(", ") }}</span>
     {% if proposto_non %}<span class="motivo"> — proposta de Claude: non é persoa</span>{% endif %}
   </label>
   {% endfor %}

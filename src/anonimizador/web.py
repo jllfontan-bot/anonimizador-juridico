@@ -481,6 +481,19 @@ def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None,
     }, None
 
 
+# Excepcións das librarías de lectura cando o ficheiro está estragado ou non
+# é do formato que di a súa extensión: ao usuario non lle di nada o nome
+# técnico en inglés (queda no log co traceback).
+_ERROS_FICHEIRO_DANADO = {"FileDataError", "EmptyFileError", "UnidentifiedImageError",
+                          "BadZipFile", "PackageNotFoundError"}
+
+
+def _mensaxe_erro(e: Exception) -> str:
+    if type(e).__name__ in _ERROS_FICHEIRO_DANADO:
+        return idioma.t("web.ficheiro_danado")
+    return f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"
+
+
 def _executar_traballo(traballo: dict) -> None:
     try:
         rexistro = _abrir_rexistro(traballo["rexistro_dir"])
@@ -499,7 +512,7 @@ def _executar_traballo(traballo: dict) -> None:
                     )
             except Exception as e:  # un ficheiro roto NON debe tirar o resto do lote
                 traceback.print_exc()
-                traballo["erros"].append({"ruta": ficheiro, "mensaxe": f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"})
+                traballo["erros"].append({"ruta": ficheiro, "mensaxe": _mensaxe_erro(e)})
             traballo["feitos"] += 1
         traballo["estado"] = "cancelado" if traballo["cancelar"].is_set() and traballo["feitos"] < len(traballo["ficheiros"]) else "rematado"
     except Exception as e:

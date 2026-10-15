@@ -216,6 +216,18 @@ class TestInterfaceEnCastelan(unittest.TestCase):
         self.assertIn("Página 1 de 1", texto)
         self.assertNotIn("PERSOA_", texto)
 
+    def test_ficheiro_estragado_explicase_sen_o_erro_tecnico(self):
+        import fitz
+        from PIL import Image, UnidentifiedImageError
+        from anonimizador import web
+        with self.assertRaises(Exception) as pdf_roto:
+            fitz.open(stream=b"isto non e un pdf", filetype="pdf")
+        for e in (pdf_roto.exception, UnidentifiedImageError("x")):
+            with self.subTest(erro=type(e).__name__):
+                self.assertEqual(web._mensaxe_erro(e),
+                                 "el archivo está dañado o no es del tipo que indica su extensión")
+        self.assertTrue(web._mensaxe_erro(ValueError("outra cousa")).startswith("ValueError: "))
+
 
 if __name__ == "__main__":
     unittest.main()

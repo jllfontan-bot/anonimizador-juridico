@@ -42,6 +42,24 @@ T = {
 }[LINGUA]
 
 
+CHAVEIRO_PROBA = """from keyring.backend import KeyringBackend
+
+
+class Memoria(KeyringBackend):
+    priority = 1
+    _datos = {}
+
+    def get_password(self, servizo, usuario):
+        return self._datos.get((servizo, usuario))
+
+    def set_password(self, servizo, usuario, contrasinal):
+        self._datos[(servizo, usuario)] = contrasinal
+
+    def delete_password(self, servizo, usuario):
+        self._datos.pop((servizo, usuario), None)
+"""
+
+
 def esperar_servidor():
     for _ in range(60):
         try:
@@ -54,16 +72,21 @@ def esperar_servidor():
 
 def captura_progreso(pg, nome, minimo=4, cancelar=False):
     """Agarda a que o lote vaia polo ficheiro `minimo` e fai a captura."""
-    for _ in range(600):
+    pg.evaluate("document.querySelectorAll('details').forEach(d => d.open = false); window.scrollTo(0, 0)")
+    limite = time.time() + 600  # neste ordenador o primeiro ficheiro pode tardar bastante
+    while time.time() < limite:
         txt = pg.inner_text("#progreso-ficheiro") if pg.is_visible("#progreso") else ""
         m = re.match(T["ficheiro"] + r" (\d+) de", txt)
         if m and int(m.group(1)) >= minimo and "restante" in pg.inner_text("#progreso-detalle"):
             break
         time.sleep(0.03)
+    else:
+        raise RuntimeError(f"{nome}: o lote non chegou ao ficheiro {minimo}")
     if cancelar:
         pg.click("#progreso-cancelar")
     time.sleep(0.45)  # deixa rematar a animación da barra
-    pg.screenshot(path=str(IMG / nome), clip={"x": 0, "y": 0, "width": 980, "height": 410})
+    caixa = pg.locator("#progreso").bounding_box()
+    pg.screenshot(path=str(IMG / nome), clip={"x": 0, "y": 0, "width": 980, "height": caixa["y"] + caixa["height"] + 30})
     print("captura", nome)
 
 
@@ -91,9 +114,15 @@ def main():
         [str(PY), str(RAIZ / "docs/fonte/datos_exemplo.py"), str(BASE), LINGUA], text=True)
     exp = Path(saida.strip().splitlines()[-1])  # PyMuPDF pode escribir avisos antes da ruta
     rex = BASE / "datos_rexistro"
-    env = {"PYTHONPATH": str(RAIZ / "src"), "PATH": "/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin",
-           "HOME": str(Path.home()), "ANONIMIZADOR_IDIOMA": LINGUA}
-    servidor = subprocess.Popen([str(PY), "-m", "anonimizador.cli", "servir", "--porto", str(PORTO)],
+    # A clave vai nun "chaveiro" en memoria, coma a do programa instalado en
+    # Windows (Administrador de credenciais); así as pantallas din o mesmo
+    # ca alí e non se toca o chaveiro real de quen fai as capturas.
+    (BASE / "chaveiro_proba.py").write_text(CHAVEIRO_PROBA)
+    env = {"PYTHONPATH": f"{RAIZ / 'src'}:{BASE}", "PATH": "/usr/bin:/bin:/usr/local/bin",
+           "HOME": str(Path.home()), "ANONIMIZADOR_IDIOMA": LINGUA,
+           "PYTHON_KEYRING_BACKEND": "chaveiro_proba.Memoria"}
+    servidor = subprocess.Popen([str(PY), "-m", "anonimizador.cli", "servir", "--porto", str(PORTO),
+                                 "--chaveiro-sistema"],
                                 cwd=BASE, env=env, stdout=subprocess.DEVNULL, stderr=open(BASE / "servidor.log", "w"))
     try:
         esperar_servidor()
