@@ -90,7 +90,7 @@ falta rexeneralos para construír).
 
 ## Outros ficheiros
 
-- `LEEME.txt` / `LEEME.pdf` — nota de benvida (mesmo contido nos dous formatos;
+- `LEEME.txt` / `LEEME.pdf` (galego) e `LEEME.es.txt` / `LEEME.es.pdf` (castelán) — nota de benvida (mesmo contido nos dous formatos;
   o PDF segue o mesmo estilo visual có resto de informes).
 - `bundle/` — utilidades de montaxe: `resolve_deps_pe.py` (bibliotecas que
   precisa `tesseract.exe`) e `montar_site_packages.py`.

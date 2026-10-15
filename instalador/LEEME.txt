@@ -1,69 +1,68 @@
-ANONIMIZADOR DE EXPEDIENTES XURÍDICOS — QUE FACER CON ESTE CARTAFOL
-====================================================================
+ANONIMIZADOR DE EXPEDIENTES XURÍDICOS — QUE FACER CON ESTE PROGRAMA
+===================================================================
 
-1. Le primeiro "02-Guia-de-instalacion.pdf" e segue os pasos para o teu
-   sistema operativo (Mac ou Windows). En Windows tamén chega con facer
-   dobre clic no instalador .exe (ver o apartado WINDOWS máis abaixo).
+1. Instálao dende a Microsoft Store. Busca «Anonimizador jurídico» na
+   Microsoft Store e preme «Obter». A «02-Guia-de-instalacion.pdf» explica
+   o proceso, onde quedan os teus datos e como pasar dende a versión
+   anterior.
 
-2. Unha vez instalado, usa "03-Manual-de-uso.pdf" para aprender a
-   anonimizar documentos coa interface web.
+2. Usa «03-Manual-de-uso.pdf». Aprende a anonimizar documentos coa
+   interface, paso a paso e con capturas reais. Tamén se abre dende a
+   ligazón «Manual de uso (PDF)» da pantalla de inicio do programa.
 
-3. "01-Caracteristicas-tecnicas-e-seguridade.pdf" é opcional — detalla
-   como funciona por dentro e que garantías de seguridade ten, por se
-   che interesa ou o precisas para xustificar o seu uso.
+3. «01-Caracteristicas-tecnicas-e-seguridade.pdf». Detalla como funciona
+   por dentro e que garantías de seguridade ten, por se che interesa ou o
+   precisas para xustificar o seu uso.
 
-WINDOWS
---------
-En Windows non hai cartafol nin scripts: recibes un único ficheiro,
-"Anonimizador-Xuridico-Instalador-<versión>.exe".
+WINDOWS E A MICROSOFT STORE
+---------------------------
 
-- Instalar: dobre clic no .exe. Ábrese un asistente normal de Windows
-  (benvida, cartafol, barra de progreso en porcentaxe, remate). Non precisa
-  permisos de administrador nin conexión a internet. Se Windows amosa un
-  aviso azul de SmartScreen ("Windows protexeu o seu PC"), preme "Máis
-  información" e despois "Executar de todos modos": o instalador aínda non
-  leva sinatura dixital, o aviso non indica ningún problema.
-- Usar: menú Inicio > "Anonimizador xurídico" (tamén hai un acceso ao manual
-  de uso). Ao remate da instalación podes marcar tamén un acceso directo no
-  escritorio.
-- Desinstalar: Configuración de Windows > Aplicacións > Aplicacións instaladas
-  > "Anonimizador de expedientes xurídicos" > Desinstalar (ou o acceso
-  "Desinstalar" do menú Inicio). Os rexistros cifrados de correspondencias
-  non se borran sen preguntar antes: sen eles non se pode reverter a
-  anonimización dos documentos xa anonimizados.
+O programa distribúese só para Windows 10 (versión 2004 ou posterior) e
+Windows 11, de 64 bits, dende a Microsoft Store. Non hai versión para Mac
+nin para Linux.
 
-A CLAVE E O CONTRASINAL (LÉEO ANTES DE EMPEZAR)
-------------------------------------------------
+- INSTALAR: Microsoft Store > «Anonimizador jurídico» > «Obter». Non hai
+  asistente nin aviso de SmartScreen, non pide permisos de administrador
+  nin conta, e leva dentro todo o necesario (Python, OCR e o modelo de
+  idioma). Despois do primeiro uso, funciona sen conexión a internet.
+- USAR: menú Inicio > «Anonimizador jurídico». Ábrese na súa propia xanela
+  (non no navegador). Os teus datos quedan en Documentos\Anonimizador; a
+  ligazón «Acerca deste programa» da pantalla de inicio amosa a versión, a
+  licenza (AGPL-3.0) e o código fonte.
+- DESINSTALAR: Configuración de Windows > Aplicacións > Aplicacións
+  instaladas > «Anonimizador jurídico» > Desinstalar. Os rexistros
+  cifrados de correspondencias (Documentos\Anonimizador) e a súa clave NON
+  SE BORRAN: sen eles non se pode reverter a anonimización dos documentos
+  xa anonimizados.
+
+A CLAVE E O CONTRASINAL — LÉEO ANTES DE EMPEZAR
+-----------------------------------------------
+
 Os nomes reais non quedan nos documentos anonimizados: gárdanse nun
 rexistro CIFRADO que relaciona cada código (PERSOA_000001) coa persoa real
-e o seu DNI. Protéxeno DOUS segredos distintos:
+e o seu DNI. Protéxeno DOUS SEGREDOS DISTINTOS:
 
-1) A CLAVE DO REXISTRO. Créaa o programa só e ninguén a escribe. Sen ela o
-   rexistro non se pode descifrar nunca máis. Garda unha copia de
-   seguridade (a pantalla de inicio do programa di onde está).
-2) O CONTRASINAL DE REVERSIÓN. Escríbeo ti unha vez, na pantalla de
-   inicio. Pídese cada vez que alguén quere ver unha identidade real, o
-   listado completo de correspondencias ou o seu PDF CONFIDENCIAL, e cada
-   uso queda rexistrado nunha auditoría cifrada.
+- A CLAVE DO REXISTRO. Créaa o programa só e ninguén a escribe. Sen ela o
+  rexistro non se pode descifrar nunca máis: garda unha copia de
+  seguridade (a pantalla de inicio do programa di onde está).
+- O CONTRASINAL DE REVERSIÓN. Escríbeo ti unha vez, na pantalla de inicio.
+  Pídese cada vez que alguén quere ver unha identidade real, o listado
+  completo de correspondencias ou o seu PDF CONFIDENCIAL, e cada uso queda
+  nunha auditoría cifrada.
 
-O PDF do listado leva a marca de auga "CONFIDENCIAL": é un documento de
-extrema sensibilidade. Non o envíes por correo nin o deixes nun cartafol
+O PDF do listado leva a marca de auga «CONFIDENCIAL»: é un documento de
+EXTREMA SENSIBILIDADE. Non o envíes por correo nin o deixes nun cartafol
 compartido, e destrúeo cando xa non faga falta.
 
-MAC E LINUX (cartafol comprimido)
-----------------------------------
-- instalar-mac.command / instalar-linux.sh    → executar UNHA SOA VEZ
-- Iniciar-Anonimizador.command / .sh           → executar cada vez que
-  queiras usar o programa
-- anonimizador-xuridico/                       → o programa en si (non
-  fai falta abrir nada de dentro directamente)
-- os PDF explicados arriba
+SE TES A VERSIÓN ANTERIOR (INSTALADOR .EXE)
+-------------------------------------------
 
-  EN LINUX (Ubuntu): NON fagas doble clic nos .sh -- o sistema ábreos no
-  editor de texto en vez de executalos. Abre un terminal na carpeta e
-  escribe:  bash instalar-linux.sh
-  Despois, o programa abre dende o menú de aplicacións ("Anonimizador"),
-  que crea o propio instalador, ou con:  bash Iniciar-Anonimizador.sh
+Se xa tiñas instalada a versión do instalador .exe, a primeira vez que
+abras a da Store cópiase o teu rexistro a Documentos\Anonimizador (o
+orixinal non se toca) e a pantalla de inicio avísao. Dende entón usa só a
+versión da Store e desinstala a anterior, respondendo NON cando pregunte
+se borra os rexistros. O apéndice B da guía de instalación explica o
+instalador clásico.
 
 Calquera dúbida, o manual de uso e a guía de instalación cobren os casos
 máis habituais, incluída unha táboa de solución de problemas.

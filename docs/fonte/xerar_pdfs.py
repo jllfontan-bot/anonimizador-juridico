@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Xera os PDF de documentación a partir dos HTML de docs/fonte/.
 
-    python3 docs/fonte/xerar_pdfs.py            # os catro
-    python3 docs/fonte/xerar_pdfs.py 02 03      # só algúns (01, 02, 03, 04, 05, 06, 07, leeme, 01es, 03es)
+    python3 docs/fonte/xerar_pdfs.py            # todos
+    python3 docs/fonte/xerar_pdfs.py 02 03      # só algúns (01, 02, 03, 04, 05, 06, 07, leeme, 01es, 02es, 03es, leemees)
 
 Imprime cada HTML a PDF con Chrome/Chromium en modo headless (o mesmo
 método co que se fixeron os PDF orixinais). Non precisa instalar nada: só
@@ -12,6 +12,7 @@ un Chrome, Chromium ou Edge. Ruta propia: variable de contorno CHROME.
   02-guia-de-instalacion.html                   -> docs/02-Guia-de-instalacion.pdf
   03-manual-de-uso.html                         -> docs/03-Manual-de-uso.pdf
   leeme.html                                    -> instalador/LEEME.pdf  (mesmo contido ca instalador/LEEME.txt)
+  (en castelán: *.es.html -> docs/es/, e leeme.es.html -> instalador/LEEME.es.pdf, igual ca LEEME.es.txt)
 
 As imaxes están en docs/fonte/img/. As capturas da interface web fanse con
 docs/fonte/capturar_pantallas.py (datos sintéticos). As do asistente de
@@ -40,7 +41,9 @@ DOCUMENTOS = {
     "leeme": ("leeme.html", RAIZ / "instalador" / "LEEME.pdf"),
     # en castelán
     "01es": ("01-caracteristicas-tecnicas-y-seguridad.es.html", RAIZ / "docs" / "es" / "01-Caracteristicas-tecnicas-y-seguridad.pdf"),
+    "02es": ("02-guia-de-instalacion.es.html", RAIZ / "docs" / "es" / "02-Guia-de-instalacion.pdf"),
     "03es": ("03-manual-de-uso.es.html", RAIZ / "docs" / "es" / "03-Manual-de-uso.pdf"),
+    "leemees": ("leeme.es.html", RAIZ / "instalador" / "LEEME.es.pdf"),
 }
 
 CANDIDATOS = [

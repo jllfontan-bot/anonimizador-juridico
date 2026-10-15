@@ -9,12 +9,12 @@
 
 <div class="portada">
   <span class="chip">Guía de instalación · Anonimizador de expedientes xurídicos</span>
-  <h1>Instalación paso a paso, en Windows, Mac e Linux</h1>
-  <p class="lede">O paquete inclúe todo o necesario (Python, OCR, librarías e modelo de idioma): non hai que instalar nada máis nin ter conexión a internet. Inclúe verificación final, solución de problemas habituais, e un apéndice cos procedementos legais e organizativos a ter en conta se este sistema se vai usar de forma continuada.</p>
+  <h1>Instalación dende a Microsoft Store, paso a paso</h1>
+  <p class="lede">O programa instálase coma calquera outra aplicación da Microsoft Store e leva dentro todo o necesario (Python, OCR, librarías e modelo de idioma): non hai que instalar nada máis, e despois funciona sen conexión a internet. Inclúe onde quedan os teus datos, como pasar dende a versión anterior do programa, verificación final, solución de problemas habituais e un apéndice cos procedementos legais e organizativos a ter en conta se este sistema se vai usar de forma continuada.</p>
   <div class="meta">
-    <div><span>Sistemas cubertos</span>Windows 10/11 · macOS · Linux</div>
-    <div><span>Tempo estimado</span>5–10 minutos</div>
-    <div><span>Data</span>Setembro de 2026</div>
+    <div><span>Sistema</span>Windows 10 (versión 2004 ou posterior) ou Windows 11, de 64 bits</div>
+    <div><span>Tempo estimado</span>5 minutos</div>
+    <div><span>Data</span>Outubro de 2026</div>
   </div>
 </div>
 
@@ -22,178 +22,114 @@
 <table>
   <thead><tr><th style="width:24%">Requisito</th><th>Detalle</th></tr></thead>
   <tbody>
-    <tr><td>Sistema operativo</td><td><strong>Windows</strong> 10 ou 11 (64 bits) · <strong>macOS</strong> 12 ou posterior (Intel ou Apple Silicon) · <strong>Linux</strong> (Ubuntu ou similar, 64 bits)</td></tr>
-    <tr><td>Python, Tesseract e librarías</td><td><strong>Non hai que instalar nada.</strong> O paquete xa leva dentro Python, Tesseract (OCR en galego e castelán), todas as librarías e o modelo de idioma.</td></tr>
-    <tr><td>Espazo en disco</td><td>Windows: uns 650 MB (o asistente amosa o espazo necesario). Mac e Linux: convén ter uns 2 GB libres durante a instalación (o paquete comprimido ocupa uns 450 MB).</td></tr>
+    <tr><td>Sistema operativo</td><td><strong>Windows 10</strong> (versión 2004 ou posterior) ou <strong>Windows 11</strong>, de 64 bits. Non hai versión para Mac nin para Linux.</td></tr>
+    <tr><td>Python, Tesseract e librarías</td><td><strong>Non hai que instalar nada.</strong> O paquete da Store xa leva dentro Python, Tesseract (OCR en galego e castelán), todas as librarías e o modelo de idioma.</td></tr>
+    <tr><td>Espazo en disco</td><td>Uns 650 MB (a Store amosa o tamaño exacto antes de instalar).</td></tr>
     <tr><td>Memoria RAM</td><td>8 GB recomendados; non precisa tarxeta gráfica (GPU).</td></tr>
-    <tr><td>Internet</td><td><strong>Non fai falta</strong>, nin sequera para instalar: todo vai dentro do paquete. O uso diario é 100 % local.</td></tr>
-    <tr><td>Permisos</td><td>En Windows a instalación é <strong>por usuario</strong>: non pide permisos de administrador.</td></tr>
-    <tr><td>Só en Windows</td><td>Compoñente de Windows <em>Microsoft Edge WebView2 Runtime</em>, co que o programa amosa a súa xanela. Vén instalado en Windows 11; en Windows 10 pode faltar (o instalador avisa; é gratuíto e descárgase da páxina de Microsoft). Se falta, o programa ofrece abrirse no navegador.</td></tr>
+    <tr><td>Internet</td><td>Só para descargar o programa da Store e para recibir as actualizacións. <strong>O uso diario é 100 % local</strong>: o programa non se conecta a internet.</td></tr>
+    <tr><td>Contas e permisos</td><td>O programa é gratuíto e non precisa conta nin rexistro de ningún tipo. Tampouco pide permisos de administrador.</td></tr>
+    <tr><td>WebView2</td><td>Compoñente de Windows <em>Microsoft Edge WebView2 Runtime</em>, co que o programa amosa a súa xanela. Vén con Windows 11 e cos Windows 10 actualizados. Se faltase, o programa avisa e ofrece abrirse no navegador; o compoñente é gratuíto e descárgase da páxina de Microsoft.</td></tr>
   </tbody>
 </table>
 
 <div class="aviso">
   <h4>Antes de empezar — copia de seguridade</h4>
-  <p>Se algunha vez se perde a clave de cifrado (o ficheiro <code>clave.key</code>, ou a entrada correspondente no chaveiro do sistema), o rexistro de correspondencias xa cifrado <strong>NON SE PODE DESCIFRAR NUNCA MÁIS</strong> — non hai «recuperar contrasinal». Fai unha copia de seguridade do cartafol do rexistro (<code>datos_rexistro</code>) nun lugar seguro en canto empeces a usalo con documentos reais.</p>
-  <p>Dende a versión do 27/09/2026 non hai que buscar isto no manual: a <strong>propia pantalla de inicio do programa</strong> amosa un aviso que di onde quedou a túa clave (nun ficheiro <code>clave.key</code> ou no chaveiro do sistema), lembra facer copia de seguridade e enlaza coa definición do contrasinal de reversión.</p>
+  <p>Se algunha vez se perde a clave de cifrado (que este programa garda no Administrador de credenciais de Windows), o rexistro de correspondencias xa cifrado <strong>NON SE PODE DESCIFRAR NUNCA MÁIS</strong> — non hai «recuperar contrasinal». Fai unha copia de seguridade do cartafol do rexistro (<code>Documentos\Anonimizador\datos_rexistro</code>) nun lugar seguro en canto empeces a usalo con documentos reais, e ten en conta que a clave queda ligada ao teu usuario de Windows neste ordenador: se reinstalas Windows ou cambias de ordenador, copiar o cartafol non abonda para abrir o rexistro.</p>
+  <p>Non hai que buscar isto no manual: a <strong>propia pantalla de inicio do programa</strong> amosa un aviso que di onde quedou a túa clave, lembra facer copia de seguridade e enlaza coa definición do contrasinal de reversión.</p>
 </div>
 
-<h2 class="sec">02 · Instalación en Windows</h2>
-<span class="so">WINDOWS</span>
-<p>En Windows recibes un único ficheiro: <code>Anonimizador-Xuridico-Instalador-&lt;versión&gt;.exe</code> (uns 160 MB). Non hai cartafol nin scripts nin nada que descomprimir.</p>
+<h2 class="sec">02 · Instalación dende a Microsoft Store</h2>
+<span class="so">WINDOWS · MICROSOFT STORE</span>
+<p>Na Store e no menú Inicio o programa chámase <strong>«Anonimizador jurídico»</strong> (co mesmo nome en galego e en castelán). A interface pódese usar en galego ou en castelán.</p>
 
+<div class="sen-corte">
 <div class="paso"><div class="n">1</div><div class="corpo">
-  <p class="t">Fai dobre clic no instalador</p>
-  <p>Se Windows amosa un aviso azul de SmartScreen («Windows protexeu o seu PC»), non significa que haxa ningún problema: o instalador aínda <strong>non leva sinatura dixital</strong> comercial. Preme <strong>«Máis información»</strong> e despois <strong>«Executar de todos modos»</strong>.</p>
+  <p class="t">Abre a ficha do programa na Microsoft Store</p>
+  <p>Abre a aplicación <strong>Microsoft Store</strong> (está no menú Inicio) e busca <strong>«Anonimizador jurídico»</strong>. Tamén podes abrir directamente a ligazón <code>https://apps.microsoft.com/detail/9PK1J429MNN5</code>, que leva á mesma ficha.</p>
 </div></div>
-<div class="par">
-  <figure><img src="img/win_smartscreen_1.png" alt="Aviso de SmartScreen" style="max-width:255px"><figcaption>Aviso de SmartScreen: preme «Máis información».</figcaption></figure>
-  <figure><img src="img/win_smartscreen_2.png" alt="Aviso de SmartScreen con botón Executar de todos modos" style="max-width:255px"><figcaption>Despois aparece o botón «Executar de todos modos».</figcaption></figure>
+<figure><img src="img/win_store_ficha.png" alt="Ficha do programa na Microsoft Store" style="max-width:480px"><figcaption>Ficha do Anonimizador jurídico na Microsoft Store.</figcaption></figure>
 </div>
-<p class="peq" style="margin-top:-6px;">Capturas reais nun Windows 11 en castelán (o aviso e os botóns aparecen na lingua do Windows: «Windows protegió su PC», «Más información», «Ejecutar de todas formas»).</p>
 
 <div class="paso"><div class="n">2</div><div class="corpo">
-  <p class="t">Segue o asistente en galego</p>
-  <p>Ábrese un asistente normal de Windows. A primeira pantalla é a benvida; preme <strong>Seguinte</strong>. A segunda propón o cartafol de destino, por defecto <code>C:\Users\&lt;o teu usuario&gt;\AppData\Local\Programs\Anonimizador</code> (non hai que cambialo; ademais amosa o espazo necesario). Preme <strong>Instalar</strong>.</p>
+  <p class="t">Preme «Obter»</p>
+  <p>O botón aparece na lingua do Windows («Obtener» nun Windows en castelán). A Store descarga e instala o programa ela soa: non hai asistente que seguir, nin cartafol que escoller, nin aviso de SmartScreen, porque o paquete vai asinado por Microsoft. Segundo a conexión, tarda uns minutos.</p>
 </div></div>
-<div class="par">
-  <figure><img src="img/win_asistente_benvida.png" alt="Asistente: benvida"><figcaption>Benvida do asistente.</figcaption></figure>
-  <figure><img src="img/win_asistente_cartafol.png" alt="Asistente: cartafol de instalación"><figcaption>Cartafol de instalación.</figcaption></figure>
-</div>
 
 <div class="sen-corte">
 <div class="paso"><div class="n">3</div><div class="corpo">
-  <p class="t">Agarda a barra de progreso</p>
-  <p>A barra avanza en porcentaxe real (o instalador só copia ficheiros: non descarga nin executa nada máis). Tarda desde uns segundos ata pouco máis dun minuto, segundo o ordenador.</p>
+  <p class="t">Ábreo</p>
+  <p>Cando remata, o botón da Store pasa a ser <strong>«Abrir»</strong>. Despois, ábreo dende o <strong>menú Inicio → «Anonimizador jurídico»</strong>. Se o queres máis á man, fai clic dereito sobre esa entrada e escolle «Fixar en Inicio» ou «Fixar na barra de tarefas» («Anclar a Inicio» ou «Anclar a la barra de tareas» nun Windows en castelán; a instalación non crea ningún acceso no escritorio).</p>
 </div></div>
-<figure><img src="img/win_asistente_progreso.png" alt="Asistente: instalando" style="max-width:340px"><figcaption>Instalando o programa (58 %).</figcaption></figure>
+<figure><img src="img/win_store_menu_inicio.png" alt="Anonimizador jurídico no menú Inicio" style="max-width:430px"><figcaption>O programa no menú Inicio de Windows.</figcaption></figure>
 </div>
 
 <div class="sen-corte">
 <div class="paso"><div class="n">4</div><div class="corpo">
-  <p class="t">Remata a instalación</p>
-  <p>A última pantalla di «Instalación completada». Ten dúas casillas: <strong>«Abrir o Anonimizador agora»</strong> (marcada por defecto) e <strong>«Crear un acceso directo no escritorio»</strong> (desmarcada; márcaa se queres o acceso no escritorio ademais do menú Inicio). Preme <strong>Rematar</strong>.</p>
-</div></div>
-<figure><img src="img/win_asistente_fin.png" alt="Asistente: instalación completada" style="max-width:340px"><figcaption>Instalación completada.</figcaption></figure>
-</div>
-
-<div class="sen-corte">
-<div class="paso"><div class="n">5</div><div class="corpo">
   <p class="t">O programa ábrese na súa propia xanela</p>
-  <p>O Anonimizador <strong>non se abre no navegador</strong>: ten a súa propia xanela de escritorio, igual ca calquera outro programa. Para usalo despois, ábreo dende o menú Inicio (ver máis abaixo).</p>
+  <p>O Anonimizador <strong>non se abre no navegador</strong>: ten a súa propia xanela de escritorio, igual ca calquera outro programa. Na pantalla de inicio escolles a lingua («Castellano | Galego», arriba á dereita) e defines o contrasinal de reversión (o manual de uso explica para que serve). Se xa usabas a versión anterior do programa, verás tamén o aviso da sección 03.</p>
 </div></div>
 <figure><img src="img/win_programa_xanela.png" alt="O Anonimizador na súa xanela" style="max-width:360px"><figcaption>Captura real: o programa na súa xanela de escritorio (Windows 11).</figcaption></figure>
 </div>
 
 <h3>Onde queda cada cousa</h3>
-<figure class="sen-marco"><img src="img/win_menu_inicio.png" alt="Accesos do menú Inicio" style="max-width:430px;border:1px solid var(--line);border-radius:6px;"><figcaption>Menú Inicio → Anonimizador xurídico: o programa, o manual de uso e «Desinstalar».</figcaption></figure>
 <table>
   <thead><tr><th style="width:27%">Que</th><th>Onde</th></tr></thead>
   <tbody>
-    <tr><td>O programa</td><td><code>%LOCALAPPDATA%\Programs\Anonimizador</code> (é dicir, <code>C:\Users\&lt;usuario&gt;\AppData\Local\Programs\Anonimizador</code>)</td></tr>
-    <tr><td>Accesos</td><td>Menú Inicio → <strong>Anonimizador xurídico</strong>: o programa, o <em>Manual de uso</em> e <em>Desinstalar</em>. Opcionalmente, tamén un acceso no escritorio.</td></tr>
-    <tr><td>Os teus datos</td><td><code>%LOCALAPPDATA%\Anonimizador</code>: aquí están <code>datos_rexistro</code> (os rexistros cifrados de correspondencias) e <code>anonimizador.log</code> (rexistro de erros, útil se algo falla). Están <strong>fóra</strong> do cartafol do programa: actualizar ou desinstalar o programa non os toca.</td></tr>
-    <tr><td>A clave de cifrado</td><td>No <strong>Administrador de credenciais</strong> de Windows (ver sección 06).</td></tr>
+    <tr><td>O programa</td><td>Nun cartafol protexido de Windows onde a Store garda as aplicacións. Non hai que abrir nin tocar nada del.</td></tr>
+    <tr><td>Accesos</td><td>Menú Inicio → <strong>Anonimizador jurídico</strong>. O <em>Manual de uso</em> ábrese coa ligazón <strong>«Manual de uso (PDF)»</strong> do pé da pantalla de inicio (na lingua escollida), e a ligazón <strong>«Acerca deste programa»</strong> amosa a versión, a licenza e o enderezo do código fonte.</td></tr>
+    <tr><td>Os teus datos</td><td><code>Documentos\Anonimizador</code>: aquí están <code>datos_rexistro</code> (os rexistros cifrados de correspondencias), <code>preferencias.json</code> (a lingua escollida) e <code>anonimizador.log</code> (rexistro de erros, útil se algo falla). É o cartafol Documentos tal como o ves no Explorador: se o tes en OneDrive ou noutra unidade, está alí.</td></tr>
+    <tr><td>A clave de cifrado</td><td>No <strong>Administrador de credenciais</strong> de Windows (ver sección 05).</td></tr>
   </tbody>
 </table>
+<figure><img src="img/acerca.png" alt="Páxina Acerca deste programa" style="max-width:430px"><figcaption>«Acerca deste programa»: versión, licenza (AGPL-3.0) e ligazón ao código fonte.</figcaption></figure>
 
 <h3>Actualizar a unha versión nova</h3>
-<p>Basta con executar o instalador novo enriba da instalación anterior. Se o programa está aberto, o asistente avisa e ofrece pechalo; despois substitúe os ficheiros do programa e deixa intactos os teus datos e rexistros.</p>
+<p>Non hai que facer nada: a Store instala as versións novas ela soa. Para buscalas no momento, abre a Store → <strong>Biblioteca</strong> → «Obter actualizacións». Os teus datos de <code>Documentos\Anonimizador</code> e a clave non se tocan ao actualizar.</p>
 
 <h3>Desinstalar</h3>
-<p>Hai dúas vías equivalentes: <strong>Configuración de Windows → Aplicacións → Aplicacións instaladas → «Anonimizador de expedientes xurídicos» → Desinstalar</strong>, ou o acceso <strong>Desinstalar</strong> do menú Inicio. Nas dúas aparece «JL López» como editor.</p>
-<figure><img src="img/win_aplicacions_instaladas.png" alt="Aplicacións instaladas" style="max-width:480px"><figcaption>Entrada do programa en «Aplicacións instaladas» (captura nun Windows en castelán).</figcaption></figure>
-<div class="par">
-  <figure><img src="img/win_desinstalar_benvida.png" alt="Desinstalador: benvida"><figcaption>Asistente de desinstalación.</figcaption></figure>
-  <figure><img src="img/win_desinstalar_pregunta.png" alt="Desinstalador: pregunta sobre os datos"><figcaption>Pregunta sobre os rexistros cifrados: por defecto, <strong>Non</strong>.</figcaption></figure>
-</div>
+<p>Fai clic dereito sobre <strong>«Anonimizador jurídico»</strong> no menú Inicio → <strong>Desinstalar</strong>, ou vai a <strong>Configuración de Windows → Aplicacións → Aplicacións instaladas → «Anonimizador jurídico» → Desinstalar</strong>. Windows desinstálao sen máis preguntas.</p>
 <div class="aviso">
-  <h4>Os rexistros cifrados non se borran sen preguntar</h4>
-  <p>Ao desinstalar, o programa pregunta se tamén se borran os rexistros cifrados de correspondencias (<code>datos_rexistro</code>). A resposta por defecto é <strong>Non</strong>: sen eses rexistros non se pode reverter a anonimización dos documentos xa anonimizados. A clave de cifrado non se borra (queda no Administrador de credenciais de Windows). O recomendable é non borralos, por se volves instalar o programa máis adiante.</p>
-</div>
-<p class="peq">Para administradores: o instalador e o desinstalador aceptan <code>/S</code> (instalación ou desinstalación en silencio, sen ventás; nunca borra os rexistros) e, só no instalador, <code>/D=ruta</code> (outro cartafol de instalación, sempre como último argumento).</p>
-
-<h2 class="sec">03 · Instalación en macOS</h2>
-<span class="so">MACOS</span>
-
-<div class="paso"><div class="n">1</div><div class="corpo">
-  <p class="t">Descomprime o paquete de instalación</p>
-  <p>O ficheiro que recibiches (<code>anonimizador-xuridico-instalacion-&lt;versión&gt;-mac.zip</code>) descomprímese facendo dobre clic. Créase un cartafol con <code>instalar-mac.command</code>, <code>Iniciar-Anonimizador.command</code>, o cartafol <code>anonimizador-xuridico</code> (o programa), <code>runtime</code> e <code>wheels</code> (Python, Tesseract e librarías, para Intel e Apple Silicon) e os PDF de documentación.</p>
-</div></div>
-<div class="paso"><div class="n">2</div><div class="corpo">
-  <p class="t">Fai dobre clic en <code>instalar-mac.command</code></p>
-  <p>A primeira vez, macOS pode amosar un aviso de seguridade («non se puido verificar o desenvolvedor»). Fai clic dereito sobre o ficheiro → «Abrir» → confirma «Abrir» na ventá que aparece (tamén se pode permitir en Axustes do Sistema → Privacidade e seguridade). Só fai falta facelo unha vez.</p>
-</div></div>
-<div class="paso"><div class="n">3</div><div class="corpo">
-  <p class="t">Espera a que remate a instalación</p>
-  <p>O script escolle automaticamente o Python e o Tesseract do paquete que corresponden ao teu Mac (Intel ou Apple Silicon), crea un ambiente illado de Python (<code>.venv</code>), instala as librarías e o modelo de idioma <strong>dende o propio paquete, sen conexión a internet</strong> e sen instalar nada no resto do sistema. Tarda uns minutos.</p>
-<pre class="terminal">======================================================
- Instalador do Anonimizador de expedientes xurídicos
-======================================================
-
-[1/3] Creando o ambiente illado de Python (.venv)...
-[2/3] Instalando as librarías necesarias...
-[3/3] Instalando o modelo de recoñecemento de idioma...
-
-======================================================
- Instalación completada correctamente.
- A partir de agora, usa 'Iniciar-Anonimizador.command' para abrir o programa.
-======================================================
-Preme Intro para pechar...</pre>
-  <p class="peq">Texto que amosa o Terminal durante a instalación (contido real do script, non é unha captura literal).</p>
-</div></div>
-<div class="paso"><div class="n">4</div><div class="corpo">
-  <p class="t">Para usalo: dobre clic en <code>Iniciar-Anonimizador.command</code></p>
-  <p>O programa ábrese nunha <strong>xanela propia</strong> (non no navegador). O Terminal que se abre xunto con ela só amosa unha mensaxe: para pechar o programa, pecha a xanela do Anonimizador. Non hai que repetir a instalación.</p>
-</div></div>
-
-<h2 class="sec">04 · Instalación en Linux</h2>
-<span class="so">LINUX</span>
-
-<div class="paso"><div class="n">1</div><div class="corpo">
-  <p class="t">Descomprime o paquete</p>
-  <p>Descomprime <code>anonimizador-xuridico-instalacion-&lt;versión&gt;-linux.zip</code>. Contén <code>instalar-linux.sh</code>, <code>Iniciar-Anonimizador.sh</code>, o programa (<code>anonimizador-xuridico</code>), <code>runtime</code>, <code>wheels</code> e os PDF.</p>
-</div></div>
-<div class="paso"><div class="n">2</div><div class="corpo">
-  <p class="t">Executa o instalador nun terminal, dentro do cartafol descomprimido</p>
-  <p>Abre un <strong>terminal</strong> na carpeta e escribe <code>bash instalar-linux.sh</code>. <strong>Non fagas doble clic no ficheiro</strong>: Ubuntu abre os <code>.sh</code> no editor de texto en vez de executalos (e, se descomprimiches o zip nun pendrive, o permiso de execución pérdese igualmente, porque eses pendrives non o gardan). Fai os mesmos tres pasos ca en Mac: ambiente illado, librarías e modelo de idioma, todo dende o paquete e sen internet.</p>
-</div></div>
-<div class="paso"><div class="n">3</div><div class="corpo">
-  <p class="t">Para usalo: busca <strong>«Anonimizador»</strong> no menú de aplicacións — a instalación crea aí a entrada. Tamén vale, nun terminal: <code>bash Iniciar-Anonimizador.sh</code>.</p>
-  <p>Ábrese nunha xanela propia se o sistema ten GTK 3 e WebKit2GTK (en Ubuntu: <code>sudo apt install gir1.2-webkit2-4.1 python3-gi</code>). Se faltan, o programa <strong>ábrese automaticamente no navegador</strong>, en <code>http://127.0.0.1:5050</code> (enderezo que só funciona neste mesmo ordenador).</p>
-</div></div>
-
-
-<div class="nota">
-  <h4>Onde quedan os teus datos (Mac e Linux)</h4>
-  <p>O rexistro cifrado de correspondencias (<code>datos_rexistro</code>) e o <code>anonimizador.log</code> viven <strong>fóra</strong> do cartafol do programa, coma en Windows: en Mac, en <code>~/Library/Application Support/Anonimizador</code>; en Linux, en <code>~/.local/share/anonimizador</code>. Así, actualizar ou borrar o cartafol do programa non os toca. A clave queda no chaveiro do sistema.</p>
-  <p><strong>Actualizar a unha versión nova:</strong> descomprime a versión nova directamente no sitio onde a vas usar (non a renomees despois: o ambiente de Python garda a ruta) e executa outra vez o instalador. Se vés dunha versión anterior á de outubro de 2026, o rexistro estaba dentro do cartafol vello do programa (<code>anonimizador-xuridico/datos_rexistro</code>): se a versión nova está no mesmo cartafol, trasládase só ao abrir o programa; se está noutro, copia ese <code>datos_rexistro</code> á ruta de datos de arriba antes de abrir o programa.</p>
+  <h4>Os rexistros cifrados non se borran ao desinstalar</h4>
+  <p>Desinstalar quita o programa, pero <strong>non</strong> o cartafol <code>Documentos\Anonimizador</code> nin a clave do Administrador de credenciais: sen eses rexistros e a súa clave non se pode reverter a anonimización dos documentos xa anonimizados, e así seguen aí se volves instalar o programa máis adiante.</p>
+  <p>Se queres borralo todo de verdade, borra ese cartafol e, no Administrador de credenciais de Windows (Credenciais de Windows), as entradas que levan «anonimizador-xuridico» no nome. Despois diso, a anonimización dos documentos xa xerados non se poderá reverter nunca.</p>
 </div>
 
-<h2 class="sec">05 · Verificación</h2>
-<div class="sen-corte"><p>Ao abrir o programa (dende o menú Inicio en Windows, ou co script de arranque en Mac e Linux) debe aparecer esta pantalla, na súa propia xanela:</p>
+<h2 class="sec">03 · Se xa usabas a versión anterior (instalador clásico)</h2>
+<p>Se tes instalada a versión anterior do programa (a do instalador <code>.exe</code>, apéndice B), os teus rexistros están en <code>%LOCALAPPDATA%\Anonimizador</code>. A versión da Store non os move: a primeira vez que se abre, se en <code>Documentos\Anonimizador</code> aínda non hai ningún rexistro, <strong>copia</strong> alí o teu <code>datos_rexistro</code> (e a lingua que tiñas escollida). O orixinal non se toca. A clave segue no Administrador de credenciais, así que a copia ábrese igual ca o orixinal e os códigos seguen sendo os mesmos.</p>
+<p>A pantalla de inicio avísao cun recadro que indica de onde se copiou o rexistro. Fica aí ata que premes «Entendido».</p>
+<figure><img src="img/inicio_aviso_rexistro_copiado.png" alt="Aviso de rexistro copiado na pantalla de inicio" style="max-width:430px"><figcaption>Aviso da pantalla de inicio cando se copia o rexistro da versión anterior.</figcaption></figure>
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Pecha a versión anterior e instala a da Store</p>
+  <p>As dúas non poden estar abertas á vez (usan o mesmo porto interno, ver «Address already in use» na sección 06).</p>
+</div></div>
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">Comproba que está todo</p>
+  <p>Por exemplo, reverte un código dun caso que coñezas, ou anonimiza de novo un documento dun caso xa traballado e mira que as persoas conservan o seu código.</p>
+</div></div>
+<div class="paso"><div class="n">3</div><div class="corpo">
+  <p class="t">Desinstala a versión anterior</p>
+  <p>Dende ese momento usa só a versión da Store: se segues anonimizando tamén coa anterior, os dous rexistros deixarán de coincidir. Ao desinstalala (apéndice B), cando pregunte se tamén se borran os rexistros cifrados, responde <strong>Non</strong> (é a opción por defecto): o orixinal queda en <code>%LOCALAPPDATA%\Anonimizador</code> coma copia de seguridade.</p>
+</div></div>
+
+<h2 class="sec">04 · Verificación</h2>
+<div class="sen-corte"><p>Ao abrir o programa dende o menú Inicio debe aparecer esta pantalla, na súa propia xanela:</p>
 <figure><img src="img/inicio_revisar.png" alt="Pantalla inicial" style="max-width:400px"><figcaption>Captura real: pantalla inicial do Anonimizador.</figcaption></figure></div>
-<p>Se a ves, a instalación funcionou correctamente. O manual de uso explica como anonimizar o primeiro documento. Todo o procesamento é local: o programa non se conecta a ningún servizo externo. O servidor interno do programa só escoita en <code>127.0.0.1</code> (este mesmo ordenador), nunca na rede.</p>
+<p>Se a ves, a instalación funcionou correctamente. O manual de uso (ligazón «Manual de uso (PDF)» ao pé desta pantalla) explica como anonimizar o primeiro documento. Todo o procesamento é local: o programa non se conecta a ningún servizo externo. O servidor interno do programa só escoita en <code>127.0.0.1</code> (este mesmo ordenador), nunca na rede.</p>
 
-<h2 class="sec">06 · Clave de cifrado no chaveiro do sistema</h2>
-<p>Os accesos e scripts de arranque activan por defecto a opción <code>--chaveiro-sistema</code>: a clave que cifra o rexistro de correspondencias gárdase no chaveiro nativo do sistema operativo (non nun ficheiro xunto aos datos): <strong>Administrador de credenciais</strong> en Windows, <strong>Chaveiro (Keychain)</strong> en macOS e, en Linux, o chaveiro do escritorio (por exemplo GNOME Keyring ou KWallet). A primeira vez que se crea un rexistro novo, macOS pode pedir confirmación (e o contrasinal do ordenador): confirma cando apareza. En Windows non adoita aparecer ningún diálogo.</p>
-<p>Isto só ocorre a primeira vez que se procesa un documento contra un rexistro novo. As seguintes veces, tanto o programa coma a interface de revisión atopan a clave automaticamente.</p>
+<h2 class="sec">05 · Clave de cifrado no chaveiro do sistema</h2>
+<p>A clave que cifra o rexistro de correspondencias gárdase no chaveiro do sistema operativo, o <strong>Administrador de credenciais</strong> de Windows, e non nun ficheiro xunto aos datos. Créase soa a primeira vez que se procesa un documento contra un rexistro novo; en Windows non adoita aparecer ningún diálogo. As seguintes veces, o programa atópaa automaticamente.</p>
+<p>Esa clave pertence ao teu usuario de Windows neste ordenador. Por iso a copia de seguridade do cartafol <code>datos_rexistro</code> serve contra un fallo do disco ou un borrado accidental, pero non para abrir o rexistro noutro ordenador ou despois de reinstalar Windows (ver o aviso da sección 01).</p>
 
-<h2 class="sec">07 · Solución de problemas</h2>
+<h2 class="sec">06 · Solución de problemas</h2>
 <table>
   <thead><tr><th style="width:33%">Problema</th><th>Solución</th></tr></thead>
   <tbody>
-    <tr><td>Windows amosa «Windows protexeu o seu PC» ao abrir o instalador</td><td>«Máis información» → «Executar de todos modos». É normal: o instalador aínda non leva sinatura dixital comercial. Non indica ningún problema real.</td></tr>
-    <tr><td>Windows di que falta «WebView2» ao instalar</td><td>É un aviso, non un erro: a instalación continúa. En Windows 10, instala gratis o «Microsoft Edge WebView2 Runtime» dende a páxina de Microsoft; mentres tanto o programa ofrecerá abrirse no navegador.</td></tr>
-    <tr><td>Windows di que o programa só funciona en 64 bits</td><td>Este programa só funciona en Windows de 64 bits (Windows 10 ou 11).</td></tr>
-    <tr><td>O instalador di que o Anonimizador está aberto</td><td>Preme «Aceptar» para que o asistente o peche (garda antes o que estivese a facer), ou «Cancelar» para saír.</td></tr>
-    <tr><td>«non se puido verificar o desenvolvedor» (Mac)</td><td>Clic dereito sobre o ficheiro <code>.command</code> → «Abrir» → confirmar. Só fai falta a primeira vez.</td></tr>
-    <tr><td>Linux: o script ábrese no editor de texto (vin o código en vez do programa)</td><td>É o comportamento normal do doble clic en Ubuntu. Usa a entrada <strong>«Anonimizador»</strong> do menú de aplicacións, ou abre un terminal e escribe <code>bash Iniciar-Anonimizador.sh</code>.</td></tr>
-    <tr><td>Linux: «Permission denied» ao executar o script</td><td><code>chmod +x instalar-linux.sh Iniciar-Anonimizador.sh</code> e volve tentar.</td></tr>
-    <tr><td>O programa non se abre ou pecha ao momento (Windows)</td><td>Mira o ficheiro <code>%LOCALAPPDATA%\Anonimizador\anonimizador.log</code>: rexistra os erros. Se pide abrirse no navegador, acepta e segue traballando, e comproba o compoñente WebView2.</td></tr>
-    <tr><td>«Tesseract non está instalado» ao anonimizar un PDF escaneado</td><td>Non debería ocorrer: Tesseract vai dentro do paquete. Volve executar o instalador (Windows) ou o script de instalación (Mac/Linux) sen mover nin borrar cartafoles do paquete.</td></tr>
-    <tr><td>«Address already in use» / a interface non carga nada</td><td>O porto 5050 xa está en uso por outro programa (normalmente outra copia do Anonimizador aberta antes). Pecha esa copia, ou reinicia o ordenador.</td></tr>
-    <tr><td>Mac/Linux: a instalación tarda moito</td><td>Instala moitas librarías dende o propio paquete: pode levar varios minutos. Non peches a ventá ata ver «Instalación completada correctamente».</td></tr>
+    <tr><td>Non atopo o programa na Store, ou a Store di que non é compatible co meu equipo</td><td>Precisa Windows 10 (versión 2004 ou posterior) ou Windows 11, de 64 bits: actualiza Windows dende Windows Update. Nalgúns ordenadores de empresa ou da Administración a Store está bloqueada: pídelle ao servizo informático que o instale, ou usa o instalador clásico se o tes (apéndice B).</td></tr>
+    <tr><td>Ao abrir o programa, Windows di que falta «WebView2»</td><td>Acepta abrilo no navegador e segue traballando (só se pode acceder a el dende este mesmo ordenador). Para ter a xanela propia, instala gratis o «Microsoft Edge WebView2 Runtime» dende a páxina de Microsoft.</td></tr>
+    <tr><td>O programa non se abre ou pecha ao momento</td><td>Mira o ficheiro <code>Documentos\Anonimizador\anonimizador.log</code>: rexistra os erros.</td></tr>
+    <tr><td>«Address already in use» / a interface non carga nada</td><td>O porto 5050 xa está en uso por outro programa: normalmente outra copia do Anonimizador aberta antes, tamén a versión anterior do instalador clásico. Pecha esa copia, ou reinicia o ordenador.</td></tr>
+    <tr><td>Usaba a versión anterior, pero non apareceu o aviso de rexistro copiado</td><td>A copia só se fai se en <code>Documentos\Anonimizador</code> aínda non había ningún <code>datos_rexistro</code> (por exemplo, se xa anonimizaches algo coa versión da Store antes de abrila por primeira vez); o programa nunca mestura dous rexistros. Para seguir co antigo, copia co Explorador o cartafol <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code> a un cartafol novo dentro de <code>Documentos\Anonimizador</code> (por exemplo <code>rexistro_anterior</code>) e indica esa ruta no campo do rexistro da pantalla de inicio.</td></tr>
+    <tr><td>«Tesseract non está instalado» ao anonimizar un PDF escaneado</td><td>Non debería ocorrer: Tesseract vai dentro do paquete. Desinstala o programa e volve instalalo dende a Store; os teus datos de <code>Documentos\Anonimizador</code> non se tocan.</td></tr>
   </tbody>
 </table>
 
@@ -211,6 +147,17 @@ Preme Intro para pechar...</pre>
   <h4>Nota</h4>
   <p>Para un uso persoal ou puntual (non nun despacho profesional suxeito a obrigas formais de protección de datos), estes puntos son recomendacións de boas prácticas, non obrigas legais estritas. Se este sistema chega a usarse nun contexto profesional regulado, convén consultar cun responsable de protección de datos antes de poñelo en produción.</p>
 </div>
+
+<h2 class="sec">Apéndice B · Instalador clásico (.exe)</h2>
+<p>Antes de chegar á Microsoft Store, o programa distribuíase coma un instalador propio, <code>Anonimizador-Xuridico-Instalador-&lt;versión&gt;.exe</code>. Recoméndase a versión da Store (vai asinada por Microsoft e actualízase soa); este resumo serve para quen xa ten instalada a versión anterior ou recibiu o <code>.exe</code> porque non pode usar a Store. Non uses as dúas versións ao mesmo tempo (sección 03).</p>
+<ul class="lista-marcas">
+  <li><strong>Instalar:</strong> dobre clic no <code>.exe</code> e segue o asistente (benvida, cartafol, barra de progreso, remate). Non precisa permisos de administrador nin internet. Como o <code>.exe</code> non leva sinatura dixital, Windows amosa un aviso azul de SmartScreen («Windows protexeu o seu PC»): preme «Máis información» e despois «Executar de todos modos».</li>
+  <li><strong>Usar:</strong> menú Inicio → cartafol <strong>«Anonimizador xurídico»</strong>, co programa, o <em>Manual de uso</em> e <em>Desinstalar</em>. Ao rematar a instalación pódese marcar tamén un acceso directo no escritorio.</li>
+  <li><strong>Onde queda cada cousa:</strong> o programa, en <code>%LOCALAPPDATA%\Programs\Anonimizador</code>; os teus datos (<code>datos_rexistro</code>, <code>anonimizador.log</code>), en <code>%LOCALAPPDATA%\Anonimizador</code>; a clave, no Administrador de credenciais, coma na versión da Store.</li>
+  <li><strong>Actualizar:</strong> executa o instalador novo enriba do anterior. Se o programa está aberto, o asistente avisa e ofrece pechalo; os teus datos non se tocan.</li>
+  <li><strong>Desinstalar:</strong> Configuración de Windows → Aplicacións → Aplicacións instaladas → <strong>«Anonimizador de expedientes xurídicos»</strong> → Desinstalar, ou o acceso <em>Desinstalar</em> do menú Inicio. Pregunta se tamén se borran os rexistros cifrados; a resposta por defecto é <strong>Non</strong>, e é a recomendable.</li>
+</ul>
+<p class="peq">Para administradores: o instalador e o desinstalador aceptan <code>/S</code> (instalación ou desinstalación en silencio, sen ventás; nunca borra os rexistros) e, só no instalador, <code>/D=ruta</code> (outro cartafol de instalación, sempre como último argumento).</p>
 
 <div class="rodape">Anonimizador de expedientes xurídicos — guía de instalación · Elaborado con Claude Code</div>
 </body>

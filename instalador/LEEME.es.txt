@@ -1,0 +1,69 @@
+ANONIMIZADOR DE EXPEDIENTES JURÍDICOS — QUÉ HACER CON ESTE PROGRAMA
+===================================================================
+
+1. Instálalo desde la Microsoft Store. Busca «Anonimizador jurídico» en la
+   Microsoft Store y pulsa «Obtener». La «02-Guia-de-instalacion.pdf»
+   explica el proceso, dónde quedan tus datos y cómo pasar desde la
+   versión anterior.
+
+2. Usa «03-Manual-de-uso.pdf». Aprende a anonimizar documentos con la
+   interfaz, paso a paso y con capturas reales. También se abre desde el
+   enlace «Manual de uso (PDF)» de la pantalla de inicio del programa.
+
+3. «01-Caracteristicas-tecnicas-y-seguridad.pdf». Detalla cómo funciona
+   por dentro y qué garantías de seguridad tiene, por si te interesa o lo
+   necesitas para justificar su uso.
+
+WINDOWS Y LA MICROSOFT STORE
+----------------------------
+
+El programa se distribuye solo para Windows 10 (versión 2004 o posterior)
+y Windows 11, de 64 bits, desde la Microsoft Store. No hay versión para
+Mac ni para Linux.
+
+- INSTALAR: Microsoft Store > «Anonimizador jurídico» > «Obtener». No hay
+  asistente ni aviso de SmartScreen, no pide permisos de administrador ni
+  cuenta, y lleva dentro todo lo necesario (Python, OCR y el modelo de
+  idioma). Una vez instalado, funciona sin conexión a internet.
+- USAR: menú Inicio > «Anonimizador jurídico». Se abre en su propia
+  ventana (no en el navegador). Tus datos quedan en
+  Documentos\Anonimizador; el enlace «Acerca de este programa» de la
+  pantalla de inicio muestra la versión, la licencia (AGPL-3.0) y el
+  código fuente.
+- DESINSTALAR: Configuración de Windows > Aplicaciones > Aplicaciones
+  instaladas > «Anonimizador jurídico» > Desinstalar. Los registros
+  cifrados de correspondencias (Documentos\Anonimizador) y su clave NO SE
+  BORRAN: sin ellos no se puede revertir la anonimización de los
+  documentos ya anonimizados.
+
+LA CLAVE Y LA CONTRASEÑA: LÉELO ANTES DE EMPEZAR
+------------------------------------------------
+
+Los nombres reales no quedan en los documentos anonimizados: se guardan en
+un registro CIFRADO que relaciona cada código (PERSONA_000001) con la
+persona real y su DNI. Lo protegen DOS SECRETOS DISTINTOS:
+
+- LA CLAVE DEL REGISTRO. La crea el programa solo y nadie la escribe. Sin
+  ella el registro no se puede descifrar nunca más: guarda una copia de
+  seguridad (la pantalla de inicio del programa dice dónde está).
+- LA CONTRASEÑA DE REVERSIÓN. La escribes tú una vez, en la pantalla de
+  inicio. Se pide cada vez que alguien quiere ver una identidad real, el
+  listado completo de correspondencias o su PDF CONFIDENCIAL, y cada uso
+  queda en una auditoría cifrada.
+
+El PDF del listado lleva la marca de agua «CONFIDENCIAL»: es un documento
+de EXTREMA SENSIBILIDAD. No lo envíes por correo ni lo dejes en una
+carpeta compartida, y destrúyelo cuando ya no haga falta.
+
+SI TIENES LA VERSIÓN ANTERIOR (INSTALADOR .EXE)
+-----------------------------------------------
+
+Si ya tenías instalada la versión del instalador .exe, la primera vez que
+abras la de la Store se copia tu registro a Documentos\Anonimizador (el
+original no se toca) y la pantalla de inicio lo avisa. A partir de
+entonces usa solo la versión de la Store y desinstala la anterior,
+respondiendo NO cuando pregunte si borra los registros. El apéndice B de
+la guía de instalación explica el instalador clásico.
+
+Ante cualquier duda, el manual de uso y la guía de instalación cubren los
+casos más habituales, incluida una tabla de solución de problemas.

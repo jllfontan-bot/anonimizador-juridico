@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de instalación</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Guía de instalación · Anonimizador de expedientes jurídicos</span>
+  <h1>Instalación desde la Microsoft Store, paso a paso</h1>
+  <p class="lede">El programa se instala como cualquier otra aplicación de la Microsoft Store y lleva dentro todo lo necesario (Python, OCR, librerías y modelo de idioma): no hay que instalar nada más, y después funciona sin conexión a internet. Incluye dónde quedan tus datos, cómo pasar desde la versión anterior del programa, verificación final, solución de problemas habituales y un apéndice con los procedimientos legales y organizativos a tener en cuenta si este sistema se va a usar de forma continuada.</p>
+  <div class="meta">
+    <div><span>Sistema</span>Windows 10 (versión 2004 o posterior) o Windows 11, de 64 bits</div>
+    <div><span>Tiempo estimado</span>5 minutos</div>
+    <div><span>Fecha</span>Octubre de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · Requisitos del sistema</h2>
+<table>
+  <thead><tr><th style="width:24%">Requisito</th><th>Detalle</th></tr></thead>
+  <tbody>
+    <tr><td>Sistema operativo</td><td><strong>Windows 10</strong> (versión 2004 o posterior) o <strong>Windows 11</strong>, de 64 bits. No hay versión para Mac ni para Linux.</td></tr>
+    <tr><td>Python, Tesseract y librerías</td><td><strong>No hay que instalar nada.</strong> El paquete de la Store ya lleva dentro Python, Tesseract (OCR en castellano y gallego), todas las librerías y el modelo de idioma.</td></tr>
+    <tr><td>Espacio en disco</td><td>Unos 650 MB (la Store muestra el tamaño exacto antes de instalar).</td></tr>
+    <tr><td>Memoria RAM</td><td>8 GB recomendados; no necesita tarjeta gráfica (GPU).</td></tr>
+    <tr><td>Internet</td><td>Solo para descargar el programa de la Store y para recibir las actualizaciones. <strong>El uso diario es 100 % local</strong>: el programa no se conecta a internet.</td></tr>
+    <tr><td>Cuentas y permisos</td><td>El programa es gratuito y no necesita cuenta ni registro de ningún tipo. Tampoco pide permisos de administrador.</td></tr>
+    <tr><td>WebView2</td><td>Componente de Windows <em>Microsoft Edge WebView2 Runtime</em>, con el que el programa muestra su ventana. Viene con Windows 11 y con los Windows 10 actualizados. Si faltara, el programa avisa y ofrece abrirse en el navegador; el componente es gratuito y se descarga de la página de Microsoft.</td></tr>
+  </tbody>
+</table>
+
+<div class="aviso">
+  <h4>Antes de empezar: copia de seguridad</h4>
+  <p>Si alguna vez se pierde la clave de cifrado (que este programa guarda en el Administrador de credenciales de Windows), el registro de correspondencias ya cifrado <strong>NO SE PUEDE DESCIFRAR NUNCA MÁS</strong>: no existe «recuperar contraseña». Haz una copia de seguridad de la carpeta del registro (<code>Documentos\Anonimizador\datos_rexistro</code>) en un lugar seguro en cuanto empieces a usarlo con documentos reales, y ten en cuenta que la clave queda ligada a tu usuario de Windows en este ordenador: si reinstalas Windows o cambias de ordenador, copiar la carpeta no basta para abrir el registro.</p>
+  <p>No hay que buscar esto en el manual: la <strong>propia pantalla de inicio del programa</strong> muestra un aviso que dice dónde ha quedado tu clave, recuerda hacer copia de seguridad y enlaza con la definición de la contraseña de reversión.</p>
+</div>
+
+<h2 class="sec">02 · Instalación desde la Microsoft Store</h2>
+<span class="so">WINDOWS · MICROSOFT STORE</span>
+<p>En la Store y en el menú Inicio el programa se llama <strong>«Anonimizador jurídico»</strong>. La interfaz se puede usar en castellano o en gallego.</p>
+
+<div class="sen-corte">
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Abre la ficha del programa en la Microsoft Store</p>
+  <p>Abre la aplicación <strong>Microsoft Store</strong> (está en el menú Inicio) y busca <strong>«Anonimizador jurídico»</strong>. También puedes abrir directamente el enlace <code>https://apps.microsoft.com/detail/9PK1J429MNN5</code>, que lleva a la misma ficha.</p>
+</div></div>
+<figure><img src="img/win_store_ficha.png" alt="Ficha del programa en la Microsoft Store" style="max-width:480px"><figcaption>Ficha del Anonimizador jurídico en la Microsoft Store.</figcaption></figure>
+</div>
+
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">Pulsa «Obtener»</p>
+  <p>La Store descarga e instala el programa ella sola: no hay asistente que seguir, ni carpeta que elegir, ni aviso de SmartScreen, porque el paquete va firmado por Microsoft. Según la conexión, tarda unos minutos.</p>
+</div></div>
+
+<div class="sen-corte">
+<div class="paso"><div class="n">3</div><div class="corpo">
+  <p class="t">Ábrelo</p>
+  <p>Cuando termina, el botón de la Store pasa a ser <strong>«Abrir»</strong>. Después, ábrelo desde el <strong>menú Inicio → «Anonimizador jurídico»</strong>. Si lo quieres más a mano, haz clic derecho sobre esa entrada y elige «Anclar a Inicio» o «Anclar a la barra de tareas» (la instalación no crea ningún acceso en el escritorio).</p>
+</div></div>
+<figure><img src="img/win_store_menu_inicio.png" alt="Anonimizador jurídico en el menú Inicio" style="max-width:430px"><figcaption>El programa en el menú Inicio de Windows.</figcaption></figure>
+</div>
+
+<div class="sen-corte">
+<div class="paso"><div class="n">4</div><div class="corpo">
+  <p class="t">El programa se abre en su propia ventana</p>
+  <p>El Anonimizador <strong>no se abre en el navegador</strong>: tiene su propia ventana de escritorio, igual que cualquier otro programa. En la pantalla de inicio eliges el idioma («Castellano | Galego», arriba a la derecha) y defines la contraseña de reversión (el manual de uso explica para qué sirve). Si ya usabas la versión anterior del programa, verás también el aviso de la sección 03.</p>
+</div></div>
+<figure><img src="img/win_programa_xanela.png" alt="El Anonimizador en su ventana" style="max-width:360px"><figcaption>Captura real: el programa en su ventana de escritorio (Windows 11).</figcaption></figure>
+</div>
+
+<h3>Dónde queda cada cosa</h3>
+<table>
+  <thead><tr><th style="width:27%">Qué</th><th>Dónde</th></tr></thead>
+  <tbody>
+    <tr><td>El programa</td><td>En una carpeta protegida de Windows donde la Store guarda las aplicaciones. No hay que abrir ni tocar nada de ella.</td></tr>
+    <tr><td>Accesos</td><td>Menú Inicio → <strong>Anonimizador jurídico</strong>. El <em>Manual de uso</em> se abre con el enlace <strong>«Manual de uso (PDF)»</strong> del pie de la pantalla de inicio (en el idioma elegido), y el enlace <strong>«Acerca de este programa»</strong> muestra la versión, la licencia y la dirección del código fuente.</td></tr>
+    <tr><td>Tus datos</td><td><code>Documentos\Anonimizador</code>: aquí están <code>datos_rexistro</code> (los registros cifrados de correspondencias), <code>preferencias.json</code> (el idioma elegido) y <code>anonimizador.log</code> (registro de errores, útil si algo falla). Es la carpeta Documentos tal como la ves en el Explorador: si la tienes en OneDrive o en otra unidad, está allí.</td></tr>
+    <tr><td>La clave de cifrado</td><td>En el <strong>Administrador de credenciales</strong> de Windows (ver sección 05).</td></tr>
+  </tbody>
+</table>
+<figure><img src="img/es/acerca.png" alt="Página Acerca de este programa" style="max-width:430px"><figcaption>«Acerca de este programa»: versión, licencia (AGPL-3.0) y enlace al código fuente.</figcaption></figure>
+
+<h3>Actualizar a una versión nueva</h3>
+<p>No hay que hacer nada: la Store instala las versiones nuevas ella sola. Para buscarlas en el momento, abre la Store → <strong>Biblioteca</strong> → «Obtener actualizaciones». Tus datos de <code>Documentos\Anonimizador</code> y la clave no se tocan al actualizar.</p>
+
+<h3>Desinstalar</h3>
+<p>Haz clic derecho sobre <strong>«Anonimizador jurídico»</strong> en el menú Inicio → <strong>Desinstalar</strong>, o ve a <strong>Configuración de Windows → Aplicaciones → Aplicaciones instaladas → «Anonimizador jurídico» → Desinstalar</strong>. Windows lo desinstala sin más preguntas.</p>
+<div class="aviso">
+  <h4>Los registros cifrados no se borran al desinstalar</h4>
+  <p>Desinstalar quita el programa, pero <strong>no</strong> la carpeta <code>Documentos\Anonimizador</code> ni la clave del Administrador de credenciales: sin esos registros y su clave no se puede revertir la anonimización de los documentos ya anonimizados, y así siguen ahí si vuelves a instalar el programa más adelante.</p>
+  <p>Si quieres borrarlo todo de verdad, borra esa carpeta y, en el Administrador de credenciales de Windows (Credenciales de Windows), las entradas que llevan «anonimizador-xuridico» en el nombre. Después de eso, la anonimización de los documentos ya generados no podrá revertirse nunca.</p>
+</div>
+
+<h2 class="sec">03 · Si ya usabas la versión anterior (instalador clásico)</h2>
+<p>Si tienes instalada la versión anterior del programa (la del instalador <code>.exe</code>, apéndice B), tus registros están en <code>%LOCALAPPDATA%\Anonimizador</code>. La versión de la Store no los mueve: la primera vez que se abre, si en <code>Documentos\Anonimizador</code> todavía no hay ningún registro, <strong>copia</strong> allí tu <code>datos_rexistro</code> (y el idioma que tenías elegido). El original no se toca. La clave sigue en el Administrador de credenciales, así que la copia se abre igual que el original y los códigos siguen siendo los mismos.</p>
+<p>La pantalla de inicio lo avisa con un recuadro que indica de dónde se ha copiado el registro. Se queda ahí hasta que pulsas «Entendido».</p>
+<figure><img src="img/es/inicio_aviso_rexistro_copiado.png" alt="Aviso de registro copiado en la pantalla de inicio" style="max-width:430px"><figcaption>Aviso de la pantalla de inicio cuando se copia el registro de la versión anterior.</figcaption></figure>
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Cierra la versión anterior e instala la de la Store</p>
+  <p>Las dos no pueden estar abiertas a la vez (usan el mismo puerto interno, ver «Address already in use» en la sección 06).</p>
+</div></div>
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">Comprueba que está todo</p>
+  <p>Por ejemplo, revierte un código de un caso que conozcas, o anonimiza de nuevo un documento de un caso ya trabajado y mira que las personas conservan su código.</p>
+</div></div>
+<div class="paso"><div class="n">3</div><div class="corpo">
+  <p class="t">Desinstala la versión anterior</p>
+  <p>Desde ese momento usa solo la versión de la Store: si sigues anonimizando también con la anterior, los dos registros dejarán de coincidir. Al desinstalarla (apéndice B), cuando pregunte si también se borran los registros cifrados, responde <strong>No</strong> (es la opción por defecto): el original queda en <code>%LOCALAPPDATA%\Anonimizador</code> como copia de seguridad.</p>
+</div></div>
+
+<h2 class="sec">04 · Verificación</h2>
+<div class="sen-corte"><p>Al abrir el programa desde el menú Inicio debe aparecer esta pantalla, en su propia ventana:</p>
+<figure><img src="img/es/inicio_revisar.png" alt="Pantalla inicial" style="max-width:400px"><figcaption>Captura real: pantalla inicial del Anonimizador.</figcaption></figure></div>
+<p>Si la ves, la instalación ha funcionado correctamente. El manual de uso (enlace «Manual de uso (PDF)» al pie de esta pantalla) explica cómo anonimizar el primer documento. Todo el procesamiento es local: el programa no se conecta a ningún servicio externo. El servidor interno del programa solo escucha en <code>127.0.0.1</code> (este mismo ordenador), nunca en la red.</p>
+
+<h2 class="sec">05 · Clave de cifrado en el llavero del sistema</h2>
+<p>La clave que cifra el registro de correspondencias se guarda en el llavero del sistema operativo, el <strong>Administrador de credenciales</strong> de Windows, y no en un archivo junto a los datos. Se crea sola la primera vez que se procesa un documento contra un registro nuevo; en Windows no suele aparecer ningún diálogo. Las siguientes veces, el programa la encuentra automáticamente.</p>
+<p>Esa clave pertenece a tu usuario de Windows en este ordenador. Por eso la copia de seguridad de la carpeta <code>datos_rexistro</code> sirve contra un fallo del disco o un borrado accidental, pero no para abrir el registro en otro ordenador o después de reinstalar Windows (ver el aviso de la sección 01).</p>
+
+<h2 class="sec">06 · Solución de problemas</h2>
+<table>
+  <thead><tr><th style="width:33%">Problema</th><th>Solución</th></tr></thead>
+  <tbody>
+    <tr><td>No encuentro el programa en la Store, o la Store dice que no es compatible con mi equipo</td><td>Necesita Windows 10 (versión 2004 o posterior) o Windows 11, de 64 bits: actualiza Windows desde Windows Update. En algunos ordenadores de empresa o de la Administración la Store está bloqueada: pide al servicio informático que lo instale, o usa el instalador clásico si lo tienes (apéndice B).</td></tr>
+    <tr><td>Al abrir el programa, Windows dice que falta «WebView2»</td><td>Acepta abrirlo en el navegador y sigue trabajando (solo se puede acceder a él desde este mismo ordenador). Para tener la ventana propia, instala gratis el «Microsoft Edge WebView2 Runtime» desde la página de Microsoft.</td></tr>
+    <tr><td>El programa no se abre o se cierra al momento</td><td>Mira el archivo <code>Documentos\Anonimizador\anonimizador.log</code>: registra los errores.</td></tr>
+    <tr><td>«Address already in use» / la interfaz no carga nada</td><td>El puerto 5050 ya está en uso por otro programa: normalmente otra copia del Anonimizador abierta antes, también la versión anterior del instalador clásico. Cierra esa copia, o reinicia el ordenador.</td></tr>
+    <tr><td>Usaba la versión anterior, pero no ha aparecido el aviso de registro copiado</td><td>La copia solo se hace si en <code>Documentos\Anonimizador</code> todavía no había ningún <code>datos_rexistro</code> (por ejemplo, si ya anonimizaste algo con la versión de la Store antes de abrirla por primera vez); el programa nunca mezcla dos registros. Para seguir con el antiguo, copia con el Explorador la carpeta <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code> a una carpeta nueva dentro de <code>Documentos\Anonimizador</code> (por ejemplo <code>registro_anterior</code>) e indica esa ruta en el campo del registro de la pantalla de inicio.</td></tr>
+    <tr><td>«Tesseract no está instalado» al anonimizar un PDF escaneado</td><td>No debería ocurrir: Tesseract va dentro del paquete. Desinstala el programa y vuelve a instalarlo desde la Store; tus datos de <code>Documentos\Anonimizador</code> no se tocan.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="sec">Apéndice A · Procedimientos legales y organizativos</h2>
+<p>Este sistema realiza seudonimización, no anonimización irreversible pura (el informe técnico explica la diferencia en detalle). Eso significa que, mientras exista el registro de correspondencias, los datos siguen siendo datos personales a efectos legales. Si este sistema se llega a usar de forma continuada (no solo como prueba), conviene tener en cuenta:</p>
+<ul class="lista-marcas">
+  <li><strong>Evaluación de impacto (EIPD)</strong>: si se va a tratar un volumen relevante de datos personales de forma regular, una EIPD documentada (art. 35 RGPD) ayuda a identificar riesgos antes de que se materialicen.</li>
+  <li><strong>Registro de actividades de tratamiento</strong> (art. 30 RGPD): una breve descripción de qué datos se tratan, con qué fin y cuánto tiempo se conservan.</li>
+  <li><strong>Política de conservación y destrucción</strong>: decidir por escrito cuánto tiempo se guarda el registro de correspondencias después de terminar un asunto, y cómo se destruye de forma segura cuando ya no haga falta.</li>
+  <li><strong>Lista de personas autorizadas para revertir códigos</strong>: aunque solo lo uses tú, conviene tener claro y por escrito quién puede solicitar una reversión y por qué motivos se considera justificada. El <strong>listado completo</strong> de correspondencias de un registro (verlas TODAS de una vez, no una sola) es una decisión distinta y normalmente más restringida: conviene dejar por escrito también quién puede pedirlo.</li>
+  <li><strong>Copia de seguridad de la clave de cifrado</strong>: en un lugar distinto de donde vive el registro cifrado, para no perder el acceso por un fallo de disco.</li>
+  <li><strong>Revisión periódica de la auditoría</strong>: el archivo de auditoría cifrado registra cada creación de código, fusión y reversión; conviene revisarlo de vez en cuando para detectar accesos inesperados.</li>
+</ul>
+<div class="nota">
+  <h4>Nota</h4>
+  <p>Para un uso personal o puntual (no en un despacho profesional sujeto a obligaciones formales de protección de datos), estos puntos son recomendaciones de buenas prácticas, no obligaciones legales estrictas. Si este sistema llega a usarse en un contexto profesional regulado, conviene consultar con un responsable de protección de datos antes de ponerlo en producción.</p>
+</div>
+
+<h2 class="sec">Apéndice B · Instalador clásico (.exe)</h2>
+<p>Antes de llegar a la Microsoft Store, el programa se distribuía como un instalador propio, <code>Anonimizador-Xuridico-Instalador-&lt;versión&gt;.exe</code>. Se recomienda la versión de la Store (va firmada por Microsoft y se actualiza sola); este resumen sirve para quien ya tiene instalada la versión anterior o ha recibido el <code>.exe</code> porque no puede usar la Store. No uses las dos versiones al mismo tiempo (sección 03).</p>
+<ul class="lista-marcas">
+  <li><strong>Instalar:</strong> doble clic en el <code>.exe</code> y sigue el asistente (bienvenida, carpeta, barra de progreso, final). No necesita permisos de administrador ni internet. Como el <code>.exe</code> no lleva firma digital, Windows muestra un aviso azul de SmartScreen («Windows protegió su PC»): pulsa «Más información» y después «Ejecutar de todas formas».</li>
+  <li><strong>Usar:</strong> menú Inicio → carpeta <strong>«Anonimizador xurídico»</strong>, con el programa, el <em>Manual de uso</em> y <em>Desinstalar</em>. Al terminar la instalación se puede marcar también un acceso directo en el escritorio.</li>
+  <li><strong>Dónde queda cada cosa:</strong> el programa, en <code>%LOCALAPPDATA%\Programs\Anonimizador</code>; tus datos (<code>datos_rexistro</code>, <code>anonimizador.log</code>), en <code>%LOCALAPPDATA%\Anonimizador</code>; la clave, en el Administrador de credenciales, como en la versión de la Store.</li>
+  <li><strong>Actualizar:</strong> ejecuta el instalador nuevo encima del anterior. Si el programa está abierto, el asistente avisa y ofrece cerrarlo; tus datos no se tocan.</li>
+  <li><strong>Desinstalar:</strong> Configuración de Windows → Aplicaciones → Aplicaciones instaladas → <strong>«Anonimizador de expedientes xurídicos»</strong> → Desinstalar, o el acceso <em>Desinstalar</em> del menú Inicio. Pregunta si también se borran los registros cifrados; la respuesta por defecto es <strong>No</strong>, y es la recomendable.</li>
+</ul>
+<p class="peq">Para administradores: el instalador y el desinstalador aceptan <code>/S</code> (instalación o desinstalación en silencio, sin ventanas; nunca borra los registros) y, solo en el instalador, <code>/D=ruta</code> (otra carpeta de instalación, siempre como último argumento).</p>
+
+<div class="rodape">Anonimizador de expedientes jurídicos — guía de instalación · Elaborado con Claude Code</div>
+</body>
+</html>

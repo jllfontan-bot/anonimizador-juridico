@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Léame</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:14mm 17mm 14mm 17mm; }
+  body{ font-size:12px; line-height:1.45; }
+  .portada{ padding:20px 28px 18px; margin-bottom:18px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; margin:0; }
+  h2.sec{ margin:20px 0 10px; }
+  .tres{ display:flex; gap:12px; margin-bottom:6px; }
+  .tres .tarxeta{ flex:1; border:1px solid var(--line); border-radius:6px; padding:11px 13px; break-inside:avoid; }
+  .tres .n{ width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; font-size:12px; text-align:center; line-height:22px; margin-bottom:6px; }
+  .tres .et{ font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:3px; }
+  .tres .tt{ font-weight:700; margin-bottom:4px; }
+  .tres p{ margin:0; font-size:11.5px; }
+  .ficheiros td:first-child{ width:38%; }
+  ul.compacta li{ margin-bottom:3px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Léame · Anonimizador de expedientes jurídicos</span>
+  <h1>Qué hacer con este programa</h1>
+  <p class="lede">Tres pasos para empezar, y lo que conviene tener claro antes de usarlo con documentos reales.</p>
+</div>
+
+<h2 class="sec">Por dónde empezar</h2>
+<div class="tres">
+  <div class="tarxeta"><div class="n">1</div><div class="et">Instalación</div><div class="tt">Instálalo desde la Microsoft Store</div><p>Busca «Anonimizador jurídico» en la Microsoft Store y pulsa «Obtener». La «02-Guia-de-instalacion.pdf» explica el proceso, dónde quedan tus datos y cómo pasar desde la versión anterior.</p></div>
+  <div class="tarxeta"><div class="n">2</div><div class="et">Uso diario</div><div class="tt">Usa «03-Manual-de-uso.pdf»</div><p>Aprende a anonimizar documentos con la interfaz, paso a paso y con capturas reales. También se abre desde el enlace «Manual de uso (PDF)» de la pantalla de inicio del programa.</p></div>
+  <div class="tarxeta"><div class="n">3</div><div class="et">Opcional</div><div class="tt">«01-Caracteristicas-tecnicas-y-seguridad.pdf»</div><p>Detalla cómo funciona por dentro y qué garantías de seguridad tiene, por si te interesa o lo necesitas para justificar su uso.</p></div>
+</div>
+
+<h2 class="sec">Windows y la Microsoft Store</h2>
+<p>El programa se distribuye solo para <strong>Windows 10 (versión 2004 o posterior) y Windows 11</strong>, de 64 bits, desde la Microsoft Store. No hay versión para Mac ni para Linux.</p>
+<ul class="compacta">
+  <li><strong>Instalar:</strong> Microsoft Store → «Anonimizador jurídico» → «Obtener». No hay asistente ni aviso de SmartScreen, no pide permisos de administrador ni cuenta, y lleva dentro todo lo necesario (Python, OCR y el modelo de idioma). Una vez instalado, funciona sin conexión a internet.</li>
+  <li><strong>Usar:</strong> menú Inicio → «Anonimizador jurídico». Se abre en su propia ventana (no en el navegador). Tus datos quedan en <code>Documentos\Anonimizador</code>; el enlace «Acerca de este programa» de la pantalla de inicio muestra la versión, la licencia (AGPL-3.0) y el código fuente.</li>
+  <li><strong>Desinstalar:</strong> Configuración de Windows → Aplicaciones → Aplicaciones instaladas → «Anonimizador jurídico» → Desinstalar. Los registros cifrados de correspondencias (<code>Documentos\Anonimizador</code>) y su clave <strong>no se borran</strong>: sin ellos no se puede revertir la anonimización de los documentos ya anonimizados.</li>
+</ul>
+
+<h2 class="sec">La clave y la contraseña: léelo antes de empezar</h2>
+<p>Los nombres reales no quedan en los documentos anonimizados: se guardan en un registro <strong>cifrado</strong> que relaciona cada código (<code>PERSONA_000001</code>) con la persona real y su DNI. Lo protegen <strong>dos secretos distintos</strong>:</p>
+<ul class="compacta">
+  <li><strong>La clave del registro.</strong> La crea el programa solo y nadie la escribe. Sin ella el registro no se puede descifrar nunca más: guarda una copia de seguridad (la pantalla de inicio del programa dice dónde está).</li>
+  <li><strong>La contraseña de reversión.</strong> La escribes tú una vez, en la pantalla de inicio. Se pide cada vez que alguien quiere ver una identidad real, el listado completo de correspondencias o su PDF CONFIDENCIAL, y cada uso queda en una auditoría cifrada.</li>
+</ul>
+<p>El PDF del listado lleva la marca de agua «CONFIDENCIAL»: es un documento de <strong>extrema sensibilidad</strong>. No lo envíes por correo ni lo dejes en una carpeta compartida, y destrúyelo cuando ya no haga falta.</p>
+
+<h2 class="sec">Si tienes la versión anterior (instalador .exe)</h2>
+<p>Si ya tenías instalada la versión del instalador <code>.exe</code>, la primera vez que abras la de la Store se copia tu registro a <code>Documentos\Anonimizador</code> (el original no se toca) y la pantalla de inicio lo avisa. A partir de entonces usa solo la versión de la Store y desinstala la anterior, respondiendo <strong>No</strong> cuando pregunte si borra los registros. El apéndice B de la guía de instalación explica el instalador clásico.</p>
+
+<p style="margin-top:14px;">Ante cualquier duda, el manual de uso y la guía de instalación cubren los casos más habituales, incluida una tabla de solución de problemas.</p>
+
+<div class="rodape">Anonimizador de expedientes jurídicos — léame · Elaborado con Claude Code</div>
+</body>
+</html>
