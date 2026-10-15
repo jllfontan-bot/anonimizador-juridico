@@ -39,6 +39,28 @@ def version_msix() -> str:
     return ".".join(partes) + ".0"
 
 
+_RESERVADOS = {"con", "prn", "aux", "nul", *(f"com{i}" for i in range(10)), *(f"lpt{i}" for i in range(10))}
+_PROHIBIDOS = set('<>:"|?*%') | {chr(i) for i in range(32)}
+
+
+def nomes_invalidos(cartafol: Path) -> list[str]:
+    """Rutas que Windows/makeappx non aceptan (makeappx só di 0x8007007b,
+    sen dicir cal): nomes de dispositivo (CON, AUX... tamén con extensión),
+    caracteres prohibidos, remate en punto ou espazo, ou rutas longas."""
+    malos = []
+    for ruta in cartafol.rglob("*"):
+        rel = ruta.relative_to(cartafol)
+        for parte in rel.parts:
+            if (parte.split(".")[0].lower() in _RESERVADOS or set(parte) & _PROHIBIDOS
+                    or parte.endswith((".", " ")) or len(parte) > 255):
+                malos.append(str(rel))
+                break
+        else:
+            if len(str(rel)) > 200:
+                malos.append(f"{rel} (ruta de {len(str(rel))} caracteres)")
+    return malos
+
+
 def iconas(assets: Path) -> None:
     assets.mkdir(parents=True, exist_ok=True)
     icona = debuxar()
@@ -67,6 +89,9 @@ def main() -> None:
     manifesto = (AQUI / "AppxManifest.xml").read_text(encoding="utf-8").replace("{VERSION}", version)
     (destino / "AppxManifest.xml").write_text(manifesto, encoding="utf-8")
     iconas(destino / "Assets")
+    malos = nomes_invalidos(destino)
+    if malos:
+        raise SystemExit("Nomes que non admite un MSIX:\n  " + "\n  ".join(malos))
     print(f"Paquete montado en {destino} (versión {version})")
 
 
