@@ -18,9 +18,9 @@ on:
 
 jobs:
   arbore:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Ferramentas (binutils para as DLL de Tesseract, zstd para as licenzas do Python, Pillow para as iconas)
         run: |
@@ -33,7 +33,7 @@ jobs:
       - name: Empaquetar o cartafol nun só ficheiro (miles de ficheiros soltos soben moi lentos)
         run: tar -cf msix-cartafol.tar -C build msix
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: msix-cartafol
           path: msix-cartafol.tar
@@ -43,7 +43,7 @@ jobs:
     needs: arbore
     runs-on: windows-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           name: msix-cartafol
 
@@ -96,14 +96,14 @@ jobs:
           & $signtool.FullName sign /fd SHA256 /sha1 $cert.Thumbprint (Get-ChildItem proba\*.msix).FullName
           if ($LASTEXITCODE -ne 0) { exit 1 }
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: paquete-msix-store
           path: "*.msix"
           retention-days: 14
           compression-level: 0
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: paquete-msix-proba-asinado
           path: proba/

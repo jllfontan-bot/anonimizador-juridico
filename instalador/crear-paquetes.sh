@@ -371,9 +371,11 @@ montar_staging_windows() {
     python3 "$INSTALADOR/bundle/montar_site_packages.py" "$stage/runtime/python/Lib/site-packages" \
         "$CACHE/wheels/windows" "$CACHE/wheels/_sdist_wheels" "$CACHE/wheels/_odfpy" \
         "$CACHE/wheels/_pywebview" "$CACHE/wheels/_modelo"
-    # Sobras que non fan falta para executar: símbolos de depuración (.pdb) e
-    # o IDE/demos de Python.
-    find "$stage/runtime/python" -maxdepth 1 -name "*.pdb" -delete
+    # Sobras que non fan falta para executar: símbolos de depuración (.pdb,
+    # en todo o árbore: só os de DLLs/ eran ~60 MB), os módulos de probas
+    # internas de CPython (_test*.pyd e as súas .lib) e o IDE/demos de Python.
+    find "$stage/runtime/python" -name "*.pdb" -delete
+    find "$stage/runtime/python/DLLs" "$stage/runtime/python/libs" -name "_test*" -delete
     rm -rf "$stage/runtime/python/Lib/idlelib" "$stage/runtime/python/Lib/turtledemo"
     copiar_fonte_limpa "$stage"
     # só as guías de usuario: as notas de versións antigas (04-07) quedan no
