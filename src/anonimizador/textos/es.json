@@ -127,7 +127,7 @@
  "inicio.reversion": "Reversión controlada de identidad →",
  "inicio.reversion_nota": "Un código conocido → la identidad real.",
  "inicio.rexistro": "Carpeta del registro cifrado de correspondencias",
- "inicio.ruta": "Archivo O carpeta que quieres anonimizar (.txt, .docx, .odt o .pdf: .docx, .odt y .pdf conservan el formato y la extensión originales; una carpeta entera procesa cada documento soportado que encuentre dentro)",
+ "inicio.ruta": "Archivo O carpeta que quieres anonimizar (.txt, .docx, .odt, .pdf o una imagen .jpg, .png, .tif…: todos menos .txt conservan el formato y la extensión originales; una carpeta entera procesa cada documento soportado que encuentre dentro)",
  "inicio.ruta_exemplo": "/ruta/al/documento.pdf",
  "inicio.subtitulo": "Sustituye nombres, DNI y demás datos personales por códigos; las identidades reales quedan solo en tu registro cifrado.",
  "inicio.titulo_pestana": "Anonimizador — nuevo documento",

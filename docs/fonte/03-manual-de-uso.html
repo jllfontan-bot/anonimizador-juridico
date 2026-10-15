@@ -61,10 +61,10 @@
 <p>Ao premer calquera botón <strong>«Escoller cartafol…»</strong> (o do documento, o de saída ou o do rexistro) ábrese o explorador do propio programa. A diferenza do diálogo nativo do sistema, que só amosa cartafoles, este amosa <strong>tamén os ficheiros</strong> que hai dentro, para que poidas recoñecer o cartafol correcto antes de escollelo.</p>
 <figure><img src="img/explorador.png" alt="Explorador de cartafoles" style="max-width:430px"><figcaption>O explorador: subcartafoles á cabeza; os ficheiros en gris (non se poden escoller) e os documentos soportados coa etiqueta «documento soportado».</figcaption></figure>
 <ul>
-  <li><strong>Cartafoles:</strong> fai clic nun cartafol para entrar nel. Os <strong>ficheiros</strong> aparecen en gris e non se poden seleccionar; os que o programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) levan a etiqueta <strong>«documento soportado»</strong>. Os ficheiros e cartafoles ocultos non se amosan.</li>
+  <li><strong>Cartafoles:</strong> fai clic nun cartafol para entrar nel. Os <strong>ficheiros</strong> aparecen en gris e non se poden seleccionar; os que o programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes coma <code>.jpg</code>, <code>.png</code> ou <code>.tif</code>) levan a etiqueta <strong>«documento soportado»</strong>. Os ficheiros e cartafoles ocultos non se amosan.</li>
   <li><strong>Atallos</strong> (columna da esquerda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> e, ao final, <em>Este equipo</em> (as unidades C:, D:…).</li>
   <li><strong>«↑ Subir»</strong> vai ao cartafol pai. O <strong>campo de ruta</strong> pódese editar: escribe unha ruta e preme <kbd>Intro</kbd> ou «Ir».</li>
-  <li><strong>«Nova carpeta…»</strong> crea un cartafol novo dentro do que estás vendo (pide o nome e o botón «Crear»).</li>
+  <li><strong>«Novo cartafol…»</strong> crea un cartafol novo dentro do que estás vendo (pide o nome e o botón «Crear»).</li>
   <li><strong>«Escoller este cartafol»</strong> pon a ruta do cartafol actual no campo que abriu o explorador. «Cancelar» (ou <kbd>Esc</kbd>, ou facer clic fóra da ventá) pecha sen cambiar nada.</li>
   <li>Debaixo da lista, unha liña resume o que hai: cantos subcartafoles e cantos documentos soportados neste nivel. Ao anonimizar un cartafol procésanse tamén os seus subcartafoles.</li>
 </ul>
@@ -96,7 +96,7 @@
 </ul>
 <h3>Se un ficheiro falla, o resto segue</h3>
 <p>Un ficheiro estragado (por exemplo, un PDF que non se pode abrir) <strong>non detén o lote</strong>: o programa segue co resto e, ao final, lista os fallos xunto co motivo. No modo automático, o resultado é este:</p>
-<figure><div class="recorte fade" style="max-height:360px;"><img src="img/resultado_automatico.png" alt="Resultado do modo automático" style="width:100%;display:block"></div><figcaption>Resultado dun lote automático de 13 ficheiros: 12 anonimizados e 1 con erro (listado ao final, co motivo). Os dous ficheiros doutros formatos (plano e imaxe) quedaron «omitidos».</figcaption></figure>
+<figure><div class="recorte fade" style="max-height:360px;"><img src="img/resultado_automatico.png" alt="Resultado do modo automático" style="width:100%;display:block"></div><figcaption>Resultado dun lote automático de 13 ficheiros: 12 anonimizados e 1 con erro (listado ao final, co motivo). Os dous ficheiros doutros formatos (plano e folla de cálculo) quedaron «omitidos».</figcaption></figure>
 <h3>Cancelar un lote</h3>
 <p>Cando o proceso ten <strong>máis dun ficheiro</strong> (un cartafol), aparece un botón <strong>«Cancelar»</strong> debaixo da barra. Ao premelo o botón pasa a «Cancelando…»: o programa remata o ficheiro que ten entre mans (un ficheiro non se pode deixar a medias) e <strong>non empeza ningún máis</strong>. O que xa estaba feito queda feito e o que non se procesou non se toca. Un ficheiro solto non ten botón de cancelar, porque se procesa dun golpe.</p>
 <div class="par">
@@ -108,7 +108,7 @@
 <h2 class="sec">06 · Anonimizar un cartafol enteiro</h2>
 <p>No canto dun ficheiro solto, o mesmo campo acepta un CARTAFOL: procésase automaticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) que atope dentro, buscando tamén en subcartafoles. En modo revisión créase unha sesión de revisión propia para CADA documento — nunca se garda nada en bloque sen revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/inicio_pendentes.png" alt="Cartafol procesado" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados e pendentes de revisar; o ficheiro estragado avísase á parte.</figcaption></figure>
-<p>Os ficheiros dun formato non soportado (planos, imaxes…) quedan fóra e cóntanse coma «omitidos» — nunca se inclúen nin se modifican. Revisa cada sesión pendente da lista unha a unha, exactamente igual que se procesases os documentos por separado.</p>
+<p>Os ficheiros dun formato non soportado (planos, follas de cálculo…) quedan fóra e cóntanse coma «omitidos» — nunca se inclúen nin se modifican. Revisa cada sesión pendente da lista unha a unha, exactamente igual que se procesases os documentos por separado.</p>
 <div class="aviso">
   <h4>Non mestures unha proba anterior co cartafol de orixe</h4>
   <p>Se procesas de novo un cartafol onde xa gardaches resultados dunha pasada anterior (ficheiros <code>nome.anonimizado.pdf</code>, <code>.docx</code>, <code>.odt</code> ou <code>.txt</code>), eses ficheiros <strong>non se volven anonimizar</strong>: contan como «omitidos» no resumo. Se queres ter os resultados separados dos orixinais, indica un <strong>«Cartafol de saída»</strong> (sección 02).</p>
@@ -166,7 +166,7 @@
 </div>
 
 <h3>Listado completo das correspondencias dun rexistro</h3>
-<p>A reversión require coñecer de antemán o código a consultar. Cando o que precisas é revisar un expediente enteiro dun golpe (por exemplo, unha auditoría interna, ou localizar un código que se fusionou noutro), usa a ligazón «Listado completo de correspondencias» da pantalla inicial. Amosa nunha soa táboa todos os códigos do rexistro cos seus nomes, DNI, contexto e data de creación.</p>
+<p>A reversión require coñecer de antemán o código a consultar. Cando o que precisas é revisar un expediente enteiro dun golpe (por exemplo, para unha auditoría interna), usa a ligazón «Listado completo de correspondencias» da pantalla inicial. Amosa nunha soa táboa todos os códigos do rexistro cos seus nomes, DNI, contexto e data de creación.</p>
 <div class="aviso">
   <h4>Máis alcance ca unha reversión</h4>
   <p>Esta pantalla require exactamente o mesmo có formulario de reversión — motivo obrigatorio e contrasinal de reversión — máis unha casiña adicional de confirmación explícita, porque expón de golpe TODAS as identidades reais do rexistro, non unha soa. Queda rexistrada na auditoría cunha acción distinta da reversión individual (<code>listado_completo</code>), co alcance exacto do que se viu. Se o rexistro ten moitas persoas, o listado paxínase de 200 en 200; cada páxina volve pedir a contrasinal e queda auditada á parte.</p>
@@ -180,11 +180,12 @@
   <p>Fóra de contexto perde valor, pero xunto cos documentos anonimizados permite reverter o anonimato. Non o envíes por correo, non o deixes nun cartafol compartido ou sincronizado coa nube e destrúeo cando xa non faga falta.</p>
 </div>
 
-<h2 class="sec">11 · Formato conservado: .docx, .odt e PDF</h2>
+<h2 class="sec">11 · Formato conservado: .docx, .odt, PDF e imaxes</h2>
 <p>Cando o documento orixinal é un <code>.docx</code> ou <code>.odt</code>, o ficheiro anonimizado mantén a mesma maquetación: aliñamento, listas, táboas e estilos de texto (negriña, cursiva) por separado dentro de cada parágrafo.</p>
 <p>Un <code>.pdf</code> tamén mantén o seu formato E a súa extensión. Funciona igual con PDF con texto normal e con PDF escaneados: os datos elimínanse de verdade do documento (non quedan «debaixo» dun recadro branco) e substitúense polo código correspondente, mantendo o aspecto visual do orixinal:</p>
 <figure><img src="img/pdf_revision.png" alt="Revisión dun PDF" style="max-width:390px"><figcaption>A revisión dun PDF é igual cá de calquera outro documento: as mesmas decisións.</figcaption></figure>
 <figure><img src="img/pdf_confirmado.png" alt="Confirmación dun PDF" style="max-width:390px"><figcaption>O ficheiro final mantén a extensión .pdf, non .txt.</figcaption></figure>
+<p>Unha <strong>imaxe</strong> solta (<code>.jpg</code>, <code>.png</code>, <code>.tif</code>, <code>.bmp</code>, <code>.webp</code>, <code>.gif</code>; por exemplo, a foto dun documento) trátase coma unha páxina escaneada: o programa le o texto con OCR, tapa os datos e garda unha imaxe nova no mesmo formato e coa mesma resolución. Os metadatos da foto (localización GPS, autor, modelo de cámara) non se copian. As fotos HEIC do iPhone non se admiten: convérteas antes a JPG.</p>
 
 <h2 class="sec">12 · Arquivos .zip e documentos grandes</h2>
 <p>Se o ficheiro que indicas na pantalla inicial é un <code>.zip</code> (por exemplo, un expediente completo con varios documentos e planos), o sistema anonimiza cada ficheiro soportado dentro (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) mantendo a estrutura de cartafoles e o formato/extensión orixinais de cada un, e xera un novo <code>.anonimizado.zip</code>. Os ficheiros que non se poden analizar (planos CAD, imaxes…) NON se inclúen no zip de saída, para non arriscar que quede algo sen revisar — quedan listados á parte coma «omitidos». Documentos moi longos (centos de páxinas) procésanse sen problema, en anacos internos que non che afectan como usuario.</p>

@@ -94,7 +94,7 @@ def main(base: Path, lingua: str = "gl") -> Path:
     (exp / "11_escaneo_danado.pdf").write_bytes(b"%PDF-1.4\nisto non e un PDF valido\n")
     # ficheiros doutros tipos: amósanse en gris no explorador e omítense ao procesar
     (exp / "plano_parcela.dwg").write_bytes(b"\0" * 64)
-    (exp / "foto_lugar.jpg").write_bytes(b"\xff\xd8\xff\xe0" + b"\0" * 60)
+    (exp / "orzamento.xlsx").write_bytes(b"PK\x03\x04" + b"\0" * 60)
     return exp
 
 

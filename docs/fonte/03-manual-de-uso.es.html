@@ -61,7 +61,7 @@
 <p>Al pulsar cualquier botón <strong>«Elegir carpeta…»</strong> (el del documento, el de salida o el del registro) se abre el explorador del propio programa. A diferencia del diálogo nativo del sistema, que solo muestra carpetas, este muestra <strong>también los archivos</strong> que hay dentro, para que puedas reconocer la carpeta correcta antes de elegirla.</p>
 <figure><img src="img/es/explorador.png" alt="Explorador de carpetas" style="max-width:430px"><figcaption>El explorador: las subcarpetas primero; los archivos en gris (no se pueden elegir) y los documentos soportados con la etiqueta «documento soportado».</figcaption></figure>
 <ul>
-  <li><strong>Carpetas:</strong> haz clic en una carpeta para entrar en ella. Los <strong>archivos</strong> aparecen en gris y no se pueden seleccionar; los que el programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) llevan la etiqueta <strong>«documento soportado»</strong>. Los archivos y carpetas ocultos no se muestran.</li>
+  <li><strong>Carpetas:</strong> haz clic en una carpeta para entrar en ella. Los <strong>archivos</strong> aparecen en gris y no se pueden seleccionar; los que el programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes como <code>.jpg</code>, <code>.png</code> o <code>.tif</code>) llevan la etiqueta <strong>«documento soportado»</strong>. Los archivos y carpetas ocultos no se muestran.</li>
   <li><strong>Accesos rápidos</strong> (columna de la izquierda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> y, al final, <em>Este equipo</em> (las unidades C:, D:…).</li>
   <li><strong>«↑ Subir»</strong> va a la carpeta superior. El <strong>campo de ruta</strong> se puede editar: escribe una ruta y pulsa <kbd>Intro</kbd> o «Ir».</li>
   <li><strong>«Nueva carpeta…»</strong> crea una carpeta nueva dentro de la que estás viendo (pide el nombre y el botón «Crear»).</li>
@@ -96,7 +96,7 @@
 </ul>
 <h3>Si un archivo falla, el resto sigue</h3>
 <p>Un archivo dañado (por ejemplo, un PDF que no se puede abrir) <strong>no detiene el lote</strong>: el programa sigue con el resto y, al final, lista los fallos junto con el motivo. En el modo automático, el resultado es este:</p>
-<figure><div class="recorte fade" style="max-height:360px;"><img src="img/es/resultado_automatico.png" alt="Resultado del modo automático" style="width:100%;display:block"></div><figcaption>Resultado de un lote automático de 13 archivos: 12 anonimizados y 1 con error (listado al final, con el motivo). Los dos archivos de otros formatos (plano e imagen) quedaron «omitidos».</figcaption></figure>
+<figure><div class="recorte fade" style="max-height:360px;"><img src="img/es/resultado_automatico.png" alt="Resultado del modo automático" style="width:100%;display:block"></div><figcaption>Resultado de un lote automático de 13 archivos: 12 anonimizados y 1 con error (listado al final, con el motivo). Los dos archivos de otros formatos (plano y hoja de cálculo) quedaron «omitidos».</figcaption></figure>
 <h3>Cancelar un lote</h3>
 <p>Cuando el proceso tiene <strong>más de un archivo</strong> (una carpeta), aparece un botón <strong>«Cancelar»</strong> debajo de la barra. Al pulsarlo, el botón pasa a «Cancelando…»: el programa termina el archivo que tiene entre manos (un archivo no se puede dejar a medias) y <strong>no empieza ninguno más</strong>. Lo que ya estaba hecho queda hecho y lo que no se procesó no se toca. Un archivo suelto no tiene botón de cancelar, porque se procesa de una vez.</p>
 <div class="par">
@@ -108,7 +108,7 @@
 <h2 class="sec">06 · Anonimizar una carpeta entera</h2>
 <p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/es/inicio_pendentes.png" alt="Carpeta procesada" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados y pendientes de revisar; el archivo dañado se avisa aparte.</figcaption></figure>
-<p>Los archivos de un formato no soportado (planos, imágenes…) quedan fuera y se cuentan como «omitidos»: nunca se incluyen ni se modifican. Revisa cada revisión pendiente de la lista una a una, exactamente igual que si procesaras los documentos por separado.</p>
+<p>Los archivos de un formato no soportado (planos, hojas de cálculo…) quedan fuera y se cuentan como «omitidos»: nunca se incluyen ni se modifican. Revisa cada revisión pendiente de la lista una a una, exactamente igual que si procesaras los documentos por separado.</p>
 <div class="aviso">
   <h4>No mezcles una prueba anterior con la carpeta de origen</h4>
   <p>Si procesas de nuevo una carpeta donde ya guardaste resultados de una pasada anterior (archivos <code>nombre.anonimizado.pdf</code>, <code>.docx</code>, <code>.odt</code> o <code>.txt</code>), esos archivos <strong>no se vuelven a anonimizar</strong>: cuentan como «omitidos» en el resumen. Si quieres tener los resultados separados de los originales, indica una <strong>«Carpeta de salida»</strong> (sección 02).</p>
@@ -166,7 +166,7 @@
 </div>
 
 <h3>Listado completo de las correspondencias de un registro</h3>
-<p>La reversión requiere conocer de antemano el código que se consulta. Cuando lo que necesitas es revisar un expediente entero de una vez (por ejemplo, una auditoría interna, o localizar un código que se fusionó en otro), usa el enlace «Listado completo de correspondencias» de la pantalla inicial. Muestra en una sola tabla todos los códigos del registro con sus nombres, DNI, contexto y fecha de creación.</p>
+<p>La reversión requiere conocer de antemano el código que se consulta. Cuando lo que necesitas es revisar un expediente entero de una vez (por ejemplo, para una auditoría interna), usa el enlace «Listado completo de correspondencias» de la pantalla inicial. Muestra en una sola tabla todos los códigos del registro con sus nombres, DNI, contexto y fecha de creación.</p>
 <div class="aviso">
   <h4>Más alcance que una reversión</h4>
   <p>Esta pantalla requiere exactamente lo mismo que el formulario de reversión (motivo obligatorio y contraseña de reversión) más una casilla adicional de confirmación explícita, porque expone de golpe TODAS las identidades reales del registro, no una sola. Queda registrada en la auditoría con una acción distinta de la reversión individual (<code>listado_completo</code>), con el alcance exacto de lo que se vio. Si el registro tiene muchas personas, el listado se pagina de 200 en 200; cada página vuelve a pedir la contraseña y queda auditada aparte.</p>
@@ -180,11 +180,12 @@
   <p>Fuera de contexto pierde valor, pero junto con los documentos anonimizados permite revertir el anonimato. No lo envíes por correo, no lo dejes en una carpeta compartida o sincronizada con la nube y destrúyelo cuando ya no haga falta.</p>
 </div>
 
-<h2 class="sec">11 · Formato conservado: .docx, .odt y PDF</h2>
+<h2 class="sec">11 · Formato conservado: .docx, .odt, PDF e imágenes</h2>
 <p>Cuando el documento original es un <code>.docx</code> o un <code>.odt</code>, el archivo anonimizado mantiene la misma maquetación: alineación, listas, tablas y estilos de texto (negrita, cursiva) por separado dentro de cada párrafo.</p>
 <p>Un <code>.pdf</code> también mantiene su formato Y su extensión. Funciona igual con PDF con texto normal y con PDF escaneados: los datos se eliminan de verdad del documento (no quedan «debajo» de un recuadro blanco) y se sustituyen por el código correspondiente, manteniendo el aspecto visual del original:</p>
 <figure><img src="img/es/pdf_revision.png" alt="Revisión de un PDF" style="max-width:390px"><figcaption>La revisión de un PDF es igual que la de cualquier otro documento: las mismas decisiones.</figcaption></figure>
 <figure><img src="img/es/pdf_confirmado.png" alt="Confirmación de un PDF" style="max-width:390px"><figcaption>El archivo final mantiene la extensión .pdf, no .txt.</figcaption></figure>
+<p>Una <strong>imagen</strong> suelta (<code>.jpg</code>, <code>.png</code>, <code>.tif</code>, <code>.bmp</code>, <code>.webp</code>, <code>.gif</code>; por ejemplo, la foto de un documento) se trata como una página escaneada: el programa lee el texto con OCR, tapa los datos y guarda una imagen nueva en el mismo formato y con la misma resolución. Los metadatos de la foto (ubicación GPS, autor, modelo de cámara) no se copian. Las fotos HEIC del iPhone no se admiten: conviértelas antes a JPG.</p>
 
 <h2 class="sec">12 · Archivos .zip y documentos grandes</h2>
 <p>Si el archivo que indicas en la pantalla inicial es un <code>.zip</code> (por ejemplo, un expediente completo con varios documentos y planos), el sistema anonimiza cada archivo soportado que contiene (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) manteniendo la estructura de carpetas y el formato y extensión originales de cada uno, y genera un nuevo <code>.anonimizado.zip</code>. Los archivos que no se pueden analizar (planos CAD, imágenes…) NO se incluyen en el zip de salida, para no arriesgar que quede algo sin revisar: quedan listados aparte como «omitidos». Los documentos muy largos (cientos de páginas) se procesan sin problema, en trozos internos que no te afectan como usuario.</p>

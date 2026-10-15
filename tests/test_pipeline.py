@@ -99,7 +99,7 @@ class TestPipeline(unittest.TestCase):
         self.assertNotEqual(codigo1, codigo2, "sen DNI, nunca se debe fusionar automaticamente")
         self.assertFalse(informe1["persoas"][0]["marcado_para_revision"])
         self.assertTrue(informe2["persoas"][0]["marcado_para_revision"])
-        self.assertIn("homonimo", informe2["persoas"][0]["motivo"].lower())
+        self.assertIn("homónimo", informe2["persoas"][0]["motivo"].lower())
 
     def test_efecto_mosaico_detectado(self):
         """Profesión moi específica + lugar + data/idade preto dunha da outra
