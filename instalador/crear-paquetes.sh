@@ -289,7 +289,7 @@ copiar_fonte_limpa() {
     cp -R "$RAIZ/config" "$destino/"
     cp -R "$RAIZ/ejemplos" "$destino/"
     cp "$RAIZ/requirements.txt" "$destino/"
-    cp "$RAIZ/README.md" "$destino/"
+    cp "$RAIZ/README.md" "$RAIZ/VERSION" "$RAIZ/LICENSE" "$RAIZ/AVISOS-TERCEIROS.md" "$destino/"
     find "$destino" -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$destino" -name "*.pyc" -delete
 }
@@ -312,9 +312,7 @@ convertir_sdists_a_wheel() {
         "$CACHE/wheels/_odfpy/"odfpy-*.tar.gz "$CACHE/wheels/_proxy_tools/"proxy_tools-*.tar.gz
 }
 
-xerar_windows() {
-    log "== Windows =="
-    command -v makensis >/dev/null || { echo "ERRO: precísase 'makensis' (paquete nsis)."; exit 1; }
+montar_staging_windows() {
     descargar_python "x86_64-pc-windows-msvc" "$CACHE/runtime/python-windows"
     descargar_tesseract "win-64" "$CACHE/runtime/tesseract-windows"
     descargar_wheels_comuns "windows" --python-version 3.12 --platform win_amd64 --implementation cp --abi cp312
@@ -345,6 +343,13 @@ xerar_windows() {
     cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$stage/docs/"
     if [ -d "$DOCS/es" ]; then mkdir -p "$stage/docs/es"; cp "$DOCS/es/"*.pdf "$stage/docs/es/"; fi
     cp "$INSTALADOR/windows/Iniciar-Anonimizador.vbs" "$INSTALADOR/windows/anonimizador.ico" "$stage/"
+}
+
+xerar_windows() {
+    log "== Windows =="
+    command -v makensis >/dev/null || { echo "ERRO: precísase 'makensis' (paquete nsis)."; exit 1; }
+    montar_staging_windows
+    local stage="$BUILD/staging-windows"
 
     # 2) Lista de ficheiros para NSIS + compilación (cross-compile con makensis)
     local xerado="$BUILD/nsis"
@@ -367,13 +372,24 @@ xerar_windows() {
 }
 
 # ---------------------------------------------------------------------
+# Microsoft Store: cartafol do paquete MSIX (o .msix faise en Windows con
+# makeappx, ver .github/workflows/msix.yml e instalador/msix/)
+# ---------------------------------------------------------------------
+
+xerar_msix() {
+    log "== MSIX (Microsoft Store) =="
+    montar_staging_windows
+    python3 "$INSTALADOR/msix/montar_msix.py" "$BUILD/staging-windows" "$BUILD/msix"
+}
+
+# ---------------------------------------------------------------------
 # Principal
 # ---------------------------------------------------------------------
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|todo) ;;
-    *) echo "Uso: $0 [windows]"; exit 1 ;;
+    windows|msix|todo) ;;
+    *) echo "Uso: $0 [windows|msix]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -382,7 +398,10 @@ descargar_proxy_tools
 descargar_pywebview
 descargar_modelo_idioma
 
-xerar_windows
+case "$OBXECTIVO" in
+    msix) xerar_msix ;;
+    *) xerar_windows ;;
+esac
 
 echo
 log "Feito ($OBXECTIVO). Os ficheiros xerados están en $RAIZ/"

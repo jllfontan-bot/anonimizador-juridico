@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Manifesto do paquete MSIX para a Microsoft Store. montar_msix.py
+     substitúe {VERSION}. A identidade (Name, Publisher, PublisherDisplayName)
+     é a que deu Partner Center ao reservar o nome "Anonimizador jurídico":
+     se non coincide letra a letra, a Store rexeita o paquete. -->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap10 rescap">
+
+  <Identity
+    Name="JosLuisLpezFontn.Anonimizadorjurdico"
+    Publisher="CN=D4ECC9E2-BE4E-46B0-A68D-EF12B55919C3"
+    Version="{VERSION}"
+    ProcessorArchitecture="x64" />
+
+  <Properties>
+    <DisplayName>Anonimizador jurídico</DisplayName>
+    <PublisherDisplayName>José Luis López Fontán</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <!-- 19041 = Windows 10 2004: o primeiro que entende uap10:Parameters -->
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="es-ES" />
+    <Resource Language="gl-ES" />
+  </Resources>
+
+  <Applications>
+    <!-- Sen lanzador propio: o Python do paquete co módulo de arranque
+         (src/anonimizador/arranque_windows.py), que atopa polo .pth que
+         montar_msix.py deixa en site-packages. -->
+    <Application Id="Anonimizador"
+      Executable="runtime\python\pythonw.exe"
+      EntryPoint="Windows.FullTrustApplication"
+      uap10:Parameters="-m anonimizador.arranque_windows">
+      <uap:VisualElements
+        DisplayName="Anonimizador jurídico"
+        Description="Anonimiza documentos jurídicos en este ordenador: nombres, DNI y demás datos personales pasan a códigos."
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

@@ -1,0 +1,85 @@
+name: Paquete MSIX (Microsoft Store)
+
+# 1) Linux monta o árbore de Windows co mesmo crear-paquetes.sh do
+#    instalador clásico (Python portátil, Tesseract, librarías) e o
+#    cartafol do paquete (instalador/msix/montar_msix.py).
+# 2) Windows precompila o Python (o cartafol dun MSIX é de só lectura: sen
+#    .pyc, cada arranque compilaría de novo spaCy, NumPy...) e empaqueta
+#    con makeappx. O .msix sae SEN asinar: asínao a Store ao publicalo.
+#
+# Execútase á man dende a pestana Actions ("Run workflow") ou cunha
+# etiqueta msix-v*. A versión do paquete é a do ficheiro VERSION.
+
+on:
+  workflow_dispatch: {}
+  push:
+    tags:
+      - "msix-v*"
+
+jobs:
+  arbore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ferramentas (binutils para as DLL de Tesseract, Pillow para as iconas)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq binutils python3-pip
+          python3 -m pip install --quiet --break-system-packages pillow
+
+      - name: Montar o cartafol do paquete
+        run: ./instalador/crear-paquetes.sh msix
+
+      - name: Empaquetar o cartafol nun só ficheiro (miles de ficheiros soltos soben moi lentos)
+        run: tar -cf msix-cartafol.tar -C build msix
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: msix-cartafol
+          path: msix-cartafol.tar
+          retention-days: 1
+
+  paquete:
+    needs: arbore
+    runs-on: windows-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: msix-cartafol
+
+      - name: Desempaquetar
+        run: tar -xf msix-cartafol.tar
+
+      - name: Precompilar o Python do paquete
+        shell: pwsh
+        run: |
+          # unchecked-hash: o .pyc úsase sen mirar a data do .py (ao instalar
+          # un MSIX as datas dos ficheiros poden cambiar). Algún ficheiro de
+          # probas das librarías non compila: non importa.
+          & msix\runtime\python\python.exe -m compileall -q -j 0 --invalidation-mode unchecked-hash `
+            msix\runtime\python\Lib msix\anonimizador-xuridico\src
+          exit 0
+
+      - name: Comprobar que arrinca o código (importar o módulo de arranque e o programa)
+        shell: pwsh
+        run: |
+          & msix\runtime\python\python.exe -c "import anonimizador.arranque_windows, anonimizador.web, spacy, fitz, webview; print('imports OK')"
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+
+      - name: makeappx pack
+        shell: pwsh
+        run: |
+          $makeappx = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\makeappx.exe" |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          $version = ([xml](Get-Content msix\AppxManifest.xml)).Package.Identity.Version
+          $saida = "Anonimizador-juridico-$version-x64.msix"
+          & $makeappx.FullName pack /d msix /p $saida /o
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          Get-Item $saida | Format-List Name, Length
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paquete-msix
+          path: "*.msix"
+          retention-days: 14
+          compression-level: 0
