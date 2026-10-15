@@ -258,5 +258,18 @@
  "web.sen_soportados": "Non se atopou ningún documento soportado en: {ruta}",
  "web.traballo_descoñecido": "Traballo descoñecido (o programa reiniciouse?)",
  "web.traballo_fallou": "O traballo non se puido completar: {erro}",
- "web.ficheiro_danado": "o ficheiro está estragado ou non é do tipo que indica a súa extensión"
+ "web.ficheiro_danado": "o ficheiro está estragado ou non é do tipo que indica a súa extensión",
+ "inicio.migracion.texto": "Copiouse a <code>Documentos\\Anonimizador</code> o rexistro cifrado da versión anterior do programa (<code>{ruta}</code>, que queda intacto). Usa de agora en diante só esta versión: se segues anonimizando tamén coa anterior, os dous rexistros deixarán de coincidir. Cando comprobes que todo está ben, desinstala a versión anterior.",
+ "inicio.migracion.entendido": "Entendido",
+ "inicio.manual": "Manual de uso (PDF)",
+ "inicio.acerca": "Acerca deste programa",
+ "acerca.titulo": "Acerca de",
+ "acerca.version": "Versión {version}",
+ "acerca.autor": "© 2026 José Luis López Fontán.",
+ "acerca.licenza": "Software libre con licenza <strong>GNU Affero General Public License v3.0</strong> (AGPL-3.0): podes usalo, estudalo, modificalo e redistribuílo nas condicións desa licenza. Distribúese SEN NINGUNHA GARANTÍA.",
+ "acerca.codigo": "Código fonte:",
+ "acerca.privacidade": "Todo o proceso faise neste ordenador: o programa non envía documentos nin datos a internet.",
+ "acerca.terceiros": "Inclúe compoñentes de terceiros (Python, Tesseract, spaCy, PyMuPDF e outros) coas súas propias licenzas: detállanse en <code>AVISOS-TERCEIROS.md</code>, no cartafol do programa.",
+ "acerca.ver_licenza": "Ver o texto completo da licenza (en inglés)",
+ "acerca.volver": "Volver ao inicio"
 }

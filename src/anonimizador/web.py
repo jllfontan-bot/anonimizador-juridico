@@ -21,10 +21,12 @@ from __future__ import annotations
 import getpass
 import os
 import re
+import sys
 import threading
 import time
 import traceback
 import uuid
+import webbrowser
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -228,6 +230,49 @@ def _estado_da_clave(rexistro_dir: str) -> dict:
     return estado
 
 
+_URL_CODIGO = "https://github.com/jllfontan-bot/anonimizador-juridico"
+_URLS_EXTERNAS = {"codigo": _URL_CODIGO, "licenza": "https://www.gnu.org/licenses/agpl-3.0.html"}
+# Raíz do código (`src/..`): no repo e no programa instalado leva VERSION,
+# LICENSE e AVISOS-TERCEIROS.md. As guías PDF están en `docs/` do repo ou,
+# no programa instalado, un nivel máis arriba.
+_RAIZ_CODIGO = Path(__file__).resolve().parents[2]
+
+
+def _version() -> str:
+    try:
+        return (_RAIZ_CODIGO / "VERSION").read_text(encoding="utf-8").strip()
+    except OSError:
+        return "?"
+
+
+def _manual_de_uso() -> Path | None:
+    subcartafol = "es/" if idioma.actual() == "es" else ""
+    for docs in (_RAIZ_CODIGO.parent / "docs", _RAIZ_CODIGO / "docs"):
+        pdf = docs / f"{subcartafol}03-Manual-de-uso.pdf"
+        if pdf.is_file():
+            return pdf
+    return None
+
+
+def _aviso_migracion() -> str | None:
+    """Ruta do rexistro da versión anterior que `arranque_windows` copiou a
+    Documentos, mentres o usuario non peche o aviso."""
+    from .arranque_windows import AVISO_MIGRACION
+    try:
+        return Path(AVISO_MIGRACION).read_text(encoding="utf-8").strip() or None
+    except OSError:
+        return None
+
+
+def _abrir_fora(destino: str) -> None:
+    """Abre unha ligazón ou un ficheiro co programa do sistema (navegador,
+    visor de PDF), fóra da xanela do programa."""
+    if sys.platform == "win32" and not destino.startswith("http"):
+        os.startfile(destino)  # noqa: S606 -- só rutas propias (manual)
+    else:
+        webbrowser.open(destino if destino.startswith("http") else Path(destino).as_uri())
+
+
 def _render_index(**kwargs):
     """Renderiza a páxina de inicio enchendo SEMPRE os datos comúns.
 
@@ -240,6 +285,8 @@ def _render_index(**kwargs):
     kwargs.setdefault("pendentes", [])
     kwargs.setdefault("clave", _estado_da_clave(rexistro_dir))
     kwargs.setdefault("aviso_modelo", ner.aviso_compatibilidade_modelo())
+    kwargs.setdefault("aviso_migracion", _aviso_migracion())
+    kwargs.setdefault("hai_manual", _manual_de_uso() is not None)
     return render_template("index.html", **kwargs)
 
 
@@ -290,6 +337,37 @@ def cambiar_idioma():
     if escolla in idioma.IDIOMAS:
         idioma.gardar(escolla)
     return redirect(url_for("index"))
+
+
+@app.route("/aviso-migracion/pechar", methods=["POST"])
+def pechar_aviso_migracion():
+    from .arranque_windows import AVISO_MIGRACION
+    Path(AVISO_MIGRACION).unlink(missing_ok=True)
+    return redirect(url_for("index"))
+
+
+@app.route("/manual")
+def manual():
+    pdf = _manual_de_uso()
+    if pdf is not None:
+        _abrir_fora(str(pdf))
+    return redirect(url_for("index"))
+
+
+@app.route("/abrir/<que>")
+def abrir_externo(que):
+    if que in _URLS_EXTERNAS:
+        _abrir_fora(_URLS_EXTERNAS[que])
+    return redirect(url_for("acerca"))
+
+
+@app.route("/acerca")
+def acerca():
+    try:
+        licenza = (_RAIZ_CODIGO / "LICENSE").read_text(encoding="utf-8")
+    except OSError:
+        licenza = None
+    return render_template("acerca.html", version=_version(), licenza=licenza, url_codigo=_URL_CODIGO)
 
 
 @app.route("/")

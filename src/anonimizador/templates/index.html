@@ -10,6 +10,13 @@
 {% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
 {% if aviso_cartafol %}<div class="aviso-ok">{{ aviso_cartafol }}</div>{% endif %}
 
+{% if aviso_migracion %}
+<div class="tarxeta marcada">
+  <p style="margin-top:0;">{{ t("inicio.migracion.texto", ruta=aviso_migracion|e)|safe }}</p>
+  <form method="post" action="{{ url_for('pechar_aviso_migracion') }}" style="margin:0;"><button type="submit" class="boton-secundario">{{ t("inicio.migracion.entendido") }}</button></form>
+</div>
+{% endif %}
+
 {% if aviso_modelo %}
 <div class="erro">
   <strong>{{ t("inicio.deteccion_degradada") }}</strong> {{ traducir(aviso_modelo) }}
@@ -117,6 +124,7 @@
 <p class="nota-saida" style="margin:0 0 8px;">{{ t("inicio.reversion_nota") }}</p>
 <p style="margin:0 0 4px;"><a href="{{ url_for('listar_correspondencias') }}" style="font-size:15px; font-weight:600;">{{ t("inicio.listado") }}</a></p>
 <p class="nota-saida" style="margin:0;">{{ t("inicio.listado_nota") }}</p>
+<p class="nota-saida" style="margin:20px 0 0;">{% if hai_manual %}<a href="{{ url_for('manual') }}">{{ t("inicio.manual") }}</a> · {% endif %}<a href="{{ url_for('acerca') }}">{{ t("inicio.acerca") }}</a></p>
 </div>
 
 <!-- Explorador de cartafoles: amosa tamén os ficheiros (en gris, non escollibles) -->

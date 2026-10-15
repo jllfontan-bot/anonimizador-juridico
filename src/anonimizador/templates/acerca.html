@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titulo %}{{ t("acerca.titulo") }}{% endblock %}
+{% block contido %}
+<h1>{{ t("app.nome") }}</h1>
+<p class="subtitulo">{{ t("acerca.version", version=version) }}</p>
+
+<div class="tarxeta">
+  <p style="margin-top:0;">{{ t("acerca.autor")|safe }}</p>
+  <p>{{ t("acerca.licenza")|safe }}</p>
+  <p style="margin-bottom:0;">{{ t("acerca.codigo") }} <a href="{{ url_for('abrir_externo', que='codigo') }}">{{ url_codigo }}</a></p>
+</div>
+
+<div class="tarxeta">
+  <p style="margin-top:0;">{{ t("acerca.privacidade") }}</p>
+  <p style="margin-bottom:0;">{{ t("acerca.terceiros")|safe }}</p>
+</div>
+
+{% if licenza %}
+<details class="tarxeta">
+  <summary>{{ t("acerca.ver_licenza") }}</summary>
+  <pre style="white-space:pre-wrap; font-size:12px;">{{ licenza }}</pre>
+</details>
+{% endif %}
+
+<p><a href="{{ url_for('index') }}">← {{ t("acerca.volver") }}</a></p>
+{% endblock %}

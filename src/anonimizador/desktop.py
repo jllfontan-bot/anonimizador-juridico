@@ -81,9 +81,25 @@ webview.settings["OPEN_EXTERNAL_LINKS_IN_BROWSER"] = False
 _AUMID = "JLLopez.AnonimizadorXuridico"
 
 
+def e_paquete_msix() -> bool:
+    """`True` se o proceso corre dende un paquete MSIX (Microsoft Store).
+    Aí Windows xa lle dá ao programa a identidade do paquete (botón da
+    barra de tareas, anclar, reabrir): fixar outra rompería iso."""
+    if sys.platform != "win32":
+        return False
+    try:
+        import ctypes
+
+        lonxitude = ctypes.c_uint32(0)
+        APPMODEL_ERROR_NO_PACKAGE = 15700
+        return ctypes.windll.kernel32.GetCurrentPackageFullName(ctypes.byref(lonxitude), None) != APPMODEL_ERROR_NO_PACKAGE
+    except Exception:
+        return False
+
+
 def _establecer_identidade_windows() -> None:
     """Debe chamarse ANTES de crear a xanela."""
-    if sys.platform != "win32":
+    if sys.platform != "win32" or e_paquete_msix():
         return
     try:
         import ctypes
@@ -235,7 +251,7 @@ def executar(porto: int = 5000, usar_chaveiro: bool = False) -> None:
     try:
         _establecer_identidade_windows()
         xanela = webview.create_window(idioma.t("app.nome"), url, width=1100, height=800)
-        if sys.platform == "win32":
+        if sys.platform == "win32" and not e_paquete_msix():
             xanela.events.shown += lambda: _ao_amosar_xanela(xanela)
         webview.start(icon=_icona())
     except Exception as e:
