@@ -27,7 +27,13 @@ from PIL import Image  # noqa: E402
 
 from xerar_icona import debuxar  # noqa: E402
 
-_SEN_EMPAQUETAR = {"Iniciar-Anonimizador.vbs"}
+# - o lanzador do instalador clásico;
+# - a plantilla DESEMPAQUETADA de python-docx (leva un `[Content_Types].xml`,
+#   nome reservado do propio formato do paquete: makeappx fallaba con
+#   0x8007007b). En execución python-docx só usa `templates/default.docx`.
+_SEN_EMPAQUETAR = {"Iniciar-Anonimizador.vbs", "default-docx-template"}
+# Nomes que usa o propio formato do paquete (OPC/MSIX)
+_NOMES_DO_PAQUETE = {"[content_types].xml", "appxblockmap.xml", "appxsignature.p7x", "appxmetadata"}
 # relativo a runtime\python\Lib\site-packages
 _PTH = "..\\..\\..\\..\\anonimizador-xuridico\\src\n"
 
@@ -52,6 +58,7 @@ def nomes_invalidos(cartafol: Path) -> list[str]:
         rel = ruta.relative_to(cartafol)
         for parte in rel.parts:
             if (parte.split(".")[0].lower() in _RESERVADOS or set(parte) & _PROHIBIDOS
+                    or (parte.lower() in _NOMES_DO_PAQUETE and rel != Path("AppxManifest.xml"))
                     or parte.endswith((".", " ")) or len(parte) > 255):
                 malos.append(str(rel))
                 break
@@ -89,11 +96,6 @@ def main() -> None:
     manifesto = (AQUI / "AppxManifest.xml").read_text(encoding="utf-8").replace("{VERSION}", version)
     (destino / "AppxManifest.xml").write_text(manifesto, encoding="utf-8")
     iconas(destino / "Assets")
-    import re
-    raros = sorted({str(r.relative_to(destino)) for r in destino.rglob("*") if re.search(r"[^A-Za-z0-9._\- ]", r.name)})
-    print(f"{len(raros)} ficheiros con caracteres fóra de [A-Za-z0-9._- ]:")
-    for r in raros[:300]:
-        print("  ", r)
     malos = nomes_invalidos(destino)
     if malos:
         raise SystemExit("Nomes que non admite un MSIX:\n  " + "\n  ".join(malos))
