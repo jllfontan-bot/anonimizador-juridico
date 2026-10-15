@@ -24,7 +24,7 @@ nin para Linux.
 - INSTALAR: Microsoft Store > «Anonimizador jurídico» > «Obter». Non hai
   asistente nin aviso de SmartScreen, non pide permisos de administrador
   nin conta, e leva dentro todo o necesario (Python, OCR e o modelo de
-  idioma). Despois do primeiro uso, funciona sen conexión a internet.
+  idioma). Só precisa internet para descargalo; despois funciona sen conexión.
 - USAR: menú Inicio > «Anonimizador jurídico». Ábrese na súa propia xanela
   (non no navegador). Os teus datos quedan en Documentos\Anonimizador; a
   ligazón «Acerca deste programa» da pantalla de inicio amosa a versión, a
