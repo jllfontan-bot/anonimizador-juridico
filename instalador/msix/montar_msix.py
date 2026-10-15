@@ -89,6 +89,11 @@ def main() -> None:
     manifesto = (AQUI / "AppxManifest.xml").read_text(encoding="utf-8").replace("{VERSION}", version)
     (destino / "AppxManifest.xml").write_text(manifesto, encoding="utf-8")
     iconas(destino / "Assets")
+    import re
+    raros = sorted({str(r.relative_to(destino)) for r in destino.rglob("*") if re.search(r"[^A-Za-z0-9._\- ]", r.name)})
+    print(f"{len(raros)} ficheiros con caracteres fóra de [A-Za-z0-9._- ]:")
+    for r in raros[:300]:
+        print("  ", r)
     malos = nomes_invalidos(destino)
     if malos:
         raise SystemExit("Nomes que non admite un MSIX:\n  " + "\n  ".join(malos))
