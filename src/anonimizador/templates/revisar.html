@@ -90,17 +90,7 @@
     <span class="codigo">{{ p.codigo }}</span>
     <div class="mencions">{{ t("revisar.mencions") }} {{ p.mencions|join(", ") }}</div>
     <div class="motivo">{{ traducir(p.motivo) }}</div>
-    {% if p.posibles_coincidencias %}
-    <label for="decision_{{ p.codigo }}">{{ t("revisar.decision") }}</label>
-    <select name="decision_{{ p.codigo }}" id="decision_{{ p.codigo }}">
-      <option value="manter" selected>{{ t("revisar.manter", codigo=p.codigo) }}</option>
-      {% for c in p.posibles_coincidencias %}
-      <option value="fusionar:{{ c }}">{{ t("revisar.fusionar", codigo=c) }}</option>
-      {% endfor %}
-    </select>
-    {% else %}
-    <div class="mencions">{{ t("revisar.sen_suxestion") }}</div>
-    {% endif %}
+    <div class="mencions">{{ t("revisar.homonimo_separado") }}</div>
   </div>
   {% endfor %}
   {% endif %}

@@ -381,8 +381,8 @@ class TestFormatoWeb(unittest.TestCase):
         self.assertIn("PERSOA_000001", doc.paragraphs[0].text)
         self.assertTrue(doc.paragraphs[0].runs[0].bold)
 
-    def test_fusion_de_homonimo_conserva_formato_por_tramos(self):
-        """Tras confirmar unha fusión, o código actualizado no texto ten
+    def test_segundo_documento_da_mesma_persoa_conserva_formato_por_tramos(self):
+        """O segundo documento da mesma persoa (mesmo DNI, mesmo código) ten
         que seguir escribíndose respectando o formato do run orixinal, non
         caer á reserva de "todo o parágrafo dun só formato"."""
         doc1 = self.dir / "doc1.docx"
@@ -403,7 +403,7 @@ class TestFormatoWeb(unittest.TestCase):
             f"/revisar/{sid2}/confirmar",
             data={
                 "texto_final": sesion2["texto_anonimizado"],
-                "decision_PERSOA_000002": "fusionar:PERSOA_000001",
+                "decision_PERSOA_000002": "manter",
             },
         )
 

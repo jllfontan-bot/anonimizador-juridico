@@ -192,7 +192,8 @@ if __name__ == "__main__":
 
 class TestFusionCoFormularioDeDecisions(unittest.TestCase):
     """FUGA atopada facendo as capturas do manual (15/10/2026): fusionar un
-    homónimo e confirmar deixaba o nome á vista no documento. As casiñas
+    homónimo e confirmar deixaba o nome á vista no documento. A fusión quitouse
+    da revisión; esta proba garda que un "fusionar" vello non volva destapar nada. As casiñas
     "anonimizar" levan o código de ANTES da fusión, e o código ao que se
     fusiona tomábase por "non é persoa". Ademais a fusión cambiaba o texto e
     contaba coma edición libre: aviso falso e un .edicion-manual.txt de sobra."""
@@ -226,6 +227,6 @@ class TestFusionCoFormularioDeDecisions(unittest.TestCase):
             "decision_PERSOA_000002": "fusionar:PERSOA_000001"})
         saida = (self.dir / "b.anonimizado.txt").read_text(encoding="utf-8")
         self.assertNotIn("Uxía", saida)
-        self.assertIn("PERSOA_000001", saida)
+        self.assertIn("PERSOA_000002", saida)  # a fusión xa non se fai (15/10/2026): segue co seu código
         self.assertFalse((self.dir / "b.anonimizado.edicion-manual.txt").exists())
         self.assertNotIn("edición libre", resposta.get_data(as_text=True))

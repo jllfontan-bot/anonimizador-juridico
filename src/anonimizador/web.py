@@ -375,10 +375,8 @@ def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro) -> dic
     modo "automático" (informe: preguntar ao usuario se quere comprobar
     o proceso ou anonimización automática). Aplica sempre a decisión MÁIS
     SEGURA por defecto: `RexistroCorrespondencias.resolver_ou_crear` xa
-    NUNCA fusiona un posible homónimo por conta propia (esixe confirmación
-    explícita dun humano, vía `/revisar/<sid>/confirmar`) -- así que sen
-    revisión un posible homónimo simplemente recibe un código novo, coma
-    se un letrado tivese decidido "manter separadas". Devolve un resumo
+    NUNCA fusiona un posible homónimo: recibe sempre un código propio (desde
+    o 15/10/2026 tampouco se fusiona dende a revisión). Devolve un resumo
     para amosar ao usuario, coa mesma información ca unha sesión de
     revisión (`n_marcadas`, `n_mosaico`).
 
@@ -721,31 +719,17 @@ def confirmar(sid):
     # "texto_final", parte do resultado automático; as decisións fan o resto.
     texto_final = request.form.get("texto_final", sesion.get("texto_anonimizado") or "")
     texto_final = texto_final.replace("\r\n", "\n").replace("\r", "\n")
-    # Só é edición libre o que mande o formulario, non o que cambian as fusións
-    # de embaixo (antes unha fusión contaba coma edición: aviso falso e un
-    # .edicion-manual.txt de sobra).
     editado_a_man = texto_final != (sesion.get("texto_anonimizado") or "").replace("\r\n", "\n")
     substitucions = sesion.get("substitucions")
-    fusions = {}  # código da revisión -> código co que se fusionou
 
+    # Un posible homónimo queda SEMPRE coma persoa distinta (decisión do usuario,
+    # 15/10/2026): a fusión desde a revisión quitouse porque cambiaba códigos a
+    # media revisión e deixara un nome á vista (as casiñas levaban o código de
+    # antes da fusión). Un "fusionar:" que aínda chegue dun formulario vello ignórase.
     for persoa in sesion["informe"]["persoas"]:
-        if not persoa["marcado_para_revision"]:
-            continue
-        codigo = persoa["codigo"]
-        decision = request.form.get(f"decision_{codigo}", "manter")
-        if decision.startswith("fusionar:"):
-            manter = decision.split(":", 1)[1]
-            rexistro.fusionar(manter, codigo)
-            fusions[codigo] = manter
-            texto_final = texto_final.replace(codigo, manter)
-            if substitucions:
-                substitucions = [
-                    (i, f, manter) if novo == codigo else (i, f, novo)
-                    for (i, f, novo) in substitucions
-                ]
-        else:
+        if persoa["marcado_para_revision"]:
             comparacion = ", ".join(persoa.get("posibles_coincidencias") or ["ningunha suxestión"])
-            rexistro.manter_separadas(codigo, comparacion)
+            rexistro.manter_separadas(persoa["codigo"], comparacion)
 
     # Revisión por DECISIÓNS (formulario novo, `decisions_v2`): o documento
     # xérase desde o ORIXINAL + as decisións, así que conserva SEMPRE o
@@ -761,11 +745,8 @@ def confirmar(sid):
     if Path(sesion["ruta_orixe"]).exists():
         texto_orixinal, _ = cargar_documento_estruturado(sesion["ruta_orixe"])
     if request.form.get("decisions_v2") == "1" and texto_orixinal is not None and substitucions is not None:
-        # FUGA (15/10/2026): as casiñas "anonimizar" levan o código de ANTES da
-        # fusión; sen traducilas, a persoa fusionada contaba coma "non é persoa"
-        # e o seu nome quedaba á vista no documento.
-        manter = {fusions.get(c, c) for c in request.form.getlist("anonimizar")}
-        codigos = {fusions.get(p["codigo"], p["codigo"]) for p in sesion["informe"]["persoas"]}
+        manter = set(request.form.getlist("anonimizar"))
+        codigos = {p["codigo"] for p in sesion["informe"]["persoas"]}
         codigos = {c for c in codigos | {novo for (_, _, novo) in substitucions} if idioma.e_codigo_persoa(c)}
         descartados = codigos - manter
         fragmentos = ler_fragmentos(request.form.get("fragmentos", ""))

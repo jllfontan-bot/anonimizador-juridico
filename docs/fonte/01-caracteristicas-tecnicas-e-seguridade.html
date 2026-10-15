@@ -19,20 +19,20 @@
 <div class="portada">
   <span class="chip">Informe técnico · Anonimizador de expedientes xurídicos</span>
   <h1>Características técnicas, robustez e seguridade do sistema</h1>
-  <p class="lede">Detalle da implementación real do sistema de pseudonimización descrito no informe orixinal: como detecta os datos, como se protexe a información en repouso, e que garantías de robustez incorpora despois de probarse contra documentos reais dun despacho de avogados.</p>
+  <p class="lede">Detalle da implementación real do sistema de pseudonimización: como detecta os datos, como se protexe a información en repouso, e que garantías de robustez incorpora despois de probarse contra documentos reais dun despacho de avogados e contra boletíns oficiais.</p>
   <div class="meta">
-    <div><span>Versión do software</span>Proba de concepto — Fase 3</div>
+    <div><span>Versión do software</span>Outubro de 2026</div>
     <div><span>Marco</span>RGPD (UE) 2016/679 · LOPDGDD</div>
-    <div><span>Data</span>Setembro de 2026</div>
+    <div><span>Idiomas da interface</span>Castelán e galego</div>
   </div>
 </div>
 
 <h2 class="sec">01 · Resumo</h2>
 <h3 style="margin-top:0">Que é e que garante</h3>
-<p>O sistema le documentos xurídicos (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>, incluídos escaneados e arquivos <code>.zip</code>) e substitúe cada persoa física mencionada por un código opaco e estable (<code>PERSOA_000042</code>), xunto cos seus identificadores directos (DNI, teléfono, email, enderezo, matrícula…). Todo o procesamento é local: en ningún momento se envía texto a un servizo externo.</p>
+<p>O sistema le documentos xurídicos (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>, incluídos escaneados, imaxes e arquivos <code>.zip</code>) e substitúe cada persoa física mencionada por un código opaco e estable (<code>PERSOA_000042</code>), xunto cos seus identificadores directos (DNI, teléfono, email, enderezo, matrícula…). Todo o procesamento é local: en ningún momento se envía texto a un servizo externo.</p>
 <div class="cifras">
-  <div class="c"><div class="v">240+</div><div class="l">Tests automatizados</div></div>
-  <div class="c"><div class="v">12+</div><div class="l">Tipos de identificador detectados</div></div>
+  <div class="c"><div class="v">750+</div><div class="l">Tests automatizados</div></div>
+  <div class="c"><div class="v">15+</div><div class="l">Tipos de identificador detectados</div></div>
   <div class="c"><div class="v">0</div><div class="l">Chamadas de rede durante o uso</div></div>
 </div>
 
@@ -59,10 +59,11 @@
 </ul>
 <h3>Identificadores directos (expresións regulares propias)</h3>
 <div class="grella">
-  <div>DNI / NIE</div><div>Teléfono</div><div>Email</div>
-  <div>Matrícula (actual e anterior a 2000)</div><div>Enderezo</div><div>Número de colexiado/a</div>
-  <div>CSV</div><div>Número de referencia</div><div>Número de expediente</div>
-  <div>N.R.P. (Número de Rexistro de Persoal)</div>
+  <div>DNI / NIE</div><div>Pasaporte</div><div>Teléfono</div>
+  <div>Email</div><div>Enderezo</div><div>Matrícula (actual e anterior a 2000)</div>
+  <div>IBAN</div><div>Tarxeta bancaria</div><div>Número da Seguridade Social</div>
+  <div>Referencia catastral</div><div>Número de colexiado/a</div><div>CSV</div>
+  <div>Número de referencia</div><div>Número de expediente</div><div>N.R.P. (Número de Rexistro de Persoal)</div>
 </div>
 <p>O DNI/NIE valídase sempre recalculando o díxito de control a partir dos números — nunca se confía na letra final tal como a le o OCR, unha fonte habitual de erro en dixitalizacións.</p>
 <p>O <strong>N.R.P.</strong> leva o DNI incrustado nos seus primeiros 8 díxitos; nas listaxes oficiais a columna «D.N.I.» amosa eses díxitos soltos, sen letra de control. Recoñécese primeiro o N.R.P. e dedúcese del o DNI — nunca se redacta «calquera número de 8 díxitos», só os xa confirmados por un N.R.P. real. O patrón de <strong>enderezo</strong> nunca cruza un salto de liña (en táboas moi compactas fusionaba por erro un nome de pía coa cifra dunha liña adxacente).</p>
@@ -81,10 +82,9 @@
     <tr><td>Documento moi longo (probado con 351 páxinas / 1,3M caracteres)</td><td>spaCy rexeita textos de máis de 1M de caracteres. O texto trocéase en anacos moi por debaixo dese límite, cortando sempre por saltos de liña para non partir unha mención pola metade.</td></tr>
     <tr><td>PDF escaneado sen texto extraíble</td><td>Recorre automaticamente a OCR (Tesseract, <code>spa+glg</code>) só nas páxinas que o precisan; preprocesado con escala de grises e autocontraste.</td></tr>
     <tr><td>Homónimos exactos (mesmo nome, persoas distintas)</td><td>Sen DNI que o confirme, NUNCA se fusionan automaticamente — créase un código novo marcado para revisión humana. Regra de deseño deliberadamente conservadora.</td></tr>
-    <tr><td>Documento .docx/.odt con formatos mesturados nun parágrafo</td><td>Consérvase o formato de cada «run»/«span» por separado; se a revisión manual desaliña os parágrafos, o sistema detéctao e garda coma texto plano en vez de arriscar un documento incorrecto.</td></tr>
+    <tr><td>Documento .docx/.odt con formatos mesturados nun parágrafo</td><td>Consérvase o formato de cada «run»/«span» por separado; o documento final xérase sempre dende o orixinal máis as decisións da revisión.</td></tr>
     <tr><td>Arquivo .zip con ficheiros non analizables (planos CAD, imaxes…)</td><td>Nunca se inclúen no .zip de saída — quedan listados explicitamente coma «omitidos» para que quede constancia do que non se puido revisar.</td></tr>
     <tr><td>Servidor de revisión reiniciado a media revisión</td><td>As sesións pendentes sobreviven ao reinicio (gardadas cifradas); o documento orixinal nunca se persiste sen cifrar, recárgase sempre do ficheiro de orixe.</td></tr>
-    <tr><td>PDF editado a man na revisión de forma que xa non casa coas substitucións</td><td>Só ESA páxina cae na reserva (redáctase enteira e reescríbese en fonte xenérica); o resto do documento mantén a redacción precisa palabra a palabra.</td></tr>
     <tr><td>Cartafol enteiro con ficheiros de formatos mesturados (soportados e non)</td><td>Cada ficheiro soportado recibe a súa propia sesión de revisión; os non soportados quedan fóra e listados coma «omitidos», nunca se inclúen nin se modifican.</td></tr>
     <tr><td>Un ficheiro dun lote falla (por exemplo, un PDF estragado)</td><td>O lote non se detén: o traballo segue co resto e os fallos lístanse ao final co seu motivo. A interface amosa o progreso en directo e permite cancelar o lote (remata o ficheiro en curso e non empeza o seguinte; o feito queda feito).</td></tr>
   </tbody>
@@ -98,8 +98,8 @@
 <table>
   <thead><tr><th style="width:22%">Modo</th><th style="width:36%">Onde vive a clave</th><th>Cando usalo</th></tr></thead>
   <tbody>
-    <tr><td>Ficheiro local (por defecto)</td><td><code>clave.key</code>, permisos restrinxidos (600, só o propietario)</td><td>Probas, ou cando non hai chaveiro de sistema dispoñible.</td></tr>
-    <tr><td><code>--chaveiro-sistema</code></td><td>macOS Keychain / Windows Credential Manager (libraría <code>keyring</code>)</td><td>Recomendado para uso real — a clave non convive co que cifra. Os accesos e scripts de arranque do programa instalado xa o activan.</td></tr>
+    <tr><td>Ficheiro local (por defecto)</td><td><code>clave.key</code>, con permisos restrinxidos ao propietario</td><td>Probas, ou cando non hai chaveiro de sistema dispoñible.</td></tr>
+    <tr><td><code>--chaveiro-sistema</code></td><td>Administrador de credenciais de Windows (libraría <code>keyring</code>)</td><td>Recomendado para uso real — a clave non convive co que cifra. Os accesos e scripts de arranque do programa instalado xa o activan.</td></tr>
   </tbody>
 </table>
 <div class="aviso">
@@ -111,9 +111,9 @@
 <ul>
   <li>Esixen sempre un <strong>motivo</strong> — non é opcional — e queda rexistrado cifrado xunto con quen o solicitou e cando.</li>
   <li>Esixen ademais unha <strong>contrasinal de reversión</strong>, definida unha vez por rexistro: unha segunda barreira, á parte da clave de cifrado, que evita que outra persoa que comparta o ordenador reverta identidades sen coñecela. Non é unha capa de cifrado adicional: quen teña á vez a clave e o rexistro cifrado pode descifralo igualmente. Os intentos fallidos quedan rexistrados na auditoría.</li>
-  <li>Se un código foi fusionado noutro tras unha revisión de homónimos, a reversión segue o alias ata o código vixente; o listado completo amosa os códigos fusionados coma columna do código vixente, así que ningún desaparece.</li>
-  <li>O listado completo é MÁIS sensible cá reversión (expón de golpe o rexistro enteiro, non un código coñecido de antemán): esixe ademais unha confirmación explícita, paxínase de 200 en 200 (cada páxina volve pedir a contrasinal), e queda auditado cunha acción propia (<code>listado_completo</code>/<code>listado_completo_denegado</code>) que a auditoría distingue sempre dunha reversión individual (<code>reversion</code>). Non ofrece exportar a ficheiro (CSV, JSON…): amósase só en pantalla, para non contradicir o principio de nunca escribir estes datos en claro en disco.</li>
-  <li>O rexistro de auditoría rexistra tamén cada creación de código, cada fusión e cada decisión de manter persoas separadas — nunca se pode editar nin borrar unha entrada individual.</li>
+  <li>Se nun rexistro antigo un código se fusionou noutro (versións anteriores do programa), a reversión segue o alias ata o código vixente; o listado completo amosa os códigos fusionados coma columna do código vixente, así que ningún desaparece.</li>
+  <li>O listado completo é MÁIS sensible cá reversión (expón de golpe o rexistro enteiro, non un código coñecido de antemán): esixe ademais unha confirmación explícita, paxínase de 200 en 200 (cada páxina volve pedir a contrasinal), e queda auditado cunha acción propia (<code>listado_completo</code>/<code>listado_completo_denegado</code>) que a auditoría distingue sempre dunha reversión individual (<code>reversion</code>). Pódese gardar coma PDF CONFIDENCIAL, con marca de auga, pedindo de novo a contrasinal e unha confirmación expresa de que é un documento de extrema sensibilidade.</li>
+  <li>O rexistro de auditoría rexistra tamén cada creación de código, cada posible homónimo e cada persoa desmarcada na revisión — nunca se pode editar nin borrar unha entrada individual.</li>
 </ul>
 <h3>Redacción real en PDF (non só visual)</h3>
 <p>Ao conservar o formato PDF orixinal, cada dato detectado elimínase do documento mediante redacción (<code>add_redact_annot</code> + <code>apply_redactions</code>), que reescribe o propio contido do ficheiro — non se limita a debuxar un recadro branco enriba. Isto aplícase por igual a texto vectorial e a píxeles de imaxe nunha páxina escaneada.</p>
@@ -144,10 +144,10 @@
   <thead><tr><th style="width:26%">Categoría</th><th>Que cobren</th></tr></thead>
   <tbody>
     <tr><td>Detección de persoas (NER)</td><td>Límites de entidade, texto en maiúsculas, apelidos con conector, documentos moi longos, nomes «Apelidos, Nome».</td></tr>
-    <tr><td>Identificadores directos</td><td>DNI/NIE (con corrección OCR), N.R.P., matrículas, enderezos, colexiado, CSV, referencia.</td></tr>
+    <tr><td>Identificadores directos</td><td>DNI/NIE (con corrección OCR), N.R.P., matrículas, enderezos, colexiado, CSV, referencia, IBAN, tarxeta, Seguridade Social, referencia catastral.</td></tr>
     <tr><td>Consistencia e resolución de identidade</td><td>Mesmo DNI → mesmo código; homónimos sen DNI → códigos distintos marcados.</td></tr>
-    <tr><td>Conservación de formato</td><td>.docx/.odt con táboas e mestura de estilos por parágrafo; PDF nativo e escaneado con redacción real (texto e píxeles de imaxe), incluído o caso de edición manual dunha páxina.</td></tr>
-    <tr><td>Interface de revisión</td><td>Fluxo completo procesar → revisar → confirmar/fusionar; persistencia de sesións; explorador de cartafoles propio e selector nativo de ficheiro; cartafol de saída; anonimización dun cartafol enteiro; progreso, fallos illados e cancelación de lotes.</td></tr>
+    <tr><td>Conservación de formato</td><td>.docx/.odt con táboas e mestura de estilos por parágrafo; PDF nativo e escaneado con redacción real (texto e píxeles de imaxe).</td></tr>
+    <tr><td>Interface de revisión</td><td>Fluxo completo procesar → revisar → confirmar; persistencia de sesións; explorador de cartafoles propio e selector nativo de ficheiro; cartafol de saída; anonimización dun cartafol enteiro; progreso, fallos illados e cancelación de lotes; castelán e galego.</td></tr>
     <tr><td>Reversión controlada e listado completo</td><td>Motivo obrigatorio, contrasinal de reversión, rexistro na auditoría (tamén dos intentos fallidos, con accións distintas para cada función), seguimento de alias, orde e paxinación do listado, confirmación explícita, e que un fallo de contrasinal non filtra ningún nome.</td></tr>
     <tr><td>Chaveiro do sistema</td><td>Gardado/recuperación de clave, fallo con reserva a ficheiro, erro claro se a clave non se atopa.</td></tr>
     <tr><td>ZIP e documentos grandes</td><td>Ficheiros soportados/omitidos, consistencia de códigos entre ficheiros dun mesmo zip, formato e extensión orixinais conservados en tódolos catro tipos.</td></tr>
@@ -162,11 +162,10 @@
   <li>Enderezos sen número preto do nome da vía (habitual en formularios con campos separados) non se detectan coma identificador directo.</li>
   <li>Resolución de identidade é intencionadamente conservadora: alcumes, iniciais ou grandes variacións ortográficas entre documentos distintos requiren revisión humana.</li>
   <li><strong>Redacción en PDF:</strong> traballa a nivel de palabra enteira, non de carácter; o tamaño de letra do código inserido axústase automaticamente pero non replica o tipo de letra orixinal exacto. Columnas múltiples ou táboas complexas en PDF poden alterar a orde de lectura do texto reconstruído.</li>
-  <li><strong>Instalador de Windows sen sinatura dixital:</strong> Windows SmartScreen amosa un aviso na primeira execución (ver a guía de instalación); non afecta ao funcionamento nin á seguridade dos datos.</li>
 </ul>
 
 <h2 class="sec">09 · Conclusión</h2>
-<p>O sistema cobre de forma sólida e probada os requisitos funcionais e de seguridade centrais definidos no informe orixinal: detección exhaustiva, consistencia global, unicidade estrita, conservación de formato, reversión controlada, trazabilidade e funcionamento 100 % local. As limitacións que quedan son as propias de calquera sistema deste tipo (efecto mosaico, falsos negativos residuais) e están documentadas para que a revisión humana as poida cubrir.</p>
+<p>O sistema cobre de forma sólida e probada os requisitos funcionais e de seguridade centrais: detección exhaustiva, consistencia global, unicidade estrita, conservación de formato, reversión controlada, trazabilidade e funcionamento 100 % local. As limitacións que quedan son as propias de calquera sistema deste tipo (efecto mosaico, falsos negativos residuais) e están documentadas para que a revisión humana as poida cubrir.</p>
 
 <div class="rodape">Anonimizador de expedientes xurídicos — informe técnico · Elaborado con Claude Code</div>
 </body>

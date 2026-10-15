@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual de uso</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  .recorte{ overflow:hidden; border:1px solid var(--line); border-radius:6px; }
+  .recorte img{ border:0 !important; border-radius:0 !important; }
+  .recorte.fade{ position:relative; }
+  .recorte.fade::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:26px; background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); }
+  kbd{ font-family:Menlo,Consolas,monospace; font-size:.86em; background:var(--paper); border:1px solid var(--line); border-radius:3px; padding:0 4px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Manual de uso · Anonimizador de expedientes jurídicos</span>
+  <h1>Cómo anonimizar documentos, paso a paso</h1>
+  <p class="lede">Guía práctica de la interfaz, con capturas reales de cada pantalla (con datos inventados): cómo elegir archivos y carpetas, cómo seguir el progreso de un lote, dónde se guarda el documento anonimizado, cómo decidir sobre posibles homónimos y cómo revertir un código cuando haga falta consultar la identidad real.</p>
+  <div class="meta">
+    <div><span>Interfaz</span>Ventana propia del programa<br>(no usa el navegador)</div>
+    <div><span>Idioma</span>Castellano o gallego<br>(se elige en la pantalla de inicio)</div>
+    <div><span>Fecha</span>Octubre de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · Arrancar el programa</h2>
+<p>Menú Inicio de Windows → <em>Anonimizador de expedientes jurídicos</em> (o el acceso del escritorio, si lo creaste).</p>
+<p>El programa se abre en una <strong>ventana de escritorio propia</strong>, no en el navegador; para cerrarlo, cierra esa ventana. Por dentro funciona como un servidor local al que solo se puede acceder desde este mismo ordenador (<code>127.0.0.1</code>), nunca desde fuera. (Si a Windows le falta el componente WebView2, el programa ofrece abrirse en el navegador.)</p>
+<figure><img src="img/es/inicio_revisar.png" alt="Pantalla inicial" style="max-width:430px"><figcaption>Pantalla inicial: aquí indicas qué documento o carpeta anonimizar y dónde está el registro de correspondencias. Arriba a la derecha se elige el idioma.</figcaption></figure>
+<div class="nota">
+  <h4>Castellano o gallego</h4>
+  <p>Los botones <strong>«Castellano | Galego»</strong> de la pantalla inicial cambian el idioma de todo el programa, y la elección se recuerda al cerrarlo. El idioma decide también cómo se escriben los códigos en los documentos anonimizados: <code>PERSONA_000001</code>, <code>[DIRECCIÓN]</code>… en castellano y <code>PERSOA_000001</code>, <code>[ENDEREZO]</code>… en gallego. La misma persona lleva el mismo número en los dos idiomas, y un código se puede revertir escrito de cualquiera de las dos formas.</p>
+</div>
+
+<h2 class="sec">02 · Anonimizar el primer documento</h2>
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Elige el archivo o la carpeta (o escribe su ruta)</p>
+  <p>El botón <strong>«Elegir archivo…»</strong> abre el diálogo nativo del sistema (el Explorador de Windows). El botón <strong>«Elegir carpeta…»</strong> abre el explorador de carpetas del propio programa (ver sección 03). También puedes escribir o pegar la ruta directamente en el campo.</p>
+</div></div>
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">Carpeta de salida (opcional)</p>
+  <p>Si la dejas vacía, el archivo anonimizado se guarda junto al original. Si quieres que vaya a otro sitio (por ejemplo, una carpeta distinta para entregar), indícalo aquí con su propio botón «Elegir carpeta…».</p>
+</div></div>
+<div class="paso"><div class="n">3</div><div class="corpo">
+  <p class="t">Indica la carpeta del registro</p>
+  <p>Por defecto <code>./datos_rexistro</code>. Es la carpeta donde queda guardada, cifrada, la correspondencia entre cada código y la persona real. Usa siempre la <strong>MISMA</strong> carpeta para todos los documentos de un mismo caso: así los códigos son coherentes entre ellos. En Windows, la carpeta por defecto está en <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code>.</p>
+</div></div>
+<div class="paso"><div class="n">4</div><div class="corpo">
+  <p class="t">Elige cómo procesar y pulsa el botón</p>
+  <p>«Comprobar antes de guardar» (botón <strong>«Anonimizar y revisar»</strong>) o «Anonimización automática» (ver sección 04). Al pulsarlo aparece la pantalla de progreso (sección 05) y, cuando termina, la pantalla de revisión (o el resultado, en modo automático).</p>
+</div></div>
+<div class="nota">
+  <h4>Dónde queda el registro</h4>
+  <p>La carpeta del registro (<code>datos_rexistro</code> o el nombre que le hayas dado) contiene <code>clave.key</code> (o nada, si usas el llavero del sistema, que es lo normal), <code>rexistro.enc</code> y <code>auditoria.enc</code>.</p>
+  <p><strong>NO LA BORRES NI LA MUEVAS</strong> mientras sigas trabajando con el mismo caso: es la única forma de mantener los códigos coherentes y de poder revertir un código en el futuro.</p>
+</div>
+
+<h2 class="sec">03 · El explorador de carpetas</h2>
+<p>Al pulsar cualquier botón <strong>«Elegir carpeta…»</strong> (el del documento, el de salida o el del registro) se abre el explorador del propio programa. A diferencia del diálogo nativo del sistema, que solo muestra carpetas, este muestra <strong>también los archivos</strong> que hay dentro, para que puedas reconocer la carpeta correcta antes de elegirla.</p>
+<figure><img src="img/es/explorador.png" alt="Explorador de carpetas" style="max-width:430px"><figcaption>El explorador: las subcarpetas primero; los archivos en gris (no se pueden elegir) y los documentos soportados con la etiqueta «documento soportado».</figcaption></figure>
+<ul>
+  <li><strong>Carpetas:</strong> haz clic en una carpeta para entrar en ella. Los <strong>archivos</strong> aparecen en gris y no se pueden seleccionar; los que el programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) llevan la etiqueta <strong>«documento soportado»</strong>. Los archivos y carpetas ocultos no se muestran.</li>
+  <li><strong>Accesos rápidos</strong> (columna de la izquierda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> y, al final, <em>Este equipo</em> (las unidades C:, D:…).</li>
+  <li><strong>«↑ Subir»</strong> va a la carpeta superior. El <strong>campo de ruta</strong> se puede editar: escribe una ruta y pulsa <kbd>Intro</kbd> o «Ir».</li>
+  <li><strong>«Nueva carpeta…»</strong> crea una carpeta nueva dentro de la que estás viendo (pide el nombre y el botón «Crear»).</li>
+  <li><strong>«Elegir esta carpeta»</strong> pone la ruta de la carpeta actual en el campo que abrió el explorador. «Cancelar» (o <kbd>Esc</kbd>, o hacer clic fuera de la ventana) cierra sin cambiar nada.</li>
+  <li>Debajo de la lista, una línea resume lo que hay: cuántas subcarpetas y cuántos documentos soportados en este nivel. Al anonimizar una carpeta se procesan también sus subcarpetas.</li>
+</ul>
+<p class="peq">El explorador solo <em>lista</em> el contenido de las carpetas: nunca lee, mueve ni borra archivos.</p>
+
+<h2 class="sec">04 · Elegir entre revisión y anonimización automática</h2>
+<p>Antes de pulsar el botón, elige cómo quieres que se procese el documento (o la carpeta entera). «Comprobar antes de guardar» es el comportamiento ya visto: revisas las personas detectadas, las posibles fugas y los riesgos antes de confirmar (secciones 07 y 08). La opción «Anonimización automática» guarda directamente, sin esperar tu confirmación:</p>
+<figure><img src="img/es/inicio_automatico.png" alt="Pantalla inicial con el modo automático" style="max-width:430px"><figcaption>La opción elegida cambia también el texto del botón: aquí «Anonimizar automáticamente».</figcaption></figure>
+<div class="nota">
+  <h4>Qué cambia y qué no</h4>
+  <p>No se crea ninguna revisión pendiente: el archivo final se guarda inmediatamente, con la misma regla de nombres y formato de la sección 08.</p>
+  <p>Un posible homónimo recibe siempre su propio código, igual que en la revisión (sección 07): si el sistema encuentra el mismo nombre en otro documento sin DNI que lo confirme, lo trata como una persona distinta.</p>
+  <p>Los riesgos de efecto mosaico no se corrigen automáticamente en ninguno de los dos modos: siguen haciendo falta ojos humanos para generalizar un dato, y el modo automático no puede hacerlo por ti.</p>
+</div>
+<div class="aviso">
+  <h4>Si el resumen avisa de posibles fugas</h4>
+  <p>Cada documento del resultado tiene el botón «Revisar este documento», que abre su revisión con los mismos códigos (lo revisado sustituye a lo guardado). Úsalo para tapar lo que se haya escapado antes de entregar el documento.</p>
+</div>
+<p><strong>Cuándo usar cada modo.</strong> <em>Comprobar antes de guardar:</em> recomendado siempre que el documento se vaya a entregar o publicar, porque permite tapar lo que se escape y destapar lo que no es una persona. <em>Anonimización automática:</em> útil para lotes grandes, revisando después los documentos que el resumen marque con posibles fugas.</p>
+
+<h2 class="sec">05 · Seguir el progreso de un proceso</h2>
+<p>Al pulsar el botón, en cualquiera de los dos modos y tanto con un archivo como con una carpeta entera, la pantalla inicial da paso a una <strong>pantalla de progreso</strong> que muestra en cada momento cómo va el trabajo:</p>
+<figure><img src="img/es/progreso_automatico.png" alt="Pantalla de progreso" style="max-width:430px"><figcaption>Pantalla de progreso de un lote de 13 archivos (modo automático).</figcaption></figure>
+<ul>
+  <li>El <strong>título</strong> indica el modo («Preparando la revisión…» o «Anonimizando automáticamente…») y la <strong>barra</strong> avanza con el lote; el tramo más claro es el archivo que se está procesando ahora.</li>
+  <li>El <strong>porcentaje</strong> y la línea <strong>«Archivo N de M — nombre»</strong> dicen por qué archivo va.</li>
+  <li>Debajo aparece <strong>«N de M terminado(s)»</strong> y, en cuanto hay un archivo hecho, el <strong>tiempo restante aproximado</strong> («menos de un minuto», «unos 3 min»…). Si algún archivo falla, se añade «· N con error».</li>
+  <li>Al acabar, el título pasa a <strong>«✔ Proceso terminado»</strong> y se abre el resultado: en modo automático, la lista de archivos guardados; en modo revisión con un solo archivo, directamente la pantalla de revisión; con una carpeta, la pantalla inicial con las revisiones pendientes.</li>
+</ul>
+<h3>Si un archivo falla, el resto sigue</h3>
+<p>Un archivo dañado (por ejemplo, un PDF que no se puede abrir) <strong>no detiene el lote</strong>: el programa sigue con el resto y, al final, lista los fallos junto con el motivo. En el modo automático, el resultado es este:</p>
+<figure><div class="recorte fade" style="max-height:360px;"><img src="img/es/resultado_automatico.png" alt="Resultado del modo automático" style="width:100%;display:block"></div><figcaption>Resultado de un lote automático de 13 archivos: 12 anonimizados y 1 con error (listado al final, con el motivo). Los dos archivos de otros formatos (plano e imagen) quedaron «omitidos».</figcaption></figure>
+<h3>Cancelar un lote</h3>
+<p>Cuando el proceso tiene <strong>más de un archivo</strong> (una carpeta), aparece un botón <strong>«Cancelar»</strong> debajo de la barra. Al pulsarlo, el botón pasa a «Cancelando…»: el programa termina el archivo que tiene entre manos (un archivo no se puede dejar a medias) y <strong>no empieza ninguno más</strong>. Lo que ya estaba hecho queda hecho y lo que no se procesó no se toca. Un archivo suelto no tiene botón de cancelar, porque se procesa de una vez.</p>
+<div class="par">
+  <figure><img src="img/es/progreso_cancelar.png" alt="Cancelando"><figcaption>Tras pulsar «Cancelar»: «Cancelando…».</figcaption></figure>
+  <figure><div class="recorte fade" style="max-height:200px;"><img src="img/es/resultado_cancelado.png" alt="Proceso cancelado" style="width:100%;display:block"></div><figcaption>Resultado: «Proceso cancelado»; los archivos restantes no se tocaron.</figcaption></figure>
+</div>
+<p>El mensaje final dice «Has cancelado el proceso: los K archivo(s) restantes no se han tocado» (modo automático) o «Proceso cancelado: N de M archivo(s) procesado(s) (pendientes de revisión más abajo); el resto no se ha tocado» (modo revisión).</p>
+
+<h2 class="sec">06 · Anonimizar una carpeta entera</h2>
+<p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
+<figure><div class="recorte fade" style="max-height:330px;"><img src="img/es/inicio_pendentes.png" alt="Carpeta procesada" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados y pendientes de revisar; el archivo dañado se avisa aparte.</figcaption></figure>
+<p>Los archivos de un formato no soportado (planos, imágenes…) quedan fuera y se cuentan como «omitidos»: nunca se incluyen ni se modifican. Revisa cada revisión pendiente de la lista una a una, exactamente igual que si procesaras los documentos por separado.</p>
+<div class="aviso">
+  <h4>No mezcles una prueba anterior con la carpeta de origen</h4>
+  <p>Si procesas de nuevo una carpeta donde ya guardaste resultados de una pasada anterior (archivos <code>nombre.anonimizado.pdf</code>, <code>.docx</code>, <code>.odt</code> o <code>.txt</code>), esos archivos <strong>no se vuelven a anonimizar</strong>: cuentan como «omitidos» en el resumen. Si quieres tener los resultados separados de los originales, indica una <strong>«Carpeta de salida»</strong> (sección 02).</p>
+</div>
+
+<h2 class="sec">07 · Revisar personas, homónimos, fugas y riesgos de efecto mosaico</h2>
+<p>La pantalla de revisión muestra, de arriba abajo: las posibles fugas sin detectar (solo si las hay), las personas no anonimizadas por cargo público, los posibles homónimos, los riesgos de efecto mosaico, los datos de categoría especial, la lista de personas detectadas y el cuadro «Añadir o generalizar».</p>
+<p>El texto <strong>no se edita a mano</strong>: el documento final se genera siempre desde el original más tus decisiones, y por eso conserva siempre su formato (PDF, Word…). Al final hay una vista previa del texto anonimizado, solo para consulta.</p>
+<h3>Posibles homónimos</h3>
+<p>Cuando un documento menciona un nombre que ya está en el registro sin un DNI que confirme que es la misma persona, el sistema le da un código NUEVO y lo avisa. En el ejemplo, el acta nombra a dos personas sin DNI que ya aparecieron (con DNI) en otro documento del expediente:</p>
+<figure><img src="img/es/rev_homonimo.png" alt="Revisión de un documento con homónimos" style="max-width:410px"><figcaption>Posibles homónimos: cada uno se trata como una persona distinta, con su propio código.</figcaption></figure>
+<p>No hay nada que decidir: un posible homónimo queda <strong>siempre como persona distinta</strong>. El documento queda igual de anonimizado; lo único es que esa persona no comparte código con la del otro documento. El programa nunca une dos personas por tener el mismo nombre.</p>
+<h3>Personas detectadas</h3>
+<p>Todas las personas detectadas van marcadas para anonimizar. Si alguna es en realidad un lugar, un organismo u otra cosa que no hay que tapar, <strong>desmárcala</strong> y quedará a la vista en el documento.</p>
+<h3>Añadir o generalizar</h3>
+<p>Una línea por cada dato que el programa no haya tapado, escrito tal como aparece en el documento:</p>
+<ul>
+  <li><strong>Solo el texto</strong> (<code>Fulano</code>): lo tapa con un código de persona en todas sus apariciones.</li>
+  <li><strong>Texto <code>=&gt;</code> sustituto</strong> (<code>Calle Real, 5 =&gt; [DIRECCIÓN]</code>): lo sustituye por lo que escribas.</li>
+  <li><strong>Texto <code>=&gt;</code> y nada detrás</strong> (<code>Nota interna. =&gt;</code>): lo borra.</li>
+</ul>
+<p>Los riesgos de efecto mosaico (combinaciones como profesión + lugar + edad que podrían identificar a alguien aunque no aparezca el nombre) NO se corrigen automáticamente: si hay que generalizar algún dato, hazlo aquí, por ejemplo <code>cirujano cardiovascular del hospital de A Ponte, de 52 años =&gt; un profesional sanitario</code>.</p>
+<h3>Posibles fugas sin detectar</h3>
+<p>Arriba del todo, la pantalla puede mostrar avisos de una <strong>red de seguridad final</strong>: el programa vuelve a escanear el texto <em>ya anonimizado</em> por si queda algún patrón que todavía parezca un dato personal (por ejemplo, un nombre en formato «Apellidos, Nombre» sin redactar, o un número suelto de 7 a 9 dígitos). No redacta nada por sí misma: solo avisa, para que lo revises. Los avisos de confianza baja (muchos serán instituciones o lugares, no personas) se recogen en un desplegable de «revisiones opcionales».</p>
+<figure><img src="img/es/revision_fugas.png" alt="Posibles fugas sin detectar" style="max-width:410px"><figcaption>Ejemplo con texto inventado: el programa avisa de un número suelto («84013276») que todavía puede identificar un expediente. Los riesgos de efecto mosaico aparecen debajo.</figcaption></figure>
+<p>Ningún sistema de detección puede garantizar que cubre todos los formatos posibles de un documento real: estos avisos <strong>no son datos ya redactados por error</strong>, son trozos del texto final que todavía PARECEN un nombre o un identificador. Comprueba cada uno y, si es un dato personal, añádelo en «Añadir o generalizar». También aparece en el resumen del modo automático («⚠ N posible(s) fuga(s) sin detectar») y en la salida de la línea de órdenes.</p>
+
+<h2 class="sec">08 · Confirmar y guardar: dónde queda el archivo anonimizado</h2>
+<p>Al pulsar «Confirmar revisión y guardar»:</p>
+<ul>
+  <li>El archivo anonimizado se guarda <strong>en la misma carpeta que el original</strong> (o en la «Carpeta de salida», si la indicaste), con el mismo nombre más <code>.anonimizado</code> antes de la extensión. Por ejemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Los <code>.docx</code>, <code>.odt</code> y <code>.pdf</code> <strong>conservan su formato y su extensión originales</strong>; cualquier otro formato se guarda como <code>.anonimizado.txt</code>.</li>
+  <li>Si el nombre del archivo original contiene el nombre de una persona, el archivo de salida usa su código en lugar del nombre real.</li>
+  <li>Los posibles homónimos y las personas desmarcadas quedan registrados en la auditoría cifrada del registro.</li>
+  <li>El documento original <strong>nunca se modifica ni se borra</strong>.</li>
+</ul>
+<figure><img src="img/es/confirmado_1.png" alt="Confirmación" style="max-width:390px"><figcaption>Confirmación: indica exactamente dónde ha quedado guardado el archivo final.</figcaption></figure>
+
+<h2 class="sec">09 · Revisiones pendientes entre sesiones</h2>
+<p>Si cierras el programa o reinicias el ordenador antes de confirmar una revisión, no se pierde: vuelve a abrir el programa, escribe la misma carpeta de registro en el campo «Ver revisiones pendientes de otra carpeta de registro» y retómala exactamente donde la dejaste.</p>
+<figure><img src="img/es/pendentes_sesions.png" alt="Revisiones pendientes" style="max-width:390px"><figcaption>Las revisiones sin confirmar quedan listadas y se pueden recuperar en cualquier momento.</figcaption></figure>
+
+<h2 class="sec">10 · Reversión controlada de identidad</h2>
+<p>Cuando necesites consultar la identidad real detrás de un código (por ejemplo, para presentar el documento original en un juzgado), usa el enlace «Reversión controlada de identidad» de la pantalla inicial. El formulario exige <strong>tres cosas</strong>: el código, un <strong>motivo</strong> (siempre obligatorio) y la <strong>contraseña de reversión</strong>.</p>
+<figure><img src="img/es/reversion.png" alt="Formulario de reversión" style="max-width:390px"><figcaption>El formulario exige un motivo y la contraseña de reversión; sin ellos, la reversión no se ejecuta.</figcaption></figure>
+<div class="aviso">
+  <h4>Acción de alto riesgo</h4>
+  <p>La reversión es la única función que devuelve datos identificativos reales. Escribe siempre el motivo real: queda grabado de forma permanente en la auditoría cifrada, junto con el usuario del sistema que la ejecutó y la fecha. No se puede editar ni borrar después.</p>
+</div>
+<figure><img src="img/es/reversion_resultado.png" alt="Resultado de la reversión" style="max-width:390px"><figcaption>Resultado: nombre(s) real(es), DNI y contexto asociados al código consultado (datos de ejemplo inventados).</figcaption></figure>
+<h3>La contraseña de reversión</h3>
+<p>Es una segunda barrera, aparte de la clave de cifrado: evita que otra persona que comparta el ordenador abra el programa y revierta identidades reales sin conocerla. Se define <strong>una vez por cada registro</strong> en el enlace «Defínela aquí» del propio formulario (mínimo 8 caracteres; hay que escribirla dos veces, y para cambiarla más tarde se pide la actual). Un intento con contraseña incorrecta no revela nada y queda registrado en la auditoría.</p>
+<div class="nota">
+  <h4>Qué NO es</h4>
+  <p>No es una capa de cifrado adicional: quien tenga acceso al archivo <code>clave.key</code> (o al llavero del sistema) <em>y</em> al archivo <code>rexistro.enc</code> puede descifrar las identidades directamente, sin conocer esta contraseña. Por eso sigue siendo imprescindible guardar bien esos dos elementos por separado.</p>
+</div>
+
+<h3>Listado completo de las correspondencias de un registro</h3>
+<p>La reversión requiere conocer de antemano el código que se consulta. Cuando lo que necesitas es revisar un expediente entero de una vez (por ejemplo, una auditoría interna, o localizar un código que se fusionó en otro), usa el enlace «Listado completo de correspondencias» de la pantalla inicial. Muestra en una sola tabla todos los códigos del registro con sus nombres, DNI, contexto y fecha de creación.</p>
+<div class="aviso">
+  <h4>Más alcance que una reversión</h4>
+  <p>Esta pantalla requiere exactamente lo mismo que el formulario de reversión (motivo obligatorio y contraseña de reversión) más una casilla adicional de confirmación explícita, porque expone de golpe TODAS las identidades reales del registro, no una sola. Queda registrada en la auditoría con una acción distinta de la reversión individual (<code>listado_completo</code>), con el alcance exacto de lo que se vio. Si el registro tiene muchas personas, el listado se pagina de 200 en 200; cada página vuelve a pedir la contraseña y queda auditada aparte.</p>
+</div>
+<p>En registros antiguos, un código que ya no aparece como fila propia (porque se fusionó en otro con versiones anteriores del programa) se sigue viendo en la columna «Códigos fusionados en este» del código con el que quedó, así que ningún código antiguo de un documento viejo desaparece del listado.</p>
+
+<h3>Guardar el listado como PDF CONFIDENCIAL</h3>
+<p>Debajo de la tabla hay un botón «Generar PDF confidencial». El PDF lleva el listado entero, en horizontal, con el motivo, quién lo generó y la fecha en la cabecera, un aviso de extrema sensibilidad y la marca de agua «CONFIDENCIAL» en todas las páginas. Para generarlo se pide de nuevo la contraseña de reversión y una casilla que confirma que entiendes que es un documento de extrema sensibilidad; la generación queda en la auditoría como listado completo «XERADO PDF CONFIDENCIAL».</p>
+<div class="aviso">
+  <h4>Un PDF así lo abre todo sin contraseña</h4>
+  <p>Fuera de contexto pierde valor, pero junto con los documentos anonimizados permite revertir el anonimato. No lo envíes por correo, no lo dejes en una carpeta compartida o sincronizada con la nube y destrúyelo cuando ya no haga falta.</p>
+</div>
+
+<h2 class="sec">11 · Formato conservado: .docx, .odt y PDF</h2>
+<p>Cuando el documento original es un <code>.docx</code> o un <code>.odt</code>, el archivo anonimizado mantiene la misma maquetación: alineación, listas, tablas y estilos de texto (negrita, cursiva) por separado dentro de cada párrafo.</p>
+<p>Un <code>.pdf</code> también mantiene su formato Y su extensión. Funciona igual con PDF con texto normal y con PDF escaneados: los datos se eliminan de verdad del documento (no quedan «debajo» de un recuadro blanco) y se sustituyen por el código correspondiente, manteniendo el aspecto visual del original:</p>
+<figure><img src="img/es/pdf_revision.png" alt="Revisión de un PDF" style="max-width:390px"><figcaption>La revisión de un PDF es igual que la de cualquier otro documento: las mismas decisiones.</figcaption></figure>
+<figure><img src="img/es/pdf_confirmado.png" alt="Confirmación de un PDF" style="max-width:390px"><figcaption>El archivo final mantiene la extensión .pdf, no .txt.</figcaption></figure>
+
+<h2 class="sec">12 · Archivos .zip y documentos grandes</h2>
+<p>Si el archivo que indicas en la pantalla inicial es un <code>.zip</code> (por ejemplo, un expediente completo con varios documentos y planos), el sistema anonimiza cada archivo soportado que contiene (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) manteniendo la estructura de carpetas y el formato y extensión originales de cada uno, y genera un nuevo <code>.anonimizado.zip</code>. Los archivos que no se pueden analizar (planos CAD, imágenes…) NO se incluyen en el zip de salida, para no arriesgar que quede algo sin revisar: quedan listados aparte como «omitidos». Los documentos muy largos (cientos de páginas) se procesan sin problema, en trozos internos que no te afectan como usuario.</p>
+
+<h2 class="sec nova-pax">13 · Preguntas frecuentes</h2>
+<table>
+  <thead><tr><th style="width:30%">Pregunta</th><th>Respuesta</th></tr></thead>
+  <tbody>
+    <tr><td>¿Dónde exactamente se guarda el archivo anonimizado?</td><td>En la misma carpeta que el original, añadiendo <code>.anonimizado</code> al nombre (ver sección 08).</td></tr>
+    <tr><td>¿Puedo cambiar la carpeta de salida?</td><td>Sí, con el campo «Carpeta de salida» de la pantalla inicial (sección 02). El NOMBRE del archivo sigue la regla fija (<code>&lt;nombre&gt;.anonimizado.&lt;extensión&gt;</code>) en cualquier caso.</td></tr>
+    <tr><td>¿Qué pasa si anonimizo el mismo documento dos veces?</td><td>Se sobrescribe el archivo <code>.anonimizado</code> anterior; el registro no crea códigos duplicados para las mismas personas gracias a la coherencia por DNI.</td></tr>
+    <tr><td>¿Puedo usar carpetas de registro distintas para casos distintos?</td><td>Sí, y es recomendable: así los códigos de un caso no se mezclan con los de otro.</td></tr>
+    <tr><td>¿Cómo sé si un documento lleva OCR o lectura directa?</td><td>No hace falta indicarlo: se detecta automáticamente página a página dentro de un PDF.</td></tr>
+    <tr><td>¿Puedo anonimizar varios documentos de una carpeta de una vez?</td><td>Sí (secciones 04 y 06): indica la carpeta en lugar de un archivo. En modo revisión, cada documento tiene su propia revisión humana antes de guardarse.</td></tr>
+    <tr><td>Un archivo de la carpeta falla: ¿pierdo el resto?</td><td>No. El lote sigue con el resto y al final se listan los fallos con su motivo (sección 05).</td></tr>
+    <tr><td>He empezado un lote largo y quiero parar. ¿Qué hago?</td><td>Pulsa «Cancelar» en la pantalla de progreso: termina el archivo en curso y no empieza ninguno más; lo que ya estaba hecho queda hecho (sección 05).</td></tr>
+    <tr><td>¿Por qué no se abre ningún diálogo al pulsar «Elegir archivo…»?</td><td>Comprueba que no haya otra ventana del sistema ya abierta detrás: el diálogo nativo a veces aparece detrás de la ventana del programa la primera vez. Siempre puedes escribir la ruta a mano.</td></tr>
+    <tr><td>¿Puedo cambiar el idioma?</td><td>Sí, con los botones «Castellano | Galego» de la pantalla inicial. Se recuerda al cerrar el programa. El título de la ventana cambia la próxima vez que lo abras.</td></tr>
+    <tr><td>¿Dónde están mis datos en Windows?</td><td>En <code>%LOCALAPPDATA%\Anonimizador</code>: <code>datos_rexistro</code> (registros cifrados), <code>preferencias.json</code> (idioma) y <code>anonimizador.log</code> (registro de errores). No se tocan al actualizar ni al desinstalar el programa (el desinstalador pregunta antes de borrar los registros).</td></tr>
+    <tr><td>¿Puedo ver todas las correspondencias de un caso de una vez?</td><td>Sí, con el enlace «Listado completo de correspondencias» de la pantalla inicial (sección 10). Requiere motivo y contraseña como la reversión, más una confirmación explícita, y queda registrado como acceso masivo.</td></tr>
+  </tbody>
+</table>
+
+<div class="rodape">Anonimizador de expedientes jurídicos — manual de uso · Elaborado con Claude Code</div>
+</body>
+</html>

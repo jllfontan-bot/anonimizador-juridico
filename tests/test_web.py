@@ -50,38 +50,33 @@ class TestInterfaceRevision(unittest.TestCase):
         self.assertEqual(resposta.status_code, 200)
         self.assertIn("Non se atopa o ficheiro", resposta.get_data(as_text=True))
 
-    def test_fluxo_completo_fusion_de_homonimo(self):
+    def test_homonimo_queda_sempre_coma_persoa_distinta(self):
+        """Desde o 15/10/2026 a revisión non ofrece fusionar un homónimo: queda
+        sempre co seu código, e un "fusionar:" dun formulario vello ignórase."""
         doc1 = self._crear_doc("doc1.txt", "Manuel Ferrándiz Salcedo acudiu á vista sinalada.")
         doc2 = self._crear_doc("doc2.txt", "Manuel Ferrándiz Salcedo volveu declarar despois.")
 
         self._procesar(doc1)  # crea PERSOA_000001, sen marcar
         sid2 = self._procesar(doc2)  # mesmo nome, sen DNI -> PERSOA_000002 marcado
 
-        pax_revision = self.client.get(f"/revisar/{sid2}")
-        self.assertIn("PERSOA_000002", pax_revision.get_data(as_text=True))
-        self.assertIn("fusionar:PERSOA_000001", pax_revision.get_data(as_text=True))
+        pax_revision = self.client.get(f"/revisar/{sid2}").get_data(as_text=True)
+        self.assertIn("PERSOA_000002", pax_revision)
+        self.assertNotIn("fusionar:", pax_revision)
+        self.assertIn("persoa distinta", pax_revision)
 
-        sesion = web.SESIONS[sid2]
         resposta = self.client.post(
             f"/revisar/{sid2}/confirmar",
-            data={
-                "texto_final": sesion["texto_anonimizado"],
-                "decision_PERSOA_000002": "fusionar:PERSOA_000001",
-            },
+            data={"decisions_v2": "1", "anonimizar": "PERSOA_000002",
+                  "decision_PERSOA_000002": "fusionar:PERSOA_000001"},
         )
-        self.assertEqual(resposta.status_code, 200)
         self.assertIn("Revisión confirmada", resposta.get_data(as_text=True))
-
-        # o texto final gardado xa non debe conter o codigo eliminado
         ruta_saida = Path(doc2).with_suffix("").as_posix() + ".anonimizado.txt"
         texto_gardado = Path(ruta_saida).read_text(encoding="utf-8")
-        self.assertIn("PERSOA_000001", texto_gardado)
-        self.assertNotIn("PERSOA_000002", texto_gardado)
-
-        # e o rexistro debe reflectir a fusion (o codigo eliminado xa non existe)
+        self.assertIn("PERSOA_000002", texto_gardado)
+        self.assertNotIn("Ferrándiz", texto_gardado)
         rexistro = RexistroCorrespondencias(self.rexistro_dir)
-        self.assertNotIn("PERSOA_000002", rexistro._estado["persoas"])
-        self.assertIn("PERSOA_000002", rexistro._estado.get("alias", {}))
+        self.assertIn("PERSOA_000002", rexistro._estado["persoas"])
+        self.assertNotIn("PERSOA_000002", rexistro._estado.get("alias", {}))
 
     def test_fluxo_completo_manter_persoas_distintas(self):
         doc1 = self._crear_doc("doc1.txt", "Manuel Ferrándiz Salcedo acudiu á vista sinalada.")

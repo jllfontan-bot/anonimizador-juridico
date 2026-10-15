@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Características técnicas</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  .cifras{ display:flex; gap:12px; margin:0 0 18px; }
+  .cifras .c{ flex:1; background:var(--paper); border-radius:6px; padding:12px 14px; break-inside:avoid; }
+  .cifras .v{ font-size:26px; font-weight:700; color:var(--accent); line-height:1.1; }
+  .cifras .l{ font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
+  .grella{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px 14px; margin:0 0 12px; }
+  .grella div{ border:1px solid var(--line); border-radius:4px; padding:5px 9px; font-size:11.5px; }
+  td.mod{ font-family:Menlo,Consolas,monospace; font-size:10.5px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Informe técnico · Anonimizador de expedientes jurídicos</span>
+  <h1>Características técnicas, robustez y seguridad del sistema</h1>
+  <p class="lede">Detalle de la implementación real del sistema de seudonimización: cómo detecta los datos, cómo se protege la información en reposo y qué garantías de robustez incorpora después de probarse contra documentos reales de un despacho de abogados y contra boletines oficiales.</p>
+  <div class="meta">
+    <div><span>Versión del software</span>Octubre de 2026</div>
+    <div><span>Marco</span>RGPD (UE) 2016/679 · LOPDGDD</div>
+    <div><span>Idiomas de la interfaz</span>Castellano y gallego</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · Resumen</h2>
+<h3 style="margin-top:0">Qué es y qué garantiza</h3>
+<p>El sistema lee documentos jurídicos (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>, incluidos los escaneados, imágenes y archivos <code>.zip</code>) y sustituye cada persona física mencionada por un código opaco y estable (<code>PERSONA_000042</code>), junto con sus identificadores directos (DNI, teléfono, correo, dirección, matrícula…). Todo el procesamiento es local: en ningún momento se envía texto a un servicio externo.</p>
+<div class="cifras">
+  <div class="c"><div class="v">750+</div><div class="l">Tests automatizados</div></div>
+  <div class="c"><div class="v">15+</div><div class="l">Tipos de identificador detectados</div></div>
+  <div class="c"><div class="v">0</div><div class="l">Llamadas de red durante el uso</div></div>
+</div>
+
+<h2 class="sec">02 · Arquitectura</h2>
+<p>El proceso sigue cuatro pasos, siempre en el mismo orden, para cualquier formato de entrada:</p>
+<div class="sen-corte"><table>
+  <thead><tr><th style="width:17%">Paso</th><th style="width:20%">Módulo</th><th>Función</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Lectura</strong></td><td class="mod">pipeline.py, pdf.py</td><td>Lee el documento conservando la estructura original (párrafos, tablas, fragmentos con formato); en PDF, extrae el texto nativo página a página y recurre al OCR solo en las páginas sin texto extraíble.</td></tr>
+    <tr><td><strong>2. Detección</strong></td><td class="mod">ner.py, recognizers.py</td><td>Combina un modelo de lenguaje (spaCy) para personas y lugares, las tablas de nombres y apellidos del INE y un conjunto de expresiones regulares propias para identificadores administrativos españoles.</td></tr>
+    <tr><td><strong>3. Resolución de identidad</strong></td><td class="mod">resolution.py, registry.py</td><td>Decide si cada mención corresponde a una persona ya conocida (por DNI) o a una nueva; nunca fusiona solo porque coincida el nombre.</td></tr>
+    <tr><td><strong>4. Sustitución e informe</strong></td><td class="mod">pipeline.py, risco_residual.py</td><td>Sustituye en el texto (o en el documento estructurado, conservando el formato) y genera un informe para la revisión humana, con los riesgos de efecto mosaico, los datos de categoría especial y una red de seguridad final que avisa de posibles fugas sin detectar.</td></tr>
+  </tbody>
+</table></div>
+
+<h2 class="sec">03 · Qué detecta</h2>
+<h3>Personas físicas (modelo de lenguaje + heurísticas propias)</h3>
+<p>Motor spaCy (<code>es_core_news_md</code>) ampliado con correcciones encontradas al probar contra documentos reales:</p>
+<ul>
+  <li><strong>Texto en MAYÚSCULAS</strong> (escrituras de poder, notas registrales, firmas oficiales): el modelo base prácticamente no reconocía personas aquí; se corrige con una transformación a «Title Case» solo para la detección, sin alterar las posiciones de los caracteres del texto original.</li>
+  <li><strong>Apellidos compuestos con conector</strong> («del Río», «de Cominges»): se extienden hacia delante cuando el patrón es un conector conocido + palabra con mayúscula inicial.</li>
+  <li><strong>Recorte de palabras absorbidas:</strong> los verbos o profesiones que el modelo incluía por error después del nombre se recortan comparando con una lista de palabras funcionales y profesiones habituales en las firmas.</li>
+  <li><strong>Nombres «Apellidos, Nombre»</strong> (formato estándar en listas oficiales): el modelo reconocía de forma inconsistente solo una de las dos mitades. Se corrige con un reconocedor por patrón determinista, independiente del modelo estadístico.</li>
+  <li><strong>Tablas del INE</strong> de nombres y apellidos y nomenclátor oficial de lugares: refuerzan la detección de nombres y evitan tapar como persona un topónimo.</li>
+</ul>
+<h3>Identificadores directos (expresiones regulares propias)</h3>
+<div class="grella">
+  <div>DNI / NIE</div><div>Pasaporte</div><div>Teléfono</div>
+  <div>Correo electrónico</div><div>Dirección</div><div>Matrícula (actual y anterior a 2000)</div>
+  <div>IBAN</div><div>Tarjeta bancaria</div><div>Número de la Seguridad Social</div>
+  <div>Referencia catastral</div><div>Número de colegiado/a</div><div>CSV</div>
+  <div>Número de referencia</div><div>Número de expediente</div><div>N.R.P. (Número de Registro de Personal)</div>
+</div>
+<p>El DNI/NIE se valida siempre recalculando el dígito de control a partir de los números: nunca se confía en la letra final tal como la lee el OCR, una fuente habitual de error en las digitalizaciones.</p>
+<p>El <strong>N.R.P.</strong> lleva el DNI incrustado en sus primeros 8 dígitos; en las listas oficiales la columna «D.N.I.» muestra esos dígitos sueltos, sin letra de control. Se reconoce primero el N.R.P. y se deduce de él el DNI: nunca se redacta «cualquier número de 8 dígitos», solo los ya confirmados por un N.R.P. real. El patrón de <strong>dirección</strong> nunca cruza un salto de línea (en tablas muy compactas fusionaba por error un nombre de pila con la cifra de una línea adyacente).</p>
+<div class="aviso">
+  <h4>Corrección crítica encontrada durante las pruebas</h4>
+  <p>Un CSV (Código Seguro de Verificación) permite recuperar el documento ORIGINAL completo en el portal del organismo emisor; un «número de referencia» de trámites judiciales funciona igual. Dejarlos sin redactar anulaba toda la anonimización aunque se borrasen nombres y DNI. Se encontró en un PDF real del despacho y se corrigió de inmediato.</p>
+</div>
+<p>En estos tres últimos casos (colegiado, CSV, referencia) solo se redacta la cifra: la etiqueta que la acompaña («colegiado número», «Código Seguro de Verificación») queda visible, a petición expresa, para no perder contexto legible en el documento final.</p>
+<h3>Red de seguridad final: escaneo de riesgo residual</h3>
+<p>Una capa independiente de la detección principal (módulo <code>risco_residual.py</code>): después de anonimizar, vuelve a escanear el texto <em>ya anonimizado</em> buscando patrones que todavía parezcan datos personales, como nombres en formato «Apellidos, Nombre» sin redactar o números sueltos de 7 a 9 dígitos. No redacta nada por sí misma: avisa para la revisión humana, en dos niveles de confianza (alta / baja, para separar avisos casi seguros de la revisión opcional). Se muestra en la pantalla de revisión, en el resumen del modo automático y en la salida de la línea de órdenes. Se añadió después de probar el sistema contra una lista oficial real (BOE núm. 238, 2/octubre/2008: nombramiento de unos 1.118 funcionarios de carrera), que también permitió corregir las tres categorías de fuga descritas arriba (nombres en orden inverso, N.R.P. y direcciones entre líneas), cubiertas ya por pruebas automáticas.</p>
+
+<h2 class="sec">04 · Robustez</h2>
+<table>
+  <thead><tr><th style="width:31%">Situación</th><th>Comportamiento</th></tr></thead>
+  <tbody>
+    <tr><td>Documento muy largo (probado con 351 páginas / 1,3 millones de caracteres)</td><td>spaCy rechaza textos de más de un millón de caracteres. El texto se divide en trozos muy por debajo de ese límite, cortando siempre por saltos de línea para no partir una mención por la mitad.</td></tr>
+    <tr><td>PDF escaneado sin texto extraíble</td><td>Recurre automáticamente al OCR (Tesseract, <code>spa+glg</code>) solo en las páginas que lo necesitan; con preprocesado en escala de grises y autocontraste.</td></tr>
+    <tr><td>Homónimos exactos (mismo nombre, personas distintas)</td><td>Sin DNI que lo confirme, NUNCA se fusionan automáticamente: se crea un código nuevo marcado para revisión humana. Regla de diseño deliberadamente conservadora.</td></tr>
+    <tr><td>Documento .docx/.odt con formatos mezclados en un párrafo</td><td>Se conserva el formato de cada fragmento por separado; el documento final se genera siempre desde el original más las decisiones de la revisión.</td></tr>
+    <tr><td>Archivo .zip con archivos no analizables (planos CAD, imágenes…)</td><td>Nunca se incluyen en el .zip de salida: quedan listados explícitamente como «omitidos» para que conste lo que no se pudo revisar.</td></tr>
+    <tr><td>Programa reiniciado a mitad de una revisión</td><td>Las revisiones pendientes sobreviven al reinicio (guardadas cifradas); el documento original nunca se guarda sin cifrar, se vuelve a cargar siempre desde el archivo de origen.</td></tr>
+    <tr><td>Carpeta entera con archivos de formatos mezclados (soportados y no)</td><td>Cada archivo soportado recibe su propia revisión; los no soportados quedan fuera y listados como «omitidos», nunca se incluyen ni se modifican.</td></tr>
+    <tr><td>Un archivo de un lote falla (por ejemplo, un PDF dañado)</td><td>El lote no se detiene: el trabajo sigue con el resto y los fallos se listan al final con su motivo. La interfaz muestra el progreso en directo y permite cancelar el lote (termina el archivo en curso y no empieza el siguiente; lo hecho queda hecho).</td></tr>
+  </tbody>
+</table>
+
+<h2 class="sec">05 · Seguridad</h2>
+<h3>Cifrado en reposo</h3>
+<p>Todo lo que contiene identidades reales se guarda cifrado con Fernet (AES simétrico autenticado): el registro de correspondencias código↔persona, el registro de auditoría y las revisiones pendientes. Ninguno de estos datos se escribe nunca en disco en claro.</p>
+<h3>Gestión de la clave de cifrado</h3>
+<p>Dos opciones, seleccionables por línea de órdenes:</p>
+<table>
+  <thead><tr><th style="width:22%">Modo</th><th style="width:36%">Dónde vive la clave</th><th>Cuándo usarlo</th></tr></thead>
+  <tbody>
+    <tr><td>Archivo local (por defecto)</td><td><code>clave.key</code>, con permisos restringidos al propietario</td><td>Pruebas, o cuando no hay llavero del sistema disponible.</td></tr>
+    <tr><td><code>--chaveiro-sistema</code></td><td>Administrador de credenciales de Windows (librería <code>keyring</code>)</td><td>Recomendado para uso real: la clave no convive con lo que cifra. Los accesos y scripts de arranque del programa instalado ya lo activan.</td></tr>
+  </tbody>
+</table>
+<div class="aviso">
+  <h4>Punto crítico</h4>
+  <p>Quien acceda al registro de correspondencias revierte toda la anonimización de golpe. Por eso recibe el mismo nivel de protección que los documentos originales, y la reversión requiere siempre un motivo explícito que queda en la auditoría.</p>
+</div>
+<h3>Reversión controlada, listado completo y auditoría</h3>
+<p>La reversión (recuperar la identidad real a partir de un código) y el listado completo (ver TODAS las correspondencias de un registro de una vez) son las dos únicas funciones de todo el sistema que devuelven datos identificativos.</p>
+<ul>
+  <li>Exigen siempre un <strong>motivo</strong> (no es opcional), que queda registrado cifrado junto con quién lo solicitó y cuándo.</li>
+  <li>Exigen además una <strong>contraseña de reversión</strong>, definida una vez por registro: una segunda barrera, aparte de la clave de cifrado, que evita que otra persona que comparta el ordenador revierta identidades sin conocerla. No es una capa de cifrado adicional: quien tenga a la vez la clave y el registro cifrado puede descifrarlo igualmente. Los intentos fallidos quedan registrados en la auditoría.</li>
+  <li>Si en un registro antiguo un código se fusionó en otro (versiones anteriores del programa), la reversión sigue el alias hasta el código vigente; el listado completo muestra los códigos fusionados como columna del código vigente, así que ninguno desaparece.</li>
+  <li>El listado completo es MÁS sensible que la reversión (expone de golpe el registro entero, no un código conocido de antemano): exige además una confirmación explícita, se pagina de 200 en 200 (cada página vuelve a pedir la contraseña) y queda auditado con una acción propia (<code>listado_completo</code>/<code>listado_completo_denegado</code>) que la auditoría distingue siempre de una reversión individual (<code>reversion</code>). Se puede guardar como PDF CONFIDENCIAL, con marca de agua, pidiendo de nuevo la contraseña y una confirmación expresa de que es un documento de extrema sensibilidad.</li>
+  <li>El registro de auditoría anota también cada creación de código, cada posible homónimo y cada persona desmarcada en la revisión: nunca se puede editar ni borrar una entrada.</li>
+</ul>
+<h3>Redacción real en PDF (no solo visual)</h3>
+<p>Al conservar el formato PDF original, cada dato detectado se elimina del documento mediante redacción (<code>add_redact_annot</code> + <code>apply_redactions</code>), que reescribe el propio contenido del archivo: no se limita a dibujar un recuadro blanco encima. Esto se aplica por igual al texto vectorial y a los píxeles de imagen de una página escaneada.</p>
+<div class="nota">
+  <h4>Por qué importa esta distinción</h4>
+  <p>Un PDF «redactado» solo visualmente (un recuadro blanco o negro encima del texto) sigue conteniendo el dato original por debajo, recuperable copiando el texto o quitando la capa. La verificación de este sistema incluye volver a hacer OCR sobre la imagen FINAL de una página escaneada ya redactada, para confirmar que el dato no es recuperable ni de los propios píxeles.</p>
+</div>
+<h3>Funcionamiento local</h3>
+<p>No hay ninguna llamada de red durante el procesamiento de un documento, <strong>ni siquiera para instalar el programa</strong>: Python, Tesseract, las librerías y el modelo de lenguaje van dentro del paquete de instalación, de modo que la instalación funciona sin conexión a internet. La interfaz (una ventana de escritorio propia) habla con un servidor interno que solo escucha en <code>127.0.0.1</code>, nunca en la red.</p>
+<p>Ese servidor local también está protegido frente a otras páginas abiertas en el MISMO navegador: cualquier petición que cambie algo (guardar una contraseña, confirmar una revisión...) exige que el origen coincida con la propia aplicación, y se rechaza cualquier petición con un nombre de host distinto de <code>127.0.0.1</code>/<code>localhost</code>. Así, una web maliciosa en otra pestaña, o un dominio público que resolviese temporalmente al propio equipo, no pueden actuar sobre él.</p>
+
+<h2 class="sec">06 · Nombre del archivo anonimizado</h2>
+<p>También se revisa el nombre del propio ARCHIVO, no solo el contenido: es habitual guardar un documento como «Certificado poder Jose Luis Lopez Rabadan.pdf» o «DNI_30014811Z_escaneado.pdf», y dejar ese nombre tal cual filtraría la identidad real aunque el contenido quedase perfectamente anonimizado.</p>
+<h3>Cómo funciona</h3>
+<ul>
+  <li>Se detectan personas y DNI/NIE en el propio nombre del archivo con la misma técnica que en el contenido (modelo de lenguaje + expresiones regulares), tanto en archivos sueltos como en cada entrada de un <code>.zip</code>.</li>
+  <li>Usa el MISMO registro que el contenido del documento: si la persona ya tiene código (por DNI, o por aparecer ya en el propio documento), el nombre del archivo reutiliza ese código; nunca crea una identidad paralela para la misma persona.</li>
+  <li>«_» y «-» (los separadores más habituales en nombres de archivo, como en «Jose_Luis_Lopez_Rabadan») se reconocen igual que un espacio; el resto del nombre se mantiene tal cual.</li>
+  <li>Sin DNI que lo confirme, un nombre coincidente en otro archivo NUNCA se fusiona solo: crea un código nuevo marcado, con la misma regla conservadora que el contenido (sección 03).</li>
+</ul>
+<div class="aviso">
+  <h4>Corrección encontrada revisando expedientes reales</h4>
+  <p>Varios documentos de un caso real llevaban el nombre de la persona directamente en el nombre del archivo (certificados de poder, títulos de propiedad…): el contenido quedaba bien anonimizado, pero el nombre del archivo dejaba la identidad real a la vista. Se corrigió para que el nombre de salida use siempre el código de persona, nunca el dato real.</p>
+</div>
+
+<h2 class="sec">07 · Cobertura de pruebas</h2>
+<table>
+  <thead><tr><th style="width:26%">Categoría</th><th>Qué cubren</th></tr></thead>
+  <tbody>
+    <tr><td>Detección de personas</td><td>Límites de entidad, texto en mayúsculas, apellidos con conector, documentos muy largos, nombres «Apellidos, Nombre», nombres partidos entre líneas y casos reales de boletines oficiales (con los nombres sustituidos por otros inventados).</td></tr>
+    <tr><td>Identificadores directos</td><td>DNI/NIE (con corrección de OCR), N.R.P., matrículas, direcciones, colegiado, CSV, referencia, IBAN, tarjeta, Seguridad Social, referencia catastral.</td></tr>
+    <tr><td>Consistencia y resolución de identidad</td><td>Mismo DNI → mismo código; homónimos sin DNI → códigos distintos marcados.</td></tr>
+    <tr><td>Conservación del formato</td><td>.docx/.odt con tablas y mezcla de estilos por párrafo; PDF nativo y escaneado con redacción real (texto y píxeles de imagen).</td></tr>
+    <tr><td>Interfaz de revisión</td><td>Flujo completo procesar → revisar → confirmar; persistencia de las revisiones; explorador de carpetas propio y selector nativo de archivo; carpeta de salida; anonimización de una carpeta entera; progreso, fallos aislados y cancelación de lotes; castellano y gallego.</td></tr>
+    <tr><td>Reversión controlada y listado completo</td><td>Motivo obligatorio, contraseña de reversión, registro en la auditoría (también de los intentos fallidos, con acciones distintas para cada función), seguimiento de alias, orden y paginación del listado, confirmación explícita y que un fallo de contraseña no filtra ningún nombre.</td></tr>
+    <tr><td>Llavero del sistema</td><td>Guardado y recuperación de la clave, fallo con reserva a archivo, error claro si la clave no se encuentra.</td></tr>
+    <tr><td>ZIP y documentos grandes</td><td>Archivos soportados/omitidos, consistencia de códigos entre archivos de un mismo zip, formato y extensión originales conservados en los cuatro tipos.</td></tr>
+    <tr><td>Red de seguridad final</td><td>Avisos de riesgo residual (nombres «Apellidos, Nombre» y números sueltos), en dos niveles de confianza.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="sec">08 · Limitaciones conocidas</h2>
+<ul>
+  <li><strong>Efecto mosaico:</strong> se detecta por heurística configurable (profesión + lugar + fecha/edad próximos); no elimina el riesgo por completo y sigue haciendo falta revisión humana en los casos de alto riesgo.</li>
+  <li><strong>Detección en gallego:</strong> usa el modelo de castellano porque todavía no hay un modelo maduro de spaCy en gallego; las tablas del INE y las reglas propias compensan buena parte, pero formas muy específicas del gallego pueden escapar a la detección.</li>
+  <li>Las direcciones sin número cerca del nombre de la vía (habituales en formularios con campos separados) no se detectan como identificador directo.</li>
+  <li>La resolución de identidad es intencionadamente conservadora: apodos, iniciales o grandes variaciones ortográficas entre documentos distintos requieren revisión humana.</li>
+  <li><strong>Redacción en PDF:</strong> trabaja a nivel de palabra entera, no de carácter; el tamaño de letra del código insertado se ajusta automáticamente, pero no replica el tipo de letra original exacto. Las columnas múltiples o las tablas complejas en PDF pueden alterar el orden de lectura del texto reconstruido.</li>
+</ul>
+
+<h2 class="sec">09 · Conclusión</h2>
+<p>El sistema cubre de forma sólida y probada los requisitos funcionales y de seguridad centrales: detección exhaustiva, consistencia global, unicidad estricta, conservación del formato, reversión controlada, trazabilidad y funcionamiento 100 % local. Las limitaciones que quedan son las propias de cualquier sistema de este tipo (efecto mosaico, falsos negativos residuales) y están documentadas para que la revisión humana las pueda cubrir.</p>
+
+<div class="rodape">Anonimizador de expedientes jurídicos — informe técnico · Elaborado con Claude Code</div>
+</body>
+</html>

@@ -17,23 +17,27 @@
 <div class="portada">
   <span class="chip">Manual de uso · Anonimizador de expedientes xurídicos</span>
   <h1>Como anonimizar documentos, paso a paso</h1>
-  <p class="lede">Guía práctica da interface, con capturas reais de cada pantalla: como escoller ficheiros e cartafoles, como seguir o progreso dun lote, onde se garda o documento anonimizado, como decidir sobre posibles homónimos e como reverter un código cando faga falta consultar a identidade real.</p>
+  <p class="lede">Guía práctica da interface, con capturas reais de cada pantalla (con datos inventados): como escoller ficheiros e cartafoles, como seguir o progreso dun lote, onde se garda o documento anonimizado, como decidir sobre posibles homónimos e como reverter un código cando faga falta consultar a identidade real.</p>
   <div class="meta">
     <div><span>Interface</span>Xanela propia do programa<br>(non usa o navegador)</div>
-    <div><span>Require instalación previa</span>Ver guía de instalación</div>
-    <div><span>Data</span>Setembro de 2026</div>
+    <div><span>Idioma</span>Castelán ou galego<br>(escóllese na pantalla de inicio)</div>
+    <div><span>Data</span>Outubro de 2026</div>
   </div>
 </div>
 
 <h2 class="sec">01 · Arrancar o programa</h2>
-<p><strong>Windows:</strong> menú Inicio → <em>Anonimizador xurídico</em> → <em>Anonimizador de expedientes xurídicos</em> (ou o acceso do escritorio, se o creaches). <strong>Mac:</strong> dobre clic en <code>Iniciar-Anonimizador.command</code>. <strong>Linux:</strong> <code>./Iniciar-Anonimizador.sh</code>.</p>
-<p>O programa ábrese nunha <strong>xanela de escritorio propia</strong>, non no navegador; para pechalo, pecha esa xanela. Por dentro funciona coma un servidor local que só é accesible dende este mesmo ordenador (<code>127.0.0.1</code>), nunca dende fóra. (Só en Linux, se o sistema non ten GTK e WebKit2GTK, o programa ábrese no navegador en <code>http://127.0.0.1:5050</code>; e en Windows sen o compoñente WebView2 ofrece facelo.)</p>
-<figure><img src="img/inicio_revisar.png" alt="Pantalla inicial" style="max-width:430px"><figcaption>Pantalla inicial: aquí indicas que documento ou cartafol anonimizar e onde vive o rexistro de correspondencias.</figcaption></figure>
+<p>Menú Inicio de Windows → <em>Anonimizador de expedientes xurídicos</em> (ou o acceso do escritorio, se o creaches).</p>
+<p>O programa ábrese nunha <strong>xanela de escritorio propia</strong>, non no navegador; para pechalo, pecha esa xanela. Por dentro funciona coma un servidor local que só é accesible dende este mesmo ordenador (<code>127.0.0.1</code>), nunca dende fóra. (Se a Windows lle falta o compoñente WebView2, o programa ofrece abrirse no navegador.)</p>
+<figure><img src="img/inicio_revisar.png" alt="Pantalla inicial" style="max-width:430px"><figcaption>Pantalla inicial: aquí indicas que documento ou cartafol anonimizar e onde vive o rexistro de correspondencias. Arriba á dereita escóllese o idioma.</figcaption></figure>
+<div class="nota">
+  <h4>Castelán ou galego</h4>
+  <p>Os botóns <strong>«Castellano | Galego»</strong> da pantalla inicial cambian o idioma de todo o programa, e a escolla lémbrase ao pechalo. O idioma decide tamén como se escriben os códigos nos documentos anonimizados: <code>PERSOA_000001</code>, <code>[ENDEREZO]</code>… en galego e <code>PERSONA_000001</code>, <code>[DIRECCIÓN]</code>… en castelán. A mesma persoa leva o mesmo número nos dous idiomas, e un código pódese reverter escrito de calquera das dúas formas.</p>
+</div>
 
 <h2 class="sec">02 · Anonimizar o primeiro documento</h2>
 <div class="paso"><div class="n">1</div><div class="corpo">
   <p class="t">Escolle o ficheiro ou o cartafol (ou escribe a súa ruta)</p>
-  <p>O botón <strong>«Escoller ficheiro…»</strong> abre o diálogo nativo do sistema (Explorador de Windows, Finder). O botón <strong>«Escoller cartafol…»</strong> abre o explorador de cartafoles do propio programa (ver sección 03). Tamén podes escribir ou pegar a ruta directamente no campo.</p>
+  <p>O botón <strong>«Escoller ficheiro…»</strong> abre o diálogo nativo do sistema (o Explorador de Windows). O botón <strong>«Escoller cartafol…»</strong> abre o explorador de cartafoles do propio programa (ver sección 03). Tamén podes escribir ou pegar a ruta directamente no campo.</p>
 </div></div>
 <div class="paso"><div class="n">2</div><div class="corpo">
   <p class="t">Cartafol de saída (opcional)</p>
@@ -58,7 +62,7 @@
 <figure><img src="img/explorador.png" alt="Explorador de cartafoles" style="max-width:430px"><figcaption>O explorador: subcartafoles á cabeza; os ficheiros en gris (non se poden escoller) e os documentos soportados coa etiqueta «documento soportado».</figcaption></figure>
 <ul>
   <li><strong>Cartafoles:</strong> fai clic nun cartafol para entrar nel. Os <strong>ficheiros</strong> aparecen en gris e non se poden seleccionar; os que o programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) levan a etiqueta <strong>«documento soportado»</strong>. Os ficheiros e cartafoles ocultos non se amosan.</li>
-  <li><strong>Atallos</strong> (columna da esquerda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> e, ao final, <em>Este equipo</em> (Windows: as unidades, C:, D:…) ou <em>Raíz</em> (Mac e Linux).</li>
+  <li><strong>Atallos</strong> (columna da esquerda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> e, ao final, <em>Este equipo</em> (as unidades C:, D:…).</li>
   <li><strong>«↑ Subir»</strong> vai ao cartafol pai. O <strong>campo de ruta</strong> pódese editar: escribe unha ruta e preme <kbd>Intro</kbd> ou «Ir».</li>
   <li><strong>«Nova carpeta…»</strong> crea un cartafol novo dentro do que estás vendo (pide o nome e o botón «Crear»).</li>
   <li><strong>«Escoller este cartafol»</strong> pon a ruta do cartafol actual no campo que abriu o explorador. «Cancelar» (ou <kbd>Esc</kbd>, ou facer clic fóra da ventá) pecha sen cambiar nada.</li>
@@ -67,19 +71,19 @@
 <p class="peq">O explorador só <em>lista</em> o contido dos cartafoles: nunca le, move nin borra ficheiros.</p>
 
 <h2 class="sec">04 · Escoller entre revisión e anonimización automática</h2>
-<p>Antes de premer o botón, escolle como queres que se procese o documento (ou o cartafol enteiro). «Comprobar antes de gardar» é o comportamento xa visto: revisas un a un os posibles homónimos e riscos antes de confirmar (seccións 07 e 08). A opción «Anonimización automática» garda directamente, sen deterse a agardar a túa confirmación:</p>
+<p>Antes de premer o botón, escolle como queres que se procese o documento (ou o cartafol enteiro). «Comprobar antes de gardar» é o comportamento xa visto: revisas as persoas detectadas, as posibles fugas e os riscos antes de confirmar (seccións 07 e 08). A opción «Anonimización automática» garda directamente, sen deterse a agardar a túa confirmación:</p>
 <figure><img src="img/inicio_automatico.png" alt="Pantalla inicial co modo automático" style="max-width:430px"><figcaption>A opción escollida cambia tamén o texto do botón — aquí «Anonimizar automaticamente».</figcaption></figure>
 <div class="nota">
   <h4>Que cambia e que non cambia</h4>
   <p>Non se crea ningunha sesión de revisión: o ficheiro final gárdase inmediatamente, coa mesma regra de nomes e formato da sección 08.</p>
-  <p>Un posible homónimo NUNCA se fusiona só: se o sistema atopa o mesmo nome noutro documento sen DNI que o confirme, crea igualmente un código NOVO — exactamente coma se tiveses escollido «Manter como persoa distinta» a man (sección 07). A fusión require sempre unha decisión humana expresa.</p>
+  <p>Un posible homónimo recibe sempre o seu propio código, igual ca na revisión (sección 07): se o sistema atopa o mesmo nome noutro documento sen DNI que o confirme, trátao coma unha persoa distinta.</p>
   <p>Os riscos de efecto mosaico non se corrixen automaticamente en ningún dos dous modos — seguen a facer falta ollos humanos para xeneralizar un dato, e o modo automático non pode facelo por ti.</p>
 </div>
 <div class="aviso">
-  <h4>Importante: a decisión queda feita</h4>
-  <p>No modo automático, «manter separadas» dúas posibles coincidencias de nome queda decidido — xa non hai unha sesión de revisión pendente para cambialo despois. Se sabes de antemán que un caso ten homónimos reais que precisan fusionarse, usa «Comprobar antes de gardar» para eses documentos.</p>
+  <h4>Se o resumo avisa de posibles fugas</h4>
+  <p>Cada documento do resultado ten o botón «Revisar este documento», que abre a súa revisión cos mesmos códigos (o revisado substitúe ao gardado). Úsao para tapar o que se escapase antes de entregar o documento.</p>
 </div>
-<p><strong>Cando usar cada modo.</strong> <em>Comprobar antes de gardar:</em> recomendado con poucos documentos, ou cando xa sabes que hai homónimos no expediente que precisarán fusionarse a man. <em>Anonimización automática:</em> útil para lotes grandes de documentos dun caso xa coñecido (ex. un cartafol enteiro), onde revisar sesión a sesión sería lento e o risco de homónimos é baixo.</p>
+<p><strong>Cando usar cada modo.</strong> <em>Comprobar antes de gardar:</em> recomendado sempre que o documento se vaia entregar ou publicar, porque permite tapar o que se escape e destapar o que non é unha persoa. <em>Anonimización automática:</em> útil para lotes grandes, revisando despois os documentos que o resumo marque con posibles fugas.</p>
 
 <h2 class="sec">05 · Seguir o progreso dun proceso</h2>
 <p>Ao premer o botón, en calquera dos dous modos e tanto cun ficheiro coma cun cartafol enteiro, a pantalla inicial dá paso a unha <strong>pantalla de progreso</strong> que mostra en cada momento como vai o traballo:</p>
@@ -97,7 +101,7 @@
 <p>Cando o proceso ten <strong>máis dun ficheiro</strong> (un cartafol), aparece un botón <strong>«Cancelar»</strong> debaixo da barra. Ao premelo o botón pasa a «Cancelando…»: o programa remata o ficheiro que ten entre mans (un ficheiro non se pode deixar a medias) e <strong>non empeza ningún máis</strong>. O que xa estaba feito queda feito e o que non se procesou non se toca. Un ficheiro solto non ten botón de cancelar, porque se procesa dun golpe.</p>
 <div class="par">
   <figure><img src="img/progreso_cancelar.png" alt="Cancelando"><figcaption>Tras premer «Cancelar»: «Cancelando…».</figcaption></figure>
-  <figure><div class="recorte fade" style="max-height:200px;"><img src="img/resultado_cancelado.png" alt="Proceso cancelado" style="width:100%;display:block"></div><figcaption>Resultado: «Proceso cancelado» — 4 de 13 feitos; os 9 restantes non se tocaron.</figcaption></figure>
+  <figure><div class="recorte fade" style="max-height:200px;"><img src="img/resultado_cancelado.png" alt="Proceso cancelado" style="width:100%;display:block"></div><figcaption>Resultado: «Proceso cancelado»; os ficheiros restantes non se tocaron.</figcaption></figure>
 </div>
 <p>A mensaxe final di «Cancelaches o proceso: os K ficheiro(s) restantes non se tocaron» (modo automático) ou «Proceso cancelado: N de M ficheiro(s) procesado(s) (pendentes de revisión abaixo); o resto non se tocou» (modo revisión).</p>
 
@@ -110,38 +114,40 @@
   <p>Se procesas de novo un cartafol onde xa gardaches resultados dunha pasada anterior (ficheiros <code>nome.anonimizado.pdf</code>, <code>.docx</code>, <code>.odt</code> ou <code>.txt</code>), eses ficheiros <strong>non se volven anonimizar</strong>: contan como «omitidos» no resumo. Se queres ter os resultados separados dos orixinais, indica un <strong>«Cartafol de saída»</strong> (sección 02).</p>
 </div>
 
-<h2 class="sec">07 · Revisar homónimos, fugas e riscos de efecto mosaico</h2>
-<p>A pantalla de revisión amosa varios bloques: posibles fugas sen detectar (só se as hai), persoas marcadas para confirmar, riscos de efecto mosaico detectados, e o texto final editable. No exemplo seguinte, o propio documento menciona dúas persoas co mesmo nome (o declarante e «o seu sobriño») — o sistema créalles códigos distintos e pide confirmación:</p>
-<figure><img src="img/rev_homonimo.png" alt="Revisión dun documento" style="max-width:410px"><figcaption>Revisión dun documento: homónimo marcado (arriba), risco de efecto mosaico (centro), texto final editable (abaixo).</figcaption></figure>
-<p>No despregable de cada persoa marcada, escolle:</p>
+<h2 class="sec">07 · Revisar persoas, homónimos, fugas e riscos de efecto mosaico</h2>
+<p>A pantalla de revisión amosa, de arriba abaixo: as posibles fugas sen detectar (só se as hai), as persoas non anonimizadas por cargo público, os posibles homónimos, os riscos de efecto mosaico, os datos de categoría especial, a lista de persoas detectadas e o recadro «Engadir ou xeneralizar».</p>
+<p>O texto <strong>non se edita a man</strong>: o documento final xérase sempre dende o orixinal máis as túas decisións, e por iso conserva sempre o seu formato (PDF, Word…). Ao final hai unha vista previa do texto anonimizado, só para consulta.</p>
+<h3>Posibles homónimos</h3>
+<p>Cando un documento menciona un nome que xa está no rexistro sen un DNI que confirme que é a mesma persoa, o sistema dálle un código NOVO e avísao. No exemplo, a acta nomea dúas persoas sen DNI que xa apareceron (con DNI) noutro documento do expediente:</p>
+<figure><img src="img/rev_homonimo.png" alt="Revisión dun documento con homónimos" style="max-width:410px"><figcaption>Posibles homónimos: cada un trátase coma unha persoa distinta, co seu propio código.</figcaption></figure>
+<p>Non hai nada que decidir: un posible homónimo queda <strong>sempre coma persoa distinta</strong>. O documento queda igual de anonimizado; o único é que esa persoa non comparte código coa do outro documento. O programa nunca xunta dúas persoas por teren o mesmo nome.</p>
+<h3>Persoas detectadas</h3>
+<p>Todas as persoas detectadas van marcadas para anonimizar. Se algunha é en realidade un lugar, un organismo ou outra cousa que non hai que tapar, <strong>desmárcaa</strong> e quedará á vista no documento.</p>
+<h3>Engadir ou xeneralizar</h3>
+<p>Unha liña por cada dato que o programa non tapase, escrito tal como aparece no documento:</p>
 <ul>
-  <li><strong>«Manter como persoa distinta»</strong> — se son realmente persoas diferentes (opción por defecto, a máis segura).</li>
-  <li><strong>«É a mesma persoa que [código] — fusionar»</strong> — se confirmas que se trata da mesma persoa xa vista noutro documento.</li>
+  <li><strong>Só o texto</strong> (<code>Fufa</code>): tápao cun código de persoa en todas as súas aparicións.</li>
+  <li><strong>Texto <code>=&gt;</code> substituto</strong> (<code>Rúa Real, 5 =&gt; [ENDEREZO]</code>): substitúeo polo que escribas.</li>
+  <li><strong>Texto <code>=&gt;</code> e nada detrás</strong> (<code>Nota interna. =&gt;</code>): bórrao.</li>
 </ul>
-<p>Cando un segundo documento menciona un nome xa visto antes (nun documento distinto) sen DNI que o confirme, o sistema faille o mesmo tratamento — créase un código novo marcado, coa suxestión de fusionar co código xa existente:</p>
-<figure><img src="img/rev_homonimo_2.png" alt="Suxestión de fusión" style="max-width:410px"><figcaption>O nome xa apareceu noutro documento sen DNI que o confirme — o sistema suxire fusionar, pero nunca o fai só.</figcaption></figure>
-<p>Os riscos de efecto mosaico (combinacións como profesión + lugar + idade que poderían identificar a alguén aínda sen o nome) NON se corrixen automaticamente — se cómpre xeneralizar algún dato («cirurxián cardiovascular de 52 anos» → «un profesional sanitario»), edita directamente o texto no recadro antes de confirmar.</p>
-
+<p>Os riscos de efecto mosaico (combinacións como profesión + lugar + idade que poderían identificar a alguén aínda sen o nome) NON se corrixen automaticamente — se cómpre xeneralizar algún dato, faino aquí, por exemplo <code>cirurxián cardiovascular do hospital da Ponte, de 52 anos =&gt; un profesional sanitario</code>.</p>
 <h3>Posibles fugas sen detectar</h3>
-<p>Antes do bloque de homónimos, a pantalla pode amosar avisos dunha <strong>rede de seguridade final</strong>: o programa volve escanear o texto <em>xa anonimizado</em> por se queda algún patrón que aínda pareza un dato persoal (por exemplo, un nome en formato «Apelidos, Nome» sen redactar, ou un número solto de 7 a 9 díxitos). Non redacta nada por si mesma: só avisa, para que o revises. Os avisos de confianza baixa (moitos serán institucións ou lugares, non persoas) quedan recollidos nun despregable de «revisións opcionais».</p>
-<figure><img src="img/revision_fugas.png" alt="Posibles fugas sen detectar" style="max-width:410px"><figcaption>Exemplo con texto sintético: o programa avisa dun número solto («84013276») que aínda pode identificar un expediente. Os riscos de efecto mosaico aparecen debaixo.</figcaption></figure>
-<p>Ningún sistema de detección pode garantir cubrir tódolos formatos posibles nun documento real: estes avisos <strong>non son datos xa redactados por erro</strong>, son anacos do texto final que aínda PARECEN un nome ou un identificador. Comproba cada un e corríxeo a man no recadro se fai falta. Móstrase tamén no resumo do modo automático («⚠ N posible(s) fuga(s) sen detectar») e na saída da liña de comandos.</p>
+<p>Arriba de todo, a pantalla pode amosar avisos dunha <strong>rede de seguridade final</strong>: o programa volve escanear o texto <em>xa anonimizado</em> por se queda algún patrón que aínda pareza un dato persoal (por exemplo, un nome en formato «Apelidos, Nome» sen redactar, ou un número solto de 7 a 9 díxitos). Non redacta nada por si mesma: só avisa, para que o revises. Os avisos de confianza baixa (moitos serán institucións ou lugares, non persoas) quedan recollidos nun despregable de «revisións opcionais».</p>
+<figure><img src="img/revision_fugas.png" alt="Posibles fugas sen detectar" style="max-width:410px"><figcaption>Exemplo con texto inventado: o programa avisa dun número solto («84013276») que aínda pode identificar un expediente. Os riscos de efecto mosaico aparecen debaixo.</figcaption></figure>
+<p>Ningún sistema de detección pode garantir cubrir tódolos formatos posibles nun documento real: estes avisos <strong>non son datos xa redactados por erro</strong>, son anacos do texto final que aínda PARECEN un nome ou un identificador. Comproba cada un e, se é un dato persoal, engádeo en «Engadir ou xeneralizar». Móstrase tamén no resumo do modo automático («⚠ N posible(s) fuga(s) sen detectar») e na saída da liña de comandos.</p>
 
 <h2 class="sec">08 · Confirmar e gardar — onde queda o ficheiro anonimizado</h2>
 <p>Ao premer «Confirmar revisión e gardar»:</p>
 <ul>
-  <li>O ficheiro anonimizado gárdase <strong>na mesmo cartafol có orixinal</strong> (ou no «Cartafol de saída», se o indicaches), co mesmo nome máis <code>.anonimizado</code> antes da extensión. Por exemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Os <code>.docx</code>, <code>.odt</code> e <code>.pdf</code> <strong>conservan o seu formato e a súa extensión orixinais</strong>; calquera outro formato gárdase coma <code>.anonimizado.txt</code>.</li>
-  <li>Un PDF corrixido a man na revisión tamén se garda como PDF (con formato), nunca coma texto plano.</li>
+  <li>O ficheiro anonimizado gárdase <strong>no mesmo cartafol có orixinal</strong> (ou no «Cartafol de saída», se o indicaches), co mesmo nome máis <code>.anonimizado</code> antes da extensión. Por exemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Os <code>.docx</code>, <code>.odt</code> e <code>.pdf</code> <strong>conservan o seu formato e a súa extensión orixinais</strong>; calquera outro formato gárdase coma <code>.anonimizado.txt</code>.</li>
   <li>Se o nome do ficheiro orixinal contén o nome dunha persoa, o ficheiro de saída usa o seu código no canto do nome real.</li>
-  <li>As decisións sobre homónimos (fusionar ou manter) quedan rexistradas na auditoría cifrada do rexistro.</li>
+  <li>Os posibles homónimos e as persoas desmarcadas quedan rexistrados na auditoría cifrada do rexistro.</li>
   <li>O documento orixinal <strong>nunca se modifica nin se borra</strong>.</li>
 </ul>
 <figure><img src="img/confirmado_1.png" alt="Confirmación" style="max-width:390px"><figcaption>Confirmación: indica exactamente onde quedou gardado o ficheiro final.</figcaption></figure>
-<p>Cando a decisión foi fusionar dous códigos, a pantalla de confirmación indícao explicitamente:</p>
-<figure><img src="img/confirmado_fusion.png" alt="Confirmación tras fusionar" style="max-width:390px"><figcaption>Tras fusionar, o texto final xa usa un único código para ambas mencións.</figcaption></figure>
 
 <h2 class="sec">09 · Revisións pendentes entre sesións</h2>
-<p>Se pechas o programa ou reinicias o ordenador antes de confirmar unha revisión, non se perde: volve abrir o programa, escribe o mesmo cartafol de rexistro no campo «Ver revisións pendentes doutro cartafol», e retómaa exactamente onde a deixaches.</p>
+<p>Se pechas o programa ou reinicias o ordenador antes de confirmar unha revisión, non se perde: volve abrir o programa, escribe o mesmo cartafol de rexistro no campo «Ver revisións pendentes doutro cartafol de rexistro», e retómaa exactamente onde a deixaches.</p>
 <figure><img src="img/pendentes_sesions.png" alt="Revisións pendentes" style="max-width:390px"><figcaption>As revisións sen confirmar quedan listadas e son recuperables en calquera momento.</figcaption></figure>
 
 <h2 class="sec">10 · Reversión controlada de identidade</h2>
@@ -165,7 +171,7 @@
   <h4>Máis alcance ca unha reversión</h4>
   <p>Esta pantalla require exactamente o mesmo có formulario de reversión — motivo obrigatorio e contrasinal de reversión — máis unha casiña adicional de confirmación explícita, porque expón de golpe TODAS as identidades reais do rexistro, non unha soa. Queda rexistrada na auditoría cunha acción distinta da reversión individual (<code>listado_completo</code>), co alcance exacto do que se viu. Se o rexistro ten moitas persoas, o listado paxínase de 200 en 200; cada páxina volve pedir a contrasinal e queda auditada á parte.</p>
 </div>
-<p>Un código que xa non aparece coma fila propia (porque se fusionou noutro tras confirmar un homónimo) séguese vendo na columna «Fusionados neste» do código co que quedou, así que ningún código antigo dun documento vello desaparece do listado.</p>
+<p>En rexistros antigos, un código que xa non aparece coma fila propia (porque se fusionou noutro con versións anteriores do programa) séguese vendo na columna «Fusionados neste» do código co que quedou, así que ningún código antigo dun documento vello desaparece do listado.</p>
 
 <h3>Gardar o listado coma PDF CONFIDENCIAL</h3>
 <p>Debaixo da táboa hai un botón «Xerar PDF confidencial». O PDF leva o listado enteiro, en horizontal, co motivo, quen o xerou e a data na cabeceira, un aviso de extrema sensibilidade e a marca de auga «CONFIDENCIAL» en todas as páxinas. Para xeralo pídese de novo a contrasinal de reversión e unha casiña que confirma que entendes que é un documento de extrema sensibilidade; a xeración queda na auditoría coma listado completo «XERADO PDF CONFIDENCIAL».</p>
@@ -175,11 +181,10 @@
 </div>
 
 <h2 class="sec">11 · Formato conservado: .docx, .odt e PDF</h2>
-<p>Cando o documento orixinal é un <code>.docx</code> ou <code>.odt</code>, o ficheiro anonimizado mantén a mesma maquetación: aliñamento, listas, táboas e estilos de texto (negriña, cursiva) por separado dentro de cada parágrafo. Podes editar con confianza dentro de cada liña do recadro de revisión, pero evita engadir ou quitar saltos de liña enteiros — se o fas, o sistema detecta a desaliñación e garda coma texto plano en vez de arriscar un documento incorrecto (avísache na pantalla de confirmación se isto ocorre).</p>
+<p>Cando o documento orixinal é un <code>.docx</code> ou <code>.odt</code>, o ficheiro anonimizado mantén a mesma maquetación: aliñamento, listas, táboas e estilos de texto (negriña, cursiva) por separado dentro de cada parágrafo.</p>
 <p>Un <code>.pdf</code> tamén mantén o seu formato E a súa extensión. Funciona igual con PDF con texto normal e con PDF escaneados: os datos elimínanse de verdade do documento (non quedan «debaixo» dun recadro branco) e substitúense polo código correspondente, mantendo o aspecto visual do orixinal:</p>
-<figure><img src="img/pdf_revision.png" alt="Revisión dun PDF" style="max-width:390px"><figcaption>Cun PDF, cada bloque separado por unha liña en branco no recadro de revisión é unha páxina enteira.</figcaption></figure>
+<figure><img src="img/pdf_revision.png" alt="Revisión dun PDF" style="max-width:390px"><figcaption>A revisión dun PDF é igual cá de calquera outro documento: as mesmas decisións.</figcaption></figure>
 <figure><img src="img/pdf_confirmado.png" alt="Confirmación dun PDF" style="max-width:390px"><figcaption>O ficheiro final mantén a extensión .pdf, non .txt.</figcaption></figure>
-<p>Nun PDF, a edición á man dunha páxina completa (engadir texto novo, por exemplo) fai que ESA páxina en concreto perda o formato orixinal ao gardar (redáctase enteira e reescríbese en fonte xenérica) — o resto de páxinas do mesmo documento non se ven afectadas.</p>
 
 <h2 class="sec">12 · Arquivos .zip e documentos grandes</h2>
 <p>Se o ficheiro que indicas na pantalla inicial é un <code>.zip</code> (por exemplo, un expediente completo con varios documentos e planos), o sistema anonimiza cada ficheiro soportado dentro (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) mantendo a estrutura de cartafoles e o formato/extensión orixinais de cada un, e xera un novo <code>.anonimizado.zip</code>. Os ficheiros que non se poden analizar (planos CAD, imaxes…) NON se inclúen no zip de saída, para non arriscar que quede algo sen revisar — quedan listados á parte coma «omitidos». Documentos moi longos (centos de páxinas) procésanse sen problema, en anacos internos que non che afectan como usuario.</p>
@@ -197,8 +202,8 @@
     <tr><td>Un ficheiro do cartafol falla: perdo o resto?</td><td>Non. O lote segue co resto e ao final listan os fallos co seu motivo (sección 05).</td></tr>
     <tr><td>Empecei un lote longo e quero parar. Que fago?</td><td>Preme «Cancelar» na pantalla de progreso: remata o ficheiro en curso e non empeza ningún máis; o que xa estaba feito queda feito (sección 05).</td></tr>
     <tr><td>Por que non se abre ningún diálogo ao premer «Escoller ficheiro…»?</td><td>Comproba que non haxa outra xanela do sistema xa aberta detrás — o diálogo nativo ás veces aparece detrás da xanela do programa a primeira vez. Sempre podes escribir a ruta a man.</td></tr>
-    <tr><td>Onde están os meus datos en Windows?</td><td>En <code>%LOCALAPPDATA%\Anonimizador</code>: <code>datos_rexistro</code> (rexistros cifrados) e <code>anonimizador.log</code> (rexistro de erros). Non se tocan ao actualizar nin ao desinstalar o programa (o desinstalador pregunta antes de borrar os rexistros).</td></tr>
-    <tr><td>E en Mac e Linux?</td><td>Desde a versión de outubro de 2026, fóra do cartafol do programa: <code>~/Library/Application Support/Anonimizador</code> (Mac) ou <code>~/.local/share/anonimizador</code> (Linux). Un rexistro antigo que estivese dentro do cartafol do programa trasládase alí só a primeira vez que se abre a versión nova.</td></tr>
+    <tr><td>Podo cambiar o idioma?</td><td>Si, cos botóns «Castellano | Galego» da pantalla inicial. Lémbrase ao pechar o programa. O título da xanela cambia a próxima vez que o abras.</td></tr>
+    <tr><td>Onde están os meus datos en Windows?</td><td>En <code>%LOCALAPPDATA%\Anonimizador</code>: <code>datos_rexistro</code> (rexistros cifrados), <code>preferencias.json</code> (idioma) e <code>anonimizador.log</code> (rexistro de erros). Non se tocan ao actualizar nin ao desinstalar o programa (o desinstalador pregunta antes de borrar os rexistros).</td></tr>
     <tr><td>Podo ver todas as correspondencias dun caso dunha vez?</td><td>Si, coa ligazón «Listado completo de correspondencias» da pantalla inicial (sección 10). Require motivo e contrasinal coma a reversión, máis unha confirmación explícita, e queda rexistrado coma acceso masivo.</td></tr>
   </tbody>
 </table>
