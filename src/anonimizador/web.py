@@ -269,6 +269,29 @@ def _modo_corpus_nas_plantillas():
     return {"modo_corpus": corpus_revision.MODO is not None}
 
 
+@app.context_processor
+def _idioma_nas_plantillas():
+    # O idioma decídese unha vez por páxina: toda ela sae no mesmo.
+    lingua = idioma.actual()
+    return {
+        "t": lambda clave, **valores: idioma.t(clave, lingua, **valores),
+        "idioma_actual": lingua,
+        "idiomas": idioma.IDIOMAS,
+        "codigo_visible": lambda codigo: idioma.codigo_visible(codigo, lingua),
+        "textos_js": lambda prefixo: idioma.textos_con_prefixo(prefixo, lingua),
+        "traducir": lambda mensaxe: idioma.traducir_mensaxe(mensaxe, lingua),
+    }
+
+
+@app.route("/idioma", methods=["POST"])
+def cambiar_idioma():
+    """Selector da pantalla de inicio: garda a escolla e volve ao inicio."""
+    escolla = request.form.get("idioma", "")
+    if escolla in idioma.IDIOMAS:
+        idioma.gardar(escolla)
+    return redirect(url_for("index"))
+
+
 @app.route("/")
 def index():
     if corpus_revision.MODO is not None:
@@ -280,9 +303,9 @@ def index():
     omitidos = request.args.get("omitidos", type=int)
     aviso_cartafol = None
     if n_creados is not None:
-        aviso_cartafol = f"{n_creados} documento(s) procesado(s), pendentes de revisión abaixo."
+        aviso_cartafol = idioma.t("web.procesados_pendentes", n=n_creados)
         if omitidos:
-            aviso_cartafol += f" {omitidos} ficheiro(s) omitido(s) (formato non soportado ou resultados dunha pasada anterior, .anonimizado)."
+            aviso_cartafol += " " + idioma.t("comun.omitidos", n=omitidos)
 
     return _render_index(
         pendentes=pendentes, rexistro_dir=rexistro_dir,
@@ -316,7 +339,7 @@ def explorar_nova_carpeta():
             request.form.get("pai", "").strip(), request.form.get("nome", "")
         )
     except ValueError as e:
-        return jsonify({"erro": str(e)}), 400
+        return jsonify({"erro": idioma.traducir_mensaxe(str(e))}), 400
     return jsonify({"ruta": ruta})
 
 
@@ -431,11 +454,11 @@ def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None,
     `(traballo, None)` ou `(None, mensaxe_de_erro)`."""
     ruta_p = Path(ruta)
     if not ruta_p.exists():
-        return None, f"Non se atopa o ficheiro ou cartafol: {ruta}"
+        return None, idioma.t("web.non_existe", ruta=ruta)
     if ruta_p.is_dir():
         ficheiros, omitidos = listar_ficheiros_soportados(ruta)
         if not ficheiros:
-            return None, f"Non se atopou ningún documento soportado en: {ruta}"
+            return None, idioma.t("web.sen_soportados", ruta=ruta)
     else:
         ficheiros, omitidos = [ruta], []
 
@@ -478,13 +501,13 @@ def _executar_traballo(traballo: dict) -> None:
                     )
             except Exception as e:  # un ficheiro roto NON debe tirar o resto do lote
                 traceback.print_exc()
-                traballo["erros"].append({"ruta": ficheiro, "mensaxe": f"{type(e).__name__}: {e}"})
+                traballo["erros"].append({"ruta": ficheiro, "mensaxe": f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"})
             traballo["feitos"] += 1
         traballo["estado"] = "cancelado" if traballo["cancelar"].is_set() and traballo["feitos"] < len(traballo["ficheiros"]) else "rematado"
     except Exception as e:
         traceback.print_exc()
         traballo["estado"] = "erro"
-        traballo["erro"] = f"{type(e).__name__}: {e}"
+        traballo["erro"] = f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"
     finally:
         traballo["actual"] = None
         traballo["fin"] = time.time()
@@ -540,7 +563,7 @@ def iniciar_traballo():
 def estado_traballo(jid):
     traballo = TRABALLOS.get(jid)
     if traballo is None:
-        return jsonify({"erro": "Traballo descoñecido (o programa reiniciouse?)"}), 404
+        return jsonify({"erro": idioma.t("web.traballo_descoñecido")}), 404
     return jsonify(_estado_publico(traballo))
 
 
@@ -551,7 +574,7 @@ def cancelar_traballo(jid):
     empeza o seguinte. O que xa estaba feito queda feito."""
     traballo = TRABALLOS.get(jid)
     if traballo is None:
-        return jsonify({"erro": "Traballo descoñecido (o programa reiniciouse?)"}), 404
+        return jsonify({"erro": idioma.t("web.traballo_descoñecido")}), 404
     traballo["cancelar"].set()
     return jsonify(_estado_publico(traballo))
 
@@ -568,7 +591,7 @@ def resultado_traballo(jid):
     if traballo["estado"] == "erro":
         return _render_index(
             pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir,
-            erro=f"O traballo non se puido completar: {traballo['erro']}",
+            erro=idioma.t("web.traballo_fallou", erro=traballo["erro"]),
         )
 
     cancelado = traballo["estado"] == "cancelado"
@@ -584,13 +607,10 @@ def resultado_traballo(jid):
     if cancelado:
         return _render_index(
             pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir,
-            aviso_cartafol=(
-                f"Proceso cancelado: {traballo['feitos']} de {len(traballo['ficheiros'])} ficheiro(s) "
-                f"procesado(s) (pendentes de revisión abaixo); o resto non se tocou."
-            ),
-            erro=(
-                f"{len(erros)} ficheiro(s) non se puideron procesar: "
-                + "; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros)
+            aviso_cartafol=idioma.t("web.cancelado", n=traballo["feitos"], total=len(traballo["ficheiros"])),
+            erro=idioma.t(
+                "web.non_procesados", n=len(erros),
+                detalle="; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros),
             ) if erros else None,
         )
     if not erros:
@@ -603,8 +623,8 @@ def resultado_traballo(jid):
     detalle = "; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros)
     return _render_index(
         pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir,
-        aviso_cartafol=f"{len(sids)} documento(s) procesado(s), pendentes de revisión abaixo.",
-        erro=f"{len(erros)} ficheiro(s) non se puideron procesar: {detalle}",
+        aviso_cartafol=idioma.t("web.procesados_pendentes", n=len(sids)),
+        erro=idioma.t("web.non_procesados", n=len(erros), detalle=detalle),
     )
 
 
@@ -619,7 +639,7 @@ def procesar():
     if not ruta_p.exists():
         return _render_index(
             pendentes=[], rexistro_dir=rexistro_dir,
-            erro=f"Non se atopa o ficheiro ou cartafol: {ruta}",
+            erro=idioma.t("web.non_existe", ruta=ruta),
         )
 
     rexistro = _abrir_rexistro(rexistro_dir)
@@ -630,7 +650,7 @@ def procesar():
             if not soportados:
                 return _render_index(
                     pendentes=[], rexistro_dir=rexistro_dir,
-                    erro=f"Non se atopou ningún documento soportado en: {ruta}",
+                    erro=idioma.t("web.sen_soportados", ruta=ruta),
                 )
             resultados = [_procesar_automatico(f, cartafol_saida, rexistro) for f in soportados]
         else:
@@ -645,7 +665,7 @@ def procesar():
         if not soportados:
             return _render_index(
                 pendentes=[], rexistro_dir=rexistro_dir,
-                erro=f"Non se atopou ningún documento soportado en: {ruta}",
+                erro=idioma.t("web.sen_soportados", ruta=ruta),
             )
         for ficheiro in soportados:
             _crear_sesion(ficheiro, rexistro_dir, cartafol_saida, rexistro)
@@ -748,7 +768,7 @@ def confirmar(sid):
             rexistro.descartar_por_humano(codigo, "marcada coma non persoa na revisión")
         for fragmento, _ in fragmentos:
             if not re.search(r"(?<!\w)" + re.escape(fragmento) + r"(?!\w)", texto_orixinal):
-                avisos.append(f"Non se atopou «{fragmento}» no documento orixinal (non se cambiou nada por el).")
+                avisos.append(idioma.t("web.fragmento_non_atopado", fragmento=fragmento))
         # Con decisións manda o documento xerado delas; unha edición libre
         # feita á vez non se mestura (podería contradicilas): gárdase aparte.
         if editado_a_man:
@@ -770,28 +790,20 @@ def confirmar(sid):
             if texto_orixinal is None or substitucions is None:
                 ruta_saida = str(Path(ruta_saida).with_suffix("")) + ".txt"
                 Path(ruta_saida).write_text(texto_final, encoding="utf-8")
-                aviso_formato = (
-                    "Non se puido conservar o formato orixinal (o ficheiro orixinal xa non está); "
-                    f"gardouse coma texto plano en {ruta_saida}."
-                )
+                aviso_formato = idioma.t("web.formato_texto_plano", ruta=ruta_saida)
             else:
                 gardar_documento_estruturado(
                     contexto, _aplicar_substitucions_a_texto(texto_orixinal, substitucions), ruta_saida, substitucions
                 )
                 ruta_edicion = Path(ruta_saida).with_suffix(".edicion-manual.txt")
                 ruta_edicion.write_text(texto_final, encoding="utf-8")
-                aviso_formato = (
-                    "A edición libre do texto cambiaba as liñas ou páxinas do documento, así que non se podía "
-                    f"aplicar sobre o formato orixinal. O documento gardouse co seu formato en {ruta_saida} "
-                    f"coas decisións da revisión, e a túa edición libre quedou en {ruta_edicion}."
-                )
+                aviso_formato = idioma.t("web.edicion_fora", ruta=ruta_saida, ruta_edicion=ruta_edicion)
     else:
         Path(ruta_saida).write_text(texto_final, encoding="utf-8")
     if edicion_aparte is not None:
         ruta_edicion = Path(ruta_saida).with_suffix(".edicion-manual.txt")
         ruta_edicion.write_text(edicion_aparte, encoding="utf-8")
-        avisos.insert(0, "O documento gardouse coas decisións da revisión; a túa edición libre do texto "
-                         f"non se aplicou sobre el e quedou en {ruta_edicion}.")
+        avisos.insert(0, idioma.t("web.edicion_aparte", ruta_edicion=ruta_edicion))
     if avisos:
         aviso_formato = " ".join(([aviso_formato] if aviso_formato else []) + avisos)
 
@@ -831,10 +843,7 @@ def _erro_rexistro_inexistente(ruta: str, que_falta: str) -> str | None:
     `None` se o rexistro existe."""
     if (Path(ruta) / "rexistro.enc").exists():
         return None
-    return (
-        f"Non se atopou ningún rexistro en \"{ruta}\" -- "
-        f"comproba a ruta (un rexistro novo baleiro non ten ningunha {que_falta})"
-    )
+    return idioma.t("web.sen_rexistro_" + que_falta, ruta=ruta)
 
 
 def _sen_cache(resposta):
@@ -855,7 +864,7 @@ def reverter():
         valores["codigo"] = request.form.get("codigo", "").strip()
         valores["motivo"] = request.form.get("motivo", "").strip()
         contrasinal = request.form.get("contrasinal", "")
-        erro = _erro_rexistro_inexistente(valores["rexistro"], "identidade que reverter")
+        erro = _erro_rexistro_inexistente(valores["rexistro"], "identidade")
         if erro is None:
             try:
                 rexistro = _abrir_rexistro(valores["rexistro"])
@@ -863,7 +872,7 @@ def reverter():
                     valores["codigo"], valores["motivo"], contrasinal, solicitante=getpass.getuser()
                 )
             except (KeyError, ValueError) as e:
-                erro = str(e)
+                erro = idioma.traducir_mensaxe(str(e))
 
     resposta = make_response(
         render_template("reverter.html", valores=valores, resultado=resultado, erro=erro)
@@ -887,12 +896,9 @@ def listar_correspondencias():
         desde = max(0, request.form.get("desde", type=int) or 0)
 
         if not request.form.get("confirmo"):
-            erro = (
-                "Tes que confirmar que entendes que este listado amosa TODAS as "
-                "identidades reais deste rexistro de golpe."
-            )
+            erro = idioma.t("web.confirmar_listado")
         else:
-            erro = _erro_rexistro_inexistente(valores["rexistro"], "correspondencia que listar")
+            erro = _erro_rexistro_inexistente(valores["rexistro"], "correspondencia")
         if erro is None:
             try:
                 rexistro = _abrir_rexistro(valores["rexistro"])
@@ -901,7 +907,7 @@ def listar_correspondencias():
                     desde=desde, limite=_FILAS_POR_PAXINA,
                 )
             except (KeyError, ValueError) as e:
-                erro = str(e)
+                erro = idioma.traducir_mensaxe(str(e))
 
     resposta = make_response(
         render_template(
@@ -922,10 +928,9 @@ def listar_correspondencias_pdf():
     motivo = request.form.get("motivo", "").strip()
     erro = None
     if not request.form.get("confirmo") or not request.form.get("aviso_pdf"):
-        erro = ("Para xerar o PDF tes que confirmar a autorización e marcar que entendes que é un "
-                "documento de extrema sensibilidade.")
+        erro = idioma.t("web.confirmar_pdf")
     else:
-        erro = _erro_rexistro_inexistente(rexistro_dir, "correspondencia que listar")
+        erro = _erro_rexistro_inexistente(rexistro_dir, "correspondencia")
     if erro is None:
         try:
             rexistro = _abrir_rexistro(rexistro_dir)
@@ -934,7 +939,7 @@ def listar_correspondencias_pdf():
                 solicitante=getpass.getuser(),
             )
         except (KeyError, ValueError) as e:
-            erro = str(e)
+            erro = idioma.traducir_mensaxe(str(e))
     if erro is not None:
         resposta = make_response(render_template(
             "listar_correspondencias.html", valores={"rexistro": rexistro_dir, "motivo": motivo},
@@ -965,13 +970,13 @@ def definir_contrasinal():
         nova = request.form.get("nova", "")
         confirmacion = request.form.get("confirmacion", "")
         if nova != confirmacion:
-            erro = "As dúas contrasinais non coinciden."
+            erro = idioma.t("web.contrasinais_distintas")
         else:
             try:
                 rexistro.definir_contrasinal_reversion(nova, actual=actual or None)
                 feito = True
             except ValueError as e:
-                erro = str(e)
+                erro = idioma.traducir_mensaxe(str(e))
 
     return render_template(
         "definir_contrasinal.html",

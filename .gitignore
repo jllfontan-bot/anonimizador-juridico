@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 datos_rexistro/
+preferencias.json
 datos_rexistro_real/
 saidas_reais/
 *.enc

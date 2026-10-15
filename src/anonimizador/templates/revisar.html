@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block titulo %}Revisar — {{ sesion.ruta_orixe }}{% endblock %}
+{% block titulo %}{{ t("revisar.pestana", ruta=sesion.ruta_orixe) }}{% endblock %}
 {% block contido %}
 {% if sesion.corpus_id %}
 <h1>Documento {{ sesion.corpus_posicion }}: {{ sesion.corpus_id }}</h1>
@@ -14,20 +14,20 @@
   </ol>
 </div>
 {% else %}
-<h1>Revisión: {{ sesion.ruta_orixe }}</h1>
+<h1>{{ t("revisar.titulo", ruta=sesion.ruta_orixe) }}</h1>
 {% endif %}
 <p class="subtitulo">
-  {{ persoas_marcadas|length }} persoa(s) marcada(s) para revisión ·
-  {{ persoas_ok|length }} sen marcar ·
-  {% if not sesion.corpus_id %}{{ riscos_mosaico|length }} risco(s) de efecto mosaico ·{% endif %}
-  {{ risco_residual|selectattr("confianza", "equalto", "alta")|list|length }} posible(s) fuga(s) sen detectar ·
-  {{ categoria_especial|length }} dato(s) de categoría especial ·
-  {{ exentos_cargo_publico|length }} exención(s) por cargo público
+  {{ t("revisar.n_marcadas", n=persoas_marcadas|length) }} ·
+  {{ t("revisar.n_sen_marcar", n=persoas_ok|length) }} ·
+  {% if not sesion.corpus_id %}{{ t("revisar.n_mosaico", n=riscos_mosaico|length) }} ·{% endif %}
+  {{ t("revisar.n_fugas", n=risco_residual|selectattr("confianza", "equalto", "alta")|list|length) }} ·
+  {{ t("revisar.n_categoria", n=categoria_especial|length) }} ·
+  {{ t("revisar.n_exentos", n=exentos_cargo_publico|length) }}
 </p>
 {% if not sesion.corpus_id %}
 <p class="nota-saida">
-  Gardarase en:
-  {% if cartafol_saida %}{{ cartafol_saida }}{% else %}o mesmo cartafol có orixinal{% endif %}
+  {{ t("revisar.gardarase") }}
+  {% if cartafol_saida %}{{ cartafol_saida }}{% else %}{{ t("revisar.mesmo_cartafol") }}{% endif %}
 </p>
 {% endif %}
 
@@ -38,16 +38,13 @@
   {% set riscos_altos = risco_residual|selectattr("confianza", "equalto", "alta")|list %}
   {% set riscos_baixos = risco_residual|selectattr("confianza", "equalto", "baixa")|list %}
   {% if riscos_altos %}
-  <h2>⚠ Posibles fugas sen detectar — revisa antes de confirmar</h2>
+  <h2>{{ t("revisar.fugas_titulo") }}</h2>
   <p class="mencions">
-    Ningún sistema de detección pode garantir cubrir tódolos formatos posibles
-    nun documento real. Isto NON son datos xa redactados por erro — son
-    anacos do texto FINAL que aínda PARECEN un nome ou un identificador.
-    Comproba cada un e, se é un dato persoal, engádeo en «Engadir ou xeneralizar» máis abaixo.
+    {{ t("revisar.fugas_texto") }}
   </p>
   {% for r in riscos_altos %}
   <div class="tarxeta marcada">
-    <strong>{{ "Nome en orde invertida" if r.tipo == "nome_en_orde_invertida" else "Número solto" }}</strong>
+    <strong>{{ t("revisar.orde_invertida") if r.tipo == "nome_en_orde_invertida" else t("revisar.numero_solto") }}</strong>
     <div class="mencions">"{{ r.texto }}"</div>
     <div class="motivo">…{{ r.contexto }}…</div>
   </div>
@@ -57,7 +54,7 @@
   {% if riscos_baixos %}
   <details style="margin:12px 0 24px;">
     <summary style="cursor:pointer; color:var(--ink-soft); font-size:13.5px;">
-      {{ riscos_baixos|length }} revisión(s) opcional(is) máis (confianza baixa — moitas serán institucións ou lugares, non persoas)
+      {{ t("revisar.opcionais", n=riscos_baixos|length) }}
     </summary>
     {% for r in riscos_baixos %}
     <div class="tarxeta" style="margin-top:8px;">
@@ -70,18 +67,14 @@
   {% if exentos_cargo_publico %}
   <details style="margin:12px 0 24px;" open>
     <summary style="cursor:pointer; color:var(--ink-soft); font-size:13.5px;">
-      {{ exentos_cargo_publico|length }} persoa(s) NON anonimizada(s) por cargo público (xuíz/a, maxistrado/a, LAJ ou médico/a forense) — revisa que a exención sexa correcta
+      {{ t("revisar.exentos_resumo", n=exentos_cargo_publico|length) }}
     </summary>
     <p class="mencions">
-      Criterio da AEPD (Gabinete Xurídico N/REF 0049/2023): estes cargos, actuando en
-      exercicio da súa función pública, non precisan anonimización. É unha
-      detección automática por proximidade ao nome -- se algún destes NON é
-      realmente ese cargo (ou é un perito, parte ou outro interviniente que SI
-      habería que anonimizar), escribe o seu nome en «Engadir ou xeneralizar» máis abaixo.
+      {{ t("revisar.exentos_texto") }}
     </p>
     {% for ex in exentos_cargo_publico %}
     <div class="tarxeta" style="margin-top:8px;">
-      <div class="mencions">"{{ ex.texto }}" — cargo detectado: {{ ex.cargo }}</div>
+      <div class="mencions">"{{ ex.texto }}" — {{ t("revisar.cargo_detectado") }} {{ ex.cargo }}</div>
       {% if sesion.corpus_id %}
       <label><input type="checkbox" name="exencion_ok" value="{{ loop.index0 }}" checked> A exención é correcta</label>
       {% endif %}
@@ -91,49 +84,46 @@
   {% endif %}
 
   {% if persoas_marcadas and not sesion.corpus_id %}
-  <h2>Posibles homónimos — require a túa confirmación</h2>
+  <h2>{{ t("revisar.homonimos") }}</h2>
   {% for p in persoas_marcadas %}
   <div class="tarxeta marcada">
     <span class="codigo">{{ p.codigo }}</span>
-    <div class="mencions">Mencións no documento: {{ p.mencions|join(", ") }}</div>
-    <div class="motivo">{{ p.motivo }}</div>
+    <div class="mencions">{{ t("revisar.mencions") }} {{ p.mencions|join(", ") }}</div>
+    <div class="motivo">{{ traducir(p.motivo) }}</div>
     {% if p.posibles_coincidencias %}
-    <label for="decision_{{ p.codigo }}">Decisión</label>
+    <label for="decision_{{ p.codigo }}">{{ t("revisar.decision") }}</label>
     <select name="decision_{{ p.codigo }}" id="decision_{{ p.codigo }}">
-      <option value="manter" selected>Manter como persoa distinta ({{ p.codigo }})</option>
+      <option value="manter" selected>{{ t("revisar.manter", codigo=p.codigo) }}</option>
       {% for c in p.posibles_coincidencias %}
-      <option value="fusionar:{{ c }}">É a mesma persoa que {{ c }} — fusionar</option>
+      <option value="fusionar:{{ c }}">{{ t("revisar.fusionar", codigo=c) }}</option>
       {% endfor %}
     </select>
     {% else %}
-    <div class="mencions">Sen código suxerido para fusionar.</div>
+    <div class="mencions">{{ t("revisar.sen_suxestion") }}</div>
     {% endif %}
   </div>
   {% endfor %}
   {% endif %}
 
   {% if riscos_mosaico %}
-  <h2>Riscos de efecto mosaico a revisar</h2>
+  <h2>{{ t("revisar.mosaico_titulo") }}</h2>
   {% for r in riscos_mosaico %}
   <div class="tarxeta risco">
-    <strong>{{ r.tipo }}</strong>
+    <strong>{{ t("mosaico." + r.tipo) }}</strong>
     <span class="frase">{{ r.frase }}</span>
-    <span class="motivo">{{ r.detalle }}</span>
+    <span class="motivo">{{ traducir(r.detalle) }}</span>
   </div>
   {% endfor %}
-  <p class="mencions">Estes riscos non se corrixen automaticamente — se cómpre xeneralizar algún dato, faino en «Engadir ou xeneralizar» máis abaixo (por exemplo: <code>67 anos =&gt; [IDADE]</code>).</p>
+  <p class="mencions">{{ t("revisar.mosaico_texto")|safe }}</p>
   {% endif %}
 
   {% if categoria_especial %}
-  <h2>Datos de categoría especial (art. 9 RGPD)</h2>
+  <h2>{{ t("revisar.categoria_titulo") }}</h2>
   <p class="mencions">
-    Saúde, relixión ou conviccións, orientación sexual ou afiliación sindical.
-    A persoa xa vai co seu código, pero estes datos son sensibles por si
-    mesmos e, xunto a outros detalles, poden axudar a reidentificala. Non se
-    retiran automaticamente — se non son necesarios, xeneralízaos en «Engadir ou xeneralizar» máis abaixo.
+    {{ t("revisar.categoria_texto") }}
   </p>
-  {% set nomes_categoria = {"saude": "Saúde", "relixion": "Relixión ou conviccións",
-                            "orientacion_sexual": "Orientación sexual", "sindical": "Afiliación sindical"} %}
+  {% set nomes_categoria = {"saude": t("categoria.saude"), "relixion": t("categoria.relixion"),
+                            "orientacion_sexual": t("categoria.orientacion_sexual"), "sindical": t("categoria.sindical")} %}
   {% for a in categoria_especial %}
   <div class="tarxeta risco">
     <strong>{{ nomes_categoria.get(a.categoria, a.categoria) }}</strong>
@@ -143,11 +133,9 @@
   {% endfor %}
   {% endif %}
 
-  <h2>Persoas detectadas — desmarca as que NON son unha persoa</h2>
+  <h2>{{ t("revisar.persoas_titulo") }}</h2>
   <p class="mencions">
-    Todas van marcadas para anonimizar. Se algunha é un lugar, un organismo ou outra cousa
-    que non hai que tapar, desmárcaa e quedará á vista no documento. O documento gárdase
-    sempre co seu formato orixinal (PDF, Word...) a partir destas decisións.
+    {{ t("revisar.persoas_texto") }}
   </p>
   {% if sesion.proposta %}
   <div class="aviso-ok">Este documento leva propostas de Claude (marcadas abaixo): revísaas, a decisión é túa.</div>
@@ -162,13 +150,9 @@
   </label>
   {% endfor %}
 
-  <h2>Engadir ou xeneralizar</h2>
+  <h2>{{ t("revisar.engadir_titulo") }}</h2>
   <p class="mencions">
-    Unha liña por cada dato que o programa non tapou. Só o texto (<code>Fufa</code>) tápao
-    cun código de persoa en todas as súas aparicións; con <code>=&gt;</code> substitúese polo
-    que escribas (<code>Rúa Real, 5 =&gt; [ENDEREZO]</code>, <code>67 anos =&gt; [IDADE]</code>);
-    con <code>=&gt;</code> e nada detrás, bórrase (<code>Nota interna. =&gt;</code>).
-    Escríbeo tal como aparece no documento.
+    {{ t("revisar.engadir_texto")|safe }}
   </p>
   {% if sesion.proposta and sesion.proposta.engadidos %}
   <p class="mencions">O cadro trae os fragmentos que faltarían segundo a proposta de Claude: bórraos se non estás de acordo.</p>
@@ -183,14 +167,14 @@
 
   <details style="margin-top:18px;">
     <summary style="cursor:pointer; color:var(--ink-soft); font-size:13.5px;">
-      Vista previa do texto anonimizado (antes das túas decisións)
+      {{ t("revisar.vista_previa") }}
     </summary>
     <pre style="white-space:pre-wrap; max-height:420px; overflow:auto; background:var(--surface);
                 border:1px solid var(--line); border-radius:8px; padding:12px; font-size:13px;">{{ sesion.texto_anonimizado }}</pre>
   </details>
 
   <div style="margin-top:18px;">
-    <button type="submit">{% if sesion.corpus_id %}Revisado — gardar a etiqueta e seguir{% else %}Confirmar revisión e gardar{% endif %}</button>
+    <button type="submit">{% if sesion.corpus_id %}Revisado — gardar a etiqueta e seguir{% else %}{{ t("revisar.confirmar") }}{% endif %}</button>
   </div>
 </form>
 {% endblock %}

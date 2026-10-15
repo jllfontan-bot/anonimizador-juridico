@@ -99,6 +99,44 @@ def t(clave: str, idioma: str | None = None, **valores) -> str:
     return texto.format(**valores) if valores else texto
 
 
+def textos_con_prefixo(prefixo: str, idioma: str | None = None) -> dict:
+    """Todos os textos que comezan por `prefixo`, sen el (para o JavaScript
+    dunha páxina: `const T = {...}`)."""
+    idioma = idioma or actual()
+    outro = "gl" if idioma == "es" else "es"
+    xuntos = {**textos(outro), **textos(idioma)}
+    return {c[len(prefixo):]: v for c, v in xuntos.items() if c.startswith(prefixo)}
+
+
+@lru_cache(maxsize=None)
+def _patrons_mensaxes() -> list:
+    """Mensaxes en galego que chegan á pantalla desde módulos que non saben de
+    idiomas (rexistro, explorador...): claves "msx.*", co texto galego exacto
+    e {marcadores} para as partes variables."""
+    patrons = []
+    for clave, texto in textos("gl").items():
+        if not clave.startswith("msx."):
+            continue
+        partes = re.split(r"\{(\w+)\}", texto)
+        regex = "".join(re.escape(x) if i % 2 == 0 else f"(?P<{x}>.+?)" for i, x in enumerate(partes))
+        patrons.append((re.compile(regex, re.S), clave))
+    return patrons
+
+
+def traducir_mensaxe(mensaxe: str, idioma: str | None = None) -> str:
+    """Traduce unha mensaxe galega coñecida (ex. o texto dunha excepción do
+    rexistro) ao idioma actual; a que non coñece devólvea tal cal."""
+    idioma = idioma or actual()
+    if idioma == "gl" or not mensaxe:
+        return mensaxe
+    limpa = mensaxe[1:-1] if len(mensaxe) > 1 and mensaxe[0] == mensaxe[-1] == "'" else mensaxe  # str(KeyError)
+    for regex, clave in _patrons_mensaxes():
+        m = regex.fullmatch(limpa)
+        if m:
+            return t(clave, idioma, **m.groupdict())
+    return mensaxe
+
+
 # -- códigos e etiquetas dos documentos ---------------------------------------
 
 def e_codigo_persoa(texto: str) -> bool:

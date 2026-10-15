@@ -18,31 +18,34 @@ from datetime import datetime
 
 import fitz  # PyMuPDF
 
+from . import idioma
+
 _ANCHO, _ALTO = fitz.paper_size("a4-l")  # apaisado: cabe a táboa enteira
 _MARXE = 36
 _FONTE = "uni"
 _TAMANO = 8.5
 _ENTRELIÑA = 11.5
-_AVISO = ("DOCUMENTO DE EXTREMA SENSIBILIDADE. Contén as identidades reais que corresponden aos "
-          "códigos dos documentos anonimizados. Non o copies, non o envíes nin o deixes á vista; "
-          "destrúeo cando xa non faga falta. Fóra de contexto perde valor, pero xunto cos documentos "
-          "anonimizados permite reverter o anonimato.")
 
 
-def _columnas(entradas: list) -> list:
+def _columnas(entradas: list, lingua: str) -> list:
     """(título, chave, ancho relativo), sen as columnas que van baleiras."""
-    columnas = [("Código", "codigo", 1.2), ("Nome(s)", "nomes", 3.2), ("DNI", "dni", 1.2)]
+    t = lambda clave: idioma.t(clave, lingua)  # noqa: E731
+    columnas = [(t("pdf.col_codigo"), "codigo", 1.2), (t("pdf.col_nomes"), "nomes", 3.2), ("DNI", "dni", 1.2)]
     if any(e.get("contexto") for e in entradas):
-        columnas.append(("Contexto", "contexto", 2.2))
-    columnas.append(("Creado", "creado", 0.9))
+        columnas.append((t("pdf.col_contexto"), "contexto", 2.2))
+    columnas.append((t("pdf.col_creado"), "creado", 0.9))
     if any(e.get("fusionados") for e in entradas):
-        columnas.append(("Fusionados neste", "fusionados", 1.6))
+        columnas.append((t("pdf.col_fusionados"), "fusionados", 1.6))
     return columnas
 
 
-def _valor(entrada: dict, chave: str) -> str:
+def _valor(entrada: dict, chave: str, lingua: str) -> str:
     valor = entrada.get(chave)
-    if chave in ("nomes", "fusionados"):
+    if chave == "codigo":
+        return idioma.codigo_visible(valor, lingua) if valor else "—"
+    if chave == "fusionados":
+        return ", ".join(idioma.codigo_visible(c, lingua) for c in valor or [])
+    if chave == "nomes":
         return ", ".join(valor or [])
     if chave == "creado":
         return (valor or "")[:10]
@@ -71,18 +74,21 @@ def _marca_de_auga(paxina: "fitz.Page") -> None:
                        morph=(centro, fitz.Matrix(30)), overlay=True)
 
 
-def _cabeceira(paxina: "fitz.Page", motivo: str, solicitante: str | None, data: str, total: int) -> float:
+def _cabeceira(paxina: "fitz.Page", motivo: str, solicitante: str | None, data: str, total: int,
+               lingua: str) -> float:
     y = _MARXE
-    paxina.insert_text((_MARXE, y + 14), "Listado completo de correspondencias  —  CONFIDENCIAL",
+    paxina.insert_text((_MARXE, y + 14), idioma.t("pdf.titulo", lingua),
                        fontname=_FONTE, fontsize=15, color=(0.55, 0.05, 0.05))
     y += 26
-    detalle = f"Xerado o {data}" + (f" por {solicitante}" if solicitante else "")
-    detalle += f"  ·  Motivo: {motivo}  ·  {total} persoa(s)"
+    detalle = idioma.t("pdf.xerado", lingua, data=data)
+    if solicitante:
+        detalle += idioma.t("pdf.por", lingua, solicitante=solicitante)
+    detalle += idioma.t("pdf.motivo_total", lingua, motivo=motivo, total=total)
     paxina.insert_text((_MARXE, y + 9), detalle, fontname=_FONTE, fontsize=9, color=(0.2, 0.2, 0.2))
     y += 16
     caixa = fitz.Rect(_MARXE, y, _ANCHO - _MARXE, y + 40)
     paxina.draw_rect(caixa, color=(0.75, 0.2, 0.2), fill=(1, 0.95, 0.93), width=0.8)
-    paxina.insert_textbox(caixa + (6, 4, -6, -4), _AVISO, fontname=_FONTE, fontsize=8.5,
+    paxina.insert_textbox(caixa + (6, 4, -6, -4), idioma.t("pdf.aviso", lingua), fontname=_FONTE, fontsize=8.5,
                           color=(0.45, 0.05, 0.05))
     return y + 52
 
@@ -91,8 +97,9 @@ def listado_correspondencias(resultado: dict, motivo: str, solicitante: str | No
                              data: str | None = None) -> bytes:
     """`resultado` é o que devolve `RexistroCorrespondencias.listar_correspondencias`."""
     data = data or datetime.now().strftime("%d/%m/%Y %H:%M")
+    lingua = idioma.actual()
     entradas = resultado.get("entradas", [])
-    columnas = _columnas(entradas)
+    columnas = _columnas(entradas, lingua)
     fonte = fitz.Font("cjk")
     total_relativo = sum(c[2] for c in columnas)
     anchos = [(_ANCHO - 2 * _MARXE) * c[2] / total_relativo for c in columnas]
@@ -120,33 +127,34 @@ def listado_correspondencias(resultado: dict, motivo: str, solicitante: str | No
         return y + alto
 
     paxina = nova_paxina()
-    y = _cabeceira(paxina, motivo, solicitante, data, resultado.get("total", len(entradas)))
+    y = _cabeceira(paxina, motivo, solicitante, data, resultado.get("total", len(entradas)), lingua)
     titulos = [c[0] for c in columnas]
     y = fila(paxina, y, titulos, cabeceira=True)
     if not entradas:
-        paxina.insert_text((_MARXE, y + 16), "O rexistro non ten ningunha correspondencia.",
+        paxina.insert_text((_MARXE, y + 16), idioma.t("pdf.baleiro", lingua),
                            fontname=_FONTE, fontsize=10)
     for entrada in entradas:
-        valores = [_valor(entrada, c[1]) for c in columnas]
+        valores = [_valor(entrada, c[1], lingua) for c in columnas]
         if y + alto_da_fila(valores) > _ALTO - _MARXE - 14:
             paxina = nova_paxina()
             y = fila(paxina, _MARXE, titulos, cabeceira=True)
         y = fila(paxina, y, valores)
     if resultado.get("alias_orfos"):
         paxina.insert_text((_MARXE, min(y + 16, _ALTO - _MARXE - 20)),
-                           "Códigos fusionados sen destino no rexistro: " + ", ".join(resultado["alias_orfos"]),
+                           idioma.t("pdf.orfos", lingua)
+                           + ", ".join(idioma.codigo_visible(c, lingua) for c in resultado["alias_orfos"]),
                            fontname=_FONTE, fontsize=8.5, color=(0.5, 0.1, 0.1))
 
     # As páxinas vellas quedan sen documento ao crear outras: pídense de novo.
     for n in range(1, len(documento) + 1):
         paxina = documento[n - 1]
         paxina.insert_text((_MARXE, _ALTO - _MARXE + 10),
-                           f"CONFIDENCIAL — documento de extrema sensibilidade  ·  Páxina {n} de {len(documento)}",
+                           idioma.t("pdf.pe", lingua, n=n, total=len(documento)),
                            fontname=_FONTE, fontsize=8, color=(0.55, 0.05, 0.05))
         _marca_de_auga(paxina)
 
     documento.subset_fonts()
-    documento.set_metadata({"title": "Listado de correspondencias — CONFIDENCIAL", "producer": "", "creator": ""})
+    documento.set_metadata({"title": idioma.t("pdf.metadatos", lingua), "producer": "", "creator": ""})
     datos = documento.tobytes(garbage=4, deflate=True)
     documento.close()
     return datos

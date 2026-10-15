@@ -1,19 +1,18 @@
 {% extends "base.html" %}
-{% block titulo %}Revisión confirmada{% endblock %}
+{% block titulo %}{{ t("confirmado.titulo") }}{% endblock %}
 {% block contido %}
-<h1>Revisión confirmada</h1>
+<h1>{{ t("confirmado.titulo") }}</h1>
 {% if aviso_formato %}
 <div class="erro">{{ aviso_formato }}</div>
 {% endif %}
 <div class="aviso-ok">
-  Documento gardado en <code>{{ ruta_saida }}</code>.
-  As decisións da revisión (fusións e persoas descartadas) quedaron rexistradas na auditoría cifrada do rexistro.
+  {{ t("confirmado.gardado", ruta=ruta_saida|e)|safe }}
 </div>
-<h2>Texto final</h2>
+<h2>{{ t("confirmado.texto_final") }}</h2>
 <textarea readonly>{{ sesion.texto_final }}</textarea>
 {% if seguinte_corpus %}
 <p style="margin-top:20px;"><a href="{{ seguinte_corpus }}"><button type="button">Etiqueta gardada — seguinte documento</button></a></p>
 {% else %}
-<p style="margin-top:20px;"><a href="{{ url_for('index') }}">← Anonimizar outro documento</a></p>
+<p style="margin-top:20px;"><a href="{{ url_for('index') }}">{{ t("comun.outro_documento") }}</a></p>
 {% endif %}
 {% endblock %}

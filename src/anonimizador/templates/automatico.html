@@ -1,23 +1,23 @@
 {% extends "base.html" %}
-{% block titulo %}Anonimización automática{% endblock %}
+{% block titulo %}{{ t("auto.titulo") }}{% endblock %}
 {% block contido %}
-<h1>Anonimización automática</h1>
+<h1>{{ t("auto.titulo") }}</h1>
 {% set erros = erros|default([]) %}
 {% set cancelado = cancelado|default(false) %}
 <div class="progreso rematado" role="status">
-  <h2>{% if cancelado %}⏹ Proceso cancelado{% else %}✔ Proceso terminado{% endif %}</h2>
+  <h2>{% if cancelado %}{{ t("inicio.js.cancelado") }}{% else %}{{ t("inicio.js.rematado") }}{% endif %}</h2>
   {% set total_n = total|default(resultados|length + erros|length) %}
   {% set pct = (feitos|default(total_n) * 100 / total_n)|int if total_n else 100 %}
   <div class="barra"><div class="feito" style="width:{{ pct }}%"></div></div>
   <div class="porcentaxe">{{ pct }} %</div>
   <div class="ficheiro-actual">
-    {{ resultados|length }} de {{ total_n }} ficheiro(s) anonimizado(s) correctamente{% if erros %}; <strong>{{ erros|length }} con erro</strong>{% endif %}.
-    {% if cancelado %}<strong>Cancelaches o proceso:</strong> os {{ total_n - feitos }} ficheiro(s) restantes non se tocaron.{% endif %}
+    {{ t("auto.correctos", n=resultados|length, total=total_n) }}{% if erros %}; <strong>{{ t("auto.con_erro", n=erros|length) }}</strong>{% endif %}.
+    {% if cancelado %}{{ t("auto.cancelaches", n=total_n - feitos)|safe }}{% endif %}
   </div>
 </div>
 {% if erros %}
 <div class="erro">
-  <strong>{{ erros|length }} ficheiro(s) NON se puideron anonimizar</strong> (o resto do lote si se procesou):
+  {{ t("auto.erros", n=erros|length)|safe }}
   <ul>
     {% for e in erros %}<li><code>{{ e.ruta }}</code> — {{ e.mensaxe }}</li>{% endfor %}
   </ul>
@@ -25,20 +25,14 @@
 {% endif %}
 {% set total_risco_alto = resultados|sum(attribute="n_risco_alto") %}
 <div class="aviso-ok">
-  {{ resultados|length }} documento(s) anonimizado(s) sen revisión humana.
-  {% if omitidos %}{{ omitidos }} ficheiro(s) omitido(s) (formato non soportado ou resultados dunha pasada anterior, .anonimizado).{% endif %}
-  Calquera posible homónimo detectado recibiu por defecto un código NOVO
-  (nunca se fusiona automaticamente) -- revisa a columna "marcada(s)"
-  abaixo se queres confirmalo a man na auditoría do rexistro.
+  {{ t("auto.sen_revision", n=resultados|length) }}
+  {% if omitidos %}{{ t("comun.omitidos", n=omitidos) }}{% endif %}
+  {{ t("auto.homonimos") }}
 </div>
 
 {% if total_risco_alto %}
 <div class="erro">
-  ⚠ {{ total_risco_alto }} posible(s) fuga(s) sen detectar en total -- ningún
-  sistema de detección pode garantir cubrir tódolos formatos posibles nun
-  documento real. Revisa os ficheiros marcados abaixo cunha lectura completa
-  antes de dalos por bos: cada un ten abaixo o botón "Revisar este documento",
-  que abre a súa revisión cos mesmos códigos.
+  {{ t("auto.fugas", n=total_risco_alto) }}
 </div>
 {% endif %}
 
@@ -46,16 +40,16 @@
   {% for r in resultados %}
   <li>
     <strong>{{ r.ruta_orixe }}</strong> → <code>{{ r.ruta_saida }}</code><br>
-    {{ r.n_marcadas }} persoa(s) marcada(s) coma posible homónimo, {{ r.n_mosaico }} risco(s) de efecto mosaico
-    {%- if r.n_risco_alto %}, <strong>{{ r.n_risco_alto }} posible(s) fuga(s) sen detectar ⚠</strong>{% endif %}
-    {%- if r.n_exentos_cargo_publico %}, {{ r.n_exentos_cargo_publico }} persoa(s) exenta(s) por cargo público{% endif %}
-    {%- if r.n_categoria_especial %}, {{ r.n_categoria_especial }} dato(s) de categoría especial (saúde, relixión, orientación sexual ou afiliación sindical){% endif %}
+    {{ t("auto.resumo", marcadas=r.n_marcadas, mosaico=r.n_mosaico) }}
+    {%- if r.n_risco_alto %}, <strong>{{ t("auto.resumo_fugas", n=r.n_risco_alto) }}</strong>{% endif %}
+    {%- if r.n_exentos_cargo_publico %}, {{ t("auto.resumo_exentos", n=r.n_exentos_cargo_publico) }}{% endif %}
+    {%- if r.n_categoria_especial %}, {{ t("auto.resumo_categoria", n=r.n_categoria_especial) }}{% endif %}
     {%- if r.sid_revision %}<br>
-    <a href="{{ url_for('revisar', sid=r.sid_revision, rexistro=rexistro_dir) }}"><button type="button">Revisar este documento</button></a>
-    <span class="mencions">(o revisado substitúe ao gardado agora)</span>{% endif %}
+    <a href="{{ url_for('revisar', sid=r.sid_revision, rexistro=rexistro_dir) }}"><button type="button">{{ t("auto.revisar_documento") }}</button></a>
+    <span class="mencions">{{ t("auto.revisado_substitue") }}</span>{% endif %}
   </li>
   {% endfor %}
 </ul>
 
-<p style="margin-top:32px;"><a href="{{ url_for('index', rexistro=rexistro_dir) }}">← Anonimizar outro documento</a></p>
+<p style="margin-top:32px;"><a href="{{ url_for('index', rexistro=rexistro_dir) }}">{{ t("comun.outro_documento") }}</a></p>
 {% endblock %}

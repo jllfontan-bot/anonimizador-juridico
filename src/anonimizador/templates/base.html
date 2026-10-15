@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="gl">
+<html lang="{{ idioma_actual }}">
 <head>
 <meta charset="utf-8">
-<title>{% block titulo %}Anonimizador — revisión{% endblock %}</title>
+<title>{% block titulo %}{{ t("titulo_xeral") }}{% endblock %}</title>
 <style>
   :root{
     --ink:#1a241f; --ink-soft:#4c5850; --paper:#f4f5f2; --surface:#fff;
@@ -116,6 +116,11 @@
   .exp-pe{ display:flex; gap:8px; padding:12px 20px 16px; align-items:center; }
   .exp-pe .esp{ flex:1; }
   button:focus-visible, input:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+
+  /* selector de idioma (pantalla de inicio) */
+  .selector-idioma{ float:right; display:flex; gap:4px; margin:0 0 8px 12px; }
+  .selector-idioma button{ background:var(--surface); color:var(--ink-soft); border:1px solid var(--line); padding:4px 10px; font-size:12.5px; }
+  .selector-idioma button[aria-pressed="true"]{ background:var(--accent); color:#fff; border-color:var(--accent); }
 </style>
 </head>
 <body>

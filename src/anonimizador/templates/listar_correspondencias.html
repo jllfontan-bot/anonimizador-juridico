@@ -1,12 +1,9 @@
 {% extends "base.html" %}
-{% block titulo %}Listado completo de correspondencias{% endblock %}
+{% block titulo %}{{ t("listado.titulo") }}{% endblock %}
 {% block contido %}
-<h1>Listado completo de correspondencias</h1>
+<h1>{{ t("listado.titulo") }}</h1>
 <p class="subtitulo">
-  Amosa dunha soa vez TODAS as correspondencias código↔persoa real dun rexistro.
-  É a acción de MAIOR alcance de todo o sistema — máis que reverter un só
-  código — e require sempre un motivo e a contrasinal de reversión. Cada acceso
-  queda rexistrado na auditoría cifrada coma acceso masivo.
+  {{ t("listado.subtitulo") }}
 </p>
 
 {% if erro %}
@@ -16,39 +13,38 @@
 {% if resultado %}
   {% if resultado.total == 0 %}
   <div class="tarxeta">
-    Este rexistro aínda non ten ningunha correspondencia (0 persoas).
-    O acceso quedou rexistrado igualmente na auditoría.
+    {{ t("listado.baleiro") }}
   </div>
   {% else %}
   {% set con_contexto = resultado.entradas|selectattr("contexto")|list %}
   {% set con_fusionados = resultado.entradas|selectattr("fusionados")|list %}
-  <h2>Correspondencias</h2>
+  <h2>{{ t("listado.correspondencias") }}</h2>
   <p class="mencions">
-    Amosando {{ resultado.entradas|length }} de {{ resultado.total }} correspondencia(s){% if resultado.desde %} (a partir da {{ resultado.desde + 1 }}){% endif %}.
+    {{ t("listado.amosando", n=resultado.entradas|length, total=resultado.total) }}{% if resultado.desde %} {{ t("listado.a_partir", n=resultado.desde + 1) }}{% endif %}.
   </p>
   <div class="correspondencias-scroll">
   <table class="correspondencias">
     <thead>
       <tr>
-        <th>Código</th><th>Nome(s) real(is)</th><th>DNI / documento</th>
-        {% if con_contexto %}<th>Contexto</th>{% endif %}
-        <th>Creado</th>
-        {% if con_fusionados %}<th>Códigos fusionados neste</th>{% endif %}
+        <th>{{ t("listado.col_codigo") }}</th><th>{{ t("listado.col_nomes") }}</th><th>{{ t("listado.col_dni") }}</th>
+        {% if con_contexto %}<th>{{ t("listado.col_contexto") }}</th>{% endif %}
+        <th>{{ t("listado.col_creado") }}</th>
+        {% if con_fusionados %}<th>{{ t("listado.col_fusionados") }}</th>{% endif %}
       </tr>
     </thead>
     <tbody>
       {% for e in resultado.entradas %}
       <tr>
-        <td><span class="codigo">{{ e.codigo }}</span></td>
+        <td><span class="codigo">{{ codigo_visible(e.codigo) }}</span></td>
         <td>{{ e.nomes|join(", ") }}</td>
         <td>
           {% if e.dni %}{{ e.dni }}
-            <div class="mencions" title="Código co que aparecía o DNI nos documentos anonimizados antes do 29/09/2026">antes: {{ e.codigo_id }}</div>
+            <div class="mencions" title="{{ t('listado.antes_titulo') }}">{{ t("listado.antes") }} {{ e.codigo_id }}</div>
           {% else %}<span class="mencions">—</span>{% endif %}
         </td>
         {% if con_contexto %}<td>{{ e.contexto or "—" }}</td>{% endif %}
         <td>{{ e.creado[:10] if e.creado else "—" }}</td>
-        {% if con_fusionados %}<td>{{ e.fusionados|join(", ") if e.fusionados else "—" }}</td>{% endif %}
+        {% if con_fusionados %}<td>{{ e.fusionados|map(codigo_visible)|join(", ") if e.fusionados else "—" }}</td>{% endif %}
       </tr>
       {% endfor %}
     </tbody>
@@ -57,8 +53,7 @@
 
   {% if resultado.alias_orfos %}
   <div class="tarxeta marcada" style="margin-top:16px;">
-    <strong>Códigos fusionados cuxo destino xa non está no rexistro</strong>
-    (revisa o rexistro): {{ resultado.alias_orfos|join(", ") }}.
+    {{ t("listado.orfos")|safe }} {{ resultado.alias_orfos|map(codigo_visible)|join(", ") }}.
   </div>
   {% endif %}
 
@@ -69,89 +64,80 @@
     <input type="hidden" name="motivo" value="{{ valores.motivo }}">
     <input type="hidden" name="desde" value="{{ seguinte }}">
     <div class="campo">
-      <label for="contrasinal2">Escribe de novo a contrasinal para ver as seguintes {{ filas_por_paxina }}</label>
+      <label for="contrasinal2">{{ t("listado.de_novo", n=filas_por_paxina) }}</label>
       <input type="password" id="contrasinal2" name="contrasinal" required>
     </div>
     <div class="campo">
       <label class="opcion-modo">
         <input type="checkbox" name="confirmo" value="1" required>
-        Confirmo que estou autorizado/a a ver todas as identidades reais deste rexistro.
+        {{ t("listado.confirmo") }}
       </label>
     </div>
-    <button type="submit">Ver as seguintes {{ filas_por_paxina }}</button>
+    <button type="submit">{{ t("listado.seguintes", n=filas_por_paxina) }}</button>
   </form>
   {% endif %}
 
   <div class="tarxeta marcada" style="margin-top:24px;">
-    <strong>Gardar coma PDF (CONFIDENCIAL)</strong>
+    <strong>{{ t("listado.pdf_titulo") }}</strong>
     <p style="margin:8px 0;">
-      O PDF leva o listado ENTEIRO, cunha marca de auga «CONFIDENCIAL» en cada páxina.
-      <strong>É un documento de extrema sensibilidade</strong>: quen o teña ve as
-      identidades reais sen ningunha contrasinal. Fóra de contexto perde valor, pero
-      xunto cos documentos anonimizados permite reverter o anonimato. Non o envíes por
-      correo, non o deixes nun cartafol compartido e destrúeo cando xa non faga falta.
-      A xeración queda rexistrada na auditoría.
+      {{ t("listado.pdf_aviso")|safe }}
     </p>
     <form method="post" action="{{ url_for('listar_correspondencias_pdf') }}">
       <input type="hidden" name="rexistro" value="{{ valores.rexistro }}">
       <input type="hidden" name="motivo" value="{{ valores.motivo }}">
       <input type="hidden" name="confirmo" value="1">
       <div class="campo">
-        <label for="contrasinal_pdf">Contrasinal de reversión</label>
+        <label for="contrasinal_pdf">{{ t("contrasinal.titulo") }}</label>
         <input type="password" id="contrasinal_pdf" name="contrasinal" required>
       </div>
       <div class="campo">
         <label class="opcion-modo">
           <input type="checkbox" name="aviso_pdf" value="1" required>
-          Entendo que o PDF é un documento de extrema sensibilidade e que son responsable de gardalo e destruílo.
+          {{ t("listado.pdf_entendo") }}
         </label>
       </div>
-      <button type="submit">Xerar PDF confidencial</button>
+      <button type="submit">{{ t("listado.pdf_boton") }}</button>
     </form>
   </div>
   {% endif %}
 
 <p class="mencions" style="margin-top:20px;">
-  Este listado quedou rexistrado na auditoría cifrada do rexistro coma
-  acceso masivo (non coma unha reversión individual).
+  {{ t("listado.rexistrado") }}
 </p>
 {% endif %}
 
 <details {% if not resultado %}open{% endif %} style="margin-top:24px;">
-  <summary><strong>{% if resultado %}Facer outra consulta{% else %}Consultar o listado{% endif %}</strong></summary>
+  <summary><strong>{% if resultado %}{{ t("listado.outra") }}{% else %}{{ t("listado.consultar") }}{% endif %}</strong></summary>
 
   <div class="tarxeta marcada" style="margin-top:12px;">
-    <strong>Antes de continuar:</strong> isto expón de golpe todo o rexistro. Confirma que tes
-    autorización, que o motivo que vas escribir é o real, e que ninguén máis ve a pantalla
-    (proxector, escritorio compartido, gravación). A auditoría non se pode editar nin borrar despois.
+    {{ t("listado.antes_continuar")|safe }}
   </div>
 
   <form method="post" action="{{ url_for('listar_correspondencias') }}">
     <div class="campo">
-      <label for="rexistro">Cartafol do rexistro</label>
+      <label for="rexistro">{{ t("comun.cartafol_rexistro") }}</label>
       <input type="text" id="rexistro" name="rexistro" value="{{ valores.rexistro }}">
     </div>
     <div class="campo">
-      <label for="motivo">Motivo (obrigatorio)</label>
-      <input type="text" id="motivo" name="motivo" value="{{ valores.motivo }}" placeholder="ex. auditoría interna do expediente 123/2026" required>
+      <label for="motivo">{{ t("comun.motivo") }}</label>
+      <input type="text" id="motivo" name="motivo" value="{{ valores.motivo }}" placeholder="{{ t('listado.motivo_exemplo') }}" required>
     </div>
     <div class="campo">
-      <label for="contrasinal">Contrasinal de reversión</label>
+      <label for="contrasinal">{{ t("contrasinal.titulo") }}</label>
       <input type="password" id="contrasinal" name="contrasinal" required>
     </div>
     <input type="hidden" name="desde" value="0">
     <div class="campo">
       <label class="opcion-modo">
         <input type="checkbox" name="confirmo" value="1" required>
-        Confirmo que estou autorizado/a a ver todas as identidades reais deste rexistro.
+        {{ t("listado.confirmo") }}
       </label>
     </div>
-    <button type="submit">Listar todo e rexistrar na auditoría</button>
+    <button type="submit">{{ t("listado.boton") }}</button>
   </form>
 
   <p class="nota-saida" style="margin:16px 0 20px;">
-    ¿Aínda non definiches unha contrasinal de reversión para este rexistro?
-    <a href="{{ url_for('definir_contrasinal', rexistro=valores.rexistro) }}">Definila aquí</a>.
+    {{ t("reverter.sen_contrasinal", url=url_for('definir_contrasinal', rexistro=valores.rexistro)|e)|safe }}
   </p>
 </details>
 {% endblock %}

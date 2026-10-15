@@ -56,9 +56,9 @@ _redirixir_saidas_se_non_hai_consola()
 
 import webview
 
-from . import web
+from . import idioma, web
 
-_TITULO = "Anonimizador de expedientes xurídicos"
+# O título da xanela e do botón vai no idioma escollido: idioma.t("app.nome").
 
 # Por defecto pywebview manda AO NAVEGADOR DO SISTEMA calquera petición de
 # "xanela nova" (target="_blank", window.open, Ctrl+clic ou clic co botón
@@ -79,7 +79,6 @@ webview.settings["OPEN_EXTERNAL_LINKS_IN_BROWSER"] = False
 # executar ao premer a icona anclada (o lanzador `.vbs` do programa instalado),
 # co seu nome e icona. Ver `instalador/windows/`.
 _AUMID = "JLLopez.AnonimizadorXuridico"
-_TITULO_BOTON = "Anonimizador de expedientes xurídicos"
 
 
 def _establecer_identidade_windows() -> None:
@@ -122,7 +121,7 @@ def _configurar_boton_da_barra(hwnd: int) -> bool:
         if relanzamento is not None:
             comando, icona = relanzamento
             almacen.SetValue(pscon.PKEY_AppUserModel_RelaunchCommand, propsys.PROPVARIANTType(comando))
-            almacen.SetValue(pscon.PKEY_AppUserModel_RelaunchDisplayNameResource, propsys.PROPVARIANTType(_TITULO_BOTON))
+            almacen.SetValue(pscon.PKEY_AppUserModel_RelaunchDisplayNameResource, propsys.PROPVARIANTType(idioma.t("app.nome")))
             if icona:
                 almacen.SetValue(pscon.PKEY_AppUserModel_RelaunchIconResource, propsys.PROPVARIANTType(icona))
         almacen.Commit()
@@ -151,13 +150,8 @@ def _preguntar_abrir_no_navegador(motivo: Exception) -> bool:
     import ctypes
 
     MB_YESNO, MB_ICONWARNING, IDYES = 0x04, 0x30, 6
-    texto = (
-        "Non se puido abrir a xanela do programa.\n\n"
-        f"Motivo: {motivo}\n\n"
-        "Queres abrilo no navegador en vez diso?\n"
-        "(O programa funciona igual; só cambia onde se ve.)"
-    )
-    return ctypes.windll.user32.MessageBoxW(None, texto, _TITULO, MB_YESNO | MB_ICONWARNING) == IDYES
+    texto = idioma.t("desktop.sen_xanela", motivo=idioma.traducir_mensaxe(str(motivo)))
+    return ctypes.windll.user32.MessageBoxW(None, texto, idioma.t("app.nome"), MB_YESNO | MB_ICONWARNING) == IDYES
 
 
 def _icona() -> str | None:
@@ -240,7 +234,7 @@ def executar(porto: int = 5000, usar_chaveiro: bool = False) -> None:
 
     try:
         _establecer_identidade_windows()
-        xanela = webview.create_window(_TITULO, url, width=1100, height=800)
+        xanela = webview.create_window(idioma.t("app.nome"), url, width=1100, height=800)
         if sys.platform == "win32":
             xanela.events.shown += lambda: _ao_amosar_xanela(xanela)
         webview.start(icon=_icona())

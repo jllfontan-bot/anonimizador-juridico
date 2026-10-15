@@ -1,39 +1,32 @@
 {% extends "base.html" %}
-{% block titulo %}Contrasinal de reversión{% endblock %}
+{% block titulo %}{{ t("contrasinal.titulo") }}{% endblock %}
 {% block contido %}
-<h1>Contrasinal de reversión</h1>
+<h1>{{ t("contrasinal.titulo") }}</h1>
 <p class="subtitulo">
-  Segunda barreira para "reverter" (recuperar unha identidade real a partir
-  dun código), independente da clave de cifrado do rexistro.
+  {{ t("contrasinal.subtitulo") }}
 </p>
 
 <div class="tarxeta marcada">
-  <strong>Importante:</strong> isto NON é unha capa de cifrado adicional --
-  quen teña acceso ao ficheiro <code>clave.key</code> (ou ao chaveiro do
-  sistema) E ao ficheiro <code>rexistro.enc</code> pode descifrar as
-  identidades reais directamente, sen coñecer esta contrasinal. O que si
-  evita é que outra persoa que comparte este ordenador abra a interface
-  web e reverta identidades reais sen coñecela. Segue a ser imprescindible
-  gardar ben eses dous ficheiros por separado.
+  {{ t("contrasinal.importante")|safe }}
 </div>
 
 <form method="post" action="{{ url_for('definir_contrasinal') }}">
   <input type="hidden" name="rexistro" value="{{ rexistro_dir }}">
   {% if xa_existe %}
   <div class="campo">
-    <label for="actual">Contrasinal actual</label>
+    <label for="actual">{{ t("contrasinal.actual") }}</label>
     <input type="password" id="actual" name="actual" required>
   </div>
   {% endif %}
   <div class="campo">
-    <label for="nova">{{ "Nova contrasinal" if xa_existe else "Contrasinal (mínimo 8 caracteres)" }}</label>
+    <label for="nova">{{ t("contrasinal.nova") if xa_existe else t("contrasinal.primeira") }}</label>
     <input type="password" id="nova" name="nova" minlength="8" required>
   </div>
   <div class="campo">
-    <label for="confirmacion">Repite a contrasinal</label>
+    <label for="confirmacion">{{ t("contrasinal.repite") }}</label>
     <input type="password" id="confirmacion" name="confirmacion" minlength="8" required>
   </div>
-  <button type="submit">{{ "Cambiar contrasinal" if xa_existe else "Definir contrasinal" }}</button>
+  <button type="submit">{{ t("contrasinal.cambiar") if xa_existe else t("contrasinal.definir") }}</button>
 </form>
 
 {% if erro %}
@@ -42,20 +35,20 @@
 
 {% if feito %}
 <div class="aviso-ok" style="margin-top:20px;">
-  Contrasinal {{ "cambiada" if xa_existe else "definida" }} correctamente.
-  Garda estes DOUS ficheiros nun lugar seguro (non son o mesmo):
+  {{ t("contrasinal.cambiada") if xa_existe else t("contrasinal.definida") }}
+  {{ t("contrasinal.garda_dous") }}
   <ul>
-    <li><code>rexistro.enc</code> -- as identidades reais, cifradas</li>
+    <li>{{ t("contrasinal.rexistro_enc")|safe }}</li>
     <li>
       {% if orixe_clave == "ficheiro" %}
-      <code>clave.key</code> -- a CLAVE que as abre; sen ela, NUNCA se poden recuperar
+      {{ t("contrasinal.clave_key")|safe }}
       {% else %}
-      a clave de cifrado vive no chaveiro do sistema operativo, non nun ficheiro local
+      {{ t("contrasinal.clave_chaveiro") }}
       {% endif %}
     </li>
   </ul>
 </div>
 {% endif %}
 
-<p class="nota-saida"><a href="{{ url_for('reverter') }}">← Volver a reversión controlada</a></p>
+<p class="nota-saida"><a href="{{ url_for('reverter') }}">{{ t("contrasinal.volver") }}</a></p>
 {% endblock %}

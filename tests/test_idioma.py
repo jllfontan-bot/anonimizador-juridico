@@ -124,5 +124,98 @@ class TestDocumentoSegundoOIdioma(unittest.TestCase):
         self.assertEqual(dados["codigo_actual"], "PERSOA_000001")
 
 
+class TestTextos(unittest.TestCase):
+    def test_os_dous_idiomas_teñen_as_mesmas_claves_e_marcadores(self):
+        import string
+        gl, es = idioma.textos("gl"), idioma.textos("es")
+        self.assertEqual(set(gl), set(es))
+        campos = lambda texto: {c[1] for c in string.Formatter().parse(texto) if c[1]}  # noqa: E731
+        for clave in gl:
+            self.assertEqual(campos(gl[clave]), campos(es[clave]), clave)
+
+    def test_mensaxes_coñecidas_tradúcense(self):
+        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecta", "es"),
+                         "contraseña de reversión incorrecta")
+        # str(KeyError(...)) vai entre comiñas
+        self.assertEqual(idioma.traducir_mensaxe("'código descoñecido no rexistro: PERSONA_000009'", "es"),
+                         "código desconocido en el registro: PERSONA_000009")
+        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecta", "gl"),
+                         "contrasinal de reversión incorrecta")
+        self.assertEqual(idioma.traducir_mensaxe("algo que non está no catálogo", "es"), "algo que non está no catálogo")
+
+
+class TestInterfaceEnCastelan(unittest.TestCase):
+    def setUp(self):
+        from anonimizador import web
+        self.web = web
+        web.SESIONS.clear()
+        self._tmp = tempfile.TemporaryDirectory()
+        self._cwd = os.getcwd()
+        os.chdir(self._tmp.name)  # preferencias.json e datos_rexistro van aquí
+        self._env = mock.patch.dict(os.environ)
+        self._env.start()
+        os.environ.pop(idioma.VARIABLE, None)
+        self.rexistro_dir = str(Path(self._tmp.name) / "rexistro")
+        self.client = web.app.test_client()
+
+    def tearDown(self):
+        self._env.stop()
+        os.chdir(self._cwd)
+        self._tmp.cleanup()
+
+    def test_inicio_en_castelan_por_defecto_e_selector(self):
+        html = self.client.get("/").get_data(as_text=True)
+        self.assertIn('lang="es"', html)
+        self.assertIn("Anonimizador de expedientes jurídicos", html)
+        self.assertIn("Elegir archivo…", html)
+        self.assertIn("PERSONA_000001", html)  # exemplo do aviso da clave
+        self.assertIn('value="gl"', html)
+
+    def test_escoller_galego_queda_gardado(self):
+        r = self.client.post("/idioma", data={"idioma": "gl"})
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(idioma.actual(), "gl")
+        html = self.client.get("/").get_data(as_text=True)
+        self.assertIn("Escoller ficheiro…", html)
+        self.client.post("/idioma", data={"idioma": "xx"})  # descoñecido: non cambia nada
+        self.assertEqual(idioma.actual(), "gl")
+
+    def test_revision_con_codigos_persona(self):
+        doc = Path(self._tmp.name) / "doc.txt"
+        doc.write_text(_TEXTO, encoding="utf-8")
+        r = self.client.post("/procesar", data={"ruta": str(doc), "rexistro": self.rexistro_dir, "modo": "revisar"})
+        html = self.client.get(r.headers["Location"]).get_data(as_text=True)
+        self.assertIn("Personas detectadas", html)
+        self.assertIn("PERSONA_000001", html)
+        self.assertNotIn("PERSOA_", html)
+
+    def test_erro_do_rexistro_traducido(self):
+        rexistro = RexistroCorrespondencias(self.rexistro_dir)
+        anonimizar_texto(_TEXTO, rexistro)
+        rexistro.definir_contrasinal_reversion(_CONTRASINAL)
+        html = self.client.post("/reverter", data={
+            "rexistro": self.rexistro_dir, "codigo": "PERSONA_000001", "motivo": "proba", "contrasinal": "errada"},
+        ).get_data(as_text=True)
+        self.assertIn("contraseña de reversión incorrecta", html)
+        html = self.client.post("/reverter", data={
+            "rexistro": self.rexistro_dir, "codigo": "PERSONA_000001", "motivo": "proba", "contrasinal": _CONTRASINAL},
+        ).get_data(as_text=True)
+        self.assertIn("Identidad recuperada", html)
+        self.assertIn("Manuel Ferrándiz Salcedo", html)
+        self.assertNotIn("Código vigente", html)  # PERSONA_000001 e PERSOA_000001 son o mesmo código
+
+    def test_pdf_do_listado_en_castelan(self):
+        import fitz
+        from anonimizador import informe_pdf
+        entradas = [{"codigo": "PERSOA_000001", "nomes": ["Persoa Proba"], "dni": None, "contexto": None,
+                     "creado": "2026-10-15T10:00:00", "fusionados": ["PERSOA_000002"]}]
+        pdf = informe_pdf.listado_correspondencias({"total": 1, "entradas": entradas, "alias_orfos": []}, motivo="proba")
+        texto = "".join(p.get_text() for p in fitz.open(stream=pdf, filetype="pdf"))
+        self.assertIn("PERSONA_000001", texto)
+        self.assertIn("PERSONA_000002", texto)
+        self.assertIn("Página 1 de 1", texto)
+        self.assertNotIn("PERSOA_", texto)
+
+
 if __name__ == "__main__":
     unittest.main()

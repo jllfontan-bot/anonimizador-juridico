@@ -20,6 +20,7 @@ import re
 import sys
 from pathlib import Path
 
+from . import idioma
 from .pipeline import EXTENSIONS_SOPORTADAS
 
 # Marcador especial de "ruta": en Windows é a vista de UNIDADES (C:\, V:\...),
@@ -56,18 +57,18 @@ def _atallos() -> list[dict]:
     """Sitios habituais para saltar dun golpe (só os que existen)."""
     casa = Path.home()
     candidatos = [
-        ("Inicio", casa),
-        ("Documentos", casa / "Documents"),
-        ("Documentos", casa / "Documentos"),
-        ("Escritorio", casa / "Desktop"),
-        ("Descargas", casa / "Downloads"),
+        (idioma.t("exp.inicio"), casa),
+        (idioma.t("exp.documentos"), casa / "Documents"),
+        (idioma.t("exp.documentos"), casa / "Documentos"),
+        (idioma.t("exp.escritorio"), casa / "Desktop"),
+        (idioma.t("exp.descargas"), casa / "Downloads"),
     ]
     atallos, vistos = [], set()
     for nome, ruta in candidatos:
         if ruta.is_dir() and str(ruta) not in vistos:
             vistos.add(str(ruta))
             atallos.append({"nome": nome, "ruta": str(ruta)})
-    atallos.append({"nome": "Este equipo" if sys.platform == "win32" else "Raíz", "ruta": EQUIPO})
+    atallos.append({"nome": idioma.t("exp.este_equipo") if sys.platform == "win32" else idioma.t("exp.raiz"), "ruta": EQUIPO})
     return atallos
 
 
@@ -137,7 +138,7 @@ def listar(ruta: str | None) -> dict:
 
     cartafol = _resolver_existente(ruta)
     if cartafol is None:
-        resposta["erro"] = f"Non se atopa o cartafol: {ruta}"
+        resposta["erro"] = idioma.t("exp.non_existe", ruta=ruta)
         return resposta
 
     resposta["ruta"] = str(cartafol)
@@ -161,7 +162,7 @@ def listar(ruta: str | None) -> dict:
                     resposta["truncado"] = True
                     break
     except OSError as e:
-        resposta["erro"] = f"Non se pode ler este cartafol ({e.strerror or e})."
+        resposta["erro"] = idioma.t("exp.non_se_le", motivo=e.strerror or e)
         return resposta
 
     clave = str.casefold
@@ -187,15 +188,15 @@ def crear_cartafol(pai: str, nome: str) -> str:
     do novo cartafol."""
     nome = (nome or "").strip()
     if not nome or nome in (".", "..") or _NOME_CARTAFOL_INVALIDO.search(nome) or nome.endswith((".", " ")):
-        raise ValueError("Nome de cartafol non válido (non pode estar baleiro nin levar \\ / : * ? \" < > |).")
+        raise ValueError(idioma.t("exp.nome_non_valido"))
     base = Path(pai)
     if not base.is_dir():
-        raise ValueError(f"Non existe o cartafol: {pai}")
+        raise ValueError(idioma.t("exp.non_existe", ruta=pai))
     novo = base / nome
     if novo.exists():
-        raise ValueError(f"Xa existe «{nome}» neste cartafol.")
+        raise ValueError(idioma.t("exp.xa_existe", nome=nome))
     try:
         novo.mkdir()
     except OSError as e:
-        raise ValueError(f"Non se puido crear o cartafol ({e.strerror or e}).") from e
+        raise ValueError(idioma.t("exp.non_se_crea", motivo=e.strerror or e)) from e
     return str(novo)

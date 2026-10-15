@@ -1,118 +1,105 @@
 {% extends "base.html" %}
-{% block titulo %}Anonimizador — novo documento{% endblock %}
+{% block titulo %}{{ t("inicio.titulo_pestana") }}{% endblock %}
 {% block contido %}
-<h1>Anonimizador de expedientes xurídicos</h1>
-<p class="subtitulo">Substitúe nomes, DNI e demais datos persoais por códigos; as identidades reais quedan só no teu rexistro cifrado.</p>
+<form method="post" action="{{ url_for('cambiar_idioma') }}" class="selector-idioma" aria-label="{{ t('inicio.idioma') }}">
+  {% for codigo, nome in idiomas.items() %}<button type="submit" name="idioma" value="{{ codigo }}" aria-pressed="{{ 'true' if codigo == idioma_actual else 'false' }}">{{ nome }}</button>{% endfor %}
+</form>
+<h1>{{ t("app.nome") }}</h1>
+<p class="subtitulo">{{ t("inicio.subtitulo") }}</p>
 
 {% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
 {% if aviso_cartafol %}<div class="aviso-ok">{{ aviso_cartafol }}</div>{% endif %}
 
 {% if aviso_modelo %}
 <div class="erro">
-  <strong>A detección está degradada:</strong> {{ aviso_modelo }}
+  <strong>{{ t("inicio.deteccion_degradada") }}</strong> {{ traducir(aviso_modelo) }}
 </div>
 {% endif %}
 
 {# Onde queda a clave que cifra o rexistro. Ata agora só estaba nos manuais:
    quen instalaba o programa non se enteraba de que existía (ver web._estado_da_clave). #}
 <details class="tarxeta" {% if clave.onde in ("aínda_non_creado", "ficheiro") %}open{% endif %} style="margin:0 0 20px;">
-  <summary style="cursor:pointer;font-weight:600;">Como se gardan os nomes reais: a clave e a contrasinal — léeme antes de empezar</summary>
+  <summary style="cursor:pointer;font-weight:600;">{{ t("inicio.clave.resumo") }}</summary>
   <p style="margin:10px 0 0;">
-    Os nomes reais non se gardan nos documentos anonimizados: quedan nun rexistro cifrado
-    (<code>{{ clave.cartafol }}</code>) que relaciona cada código (<code>PERSOA_000001</code>) coa
-    persoa real e o seu DNI. Para protexelo hai <strong>dous segredos distintos</strong>:
+    {{ t("inicio.clave.intro", cartafol=clave.cartafol|e, codigo=codigo_visible("PERSOA_000001"))|safe }}
   </p>
   <ol style="margin:8px 0 0 18px; padding:0;">
-    <li style="margin-bottom:6px;"><strong>A clave do rexistro</strong> — créaa o programa só, ninguén
-      a escribe. É a que cifra o rexistro: <strong>sen ela, o rexistro non se pode descifrar nunca
-      máis</strong> e non hai forma de saber a quen corresponde cada código. Só hai que gardala
-      (máis abaixo dise onde está).</li>
-    <li><strong>A contrasinal de reversión</strong> — escríbea ti unha vez
-      (<a href="{{ url_for('definir_contrasinal', rexistro=clave.cartafol) }}">definila aquí</a>).
-      Pídese cada vez que alguén quere ver unha identidade real, o
-      <a href="{{ url_for('listar_correspondencias') }}">listado completo</a> ou o seu PDF
-      confidencial, e cada uso queda na auditoría cifrada.</li>
+    <li style="margin-bottom:6px;">{{ t("inicio.clave.clave")|safe }}</li>
+    <li>{{ t("inicio.clave.contrasinal", url_definir=url_for('definir_contrasinal', rexistro=clave.cartafol)|e, url_listado=url_for('listar_correspondencias'))|safe }}</li>
   </ol>
   {% if clave.onde == "ficheiro" %}
   <p style="margin:10px 0 0;">
-    A túa clave está <strong>nun ficheiro</strong>: <code>{{ clave.ruta_clave }}</code>.
-    Está ao carón do que cifra, así que <strong>garda unha copia noutro sitio</strong> (por exemplo
-    nun pendrive), e ten en conta que quen copie ese cartafol enteiro pode reverter as identidades.
+    {{ t("inicio.clave.en_ficheiro", ruta=clave.ruta_clave|e)|safe }}
   </p>
   {% elif clave.onde == "chaveiro" %}
   <p style="margin:10px 0 0;">
-    A túa clave está no <strong>chaveiro do sistema operativo</strong> (Administrador de credenciais
-    en Windows, Chaveiro en macOS): non está neste cartafol. Se reinstalas o sistema ou cambias de
-    ordenador, <strong>o rexistro deixa de poder abrirse</strong> aínda que copies o cartafol.
+    {{ t("inicio.clave.en_chaveiro")|safe }}
   </p>
   {% elif clave.onde == "aínda_non_creado" %}
   <p style="margin:10px 0 0;">
-    Aínda non hai rexistro: crearase co primeiro documento que anonimices, e a clave gardarase no
-    <strong>chaveiro do sistema operativo</strong> (é o que fan os accesos directos do programa).
-    Cando exista, aquí mesmo verás onde quedou.
+    {{ t("inicio.clave.sen_rexistro")|safe }}
   </p>
   {% endif %}
   <p style="margin:10px 0 0;">
-    Fai tamén copia de seguridade do cartafol do rexistro. Se esqueces a contrasinal de reversión
-    non perdes os datos, pero ninguén poderá ver as identidades reais desde o programa.
+    {{ t("inicio.clave.copia") }}
   </p>
 </details>
 <div class="erro" id="erro-js" hidden></div>
 
 <div class="progreso" id="progreso" role="status" aria-live="polite" hidden>
-  <h2 id="progreso-titulo">Anonimizando…</h2>
+  <h2 id="progreso-titulo">{{ t("inicio.progreso.anonimizando") }}</h2>
   <div class="barra" aria-hidden="true"><div class="feito" id="barra-feito"></div><div class="actual" id="barra-actual"></div></div>
   <div class="porcentaxe" id="progreso-porcentaxe">0 %</div>
-  <div class="ficheiro-actual" id="progreso-ficheiro">Preparando…</div>
+  <div class="ficheiro-actual" id="progreso-ficheiro">{{ t("inicio.progreso.preparando") }}</div>
   <div class="detalle" id="progreso-detalle"></div>
-  <p style="margin:16px 0 0;"><button type="button" class="boton-secundario" id="progreso-cancelar" hidden>Cancelar</button></p>
+  <p style="margin:16px 0 0;"><button type="button" class="boton-secundario" id="progreso-cancelar" hidden>{{ t("comun.cancelar") }}</button></p>
 </div>
 
 <div id="formulario-e-pendentes">
 <form method="post" action="{{ url_for('procesar') }}" id="formulario">
   <div class="campo">
-    <label for="ruta">Ficheiro OU cartafol a anonimizar (.txt, .docx, .odt ou .pdf — .docx, .odt e .pdf conservan o formato e a extensión orixinais; un cartafol enteiro procesa cada documento soportado que atope dentro)</label>
+    <label for="ruta">{{ t("inicio.ruta") }}</label>
     <div class="campo-con-boton">
-      <input type="text" id="ruta" name="ruta" placeholder="/ruta/ao/documento.pdf" required>
-      <button type="button" class="boton-secundario" onclick="escoller('ficheiro', 'ruta', this)">Escoller ficheiro…</button>
-      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'ruta', this)">Escoller cartafol…</button>
+      <input type="text" id="ruta" name="ruta" placeholder="{{ t('inicio.ruta_exemplo') }}" required>
+      <button type="button" class="boton-secundario" onclick="escoller('ficheiro', 'ruta', this)">{{ t("inicio.escoller_ficheiro") }}</button>
+      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'ruta', this)">{{ t("inicio.escoller_cartafol") }}</button>
     </div>
   </div>
   <div class="campo">
-    <label for="cartafol_saida">Cartafol de saída (opcional — se se deixa baleiro, o ficheiro anonimizado gárdase canda o orixinal)</label>
+    <label for="cartafol_saida">{{ t("inicio.cartafol_saida") }}</label>
     <div class="campo-con-boton">
-      <input type="text" id="cartafol_saida" name="cartafol_saida" placeholder="(mesmo cartafol có orixinal)">
-      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'cartafol_saida', this)">Escoller cartafol…</button>
+      <input type="text" id="cartafol_saida" name="cartafol_saida" placeholder="{{ t('inicio.cartafol_saida_baleiro') }}">
+      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'cartafol_saida', this)">{{ t("inicio.escoller_cartafol") }}</button>
     </div>
   </div>
   <div class="campo">
-    <label for="rexistro">Cartafol do rexistro de correspondencias cifrado</label>
+    <label for="rexistro">{{ t("inicio.rexistro") }}</label>
     <div class="campo-con-boton">
       <input type="text" id="rexistro" name="rexistro" value="./datos_rexistro">
-      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'rexistro', this)">Escoller cartafol…</button>
+      <button type="button" class="boton-secundario" onclick="escoller('cartafol', 'rexistro', this)">{{ t("inicio.escoller_cartafol") }}</button>
     </div>
   </div>
   <div class="campo">
-    <label>Como queres procesar o(s) documento(s)?</label>
+    <label>{{ t("inicio.modo") }}</label>
     <label class="opcion-modo">
       <input type="radio" name="modo" value="revisar" checked onchange="actualizarBoton()">
-      Comprobar antes de gardar — revisa un a un os posibles homónimos e riscos de efecto mosaico antes de confirmar
+      {{ t("inicio.modo_revisar") }}
     </label>
     <label class="opcion-modo">
       <input type="radio" name="modo" value="automatico" onchange="actualizarBoton()">
-      Anonimización automática — garda directamente, sen pedir confirmación (un posible homónimo nunca se fusiona só; queda coma persoa nova)
+      {{ t("inicio.modo_automatico") }}
     </label>
   </div>
-  <button type="submit" id="boton-procesar">Anonimizar e revisar</button>
+  <button type="submit" id="boton-procesar">{{ t("inicio.boton_revisar") }}</button>
 </form>
 
 {% if pendentes %}
-<h2>Revisións pendentes</h2>
+<h2>{{ t("inicio.pendentes") }}</h2>
 <ul class="pendentes">
   {% for p in pendentes %}
   <li>
     <a href="{{ url_for('revisar', sid=p.id, rexistro=rexistro_dir) }}">{{ p.ruta_orixe }}</a>
-    — {{ p.n_marcadas }} persoa(s) marcada(s), {{ p.n_mosaico }} risco(s) de efecto mosaico
+    — {{ t("inicio.pendente_resumo", marcadas=p.n_marcadas, mosaico=p.n_mosaico) }}
   </li>
   {% endfor %}
 </ul>
@@ -120,63 +107,64 @@
 
 <form method="get" action="{{ url_for('index') }}" style="margin-top:24px;">
   <div class="campo">
-    <label for="rexistro_filtro">Ver revisións pendentes doutro cartafol de rexistro (ex. tras reiniciar o servidor)</label>
+    <label for="rexistro_filtro">{{ t("inicio.outro_rexistro") }}</label>
     <input type="text" id="rexistro_filtro" name="rexistro" value="{{ rexistro_dir }}" placeholder="./datos_rexistro">
   </div>
-  <button type="submit">Ver pendentes</button>
+  <button type="submit">{{ t("inicio.ver_pendentes") }}</button>
 </form>
 
-<p style="margin-top:32px; padding-top:16px; border-top:1px solid var(--line); margin-bottom:4px;"><a href="{{ url_for('reverter') }}" style="font-size:15px; font-weight:600;">Reversión controlada de identidade →</a></p>
-<p class="nota-saida" style="margin:0 0 8px;">Un código coñecido → a identidade real.</p>
-<p style="margin:0 0 4px;"><a href="{{ url_for('listar_correspondencias') }}" style="font-size:15px; font-weight:600;">Listado completo de correspondencias →</a></p>
-<p class="nota-saida" style="margin:0;">Todas as correspondencias dun rexistro dunha vez. Mesma contrasinal e motivo obrigatorio; queda rexistrado coma acceso masivo.</p>
+<p style="margin-top:32px; padding-top:16px; border-top:1px solid var(--line); margin-bottom:4px;"><a href="{{ url_for('reverter') }}" style="font-size:15px; font-weight:600;">{{ t("inicio.reversion") }}</a></p>
+<p class="nota-saida" style="margin:0 0 8px;">{{ t("inicio.reversion_nota") }}</p>
+<p style="margin:0 0 4px;"><a href="{{ url_for('listar_correspondencias') }}" style="font-size:15px; font-weight:600;">{{ t("inicio.listado") }}</a></p>
+<p class="nota-saida" style="margin:0;">{{ t("inicio.listado_nota") }}</p>
 </div>
 
 <!-- Explorador de cartafoles: amosa tamén os ficheiros (en gris, non escollibles) -->
 <div class="modal" id="explorador" hidden>
   <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="exp-titulo">
-    <h2 id="exp-titulo">Escolle o cartafol</h2>
+    <h2 id="exp-titulo">{{ t("exp.titulo") }}</h2>
     <div class="exp-barra">
-      <button type="button" class="boton-secundario" id="exp-subir" title="Subir ao cartafol pai">↑ Subir</button>
-      <input type="text" id="exp-ruta" aria-label="Ruta do cartafol" spellcheck="false" autocomplete="off">
-      <button type="button" class="boton-secundario" id="exp-ir">Ir</button>
+      <button type="button" class="boton-secundario" id="exp-subir" title="{{ t('exp.subir_titulo') }}">{{ t("exp.subir") }}</button>
+      <input type="text" id="exp-ruta" aria-label="{{ t('exp.ruta') }}" spellcheck="false" autocomplete="off">
+      <button type="button" class="boton-secundario" id="exp-ir">{{ t("exp.ir") }}</button>
     </div>
     <div class="exp-corpo">
-      <ul class="exp-atallos" id="exp-atallos" aria-label="Sitios"></ul>
-      <ul class="exp-lista" id="exp-lista" aria-label="Contido do cartafol"></ul>
+      <ul class="exp-atallos" id="exp-atallos" aria-label="{{ t('exp.sitios') }}"></ul>
+      <ul class="exp-lista" id="exp-lista" aria-label="{{ t('exp.contido') }}"></ul>
     </div>
     <div class="exp-resumo" id="exp-resumo"></div>
     <div class="exp-erro" id="exp-erro" role="alert"></div>
     <div class="exp-barra" id="exp-nova-fila" style="padding-top:10px;" hidden>
-      <input type="text" id="exp-nova-nome" placeholder="Nome do novo cartafol" aria-label="Nome do novo cartafol" spellcheck="false" autocomplete="off">
-      <button type="button" class="boton-secundario" id="exp-nova-crear">Crear</button>
-      <button type="button" class="boton-secundario" id="exp-nova-cancelar">Cancelar</button>
+      <input type="text" id="exp-nova-nome" placeholder="{{ t('exp.nome_novo') }}" aria-label="{{ t('exp.nome_novo') }}" spellcheck="false" autocomplete="off">
+      <button type="button" class="boton-secundario" id="exp-nova-crear">{{ t("exp.crear") }}</button>
+      <button type="button" class="boton-secundario" id="exp-nova-cancelar">{{ t("comun.cancelar") }}</button>
     </div>
     <div class="exp-pe">
-      <button type="button" class="boton-secundario" id="exp-nova">Nova carpeta…</button>
+      <button type="button" class="boton-secundario" id="exp-nova">{{ t("exp.nova") }}</button>
       <span class="esp"></span>
-      <button type="button" class="boton-secundario" id="exp-cancelar">Cancelar</button>
-      <button type="button" id="exp-escoller">Escoller este cartafol</button>
+      <button type="button" class="boton-secundario" id="exp-cancelar">{{ t("comun.cancelar") }}</button>
+      <button type="button" id="exp-escoller">{{ t("exp.escoller") }}</button>
     </div>
   </div>
 </div>
 
 <script>
+const T = {{ textos_js("inicio.js.")|tojson }};
 const $ = (id) => document.getElementById(id);
 
 function actualizarBoton() {
   const automatico = document.querySelector('input[name="modo"]:checked').value === "automatico";
   $("boton-procesar").textContent = automatico
-    ? "Anonimizar automaticamente"
-    : "Anonimizar e revisar";
+    ? T.automatico_boton
+    : T.revisar_boton;
 }
 
 /* ---------- Escoller ficheiro (diálogo nativo) / cartafol (explorador) ---------- */
 
 const TITULOS_EXPLORADOR = {
-  ruta: "Escolle o cartafol a anonimizar",
-  cartafol_saida: "Escolle o cartafol de saída",
-  rexistro: "Escolle o cartafol do rexistro",
+  ruta: T.exp_ruta,
+  cartafol_saida: T.exp_saida,
+  rexistro: T.exp_rexistro,
 };
 
 async function escoller(tipo, idCampo, boton) {
@@ -185,7 +173,7 @@ async function escoller(tipo, idCampo, boton) {
     return;
   }
   const textoOrixinal = boton.textContent;
-  boton.textContent = "Agardando…";
+  boton.textContent = T.agardando;
   boton.disabled = true;
   try {
     const resposta = await fetch("{{ url_for('escoller') }}?tipo=" + tipo);
@@ -204,7 +192,7 @@ const explorador = { campo: null, ruta: "", pai: null, ultimoFoco: null };
 function abrirExplorador(idCampo) {
   explorador.campo = idCampo;
   explorador.ultimoFoco = document.activeElement;
-  $("exp-titulo").textContent = TITULOS_EXPLORADOR[idCampo] || "Escolle o cartafol";
+  $("exp-titulo").textContent = TITULOS_EXPLORADOR[idCampo] || T.exp_titulo;
   $("explorador").hidden = false;
   // parte do que xa hai escrito no campo (se é un ficheiro, o servidor usa o seu cartafol)
   navegar($(idCampo).value.trim());
@@ -223,7 +211,7 @@ async function navegar(ruta) {
     const r = await fetch("{{ url_for('explorar') }}?ruta=" + encodeURIComponent(ruta || ""));
     datos = await r.json();
   } catch (e) {
-    $("exp-erro").textContent = "Non se puido ler o cartafol (perdeuse a conexión co programa).";
+    $("exp-erro").textContent = T.exp_erro_ler;
     return;
   }
   explorador.ruta = datos.ruta;
@@ -263,23 +251,23 @@ async function navegar(ruta) {
       icona.textContent = "📄";
       li.append(icona, nome);
       if (e.soportado) {
-        const et = document.createElement("span"); et.className = "etiqueta"; et.textContent = "documento soportado";
+        const et = document.createElement("span"); et.className = "etiqueta"; et.textContent = T.soportado;
         li.appendChild(et);
       }
     }
     lista.appendChild(li);
   }
   if (!datos.entradas.length && !datos.erro) {
-    const li = document.createElement("li"); li.className = "baleiro"; li.textContent = "Este cartafol está baleiro.";
+    const li = document.createElement("li"); li.className = "baleiro"; li.textContent = T.baleiro;
     lista.appendChild(li);
   }
   lista.scrollTop = 0;
 
   const partes = [];
   if (datos.ruta) {
-    partes.push(datos.n_cartafoles + " subcartafol(es)");
-    partes.push(datos.n_soportados + " documento(s) soportado(s) neste nivel (ao anonimizar un cartafol procésanse tamén os seus subcartafoles)");
-    if (datos.truncado) partes.push("só se amosan os primeiros ficheiros");
+    partes.push(datos.n_cartafoles + T.subcartafoles);
+    partes.push(datos.n_soportados + T.soportados);
+    if (datos.truncado) partes.push(T.truncado);
   }
   $("exp-resumo").textContent = partes.join(" · ");
 }
@@ -312,7 +300,7 @@ async function crearCarpeta() {
     body: new URLSearchParams({ pai: explorador.ruta, nome: nome }),
   });
   const datos = await r.json();
-  if (!r.ok) { $("exp-erro").textContent = datos.erro || "Non se puido crear o cartafol."; return; }
+  if (!r.ok) { $("exp-erro").textContent = datos.erro || T.erro_crear; return; }
   amosarNovaCarpeta(false);
   navegar(datos.ruta);
 }
@@ -322,9 +310,9 @@ $("exp-nova-nome").addEventListener("keydown", (ev) => { if (ev.key === "Enter")
 /* ---------- Barra de progreso dos traballos ---------- */
 
 function duracion(segundos) {
-  if (segundos < 60) return "menos dun minuto";
+  if (segundos < 60) return T.menos_minuto;
   const min = Math.round(segundos / 60);
-  return min < 60 ? "uns " + min + " min" : "uns " + Math.floor(min / 60) + " h " + (min % 60) + " min";
+  return min < 60 ? T.min.replace("{min}", min) : T.horas.replace("{h}", Math.floor(min / 60)).replace("{min}", min % 60);
 }
 
 function amosarProgreso(e, automatico) {
@@ -336,29 +324,29 @@ function amosarProgreso(e, automatico) {
   actual.style.width = (e.estado === "en_curso" ? 100 / total : 0) + "%";
   $("progreso-porcentaxe").textContent = e.porcentaxe + " %";
   $("progreso-titulo").textContent = e.estado === "en_curso"
-    ? (automatico ? "Anonimizando automaticamente…" : "Preparando a revisión…")
-    : e.estado === "rematado" ? "✔ Proceso terminado"
-    : e.estado === "cancelado" ? "⏹ Proceso cancelado" : "O proceso non se puido completar";
+    ? (automatico ? T.titulo_auto : T.titulo_revision)
+    : e.estado === "rematado" ? T.rematado
+    : e.estado === "cancelado" ? T.cancelado : T.fallou;
   // cancelar só ten sentido cun lote (un ficheiro solto non se pode deixar a medias)
   const cancelar = $("progreso-cancelar");
   cancelar.hidden = !(e.estado === "en_curso" && e.total > 1);
   if (e.cancelando) {
     cancelar.disabled = true;
-    cancelar.textContent = "Cancelando…";
+    cancelar.textContent = T.cancelando;
   }
   if (e.estado === "en_curso") {
-    $("progreso-ficheiro").textContent = "Ficheiro " + Math.min(e.feitos + 1, e.total) + " de " + e.total +
+    $("progreso-ficheiro").textContent = T.ficheiro_n.replace("{n}", Math.min(e.feitos + 1, e.total)).replace("{total}", e.total) +
       (e.actual ? " — " + e.actual : "");
-    let detalle = e.feitos + " de " + e.total + " rematado(s)";
-    if (e.n_erros) detalle += " · " + e.n_erros + " con erro";
-    if (e.cancelando) detalle += " · agardando a que remate o ficheiro actual; despois non se procesa ningún máis";
-    if (e.segundos_restantes !== null) detalle += " · tempo restante aprox.: " + duracion(e.segundos_restantes);
+    let detalle = T.rematados.replace("{n}", e.feitos).replace("{total}", e.total);
+    if (e.n_erros) detalle += " · " + T.con_erro.replace("{n}", e.n_erros);
+    if (e.cancelando) detalle += " · " + T.agardando_actual;
+    if (e.segundos_restantes !== null) detalle += " · " + T.tempo_restante + duracion(e.segundos_restantes);
     $("progreso-detalle").textContent = detalle;
   } else {
     $("progreso-ficheiro").textContent = e.estado === "rematado"
-      ? e.total + " de " + e.total + " ficheiro(s) procesado(s)"
+      ? T.procesados.replace("{n}", e.total).replace("{total}", e.total)
       : e.estado === "cancelado"
-        ? e.feitos + " de " + e.total + " ficheiro(s) procesado(s); o resto non se tocou"
+        ? T.procesados_cancelado.replace("{n}", e.feitos).replace("{total}", e.total)
         : (e.erro || "");
     $("progreso-detalle").textContent = "";
   }
@@ -370,7 +358,7 @@ let traballoActual = null;
 $("progreso-cancelar").onclick = async () => {
   if (!traballoActual) return;
   $("progreso-cancelar").disabled = true;
-  $("progreso-cancelar").textContent = "Cancelando…";
+  $("progreso-cancelar").textContent = T.cancelando;
   try { await fetch("/traballo/" + traballoActual + "/cancelar", { method: "POST" }); } catch (err) { /* o seguinte sondeo amosará o erro */ }
 };
 
@@ -384,7 +372,7 @@ function seguirTraballo(id, automatico) {
       if (!r.ok) throw new Error(e.erro);
     } catch (err) {
       clearInterval(temporizador);
-      amosarErro("Perdeuse o contacto co programa mentres procesaba: " + err.message);
+      amosarErro(T.contacto_perdido + err.message);
       return;
     }
     amosarProgreso(e, automatico);
@@ -413,7 +401,7 @@ $("formulario").addEventListener("submit", async (ev) => {
   $("formulario-e-pendentes").hidden = true;
   $("progreso").hidden = false;
   amosarProgreso({ estado: "en_curso", total: 1, feitos: 0, porcentaxe: 0, actual: null, n_erros: 0, segundos_restantes: null }, automatico);
-  $("progreso-ficheiro").textContent = "Preparando…";
+  $("progreso-ficheiro").textContent = T.preparando;
 
   let datos;
   try {
@@ -422,9 +410,9 @@ $("formulario").addEventListener("submit", async (ev) => {
       body: new URLSearchParams(new FormData(formulario)),
     });
     datos = await r.json();
-    if (!r.ok) { amosarErro(datos.erro || "Non se puido arrincar o proceso."); return; }
+    if (!r.ok) { amosarErro(datos.erro || T.erro_arrincar); return; }
   } catch (err) {
-    amosarErro("Non se puido contactar co programa: " + err.message);
+    amosarErro(T.erro_contacto + err.message);
     return;
   }
   seguirTraballo(datos.id, automatico);
