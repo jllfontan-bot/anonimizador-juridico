@@ -721,7 +721,12 @@ def confirmar(sid):
     # "texto_final", parte do resultado automático; as decisións fan o resto.
     texto_final = request.form.get("texto_final", sesion.get("texto_anonimizado") or "")
     texto_final = texto_final.replace("\r\n", "\n").replace("\r", "\n")
+    # Só é edición libre o que mande o formulario, non o que cambian as fusións
+    # de embaixo (antes unha fusión contaba coma edición: aviso falso e un
+    # .edicion-manual.txt de sobra).
+    editado_a_man = texto_final != (sesion.get("texto_anonimizado") or "").replace("\r\n", "\n")
     substitucions = sesion.get("substitucions")
+    fusions = {}  # código da revisión -> código co que se fusionou
 
     for persoa in sesion["informe"]["persoas"]:
         if not persoa["marcado_para_revision"]:
@@ -731,6 +736,7 @@ def confirmar(sid):
         if decision.startswith("fusionar:"):
             manter = decision.split(":", 1)[1]
             rexistro.fusionar(manter, codigo)
+            fusions[codigo] = manter
             texto_final = texto_final.replace(codigo, manter)
             if substitucions:
                 substitucions = [
@@ -754,10 +760,12 @@ def confirmar(sid):
     fragmentos = []
     if Path(sesion["ruta_orixe"]).exists():
         texto_orixinal, _ = cargar_documento_estruturado(sesion["ruta_orixe"])
-    editado_a_man = texto_final != (sesion.get("texto_anonimizado") or "").replace("\r\n", "\n")
     if request.form.get("decisions_v2") == "1" and texto_orixinal is not None and substitucions is not None:
-        manter = set(request.form.getlist("anonimizar"))
-        codigos = {p["codigo"] for p in sesion["informe"]["persoas"]}
+        # FUGA (15/10/2026): as casiñas "anonimizar" levan o código de ANTES da
+        # fusión; sen traducilas, a persoa fusionada contaba coma "non é persoa"
+        # e o seu nome quedaba á vista no documento.
+        manter = {fusions.get(c, c) for c in request.form.getlist("anonimizar")}
+        codigos = {fusions.get(p["codigo"], p["codigo"]) for p in sesion["informe"]["persoas"]}
         codigos = {c for c in codigos | {novo for (_, _, novo) in substitucions} if idioma.e_codigo_persoa(c)}
         descartados = codigos - manter
         fragmentos = ler_fragmentos(request.form.get("fragmentos", ""))

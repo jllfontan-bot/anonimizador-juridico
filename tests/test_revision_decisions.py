@@ -188,3 +188,44 @@ class TestSenEdicionLibre(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestFusionCoFormularioDeDecisions(unittest.TestCase):
+    """FUGA atopada facendo as capturas do manual (15/10/2026): fusionar un
+    homónimo e confirmar deixaba o nome á vista no documento. As casiñas
+    "anonimizar" levan o código de ANTES da fusión, e o código ao que se
+    fusiona tomábase por "non é persoa". Ademais a fusión cambiaba o texto e
+    contaba coma edición libre: aviso falso e un .edicion-manual.txt de sobra."""
+
+    def setUp(self):
+        web.SESIONS.clear()
+        self._tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self._tmp.name)
+        self.rexistro_dir = str(self.dir / "rexistro")
+        self.client = web.app.test_client()
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _revisar(self, nome, texto):
+        ruta = self.dir / nome
+        ruta.write_text(texto, encoding="utf-8")
+        r = self.client.post("/procesar", data={"ruta": str(ruta), "rexistro": self.rexistro_dir}, follow_redirects=True)
+        return r.request.path.rsplit("/", 1)[-1]
+
+    def test_fusionar_e_confirmar_non_deixa_o_nome_a_vista(self):
+        sid1 = self._revisar("a.txt", "Comparece dona Uxía Roel Salcedo.")
+        self.client.post(f"/revisar/{sid1}/confirmar", data={
+            "rexistro_dir": self.rexistro_dir, "decisions_v2": "1", "anonimizar": "PERSOA_000001"})
+        sid2 = self._revisar("b.txt", "Asina Uxía Roel Salcedo.")
+        persoa = web.SESIONS[sid2]["informe"]["persoas"][0]
+        self.assertEqual((persoa["codigo"], persoa["posibles_coincidencias"]), ("PERSOA_000002", ["PERSOA_000001"]))
+        # o que manda a pantalla: a casiña co código de antes e a decisión de fusionar
+        resposta = self.client.post(f"/revisar/{sid2}/confirmar", data={
+            "rexistro_dir": self.rexistro_dir, "decisions_v2": "1", "anonimizar": "PERSOA_000002",
+            "decision_PERSOA_000002": "fusionar:PERSOA_000001"})
+        saida = (self.dir / "b.anonimizado.txt").read_text(encoding="utf-8")
+        self.assertNotIn("Uxía", saida)
+        self.assertIn("PERSOA_000001", saida)
+        self.assertFalse((self.dir / "b.anonimizado.edicion-manual.txt").exists())
+        self.assertNotIn("edición libre", resposta.get_data(as_text=True))
