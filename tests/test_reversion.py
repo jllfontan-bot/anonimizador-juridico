@@ -286,7 +286,7 @@ class TestReversionWeb(unittest.TestCase):
         """A26 (revisión 21/09/2026): antes deste arranxo, apuntar a unha
         ruta de rexistro escrita mal (que non existe) creaba en silencio
         un rexistro NOVO baleiro nesa ruta, e o erro amosado era "aínda
-        non hai contrasinal de reversión definida" -- confuso, porque o
+        non hai contrasinal de reversión definido" -- confuso, porque o
         problema real é que non era ESE rexistro. Agora ten que quedar
         claro que non se atopou ningún rexistro nesa ruta."""
         ruta_mal_escrita = str(Path(self._tmp.name) / "rexistro_qeu_non_existe")
@@ -314,7 +314,7 @@ class TestReversionWeb(unittest.TestCase):
             },
         )
         texto = resposta.get_data(as_text=True)
-        self.assertIn("definida correctamente", texto)
+        self.assertIn("definido correctamente", texto)
         rexistro = RexistroCorrespondencias(self.rexistro_dir)
         self.assertTrue(rexistro.ten_contrasinal_reversion())
 
@@ -397,7 +397,7 @@ class TestListadoCorrespondenciasWeb(unittest.TestCase):
         )
         texto = resposta.get_data(as_text=True)
         self.assertNotIn("Manuel Ferrándiz Salcedo", texto)
-        self.assertIn("incorrecta", texto.lower())
+        self.assertIn("incorrecto", texto.lower())
 
     def test_listado_sen_motivo_amosa_erro(self):
         rexistro = RexistroCorrespondencias(self.rexistro_dir)

@@ -150,7 +150,7 @@ def _pendentes(rexistro_dir: str) -> list:
 #   - CSRF: unha web maliciosa aberta no MESMO navegador podería enviar
 #     un POST directamente a esta app (`fetch`/formulario cara a
 #     `http://127.0.0.1:<porto>/...`) sen que o usuario o note -- p.ex.
-#     definir a contrasinal de reversión antes de que o faga o usuario
+#     definir o contrasinal de reversión antes de que o faga o usuario
 #     lexítimo. Un navegador manda `Origin` (case xeral) ou polo menos
 #     `Referer` en calquera POST cross-site; se ningunha das dúas
 #     coincide coa propia orixe, recházase. Cando NON se manda ningunha
@@ -1001,7 +1001,7 @@ def listar_correspondencias():
 @app.route("/listar-correspondencias/pdf", methods=["POST"])
 def listar_correspondencias_pdf():
     """O mesmo listado en PDF CONFIDENCIAL (ver `informe_pdf`). Ademais do
-    motivo, da contrasinal e da confirmación, pide un aviso expreso de que é
+    motivo, do contrasinal e da confirmación, pide un aviso expreso de que é
     un documento de extrema sensibilidade, e o acceso queda na auditoría
     coma "PDF" (petición do usuario, 03/10/2026)."""
     rexistro_dir = request.form.get("rexistro", "").strip() or "./datos_rexistro"

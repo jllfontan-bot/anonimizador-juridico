@@ -3,7 +3,7 @@
 Petición do usuario (03/10/2026): poder xerar un PDF do listado, advertindo de
 que é un documento de extrema sensibilidade, cunha marca de auga
 "CONFIDENCIAL". O PDF sae do rexistro cifrado: quen o teña ve as identidades
-reais sen ningunha contrasinal. Por iso a web pide un aviso expreso, a
+reais sen ningún contrasinal. Por iso a web pide un aviso expreso, o
 contrasinal de reversión e deixa constancia na auditoría (ver
 `web.listar_correspondencias_pdf`).
 

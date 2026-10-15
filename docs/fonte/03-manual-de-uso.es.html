@@ -26,7 +26,7 @@
 </div>
 
 <h2 class="sec">01 · Arrancar el programa</h2>
-<p>Menú Inicio de Windows → <em>Anonimizador de expedientes jurídicos</em> (o el acceso del escritorio, si lo creaste).</p>
+<p>Menú Inicio de Windows → <em>Anonimizador jurídico</em> (versión de la Microsoft Store) o <em>Anonimizador de expedientes jurídicos</em> (instalador clásico; también el acceso del escritorio, si lo creaste).</p>
 <p>El programa se abre en una <strong>ventana de escritorio propia</strong>, no en el navegador; para cerrarlo, cierra esa ventana. Por dentro funciona como un servidor local al que solo se puede acceder desde este mismo ordenador (<code>127.0.0.1</code>), nunca desde fuera. (Si a Windows le falta el componente WebView2, el programa ofrece abrirse en el navegador.)</p>
 <figure><img src="img/es/inicio_revisar.png" alt="Pantalla inicial" style="max-width:430px"><figcaption>Pantalla inicial: aquí indicas qué documento o carpeta anonimizar y dónde está el registro de correspondencias. Arriba a la derecha se elige el idioma.</figcaption></figure>
 <div class="nota">
@@ -45,7 +45,7 @@
 </div></div>
 <div class="paso"><div class="n">3</div><div class="corpo">
   <p class="t">Indica la carpeta del registro</p>
-  <p>Por defecto <code>./datos_rexistro</code>. Es la carpeta donde queda guardada, cifrada, la correspondencia entre cada código y la persona real. Usa siempre la <strong>MISMA</strong> carpeta para todos los documentos de un mismo caso: así los códigos son coherentes entre ellos. En Windows, la carpeta por defecto está en <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code>.</p>
+  <p>Por defecto <code>./datos_rexistro</code>. Es la carpeta donde queda guardada, cifrada, la correspondencia entre cada código y la persona real. Usa siempre la <strong>MISMA</strong> carpeta para todos los documentos de un mismo caso: así los códigos son coherentes entre ellos. En Windows, la carpeta por defecto es <code>Documentos\Anonimizador\datos_rexistro</code> en la versión de la Microsoft Store y <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code> con el instalador clásico (sección 13).</p>
 </div></div>
 <div class="paso"><div class="n">4</div><div class="corpo">
   <p class="t">Elige cómo procesar y pulsa el botón</p>
@@ -106,7 +106,7 @@
 <p>El mensaje final dice «Has cancelado el proceso: los K archivo(s) restantes no se han tocado» (modo automático) o «Proceso cancelado: N de M archivo(s) procesado(s) (pendientes de revisión más abajo); el resto no se ha tocado» (modo revisión).</p>
 
 <h2 class="sec">06 · Anonimizar una carpeta entera</h2>
-<p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
+<p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/es/inicio_pendentes.png" alt="Carpeta procesada" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados y pendientes de revisar; el archivo dañado se avisa aparte.</figcaption></figure>
 <p>Los archivos de un formato no soportado (planos, hojas de cálculo…) quedan fuera y se cuentan como «omitidos»: nunca se incluyen ni se modifican. Revisa cada revisión pendiente de la lista una a una, exactamente igual que si procesaras los documentos por separado.</p>
 <div class="aviso">
@@ -139,7 +139,7 @@
 <h2 class="sec">08 · Confirmar y guardar: dónde queda el archivo anonimizado</h2>
 <p>Al pulsar «Confirmar revisión y guardar»:</p>
 <ul>
-  <li>El archivo anonimizado se guarda <strong>en la misma carpeta que el original</strong> (o en la «Carpeta de salida», si la indicaste), con el mismo nombre más <code>.anonimizado</code> antes de la extensión. Por ejemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Los <code>.docx</code>, <code>.odt</code> y <code>.pdf</code> <strong>conservan su formato y su extensión originales</strong>; cualquier otro formato se guarda como <code>.anonimizado.txt</code>.</li>
+  <li>El archivo anonimizado se guarda <strong>en la misma carpeta que el original</strong> (o en la «Carpeta de salida», si la indicaste), con el mismo nombre más <code>.anonimizado</code> antes de la extensión. Por ejemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Los <code>.docx</code>, <code>.odt</code> y <code>.pdf</code>, las imágenes y los <code>.zip</code> <strong>conservan su formato y su extensión originales</strong> (sección 11).</li>
   <li>Si el nombre del archivo original contiene el nombre de una persona, el archivo de salida usa su código en lugar del nombre real.</li>
   <li>Los posibles homónimos y las personas desmarcadas quedan registrados en la auditoría cifrada del registro.</li>
   <li>El documento original <strong>nunca se modifica ni se borra</strong>.</li>
@@ -188,7 +188,7 @@
 <p>Una <strong>imagen</strong> suelta (<code>.jpg</code>, <code>.png</code>, <code>.tif</code>, <code>.bmp</code>, <code>.webp</code>, <code>.gif</code>; por ejemplo, la foto de un documento) se trata como una página escaneada: el programa lee el texto con OCR, tapa los datos y guarda una imagen nueva en el mismo formato y con la misma resolución. Los metadatos de la foto (ubicación GPS, autor, modelo de cámara) no se copian. Las fotos HEIC del iPhone no se admiten: conviértelas antes a JPG.</p>
 
 <h2 class="sec">12 · Archivos .zip y documentos grandes</h2>
-<p>Si el archivo que indicas en la pantalla inicial es un <code>.zip</code> (por ejemplo, un expediente completo con varios documentos y planos), el sistema anonimiza cada archivo soportado que contiene (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) manteniendo la estructura de carpetas y el formato y extensión originales de cada uno, y genera un nuevo <code>.anonimizado.zip</code>. Los archivos que no se pueden analizar (planos CAD, imágenes…) NO se incluyen en el zip de salida, para no arriesgar que quede algo sin revisar: quedan listados aparte como «omitidos». Los documentos muy largos (cientos de páginas) se procesan sin problema, en trozos internos que no te afectan como usuario.</p>
+<p>Si el archivo que indicas en la pantalla inicial es un <code>.zip</code> (por ejemplo, un expediente completo con varios documentos y planos), el sistema anonimiza cada archivo soportado que contiene (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code> e imágenes) manteniendo la estructura de carpetas y el formato y extensión originales de cada uno, y genera un nuevo <code>.anonimizado.zip</code>. Los nombres de las carpetas de dentro del zip también se anonimizan, por si alguna lleva el nombre de una persona. Los archivos que no se pueden analizar (planos CAD, fotos HEIC…) NO se incluyen en el zip de salida, para no arriesgar que quede algo sin revisar: quedan listados aparte como «omitidos». Los documentos muy largos (cientos de páginas) se procesan sin problema, en trozos internos que no te afectan como usuario.</p>
 
 <h2 class="sec nova-pax">13 · Preguntas frecuentes</h2>
 <table>
@@ -204,7 +204,7 @@
     <tr><td>He empezado un lote largo y quiero parar. ¿Qué hago?</td><td>Pulsa «Cancelar» en la pantalla de progreso: termina el archivo en curso y no empieza ninguno más; lo que ya estaba hecho queda hecho (sección 05).</td></tr>
     <tr><td>¿Por qué no se abre ningún diálogo al pulsar «Elegir archivo…»?</td><td>Comprueba que no haya otra ventana del sistema ya abierta detrás: el diálogo nativo a veces aparece detrás de la ventana del programa la primera vez. Siempre puedes escribir la ruta a mano.</td></tr>
     <tr><td>¿Puedo cambiar el idioma?</td><td>Sí, con los botones «Castellano | Galego» de la pantalla inicial. Se recuerda al cerrar el programa. El título de la ventana cambia la próxima vez que lo abras.</td></tr>
-    <tr><td>¿Dónde están mis datos en Windows?</td><td>En <code>%LOCALAPPDATA%\Anonimizador</code>: <code>datos_rexistro</code> (registros cifrados), <code>preferencias.json</code> (idioma) y <code>anonimizador.log</code> (registro de errores). No se tocan al actualizar ni al desinstalar el programa (el desinstalador pregunta antes de borrar los registros).</td></tr>
+    <tr><td>¿Dónde están mis datos en Windows?</td><td>En la versión de la <strong>Microsoft Store</strong>, en <code>Documentos\Anonimizador</code>: <code>datos_rexistro</code> (registros cifrados), <code>preferencias.json</code> (idioma) y <code>anonimizador.log</code> (registro de errores). La clave que cifra los registros está en el <strong>Administrador de credenciales de Windows</strong>. Nada de esto se borra al actualizar ni al desinstalar el programa: sin el registro y su clave no se podría revertir ningún código. Si tu carpeta Documentos se sincroniza con OneDrive, los registros también se copian a la nube, pero cifrados (la clave no está en esa carpeta). Si antes usabas el instalador clásico, la primera vez se copia tu registro a esta carpeta (el original no se toca) y la pantalla de inicio te lo avisa.<br>Con el <strong>instalador clásico</strong>, los mismos archivos están en <code>%LOCALAPPDATA%\Anonimizador</code>, y el desinstalador pregunta antes de borrar los registros.</td></tr>
     <tr><td>¿Puedo ver todas las correspondencias de un caso de una vez?</td><td>Sí, con el enlace «Listado completo de correspondencias» de la pantalla inicial (sección 10). Requiere motivo y contraseña como la reversión, más una confirmación explícita, y queda registrado como acceso masivo.</td></tr>
   </tbody>
 </table>

@@ -26,7 +26,7 @@
 </div>
 
 <h2 class="sec">01 · Arrancar o programa</h2>
-<p>Menú Inicio de Windows → <em>Anonimizador de expedientes xurídicos</em> (ou o acceso do escritorio, se o creaches).</p>
+<p>Menú Inicio de Windows → <em>Anonimizador jurídico</em> (versión da Microsoft Store) ou <em>Anonimizador de expedientes xurídicos</em> (instalador clásico; tamén o acceso do escritorio, se o creaches).</p>
 <p>O programa ábrese nunha <strong>xanela de escritorio propia</strong>, non no navegador; para pechalo, pecha esa xanela. Por dentro funciona coma un servidor local que só é accesible dende este mesmo ordenador (<code>127.0.0.1</code>), nunca dende fóra. (Se a Windows lle falta o compoñente WebView2, o programa ofrece abrirse no navegador.)</p>
 <figure><img src="img/inicio_revisar.png" alt="Pantalla inicial" style="max-width:430px"><figcaption>Pantalla inicial: aquí indicas que documento ou cartafol anonimizar e onde vive o rexistro de correspondencias. Arriba á dereita escóllese o idioma.</figcaption></figure>
 <div class="nota">
@@ -45,7 +45,7 @@
 </div></div>
 <div class="paso"><div class="n">3</div><div class="corpo">
   <p class="t">Indica o cartafol do rexistro</p>
-  <p>Por defecto <code>./datos_rexistro</code>. É o cartafol onde queda gardada, cifrada, a correspondencia entre cada código e a persoa real. Usa sempre o <strong>MESMO</strong> cartafol para todos os documentos dun mesmo caso, así os códigos son consistentes entre eles. En Windows, o cartafol por defecto está en <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code>.</p>
+  <p>Por defecto <code>./datos_rexistro</code>. É o cartafol onde queda gardada, cifrada, a correspondencia entre cada código e a persoa real. Usa sempre o <strong>MESMO</strong> cartafol para todos os documentos dun mesmo caso, así os códigos son consistentes entre eles. En Windows, o cartafol por defecto é <code>Documentos\Anonimizador\datos_rexistro</code> na versión da Microsoft Store e <code>%LOCALAPPDATA%\Anonimizador\datos_rexistro</code> co instalador clásico (sección 13).</p>
 </div></div>
 <div class="paso"><div class="n">4</div><div class="corpo">
   <p class="t">Escolle como procesar e preme o botón</p>
@@ -106,7 +106,7 @@
 <p>A mensaxe final di «Cancelaches o proceso: os K ficheiro(s) restantes non se tocaron» (modo automático) ou «Proceso cancelado: N de M ficheiro(s) procesado(s) (pendentes de revisión abaixo); o resto non se tocou» (modo revisión).</p>
 
 <h2 class="sec">06 · Anonimizar un cartafol enteiro</h2>
-<p>No canto dun ficheiro solto, o mesmo campo acepta un CARTAFOL: procésase automaticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code>) que atope dentro, buscando tamén en subcartafoles. En modo revisión créase unha sesión de revisión propia para CADA documento — nunca se garda nada en bloque sen revisar antes.</p>
+<p>No canto dun ficheiro solto, o mesmo campo acepta un CARTAFOL: procésase automaticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes) que atope dentro, buscando tamén en subcartafoles. En modo revisión créase unha sesión de revisión propia para CADA documento — nunca se garda nada en bloque sen revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/inicio_pendentes.png" alt="Cartafol procesado" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados e pendentes de revisar; o ficheiro estragado avísase á parte.</figcaption></figure>
 <p>Os ficheiros dun formato non soportado (planos, follas de cálculo…) quedan fóra e cóntanse coma «omitidos» — nunca se inclúen nin se modifican. Revisa cada sesión pendente da lista unha a unha, exactamente igual que se procesases os documentos por separado.</p>
 <div class="aviso">
@@ -139,7 +139,7 @@
 <h2 class="sec">08 · Confirmar e gardar — onde queda o ficheiro anonimizado</h2>
 <p>Ao premer «Confirmar revisión e gardar»:</p>
 <ul>
-  <li>O ficheiro anonimizado gárdase <strong>no mesmo cartafol có orixinal</strong> (ou no «Cartafol de saída», se o indicaches), co mesmo nome máis <code>.anonimizado</code> antes da extensión. Por exemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Os <code>.docx</code>, <code>.odt</code> e <code>.pdf</code> <strong>conservan o seu formato e a súa extensión orixinais</strong>; calquera outro formato gárdase coma <code>.anonimizado.txt</code>.</li>
+  <li>O ficheiro anonimizado gárdase <strong>no mesmo cartafol có orixinal</strong> (ou no «Cartafol de saída», se o indicaches), co mesmo nome máis <code>.anonimizado</code> antes da extensión. Por exemplo, <code>declaracion.txt</code> → <code>declaracion.anonimizado.txt</code>. Os <code>.docx</code>, <code>.odt</code> e <code>.pdf</code>, as imaxes e os <code>.zip</code> <strong>conservan o seu formato e a súa extensión orixinais</strong> (sección 11).</li>
   <li>Se o nome do ficheiro orixinal contén o nome dunha persoa, o ficheiro de saída usa o seu código no canto do nome real.</li>
   <li>Os posibles homónimos e as persoas desmarcadas quedan rexistrados na auditoría cifrada do rexistro.</li>
   <li>O documento orixinal <strong>nunca se modifica nin se borra</strong>.</li>
@@ -151,30 +151,30 @@
 <figure><img src="img/pendentes_sesions.png" alt="Revisións pendentes" style="max-width:390px"><figcaption>As revisións sen confirmar quedan listadas e son recuperables en calquera momento.</figcaption></figure>
 
 <h2 class="sec">10 · Reversión controlada de identidade</h2>
-<p>Cando precises consultar a identidade real detrás dun código (por exemplo, para presentar o documento orixinal nun xulgado), usa a ligazón «Reversión controlada de identidade» da pantalla inicial. O formulario esixe <strong>tres cousas</strong>: o código, un <strong>motivo</strong> (sempre obrigatorio) e a <strong>contrasinal de reversión</strong>.</p>
-<figure><img src="img/reversion.png" alt="Formulario de reversión" style="max-width:390px"><figcaption>O formulario esixe un motivo e a contrasinal de reversión; sen eles, a reversión non se executa.</figcaption></figure>
+<p>Cando precises consultar a identidade real detrás dun código (por exemplo, para presentar o documento orixinal nun xulgado), usa a ligazón «Reversión controlada de identidade» da pantalla inicial. O formulario esixe <strong>tres cousas</strong>: o código, un <strong>motivo</strong> (sempre obrigatorio) e o <strong>contrasinal de reversión</strong>.</p>
+<figure><img src="img/reversion.png" alt="Formulario de reversión" style="max-width:390px"><figcaption>O formulario esixe un motivo e o contrasinal de reversión; sen eles, a reversión non se executa.</figcaption></figure>
 <div class="aviso">
   <h4>Acción de alto risco</h4>
   <p>A reversión é a única función que devolve datos identificativos reais. Escribe sempre o motivo real: queda gravado de forma permanente na auditoría cifrada, xunto co usuario do sistema que a executou e a data. Non se pode editar nin borrar despois.</p>
 </div>
 <figure><img src="img/reversion_resultado.png" alt="Resultado da reversión" style="max-width:390px"><figcaption>Resultado: nome(s) real(is), DNI e contexto asociados ao código consultado (datos de exemplo inventados).</figcaption></figure>
-<h3>A contrasinal de reversión</h3>
-<p>É unha segunda barreira, á parte da clave de cifrado: evita que outra persoa que comparta o ordenador abra o programa e reverta identidades reais sen coñecela. Defínese <strong>unha vez por cada rexistro</strong> na ligazón «Definila aquí» do propio formulario (mínimo 8 caracteres; hai que escribila dúas veces, e para cambiala máis tarde pídese a actual). Un intento con contrasinal incorrecta non revela nada e queda rexistrado na auditoría.</p>
+<h3>O contrasinal de reversión</h3>
+<p>É unha segunda barreira, á parte da clave de cifrado: evita que outra persoa que comparta o ordenador abra o programa e reverta identidades reais sen coñecelo. Defínese <strong>unha vez por cada rexistro</strong> na ligazón «Definilo aquí» do propio formulario (mínimo 8 caracteres; hai que escribilo dúas veces, e para cambialo máis tarde pídese o actual). Un intento con contrasinal incorrecto non revela nada e queda rexistrado na auditoría.</p>
 <div class="nota">
   <h4>Que NON é</h4>
-  <p>Non é unha capa de cifrado adicional: quen teña acceso ao ficheiro <code>clave.key</code> (ou ao chaveiro do sistema) <em>e</em> ao ficheiro <code>rexistro.enc</code> pode descifrar as identidades directamente, sen coñecer esta contrasinal. Por iso segue a ser imprescindible gardar ben eses dous elementos por separado.</p>
+  <p>Non é unha capa de cifrado adicional: quen teña acceso ao ficheiro <code>clave.key</code> (ou ao chaveiro do sistema) <em>e</em> ao ficheiro <code>rexistro.enc</code> pode descifrar as identidades directamente, sen coñecer este contrasinal. Por iso segue a ser imprescindible gardar ben eses dous elementos por separado.</p>
 </div>
 
 <h3>Listado completo das correspondencias dun rexistro</h3>
 <p>A reversión require coñecer de antemán o código a consultar. Cando o que precisas é revisar un expediente enteiro dun golpe (por exemplo, para unha auditoría interna), usa a ligazón «Listado completo de correspondencias» da pantalla inicial. Amosa nunha soa táboa todos os códigos do rexistro cos seus nomes, DNI, contexto e data de creación.</p>
 <div class="aviso">
   <h4>Máis alcance ca unha reversión</h4>
-  <p>Esta pantalla require exactamente o mesmo có formulario de reversión — motivo obrigatorio e contrasinal de reversión — máis unha casiña adicional de confirmación explícita, porque expón de golpe TODAS as identidades reais do rexistro, non unha soa. Queda rexistrada na auditoría cunha acción distinta da reversión individual (<code>listado_completo</code>), co alcance exacto do que se viu. Se o rexistro ten moitas persoas, o listado paxínase de 200 en 200; cada páxina volve pedir a contrasinal e queda auditada á parte.</p>
+  <p>Esta pantalla require exactamente o mesmo có formulario de reversión — motivo obrigatorio e contrasinal de reversión — máis unha casiña adicional de confirmación explícita, porque expón de golpe TODAS as identidades reais do rexistro, non unha soa. Queda rexistrada na auditoría cunha acción distinta da reversión individual (<code>listado_completo</code>), co alcance exacto do que se viu. Se o rexistro ten moitas persoas, o listado paxínase de 200 en 200; cada páxina volve pedir o contrasinal e queda auditada á parte.</p>
 </div>
 <p>En rexistros antigos, un código que xa non aparece coma fila propia (porque se fusionou noutro con versións anteriores do programa) séguese vendo na columna «Fusionados neste» do código co que quedou, así que ningún código antigo dun documento vello desaparece do listado.</p>
 
 <h3>Gardar o listado coma PDF CONFIDENCIAL</h3>
-<p>Debaixo da táboa hai un botón «Xerar PDF confidencial». O PDF leva o listado enteiro, en horizontal, co motivo, quen o xerou e a data na cabeceira, un aviso de extrema sensibilidade e a marca de auga «CONFIDENCIAL» en todas as páxinas. Para xeralo pídese de novo a contrasinal de reversión e unha casiña que confirma que entendes que é un documento de extrema sensibilidade; a xeración queda na auditoría coma listado completo «XERADO PDF CONFIDENCIAL».</p>
+<p>Debaixo da táboa hai un botón «Xerar PDF confidencial». O PDF leva o listado enteiro, en horizontal, co motivo, quen o xerou e a data na cabeceira, un aviso de extrema sensibilidade e a marca de auga «CONFIDENCIAL» en todas as páxinas. Para xeralo pídese de novo o contrasinal de reversión e unha casiña que confirma que entendes que é un documento de extrema sensibilidade; a xeración queda na auditoría coma listado completo «XERADO PDF CONFIDENCIAL».</p>
 <div class="aviso">
   <h4>Un PDF así abre todo sen contrasinal</h4>
   <p>Fóra de contexto perde valor, pero xunto cos documentos anonimizados permite reverter o anonimato. Non o envíes por correo, non o deixes nun cartafol compartido ou sincronizado coa nube e destrúeo cando xa non faga falta.</p>
@@ -188,7 +188,7 @@
 <p>Unha <strong>imaxe</strong> solta (<code>.jpg</code>, <code>.png</code>, <code>.tif</code>, <code>.bmp</code>, <code>.webp</code>, <code>.gif</code>; por exemplo, a foto dun documento) trátase coma unha páxina escaneada: o programa le o texto con OCR, tapa os datos e garda unha imaxe nova no mesmo formato e coa mesma resolución. Os metadatos da foto (localización GPS, autor, modelo de cámara) non se copian. As fotos HEIC do iPhone non se admiten: convérteas antes a JPG.</p>
 
 <h2 class="sec">12 · Arquivos .zip e documentos grandes</h2>
-<p>Se o ficheiro que indicas na pantalla inicial é un <code>.zip</code> (por exemplo, un expediente completo con varios documentos e planos), o sistema anonimiza cada ficheiro soportado dentro (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code>) mantendo a estrutura de cartafoles e o formato/extensión orixinais de cada un, e xera un novo <code>.anonimizado.zip</code>. Os ficheiros que non se poden analizar (planos CAD, imaxes…) NON se inclúen no zip de saída, para non arriscar que quede algo sen revisar — quedan listados á parte coma «omitidos». Documentos moi longos (centos de páxinas) procésanse sen problema, en anacos internos que non che afectan como usuario.</p>
+<p>Se o ficheiro que indicas na pantalla inicial é un <code>.zip</code> (por exemplo, un expediente completo con varios documentos e planos), o sistema anonimiza cada ficheiro soportado dentro (<code>.pdf</code>, <code>.docx</code>, <code>.odt</code>, <code>.txt</code> e imaxes) mantendo a estrutura de cartafoles e o formato/extensión orixinais de cada un, e xera un novo <code>.anonimizado.zip</code>. Os nomes dos cartafoles de dentro do zip tamén se anonimizan, por se algún leva o nome dunha persoa. Os ficheiros que non se poden analizar (planos CAD, fotos HEIC…) NON se inclúen no zip de saída, para non arriscar que quede algo sen revisar — quedan listados á parte coma «omitidos». Documentos moi longos (centos de páxinas) procésanse sen problema, en anacos internos que non che afectan como usuario.</p>
 
 <h2 class="sec nova-pax">13 · Preguntas frecuentes</h2>
 <table>
@@ -204,7 +204,7 @@
     <tr><td>Empecei un lote longo e quero parar. Que fago?</td><td>Preme «Cancelar» na pantalla de progreso: remata o ficheiro en curso e non empeza ningún máis; o que xa estaba feito queda feito (sección 05).</td></tr>
     <tr><td>Por que non se abre ningún diálogo ao premer «Escoller ficheiro…»?</td><td>Comproba que non haxa outra xanela do sistema xa aberta detrás — o diálogo nativo ás veces aparece detrás da xanela do programa a primeira vez. Sempre podes escribir a ruta a man.</td></tr>
     <tr><td>Podo cambiar o idioma?</td><td>Si, cos botóns «Castellano | Galego» da pantalla inicial. Lémbrase ao pechar o programa. O título da xanela cambia a próxima vez que o abras.</td></tr>
-    <tr><td>Onde están os meus datos en Windows?</td><td>En <code>%LOCALAPPDATA%\Anonimizador</code>: <code>datos_rexistro</code> (rexistros cifrados), <code>preferencias.json</code> (idioma) e <code>anonimizador.log</code> (rexistro de erros). Non se tocan ao actualizar nin ao desinstalar o programa (o desinstalador pregunta antes de borrar os rexistros).</td></tr>
+    <tr><td>Onde están os meus datos en Windows?</td><td>Na versión da <strong>Microsoft Store</strong>, en <code>Documentos\Anonimizador</code>: <code>datos_rexistro</code> (rexistros cifrados), <code>preferencias.json</code> (idioma) e <code>anonimizador.log</code> (rexistro de erros). A clave que cifra os rexistros está no <strong>Administrador de credenciais de Windows</strong>. Nada disto se borra ao actualizar nin ao desinstalar o programa: sen o rexistro e a súa clave non se podería reverter ningún código. Se o teu cartafol Documentos se sincroniza con OneDrive, os rexistros tamén se copian á nube, pero cifrados (a clave non está nese cartafol). Se antes usabas o instalador clásico, a primeira vez cópiase o teu rexistro a este cartafol (o orixinal non se toca) e a pantalla de inicio avísao.<br>Co <strong>instalador clásico</strong>, os mesmos ficheiros están en <code>%LOCALAPPDATA%\Anonimizador</code>, e o desinstalador pregunta antes de borrar os rexistros.</td></tr>
     <tr><td>Podo ver todas as correspondencias dun caso dunha vez?</td><td>Si, coa ligazón «Listado completo de correspondencias» da pantalla inicial (sección 10). Require motivo e contrasinal coma a reversión, máis unha confirmación explícita, e queda rexistrado coma acceso masivo.</td></tr>
   </tbody>
 </table>

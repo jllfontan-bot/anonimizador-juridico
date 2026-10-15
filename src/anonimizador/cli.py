@@ -73,7 +73,7 @@ def main():
 
     p_contrasinal = sub.add_parser(
         "contrasinal-reversion",
-        help="Define ou cambia a contrasinal esixida para 'reverter' (segunda barreira, á parte da clave de cifrado)",
+        help="Define ou cambia o contrasinal esixido para 'reverter' (segunda barreira, á parte da clave de cifrado)",
     )
     p_contrasinal.add_argument("--rexistro", default="./datos_rexistro")
     p_contrasinal.add_argument("--chaveiro-sistema", action="store_true", help=_AXUDA_CHAVEIRO)
@@ -169,7 +169,7 @@ def main():
         print(f"Clave de cifrado: {_DESCRICION_ORIXE_CLAVE[rexistro.orixe_clave]}")
         if not rexistro.ten_contrasinal_reversion():
             print(
-                "Erro: aínda non hai contrasinal de reversión definida. "
+                "Erro: aínda non hai contrasinal de reversión definido. "
                 "Execute primeiro 'anonimizador contrasinal-reversion "
                 f"--rexistro {args.rexistro}'."
             )
@@ -202,7 +202,7 @@ def main():
             return
         if not rexistro.ten_contrasinal_reversion():
             print(
-                "Erro: aínda non hai contrasinal de reversión definida. "
+                "Erro: aínda non hai contrasinal de reversión definido. "
                 "Execute primeiro 'anonimizador contrasinal-reversion "
                 f"--rexistro {args.rexistro}'."
             )
@@ -238,17 +238,17 @@ def main():
         rexistro = RexistroCorrespondencias(args.rexistro, usar_chaveiro=args.chaveiro_sistema)
         xa_existe = rexistro.ten_contrasinal_reversion()
         actual = getpass.getpass("Contrasinal actual: ") if xa_existe else None
-        nova = getpass.getpass("Nova contrasinal de reversion (minimo 8 caracteres): ")
-        confirmacion = getpass.getpass("Repite a nova contrasinal: ")
+        nova = getpass.getpass("Novo contrasinal de reversion (minimo 8 caracteres): ")
+        confirmacion = getpass.getpass("Repite o novo contrasinal: ")
         if nova != confirmacion:
-            print("Erro: as dúas contrasinais non coinciden.")
+            print("Erro: os dous contrasinais non coinciden.")
             return
         try:
             rexistro.definir_contrasinal_reversion(nova, actual=actual)
         except ValueError as e:
             print(f"Erro: {e}")
             return
-        print("Contrasinal de reversion definida correctamente.")
+        print("Contrasinal de reversion definido correctamente.")
         print()
         print("IMPORTANTE -- garda estes DOUS ficheiros nun lugar seguro (non son o mesmo):")
         print(f"  - {Path(args.rexistro) / 'rexistro.enc'}  (as identidades reais, cifradas)")
@@ -257,7 +257,7 @@ def main():
         else:
             print("  - a clave de cifrado vive no chaveiro do sistema operativo, non nun ficheiro local")
         print(
-            "Esta contrasinal é unha segunda barreira só a nivel de aplicación: "
+            "Este contrasinal é unha segunda barreira só a nivel de aplicación: "
             "non substitúe gardar ben ese ficheiro de clave."
         )
 

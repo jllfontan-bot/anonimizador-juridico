@@ -32,7 +32,7 @@ En Windows non hai cartafol nin scripts: recibes un único ficheiro,
   non se borran sen preguntar antes: sen eles non se pode reverter a
   anonimización dos documentos xa anonimizados.
 
-A CLAVE E A CONTRASINAL (LÉEO ANTES DE EMPEZAR)
+A CLAVE E O CONTRASINAL (LÉEO ANTES DE EMPEZAR)
 ------------------------------------------------
 Os nomes reais non quedan nos documentos anonimizados: gárdanse nun
 rexistro CIFRADO que relaciona cada código (PERSOA_000001) coa persoa real
@@ -41,7 +41,7 @@ e o seu DNI. Protéxeno DOUS segredos distintos:
 1) A CLAVE DO REXISTRO. Créaa o programa só e ninguén a escribe. Sen ela o
    rexistro non se pode descifrar nunca máis. Garda unha copia de
    seguridade (a pantalla de inicio do programa di onde está).
-2) A CONTRASINAL DE REVERSIÓN. Escríbela ti unha vez, na pantalla de
+2) O CONTRASINAL DE REVERSIÓN. Escríbeo ti unha vez, na pantalla de
    inicio. Pídese cada vez que alguén quere ver unha identidade real, o
    listado completo de correspondencias ou o seu PDF CONFIDENCIAL, e cada
    uso queda rexistrado nunha auditoría cifrada.

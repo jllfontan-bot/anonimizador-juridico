@@ -134,13 +134,13 @@ class TestTextos(unittest.TestCase):
             self.assertEqual(campos(gl[clave]), campos(es[clave]), clave)
 
     def test_mensaxes_coñecidas_tradúcense(self):
-        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecta", "es"),
+        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecto", "es"),
                          "contraseña de reversión incorrecta")
         # str(KeyError(...)) vai entre comiñas
         self.assertEqual(idioma.traducir_mensaxe("'código descoñecido no rexistro: PERSONA_000009'", "es"),
                          "código desconocido en el registro: PERSONA_000009")
-        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecta", "gl"),
-                         "contrasinal de reversión incorrecta")
+        self.assertEqual(idioma.traducir_mensaxe("contrasinal de reversión incorrecto", "gl"),
+                         "contrasinal de reversión incorrecto")
         self.assertEqual(idioma.traducir_mensaxe("algo que non está no catálogo", "es"), "algo que non está no catálogo")
 
 

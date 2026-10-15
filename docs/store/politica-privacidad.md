@@ -30,6 +30,8 @@ La aplicación lee únicamente los archivos y carpetas que el usuario le indica 
   - `anonimizador.log`: un registro técnico de errores, que puede incluir rutas o nombres de archivos.
 - La **clave de cifrado** del registro, en el **Administrador de credenciales de Windows**, separada de lo que cifra.
 
+Si la carpeta Documentos del usuario se sincroniza con OneDrive u otro servicio en la nube, ese servicio copiará también estos archivos: lo hace el sistema, no la aplicación, y el registro, la auditoría y las revisiones pendientes viajan cifrados (la clave no está en esa carpeta).
+
 Si el usuario usaba una versión anterior del programa instalada con el instalador clásico, la primera vez se **copia** su registro desde `%LOCALAPPDATA%\Anonimizador` a `Documentos\Anonimizador`; el original no se toca.
 
 Estos datos **no se borran al desinstalar** la aplicación, a propósito: sin el registro y su clave ya no se podría saber a quién corresponde cada código de los documentos anonimizados. Para eliminarlos, el usuario puede borrar la carpeta `Documentos\Anonimizador` y, en el Administrador de credenciales de Windows (Credenciales de Windows), las entradas que llevan «anonimizador-xuridico» en el nombre. Hecho esto, la anonimización de los documentos ya generados no podrá revertirse.
@@ -83,6 +85,8 @@ A aplicación le unicamente os ficheiros e cartafoles que o usuario lle indica e
   - `preferencias.json`: o idioma escollido.
   - `anonimizador.log`: un rexistro técnico de erros, que pode incluír rutas ou nomes de ficheiros.
 - A **clave de cifrado** do rexistro, no **Administrador de credenciais de Windows**, separada do que cifra.
+
+Se o cartafol Documentos do usuario se sincroniza con OneDrive ou outro servizo na nube, ese servizo copiará tamén estes ficheiros: faino o sistema, non a aplicación, e o rexistro, a auditoría e as revisións pendentes viaxan cifrados (a clave non está nese cartafol).
 
 Se o usuario usaba unha versión anterior do programa instalada co instalador clásico, a primeira vez **cópiase** o seu rexistro dende `%LOCALAPPDATA%\Anonimizador` a `Documentos\Anonimizador`; o orixinal non se toca.
 

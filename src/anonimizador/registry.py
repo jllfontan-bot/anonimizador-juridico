@@ -594,9 +594,9 @@ class RexistroCorrespondencias:
     # con Fernet coa MESMA clave que abre todo o resto. Quen teña acceso a
     # `clave.key` E `rexistro.enc` pode descifrar as identidades reais
     # directamente coa libraría `cryptography`, sen pasar por aquí nin
-    # coñecer esta contrasinal. O que si evita é que outra persoa que
+    # coñecer este contrasinal. O que si evita é que outra persoa que
     # comparte o mesmo ordenador (sen coñecementos técnicos) abra a
-    # interface web ou a CLI e reverta identidades reais sen coñecela.
+    # interface web ou a CLI e reverta identidades reais sen coñecelo.
 
     @_con_bloqueo
     def ten_contrasinal_reversion(self) -> bool:
@@ -611,16 +611,16 @@ class RexistroCorrespondencias:
 
     @_con_bloqueo
     def definir_contrasinal_reversion(self, nova: str, actual: str | None = None) -> None:
-        """Establece a contrasinal (primeira vez) ou cámbiaa (se xa existe
-        unha, hai que confirmala primeiro coma `actual`)."""
+        """Establece o contrasinal (primeira vez) ou cámbiao (se xa existe
+        un, hai que confirmalo primeiro coma `actual`)."""
         if not nova or len(nova) < _LONXITUDE_MINIMA_CONTRASINAL:
             raise ValueError(
-                f"a contrasinal de reversión ten que ter polo menos "
+                f"o contrasinal de reversión ten que ter polo menos "
                 f"{_LONXITUDE_MINIMA_CONTRASINAL} caracteres"
             )
         if self.ten_contrasinal_reversion():
             if not actual or not self._verificar_contrasinal_reversion(actual):
-                raise ValueError("a contrasinal actual non coincide")
+                raise ValueError("o contrasinal actual non coincide")
 
         sal = secrets.token_bytes(16)
         self._estado["contrasinal_reversion"] = {
@@ -639,24 +639,24 @@ class RexistroCorrespondencias:
         código. Esixe sempre un motivo -- non e opcional -- porque queda
         gravado na auditoría cifrada xunto con quen o solicitou; sen iso,
         non hai forma de xustificar despois por que se abriu o rexistro.
-        Esixe ademais a contrasinal de reversión (ver arriba); un intento
+        Esixe ademais o contrasinal de reversión (ver arriba); un intento
         fallido tamén queda rexistrado na auditoría, coma sinal de alerta
-        se alguén tenta reverter identidades reais sen coñecela."""
+        se alguén tenta reverter identidades reais sen coñecelo."""
         motivo = (motivo or "").strip()
         if not motivo:
             raise ValueError("a reversión require un motivo; queda rexistrado na auditoría")
 
         if not self.ten_contrasinal_reversion():
             raise ValueError(
-                "aínda non hai contrasinal de reversión definida para este rexistro -- "
-                "hai que definila antes de poder reverter ningunha identidade"
+                "aínda non hai contrasinal de reversión definido para este rexistro -- "
+                "hai que definilo antes de poder reverter ningunha identidade"
             )
         if not self._verificar_contrasinal_reversion(contrasinal):
             detalle = "intento fallido"
             if solicitante:
                 detalle += f" | solicitante: {solicitante}"
             self._rexistrar_auditoria("reversion_denegada", codigo, detalle)
-            raise ValueError("contrasinal de reversión incorrecta")
+            raise ValueError("contrasinal de reversión incorrecto")
 
         # A26 (revisión 21/09/2026): ata o 29/09/2026 o DNI redactábase
         # coma "ID_000042" (mesma numeración ca "PERSOA_000042"); dende
@@ -710,7 +710,7 @@ class RexistroCorrespondencias:
         desapareceu do rexistro. Devólvense coma `fusionados` do código
         vixente, resolvendo cadeas de fusións (A→B→C) coma `_resolver_alias`.
 
-        `desde`/`limite` paxinan (a web pide de novo a contrasinal en cada
+        `desde`/`limite` paxinan (a web pide de novo o contrasinal en cada
         páxina -- ver `web.py` -- así que cada tanda queda auditada co seu
         propio rango, non un só evento "viu todo"). Un rexistro BALEIRO
         non é un erro: devolve `total=0` e AÍNDA ASÍ audita o acceso --
@@ -722,15 +722,15 @@ class RexistroCorrespondencias:
 
         if not self.ten_contrasinal_reversion():
             raise ValueError(
-                "aínda non hai contrasinal de reversión definida para este rexistro -- "
-                "hai que definila antes de poder listar as correspondencias"
+                "aínda non hai contrasinal de reversión definido para este rexistro -- "
+                "hai que definilo antes de poder listar as correspondencias"
             )
         if not self._verificar_contrasinal_reversion(contrasinal):
             detalle = f"intento fallido | motivo: {motivo}"
             if solicitante:
                 detalle += f" | solicitante: {solicitante}"
             self._rexistrar_auditoria("listado_completo_denegado", "*", detalle)
-            raise ValueError("contrasinal de reversión incorrecta")
+            raise ValueError("contrasinal de reversión incorrecto")
 
         fusionados_por_codigo: dict[str, list[str]] = {}
         alias_orfos = []

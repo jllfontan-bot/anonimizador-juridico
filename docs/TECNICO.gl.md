@@ -355,7 +355,7 @@ explícita (`--confirmar` no CLI, unha casiña na web) -- amosa TODAS as
 correspondencias do rexistro dunha soa vez, así que ten MÁIS alcance ca
 unha reversión individual, e queda auditado cunha acción propia
 (`listado_completo`). Paxínase de 200 en 200 (`--desde`/`--limite` no
-CLI); a web volve pedir a contrasinal en cada páxina.
+CLI); a web volve pedir o contrasinal en cada páxina.
 
 ## Executar os tests
 
