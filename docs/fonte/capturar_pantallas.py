@@ -148,6 +148,17 @@ def main():
                 pg.wait_for_load_state()
                 time.sleep(0.5)
 
+            # 0. "Acerca de" e aviso de rexistro copiado da versión da Store
+            # (o aviso é o ficheiro que deixa arranque_windows; o servidor
+            # corre con cwd=BASE, así que se crea e se retira aquí)
+            pg.goto(URL + "/acerca")
+            foto("acerca.png", full_page=True)
+            aviso = BASE / "aviso-rexistro-copiado.txt"
+            aviso.write_text(r"C:\Users\nome\AppData\Local\Anonimizador\datos_rexistro", encoding="utf-8")
+            pg.goto(URL + "/")
+            foto("inicio_aviso_rexistro_copiado.png", full_page=True)
+            aviso.unlink()
+
             # 1. pantalla inicial (dous modos)
             pg.goto(URL + "/")
             foto("inicio_revisar.png", full_page=True)
@@ -238,7 +249,7 @@ def main():
             time.sleep(0.5)
             foto("reversion_resultado.png", full_page=True)
             nav.close()
-        for n in ("inicio_revisar", "inicio_automatico", "inicio_pendentes", "resultado_automatico",
+        for n in ("acerca", "inicio_aviso_rexistro_copiado", "inicio_revisar", "inicio_automatico", "inicio_pendentes", "resultado_automatico",
                   "resultado_cancelado", "definir_contrasinal", "reversion", "reversion_resultado",
                   "rev_homonimo", "confirmado_1", "pdf_confirmado"):
             recortar_baleiro(n + ".png")
