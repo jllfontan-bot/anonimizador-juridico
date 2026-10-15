@@ -18,8 +18,8 @@ Interfaz en **castellano** (por defecto) o **gallego**, a elegir en la pantalla 
   teléfonos, correos, direcciones, matrículas, IBAN, tarjetas, número de la Seguridad Social,
   referencia catastral, número de colegiado, CSV y referencias de trámites.
 - **Asigna un código estable a cada persona**, el mismo en todos los documentos del despacho.
-  Dos nombres iguales sin DNI que lo confirme **nunca** se fusionan solos: quedan marcados para
-  que una persona lo decida.
+  Dos nombres iguales sin DNI que lo confirme **nunca** se fusionan: se tratan como personas
+  distintas y el programa avisa del posible homónimo.
 - **Avisa** de posibles fugas que no ha podido tapar, de riesgos de efecto mosaico
   (combinaciones de datos que reidentifican) y de datos de categoría especial (art. 9 RGPD).
 - **Revisión humana** opcional antes de guardar, y **reversión controlada** de identidades con
@@ -27,10 +27,12 @@ Interfaz en **castellano** (por defecto) o **gallego**, a elegir en la pantalla 
 
 ## Instalación
 
-Los instaladores para Windows, macOS y Linux se generan con `instalador/crear-paquetes.sh`
-(ver [`instalador/README.md`](instalador/README.md)). La guía para usuarios está en `docs/`.
+El programa se distribuye para Windows. El instalador se genera con
+`instalador/crear-paquetes.sh` (ver [`instalador/README.md`](instalador/README.md)). La guía
+para usuarios está en `docs/`.
 
-Para desarrollar (Python 3.9 o posterior):
+Para desarrollar también se puede ejecutar desde el código fuente en Linux o macOS
+(Python 3.9 o posterior):
 
 ```bash
 python3 -m venv .venv

@@ -3,28 +3,24 @@
 Orixe versionada de todo o que se entrega para que alguén sen coñecementos
 técnicos poida instalar e usar o programa.
 
-| SO | Entregable | Como se instala |
-|----|-----------|-----------------|
-| **Windows** | `Anonimizador-Xuridico-Instalador-<VERSION>.exe` (un só ficheiro, na raíz do repo) | Asistente gráfico NSIS con barra de progreso en porcentaxe; desinstalador propio |
-| **Mac** | `anonimizador-xuridico-instalacion-<VERSION>-mac.zip` | `instalar-mac.command` (dobre clic, unha vez) e despois `Iniciar-Anonimizador.command` |
-| **Linux** | `anonimizador-xuridico-instalacion-<VERSION>-linux.zip` | `instalar-linux.sh` e despois `Iniciar-Anonimizador.sh` |
+O programa distribúese só para **Windows**:
+`Anonimizador-Xuridico-Instalador-<VERSION>.exe` (un só ficheiro, na raíz do
+repo), un asistente gráfico NSIS con barra de progreso en porcentaxe e
+desinstalador propio.
 
 `<VERSION>` = `AAAAMMDD-<commit curto>[-suxo]` (`-suxo` se o repo tiña cambios
 sen commitear ao xerar o paquete).
 
-## Xerar os paquetes
+## Xerar o instalador
 
 ```
-./instalador/crear-paquetes.sh windows   # só o .exe de Windows
-./instalador/crear-paquetes.sh mac
-./instalador/crear-paquetes.sh linux
-./instalador/crear-paquetes.sh           # os tres
+./instalador/crear-paquetes.sh windows
 ```
 
 Todo o que se descarga (Python portátil, Tesseract, wheels) queda cacheado
 en `build/cache/` (ignorado por git) e reutilízase: non se descarga dúas
 veces. Para o `.exe` de Windows precísase ademais `makensis` no equipo que
-constrúe (`brew install makensis`; é un cross-compile, non fai falta Windows).
+constrúe (paquete `nsis`; é un cross-compile, non fai falta Windows).
 `INSTALADOR_PROBA=1 ./instalador/crear-paquetes.sh windows` xera un `.exe` SEN
 compresión en `build/proba/` (7 segundos en vez de 2-3 minutos) para iterar
 sobre o propio instalador.
@@ -92,22 +88,9 @@ Ficheiros de `windows/`: `instalador.nsi`, `xerar_arbore_nsh.py`,
 `anonimizador.ico` e `asistente.bmp` con Pillow; ambos van versionados, non fai
 falta rexeneralos para construír).
 
-## Mac e Linux
+## Outros ficheiros
 
-- `instalar-mac.command` / `instalar-linux.sh` — instalación completa
-  (Python, Tesseract, ambiente virtual, dependencias, modelo de idioma).
-- `Iniciar-Anonimizador.command` / `.sh` — arrancan a interface nunha xanela
-  de escritorio propia (`anonimizador escritorio`, pywebview -- non nunha
-  pestana do navegador), coa clave de cifrado no chaveiro do sistema
-  (`--chaveiro-sistema`) xa activada. En Linux cae automaticamente ao
-  navegador se falta GTK3/WebKit2GTK no sistema (non se inclúen no paquete
-  offline, ver `crear-paquetes.sh`).
 - `LEEME.txt` / `LEEME.pdf` — nota de benvida (mesmo contido nos dous formatos;
   o PDF segue o mesmo estilo visual có resto de informes).
-
-Estes scripts asumen que se executan situados **xunto a unha copia completa
-do proxecto** nun cartafol chamado `anonimizador-xuridico/`
-(`./anonimizador-xuridico/src`, `./anonimizador-xuridico/requirements.txt`...
-ao seu carón): a estrutura do paquete final que se entrega ao usuario, non a
-deste repositorio. `crear-paquetes.sh` monta ese paquete (código limpo, PDFs
-de `docs/`, runtime e wheels) e cómprimeo.
+- `bundle/` — utilidades de montaxe: `resolve_deps_pe.py` (bibliotecas que
+  precisa `tesseract.exe`) e `montar_site_packages.py`.

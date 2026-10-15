@@ -1,32 +1,26 @@
 #!/bin/bash
-# Xera os paquetes de entrega do Anonimizador de expedientes xurídicos,
-# un por sistema operativo -- ver instalador/README.md para o porqué.
+# Xera o instalador de Windows do Anonimizador de expedientes xurídicos
+# -- ver instalador/README.md para o porqué.
 #
-# Cada paquete leva TODO o necesario para instalar sen tocar nada máis no
+# O instalador leva TODO o necesario para instalar sen tocar nada máis no
 # ordenador de destino nin precisar conexión a internet: Python, Tesseract
-# (OCR) coas súas bibliotecas, e tódolos paquetes de Python xa descargados
-# coma ".whl" locais.
+# (OCR) coas súas bibliotecas, e tódolos paquetes de Python.
 #
-# Uso: ./instalador/crear-paquetes.sh [windows|mac|linux|todo]
-#      (sen argumento: todo)
-# Saída: Anonimizador-Xuridico-Instalador-<VERSION>.exe   (Windows: instalador
-#          gráfico NSIS con barra de progreso, desinstalador e entrada en
-#          "Aplicacións instaladas" -- ver instalador/windows/instalador.nsi)
-#        anonimizador-xuridico-instalacion-<VERSION>-mac.zip
-#        anonimizador-xuridico-instalacion-<VERSION>-linux.zip
-#        (na raíz do repositorio)
+# Uso: ./instalador/crear-paquetes.sh [windows]
+# Saída: Anonimizador-Xuridico-Instalador-<VERSION>.exe (na raíz do
+#        repositorio): instalador gráfico NSIS con barra de progreso,
+#        desinstalador e entrada en "Aplicacións instaladas" -- ver
+#        instalador/windows/instalador.nsi.
 #
-# Windows non leva un zip cos scripts: o .exe leva xa o árbore FINAL (Python
-# portátil cos paquetes desempaquetados en site-packages, sen venv nin pip),
-# así que na máquina de destino só copia ficheiros -- a barra de progreso
-# do asistente é a de verdade. Precisa `makensis` (brew install makensis).
+# O .exe leva xa o árbore FINAL (Python portátil cos paquetes
+# desempaquetados en site-packages, sen venv nin pip), así que na máquina
+# de destino só copia ficheiros -- a barra de progreso do asistente é a de
+# verdade. Precisa `makensis` (paquete nsis).
 #
 # O cartafol build/ (descargas e paquetes montados) é un caché reutilizable
 # entre execucións -- está en .gitignore, bórrao se queres partir de cero.
 #
-# Precisa: curl, python3 (con pip), objdump e readelf (paquete binutils,
-# adoitan estar xa instalados en Linux/Mac), e o paquete de Python
-# "macholib" (o script instálao só a primeira vez si fai falta).
+# Precisa: curl, python3 (con pip) e makensis.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."   # raíz do repositorio
@@ -34,8 +28,8 @@ cd "$(dirname "$0")/.."   # raíz do repositorio
 RAIZ="$(pwd)"
 INSTALADOR="$RAIZ/instalador"
 DOCS="$RAIZ/docs"
-# ONDE SE TRABALLA. O empaquetado chega a ocupar case 8 GB (staging dos tres
-# sistemas + caché de wheels). Por defecto vai en `build/` dentro do repo;
+# ONDE SE TRABALLA. O empaquetado ocupa varios GB (staging + caché de
+# wheels). Por defecto vai en `build/` dentro do repo;
 # para levalo a outro disco:
 #     ANONIMIZADOR_BUILD=/onde/queiras ./instalador/crear-paquetes.sh windows
 BUILD="${ANONIMIZADOR_BUILD:-$RAIZ/build}"
@@ -84,14 +78,9 @@ MICROMAMBA="$CACHE/tools/micromamba"
 # (só existe wheel para Mac) e fallaba con "No matching distribution".
 # Mesmo motivo xa documentado máis abaixo para pywin32 (`descargar_extras_windows`).
 #
-# cryptography, pymupdf e opencv-python-headless: a versión máis nova
-# instalada no venv de desenvolvemento (Mac ARM64) NON sempre ten wheel
-# para Mac INTEL cos obxectivos antigos de abaixo (macosx_10_13/11_0/
-# 12_0_x86_64) -- algunhas librarías deixan de publicar wheel para Intel
-# en versións recentes. Baixadas á última versión confirmada con wheel
-# nas 4 combinacións de plataforma (Windows, Mac Intel, Mac ARM, Linux),
-# comprobado a man cunha descarga de proba de cada unha antes de
-# escribir isto -- bug real atopado xerando o paquete.
+# cryptography, pymupdf e opencv-python-headless: fixadas nas versións
+# xa probadas co instalador de Windows; ao subilas, comprobar antes que
+# hai wheel para win_amd64 / cp312.
 PAQUETES_COMUNS="cryptography==46.0.7 PyYAML==6.0.3 python-docx==1.2.0 pymupdf==1.26.0 pytesseract==0.3.13 pillow==11.3.0 flask==3.1.3 keyring==25.7.0 spacy==3.7.5 numpy==1.26.4 opencv-python-headless==4.10.0.84"
 
 mkdir -p "$CACHE/tools" "$CACHE/runtime" "$CACHE/wheels" "$BUILD"
@@ -103,21 +92,7 @@ mkdir -p "$CACHE/tools" "$CACHE/runtime" "$CACHE/wheels" "$BUILD"
 log() { echo ">> $*"; }
 
 asegurar_ferramentas() {
-    # objdump/readelf/macholib só se usan para empaquetar Tesseract de Mac e
-    # Linux (bundle/resolve_deps_*.py): para "windows" non fan falta.
-    local cmds="curl"
-    if [ "${OBXECTIVO:-todo}" != "windows" ]; then cmds="curl objdump readelf"; fi
-    for cmd in $cmds; do
-        command -v "$cmd" >/dev/null || { echo "ERRO: precísase '$cmd' instalado."; exit 1; }
-    done
-    if [ "${OBXECTIVO:-todo}" != "windows" ]; then python3 -c "import macholib" 2>/dev/null || {
-        log "Instalando macholib (só fai falta para xerar os paquetes, non para usar o programa)..."
-        # "python3 -m pip" (nunca o binario "pip" solto): en macOS co Python
-        # das Command Line Tools non hai ningún "pip" no PATH, só "pip3" --
-        # bug real de portabilidade atopado executando este script en Mac.
-        python3 -m pip install --quiet --break-system-packages macholib 2>/dev/null \
-            || python3 -m pip install --quiet --user macholib
-    }; fi
+    command -v curl >/dev/null || { echo "ERRO: precísase 'curl' instalado."; exit 1; }
     if [ ! -x "$MICROMAMBA" ]; then
         log "Descargando micromamba (ferramenta de empaquetado, non se distribúe)..."
         # SEN "--strip-components=0": é un no-op (stripar CERO compoñentes
@@ -167,7 +142,7 @@ descargar_python() {
 
 # ---------------------------------------------------------------------
 # Tesseract mínimo (binario + peche de bibliotecas + tessdata) por
-# plataforma conda (win-64 / osx-64 / osx-arm64 / linux-64)
+# para Windows (plataforma conda win-64)
 # ---------------------------------------------------------------------
 
 descargar_tesseract() {
@@ -182,26 +157,11 @@ descargar_tesseract() {
 
     mkdir -p "$destino/bin" "$destino/tessdata"
 
-    if [ "$plataforma" = "win-64" ]; then
-        python3 "$INSTALADOR/bundle/resolve_deps_pe.py" "$env/Library/bin" tesseract.exe \
-            | while read -r f; do cp "$env/Library/bin/$f" "$destino/bin/"; done
-        for idioma in spa glg eng; do
-            cp "$env/share/tessdata/$idioma.traineddata" "$destino/tessdata/"
-        done
-    else
-        mkdir -p "$destino/lib"
-        cp "$env/bin/tesseract" "$destino/bin/"
-        if [ "$plataforma" = "linux-64" ]; then
-            python3 "$INSTALADOR/bundle/resolve_deps_elf.py" "$env" bin/tesseract \
-                | while read -r f; do cp "$env/lib/$f" "$destino/lib/"; done
-        else
-            python3 "$INSTALADOR/bundle/resolve_deps_macho.py" "$env" bin/tesseract \
-                | while read -r f; do cp "$env/lib/$f" "$destino/lib/"; done
-        fi
-        for idioma in spa glg eng; do
-            cp "$env/share/tessdata/$idioma.traineddata" "$destino/tessdata/"
-        done
-    fi
+    python3 "$INSTALADOR/bundle/resolve_deps_pe.py" "$env/Library/bin" tesseract.exe \
+        | while read -r f; do cp "$env/Library/bin/$f" "$destino/bin/"; done
+    for idioma in spa glg eng; do
+        cp "$env/share/tessdata/$idioma.traineddata" "$destino/tessdata/"
+    done
     rm -rf "$env"
 }
 
@@ -283,28 +243,6 @@ descargar_extras_windows() {
         --implementation cp --abi cp312 --only-binary=:all: pywin32 pywin32-ctypes colorama pythonnet
 }
 
-descargar_extras_mac() {
-    # pyobjc-core e os frameworks que pywebview precisa en Mac
-    # (requirements.txt, marcados "; sys_platform == darwin") -- mesmo
-    # motivo cá función equivalente de Windows (marcadores condicionais
-    # que "pip download --platform" non resolve para a plataforma de
-    # DESTINO). Fixado a "==11.1" a propósito -- ver requirements.txt (a
-    # 12.0 está RETIRADA de PyPI e rompe o tamaño da xanela de pywebview,
-    # bug real atopado probando a versión de escritorio) -- e coa MESMA
-    # versión exacta xa instalada e probada no venv de desenvolvemento,
-    # para non arriscar outra vez o resolvedor de pip (ver comentario en
-    # PAQUETES_COMUNS: "<12" a secas xa contribuíu a un bloqueo real de
-    # case 8 horas noutro punto deste script).
-    local plataforma="$1" destino="$2"  # $1 = etiqueta --platform de pip
-    mkdir -p "$destino"
-    [ -n "$(ls "$destino"/pyobjc_core-* 2>/dev/null)" ] && return
-    python3 -m pip download --quiet --dest "$destino" --python-version 3.12 --platform "$plataforma" \
-        --implementation cp --abi cp312 --only-binary=:all: \
-        "pyobjc-core==11.1" "pyobjc-framework-Cocoa==11.1" "pyobjc-framework-WebKit==11.1" \
-        "pyobjc-framework-Quartz==11.1" "pyobjc-framework-security==11.1" \
-        "pyobjc-framework-UniformTypeIdentifiers==11.1"
-}
-
 # A versión do modelo TEN QUE corresponderse coa de spaCy fixada arriba
 # (spacy==3.7.5 -> modelo 3.7.x; a serie 3.8.x pide spaCy >=3.8). Non é
 # unha regra teórica: ata o 27/09/2026 este script baixaba o modelo 3.8.0
@@ -356,22 +294,6 @@ copiar_fonte_limpa() {
     find "$destino" -name "*.pyc" -delete
 }
 
-copiar_docs_comuns() {
-    cp "$INSTALADOR/LEEME.txt" "$1/"
-    cp "$INSTALADOR/LEEME.pdf" "$1/"
-    cp "$DOCS/"*.pdf "$1/"
-}
-
-copiar_wheels() {
-    # $1 = destino   $2 = etiqueta da roda de paquetes
-    mkdir -p "$1/wheels"
-    cp "$CACHE/wheels/$2/"* "$1/wheels/"
-    cp "$CACHE/wheels/_odfpy/"* "$1/wheels/"
-    cp "$CACHE/wheels/_proxy_tools/"* "$1/wheels/"
-    cp "$CACHE/wheels/_pywebview/"* "$1/wheels/"
-    cp "$CACHE/wheels/_modelo/"* "$1/wheels/"
-}
-
 # ---------------------------------------------------------------------
 # Windows: instalador gráfico NSIS (un único .exe)
 # ---------------------------------------------------------------------
@@ -381,8 +303,7 @@ convertir_sdists_a_wheel() {
     # (.tar.gz, Python puro). O instalador de Windows NON executa pip na
     # máquina de destino, así que convértense aquí, unha soa vez, a wheel
     # (un zip que se pode desempaquetar directamente en site-packages).
-    # Cacheado en wheels/_sdist_wheels (aparte de _odfpy/_proxy_tools, que
-    # copian tal cales os paquetes de Mac e Linux).
+    # Cacheado en wheels/_sdist_wheels.
     local destino="$CACHE/wheels/_sdist_wheels"
     if [ -n "$(ls "$destino"/odfpy-*.whl 2>/dev/null)" ] && [ -n "$(ls "$destino"/proxy_tools-*.whl 2>/dev/null)" ]; then return; fi
     log "Convertendo odfpy e proxy_tools (sdist) a wheel..."
@@ -393,7 +314,7 @@ convertir_sdists_a_wheel() {
 
 xerar_windows() {
     log "== Windows =="
-    command -v makensis >/dev/null || { echo "ERRO: precísase 'makensis' (brew install makensis)."; exit 1; }
+    command -v makensis >/dev/null || { echo "ERRO: precísase 'makensis' (paquete nsis)."; exit 1; }
     descargar_python "x86_64-pc-windows-msvc" "$CACHE/runtime/python-windows"
     descargar_tesseract "win-64" "$CACHE/runtime/tesseract-windows"
     descargar_wheels_comuns "windows" --python-version 3.12 --platform win_amd64 --implementation cp --abi cp312
@@ -442,67 +363,14 @@ xerar_windows() {
     log "Xerado: $(basename "$saida") ($(du -sh "$saida" | cut -f1))"
 }
 
-xerar_mac() {
-    log "== macOS =="
-    descargar_python "x86_64-apple-darwin" "$CACHE/runtime/python-mac-x64"
-    descargar_python "aarch64-apple-darwin" "$CACHE/runtime/python-mac-arm64"
-    descargar_tesseract "osx-64" "$CACHE/runtime/tesseract-mac-x64"
-    descargar_tesseract "osx-arm64" "$CACHE/runtime/tesseract-mac-arm64"
-    descargar_wheels_comuns "mac-x64" --python-version 3.12 \
-        --platform macosx_10_13_x86_64 --platform macosx_11_0_x86_64 --platform macosx_12_0_x86_64 \
-        --implementation cp --abi cp312
-    descargar_wheels_comuns "mac-arm64" --python-version 3.12 \
-        --platform macosx_11_0_arm64 --platform macosx_12_0_arm64 \
-        --implementation cp --abi cp312
-    descargar_extras_mac "macosx_11_0_x86_64" "$CACHE/wheels/mac-x64"
-    descargar_extras_mac "macosx_11_0_arm64" "$CACHE/wheels/mac-arm64"
-
-    paquete="$BUILD/$NOME-mac"
-    rm -rf "$paquete"; mkdir -p "$paquete/runtime" "$paquete/wheels"
-    cp "$INSTALADOR/mac/"* "$paquete/"
-    copiar_docs_comuns "$paquete"
-    cp "$CACHE/wheels/mac-x64/"* "$CACHE/wheels/mac-arm64/"* "$CACHE/wheels/_odfpy/"* "$CACHE/wheels/_proxy_tools/"* "$CACHE/wheels/_pywebview/"* "$CACHE/wheels/_modelo/"* "$paquete/wheels/" 2>/dev/null || true
-    copiar_fonte_limpa "$paquete"
-    cp -R "$CACHE/runtime/python-mac-x64" "$paquete/runtime/python-x64"
-    cp -R "$CACHE/runtime/python-mac-arm64" "$paquete/runtime/python-arm64"
-    cp -R "$CACHE/runtime/tesseract-mac-x64" "$paquete/runtime/tesseract-x64"
-    cp -R "$CACHE/runtime/tesseract-mac-arm64" "$paquete/runtime/tesseract-arm64"
-    chmod +x "$paquete/instalar-mac.command" "$paquete/Iniciar-Anonimizador.command"
-    (cd "$paquete" && zip -r -X -q "$RAIZ/$NOME-mac.zip" .)
-    log "Xerado: $NOME-mac.zip ($(du -sh "$RAIZ/$NOME-mac.zip" | cut -f1))"
-
-}
-
-xerar_linux() {
-    log "== Linux/Ubuntu =="
-    descargar_python "x86_64-unknown-linux-gnu" "$CACHE/runtime/python-linux"
-    descargar_tesseract "linux-64" "$CACHE/runtime/tesseract-linux"
-    descargar_wheels_comuns "linux" --python-version 3.12 \
-        --platform manylinux2014_x86_64 --platform manylinux_2_17_x86_64 \
-        --implementation cp --abi cp312
-
-    paquete="$BUILD/$NOME-linux"
-    rm -rf "$paquete"; mkdir -p "$paquete/runtime"
-    cp "$INSTALADOR/linux/"* "$paquete/"
-    copiar_docs_comuns "$paquete"
-    copiar_wheels "$paquete" "linux"
-    copiar_fonte_limpa "$paquete"
-    cp -R "$CACHE/runtime/python-linux" "$paquete/runtime/python"
-    cp -R "$CACHE/runtime/tesseract-linux" "$paquete/runtime/tesseract"
-    chmod +x "$paquete/instalar-linux.sh" "$paquete/Iniciar-Anonimizador.sh"
-    (cd "$paquete" && zip -r -X -q "$RAIZ/$NOME-linux.zip" .)
-    log "Xerado: $NOME-linux.zip ($(du -sh "$RAIZ/$NOME-linux.zip" | cut -f1))"
-
-}
-
 # ---------------------------------------------------------------------
 # Principal
 # ---------------------------------------------------------------------
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|mac|linux|todo) ;;
-    *) echo "Uso: $0 [windows|mac|linux|todo]"; exit 1 ;;
+    windows|todo) ;;
+    *) echo "Uso: $0 [windows]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -511,9 +379,7 @@ descargar_proxy_tools
 descargar_pywebview
 descargar_modelo_idioma
 
-if [ "$OBXECTIVO" = "todo" ] || [ "$OBXECTIVO" = "windows" ]; then xerar_windows; fi
-if [ "$OBXECTIVO" = "todo" ] || [ "$OBXECTIVO" = "mac" ]; then xerar_mac; fi
-if [ "$OBXECTIVO" = "todo" ] || [ "$OBXECTIVO" = "linux" ]; then xerar_linux; fi
+xerar_windows
 
 echo
 log "Feito ($OBXECTIVO). Os ficheiros xerados están en $RAIZ/"

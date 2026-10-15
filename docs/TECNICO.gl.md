@@ -113,10 +113,10 @@ DETERMINADO. Os compoñentes e datos de terceiros, coas súas licenzas, están e
    se quedou marcada e por que).
 7. **Interface de revisión humana** (`web.py`, `templates/`): unha aplicación
    web local (só en `127.0.0.1`, nunca exposta á rede) onde un letrado
-   revisa os posibles homónimos marcados, decide se fusionar dous códigos
-   ou mantelos distintos, revisa os riscos de efecto mosaico e pode retocar
-   o texto final antes de gardalo. As fusións quedan rexistradas na
-   auditoría cifrada (`registry.fusionar` / `registry.manter_separadas`).
+   ve os posibles homónimos (que quedan SEMPRE coma persoas distintas:
+   a revisión non fusiona códigos), revisa os riscos de efecto mosaico e
+   escolle que datos se tapan antes de gardar. A decisión queda rexistrada
+   na auditoría cifrada (`registry.manter_separadas`).
 8. **Reversión controlada e listado completo** (`registry.reverter`/
    `registry.listar_correspondencias`, rutas web `/reverter`/
    `/listar-correspondencias` e subcomandos `reverter`/
@@ -128,8 +128,9 @@ DETERMINADO. Os compoñentes e datos de terceiros, coas súas licenzas, están e
    distinta -- `listado_completo`, nunca `reversion`). As dúas esixen
    sempre un motivo (nunca opcional) e quedan rexistradas na auditoría
    cifrada con quen as solicitou e cando. Se un código foi fusionado
-   noutro, `reverter` segue o alias ata o vixente e o listado amosa os
-   fusionados coma columna do código vixente.
+   noutro (só en rexistros antigos ou dende o CLI), `reverter` segue o
+   alias ata o vixente e o listado amosa os fusionados coma columna do
+   código vixente.
 9. **Conserva o formato orixinal** en `.docx` e `.odt` (`pipeline.py`,
    funcións `cargar_documento_estruturado`/`gardar_documento_estruturado`):
    en vez de escribir sempre texto plano, reescribe o texto anonimizado
@@ -241,11 +242,10 @@ PYTHONPATH=src python3 -m anonimizador.cli anonimizar \
     ejemplos/declaracion.txt --rexistro ./datos_rexistro --chaveiro-sistema
 ```
 
-Funciona igual en Mac e en Windows -- a libraría `keyring` (dependencia
-nova en `requirements.txt`) escolle o backend nativo de cada sistema:
-**macOS Keychain** ou **Windows Credential Manager** (require `pywin32`,
-xa incluído en `requirements.txt` só para Windows). En Linux usa
-SecretService (GNOME Keyring/KWallet) se hai un dispoñible.
+En Windows a libraría `keyring` usa o **Administrador de credenciais**
+(require `pywin32`, xa incluído en `requirements.txt` só para Windows).
+Executando dende o código fonte noutros sistemas usa o chaveiro nativo
+(Keychain, SecretService) se hai un dispoñible.
 
 Puntos importantes:
 
@@ -276,15 +276,14 @@ PYTHONPATH=src python3 -m anonimizador.cli servir --porto 5000
 Abre `http://127.0.0.1:5000` (só accesible desde este ordenador). Introduce
 a ruta do documento e o cartafol do rexistro, e a interface amosa:
 
-- os posibles homónimos marcados, cun despregable para confirmar "é a mesma
-  persoa que [código]" (fusiona os códigos) ou manter cada un por separado;
+- os posibles homónimos, só coma aviso: cada un queda sempre coma persoa
+  distinta (a revisión non fusiona códigos; fusionar a man chegou a deixar
+  o nome á vista no documento final);
 - os riscos de efecto mosaico detectados, coa frase orixe;
-- o texto final nun campo editable, por se cómpre corrixir algo á man antes
-  de gardar.
+- os datos detectados, para escoller cales se tapan.
 
-Ao confirmar, garda o documento final e dispara `registry.fusionar` (ou
-`manter_separadas`) para que a decisión do letrado quede tamén na auditoría
-cifrada do rexistro.
+Ao confirmar, garda o documento final e dispara `registry.manter_separadas`
+para que a decisión do letrado quede tamén na auditoría cifrada do rexistro.
 
 **Escoller ficheiro/cartafol sen escribir a ruta a man**: os botóns
 "Escoller ficheiro…"/"Escoller cartafol…" (`selector.py`) abren o diálogo
@@ -314,11 +313,9 @@ ou "Anonimización automática" -- garda directamente, sen crear ningunha
 sesión de revisión nin pedir confirmación, tanto para un ficheiro solto
 coma para un cartafol enteiro (`web._procesar_automatico`). A regra de
 seguridade central non cambia: `registry.resolver_ou_crear` xa NUNCA
-fusiona un posible homónimo por conta propia (esixe sempre `fusionar`
-explícito dun humano), así que en modo automático un posible homónimo
-simplemente recibe un código novo, coma se se tivese escollido "manter
-separadas" a man -- só que xa non hai sesión pendente para cambiar esa
-decisión despois desde a interface web.
+fusiona un posible homónimo por conta propia, así que en modo automático
+un posible homónimo simplemente recibe un código novo, igual ca no modo
+de revisión.
 
 As revisións pendentes sobreviven a un reinicio do servidor: gárdanse
 cifradas en `<rexistro>/sesions.enc` (mesma clave có resto do rexistro) en
@@ -380,7 +377,7 @@ está instalado), corrección de DNI/NIE mal lidos polo OCR, matrículas
 (formato actual e anterior a 2000), enderezos (galego/castelán, "c/", "s/n",
 símbolo "nº" mal lido polo OCR), números de colexiado/a, CSV e números de
 referencia (en calquera orde etiqueta/código), o fluxo completo da interface
-de revisión (procesar → marcar homónimo → fusionar/manter → gardar), a
+de revisión (procesar → marcar homónimo → manter separado → gardar), a
 reversión controlada (motivo
 obrigatorio, rexistro na auditoría, seguimento de alias tras unha fusión), a
 conservación de formato en `.docx`/`.odt` (negriña, táboas, e o caso de erro
@@ -445,7 +442,7 @@ Correspóndense coas seccións 10 (riscos residuais) do informe orixinal:
   garantía; segue a facer falta revisión humana en casos de alto risco.
 - **Xestión de claves**: por defecto a clave vive nun ficheiro local con
   permisos restrinxidos; con `--chaveiro-sistema` gárdase no chaveiro do
-  sistema operativo (macOS Keychain / Windows Credential Manager) -- ver
+  sistema operativo (en Windows, o Administrador de credenciais) -- ver
   sección "Clave de cifrado no chaveiro do sistema operativo" máis arriba.
   Un token de hardware (HSM) queda fóra do alcance desta proba de concepto.
 
