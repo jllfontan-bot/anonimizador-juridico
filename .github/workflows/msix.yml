@@ -77,9 +77,35 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit 1 }
           Get-Item $saida | Format-List Name, Length
 
+      - name: Copia de PROBA asinada cun certificado propio (só para instalala na VM)
+        shell: pwsh
+        run: |
+          # O .msix da Store vai sen asinar; Windows só instala paquetes
+          # asinados. Esta copia asínase cun certificado de proba co mesmo
+          # Publisher: na VM impórtase certificado-proba.cer en "Persoas de
+          # confianza" do equipo e instálase o .msix con dobre clic.
+          $cert = New-SelfSignedCertificate -Type Custom -Subject "CN=D4ECC9E2-BE4E-46B0-A68D-EF12B55919C3" `
+            -KeyUsage DigitalSignature -FriendlyName "Anonimizador proba" -CertStoreLocation Cert:\CurrentUser\My `
+            -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.3", "2.5.29.19={text}")
+          New-Item -ItemType Directory proba | Out-Null
+          Export-Certificate -Cert $cert -FilePath proba\certificado-proba.cer | Out-Null
+          $msix = Get-ChildItem *.msix | Select-Object -First 1
+          Copy-Item $msix.FullName "proba\$($msix.BaseName)-PROBA.msix"
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\signtool.exe" |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          & $signtool.FullName sign /fd SHA256 /sha1 $cert.Thumbprint (Get-ChildItem proba\*.msix).FullName
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+
       - uses: actions/upload-artifact@v4
         with:
-          name: paquete-msix
+          name: paquete-msix-store
           path: "*.msix"
           retention-days: 14
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paquete-msix-proba-asinado
+          path: proba/
+          retention-days: 3
           compression-level: 0
