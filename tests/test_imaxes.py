@@ -1,6 +1,10 @@
 """Imaxes soltas (`imaxes.py`): a saída é unha imaxe do MESMO formato e
 tamaño en píxeles, sen o dato nos píxeles (comprobado con OCR de novo
 sobre a imaxe final) e sen metadatos EXIF. Nomes inventados."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import shutil
 import sys

@@ -21,6 +21,10 @@ editou o texto a man) o texto reescribíase sempre a 11 puntos, e cando
 non collía `insert_textbox` non escribía NADA -- a páxina, xa redactada,
 quedaba en branco sen aviso ningún.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

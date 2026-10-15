@@ -50,6 +50,7 @@ from pathlib import Path
 
 from cryptography.fernet import Fernet
 
+from .idioma import codigo_canonico
 from .resolution import Grupo, normalizar
 
 if os.name == "nt":
@@ -531,6 +532,7 @@ class RexistroCorrespondencias:
         mesma persoa que `manter`. Refusase se ambos teñen DNI confirmado
         e son distintos (iso xa non seria un homonimo dubidoso, senon un
         erro de revision)."""
+        manter, eliminar = codigo_canonico(manter), codigo_canonico(eliminar)
         if manter == eliminar:
             return
         if manter not in self._estado["persoas"] or eliminar not in self._estado["persoas"]:
@@ -562,7 +564,7 @@ class RexistroCorrespondencias:
         que SON persoas distintas (deixa o rexistro tal como estaba, so
         queda constancia na auditoría)."""
         self._rexistrar_auditoria(
-            "confirmado_persoas_distintas", codigo_a, f"confirmado distinto de {codigo_b}"
+            "confirmado_persoas_distintas", codigo_canonico(codigo_a), f"confirmado distinto de {codigo_b}"
         )
 
     @_con_bloqueo
@@ -571,7 +573,7 @@ class RexistroCorrespondencias:
         (ou non hai que anonimizala) e deixouna á vista no documento. O código
         segue no rexistro (pode aparecer noutros documentos); queda constancia
         na auditoría para medir a precisión do detector co uso real."""
-        self._rexistrar_auditoria("descartada_por_humano", codigo, motivo)
+        self._rexistrar_auditoria("descartada_por_humano", codigo_canonico(codigo), motivo)
 
     def _resolver_alias(self, codigo: str) -> str:
         """Se un código foi fusionado noutro (`fusionar`), segue a cadea de
@@ -659,10 +661,9 @@ class RexistroCorrespondencias:
         # A26 (revisión 21/09/2026): ata o 29/09/2026 o DNI redactábase
         # coma "ID_000042" (mesma numeración ca "PERSOA_000042"); dende
         # entón leva o mesmo código ca o titular, pero os documentos xa
-        # entregados seguen tendo "ID_..." e teñen que poder reverterse.
-        codigo_normalizado = codigo
-        if codigo_normalizado.startswith("ID_"):
-            codigo_normalizado = "PERSOA_" + codigo_normalizado[len("ID_"):]
+        # entregados seguen tendo "ID_..." e teñen que poder reverterse. O
+        # mesmo cos documentos en castelán ("PERSONA_000042").
+        codigo_normalizado = codigo_canonico(codigo.strip())
 
         codigo_actual = self._resolver_alias(codigo_normalizado)
         if codigo_actual not in self._estado["persoas"]:

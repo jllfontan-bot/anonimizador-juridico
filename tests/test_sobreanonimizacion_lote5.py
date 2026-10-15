@@ -1,6 +1,10 @@
 """Sobreanonimización do lote 5 (revisión humana do 10/10/2026, 60 docs): termos que
 NON son persoas e o programa tapaba. Cada caso é sintético, co mesmo contexto que o
 documento real; os controis negativos comproban que unha persoa parecida segue tapada."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import re
 import sys
 import unittest

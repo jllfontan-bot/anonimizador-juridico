@@ -1,5 +1,9 @@
 """`medicion/comparar_tapados.py`: comparar o que tapan dúas versións do programa
 sobre os documentos NON revisados dun lote (medición sen sesgo). Documentos sintéticos."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import json
 import subprocess
 import sys

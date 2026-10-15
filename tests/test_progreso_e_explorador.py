@@ -7,6 +7,10 @@
 - ao confirmar unha revisión, os saltos de liña `\\r\\n` que envía o
   navegador NON deben facer que un PDF/.docx caia a texto plano.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

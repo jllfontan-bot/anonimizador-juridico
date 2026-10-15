@@ -2,6 +2,10 @@
 (petición do usuario, 03/10/2026: "que cando o pida, saia unha táboa bonita";
 "opción de xerar un PDF, advertindo de que é un documento de extrema
 sensibilidade, cunha marca de auga de Confidencial")."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

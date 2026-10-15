@@ -9,6 +9,10 @@ escaneada, dos propios píxeles: verificado facendo OCR de novo sobre a
 imaxe final). É o mesmo tipo de erro crítico xa atopado antes neste
 proxecto (CSV, número de colexiado...) pero aplicado a PDF.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import shutil
 import sys

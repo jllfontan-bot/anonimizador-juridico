@@ -10,6 +10,10 @@ apuntaba á persoa equivocada.
 
 Todos os nomes e DNI son sintéticos.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import subprocess
 import sys

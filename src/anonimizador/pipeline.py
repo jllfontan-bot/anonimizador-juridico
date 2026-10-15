@@ -30,7 +30,7 @@ from odf.opendocument import load as cargar_odt
 from odf.text import H as TituloOdt
 from odf.text import P as ParagrafoOdt
 
-from . import codigos, imaxes, mosaic, ner, resolution
+from . import codigos, idioma, imaxes, mosaic, ner, resolution
 from .categoria_especial import escanear_categoria_especial
 from .risco_residual import escanear_risco_residual
 from .pdf_estrutura import _limites_paxinas, cargar_pdf_estruturado, gardar_pdf_estruturado
@@ -795,6 +795,7 @@ def aplicar_decisions(
         if substituto is None:
             mencions = [Entidade(a, b, texto[a:b], "PERSOA") for a, b in aparicions]
             codigo, _, _, _ = rexistro.resolver_ou_crear(resolution.Grupo(representante=fragmento, mencions=mencions))
+            codigo = idioma.codigo_visible(codigo)
             codigos_novos.append(codigo)
             substituto = codigo
         novas.extend((a, b, substituto) for a, b in aparicions)
@@ -824,12 +825,16 @@ def anonimizar_texto_detallado(
     # aplicaríase sobre o texto xa modificado e corrompería os veciños).
     titular_do_documento = resolution.documentos_por_grupo(grupos, entidades, texto)
     documentos = [e for e in entidades if id(e) in titular_do_documento]
+    lingua = idioma.actual()  # unha soa vez: todo o documento co mesmo prefixo e etiquetas
 
     substitucions = []  # (inicio, fin, texto_substituto)
     informe_persoas = []
 
     for grupo in grupos:
         codigo, marcado, motivo, posibles_coincidencias = rexistro.resolver_ou_crear(grupo)
+        # O rexistro garda PERSOA_n; o documento e a pantalla levan o prefixo do idioma.
+        codigo = idioma.codigo_visible(codigo, lingua)
+        posibles_coincidencias = [idioma.codigo_visible(c, lingua) for c in posibles_coincidencias or []]
         for mencion in grupo.mencions:
             substitucions.append((mencion.inicio, mencion.fin, codigo))
         for d in documentos:
@@ -839,7 +844,7 @@ def anonimizar_texto_detallado(
             "codigo": codigo,
             "mencions": [m.texto for m in grupo.mencions],
             "marcado_para_revision": marcado,
-            "motivo": motivo,
+            "motivo": idioma.codigos_visibles_no_texto(motivo, lingua) if motivo else motivo,
             "posibles_coincidencias": posibles_coincidencias,
         })
 
@@ -853,7 +858,7 @@ def anonimizar_texto_detallado(
                 outras_directas.append({"tipo": e.etiqueta, "texto": e.texto})
             continue
         if etiqueta_saida:
-            substitucions.append((e.inicio, e.fin, f"[{etiqueta_saida}]"))
+            substitucions.append((e.inicio, e.fin, f"[{idioma.etiqueta(etiqueta_saida, lingua)}]"))
             outras_directas.append({"tipo": e.etiqueta, "texto": e.texto})
         elif e.etiqueta == "DNI_NIE":
             substitucions.append((e.inicio, e.fin, "[DNI_NIE]"))
@@ -973,6 +978,7 @@ def nome_ficheiro_anonimizado(
         codigo = codigo_por_nome.get(resolution.normalizar(grupo.representante))
         if not codigo:
             codigo, _, _, _ = rexistro.resolver_ou_crear(grupo)
+            codigo = idioma.codigo_visible(codigo)
         for mencion in grupo.mencions:
             substitucions.append((mencion.inicio, mencion.fin, codigo))
         if grupo.dni:
@@ -995,6 +1001,8 @@ def nome_ficheiro_anonimizado(
         if d.inicio in dnis_cubertos:
             continue
         codigo = rexistro.codigo_por_dni(d.texto)
+        if codigo:
+            codigo = idioma.codigo_visible(codigo)
         substitucions.append((d.inicio, d.fin, codigo or "[DNI_NIE]"))
 
     if not substitucions:

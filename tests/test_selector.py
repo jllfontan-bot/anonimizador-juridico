@@ -3,6 +3,10 @@
 Non abre un diálogo real en ningún test -- bloquearía a suite agardando
 por un clic humano que nunca chega. `subprocess.run` substitúese por un
 dobre de proba."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import unittest

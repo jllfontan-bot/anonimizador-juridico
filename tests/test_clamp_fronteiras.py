@@ -8,6 +8,10 @@ SEN que ningún letrado editase nada a man. `_clamp_substitucions_a_limites`
 parte calquera substitución así en anacos, un por páxina/parágrafo que
 toca, para que isto nunca poida desaliñar a estrutura do documento.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

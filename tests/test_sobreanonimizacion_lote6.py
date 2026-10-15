@@ -2,6 +2,10 @@
 DESENVOLVEMENTO (`corpus_web_lote6_2024/revision/particion_sobreanonimizacion.json`);
 a metade de PROBA só se usa para medir. Casos sintéticos co contexto do real; os
 controis comproban que a persoa parecida segue tapada."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import sys
 import tempfile
 import unittest

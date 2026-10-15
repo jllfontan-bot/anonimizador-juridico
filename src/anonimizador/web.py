@@ -31,7 +31,7 @@ from urllib.parse import urlsplit
 
 from flask import Flask, jsonify, make_response, redirect, render_template, request, url_for
 
-from . import corpus_revision, explorador, informe_pdf, ner, selector
+from . import corpus_revision, explorador, idioma, informe_pdf, ner, selector
 from .pipeline import (
     _aplicar_substitucions_a_texto,
     anonimizar_e_gardar_detallado,
@@ -738,7 +738,7 @@ def confirmar(sid):
     if request.form.get("decisions_v2") == "1" and texto_orixinal is not None and substitucions is not None:
         manter = set(request.form.getlist("anonimizar"))
         codigos = {p["codigo"] for p in sesion["informe"]["persoas"]}
-        codigos = {c for c in codigos | {novo for (_, _, novo) in substitucions} if c.startswith("PERSOA_")}
+        codigos = {c for c in codigos | {novo for (_, _, novo) in substitucions} if idioma.e_codigo_persoa(c)}
         descartados = codigos - manter
         fragmentos = ler_fragmentos(request.form.get("fragmentos", ""))
         texto_decisions, substitucions, _ = aplicar_decisions(

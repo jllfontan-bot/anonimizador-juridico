@@ -1,5 +1,9 @@
 """Medición contra a referencia do corpus (medicion/corpus_metricas.py): as
 etiquetas xéranse co fluxo real do modo corpus sobre documentos sintéticos."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import json
 import sys
 import tempfile

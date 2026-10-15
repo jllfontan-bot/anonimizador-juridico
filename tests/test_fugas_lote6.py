@@ -2,6 +2,10 @@
 Claude dunha mostra de 60, 11/10/2026; ids en `corpus_web_lote6_2024/mostra_lectura_claude.json`
 na copia local, fóra de git). Cada caso é sintético, co mesmo contexto ca o documento real; os controis
 comproban que o que non é persoa segue á vista."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import sys
 import tempfile
 import unittest

@@ -30,6 +30,10 @@ Tódalas comprobacións fanse sobre a SAÍDA: texto extraíble, bytes
 descomprimidos de TÓDOLOS obxectos do ficheiro e, cando o dato ía nunha
 imaxe ou nun debuxo, OCR do render da páxina final.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import io
 import re

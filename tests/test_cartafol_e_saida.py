@@ -4,6 +4,10 @@
   sesión de revisión propia por cada un (nunca en bloque sen revisión)
 - selector nativo de ficheiro/cartafol conectado á ruta `/escoller`
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

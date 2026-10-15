@@ -1,6 +1,10 @@
 """Modo corpus (plan interno de revisión do corpus): revisar documentos PÚBLICOS coa pantalla
 de decisións e gardar cada decisión coma ETIQUETA (a referencia para medir).
 Os documentos son sintéticos."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import json
 import sys
 import tempfile

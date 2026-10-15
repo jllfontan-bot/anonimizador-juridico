@@ -4,6 +4,10 @@ do BOE onde a detección normal (spaCy + patróns) fallou por completo
 ante un formato non previsto (nomes en "Apelidos, Nome"); en vez de fiar
 cegamente en que a detección é perfecta, isto dá ao letrado unha
 listaxe concreta do que revisar a man."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import unittest

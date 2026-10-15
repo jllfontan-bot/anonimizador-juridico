@@ -7,6 +7,10 @@ calquera outro dato do rexistro, e NUNCA debe conter en claro o documento
 orixinal sen anonimizar (`contexto`) -- iso recárgase sempre desde o
 ficheiro orixinal no disco, nunca se persiste.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

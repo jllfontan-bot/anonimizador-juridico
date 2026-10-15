@@ -10,6 +10,10 @@ programa xa instalado (Windows e Ubuntu):
 3. a quen instala o programa non se lle di nunca que existe unha clave de
    cifrado nin onde queda.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import os
 import subprocess

@@ -11,6 +11,10 @@ Este test verifica as DÚAS cousas: que non quede ningún obxecto de imaxe
 sen usar no PDF final, e que ningunha imaxe que quede (usada ou non)
 conteña o texto orixinal ao voltar a facerlle OCR.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import shutil
 import sys

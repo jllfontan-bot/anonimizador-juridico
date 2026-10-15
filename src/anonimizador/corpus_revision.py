@@ -23,6 +23,8 @@ from pathlib import Path
 
 from flask import Blueprint, Response, abort, redirect, render_template, send_file, url_for
 
+from . import idioma
+
 bp = Blueprint("corpus", __name__)
 
 # {"dir": Path do lote, "cola": [ids], "docs": {id: entrada do manifesto},
@@ -340,7 +342,7 @@ def gardar_etiqueta(sesion: dict, texto_orixinal: str, substitucions_automaticas
     identificadores = []
     for inicio, fin, novo in sorted(substitucions_automaticas):
         mencion = {"inicio": inicio, "fin": fin, "texto": texto_orixinal[inicio:fin]}
-        if novo.startswith("PERSOA_"):
+        if idioma.e_codigo_persoa(novo):
             persoas.setdefault(novo, []).append(mencion)
         else:
             identificadores.append({**mencion, "tipo": novo})

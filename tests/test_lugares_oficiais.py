@@ -1,6 +1,10 @@
 """Listas oficiais de lugares (INE + Nomenclátor de Galicia): un lugar non se
 tapa coma persoa (lote 3 e 4, sobreanonimización dominante). Os casos son
 sintéticos; os nomes de lugar son reais (as listas oficiais)."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import sys
 import tempfile
 import unittest

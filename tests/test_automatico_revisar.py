@@ -2,6 +2,10 @@
 10/10/2026): os documentos con posibles fugas gardan a súa sesión de revisión
 coa MESMA anonimización e os MESMOS códigos; ao confirmar, o resultado revisado
 substitúe ao automático (nada de reprocesar: daría códigos novos)."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import re
 import sys
 import tempfile

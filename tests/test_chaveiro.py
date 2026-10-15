@@ -7,6 +7,10 @@ podería abrir un diálogo de autorización do sistema que bloquease a suite
 agardando a un humano que nunca chega. En vez diso, substitúese o módulo
 `keyring` por un dobre de proba en memoria (`_ChaveiroFalso`).
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

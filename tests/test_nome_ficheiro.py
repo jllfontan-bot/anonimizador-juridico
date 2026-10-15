@@ -4,6 +4,10 @@ Luis Lopez Rabadan.pdf") -- deixalo así deixaría a identidade real á vista
 aínda que o contido do documento quedase ben anonimizado. Informe do
 usuario: "a veces os nomes dos arquivos teñen nomes de persoas ou DNI ou
 DOI... hai que poñer o código de persoa correspondente"."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

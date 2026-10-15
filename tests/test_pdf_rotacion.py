@@ -8,6 +8,10 @@ código coma o propio texto vertical orixinal ao seu redor.
 NATIVO (`get_text("dict")`, campo "dir") e insire o código coa MESMA
 rotación -- estes tests cobren as catro orientacións posibles (0/90/180/270).
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

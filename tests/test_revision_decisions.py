@@ -2,6 +2,10 @@
 do ORIXINAL e das decisións (quen revisa marca persoa / non persoa, engade o que
 faltaba, xeneraliza un dato), nunca a partir dun texto libre editado. Antes,
 editar o cadro de texto desaliñaba as liñas e o PDF caía a un .txt."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import sys
 import tempfile
 import unittest

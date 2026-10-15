@@ -11,6 +11,10 @@ anonimízao co pipeline completo e comproba a SAÍDA abrindo o resultado
 coma un .zip e buscando o dato orixinal en TODOS os XML internos -- non
 abonda con mirar só o texto que devolve python-docx/odfpy, porque
 xustamente aí é onde se escondían estas fugas."""
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import sys
 import tempfile

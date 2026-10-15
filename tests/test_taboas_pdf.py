@@ -11,6 +11,10 @@ Compróbase SEMPRE no PDF de saída relido (capa de texto) e nos seus bytes,
 e tamén o contrario: o que NON é dato persoal (outras columnas, "Desierto",
 unha táboa sen esas cabeceiras) segue igual.
 """
+import os
+
+# Estas probas escribíronse coa interface e os códigos en galego (PERSOA_...).
+os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 
 import shutil
 import sys
