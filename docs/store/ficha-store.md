@@ -16,6 +16,10 @@ Partner Center pedirá una ficha para cada uno.
 - URL de la política de privacidad: dirección pública de `docs/store/politica-privacidad.md`
   (por ejemplo, `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/politica-privacidad.md`,
   que solo funcionará cuando el repositorio sea público y esta rama esté en `main`).
+- Condiciones de uso: `docs/store/condiciones-de-uso.md` (es y gl en el mismo archivo), enlazadas
+  en «Términos de licencia adicionales» de cada ficha:
+  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md`
+  (como la política de privacidad, solo funcionará cuando el repositorio sea público).
 - Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico
 - Contacto de soporte: jllfontan@gmail.com
 - La aplicación no recoge datos personales; no requiere cuenta; no tiene publicidad.
@@ -93,7 +97,7 @@ Primera versión publicada en la Microsoft Store. Los datos de trabajo (registro
 
 **Información de copyright:** © 2026 José Luis López Fontán. Licencia AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
-**Términos de licencia adicionales:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html
+**Términos de licencia adicionales:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md
 
 ## Store listing (gl-ES)
 
@@ -160,7 +164,7 @@ Primeira versión publicada na Microsoft Store. Os datos de traballo (rexistro c
 
 **Información de copyright:** © 2026 José Luis López Fontán. Licenza AGPL-3.0. Datos: INE (CC BY 4.0) e Nomenclátor de Galicia da Xunta de Galicia (CC BY-SA 4.0).
 
-**Termos de licenza adicionais:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html
+**Termos de licenza adicionais:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html. Condicións de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md#condicións-de-uso--anonimizador-jurídico
 
 ## Submission options
 **Capacidades restringidas — justificación de runFullTrust** (en inglés, 485 caracteres):
