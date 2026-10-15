@@ -92,8 +92,8 @@ Tesseract 5.5 e as bibliotecas que precisa, tomadas de **conda-forge**:
 | `Lerc.dll` | LERC (Esri) | Apache-2.0 |
 
 O código fonte das bibliotecas LGPL (GNU libiconv e FFmpeg) está nos seus proxectos
-(https://www.gnu.org/software/libiconv/, https://ffmpeg.org/) e nas receitas de conda-forge e
-opencv-python coas que se compilaron.
+(https://www.gnu.org/software/libiconv/, https://ffmpeg.org/) e nas receitas de conda-forge
+(`https://github.com/conda-forge/<nome>-feedstock`) e opencv-python coas que se compilaron.
 
 ### Runtime de Microsoft Visual C++
 
@@ -117,7 +117,8 @@ Os textos completos das licenzas:
 - **Paquetes de Python:** dentro de cada cartafol `*.dist-info`. Os das bibliotecas nativas que
   levan dentro están no mesmo sitio: `LICENSE.txt` de NumPy, `LICENSE-3RD-PARTY.txt` de
   opencv-python-headless, `COPYING` de PyMuPDF e `LICENSE` de Pillow.
-- **Python portátil:** `runtime/python/LICENSE.txt` (Python, bzip2 e Tcl/Tk); o resto, nos
-  proxectos de orixe.
-- **Tesseract e as súas bibliotecas:** nas receitas de conda-forge
-  (`https://github.com/conda-forge/<nome>-feedstock`) e nos proxectos de orixe.
+- **Python portátil:** `runtime/python/LICENSE.txt` e, para as bibliotecas compiladas dentro,
+  `runtime/python/licenzas/` (un `LICENSE.<biblioteca>.txt` por cada unha).
+- **Tesseract e as súas bibliotecas:** `runtime/tesseract/licenzas/`, un cartafol por paquete de
+  conda-forge. `INDICE.txt` di de que paquete vén cada DLL e cal é a súa licenza. Aí van tamén
+  as condicións de Microsoft para o runtime de Visual C++ (`vc14_runtime-*`, `ucrt-*`).

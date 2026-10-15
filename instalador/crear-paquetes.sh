@@ -20,7 +20,7 @@
 # O cartafol build/ (descargas e paquetes montados) é un caché reutilizable
 # entre execucións -- está en .gitignore, bórrao se queres partir de cero.
 #
-# Precisa: curl, python3 (con pip) e makensis.
+# Precisa: curl, zstd, python3 (con pip) e makensis.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."   # raíz do repositorio
@@ -140,6 +140,32 @@ descargar_python() {
     rm -rf "$tmp" "$extraido"
 }
 
+# O "install_only" de python-build-standalone só trae o LICENSE.txt de
+# Python; os textos das bibliotecas compiladas dentro (OpenSSL, libffi,
+# SQLite...) están só no arquivo "full", en python/licenses/. Del cóllense
+# os das que leva a compilación de Windows (non as de Linux: X11, ncurses...).
+LICENZAS_PYTHON_WINDOWS="bzip2 cpython expat libffi liblzma mpdecimal openssl-3 sqlite tcl tix zlib"
+
+descargar_licenzas_python() {
+    # $1 = triple   $2 = cartafol destino cacheado
+    local triple="$1" destino="$2"
+    if [ -d "$destino" ]; then return; fi
+    command -v zstd >/dev/null || { echo "ERRO: precísase 'zstd' (o arquivo full vén en .tar.zst)."; exit 1; }
+    log "Descargando os textos de licenza do Python portátil ($triple)..."
+    local url="https://github.com/astral-sh/python-build-standalone/releases/download/${PY_TAG}/cpython-${PY_VERSION}%2B${PY_TAG}-${triple}-pgo-full.tar.zst"
+    local tmp="$CACHE/runtime/_tmp_python_full.tar.zst"
+    local extraido="$CACHE/runtime/_extraido_licenzas_$$"
+    curl -Ls "$url" -o "$tmp"
+    mkdir -p "$extraido"
+    zstd -dc "$tmp" | tar xf - -C "$extraido" python/licenses
+    mkdir -p "$destino"
+    local nome
+    for nome in $LICENZAS_PYTHON_WINDOWS; do
+        cp "$extraido/python/licenses/LICENSE.$nome.txt" "$destino/"
+    done
+    rm -rf "$tmp" "$extraido"
+}
+
 # ---------------------------------------------------------------------
 # Tesseract mínimo (binario + peche de bibliotecas + tessdata) por
 # para Windows (plataforma conda win-64)
@@ -148,7 +174,10 @@ descargar_python() {
 descargar_tesseract() {
     # $1 = plataforma conda   $2 = cartafol destino cacheado
     local plataforma="$1" destino="$2"
-    if [ -d "$destino" ]; then return; fi
+    # licenzas/ é a última peza: un caché sen ela é dunha versión anterior
+    # do script e refaise
+    if [ -d "$destino/licenzas" ]; then return; fi
+    rm -rf "$destino"
     log "Construíndo o paquete mínimo de Tesseract ($plataforma)..."
 
     local env="$CACHE/runtime/_env_$plataforma"
@@ -162,6 +191,9 @@ descargar_tesseract() {
     for idioma in spa glg eng; do
         cp "$env/share/tessdata/$idioma.traineddata" "$destino/tessdata/"
     done
+    # textos de licenza dos paquetes de conda dos que saíu cada DLL (non se
+    # instalan no contorno, quedan na caché de micromamba)
+    python3 "$INSTALADOR/bundle/licenzas_conda.py" "$env" "$destino" "$destino/licenzas"
     rm -rf "$env"
 }
 
@@ -318,6 +350,7 @@ convertir_sdists_a_wheel() {
 
 montar_staging_windows() {
     descargar_python "x86_64-pc-windows-msvc" "$CACHE/runtime/python-windows"
+    descargar_licenzas_python "x86_64-pc-windows-msvc" "$CACHE/runtime/python-windows-licenzas"
     descargar_tesseract "win-64" "$CACHE/runtime/tesseract-windows"
     descargar_wheels_comuns "windows" --python-version 3.12 --platform win_amd64 --implementation cp --abi cp312
     descargar_extras_windows
@@ -332,6 +365,7 @@ montar_staging_windows() {
     # o soporta cae á copia normal.
     cp -Rc "$CACHE/runtime/python-windows" "$stage/runtime/python" 2>/dev/null \
         || { rm -rf "$stage/runtime/python"; cp -R "$CACHE/runtime/python-windows" "$stage/runtime/python"; }
+    cp -R "$CACHE/runtime/python-windows-licenzas" "$stage/runtime/python/licenzas"
     cp -Rc "$CACHE/runtime/tesseract-windows" "$stage/runtime/tesseract" 2>/dev/null \
         || { rm -rf "$stage/runtime/tesseract"; cp -R "$CACHE/runtime/tesseract-windows" "$stage/runtime/tesseract"; }
     python3 "$INSTALADOR/bundle/montar_site_packages.py" "$stage/runtime/python/Lib/site-packages" \

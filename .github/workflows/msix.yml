@@ -22,9 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ferramentas (binutils para as DLL de Tesseract, Pillow para as iconas)
+      - name: Ferramentas (binutils para as DLL de Tesseract, zstd para as licenzas do Python, Pillow para as iconas)
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq binutils python3-pip
+          sudo apt-get update -qq && sudo apt-get install -y -qq binutils python3-pip zstd
           python3 -m pip install --quiet --break-system-packages pillow
 
       - name: Montar o cartafol do paquete
