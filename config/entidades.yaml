@@ -1,0 +1,71 @@
+# Configuracion de entidades e retencion — decisions da Fase 1 (Analise e deseno)
+# do informe "Sistema de anonimizacion de expedientes por codigo de persoa".
+
+entidades_directas:
+  - PERSOA        # nomes de persoas fisicas (deteccion via NER + heuristicas)
+  - DNI_NIE
+  - TELEFONO
+  - EMAIL
+  - MATRICULA
+  - EXPEDIENTE
+
+categorias_reforzadas:
+  MENOR:
+    descricion: "Persoas menores de idade (art. 8 RGPD) — prefixo propio e acceso mais restrinxido"
+    prefixo: "MENOR_"
+
+alcance_consistencia: despacho   # "expediente" | "despacho" — ambito no que se reutiliza o mesmo codigo
+
+conservacion:
+  dias_rexistro_activo: 1825     # 5 anos por defecto; axustar ao prazo de prescricion do expediente
+  accion_ao_expirar: "revisar_para_destruir"   # unha vez expirado, valorar destruir a clave -> anonimizacion irreversible
+
+resolucion_identidade:
+  # Regra de deseno (informe, seccion 06): ante a duvida, crear codigo novo e marcar para revision.
+  # Nunca fusionar dous rexistros so por coincidencia de nome sen sinal adicional (DNI, contexto).
+  requerir_dni_para_fusion_automatica: true
+
+mosaico:
+  # Sinais de risco de reidentificacion sen nome (informe, seccion 10).
+  # A24 (revision 21/09/2026): so había formas en galego -- un expediente
+  # en castelan (moi habitual, os xulgados tamen escriben en castelan)
+  # nunca activaba ningun aviso. Engadense as formas equivalentes en
+  # castelan xunto as galegas xa existentes (sen borrar estas ultimas);
+  # onde a palabra xa coincide nos dous idiomas (fiscal, notario,
+  # alcalde, director, policía, profesor...) non fai falla duplicala.
+  categorias_profesion:
+    - medico
+    - médico
+    - cirurxian
+    - cirurxián
+    - cirujano
+    - cirujana
+    - avogado
+    - avogada
+    - abogado
+    - abogada
+    - xuiz
+    - xuíz
+    - juez
+    - jueza
+    - fiscal
+    - notario
+    - notaria
+    - parroco
+    - párroco
+    - alcalde
+    - alcaldesa
+    - director
+    - directora
+    - xerente
+    - gerente
+    - policia
+    - policía
+    - garda civil
+    - guardia civil
+    - ensinante
+    - docente
+    - enseñante
+    - profesor
+    - profesora
+  distancia_maxima_frases: 2     # ventana de frases para cruzar profesion + lugar + data/idade

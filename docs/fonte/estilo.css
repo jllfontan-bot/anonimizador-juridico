@@ -1,0 +1,87 @@
+/* Folla de estilos común dos PDF de documentación (01, 02, 03 e LEEME).
+   Mesmas cores ca interface (src/anonimizador/templates/base.html). Impresión: A4. */
+:root{
+  --ink:#1a241f; --ink-soft:#4c5850; --paper:#f4f5f2; --surface:#fff;
+  --line:#d7ddd4; --accent:#1f6f5c; --accent-soft:#e2efe9;
+  --warn:#8f5623; --warn-soft:#f4e9d9;
+}
+@page{
+  size:A4; margin:17mm 18mm 19mm 18mm;
+  @bottom-right{ content:counter(page); font:7.5pt "Helvetica Neue",Helvetica,Arial,sans-serif; color:#4c5850; }
+}
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{
+  margin:0; background:#fff; color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:12.5px; line-height:1.5;
+}
+code,.mono{ font-family:Menlo,Consolas,"DejaVu Sans Mono",monospace; font-size:.86em; background:var(--paper); padding:0 3px; border-radius:3px; }
+a{ color:var(--accent); }
+strong{ font-weight:700; }
+
+/* portada (non ocupa unha páxina enteira: o contido segue debaixo) */
+.portada{ background:var(--paper); border-radius:6px; padding:28px 34px 26px; margin:0 0 26px; break-inside:avoid; }
+.chip{ display:inline-block; background:var(--accent-soft); color:var(--accent); font-size:11px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:3px; }
+.portada h1{ font-size:31px; line-height:1.15; margin:18px 0 12px; letter-spacing:-.01em; }
+.portada .lede{ color:var(--ink-soft); font-size:14.5px; line-height:1.55; margin:0 0 22px; max-width:440px; }
+.meta{ display:flex; gap:38px; border-top:1px solid var(--line); padding-top:14px; }
+.meta div{ font-size:12.5px; font-weight:700; }
+.meta span{ display:block; font-size:11px; font-weight:400; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; margin-bottom:2px; }
+
+/* cabeceiras de sección */
+h2.sec{
+  font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent);
+  border-bottom:2px solid var(--accent); padding-bottom:5px; margin:30px 0 14px; break-after:avoid;
+}
+h2.sec.nova-pax{ break-before:page; margin-top:0; }
+h3{ font-size:13px; margin:18px 0 6px; break-after:avoid; }
+p{ margin:0 0 9px; orphans:3; widows:3; }
+ul,ol{ margin:0 0 10px; padding-left:20px; }
+li{ margin-bottom:4px; }
+.peq{ font-size:11.5px; color:var(--ink-soft); }
+
+/* etiqueta de sistema (WINDOWS, MACOS...) */
+.so{ display:inline-block; background:var(--accent-soft); color:var(--accent); font-size:10.5px; font-weight:700;
+  letter-spacing:.06em; padding:2px 7px; border-radius:3px; margin:0 0 12px; }
+
+/* pasos numerados */
+.paso{ display:flex; gap:11px; margin:0 0 14px; break-inside:avoid; }
+.paso .n{ flex:none; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700;
+  font-size:12.5px; text-align:center; line-height:22px; margin-top:1px; }
+.paso .t{ font-weight:700; font-size:13.5px; margin:0 0 3px; }
+.paso p{ margin:0 0 5px; }
+.paso .corpo{ flex:1; min-width:0; }
+
+/* táboas */
+table{ width:100%; border-collapse:collapse; margin:0 0 14px; font-size:11.5px; }
+thead th{ background:var(--paper); text-align:left; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--ink-soft); padding:8px 8px; border-bottom:1px solid var(--line); }
+td{ padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr{ break-inside:avoid; }
+
+/* recadros */
+.nota,.aviso{ border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 5px 5px 0;
+  padding:11px 14px; margin:0 0 14px; break-inside:avoid; font-size:12px; }
+.aviso{ border-left-color:var(--warn); background:var(--warn-soft); }
+.nota h4,.aviso h4{ margin:0 0 5px; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+.nota p:last-child,.aviso p:last-child,.nota ul:last-child,.aviso ul:last-child{ margin-bottom:0; }
+
+/* figuras */
+figure{ margin:0 0 15px; break-inside:avoid; text-align:center; }
+figure img{ max-width:100%; border:1px solid var(--line); border-radius:6px; display:block; margin:0 auto; }
+figure.sen-marco img{ border:0; border-radius:0; }
+figcaption{ font-size:10.5px; font-style:italic; color:var(--ink-soft); margin-top:6px; }
+.par{ display:flex; gap:12px; align-items:flex-start; justify-content:center; }
+.par figure{ flex:1; min-width:0; }
+
+/* bloque de texto de terminal (contido real dos scripts) */
+pre.terminal{ background:#1f2521; color:#d9e4dc; border-radius:6px; padding:13px 16px; margin:0 0 6px;
+  font-family:Menlo,Consolas,monospace; font-size:10.5px; line-height:1.55; white-space:pre-wrap; break-inside:avoid; }
+
+.rodape{ margin-top:18px; padding-top:9px; border-top:2px solid var(--accent); font-size:10.5px; color:var(--ink-soft); text-align:right; }
+.lista-marcas{ list-style:none; padding-left:0; }
+.lista-marcas li{ padding-left:20px; position:relative; }
+.lista-marcas li::before{ content:"☐"; position:absolute; left:0; color:var(--ink-soft); }
+.salto{ break-before:page; }
+.sen-corte{ break-inside:avoid; }

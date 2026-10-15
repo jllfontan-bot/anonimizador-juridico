@@ -1,0 +1,1081 @@
+{
+  "xerador": [
+    {
+      "id": "categoria_especial_saude",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "El Sr. PERSOA_000001 presenta un informe médico donde consta que padece una infección por VIH desde hace 5 años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "VIH",
+          "contexto": "un informe médico donde consta que padece una infección por VIH desde hace 5 años."
+        }
+      ]
+    },
+    {
+      "id": "categoria_especial_relixion",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "La testigo declaró que profesa la religión musulmana y que acude a la mezquita cada viernes.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión musulmana y que acude a la mezquita",
+          "contexto": "La testigo declaró que profesa la religión musulmana y que acude a la mezquita cada viernes."
+        }
+      ]
+    },
+    {
+      "id": "categoria_especial_orientacion",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "El demandante manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "demandante manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "categoria_especial_sindical",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que el trabajador es afiliado del sindicato PERSOA_000001 desde el año 2018.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que el trabajador es afiliado del sindicato PERSOA_000001 desde el año 2018."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_0",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "Covadonga Pazos PERSOA_000001 presenta un informe médico donde consta que padece esclerosis múltiple desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "esclerosis",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece esclerosis múltiple desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_1",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "cáncer",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_2",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "diabetes",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_3",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "diabetes",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_4",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "trastorno",
+          "contexto": "00001 presenta un informe médico donde consta que padece un trastorno bipolar desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_5",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "cáncer",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_6",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "diabetes",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_7",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "Roi Fiolleda Outeiral presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "trastorno",
+          "contexto": "iriño presenta un informe médico donde consta que padece un trastorno bipolar desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_8",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece VIH desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "VIH",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece VIH desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_saude_9",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece VIH desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "VIH",
+          "contexto": "A_000001 presenta un informe médico donde consta que padece VIH desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_0",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión testigo de Jehová y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_1",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "Xacobe PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión testigo de Jehová y acude a su lugar de culto",
+          "contexto": "Xacobe PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_2",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión judía y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión judía y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión judía y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_3",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión musulmana y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_4",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión budista y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_5",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "Covadonga Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión musulmana y acude a su lugar de culto",
+          "contexto": "Covadonga Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_6",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión evangélica y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión evangélica y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión evangélica y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_7",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión budista y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_8",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión musulmana y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_relixion_9",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "profesa la religión musulmana y acude a su lugar de culto",
+          "contexto": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_0",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_1",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_2",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación bisexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_3",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_4",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación bisexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_5",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación bisexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_6",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_7",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "orientación homosexual",
+          "contexto": "SOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_8",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "transexual",
+          "contexto": "anifestó que su despido se debió a conocerse su orientación transexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_orientacion_9",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "transexual",
+          "contexto": "anifestó que su despido se debió a conocerse su orientación transexual en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_0",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_1",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_2",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que Roi Barroso Cordeiro es afiliado del sindicato PERSOA_000001 desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que Roi Barroso Cordeiro es afiliado del sindicato PERSOA_000001 desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_3",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_4",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato CSIF desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato CSIF desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_5",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que Xacobe Ferrándiz Salcedo es afiliado del sindicato UGT desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que Xacobe Ferrándiz Salcedo es afiliado del sindicato UGT desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_6",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_7",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_8",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años."
+        }
+      ]
+    },
+    {
+      "id": "gen_sindical_9",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que Xacobe Fiolleda Outeiral es afiliado del sindicato USO desde hace varios años.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliado del sindicato",
+          "contexto": "Consta que Xacobe Fiolleda Outeiral es afiliado del sindicato USO desde hace varios años."
+        }
+      ]
+    }
+  ],
+  "reserva": [
+    {
+      "id": "res_saude_quimio",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "Consta en el informe que PERSOA_000001 recibe tratamiento de quimioterapia desde marzo.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "quimioterapia",
+          "contexto": "onsta en el informe que PERSOA_000001 recibe tratamiento de quimioterapia desde marzo."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_discapacidade",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "La demandante PERSOA_000001 aporta certificado de discapacidad del 45 por ciento.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "certificado de discapacidad",
+          "contexto": "La demandante PERSOA_000001 aporta certificado de discapacidad del 45 por ciento."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_depresion",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "El trabajador PERSOA_000001 estuvo de baja por depresión durante seis meses.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "depresión",
+          "contexto": "El trabajador PERSOA_000001 estuvo de baja por depresión durante seis meses."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_esquizofrenia",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "A PERSOA_000001 se le diagnosticó una esquizofrenia paranoide en 2019.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "diagnosticó una esquizofrenia",
+          "contexto": "A PERSOA_000001 se le diagnosticó una esquizofrenia paranoide en 2019."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_embarazo",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "A traballadora PERSOA_000001 está embarazada de cinco meses.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "embarazada",
+          "contexto": "A traballadora PERSOA_000001 está embarazada de cinco meses."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_antirretroviral",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 toma medicación antirretroviral a diario.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "antirretroviral",
+          "contexto": "PERSOA_000001 toma medicación antirretroviral a diario."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_infarto_gl",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "O recorrente, PERSOA_000001, padeceu un infarto de miocardio o pasado ano.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "infarto",
+          "contexto": "O recorrente, PERSOA_000001, padeceu un infarto de miocardio o pasado ano."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_psiquiatria",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 ingresó en la unidad de psiquiatría del hospital en enero.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "psiquiatría",
+          "contexto": "PERSOA_000001 ingresó en la unidad de psiquiatría del hospital en enero."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_seropositivo",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "Según la testigo, PERSOA_000001 es seropositivo desde hace años.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "seropositivo",
+          "contexto": "Según la testigo, PERSOA_000001 es seropositivo desde hace años."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_alcoholismo",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "El informe forense indica que PERSOA_000001 sufre alcoholismo crónico.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "alcoholismo",
+          "contexto": "El informe forense indica que PERSOA_000001 sufre alcoholismo crónico."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_lesion_medular",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 presenta una lesión medular que le impide caminar.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "lesión medular",
+          "contexto": "PERSOA_000001 presenta una lesión medular que le impide caminar."
+        }
+      ]
+    },
+    {
+      "id": "res_saude_desintoxicacion",
+      "esperado": "saude",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 está en tratamiento de desintoxicación por consumo de cocaína.",
+      "avisos": [
+        {
+          "categoria": "saude",
+          "termo": "desintoxicación",
+          "contexto": "PERSOA_000001 está en tratamiento de desintoxicación por consumo de cocaína."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_adventista",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "Por motivos religiosos, PERSOA_000001 no trabaja los sábados al ser adventista.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "motivos religiosos",
+          "contexto": "Por motivos religiosos, PERSOA_000001 no trabaja los sábados al ser adventista."
+        },
+        {
+          "categoria": "relixion",
+          "termo": "adventista",
+          "contexto": "vos religiosos, PERSOA_000001 no trabaja los sábados al ser adventista."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_hiyab",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "La trabajadora PERSOA_000001 viste el hiyab en su puesto de trabajo.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "hiyab",
+          "contexto": "La trabajadora PERSOA_000001 viste el hiyab en su puesto de trabajo."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_xudia_gl",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 é membro da comunidade xudía de Galicia.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "xudía",
+          "contexto": "PERSOA_000001 é membro da comunidade xudía de Galicia."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_ateo",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "En la entrevista, PERSOA_000001 se declaró ateo.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "ateo",
+          "contexto": "En la entrevista, PERSOA_000001 se declaró ateo."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_ramadan",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 solicitó el cambio de turno para cumplir con el Ramadán.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "Ramadán",
+          "contexto": "RSOA_000001 solicitó el cambio de turno para cumplir con el Ramadán."
+        }
+      ]
+    },
+    {
+      "id": "res_relixion_misa",
+      "esperado": "relixion",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 acude cada domingo a misa en la parroquia de su barrio.",
+      "avisos": [
+        {
+          "categoria": "relixion",
+          "termo": "misa",
+          "contexto": "PERSOA_000001 acude cada domingo a misa en la parroquia de su barrio."
+        }
+      ]
+    },
+    {
+      "id": "res_orientacion_lesbiana",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 es lesbiana y lo comunicó a sus compañeros.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "lesbiana",
+          "contexto": "PERSOA_000001 es lesbiana y lo comunicó a sus compañeros."
+        }
+      ]
+    },
+    {
+      "id": "res_orientacion_mismo_sexo",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 contrajo matrimonio con su pareja del mismo sexo en 2020.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "pareja del mismo sexo",
+          "contexto": "PERSOA_000001 contrajo matrimonio con su pareja del mismo sexo en 2020."
+        }
+      ]
+    },
+    {
+      "id": "res_orientacion_gai_gl",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "O traballador PERSOA_000001 é gai e sufriu acoso por iso.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "gai",
+          "contexto": "O traballador PERSOA_000001 é gai e sufriu acoso por iso."
+        }
+      ]
+    },
+    {
+      "id": "res_orientacion_transicion",
+      "esperado": "orientacion_sexual",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 se encuentra en proceso de transición de género.",
+      "avisos": [
+        {
+          "categoria": "orientacion_sexual",
+          "termo": "transición de género",
+          "contexto": "PERSOA_000001 se encuentra en proceso de transición de género."
+        }
+      ]
+    },
+    {
+      "id": "res_orientacion_relacion_hombre",
+      "esperado": "orientacion_sexual",
+      "ok": false,
+      "anonimizado": "PERSOA_000001 mantiene una relación sentimental con otro hombre desde hace años.",
+      "avisos": []
+    },
+    {
+      "id": "res_sindical_delegada",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 es delegada sindical de PERSOA_000002 en la empresa.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "delegada sindical",
+          "contexto": "PERSOA_000001 es delegada sindical de PERSOA_000002 en la empresa."
+        }
+      ]
+    },
+    {
+      "id": "res_sindical_comite",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 forma parte del comité de empresa por la candidatura de UGT.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "forma parte del comité de empresa",
+          "contexto": "PERSOA_000001 forma parte del comité de empresa por la candidatura de UGT."
+        }
+      ]
+    },
+    {
+      "id": "res_sindical_afiliada_gl",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 está afiliada á CIG desde 2015.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "afiliada á CIG",
+          "contexto": "PERSOA_000001 está afiliada á CIG desde 2015."
+        }
+      ]
+    },
+    {
+      "id": "res_sindical_seccion",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 es miembro de la sección sindical de CSIF.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "sección sindical",
+          "contexto": "PERSOA_000001 es miembro de la sección sindical de CSIF."
+        }
+      ]
+    },
+    {
+      "id": "res_sindical_cotiza",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "Consta que PERSOA_000001 cotiza en el sindicato PERSOA_000002 desde hace una década.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "cotiza en el sindicato",
+          "contexto": "Consta que PERSOA_000001 cotiza en el sindicato PERSOA_000002 desde hace una década."
+        }
+      ]
+    },
+    {
+      "id": "res_sindical_liberado",
+      "esperado": "sindical",
+      "ok": true,
+      "anonimizado": "PERSOA_000001 es liberado sindical de la CGT.",
+      "avisos": [
+        {
+          "categoria": "sindical",
+          "termo": "liberado sindical",
+          "contexto": "PERSOA_000001 es liberado sindical de la CGT."
+        }
+      ]
+    },
+    {
+      "id": "res_neg_centro_saude",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "El centro de salud del barrio cierra a las ocho de la tarde.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_seguridade_social",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La Seguridad Social abonará la prestación en el plazo de un mes.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_sindicato_parte",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "Comparece PERSOA_000001 como parte demandante en el conflicto colectivo.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_xulgado_social",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "El Juzgado de lo Social número 2 dictó sentencia el pasado lunes.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_igrexa_ben",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La iglesia de Santa María es un bien de interés cultural.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_hospital_parte",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "El hospital presentó recurso contra la liquidación del impuesto.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_baixa_vehiculo",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La baja del vehículo se tramitó en la Jefatura de Tráfico.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_sindicato_inquilinos",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "El sindicato de inquilinos convocó una asamblea en la plaza.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_orientacion_sur",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La vivienda tiene orientación sur y dos dormitorios.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_material_sanitario",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La empresa se dedica a la fabricación de material sanitario.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_doutrina_discapacidade",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La sala aplica la doctrina del Tribunal Supremo sobre el concepto de discapacidad.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_libertade_relixiosa",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "El artículo 16 de la Constitución garantiza la libertad religiosa.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_saude_publica_gl",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "A consellería de Sanidade publicou as novas normas de saúde pública.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_baixa_contrato",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La baja en el padrón municipal se produjo en 2018.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_transicion_informatica",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La transición al nuevo sistema informático concluyó en junio.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_libertade_sindical",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La Ley Orgánica de Libertad Sindical regula la representación en la empresa.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_parroquia_topo_gl",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "A finca sitúase na parroquia de San Xoán de Poio.",
+      "avisos": []
+    },
+    {
+      "id": "res_neg_mutua",
+      "esperado": null,
+      "ok": true,
+      "anonimizado": "La mutua colaboradora con la Seguridad Social emitió su informe.",
+      "avisos": []
+    }
+  ],
+  "falsos_positivos_corpus_principal": []
+}

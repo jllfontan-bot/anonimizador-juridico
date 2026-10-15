@@ -1,0 +1,3604 @@
+{
+  "resultados": [
+    {
+      "id": "res_nome_01",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Antía Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+      "texto_anonimizado": "PERSOA_000001 presentó escrito de alegaciones fuera de plazo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_02",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Consta que Anxo Mouriño Bouzas es titular de la cuenta embargada.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es titular de la cuenta embargada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_03",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "En el acto del juicio declara la testigo Aroa Lema Novoa, quien no aporta nada nuevo.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien no aporta nada nuevo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_04",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como perito don Erea Ferreiro Loureiro, en representación de la aseguradora.",
+      "texto_anonimizado": "Comparece como perito don PERSOA_000001, en representación de la aseguradora.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_05",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como testigo doña Iria Cotelo Pereiro, quien se ratifica en su declaración.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien se ratifica en su declaración.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_06",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Otorga poder de representación Camilo Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_07",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Según manifestó Celso Caamaño Regueiro, el vehículo estaba mal estacionado.",
+      "texto_anonimizado": "Según manifestó PERSOA_000001, el vehículo estaba mal estacionado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_08",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece a veciña Eloy Piñeiro Taboada, que declara non ter visto nada.",
+      "texto_anonimizado": "Comparece a veciña PERSOA_000001, que declara non ter visto nada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_09",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Recibida a declaración de Serafín Varela Lema, dáse traslado ás partes.",
+      "texto_anonimizado": "Recibida a declaración de PERSOA_000001, dáse traslado ás partes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_10",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "El recurso lo interpone Gumersindo Bouzas Cotelo contra la resolución de 3 de marzo.",
+      "texto_anonimizado": "El recurso lo interpone PERSOA_000001 contra la resolución de 3 de marzo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_11",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "La vivienda fue adquirida por Herminia Vilaboi Mouriño en el año 2019.",
+      "texto_anonimizado": "La vivienda fue adquirida por PERSOA_000001 en el año 2019.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_12",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Asina o escrito Ramiro Regueiro Vilaboi como parte demandante.",
+      "texto_anonimizado": "Asina o escrito PERSOA_000001 como parte demandante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_13",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Xoán Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+      "texto_anonimizado": "PERSOA_000001 presentó escrito de alegaciones fuera de plazo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_14",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Consta que Xurxo Mouriño Bouzas es titular de la cuenta embargada.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es titular de la cuenta embargada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_15",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "En el acto del juicio declara la testigo Martiño Lema Novoa, quien no aporta nada nuevo.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien no aporta nada nuevo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_16",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como perito don Breogán Ferreiro Loureiro, en representación de la aseguradora.",
+      "texto_anonimizado": "Comparece como perito don PERSOA_000001, en representación de la aseguradora.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_17",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como testigo doña Icía Cotelo Pereiro, quien se ratifica en su declaración.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien se ratifica en su declaración.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_18",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Otorga poder de representación Catuxa Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_19",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Según manifestó Ánxela Caamaño Regueiro, el vehículo estaba mal estacionado.",
+      "texto_anonimizado": "Según manifestó PERSOA_000001, el vehículo estaba mal estacionado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_20",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece a veciña Tareixa Piñeiro Taboada, que declara non ter visto nada.",
+      "texto_anonimizado": "Comparece a veciña PERSOA_000001, que declara non ter visto nada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_21",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Recibida a declaración de Fiz Varela Lema, dáse traslado ás partes.",
+      "texto_anonimizado": "Recibida a declaración de PERSOA_000001, dáse traslado ás partes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_22",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "El recurso lo interpone Lois Bouzas Cotelo contra la resolución de 3 de marzo.",
+      "texto_anonimizado": "El recurso lo interpone PERSOA_000001 contra la resolución de 3 de marzo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_23",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "La vivienda fue adquirida por Uxío Vilaboi Mouriño en el año 2019.",
+      "texto_anonimizado": "La vivienda fue adquirida por PERSOA_000001 en el año 2019.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_24",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Asina o escrito Xián Regueiro Vilaboi como parte demandante.",
+      "texto_anonimizado": "Asina o escrito PERSOA_000001 como parte demandante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_25",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Xela Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+      "texto_anonimizado": "PERSOA_000001 presentó escrito de alegaciones fuera de plazo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_26",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Consta que Xesús Mouriño Bouzas es titular de la cuenta embargada.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es titular de la cuenta embargada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_27",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "En el acto del juicio declara la testigo Maruxa Lema Novoa, quien no aporta nada nuevo.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien no aporta nada nuevo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_28",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como perito don Aleixo Ferreiro Loureiro, en representación de la aseguradora.",
+      "texto_anonimizado": "Comparece como perito don PERSOA_000001, en representación de la aseguradora.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_29",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Comparece como testigo doña Noela Cotelo Pereiro, quien se ratifica en su declaración.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien se ratifica en su declaración.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_30",
+      "categoria": "nome_galego_reserva",
+      "texto_orixinal": "Otorga poder de representación Lúa Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Antía Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Antía Mouriño Bouzas, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Antía Lema Novoa contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Antía Ferreiro Loureiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Antía Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Antía Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Antía Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Antía Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Antía Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Antía Bouzas Cotelo, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_01_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Antía Vilaboi Mouriño, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Anxo Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Anxo Lema Novoa, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Anxo Ferreiro Loureiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Anxo Cotelo Pereiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Anxo Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Anxo Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Anxo Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Anxo Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Anxo Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Anxo Vilaboi Mouriño, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_02_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Anxo Regueiro Vilaboi, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aroa Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Aroa Ferreiro Loureiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Aroa Cotelo Pereiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Aroa Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Aroa Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aroa Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aroa Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aroa Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Aroa Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Aroa Regueiro Vilaboi, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_03_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Aroa Vilariño Castiñeiras, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Erea Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Erea Cotelo Pereiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Erea Queiruga Ogando contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Erea Caamaño Regueiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Erea Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Erea Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Erea Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Erea Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Erea Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Erea Vilariño Castiñeiras, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_04_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Erea Mouriño Bouzas, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Iria Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Iria Queiruga Ogando, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Iria Caamaño Regueiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Iria Piñeiro Taboada a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Iria Varela Lema, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Iria Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Iria Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Iria Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Iria Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Iria Mouriño Bouzas, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_05_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Iria Lema Novoa, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Camilo Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Camilo Caamaño Regueiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Camilo Piñeiro Taboada contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Camilo Varela Lema a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Camilo Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Camilo Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Camilo Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Camilo Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Camilo Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Camilo Lema Novoa, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_06_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Camilo Ferreiro Loureiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Celso Caamaño Regueiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Celso Piñeiro Taboada, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Celso Varela Lema contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Celso Bouzas Cotelo a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Celso Vilaboi Mouriño, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Celso Regueiro Vilaboi presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Celso Vilariño Castiñeiras declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Celso Mouriño Bouzas manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Celso Lema Novoa es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Celso Ferreiro Loureiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_07_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Celso Cotelo Pereiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Eloy Piñeiro Taboada presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Eloy Varela Lema, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Eloy Bouzas Cotelo contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Eloy Vilaboi Mouriño a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Eloy Regueiro Vilaboi, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Eloy Vilariño Castiñeiras presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Eloy Mouriño Bouzas declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Eloy Lema Novoa manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Eloy Ferreiro Loureiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Eloy Cotelo Pereiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_08_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Eloy Queiruga Ogando, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Serafín Varela Lema presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Serafín Bouzas Cotelo, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Serafín Vilaboi Mouriño contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Serafín Regueiro Vilaboi a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Serafín Vilariño Castiñeiras, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Serafín Mouriño Bouzas presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Serafín Lema Novoa declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Serafín Ferreiro Loureiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Serafín Cotelo Pereiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Serafín Queiruga Ogando, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_09_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Serafín Caamaño Regueiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Gumersindo Bouzas Cotelo presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Gumersindo Vilaboi Mouriño, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Gumersindo Regueiro Vilaboi contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Gumersindo Vilariño Castiñeiras a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Gumersindo Mouriño Bouzas, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Gumersindo Lema Novoa presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Gumersindo Ferreiro Loureiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Gumersindo Cotelo Pereiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Gumersindo Queiruga Ogando es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Gumersindo Caamaño Regueiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_10_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Gumersindo Piñeiro Taboada, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Herminia Vilaboi Mouriño presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Herminia Regueiro Vilaboi, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Herminia Vilariño Castiñeiras contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Herminia Mouriño Bouzas a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Herminia Lema Novoa, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Herminia Ferreiro Loureiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Herminia Cotelo Pereiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Herminia Queiruga Ogando manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Herminia Caamaño Regueiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Herminia Piñeiro Taboada, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_11_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Herminia Varela Lema, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ramiro Regueiro Vilaboi presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Ramiro Vilariño Castiñeiras, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Ramiro Mouriño Bouzas contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Ramiro Lema Novoa a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Ramiro Ferreiro Loureiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ramiro Cotelo Pereiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ramiro Queiruga Ogando declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ramiro Caamaño Regueiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Ramiro Piñeiro Taboada es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Ramiro Varela Lema, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_12_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Ramiro Bouzas Cotelo, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xoán Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Xoán Mouriño Bouzas, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Xoán Lema Novoa contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Xoán Ferreiro Loureiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xoán Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xoán Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xoán Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xoán Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Xoán Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Xoán Bouzas Cotelo, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_13_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Xoán Vilaboi Mouriño, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xurxo Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Xurxo Lema Novoa, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Xurxo Ferreiro Loureiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Xurxo Cotelo Pereiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xurxo Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xurxo Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xurxo Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xurxo Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Xurxo Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Xurxo Vilaboi Mouriño, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_14_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Xurxo Regueiro Vilaboi, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Martiño Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Martiño Ferreiro Loureiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Martiño Cotelo Pereiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Martiño Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Martiño Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Martiño Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Martiño Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Martiño Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Martiño Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Martiño Regueiro Vilaboi, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_15_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Martiño Vilariño Castiñeiras, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Breogán Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Breogán Cotelo Pereiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Breogán Queiruga Ogando contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Breogán Caamaño Regueiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Breogán Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Breogán Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Breogán Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Breogán Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Breogán Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Breogán Vilariño Castiñeiras, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_16_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Breogán Mouriño Bouzas, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Icía Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Icía Queiruga Ogando, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Icía Caamaño Regueiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Icía Piñeiro Taboada a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Icía Varela Lema, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Icía Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Icía Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Icía Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Icía Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Icía Mouriño Bouzas, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_17_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Icía Lema Novoa, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Catuxa Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Catuxa Caamaño Regueiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Catuxa Piñeiro Taboada contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Catuxa Varela Lema a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Catuxa Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Catuxa Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Catuxa Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Catuxa Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Catuxa Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Catuxa Lema Novoa, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_18_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Catuxa Ferreiro Loureiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ánxela Caamaño Regueiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Ánxela Piñeiro Taboada, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Ánxela Varela Lema contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Ánxela Bouzas Cotelo a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Ánxela Vilaboi Mouriño, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ánxela Regueiro Vilaboi presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ánxela Vilariño Castiñeiras declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Ánxela Mouriño Bouzas manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Ánxela Lema Novoa es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Ánxela Ferreiro Loureiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_19_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Ánxela Cotelo Pereiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Tareixa Piñeiro Taboada presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Tareixa Varela Lema, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Tareixa Bouzas Cotelo contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Tareixa Vilaboi Mouriño a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Tareixa Regueiro Vilaboi, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Tareixa Vilariño Castiñeiras presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Tareixa Mouriño Bouzas declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Tareixa Lema Novoa manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Tareixa Ferreiro Loureiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Tareixa Cotelo Pereiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_20_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Tareixa Queiruga Ogando, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Fiz Varela Lema presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Fiz Bouzas Cotelo, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Fiz Vilaboi Mouriño contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Fiz Regueiro Vilaboi a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Fiz Vilariño Castiñeiras, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Fiz Mouriño Bouzas presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Fiz Lema Novoa declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Fiz Ferreiro Loureiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Fiz Cotelo Pereiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Fiz Queiruga Ogando, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_21_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Fiz Caamaño Regueiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lois Bouzas Cotelo presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Lois Vilaboi Mouriño, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Lois Regueiro Vilaboi contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Lois Vilariño Castiñeiras a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Lois Mouriño Bouzas, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lois Lema Novoa presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lois Ferreiro Loureiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lois Cotelo Pereiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Lois Queiruga Ogando es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Lois Caamaño Regueiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_22_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Lois Piñeiro Taboada, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Uxío Vilaboi Mouriño presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Uxío Regueiro Vilaboi, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Uxío Vilariño Castiñeiras contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Uxío Mouriño Bouzas a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Uxío Lema Novoa, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Uxío Ferreiro Loureiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Uxío Cotelo Pereiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Uxío Queiruga Ogando manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Uxío Caamaño Regueiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Uxío Piñeiro Taboada, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_23_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Uxío Varela Lema, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xián Regueiro Vilaboi presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Xián Vilariño Castiñeiras, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Xián Mouriño Bouzas contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Xián Lema Novoa a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xián Ferreiro Loureiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xián Cotelo Pereiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xián Queiruga Ogando declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xián Caamaño Regueiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Xián Piñeiro Taboada es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Xián Varela Lema, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_24_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Xián Bouzas Cotelo, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xela Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Xela Mouriño Bouzas, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Xela Lema Novoa contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Xela Ferreiro Loureiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xela Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xela Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xela Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xela Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Xela Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Xela Bouzas Cotelo, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_25_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Xela Vilaboi Mouriño, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xesús Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Xesús Lema Novoa, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Xesús Ferreiro Loureiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Xesús Cotelo Pereiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xesús Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xesús Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xesús Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Xesús Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Xesús Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Xesús Vilaboi Mouriño, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_26_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Xesús Regueiro Vilaboi, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Maruxa Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Maruxa Ferreiro Loureiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Maruxa Cotelo Pereiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Maruxa Queiruga Ogando a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Maruxa Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Maruxa Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Maruxa Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Maruxa Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Maruxa Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Maruxa Regueiro Vilaboi, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_27_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Maruxa Vilariño Castiñeiras, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aleixo Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Aleixo Cotelo Pereiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Aleixo Queiruga Ogando contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Aleixo Caamaño Regueiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Aleixo Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aleixo Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aleixo Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Aleixo Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Aleixo Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Aleixo Vilariño Castiñeiras, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_28_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Aleixo Mouriño Bouzas, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Noela Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Noela Queiruga Ogando, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Noela Caamaño Regueiro contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Noela Piñeiro Taboada a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Noela Varela Lema, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Noela Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Noela Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Noela Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Noela Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Noela Mouriño Bouzas, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_29_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Noela Lema Novoa, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_01",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lúa Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_02",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Firma el presente documento Lúa Caamaño Regueiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_03",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Interpone recurso de reposición Lúa Piñeiro Taboada contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_04",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Otorga poder de representación Lúa Varela Lema a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_05",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "En el acto del juicio declara la testigo Lúa Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_06",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lúa Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_07",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lúa Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_08",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Lúa Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_09",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Consta que Lúa Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_10",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como testigo doña Lúa Lema Novoa, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "res_nome_xer_30_11",
+      "categoria": "nome_galego_reserva_plantillas_xerador",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Lúa Ferreiro Loureiro, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    }
+  ]
+}

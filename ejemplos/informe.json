@@ -1,0 +1,42 @@
+{
+  "persoas": [
+    {
+      "codigo": "PERSOA_000001",
+      "mencions": [
+        "Manuel Ferrándiz Salcedo"
+      ],
+      "marcado_para_revision": false,
+      "motivo": null
+    },
+    {
+      "codigo": "PERSOA_000002",
+      "mencions": [
+        "Manuel Ferrándiz Salcedo"
+      ],
+      "marcado_para_revision": true,
+      "motivo": "posible homonimo: o nome 'Manuel Ferrándiz Salcedo' coincide con PERSOA_000001 sen DNI que o confirme — verificar se e a mesma persoa"
+    }
+  ],
+  "identificadores_directos": [
+    {
+      "tipo": "TELEFONO",
+      "texto": "612345678"
+    },
+    {
+      "tipo": "EMAIL",
+      "texto": "manuel.fs@exemplo.gal"
+    }
+  ],
+  "riscos_mosaico": [
+    {
+      "tipo": "combinacion_alta_especificidade",
+      "frase": "O único cirurxián cardiovascular do hospital de Cee, de 52 anos, foi intervido o 14 de marzo de 2021 tras un accidente de tráfico.",
+      "detalle": "profesion ('cirurxián') + lugar + data/idade na mesma zona do texto"
+    },
+    {
+      "tipo": "enderezo_moi_especifico",
+      "frase": "A vítima reside na Rúa do Franco, número 12.",
+      "detalle": "Rúa do Franco, número 12"
+    }
+  ]
+}

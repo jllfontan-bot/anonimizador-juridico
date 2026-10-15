@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Novidades da versión do 12 de outubro de 2026</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:15mm 17mm 15mm 17mm; }
+  body{ font-size:12px; line-height:1.5; }
+  .portada{ padding:22px 30px 20px; margin-bottom:20px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; max-width:none; margin-bottom:16px; }
+  h2.sec{ margin:22px 0 10px; }
+  .cifras{ display:flex; gap:10px; margin:6px 0 14px; }
+  .cifra{ flex:1; border:1px solid var(--line); border-radius:6px; padding:10px 12px; break-inside:avoid; }
+  .cifra .v{ font-size:22px; font-weight:700; color:var(--accent); line-height:1.1; }
+  .cifra .antes{ font-size:11px; color:var(--ink-soft); }
+  .cifra .et{ font-size:11.5px; margin-top:4px; }
+  table.comparacion td:nth-child(n+2), table.comparacion th:nth-child(n+2){ text-align:right; white-space:nowrap; }
+  ul.compacta li{ margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Novidades · Anonimizador de expedientes xurídicos</span>
+  <h1>Que mellora a versión do 12 de outubro fronte á do 4 de outubro</h1>
+  <p class="lede">Resumo para quen usa o programa e ten instalada a versión do 4 de outubro (20261004-5a43ade): todo o que se arranxou desde entón, como se mediu e que límites seguen a existir. Inclúe tamén o das dúas versións intermedias do 11 de outubro, que estiveron vixentes poucas horas.</p>
+  <div class="meta">
+    <div><span>Versión</span>20261012 (12 de outubro)</div>
+    <div><span>Compárase con</span>20261004-5a43ade</div>
+    <div><span>Substitúe a</span>20261011-ea055cf</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · En poucas palabras</h2>
+<p>A versión nova <strong>deixa á vista menos anacos de nomes</strong> (apelidos partidos entre dúas liñas ou cun guión, nomes de pía abreviados), <strong>xa non atribúe a outra persoa o DNI dun anexo</strong> e <strong>tapa moito menos o que non é persoa</strong>: cargos, nomes de consellerías e ministerios, municipios, rótulos de formularios e o lixo do logotipo do pé do DOG.</p>
+
+<div class="cifras">
+  <div class="cifra"><div class="v">0</div><div class="antes">en 440 documentos que ninguén lera</div><div class="et">persoas que a versión nova deixa á vista e a do 4 de outubro tapaba</div></div>
+  <div class="cifra"><div class="v">125</div><div class="antes">mencións en 440 documentos que ninguén lera</div><div class="et">cousas que non eran persoas e deixan de taparse</div></div>
+  <div class="cifra"><div class="v">41</div><div class="antes">mencións nos mesmos documentos</div><div class="et">nomes que quedaban á vista, enteiros ou en parte, e agora se tapan</div></div>
+</div>
+
+<h2 class="sec">02 · Datos persoais que quedaban á vista</h2>
+<ul class="compacta">
+  <li><strong>Nomes partidos entre dúas liñas</strong>: o segundo apelido na liña seguinte («… Rodríguez» e «Díaz» debaixo), o nome de pía nunha liña e os apelidos na seguinte, apelidos partidos cun guión ao final da liña («Es-» / «tévez») e un conector ao final da liña co apelido na seguinte («… del» / «Campo Serrano»). Agora tápase o nome enteiro, cun só código.</li>
+  <li><strong>Nome de pía á vista cos apelidos tapados</strong>: «Maria dels Àngels», «Marcel·lí», «M.ª» pegado ao nome, unha «M» solta diante ou detrás do nome e iniciais no medio («… M.R.F. …»).</li>
+  <li><strong>Comisións de concursos</strong> («Presidente Apelidos, Nome», «1ª Vogal …»): o nome quedaba á vista, enteiro ou só cos apelidos, e os nomes estranxeiros da mesma liña tamén. Agora tápase o nome e quedan á vista o cargo e a profesión.</li>
+  <li><strong>Un apelido que coincide cunha palabra común</strong>: «JUZGADO PRIETO, CARLOS» (apelido «Juzgado») quedaba á vista.</li>
+</ul>
+
+<h2 class="sec">03 · O DNI dun anexo xa non se atribúe a outra persoa</h2>
+<p>Nos anuncios que rematan cun <strong>ANEXO só con DNI</strong>, o primeiro DNI recibía o código da persoa que asina xusto enriba; e nas táboas de notificacións, o DNI dunha fila podía levar o código do concello coma se fose unha persoa. Non deixaba nada á vista, pero no documento anonimizado parecía que ese DNI era doutra persoa. Agora tápase coma DNI.</p>
+
+<h2 class="sec">04 · Menos cousas tapadas sen motivo</h2>
+<ul class="compacta">
+  <li><strong>Cargos</strong>: «Fiscal Delegado/a…», «Rector Magnífico», «Fiscal de Sala», e o nome do departamento dentro dun cargo («Ministra de Vivienda y <em>Agenda Urbana</em>», «Dirección General de Presupuestos y <em>Fondos Europeos</em>», «directora xeral do <em>Tesouro e Política Financeira</em>»).</li>
+  <li><strong>Lugares e organismos</strong>: municipios co artigo detrás nas listaxes («Coruña, A.», «Porriño, O.»), concellos nunha columna dunha táboa («Teo»), «Autoridad Portuaria de …», accidentes xeográficos («Sierra del Toro»), nomes de vivendas rurais («Casería Don …») e a «Sala» dun tribunal.</li>
+  <li><strong>O pé de páxina do DOG</strong>: o recoñecemento de texto do logotipo («[CIRA», «Dr RUA», «Ela»…) tapábase coma un nome, ás veces decenas de veces nun mesmo documento.</li>
+  <li><strong>Rótulos e textos de formulario</strong>: «N.º Póliza», «Patrón:», encabezados en maiúsculas, «Título I. De…», siglas con puntos («I.R.P.F.»), «Pausa café», «Grao en Medicina».</li>
+  <li><strong>Outros nomes que non son persoas</strong>: plantas fotovoltaicas («FV … Solar»), fondos («Fondo de Asilo…»), formas xurídicas en siglas («F. S.P.») e nomes científicos de especies («Falco naumanni»).</li>
+  <li><strong>A mesma persoa, un só código</strong>: a forma abreviada entre parénteses xusto detrás do nome completo («Elena E. Rodríguez Díaz»).</li>
+</ul>
+
+<h2 class="sec">05 · Como se mediu</h2>
+<p>Cada cambio comprobouse cun exemplo inventado (sen datos reais) que fallaba antes do arranxo, e cun control de que unha persoa parecida segue tapada. O programa ten agora <strong>759 comprobacións automáticas</strong> (a versión do 4 de outubro, 627), e pasan todas.</p>
+<p>Para non medir cos mesmos documentos cos que se buscaron os fallos, comparáronse a versión do 4 de outubro e a nova <strong>só con documentos que ninguén mirara para buscar fallos</strong>, e leuse cada diferenza unha a unha:</p>
+<table class="comparacion">
+  <thead><tr><th>Documentos (BOE e DOG)</th><th>Persoas novas á vista</th><th>Nomes que deixan de quedar á vista</th><th>Non-persoas que deixan de taparse</th><th>Erros</th></tr></thead>
+  <tbody>
+    <tr><td>220 de 2024, apartados ao chou para medir</td><td>0 (*)</td><td>1</td><td>38</td><td>0</td></tr>
+    <tr><td>220 de xaneiro-xuño de 2025 que ninguén revisou</td><td>0</td><td>40</td><td>87</td><td>0</td></tr>
+  </tbody>
+</table>
+<p>Ademais, <strong>45 DNI</strong> deixan de levar o código doutra persoa (sobre todo nas táboas de notificacións e de axudas). (*) Unha maxistrada queda á vista nas dúas mencións do seu documento: antes o seu nome viña partido entre dúas liñas e non se lle aplicaba o criterio CENDOJ (xuíces e maxistrados á vista). Entre os nomes que deixan de quedar á vista están os das comisións de concursos universitarios («Presidente Apelidos, Nome»), que a versión do 4 de outubro deixaba á vista en todo ou en parte, tamén cando eran nomes estranxeiros.</p>
+<p>As cifras de fiabilidade da versión do 11 de outubro con 500 documentos de 2024 (persoas tapadas enteiras, documentos sen fuga, igualdade entre Windows e Mac) están no documento 05 (Estatística).</p>
+
+<h2 class="sec">06 · Límites que seguen aí</h2>
+<div class="aviso"><h4>A revisión humana segue sendo necesaria</h4>
+<p>O programa é máis fiable ca antes, pero ningún sistema deste tipo garante o 100 %. Antes de entregar un documento anonimizado, revisa sobre todo as táboas, as listaxes de persoas e os nomes partidos entre liñas.</p></div>
+<ul class="compacta">
+  <li>Aínda se tapan ás veces palabras soltas, nomes de entidades ou rótulos que non se repiten de abondo para corrixilos con seguridade.</li>
+  <li>Algúns nomes estranxeiros pouco habituais poden quedar á vista se non hai ningún sinal (un tratamento, un DNI) ao seu carón.</li>
+  <li>Os xuíces, maxistrados e letrados da Administración de Xustiza quedan á vista (criterio CENDOJ), agora tamén cando o seu nome vén partido entre dúas liñas.</li>
+  <li>Os documentos escaneados dependen da calidade do recoñecemento de texto (OCR).</li>
+</ul>
+
+<h2 class="sec">07 · Como actualizar</h2>
+<ul class="compacta">
+  <li><strong>Windows:</strong> executa o instalador novo (<code>Anonimizador-Xuridico-Instalador-20261012-….exe</code>) por riba do anterior. O rexistro de nomes reais que xa tiñas consérvase.</li>
+  <li><strong>Mac e Linux:</strong> esta versión aínda non se preparou para Mac e Linux; seguen coa do 4 de outubro.</li>
+  <li>Non sigas usando as versións anteriores do 11 de outubro (20261011-9a30d66 e 20261011-ea055cf).</li>
+</ul>
+
+<p class="rodape">Anonimizador de expedientes xurídicos · Novidades da versión do 12 de outubro de 2026 (fronte á do 4 de outubro) · Outubro de 2026</p>
+</body>
+</html>

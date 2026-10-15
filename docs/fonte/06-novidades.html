@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Novidades da segunda versión do 11 de outubro de 2026</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:15mm 17mm 15mm 17mm; }
+  body{ font-size:12px; line-height:1.5; }
+  .portada{ padding:22px 30px 20px; margin-bottom:20px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; max-width:none; margin-bottom:16px; }
+  h2.sec{ margin:22px 0 10px; }
+  .cifras{ display:flex; gap:10px; margin:6px 0 14px; }
+  .cifra{ flex:1; border:1px solid var(--line); border-radius:6px; padding:10px 12px; break-inside:avoid; }
+  .cifra .v{ font-size:22px; font-weight:700; color:var(--accent); line-height:1.1; }
+  .cifra .antes{ font-size:11px; color:var(--ink-soft); }
+  .cifra .et{ font-size:11.5px; margin-top:4px; }
+  table.comparacion td:nth-child(2), table.comparacion td:nth-child(3),
+  table.comparacion th:nth-child(2), table.comparacion th:nth-child(3){ text-align:right; white-space:nowrap; }
+  table.comparacion td:nth-child(3){ font-weight:700; color:var(--accent); }
+  ul.compacta li{ margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Novidades · Anonimizador de expedientes xurídicos</span>
+  <h1>Que mellora a segunda versión do 11 de outubro</h1>
+  <p class="lede">Resumo para quen usa o programa: que se arranxou fronte á versión instalada do 11 de outubro (20261011-9a30d66), como se mediu e que límites seguen a existir. As cifras de fiabilidade da versión do 11 de outubro están no documento 05 (Estatística).</p>
+  <div class="meta">
+    <div><span>Versión</span>20261011 (segunda do día)</div>
+    <div><span>Substitúe a</span>20261011-9a30d66</div>
+    <div><span>Data</span>11 de outubro de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · En poucas palabras</h2>
+<p>A versión nova <strong>deixa á vista menos anacos de nomes</strong> (apelidos partidos ao final da liña, nomes de pía abreviados ou unidos), <strong>xa non atribúe a quen asina o DNI dun anexo</strong> e <strong>tapa menos o que non é persoa</strong> (cargos, nomes de consellerías e ministerios, nomes de vivendas rurais).</p>
+
+<div class="cifras">
+  <div class="cifra"><div class="v">0</div><div class="antes">en 660 documentos que ninguén lera</div><div class="et">persoas que a versión nova deixa á vista e a anterior tapaba</div></div>
+  <div class="cifra"><div class="v">9 → 0</div><div class="antes">en 660 documentos que ninguén lera (1,4 %)</div><div class="et">DNI dun anexo co código da persoa que asina</div></div>
+  <div class="cifra"><div class="v">56 → 60</div><div class="antes">de 60 na mostra lida (93 % → 100 %)</div><div class="et">documentos sen ningún anaco de nome á vista (cifra só indicativa: ver 05)</div></div>
+</div>
+
+<h2 class="sec">02 · Datos persoais que quedaban á vista</h2>
+<ul class="compacta">
+  <li><strong>Apelidos partidos cun guión ao final da liña</strong> («Pérez Es-» nunha liña e «tévez» na seguinte): a persoa podía quedar enteira á vista, ou só co anaco final tapado. Agora tápase enteira e cun só código, aínda que noutra parte do documento o apelido apareza sen partir.</li>
+  <li><strong>Segundo apelido na liña seguinte</strong> («doña Elena Esperanza Ramírez» ao final dunha liña e «Díaz» na seguinte): o segundo apelido levaba outro código ou quedaba á vista.</li>
+  <li><strong>Nome de pía á vista cos apelidos tapados</strong>: o catalán «Maria dels Àngels», o «l·l» catalán («Marcel·lí»), «M.ª» pegado ao nome («M.ªElena»), unha «M» solta diante ou detrás do nome («M Luisa», «Clara M») e iniciais no medio do nome («Hassan M.R.F. Ali»).</li>
+</ul>
+
+<h2 class="sec">03 · O DNI dun anexo xa non se atribúe a quen asina</h2>
+<p>Nos anuncios que rematan cun <strong>ANEXO só con DNI</strong> (notificacións de expedientes sancionadores, por exemplo), o primeiro DNI do anexo recibía o código da persoa que asina xusto enriba. Non deixaba nada á vista, pero no documento anonimizado parecía que ese DNI era de quen asinaba. Agora un DNI non se relaciona cunha persoa se entre os dous hai un encabezado «ANEXO»: tápase coma DNI.</p>
+
+<h2 class="sec">04 · Menos cousas tapadas sen motivo</h2>
+<ul class="compacta">
+  <li><strong>Cargos con calificativo</strong>: «Fiscal Delegado/a para…», «Rector Magnífico».</li>
+  <li><strong>O nome do departamento nun cargo</strong>: «La Ministra de Vivienda y Agenda Urbana, …» tapaba tamén «Agenda Urbana»; igual con «Bellas Artes» ou «Mar Menor». Agora tápase só a persoa.</li>
+  <li><strong>Nomes de vivendas rurais</strong> que levan «Don»: «Casería Don …», «Molino de Don …».</li>
+  <li><strong>A mesma persoa, un só código</strong>: cando a forma abreviada vai entre parénteses xusto detrás do nome completo («Elena Esperanza Ramírez Duarte (Elena E. Ramírez Duarte)»).</li>
+  <li><strong>Maxistrados</strong>: cando o nome estaba partido entre dúas liñas, unha mención quedaba á vista (criterio CENDOJ) e outra tapada a medias. Agora quedan á vista as dúas, coma sempre que non está partido.</li>
+</ul>
+
+<h2 class="sec">05 · Como se mediu</h2>
+<p>Cada cambio comprobouse cun exemplo inventado (sen datos reais) que fallaba antes do arranxo, e cun control de que unha persoa parecida segue tapada. O programa ten agora <strong>738 comprobacións automáticas</strong> (a versión do 11 de outubro, 707), e pasan todas.</p>
+<p>Para non medir cos mesmos documentos cos que se buscaron os fallos, comparáronse a versión do 11 de outubro e a nova <strong>só con documentos que ninguén lera</strong>, e leuse cada diferenza unha a unha:</p>
+<table class="comparacion">
+  <thead><tr><th>Documentos que ninguén lera</th><th>Persoas novas á vista</th><th>Erros</th></tr></thead>
+  <tbody>
+    <tr><td>440 do BOE e do DOG de 2024 (os da proba do documento 05, sen a súa mostra de 60)</td><td>0</td><td>0</td></tr>
+    <tr><td>220 do BOE e do DOG de xaneiro-xuño de 2025</td><td>0</td><td>0</td></tr>
+  </tbody>
+</table>
+<p>Nos 660 documentos, todo o que cambia é mellora: <strong>4 nomes</strong> partidos cun guión ao final da liña que quedaban á vista, enteiros ou en parte, agora tápanse enteiros; <strong>9 DNI</strong> de anexos deixan de levar o código de quen asina; e <strong>16 anacos</strong> que non eran persoas deixan de taparse (cargos como «Fiscal Delegada» ou «Rector Magnífico» e nomes de consellerías ou ministerios). Os demais cambios son o mesmo nome, antes en dous anacos e agora nun só, e unha maxistrada que agora queda á vista nas dúas mencións do seu documento (criterio CENDOJ).</p>
+<p>A cifra «56 → 60 de 60» é da mostra de 60 documentos de 2024 do documento 05, escollidos ao chou e lidos un a un coa versión do 11 de outubro: os fallos arranxados atopáronse nela, así que só indica que eses casos xa non se repiten; a medida sen sesgo é a da táboa.</p>
+
+<h2 class="sec">06 · Límites que seguen aí</h2>
+<div class="aviso"><h4>A revisión humana segue sendo necesaria</h4>
+<p>O programa é máis fiable ca antes, pero ningún sistema deste tipo garante o 100 %. Antes de entregar un documento anonimizado, revisa sobre todo as táboas, as listaxes de persoas e os nomes partidos entre liñas.</p></div>
+<ul class="compacta">
+  <li>Aínda se tapan ás veces rótulos de formulario en maiúsculas, nomes de entidades e palabras soltas («Marco», «Test», o concello de «Teo» nunha táboa).</li>
+  <li>Algúns nomes estranxeiros pouco habituais poden quedar á vista se non hai ningún sinal (un tratamento, un DNI) ao seu carón.</li>
+  <li>Un PDF de 500 da proba de 2024 non se pode procesar (formato de cor non admitido): o programa avisa e non xera saída.</li>
+</ul>
+
+<h2 class="sec">07 · Como actualizar</h2>
+<ul class="compacta">
+  <li><strong>Windows:</strong> executa o instalador novo (<code>Anonimizador-Xuridico-Instalador-20261011-….exe</code>, o que acompaña a este documento; non o de <code>9a30d66</code>) por riba do anterior. O rexistro de nomes reais que xa tiñas consérvase.</li>
+  <li><strong>Mac e Linux:</strong> esta versión aínda non se preparou para Mac e Linux; seguen coa do 4 de outubro (20261004).</li>
+</ul>
+
+<p class="rodape">Anonimizador de expedientes xurídicos · Novidades da segunda versión do 11 de outubro de 2026 · Outubro de 2026</p>
+</body>
+</html>

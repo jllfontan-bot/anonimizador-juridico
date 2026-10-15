@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titulo %}{{ doc_id }} — orixinal e anonimizado{% endblock %}
+{% block contido %}
+<style>.envoltorio{ max-width:none; }</style>
+<h1>{{ doc_id }}</h1>
+<p class="subtitulo">Esquerda: orixinal. Dereita: anonimizado polo programa (antes das túas decisións).</p>
+{% for n in paxinas %}
+<h2>Páxina {{ n }}</h2>
+<div style="display:flex; gap:10px;">
+  <img src="{{ url_for('corpus.paxina', doc_id=doc_id, cal='orixinal', n=n) }}" alt="orixinal páxina {{ n }}"
+       style="width:50%; border:1px solid var(--line); background:#fff;" loading="lazy">
+  <img src="{{ url_for('corpus.paxina', doc_id=doc_id, cal='previa', n=n) }}" alt="anonimizado páxina {{ n }}"
+       style="width:50%; border:1px solid var(--line); background:#fff;" loading="lazy">
+</div>
+{% endfor %}
+{% endblock %}

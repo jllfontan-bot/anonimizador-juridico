@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block titulo %}Contrasinal de reversión{% endblock %}
+{% block contido %}
+<h1>Contrasinal de reversión</h1>
+<p class="subtitulo">
+  Segunda barreira para "reverter" (recuperar unha identidade real a partir
+  dun código), independente da clave de cifrado do rexistro.
+</p>
+
+<div class="tarxeta marcada">
+  <strong>Importante:</strong> isto NON é unha capa de cifrado adicional --
+  quen teña acceso ao ficheiro <code>clave.key</code> (ou ao chaveiro do
+  sistema) E ao ficheiro <code>rexistro.enc</code> pode descifrar as
+  identidades reais directamente, sen coñecer esta contrasinal. O que si
+  evita é que outra persoa que comparte este ordenador abra a interface
+  web e reverta identidades reais sen coñecela. Segue a ser imprescindible
+  gardar ben eses dous ficheiros por separado.
+</div>
+
+<form method="post" action="{{ url_for('definir_contrasinal') }}">
+  <input type="hidden" name="rexistro" value="{{ rexistro_dir }}">
+  {% if xa_existe %}
+  <div class="campo">
+    <label for="actual">Contrasinal actual</label>
+    <input type="password" id="actual" name="actual" required>
+  </div>
+  {% endif %}
+  <div class="campo">
+    <label for="nova">{{ "Nova contrasinal" if xa_existe else "Contrasinal (mínimo 8 caracteres)" }}</label>
+    <input type="password" id="nova" name="nova" minlength="8" required>
+  </div>
+  <div class="campo">
+    <label for="confirmacion">Repite a contrasinal</label>
+    <input type="password" id="confirmacion" name="confirmacion" minlength="8" required>
+  </div>
+  <button type="submit">{{ "Cambiar contrasinal" if xa_existe else "Definir contrasinal" }}</button>
+</form>
+
+{% if erro %}
+<div class="erro" style="margin-top:20px;">{{ erro }}</div>
+{% endif %}
+
+{% if feito %}
+<div class="aviso-ok" style="margin-top:20px;">
+  Contrasinal {{ "cambiada" if xa_existe else "definida" }} correctamente.
+  Garda estes DOUS ficheiros nun lugar seguro (non son o mesmo):
+  <ul>
+    <li><code>rexistro.enc</code> -- as identidades reais, cifradas</li>
+    <li>
+      {% if orixe_clave == "ficheiro" %}
+      <code>clave.key</code> -- a CLAVE que as abre; sen ela, NUNCA se poden recuperar
+      {% else %}
+      a clave de cifrado vive no chaveiro do sistema operativo, non nun ficheiro local
+      {% endif %}
+    </li>
+  </ul>
+</div>
+{% endif %}
+
+<p class="nota-saida"><a href="{{ url_for('reverter') }}">← Volver a reversión controlada</a></p>
+{% endblock %}

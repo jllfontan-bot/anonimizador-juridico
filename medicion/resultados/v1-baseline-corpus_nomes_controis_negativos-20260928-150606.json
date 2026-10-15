@@ -1,0 +1,264 @@
+{
+  "resultados": [
+    {
+      "id": "ctl_nome_01",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La vista se celebró en Santiago de Compostela el pasado martes.",
+      "texto_anonimizado": "La vista se celebró en Santiago de Compostela el pasado martes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_02",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El juzgado de Vilagarcía remitió el exhorto a Santiago.",
+      "texto_anonimizado": "El juzgado de Vilagarcía remitió el exhorto a Santiago.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_03",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La demandante vivía en A Mariña desde el año 2015.",
+      "texto_anonimizado": "La demandante vivía en A Mariña desde el año 2015.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_04",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Recorrió la Costa da Morte y A Mariña Lucense en verano.",
+      "texto_anonimizado": "Recorrió la Costa da Morte y A Mariña Lucense en verano.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_05",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El acusado conducía un Mercedes gris por la autovía.",
+      "texto_anonimizado": "El acusado conducía un Mercedes gris por la autovía.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_06",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Compró un Mercedes Benz de segunda mano en Lugo.",
+      "texto_anonimizado": "Compró un Mercedes Benz de segunda mano en Lugo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_07",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El local está en la calle Rosalía de Castro de Vigo.",
+      "texto_anonimizado": "El local está en la calle PERSOA_000001.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Rosalía de Castro"
+      ],
+      "sobre_anonimizacion_sen_marcar": true,
+      "ok": false
+    },
+    {
+      "id": "ctl_nome_08",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La sede está en la rúa Concepción Arenal de Ferrol.",
+      "texto_anonimizado": "La sede está en la rúa Concepción Arenal de Ferrol.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_09",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El IES Rosalía de Castro organizó la jornada de puertas abiertas.",
+      "texto_anonimizado": "El IES Rosalía de Castro organizó la jornada de puertas abiertas.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_10",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Recibió el Premio Rosalía de Castro de poesía en 2010.",
+      "texto_anonimizado": "Recibió el PERSOA_000001 de poesía en 2010.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Rosalía de Castro"
+      ],
+      "sobre_anonimizacion_sen_marcar": true,
+      "ok": false
+    },
+    {
+      "id": "ctl_nome_11",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El vuelo aterrizó en el aeropuerto Rosalía de Castro con retraso.",
+      "texto_anonimizado": "El vuelo aterrizó en el aeropuerto PERSOA_000001 con retraso.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Rosalía de Castro"
+      ],
+      "sobre_anonimizacion_sen_marcar": true,
+      "ok": false
+    },
+    {
+      "id": "ctl_nome_12",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Fue trasladado al Hospital Álvaro Cunqueiro de Vigo.",
+      "texto_anonimizado": "Fue trasladado al Hospital Álvaro Cunqueiro de Vigo.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_13",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El CEIP Manuel Murguía cerró por obras durante un mes.",
+      "texto_anonimizado": "El PERSOA_000001 cerró por obras durante un mes.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Manuel Murguía"
+      ],
+      "sobre_anonimizacion_sen_marcar": true,
+      "ok": false
+    },
+    {
+      "id": "ctl_nome_14",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El partido se jugó en el estadio Santiago Bernabéu.",
+      "texto_anonimizado": "El partido se jugó en el estadio Santiago Bernabéu.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_15",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Visitaron el santuario de Covadonga en agosto.",
+      "texto_anonimizado": "Visitaron el santuario de Covadonga en agosto.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_16",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La procesión de la Virgen del Pilar pasó por la plaza.",
+      "texto_anonimizado": "La procesión de la Virgen del Pilar pasó por la plaza.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_17",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Participó en la romería del Rocío con su familia.",
+      "texto_anonimizado": "Participó en la romería del PERSOA_000001 con su familia.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Rocío"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_18",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La concentración tuvo lugar en la Praza de María Pita.",
+      "texto_anonimizado": "La concentración tuvo lugar en la Praza de María Pita.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_19",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La Sala Primera del Tribunal Supremo desestimó el recurso.",
+      "texto_anonimizado": "La Sala Primera del Tribunal Supremo desestimó el recurso.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_20",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Colaboró como voluntario con Cruz Roja durante la emergencia.",
+      "texto_anonimizado": "Colaboró como voluntario con Cruz Roja durante la emergencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_21",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "El hotel Sol Meliá de Sanxenxo cerró la temporada.",
+      "texto_anonimizado": "El hotel Sol Meliá de Sanxenxo cerró la temporada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_22",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Esa noche las Nieves de la sierra cortaron la carretera.",
+      "texto_anonimizado": "Esa noche las Nieves de la sierra cortaron la carretera.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_23",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Dictó la resolución la magistrada Antía Queiruga Vilariño, titular del juzgado.",
+      "texto_anonimizado": "Dictó la resolución la magistrada Antía Queiruga Vilariño, titular del juzgado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_24",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "Xurxo Lema Novoa, Magistrado-Juez del Juzgado de Primera Instancia nº 2.",
+      "texto_anonimizado": "Xurxo Lema Novoa, Magistrado-Juez del Juzgado de Primera Instancia nº 2.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ctl_nome_25",
+      "categoria": "control_negativo_nomes",
+      "texto_orixinal": "La Paz y la Luz eran los nombres de las dos embarcaciones.",
+      "texto_anonimizado": "La Paz y la Luz eran los nombres de las dos embarcaciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    }
+  ]
+}

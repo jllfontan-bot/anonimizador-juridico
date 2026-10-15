@@ -1,0 +1,346 @@
+[
+  {
+    "id": "dni_solto",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 71234569J para acreditar su identidad ante el letrado.",
+    "debe_desaparecer": ["71234569J"],
+    "debe_permanecer": ["compareciente", "letrado"],
+    "nota": "Caso estándar, xa cuberto ben pola v1."
+  },
+  {
+    "id": "dni_pegado_a_guion_baixo",
+    "categoria": "identificador_directo",
+    "texto": "OTROS DOCUMENTOS: Solicitud_ApudActa_71234569J.pdf adxunto ao expediente.",
+    "debe_desaparecer": ["71234569J"],
+    "debe_permanecer": ["OTROS DOCUMENTOS", "adxunto"],
+    "nota": "Caso real do 17/09/2026, xa arranxado."
+  },
+  {
+    "id": "nie_estandar",
+    "categoria": "identificador_directo",
+    "texto": "Presenta NIE Y1234567X como documento de identidad válido en España.",
+    "debe_desaparecer": ["Y1234567X"],
+    "debe_permanecer": ["documento de identidad válido"],
+    "nota": "Control estándar."
+  },
+  {
+    "id": "pasaporte_con_etiqueta",
+    "categoria": "identificador_directo",
+    "texto": "Comparece con pasaporte número PAA123456 al no disponer de DNI español.",
+    "debe_desaparecer": ["PAA123456"],
+    "debe_permanecer": ["pasaporte número", "al no disponer"],
+    "nota": "Hueco arranxado o 27/09/2026 (v2, sesión anterior)."
+  },
+  {
+    "id": "pasaporte_sen_etiqueta",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia interna PAA123456 aparece en la tabla de expedientes.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["PAA123456"],
+    "nota": "Sen a etiqueta 'pasaporte' preto, NON debe tocarse (regra de ouro dos formatos ambiguos)."
+  },
+  {
+    "id": "telefono_3_3_3",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 666 123 456 en horario de mañana.",
+    "debe_desaparecer": ["666 123 456"],
+    "debe_permanecer": ["horario de mañana"],
+    "nota": "Control estándar."
+  },
+  {
+    "id": "email_estandar",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo mcarballo.exemplo@dominio-ficticio.gal antes del viernes.",
+    "debe_desaparecer": ["mcarballo.exemplo@dominio-ficticio.gal"],
+    "debe_permanecer": ["antes del viernes"],
+    "nota": "Control estándar."
+  },
+  {
+    "id": "enderezo_con_numero",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Rúa Nova de Abaixo 20, según consta en el padrón municipal.",
+    "debe_desaparecer": ["Rúa Nova de Abaixo 20"],
+    "debe_permanecer": ["padrón municipal"],
+    "nota": "Control estándar."
+  },
+  {
+    "id": "enderezo_sen_numero_control",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana típica.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["Rúa Nova a modo de ejemplo"],
+    "nota": "Sen número/s/n non hai enderezo completo -- non debe redactarse (control negativo)."
+  },
+  {
+    "id": "colexiado_con_numero",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 4821 del ICA de Santiago.",
+    "debe_desaparecer": ["4821"],
+    "debe_permanecer": ["colegiado número", "ICA de Santiago"],
+    "nota": "Control estándar (só se redacta a cifra)."
+  },
+  {
+    "id": "seguridade_social_con_etiqueta",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 28/12345678/40 en el expediente laboral.",
+    "debe_desaparecer": ["28/12345678/40"],
+    "debe_permanecer": ["expediente laboral"],
+    "nota": "Formato arranxado o 27/09/2026 (sesión Seguridade Social)."
+  },
+  {
+    "id": "seguridade_social_sen_etiqueta_control",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 28/12345678/40 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["28/12345678/40"],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera -- non debe tocarse."
+  },
+  {
+    "id": "nome_estandar",
+    "categoria": "nome",
+    "texto": "Manuel Ferrándiz Salcedo presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": ["Manuel Ferrándiz Salcedo"],
+    "debe_permanecer": ["escrito de alegaciones"],
+    "nota": "Caso estándar, ben cuberto pola v1."
+  },
+  {
+    "id": "nome_orde_invertida_listaxe",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Fiolleda Outeiral, Xiana - Turno de mañá.",
+    "debe_desaparecer": ["Fiolleda Outeiral", "Xiana"],
+    "debe_permanecer": ["Listaxe de persoal", "Turno de mañá"],
+    "nota": "O caso real do BOE (14/09/2026) que motivou risco_residual.py. A proba rápida do 27/09 amosou que qwen2.5-coder:3b NON o detecta -- aquí gaña a regex."
+  },
+  {
+    "id": "nome_sen_coma_profesion",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Leandro del Valle Resua arquitecto colegiado en Pontevedra.",
+    "debe_desaparecer": ["Leandro del Valle Resua"],
+    "debe_permanecer": ["Firma el informe", "arquitecto colegiado"],
+    "nota": "Caso real do 17/09/2026 (cabeceira repetida sen coma), xa arranxado en ner.py."
+  },
+  {
+    "id": "nome_contexto_testemuna",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la testigo Xiana Fiolleda Outeiral, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": ["Xiana Fiolleda Outeiral"],
+    "debe_permanecer": ["declara la testigo", "no haber presenciado"],
+    "nota": "O caso da proba rápida do 27/09: a v1 (spaCy) adoita collelo ben coma PERSOA estándar; comprobar se de verdade escapa ou non."
+  },
+  {
+    "id": "cargo_publico_exento",
+    "categoria": "control_negativo",
+    "texto": "Preside la vista la magistrada Covadonga Freire Lameiro, titular del juzgado.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["Covadonga Freire Lameiro"],
+    "nota": "Criterio AEPD: cargos públicos no se anonimizan. Control negativo -- non debe desaparecer."
+  },
+  {
+    "id": "categoria_especial_saude",
+    "categoria": "categoria_especial",
+    "texto": "El Sr. Otero presenta un informe médico donde consta que padece una infección por VIH desde hace 5 años.",
+    "debe_desaparecer": ["Otero"],
+    "debe_permanecer": [],
+    "nota": "Hoxe a v1 non marca 'infección por VIH' coma dato de categoría especial (só anonimiza o nome se o detecta) -- métrica separada, non conta coma fuga de identificador. A proba rápida do 27/09 amosou que qwen2.5-coder:3b SI o detecta."
+  },
+  {
+    "id": "categoria_especial_relixion",
+    "categoria": "categoria_especial",
+    "texto": "La testigo declaró que profesa la religión musulmana y que acude a la mezquita cada viernes.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [],
+    "nota": "Dato de categoría especial (relixión) sen recoñecedor propio na v1 -- métrica informativa."
+  },
+  {
+    "id": "categoria_especial_orientacion",
+    "categoria": "categoria_especial",
+    "texto": "El demandante manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [],
+    "nota": "Dato de categoría especial (orientación sexual) sen recoñecedor propio na v1 -- métrica informativa."
+  },
+  {
+    "id": "categoria_especial_sindical",
+    "categoria": "categoria_especial",
+    "texto": "Consta que el trabajador es afiliado del sindicato CIG desde el año 2018.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [],
+    "nota": "Dato de categoría especial (afiliación sindical) sen recoñecedor propio na v1 -- métrica informativa."
+  },
+  {
+    "id": "papel_perito",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial don Ramón Falcón Bande, colegiado en el ICAI, para ratificar su informe.",
+    "debe_desaparecer": ["Ramón Falcón Bande"],
+    "debe_permanecer": ["perito judicial", "ratificar su informe"],
+    "nota": "O nome debe desaparecer coma sempre; o PAPEL (perito) non se marca hoxe coma tal -- métrica informativa para a IA local."
+  },
+  {
+    "id": "ocr_dni_con_ruido",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 71234569J presentado xunto coa solicitude (dixitalizado por OCR).",
+    "debe_desaparecer": ["71234569J"],
+    "debe_permanecer": ["solicitude"],
+    "nota": "Simula ruído de OCR lixeiro (0 por O) arredor, sen tocar o propio DNI -- control de robustez básica."
+  },
+  {
+    "id": "iban_estandar",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES91 2100 0418 4502 0005 1332 indicada por el interesado.",
+    "debe_desaparecer": ["ES91 2100 0418 4502 0005 1332"],
+    "debe_permanecer": ["interesado"],
+    "nota": "Control estándar."
+  },
+  {
+    "id": "web_cela_apelidos_nome_partida",
+    "categoria": "nome_formato_dificil",
+    "texto": "30\nMINISTERIO ECONOMIA,\n30\nBARROSO CORDEIRO,\nALDARA.\n***4521**\nA1\nC.SUP.SIST.\n",
+    "debe_desaparecer": ["BARROSO CORDEIRO", "ALDARA"],
+    "debe_permanecer": ["MINISTERIO ECONOMIA", "C.SUP.SIST."],
+    "nota": "Corpus web 28/09/2026 (táboa real do BOE en PDF): a cela 'APELIDOS, NOME.' partida en dúas liñas; só se tapaba a segunda liña. Datos inventados."
+  },
+  {
+    "id": "web_cela_un_apelido_partida",
+    "categoria": "nome_formato_dificil",
+    "texto": "Puesto adjudicado\nOTERO,\nANTÍA.\n***1122**\n",
+    "debe_desaparecer": ["OTERO", "ANTÍA"],
+    "debe_permanecer": ["Puesto adjudicado"],
+    "nota": "Corpus web 28/09/2026: cun só apelido non se detectaba nada. Datos inventados."
+  },
+  {
+    "id": "web_cela_apelidos_conector_partida",
+    "categoria": "nome_formato_dificil",
+    "texto": "29\nVEIGA LUCAS DE LA\nTORRE, XOÁN.\n***9876**\nA1\n",
+    "debe_desaparecer": ["VEIGA LUCAS", "TORRE", "XOÁN"],
+    "debe_permanecer": ["A1"],
+    "nota": "Corpus web 28/09/2026: salto de liña dentro dos apelidos tras un conector. Datos inventados."
+  },
+  {
+    "id": "web_columna_dni_nie_pas",
+    "categoria": "identificador_directo",
+    "texto": "Número de expediente\nDNI/NIE/PAS\nData da resolución\n100001\nK12345678 (NIE X1234567L)\n2.6.2026\n100002\nQW123456\n2.6.2026\n100003\n7T8R2PQXA00041234567B (representante 334455667)\n3.6.2026\n100005\nB0998877\n4.6.2026\n",
+    "debe_desaparecer": ["K12345678", "X1234567L", "QW123456", "7T8R2PQXA00041234567B", "334455667", "B0998877"],
+    "debe_permanecer": ["100001", "100005", "2.6.2026", "DNI/NIE/PAS", "Número de expediente"],
+    "nota": "Corpus web 28/09/2026 (anexo real do DOG): pasaportes e documentos estranxeiros baixo a columna DNI/NIE/PAS quedaban á vista. Datos inventados."
+  },
+  {
+    "id": "web_pasaporte_estranxeiro_prosa",
+    "categoria": "identificador_directo",
+    "texto": "O interesado presentou o pasaporte número P99887766 na oficina de Lugo.",
+    "debe_desaparecer": ["P99887766"],
+    "debe_permanecer": ["pasaporte número", "oficina"],
+    "nota": "Corpus web 28/09/2026: formato estranxeiro (1 letra + 8 díxitos) fóra do patrón español. Datos inventados."
+  },
+  {
+    "id": "web_dona_minuscula_cargo_sen_coma",
+    "categoria": "nome_formato_dificil",
+    "texto": "resuelvo: Nombrar a doña Uxía Barroso Cordeiro Secretaria General del Consorcio de la Zona Especial.",
+    "debe_desaparecer": ["Uxía Barroso Cordeiro"],
+    "debe_permanecer": ["Secretaria General del Consorcio"],
+    "nota": "Corpus web 28/09/2026 (BOE real): tratamento en minúscula + cargo sen coma; o nome non se detectaba. Datos inventados."
+  },
+  {
+    "id": "web_don_minuscula_alcalde",
+    "categoria": "nome_formato_dificil",
+    "texto": "De una parte, don Breixo Fiolleda Outeiral Alcalde-Presidente del Ayuntamiento de Lalín.",
+    "debe_desaparecer": ["Breixo Fiolleda Outeiral"],
+    "debe_permanecer": ["Alcalde-Presidente del Ayuntamiento"],
+    "nota": "Corpus web 28/09/2026 (convenio real do BOE). Datos inventados."
+  },
+  {
+    "id": "web_cela_tres_linas",
+    "categoria": "nome_formato_dificil",
+    "texto": "MADRID.\n28\nOTERO\nLORENZO,\nANTÍA.\n******8168\nA0011\n",
+    "debe_desaparecer": ["OTERO", "LORENZO", "ANTÍA"],
+    "debe_permanecer": ["MADRID."],
+    "nota": "Corpus web 28/09/2026: cela de táboa en tres liñas, salto entre apelidos sen conector. Datos inventados."
+  },
+  {
+    "id": "web_sinatura_apelido_liña_seguinte",
+    "categoria": "nome_formato_dificil",
+    "texto": "Madrid, 2 de septiembre de 2026.–La Subsecretaria de Hacienda, Lidia Sáez\nMateu.\nANEXO\n",
+    "debe_desaparecer": ["Lidia Sánchez", "Milán"],
+    "debe_permanecer": ["ANEXO", "Madrid, 2 de septiembre"],
+    "nota": "Corpus web 28/09/2026: sinatura do BOE co segundo apelido na liña seguinte (spaCy tomábao coma lugar). Datos inventados."
+  },
+  {
+    "id": "web_cabeceira_institucional_universidades_plural",
+    "categoria": "control_negativo",
+    "texto": "CONSELLERÍA\nDE\nEDUCACIÓN,\nCIENCIA,\nUNIVERSIDADES\nE\nFORMACIÓN PROFESIONAL\nORDE do 6 de xullo de 2026.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["UNIVERSIDADES", "FORMACIÓN PROFESIONAL"],
+    "nota": "Corpus web 28/09/2026: cabeceira institucional do DOG partida en liñas casaba co patrón de listaxe e 'universidades' (plural) non casaba en _ORGANISMOS_RE."
+  },
+  {
+    "id": "web_ministerio_enumeracion_areas",
+    "categoria": "control_negativo",
+    "texto": "puestos de trabajo en el Ministerio de Economía, Comercio y Empresa. De acuerdo con lo establecido en el artículo.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["Economía, Comercio y Empresa"],
+    "nota": "Corpus web 28/09/2026: enumeración de áreas dun ministerio casaba co patrón 'Apelidos, Nome'. Datos inventados."
+  },
+  {
+    "id": "web_conselleria_enumeracion_areas",
+    "categoria": "control_negativo",
+    "texto": "establece a estrutura orgánica da Consellería de Emprego, Comercio e Emigración, esta consellería asume o exercicio.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["Emprego, Comercio e Emigración"],
+    "nota": "Corpus web 28/09/2026, versión galega. Datos inventados."
+  },
+  {
+    "id": "web_cabeceira_ministerio_partida_varias_linas",
+    "categoria": "control_negativo",
+    "texto": "CONSELLERÍA\nDE\nEDUCACIÓN,\nCIENCIA,\nUNIVERSIDADES\nE\nFORMACIÓN PROFESIONAL\nORDE do 6 de xullo de 2026.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["EDUCACIÓN,", "CIENCIA,", "UNIVERSIDADES"],
+    "nota": "Corpus web 28/09/2026: cabeceira dun DOG real partida en varias liñas polo axuste do PDF. Datos inventados."
+  },
+  {
+    "id": "web_cargo_antes_do_nome_sen_honorifico",
+    "categoria": "nome_formato_dificil",
+    "texto": "El Secretario General Técnico, Juan Antonio Piedrafita Marín, resolvió el expediente.",
+    "debe_desaparecer": ["Juan Antonio Piedrafita Marín"],
+    "debe_permanecer": ["El Secretario General Técnico"],
+    "nota": "Corpus web 28/09/2026: cargo antes do nome sen honorífico redactábase enteiro (cargo incluído). Datos inventados."
+  },
+  {
+    "id": "web_cargo_antes_nome_con_del",
+    "categoria": "nome_formato_dificil",
+    "texto": "El Titular del Centro Concertado, Antonio Javier Aguilera Rubio, presentó la solicitud.",
+    "debe_desaparecer": ["Antonio Javier Aguilera Rubio"],
+    "debe_permanecer": ["El Titular del Centro Concertado"],
+    "nota": "Corpus web 28/09/2026, conector 'del'. Datos inventados."
+  },
+  {
+    "id": "web_cargo_antes_nome_minuscula_medio_frase",
+    "categoria": "nome_formato_dificil",
+    "texto": "y el Secretario de Estado de Cultura, Jordi Mateu Gea, firmó el convenio.",
+    "debe_desaparecer": ["Jordi Mateu Gea"],
+    "debe_permanecer": ["el Secretario de Estado de Cultura"],
+    "nota": "Corpus web 28/09/2026: bloque de sinatura no medio da frase, artigo en minúscula. Datos inventados."
+  },
+  {
+    "id": "web_cve_dog_non_e_persoa",
+    "categoria": "control_negativo",
+    "texto": "RESOLUCIÓN do 5 de setembro de 2026.\n\nCVE-DOG: vkaucs15-xau1-2na8-hbq6-ncoqegbnjm18\n",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["CVE-DOG"],
+    "nota": "Corpus web 29/09/2026 (DOG real): a etiqueta de pé de páxina \"CVE-DOG\" (Código de Verificación Electrónica) suavizábase a Title Case (\"Cve-Dog\") coa forma exacta dun apelido composto e spaCy chegaba a clasificala coma PERSOA -- de xeito INCONSISTENTE dentro do MESMO documento (repetida en cada páxina, unhas veces trocada por un código de persoa e outras non). \"CVE-DOG\" nunca é un dato persoal. Datos inventados."
+  },
+  {
+    "id": "web_marxe_cve_boe_non_e_persoa",
+    "categoria": "control_negativo",
+    "texto": "cve: BOE-A-2026-19351\nVerificable en https://www.boe.es\nEsta notificación ten que ser feita no BOE.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["BOE-A-2026-19351", "no BOE."],
+    "nota": "Corpus web 29/09/2026 (BOE real): a sigla BOE en maiúsculas suavizábase a \"Boe\" e spaCy tomábaa por persoa, na marxe de cada páxina e no texto corrido."
+  },
+  {
+    "id": "web_lei_galego_non_e_persoa",
+    "categoria": "control_negativo",
+    "texto": "De conformidade co disposto no artigo 46 da Lei 39/2015 e no Regulamento da Lei 2/2016.",
+    "debe_desaparecer": [],
+    "debe_permanecer": ["da Lei 39/2015", "Regulamento da Lei 2/2016"],
+    "nota": "Corpus web 29/09/2026 (DOG real): o modelo castelán toma o galego \"Lei\" por un nome."
+  }
+]

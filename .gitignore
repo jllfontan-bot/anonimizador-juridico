@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.pyc
+datos_rexistro/
+datos_rexistro_real/
+saidas_reais/
+*.enc
+clave.key
+clave.chaveiro
+distribucion/
+*.anonimizado.txt
+anonimizador-xuridico-instalacion.zip
+anonimizador-xuridico-instalacion/
+anonimizador-xuridico-instalacion-*.zip
+.DS_Store
+build/
+Anonimizador-Xuridico-Instalador-*.exe
+.claude/
+
+# Descargas orixinais do INE (moi pesadas para git): ver datos/ine/LEEME.md
+datos/ine/*.xls
+datos/ine/*.xlsx
+
+# Descargas orixinais de lugares (INE, Xunta): ver datos/lugares/LEEME.md
+datos/lugares/*.xlsx
+datos/lugares/*.csv

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Novidades da versión de outubro de 2026</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:15mm 17mm 15mm 17mm; }
+  body{ font-size:12px; line-height:1.5; }
+  .portada{ padding:22px 30px 20px; margin-bottom:20px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; max-width:none; margin-bottom:16px; }
+  h2.sec{ margin:22px 0 10px; }
+  .cifras{ display:flex; gap:10px; margin:6px 0 14px; }
+  .cifra{ flex:1; border:1px solid var(--line); border-radius:6px; padding:10px 12px; break-inside:avoid; }
+  .cifra .v{ font-size:22px; font-weight:700; color:var(--accent); line-height:1.1; }
+  .cifra .antes{ font-size:11px; color:var(--ink-soft); }
+  .cifra .et{ font-size:11.5px; margin-top:4px; }
+  table.comparacion td:nth-child(2), table.comparacion td:nth-child(3),
+  table.comparacion th:nth-child(2), table.comparacion th:nth-child(3){ text-align:right; white-space:nowrap; }
+  table.comparacion td:nth-child(3){ font-weight:700; color:var(--accent); }
+  ul.compacta li{ margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Novidades · Anonimizador de expedientes xurídicos</span>
+  <h1>Que mellora a versión de outubro de 2026</h1>
+  <p class="lede">Resumo para quen usa o programa: que se arranxou, que hai de novo, como se mediu e que límites seguen a existir. Substitúe á versión do 27 de setembro de 2026, que xa non se debe distribuír.</p>
+  <div class="meta">
+    <div><span>Versión</span>20261004 (4 de outubro)</div>
+    <div><span>Substitúe a</span>20260927-e86ce6b</div>
+    <div><span>Data</span>4 de outubro de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · En poucas palabras</h2>
+<p>A versión nova <strong>deixa á vista moitos menos datos persoais</strong>, <strong>xa non estraga o texto</strong> do PDF arredor do que tapa e <strong>tapa moito menos o que non é dato persoal</strong> (lugares, organismos, cargos). Ademais, inclúe un <strong>PDF confidencial</strong> co listado de correspondencias e explica mellor como se protexen os nomes reais.</p>
+
+<div class="cifras">
+  <div class="cifra"><div class="v">0</div><div class="antes">antes: 34 en 12 documentos</div><div class="et">nomes completos de particulares á vista no control automático</div></div>
+  <div class="cifra"><div class="v">5</div><div class="antes">antes: 7.987 en 217 documentos</div><div class="et">palabras alleas perdidas no PDF de saída</div></div>
+  <div class="cifra"><div class="v">18</div><div class="antes">antes: 418</div><div class="et">avisos de posible sobreanonimización</div></div>
+</div>
+<p class="peq">Cifras medidas cos mesmos 280 documentos reais do BOE e do DOG (xullo-decembro de 2025) procesados coas dúas versións. Ver a sección 04.</p>
+
+<h2 class="sec">02 · Que se arranxou</h2>
+<h3>Datos persoais que podían quedar á vista</h3>
+<ul class="compacta">
+  <li><strong>Apelidos con letras doutros idiomas</strong> (por exemplo, con «Š» ou «Ł») e con apóstrofos tipográficos («O´…»).</li>
+  <li><strong>Apelidos compostos</strong> co guión especial que usa o DOG, e apelidos partidos con guión ao final dunha liña.</li>
+  <li><strong>Apelidos cataláns</strong> unidos con «i» («… i …»).</li>
+  <li><strong>Nomes en táboas</strong>: o primeiro nome de pía dunha fila, «Mª» ou «M.ª» abreviado, e as columnas «Propietario» ou «Titular» con varias persoas por cela (relacións de bens e dereitos, expropiacións).</li>
+  <li>O <strong>primeiro nome dunha enumeración</strong> («de X, Y e Z») e un apelido que coincide cunha palabra común (un mes, por exemplo).</li>
+  <li>O <strong>resumo ou sumario</strong> dun anuncio, cando o nome aparecía partido entre dúas liñas.</li>
+</ul>
+<h3>O texto que se estragaba no PDF</h3>
+<p>A versión anterior borraba, ao tapar un nome, palabras das liñas veciñas. Agora o PDF anonimizado conserva o resto do texto intacto.</p>
+<h3>O rexistro de nomes reais</h3>
+<p>Agora compróbase automaticamente que cada código garda o nome e o DNI correctos. Así atopáronse e arranxáronse dous casos en que un DNI quedaba asociado á persoa equivocada no rexistro: «don X, con DNI…, e dona Y» e un documento dun anexo que recibía o código de quen asina enriba.</p>
+
+<h2 class="sec">03 · Que hai de novo</h2>
+<h3>Menos cousas tapadas sen motivo</h3>
+<ul class="compacta">
+  <li><strong>Xuíces, maxistrados e letrados da Administración de Xustiza</strong> quedan á vista en todas as aparicións dun documento (criterio CENDOJ), non nunhas si e noutras non.</li>
+  <li>Quedan á vista <strong>municipios, provincias, países e organismos</strong> (incluídas listaxes longas de xulgados ou concellos), rúas e prazas co nome dunha persoa, o nome dun premio ou dunha institución entre comiñas, siglas e sistemas informáticos, cargos («Tesorero/a»), expresións galegas («Segundo o previsto», «Polo exposto») e coordenadas UTM.</li>
+</ul>
+
+<h3>A clave e a contrasinal, explicadas</h3>
+<p>Os nomes reais non quedan nos documentos anonimizados: gárdanse nun rexistro cifrado. Protéxeno <strong>dous segredos distintos</strong>, que agora se explican por separado no instalador, na pantalla de inicio, no Léeme e no manual:</p>
+<ol style="margin:0 0 12px 18px;padding:0;">
+  <li><strong>A clave do rexistro.</strong> Créaa o programa e ninguén a escribe. Sen ela o rexistro non se pode descifrar nunca máis: hai que facer copia de seguridade.</li>
+  <li><strong>A contrasinal de reversión.</strong> Escríbea o usuario unha vez. Pídese para ver unha identidade real, o listado completo ou o seu PDF, e cada uso queda nunha auditoría cifrada.</li>
+</ol>
+<figure><img src="img/instalador_clave_contrasinal.png" alt="Páxina do instalador" style="max-width:380px"><figcaption>Páxina nova do instalador de Windows que explica os dous segredos.</figcaption></figure>
+
+<h3>Listado de correspondencias máis claro e PDF CONFIDENCIAL</h3>
+<p>A táboa que relaciona cada código coa persoa real amósase agora arriba e sen columnas baleiras. Debaixo hai un botón para <strong>gardala en PDF</strong>: leva a marca de auga «CONFIDENCIAL» en cada páxina, a data, quen o xerou e o motivo. Para xeralo hai que escribir de novo a contrasinal e confirmar un aviso, e queda rexistrado na auditoría.</p>
+<figure><img src="img/pdf_confidencial_exemplo.png" alt="PDF confidencial" style="max-width:520px"><figcaption>Cabeceira do PDF confidencial (exemplo con datos inventados).</figcaption></figure>
+<div class="aviso">
+  <h4>Un documento de extrema sensibilidade</h4>
+  <p>Quen teña ese PDF ve as identidades reais sen ningunha contrasinal. Fóra de contexto perde valor, pero xunto cos documentos anonimizados permite reverter o anonimato. Non o envíes por correo nin o deixes nun cartafol compartido ou sincronizado coa nube, e destrúeo cando xa non faga falta.</p>
+</div>
+
+<h2 class="sec">04 · Como se mediu</h2>
+<p>Cada cambio comprobouse cun exemplo inventado (sen datos reais) que fallaba antes do arranxo; o programa ten agora <strong>626 comprobacións automáticas</strong> (antes, 397), e pasan todas. Ademais, mediuse con documentos reais e públicos do BOE e do DOG:</p>
+<ul class="compacta">
+  <li><strong>Catro lotes de 150 a 280 documentos</strong> de datas distintas (xullo de 2025 a setembro de 2026), cunha revisión automática de cada un e lectura humana de mostras, con documentos de control ao chou.</li>
+  <li><strong>Comparación directa</strong> da versión anterior e da nova co mesmo lote de 280 documentos:</li>
+</ul>
+<table class="comparacion">
+  <thead><tr><th>Indicador (280 documentos, xullo-decembro de 2025)</th><th>Versión 27/09</th><th>Versión nova</th></tr></thead>
+  <tbody>
+    <tr><td>Nomes completos de particulares á vista (control automático)</td><td>34 en 12 docs</td><td>0</td></tr>
+    <tr><td>Palabras alleas perdidas no PDF de saída</td><td>7.987 en 217 docs</td><td>5 en 2 docs</td></tr>
+    <tr><td>Avisos de posible sobreanonimización</td><td>418 en 138 docs</td><td>18 en 13 docs</td></tr>
+    <tr><td>Algo non persoal tapado nun sitio e á vista noutro</td><td>323 en 96 docs</td><td>59 en 40 docs</td></tr>
+    <tr><td>Erros no rexistro de nomes reais (código, nome ou DNI)</td><td>sen comprobar</td><td>0</td></tr>
+  </tbody>
+</table>
+<p>Nunha mostra de 60 documentos escollidos ao chou, lidos páxina a páxina, a versión do 3 de outubro (anterior a estes últimos arranxos) xa daba <strong>59 de 60 sen ningún dato persoal á vista</strong>; os fallos atopados nesa lectura e no resto do lote son os que se arranxaron nesta versión.</p>
+
+<h2 class="sec">05 · Límites que seguen aí</h2>
+<div class="nota">
+  <h4>A revisión humana segue a ser necesaria</h4>
+  <p>O programa recoñece nomes por patróns, táboas oficiais de nomes e apelidos (INE) e un modelo de linguaxe. É moito máis fiable ca antes, pero ningún sistema deste tipo garante o 100 %: un documento cun formato raro pode deixar algo á vista. Antes de entregar un documento anonimizado, bótalle unha ollada, sobre todo ás táboas e ás listaxes de persoas.</p>
+</div>
+<ul class="compacta">
+  <li>O control automático só detecta nomes cos seus apelidos completos; un apelido solto á vista non sempre o ve.</li>
+  <li>Aínda se tapa ás veces algo que non é persoal (un lugar pouco coñecido, o nome dunha empresa): menos que antes, pero pasa.</li>
+  <li>Os documentos escaneados dependen da calidade do recoñecemento de texto (OCR).</li>
+  <li>A versión de Linux non se puido probar instalándoa nun ordenador real; as de Windows e Mac si.</li>
+</ul>
+
+<h2 class="sec">06 · Como actualizar</h2>
+<ul class="compacta">
+  <li><strong>Windows:</strong> executa o instalador novo <code>Anonimizador-Xuridico-Instalador-20261004-….exe</code> por riba do anterior. O rexistro de nomes reais que xa tiñas consérvase (comprobado).</li>
+  <li><strong>Mac e Linux:</strong> descomprime a versión nova directamente no sitio onde a vas usar e executa <code>instalar-mac.command</code> ou <code>instalar-linux.sh</code>, como a primeira vez. Novidade: o rexistro de nomes reais pasa a vivir <strong>fóra</strong> do cartafol do programa (<code>~/Library/Application Support/Anonimizador</code> en Mac, <code>~/.local/share/anonimizador</code> en Linux), coma en Windows. Se descomprimes a versión nova <strong>no mesmo cartafol</strong> ca a anterior, o rexistro trasládase só ao abrir o programa. Se a pos <strong>noutro cartafol</strong>, copia antes o <code>anonimizador-xuridico/datos_rexistro</code> da versión anterior a esa ruta de datos. A clave queda no chaveiro do sistema e segue funcionando aínda que o rexistro cambie de sitio.</li>
+  <li>Se aínda non o fixeches, define a <strong>contrasinal de reversión</strong> dende a pantalla de inicio, e fai <strong>copia de seguridade da clave</strong> do rexistro.</li>
+  <li>Non sigas usando nin distribuíndo as versións do 22 e do 27 de setembro.</li>
+</ul>
+
+<p class="rodape">Anonimizador de expedientes xurídicos · Novidades da versión de outubro de 2026 (20261004) · Outubro de 2026</p>
+</body>
+</html>

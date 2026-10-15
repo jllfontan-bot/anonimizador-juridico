@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Corpus — revisión de documentos públicos{% endblock %}
+{% block contido %}
+<h1>Revisión do corpus público</h1>
+<p class="subtitulo">{{ feitos }} de {{ total }} documentos revisados. Cada revisión gárdase coma etiqueta
+  para medir a precisión do programa; podes deixalo e continuar outro día.</p>
+{% if seguinte %}
+<p><a href="{{ url_for('corpus.abrir', doc_id=seguinte) }}"><button type="button">Revisar o seguinte ({{ seguinte }})</button></a></p>
+{% else %}
+<div class="aviso-ok">Todos os documentos da mostra están revisados. Podes pechar esta xanela.</div>
+{% endif %}
+<p class="mencions">Para corrixir un documento xa revisado, ábreo na lista: a nova revisión substitúe á anterior.</p>
+<h2>Mostra</h2>
+{% for f in filas %}
+<div class="tarxeta" style="margin-top:6px;">
+  {% if f.revisado %}✔{% else %}·{% endif %}
+  <a href="{{ url_for('corpus.abrir', doc_id=f.id) }}">{{ f.id }}</a>
+  <span class="mencions">[{{ f.fonte }}] {{ f.titulo[:140] }}</span>
+</div>
+{% endfor %}
+{% endblock %}

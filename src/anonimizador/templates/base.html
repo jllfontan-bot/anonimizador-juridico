@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>{% block titulo %}Anonimizador — revisión{% endblock %}</title>
+<style>
+  :root{
+    --ink:#1a241f; --ink-soft:#4c5850; --paper:#f4f5f2; --surface:#fff;
+    --line:#d7ddd4; --accent:#1f6f5c; --accent-soft:#e2efe9;
+    --warn:#8f5623; --warn-soft:#f4e9d9;
+  }
+  *{box-sizing:border-box;}
+  [hidden]{ display:none !important; }
+  body{
+    background:var(--paper); color:var(--ink); margin:0; padding:32px 24px 80px;
+    font-family:-apple-system,"Segoe UI",sans-serif; font-size:15px; line-height:1.55;
+  }
+  .envoltorio{ max-width:920px; margin:0 auto; }
+  h1{ font-size:22px; margin:0 0 6px; }
+  h2{ font-size:16px; margin:28px 0 10px; }
+  .subtitulo{ color:var(--ink-soft); margin:0 0 28px; font-size:14px; }
+  a{ color:var(--accent); }
+  label{ display:block; font-size:13px; color:var(--ink-soft); margin-bottom:4px; }
+  input[type=text], input[type=password]{
+    width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:6px;
+    font-size:14px; background:var(--surface); color:var(--ink);
+  }
+  textarea{
+    width:100%; min-height:320px; padding:12px; border:1px solid var(--line);
+    border-radius:8px; font-family:ui-monospace,Menlo,monospace; font-size:13px;
+    line-height:1.5; background:var(--surface); color:var(--ink); resize:vertical;
+  }
+  select{ padding:6px 8px; border:1px solid var(--line); border-radius:6px; font-size:13px; }
+  button{
+    background:var(--accent); color:#fff; border:none; padding:10px 18px;
+    border-radius:6px; font-size:14px; cursor:pointer;
+  }
+  button:hover{ opacity:.92; }
+  .campo{ margin-bottom:16px; }
+  .tarxeta{
+    background:var(--surface); border:1px solid var(--line); border-radius:8px;
+    padding:16px 18px; margin-bottom:12px;
+  }
+  .tarxeta.marcada{ border-left:3px solid var(--warn); background:var(--warn-soft); }
+  .codigo{
+    font-family:ui-monospace,Menlo,monospace; background:var(--ink); color:var(--paper);
+    padding:2px 7px; border-radius:4px; font-size:13px;
+  }
+  .motivo{ color:var(--ink-soft); font-size:13.5px; margin:8px 0; }
+  .mencions{ font-size:13px; color:var(--ink-soft); }
+  .erro{ background:var(--warn-soft); border:1px solid var(--warn); border-radius:6px; padding:10px 14px; margin-bottom:20px; color:var(--warn); }
+  .aviso-ok{ background:var(--accent-soft); border-radius:6px; padding:14px 18px; margin-bottom:20px; }
+  .campo-con-boton{ display:flex; gap:8px; align-items:stretch; }
+  .campo-con-boton input{ flex:1; }
+  .boton-secundario{
+    background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    padding:9px 14px; border-radius:6px; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .boton-secundario:hover{ background:var(--paper); }
+  .nota-saida{ font-size:12.5px; color:var(--ink-soft); margin:-10px 0 20px; }
+  .opcion-modo{
+    display:flex; align-items:flex-start; gap:8px; font-size:14px; color:var(--ink);
+    font-weight:normal; margin:6px 0; cursor:pointer;
+  }
+  .opcion-modo input{ margin-top:3px; flex-shrink:0; }
+  .pendentes{ list-style:none; padding:0; }
+  .pendentes li{ padding:8px 0; border-bottom:1px solid var(--line); }
+  .risco{ font-size:13.5px; }
+  .risco .frase{ display:block; margin:4px 0 6px; color:var(--ink-soft); }
+
+  /* listado completo de correspondencias */
+  .correspondencias-scroll{ overflow-x:auto; border-radius:8px; }
+  table.correspondencias{ width:100%; min-width:720px; border-collapse:collapse; font-size:13px; background:var(--surface); }
+  table.correspondencias th, table.correspondencias td{ text-align:left; padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.correspondencias th{ color:var(--ink-soft); font-weight:600; font-size:12.5px; }
+
+  /* barra de progreso dos traballos */
+  .progreso{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:22px 24px; margin:8px 0 28px; }
+  .progreso h2{ margin:0 0 14px; font-size:18px; }
+  .barra{ position:relative; height:22px; background:var(--accent-soft); border-radius:11px; overflow:hidden; }
+  .barra .feito{ position:absolute; left:0; top:0; bottom:0; width:0; background:var(--accent); transition:width .35s ease; }
+  /* O anaco "en curso" da barra NON parpadea: antes tiña unha animación
+     infinita (opacidade .2 <-> .6 cada 1,2 s) que, nun documento grande ou
+     nun lote, estaba a pestanexar minutos enteiros nunha esquina da
+     pantalla. O usuario avisou (27/09/2026) de que iso molesta cando se
+     está a traballar noutra cousa no mesmo monitor. O avance xa se ve pola
+     anchura da barra, pola porcentaxe e polo nome do ficheiro actual. */
+  .barra .actual{ position:absolute; top:0; bottom:0; background:var(--accent); opacity:.38; }
+  .progreso .porcentaxe{ font-size:28px; font-weight:600; margin:14px 0 2px; }
+  .progreso .ficheiro-actual{ font-size:14px; word-break:break-all; }
+  .progreso .detalle{ color:var(--ink-soft); font-size:13px; margin-top:6px; }
+  .progreso.rematado .barra .feito{ background:var(--accent); }
+
+  /* explorador de cartafoles */
+  .modal{ position:fixed; inset:0; background:rgba(26,36,31,.55); display:flex; align-items:center; justify-content:center; z-index:50; padding:20px; }
+  .modal[hidden]{ display:none; }
+  .modal-caixa{ background:var(--surface); border-radius:10px; width:min(860px,100%); max-height:100%; display:flex; flex-direction:column; box-shadow:0 12px 40px rgba(0,0,0,.3); }
+  .modal-caixa h2{ margin:0; padding:16px 20px 10px; font-size:17px; }
+  .exp-barra{ display:flex; gap:8px; padding:0 20px 10px; }
+  .exp-barra input{ flex:1; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; }
+  .exp-corpo{ display:flex; gap:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); min-height:0; flex:1; height:380px; }
+  .exp-atallos{ list-style:none; margin:0; padding:8px; width:150px; flex-shrink:0; border-right:1px solid var(--line); background:var(--paper); overflow:auto; }
+  .exp-atallos button{ all:unset; display:block; width:100%; box-sizing:border-box; padding:6px 10px; border-radius:5px; cursor:pointer; font-size:13.5px; color:var(--ink); }
+  .exp-atallos button:hover, .exp-lista button:hover{ background:var(--accent-soft); }
+  .exp-lista{ list-style:none; margin:0; padding:6px; flex:1; overflow:auto; }
+  .exp-lista li{ margin:0; }
+  .exp-lista button{ all:unset; display:flex; gap:9px; width:100%; box-sizing:border-box; padding:6px 10px; border-radius:5px; cursor:pointer; font-size:14px; color:var(--ink); align-items:baseline; }
+  .exp-lista .icona{ width:1.4em; text-align:center; flex-shrink:0; }
+  .exp-lista .nome{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .exp-lista li.ficheiro{ padding:6px 10px; display:flex; gap:9px; align-items:baseline; font-size:14px; color:#8a948d; cursor:default; }
+  .exp-lista li.ficheiro.soportado{ color:var(--ink-soft); }
+  .exp-lista li.ficheiro .etiqueta{ font-size:11px; border:1px solid var(--line); border-radius:9px; padding:0 7px; margin-left:auto; white-space:nowrap; }
+  .exp-lista li.baleiro{ color:var(--ink-soft); padding:14px 10px; font-size:13.5px; }
+  .exp-resumo{ padding:8px 20px 0; font-size:13px; color:var(--ink-soft); min-height:1.6em; }
+  .exp-erro{ padding:0 20px; color:var(--warn); font-size:13px; }
+  .exp-pe{ display:flex; gap:8px; padding:12px 20px 16px; align-items:center; }
+  .exp-pe .esp{ flex:1; }
+  button:focus-visible, input:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+</style>
+</head>
+<body>
+{% if modo_corpus %}
+<div style="background:#8f5623;color:#fff;padding:8px 14px;margin:-32px -24px 24px;font-size:13.5px;text-align:center;">
+  MODO CORPUS — revisión de documentos públicos para medir o programa (rexistro propio, non o do despacho)
+  · <a href="/corpus/lista" style="color:#fff;">lista de documentos</a>
+</div>
+{% endif %}
+<div class="envoltorio">
+{% block contido %}{% endblock %}
+</div>
+</body>
+</html>

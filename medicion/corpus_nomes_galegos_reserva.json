@@ -1,0 +1,4220 @@
+[
+ {
+  "id": "res_nome_01",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Antía Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+  "debe_desaparecer": [
+   "Antía Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_02",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Consta que Anxo Mouriño Bouzas es titular de la cuenta embargada.",
+  "debe_desaparecer": [
+   "Anxo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_03",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Aroa Lema Novoa, quien no aporta nada nuevo.",
+  "debe_desaparecer": [
+   "Aroa Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "declara la testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_04",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Comparece como perito don Erea Ferreiro Loureiro, en representación de la aseguradora.",
+  "debe_desaparecer": [
+   "Erea Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "en representación de la aseguradora"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_05",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Iria Cotelo Pereiro, quien se ratifica en su declaración.",
+  "debe_desaparecer": [
+   "Iria Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "se ratifica en su declaración"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_06",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Camilo Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Camilo Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "a favor de su letrado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_07",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Según manifestó Celso Caamaño Regueiro, el vehículo estaba mal estacionado.",
+  "debe_desaparecer": [
+   "Celso Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "el vehículo estaba mal estacionado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_08",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Comparece a veciña Eloy Piñeiro Taboada, que declara non ter visto nada.",
+  "debe_desaparecer": [
+   "Eloy Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "que declara non ter visto nada"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_09",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Recibida a declaración de Serafín Varela Lema, dáse traslado ás partes.",
+  "debe_desaparecer": [
+   "Serafín Varela Lema"
+  ],
+  "debe_permanecer": [
+   "dáse traslado ás partes"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_10",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "El recurso lo interpone Gumersindo Bouzas Cotelo contra la resolución de 3 de marzo.",
+  "debe_desaparecer": [
+   "Gumersindo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "contra la resolución de 3 de marzo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_11",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "La vivienda fue adquirida por Herminia Vilaboi Mouriño en el año 2019.",
+  "debe_desaparecer": [
+   "Herminia Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "en el año 2019"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20): limita a regra se é o único apelido."
+ },
+ {
+  "id": "res_nome_12",
+  "categoria": "nome_galego_reserva",
+  "nivel": "A",
+  "texto": "Asina o escrito Ramiro Regueiro Vilaboi como parte demandante.",
+  "debe_desaparecer": [
+   "Ramiro Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "como parte demandante"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20): limita a regra se é o único apelido."
+ },
+ {
+  "id": "res_nome_13",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Xoán Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+  "debe_desaparecer": [
+   "Xoán Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_14",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Consta que Xurxo Mouriño Bouzas es titular de la cuenta embargada.",
+  "debe_desaparecer": [
+   "Xurxo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_15",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Martiño Lema Novoa, quien no aporta nada nuevo.",
+  "debe_desaparecer": [
+   "Martiño Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "declara la testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_16",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Comparece como perito don Breogán Ferreiro Loureiro, en representación de la aseguradora.",
+  "debe_desaparecer": [
+   "Breogán Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "en representación de la aseguradora"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_17",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Icía Cotelo Pereiro, quien se ratifica en su declaración.",
+  "debe_desaparecer": [
+   "Icía Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "se ratifica en su declaración"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_18",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Catuxa Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Catuxa Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "a favor de su letrado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_19",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Según manifestó Ánxela Caamaño Regueiro, el vehículo estaba mal estacionado.",
+  "debe_desaparecer": [
+   "Ánxela Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "el vehículo estaba mal estacionado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_20",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Comparece a veciña Tareixa Piñeiro Taboada, que declara non ter visto nada.",
+  "debe_desaparecer": [
+   "Tareixa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "que declara non ter visto nada"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_21",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Recibida a declaración de Fiz Varela Lema, dáse traslado ás partes.",
+  "debe_desaparecer": [
+   "Fiz Varela Lema"
+  ],
+  "debe_permanecer": [
+   "dáse traslado ás partes"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_22",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "El recurso lo interpone Lois Bouzas Cotelo contra la resolución de 3 de marzo.",
+  "debe_desaparecer": [
+   "Lois Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "contra la resolución de 3 de marzo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_23",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "La vivienda fue adquirida por Uxío Vilaboi Mouriño en el año 2019.",
+  "debe_desaparecer": [
+   "Uxío Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "en el año 2019"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20): limita a regra se é o único apelido."
+ },
+ {
+  "id": "res_nome_24",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Asina o escrito Xián Regueiro Vilaboi como parte demandante.",
+  "debe_desaparecer": [
+   "Xián Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "como parte demandante"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20): limita a regra se é o único apelido."
+ },
+ {
+  "id": "res_nome_25",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Xela Vilariño Castiñeiras presentó escrito de alegaciones fuera de plazo.",
+  "debe_desaparecer": [
+   "Xela Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_26",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Consta que Xesús Mouriño Bouzas es titular de la cuenta embargada.",
+  "debe_desaparecer": [
+   "Xesús Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_27",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Maruxa Lema Novoa, quien no aporta nada nuevo.",
+  "debe_desaparecer": [
+   "Maruxa Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "declara la testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_28",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Comparece como perito don Aleixo Ferreiro Loureiro, en representación de la aseguradora.",
+  "debe_desaparecer": [
+   "Aleixo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "en representación de la aseguradora"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_29",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Noela Cotelo Pereiro, quien se ratifica en su declaración.",
+  "debe_desaparecer": [
+   "Noela Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "se ratifica en su declaración"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_30",
+  "categoria": "nome_galego_reserva",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Lúa Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Lúa Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "a favor de su letrado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Antía Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Antía Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Antía Mouriño Bouzas, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Antía Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Antía Lema Novoa contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Antía Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Antía Ferreiro Loureiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Antía Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Antía Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Antía Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Antía Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Antía Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Antía Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Antía Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Antía Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Antía Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Antía Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Antía Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Antía Bouzas Cotelo, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Antía Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_01_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Antía Vilaboi Mouriño, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Antía Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_02_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Anxo Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Anxo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Anxo Lema Novoa, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Anxo Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Anxo Ferreiro Loureiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Anxo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Anxo Cotelo Pereiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Anxo Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Anxo Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Anxo Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Anxo Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Anxo Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Anxo Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Anxo Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Anxo Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Anxo Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Anxo Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Anxo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_02_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Anxo Vilaboi Mouriño, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Anxo Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_02_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Anxo Regueiro Vilaboi, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Anxo Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_03_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Aroa Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Aroa Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Aroa Ferreiro Loureiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Aroa Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Aroa Cotelo Pereiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Aroa Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Aroa Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Aroa Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Aroa Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Aroa Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Aroa Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Aroa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Aroa Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Aroa Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Aroa Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Aroa Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_03_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Aroa Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Aroa Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_03_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Aroa Regueiro Vilaboi, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Aroa Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_03_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Aroa Vilariño Castiñeiras, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Aroa Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Erea Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Erea Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Erea Cotelo Pereiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Erea Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Erea Queiruga Ogando contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Erea Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Erea Caamaño Regueiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Erea Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Erea Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Erea Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Erea Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Erea Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Erea Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Erea Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Erea Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Erea Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_04_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Erea Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Erea Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_04_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Erea Vilariño Castiñeiras, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Erea Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_04_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Erea Mouriño Bouzas, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Erea Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Iria Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Iria Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Iria Queiruga Ogando, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Iria Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Iria Caamaño Regueiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Iria Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Iria Piñeiro Taboada a favor de su letrado.",
+  "debe_desaparecer": [
+   "Iria Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Iria Varela Lema, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Iria Varela Lema"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Iria Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Iria Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Iria Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Iria Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_05_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Iria Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Iria Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_05_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Iria Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Iria Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Iria Mouriño Bouzas, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Iria Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_05_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Iria Lema Novoa, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Iria Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Camilo Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Camilo Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Camilo Caamaño Regueiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Camilo Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Camilo Piñeiro Taboada contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Camilo Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Camilo Varela Lema a favor de su letrado.",
+  "debe_desaparecer": [
+   "Camilo Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Camilo Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Camilo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Camilo Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Camilo Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_06_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Camilo Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Camilo Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_06_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Camilo Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Camilo Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Camilo Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Camilo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Camilo Lema Novoa, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Camilo Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_06_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Camilo Ferreiro Loureiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Camilo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Celso Caamaño Regueiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Celso Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Celso Piñeiro Taboada, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Celso Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Celso Varela Lema contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Celso Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Celso Bouzas Cotelo a favor de su letrado.",
+  "debe_desaparecer": [
+   "Celso Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Celso Vilaboi Mouriño, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Celso Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_07_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Celso Regueiro Vilaboi presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Celso Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_07_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Celso Vilariño Castiñeiras declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Celso Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Celso Mouriño Bouzas manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Celso Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Celso Lema Novoa es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Celso Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Celso Ferreiro Loureiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Celso Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_07_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Celso Cotelo Pereiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Celso Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Eloy Piñeiro Taboada presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Eloy Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Eloy Varela Lema, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Eloy Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Eloy Bouzas Cotelo contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Eloy Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Eloy Vilaboi Mouriño a favor de su letrado.",
+  "debe_desaparecer": [
+   "Eloy Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_08_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Eloy Regueiro Vilaboi, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Eloy Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_08_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Eloy Vilariño Castiñeiras presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Eloy Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Eloy Mouriño Bouzas declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Eloy Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Eloy Lema Novoa manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Eloy Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Eloy Ferreiro Loureiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Eloy Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Eloy Cotelo Pereiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Eloy Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_08_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Eloy Queiruga Ogando, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Eloy Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Serafín Varela Lema presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Serafín Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Serafín Bouzas Cotelo, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Serafín Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Serafín Vilaboi Mouriño contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Serafín Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_09_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Serafín Regueiro Vilaboi a favor de su letrado.",
+  "debe_desaparecer": [
+   "Serafín Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_09_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Serafín Vilariño Castiñeiras, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Serafín Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Serafín Mouriño Bouzas presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Serafín Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Serafín Lema Novoa declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Serafín Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Serafín Ferreiro Loureiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Serafín Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Serafín Cotelo Pereiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Serafín Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Serafín Queiruga Ogando, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Serafín Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_09_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Serafín Caamaño Regueiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Serafín Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Gumersindo Bouzas Cotelo presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Gumersindo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Gumersindo Vilaboi Mouriño, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Gumersindo Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_10_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Gumersindo Regueiro Vilaboi contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Gumersindo Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_10_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Gumersindo Vilariño Castiñeiras a favor de su letrado.",
+  "debe_desaparecer": [
+   "Gumersindo Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Gumersindo Mouriño Bouzas, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Gumersindo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Gumersindo Lema Novoa presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Gumersindo Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Gumersindo Ferreiro Loureiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Gumersindo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Gumersindo Cotelo Pereiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Gumersindo Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Gumersindo Queiruga Ogando es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Gumersindo Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Gumersindo Caamaño Regueiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Gumersindo Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_10_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Gumersindo Piñeiro Taboada, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Gumersindo Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Herminia Vilaboi Mouriño presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Herminia Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_11_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Herminia Regueiro Vilaboi, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Herminia Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_11_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Herminia Vilariño Castiñeiras contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Herminia Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Herminia Mouriño Bouzas a favor de su letrado.",
+  "debe_desaparecer": [
+   "Herminia Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Herminia Lema Novoa, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Herminia Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Herminia Ferreiro Loureiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Herminia Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Herminia Cotelo Pereiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Herminia Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Herminia Queiruga Ogando manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Herminia Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Herminia Caamaño Regueiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Herminia Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Herminia Piñeiro Taboada, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Herminia Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_11_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Herminia Varela Lema, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Herminia Varela Lema"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Ramiro Regueiro Vilaboi presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Ramiro Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_12_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Firma el presente documento Ramiro Vilariño Castiñeiras, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Ramiro Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Interpone recurso de reposición Ramiro Mouriño Bouzas contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Ramiro Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Otorga poder de representación Ramiro Lema Novoa a favor de su letrado.",
+  "debe_desaparecer": [
+   "Ramiro Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "En el acto del juicio declara la testigo Ramiro Ferreiro Loureiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Ramiro Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Ramiro Cotelo Pereiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Ramiro Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Ramiro Queiruga Ogando declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Ramiro Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Ramiro Caamaño Regueiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Ramiro Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Consta que Ramiro Piñeiro Taboada es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Ramiro Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como testigo doña Ramiro Varela Lema, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Ramiro Varela Lema"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_12_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "A",
+  "texto": "Comparece como letrado de la parte contraria don Ramiro Bouzas Cotelo, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Ramiro Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xoán Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Xoán Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Xoán Mouriño Bouzas, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Xoán Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Xoán Lema Novoa contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Xoán Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Xoán Ferreiro Loureiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Xoán Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Xoán Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Xoán Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xoán Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Xoán Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xoán Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Xoán Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xoán Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Xoán Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Xoán Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Xoán Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Xoán Bouzas Cotelo, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Xoán Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_13_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Xoán Vilaboi Mouriño, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Xoán Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_14_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xurxo Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Xurxo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Xurxo Lema Novoa, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Xurxo Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Xurxo Ferreiro Loureiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Xurxo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Xurxo Cotelo Pereiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Xurxo Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Xurxo Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Xurxo Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xurxo Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Xurxo Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xurxo Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Xurxo Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xurxo Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Xurxo Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Xurxo Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Xurxo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_14_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Xurxo Vilaboi Mouriño, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Xurxo Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_14_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Xurxo Regueiro Vilaboi, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Xurxo Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_15_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Martiño Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Martiño Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Martiño Ferreiro Loureiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Martiño Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Martiño Cotelo Pereiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Martiño Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Martiño Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Martiño Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Martiño Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Martiño Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Martiño Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Martiño Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Martiño Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Martiño Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Martiño Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Martiño Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_15_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Martiño Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Martiño Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_15_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Martiño Regueiro Vilaboi, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Martiño Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_15_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Martiño Vilariño Castiñeiras, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Martiño Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Breogán Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Breogán Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Breogán Cotelo Pereiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Breogán Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Breogán Queiruga Ogando contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Breogán Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Breogán Caamaño Regueiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Breogán Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Breogán Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Breogán Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Breogán Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Breogán Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Breogán Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Breogán Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Breogán Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Breogán Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_16_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Breogán Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Breogán Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_16_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Breogán Vilariño Castiñeiras, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Breogán Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_16_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Breogán Mouriño Bouzas, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Breogán Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Icía Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Icía Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Icía Queiruga Ogando, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Icía Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Icía Caamaño Regueiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Icía Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Icía Piñeiro Taboada a favor de su letrado.",
+  "debe_desaparecer": [
+   "Icía Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Icía Varela Lema, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Icía Varela Lema"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Icía Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Icía Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Icía Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Icía Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_17_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Icía Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Icía Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_17_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Icía Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Icía Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Icía Mouriño Bouzas, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Icía Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_17_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Icía Lema Novoa, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Icía Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Catuxa Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Catuxa Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Catuxa Caamaño Regueiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Catuxa Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Catuxa Piñeiro Taboada contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Catuxa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Catuxa Varela Lema a favor de su letrado.",
+  "debe_desaparecer": [
+   "Catuxa Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Catuxa Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Catuxa Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Catuxa Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Catuxa Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_18_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Catuxa Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Catuxa Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_18_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Catuxa Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Catuxa Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Catuxa Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Catuxa Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Catuxa Lema Novoa, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Catuxa Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_18_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Catuxa Ferreiro Loureiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Catuxa Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Ánxela Caamaño Regueiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Ánxela Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Ánxela Piñeiro Taboada, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Ánxela Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Ánxela Varela Lema contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Ánxela Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Ánxela Bouzas Cotelo a favor de su letrado.",
+  "debe_desaparecer": [
+   "Ánxela Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Ánxela Vilaboi Mouriño, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Ánxela Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_19_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Ánxela Regueiro Vilaboi presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Ánxela Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_19_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Ánxela Vilariño Castiñeiras declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Ánxela Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Ánxela Mouriño Bouzas manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Ánxela Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Ánxela Lema Novoa es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Ánxela Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Ánxela Ferreiro Loureiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Ánxela Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_19_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Ánxela Cotelo Pereiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Ánxela Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Tareixa Piñeiro Taboada presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Tareixa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Tareixa Varela Lema, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Tareixa Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Tareixa Bouzas Cotelo contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Tareixa Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Tareixa Vilaboi Mouriño a favor de su letrado.",
+  "debe_desaparecer": [
+   "Tareixa Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_20_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Tareixa Regueiro Vilaboi, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Tareixa Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_20_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Tareixa Vilariño Castiñeiras presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Tareixa Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Tareixa Mouriño Bouzas declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Tareixa Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Tareixa Lema Novoa manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Tareixa Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Tareixa Ferreiro Loureiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Tareixa Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Tareixa Cotelo Pereiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Tareixa Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_20_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Tareixa Queiruga Ogando, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Tareixa Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Fiz Varela Lema presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Fiz Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Fiz Bouzas Cotelo, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Fiz Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Fiz Vilaboi Mouriño contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Fiz Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_21_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Fiz Regueiro Vilaboi a favor de su letrado.",
+  "debe_desaparecer": [
+   "Fiz Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_21_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Fiz Vilariño Castiñeiras, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Fiz Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Fiz Mouriño Bouzas presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Fiz Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Fiz Lema Novoa declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Fiz Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Fiz Ferreiro Loureiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Fiz Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Fiz Cotelo Pereiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Fiz Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Fiz Queiruga Ogando, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Fiz Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_21_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Fiz Caamaño Regueiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Fiz Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lois Bouzas Cotelo presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Lois Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Lois Vilaboi Mouriño, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Lois Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_22_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Lois Regueiro Vilaboi contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Lois Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_22_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Lois Vilariño Castiñeiras a favor de su letrado.",
+  "debe_desaparecer": [
+   "Lois Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Lois Mouriño Bouzas, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Lois Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lois Lema Novoa presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Lois Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lois Ferreiro Loureiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Lois Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lois Cotelo Pereiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Lois Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Lois Queiruga Ogando es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Lois Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Lois Caamaño Regueiro, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Lois Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_22_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Lois Piñeiro Taboada, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Lois Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Uxío Vilaboi Mouriño presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Uxío Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_23_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Uxío Regueiro Vilaboi, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Uxío Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_23_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Uxío Vilariño Castiñeiras contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Uxío Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Uxío Mouriño Bouzas a favor de su letrado.",
+  "debe_desaparecer": [
+   "Uxío Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Uxío Lema Novoa, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Uxío Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Uxío Ferreiro Loureiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Uxío Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Uxío Cotelo Pereiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Uxío Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Uxío Queiruga Ogando manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Uxío Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Uxío Caamaño Regueiro es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Uxío Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Uxío Piñeiro Taboada, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Uxío Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_23_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Uxío Varela Lema, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Uxío Varela Lema"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xián Regueiro Vilaboi presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Xián Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_24_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Xián Vilariño Castiñeiras, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Xián Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Xián Mouriño Bouzas contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Xián Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Xián Lema Novoa a favor de su letrado.",
+  "debe_desaparecer": [
+   "Xián Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Xián Ferreiro Loureiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Xián Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xián Cotelo Pereiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Xián Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xián Queiruga Ogando declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Xián Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xián Caamaño Regueiro manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Xián Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Xián Piñeiro Taboada es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Xián Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Xián Varela Lema, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Xián Varela Lema"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_24_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Xián Bouzas Cotelo, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Xián Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xela Vilariño Castiñeiras presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Xela Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Xela Mouriño Bouzas, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Xela Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Xela Lema Novoa contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Xela Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Xela Ferreiro Loureiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Xela Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Xela Cotelo Pereiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Xela Cotelo Pereiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xela Queiruga Ogando presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Xela Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xela Caamaño Regueiro declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Xela Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xela Piñeiro Taboada manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Xela Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Xela Varela Lema es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Xela Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Xela Bouzas Cotelo, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Xela Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_25_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Xela Vilaboi Mouriño, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Xela Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_26_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xesús Mouriño Bouzas presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Xesús Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Xesús Lema Novoa, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Xesús Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Xesús Ferreiro Loureiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Xesús Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Xesús Cotelo Pereiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Xesús Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Xesús Queiruga Ogando, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Xesús Queiruga Ogando"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xesús Caamaño Regueiro presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Xesús Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xesús Piñeiro Taboada declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Xesús Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Xesús Varela Lema manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Xesús Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Xesús Bouzas Cotelo es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Xesús Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_26_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Xesús Vilaboi Mouriño, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Xesús Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_26_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Xesús Regueiro Vilaboi, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Xesús Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_27_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Maruxa Lema Novoa presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Maruxa Lema Novoa"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Maruxa Ferreiro Loureiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Maruxa Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Maruxa Cotelo Pereiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Maruxa Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Maruxa Queiruga Ogando a favor de su letrado.",
+  "debe_desaparecer": [
+   "Maruxa Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Maruxa Caamaño Regueiro, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Maruxa Caamaño Regueiro"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Maruxa Piñeiro Taboada presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Maruxa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Maruxa Varela Lema declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Maruxa Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Maruxa Bouzas Cotelo manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Maruxa Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_27_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Maruxa Vilaboi Mouriño es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Maruxa Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_27_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Maruxa Regueiro Vilaboi, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Maruxa Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_27_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Maruxa Vilariño Castiñeiras, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Maruxa Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Aleixo Ferreiro Loureiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Aleixo Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Aleixo Cotelo Pereiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Aleixo Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Aleixo Queiruga Ogando contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Aleixo Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Aleixo Caamaño Regueiro a favor de su letrado.",
+  "debe_desaparecer": [
+   "Aleixo Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Aleixo Piñeiro Taboada, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Aleixo Piñeiro Taboada"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Aleixo Varela Lema presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Aleixo Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Aleixo Bouzas Cotelo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Aleixo Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Aleixo Vilaboi Mouriño manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Aleixo Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_28_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Aleixo Regueiro Vilaboi es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Aleixo Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_28_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Aleixo Vilariño Castiñeiras, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Aleixo Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_28_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Aleixo Mouriño Bouzas, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Aleixo Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Noela Cotelo Pereiro presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Noela Cotelo Pereiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Noela Queiruga Ogando, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Noela Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Noela Caamaño Regueiro contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Noela Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Noela Piñeiro Taboada a favor de su letrado.",
+  "debe_desaparecer": [
+   "Noela Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Noela Varela Lema, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Noela Varela Lema"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Noela Bouzas Cotelo presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Noela Bouzas Cotelo"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Noela Vilaboi Mouriño declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Noela Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_29_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Noela Regueiro Vilaboi manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Noela Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_29_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Noela Vilariño Castiñeiras es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Noela Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Noela Mouriño Bouzas, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Noela Mouriño Bouzas"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_29_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Noela Lema Novoa, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Noela Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_01",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lúa Queiruga Ogando presentó el escrito de alegaciones en tiempo y forma.",
+  "debe_desaparecer": [
+   "Lúa Queiruga Ogando"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_02",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Firma el presente documento Lúa Caamaño Regueiro, en calidad de interesado.",
+  "debe_desaparecer": [
+   "Lúa Caamaño Regueiro"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_03",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Interpone recurso de reposición Lúa Piñeiro Taboada contra la resolución dictada.",
+  "debe_desaparecer": [
+   "Lúa Piñeiro Taboada"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_04",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Otorga poder de representación Lúa Varela Lema a favor de su letrado.",
+  "debe_desaparecer": [
+   "Lúa Varela Lema"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_05",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "En el acto del juicio declara la testigo Lúa Bouzas Cotelo, quien manifiesta no haber presenciado los hechos.",
+  "debe_desaparecer": [
+   "Lúa Bouzas Cotelo"
+  ],
+  "debe_permanecer": [
+   "declara la testigo",
+   "no haber presenciado"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_06",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lúa Vilaboi Mouriño presenta un informe médico donde consta que padece diabetes desde hace años.",
+  "debe_desaparecer": [
+   "Lúa Vilaboi Mouriño"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_30_07",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lúa Regueiro Vilaboi declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+  "debe_desaparecer": [
+   "Lúa Regueiro Vilaboi"
+  ],
+  "debe_permanecer": [],
+  "nota": "Apelido 'Vilaboi' NON está na lista INE de apelidos (>=20)."
+ },
+ {
+  "id": "res_nome_xer_30_08",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Lúa Vilariño Castiñeiras manifestó que su despido se debió a conocerse su orientación sexual en la empresa.",
+  "debe_desaparecer": [
+   "Lúa Vilariño Castiñeiras"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_09",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Consta que Lúa Mouriño Bouzas es afiliado del sindicato CCOO desde hace varios años.",
+  "debe_desaparecer": [
+   "Lúa Mouriño Bouzas"
+  ],
+  "debe_permanecer": [],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_10",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como testigo doña Lúa Lema Novoa, quien nada aportó de relevancia.",
+  "debe_desaparecer": [
+   "Lúa Lema Novoa"
+  ],
+  "debe_permanecer": [
+   "testigo"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "res_nome_xer_30_11",
+  "categoria": "nome_galego_reserva_plantillas_xerador",
+  "nivel": "B",
+  "texto": "Comparece como letrado de la parte contraria don Lúa Ferreiro Loureiro, en el turno de intervenciones.",
+  "debe_desaparecer": [
+   "Lúa Ferreiro Loureiro"
+  ],
+  "debe_permanecer": [
+   "letrado de la parte contraria"
+  ],
+  "nota": ""
+ }
+]

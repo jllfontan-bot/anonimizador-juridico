@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block titulo %}Reversión controlada{% endblock %}
+{% block contido %}
+<h1>Reversión controlada</h1>
+<p class="subtitulo">
+  Recupera a identidade real a partir dun código. É a acción de maior risco
+  de todo o sistema — require sempre un motivo, e queda rexistrada na
+  auditoría cifrada do rexistro con quen a solicitou e cando.
+</p>
+
+<div class="tarxeta marcada">
+  <strong>Antes de continuar:</strong> confirma que tes autorización para
+  ver esta identidade e que o motivo que vas escribir é o real — a
+  auditoría non se pode editar nin borrar despois.
+</div>
+
+<form method="post" action="{{ url_for('reverter') }}">
+  <div class="campo">
+    <label for="rexistro">Cartafol do rexistro</label>
+    <input type="text" id="rexistro" name="rexistro" value="{{ valores.rexistro }}">
+  </div>
+  <div class="campo">
+    <label for="codigo">Código a reverter</label>
+    <input type="text" id="codigo" name="codigo" value="{{ valores.codigo }}" placeholder="PERSOA_000007" required>
+  </div>
+  <div class="campo">
+    <label for="motivo">Motivo (obrigatorio)</label>
+    <input type="text" id="motivo" name="motivo" value="{{ valores.motivo }}" placeholder="ex. presentación do orixinal en xulgado, expediente 123/2026" required>
+  </div>
+  <div class="campo">
+    <label for="contrasinal">Contrasinal de reversión</label>
+    <input type="password" id="contrasinal" name="contrasinal" required>
+  </div>
+  <button type="submit">Reverter e rexistrar na auditoría</button>
+</form>
+
+<p class="nota-saida" style="margin:16px 0 20px;">
+  ¿Aínda non definiches unha contrasinal de reversión para este rexistro?
+  <a href="{{ url_for('definir_contrasinal', rexistro=valores.rexistro) }}">Definila aquí</a>.
+</p>
+
+{% if erro %}
+<div class="erro" style="margin-top:20px;">{{ erro }}</div>
+{% endif %}
+
+{% if resultado %}
+<h2>Identidade recuperada</h2>
+<div class="tarxeta marcada">
+  <div class="mencions">Código solicitado: <span class="codigo">{{ resultado.codigo_solicitado }}</span></div>
+  {% if resultado.codigo_actual != resultado.codigo_solicitado %}
+  <div class="mencions">Código vixente (fusionado): <span class="codigo">{{ resultado.codigo_actual }}</span></div>
+  {% endif %}
+  <div class="motivo"><strong>Nome(s):</strong> {{ resultado.nomes|join(", ") }}</div>
+  <div class="motivo"><strong>DNI:</strong> {{ resultado.dni or "(non rexistrado)" }}</div>
+  <div class="motivo"><strong>Contexto:</strong> {{ resultado.contexto or "(ningún)" }}</div>
+</div>
+<p class="mencions">Esta consulta quedou rexistrada na auditoría cifrada do rexistro.</p>
+{% endif %}
+{% endblock %}

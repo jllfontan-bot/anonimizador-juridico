@@ -1,0 +1,34 @@
+{
+  "data": "2026-09-29T19:56:50+00:00",
+  "documentos": 150,
+  "por_fonte": {
+    "BOE": 100,
+    "DOG": 50
+  },
+  "achados_por_tipo": {
+    "entidade_literal_no_texto": 177,
+    "risco_residual_alta": 174,
+    "posible_sobre_anonimizacion": 47,
+    "dni_parcial": 8,
+    "palabra_comun_tapada": 137
+  },
+  "documentos_por_tipo": {
+    "entidade_literal_no_texto": 55,
+    "risco_residual_alta": 53,
+    "posible_sobre_anonimizacion": 28,
+    "dni_parcial": 4,
+    "palabra_comun_tapada": 33
+  },
+  "por_fonte_e_seccion": {
+    "BOE 2A": 20,
+    "BOE 2B": 30,
+    "BOE 3": 20,
+    "BOE 4": 20,
+    "BOE 5B": 10,
+    "DOG II. Autoridades e persoal": 2,
+    "DOG III. Outras disposicións": 13,
+    "DOG IV. Oposicións e concursos": 10,
+    "DOG V. Administración de xustiza": 1,
+    "DOG VI. Anuncios": 24
+  }
+}

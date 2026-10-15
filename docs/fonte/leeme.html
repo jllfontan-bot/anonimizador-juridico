@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Léeme</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:14mm 17mm 14mm 17mm; }
+  body{ font-size:12px; line-height:1.45; }
+  .portada{ padding:20px 28px 18px; margin-bottom:18px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; margin:0; }
+  h2.sec{ margin:20px 0 10px; }
+  .tres{ display:flex; gap:12px; margin-bottom:6px; }
+  .tres .tarxeta{ flex:1; border:1px solid var(--line); border-radius:6px; padding:11px 13px; break-inside:avoid; }
+  .tres .n{ width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; font-size:12px; text-align:center; line-height:22px; margin-bottom:6px; }
+  .tres .et{ font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:3px; }
+  .tres .tt{ font-weight:700; margin-bottom:4px; }
+  .tres p{ margin:0; font-size:11.5px; }
+  .ficheiros td:first-child{ width:38%; }
+  ul.compacta li{ margin-bottom:3px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Léeme · Anonimizador de expedientes xurídicos</span>
+  <h1>Que facer con este cartafol</h1>
+  <p class="lede">Tres pasos para empezar, e unha guía rápida de que é cada ficheiro.</p>
+</div>
+
+<h2 class="sec">Por onde empezar</h2>
+<div class="tres">
+  <div class="tarxeta"><div class="n">1</div><div class="et">Instalación</div><div class="tt">Le «02-Guia-de-instalacion.pdf»</div><p>Segue os pasos para o teu sistema operativo (Mac ou Windows). En Windows tamén chega con facer dobre clic no instalador .exe (ver o apartado Windows máis abaixo).</p></div>
+  <div class="tarxeta"><div class="n">2</div><div class="et">Uso diario</div><div class="tt">Usa «03-Manual-de-uso.pdf»</div><p>Aprende a anonimizar documentos coa interface web, paso a paso e con capturas reais.</p></div>
+  <div class="tarxeta"><div class="n">3</div><div class="et">Opcional</div><div class="tt">«01-Caracteristicas-tecnicas-e-seguridade.pdf»</div><p>Detalla como funciona por dentro e que garantías de seguridade ten, por se che interesa ou o precisas para xustificar o seu uso.</p></div>
+</div>
+
+<h2 class="sec">Windows</h2>
+<p>En Windows non hai cartafol nin scripts: recibes un único ficheiro, <code>Anonimizador-Xuridico-Instalador-&lt;versión&gt;.exe</code>.</p>
+<ul class="compacta">
+  <li><strong>Instalar:</strong> dobre clic no .exe. Ábrese un asistente normal de Windows (benvida, cartafol, barra de progreso en porcentaxe, remate). Non precisa permisos de administrador nin conexión a internet. Se Windows amosa un aviso azul de SmartScreen («Windows protexeu o seu PC»), preme «Máis información» e despois «Executar de todos modos»: o instalador aínda non leva sinatura dixital, o aviso non indica ningún problema.</li>
+  <li><strong>Usar:</strong> menú Inicio → «Anonimizador xurídico» (tamén hai un acceso ao manual de uso). Ao remate da instalación podes marcar tamén un acceso directo no escritorio.</li>
+  <li><strong>Desinstalar:</strong> Configuración de Windows → Aplicacións → Aplicacións instaladas → «Anonimizador de expedientes xurídicos» → Desinstalar (ou o acceso «Desinstalar» do menú Inicio). Os rexistros cifrados de correspondencias non se borran sen preguntar antes: sen eles non se pode reverter a anonimización dos documentos xa anonimizados.</li>
+</ul>
+
+<h2 class="sec">A clave e a contrasinal — léeo antes de empezar</h2>
+<p>Os nomes reais non quedan nos documentos anonimizados: gárdanse nun rexistro <strong>cifrado</strong> que relaciona cada código (<code>PERSOA_000001</code>) coa persoa real e o seu DNI. Protéxeno <strong>dous segredos distintos</strong>:</p>
+<ul class="compacta">
+  <li><strong>A clave do rexistro.</strong> Créaa o programa só e ninguén a escribe. Sen ela o rexistro non se pode descifrar nunca máis: garda unha copia de seguridade (a pantalla de inicio do programa di onde está).</li>
+  <li><strong>A contrasinal de reversión.</strong> Escríbela ti unha vez, na pantalla de inicio. Pídese cada vez que alguén quere ver unha identidade real, o listado completo de correspondencias ou o seu PDF CONFIDENCIAL, e cada uso queda nunha auditoría cifrada.</li>
+</ul>
+<p>O PDF do listado leva a marca de auga «CONFIDENCIAL»: é un documento de <strong>extrema sensibilidade</strong>. Non o envíes por correo nin o deixes nun cartafol compartido, e destrúeo cando xa non faga falta.</p>
+
+<h2 class="sec">Mac e Linux (cartafol comprimido)</h2>
+<table class="ficheiros">
+  <tbody>
+    <tr><td><code>instalar-mac.command</code><br><code>instalar-linux.sh</code></td><td>Executar <strong>unha soa vez</strong>, para instalar o programa.</td></tr>
+    <tr><td><code>Iniciar-Anonimizador.command</code> / <code>.sh</code></td><td>Executar cada vez que queiras usar o programa.</td></tr>
+    <tr><td><strong>Linux (Ubuntu)</strong></td><td>NON fagas doble clic nos <code>.sh</code>: Ubuntu ábreos no editor de texto. Abre un terminal na carpeta e escribe <code>bash instalar-linux.sh</code>. Despois o programa abre dende o menú de aplicacións («Anonimizador»), que crea o propio instalador, ou con <code>bash Iniciar-Anonimizador.sh</code>.</td></tr>
+    <tr><td><code>anonimizador-xuridico/</code></td><td>O programa en si — non fai falta abrir nada de dentro directamente.</td></tr>
+    <tr><td>Os PDF <code>01</code>, <code>02</code> e <code>03</code></td><td>Os tres documentos explicados arriba.</td></tr>
+  </tbody>
+</table>
+
+<p style="margin-top:14px;">Calquera dúbida, o manual de uso e a guía de instalación cobren os casos máis habituais, incluída unha táboa de solución de problemas.</p>
+
+<div class="rodape">Anonimizador de expedientes xurídicos — léeme · Elaborado con Claude Code</div>
+</body>
+</html>

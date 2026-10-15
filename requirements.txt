@@ -1,0 +1,35 @@
+spacy==3.7.5
+cryptography>=42
+PyYAML>=6
+python-docx>=1.1
+pymupdf>=1.24
+pytesseract>=0.3.10
+pillow>=10
+odfpy>=1.4
+flask>=3.0
+keyring>=24
+opencv-python-headless<4.12
+# spaCy (thinc) esixe numpy<2 -- fixado a propósito, xa que opencv-python
+# por si só instalaría a última versión de numpy (2.x), incompatible en
+# tempo de execución (non só un aviso do resolvedor de pip: crashea con
+# "numpy.dtype size changed" ao cargar spaCy). Bug real atopado instalando
+# opencv para a detección de QR/códigos de barras.
+numpy<2.0.0
+pywebview>=5
+# En Mac, pywebview arrastra pyobjc-core coma dependencia transitiva sen
+# fixar versión -- pip chegou a instalar a 12.0, unha versión RETIRADA
+# ("yanked", python_requires mal declarado para 3.9) que en tempo de
+# execución NON respecta `width`/`height` en `webview.create_window`: a
+# xanela abre nun tamaño minúsculo (~86x105 puntos) en vez do pedido, sen
+# ningún erro. Bug real atopado probando a versión de escritorio.
+# Fixado a <12 para forzar unha versión real e publicada.
+pyobjc-core<12; sys_platform == "darwin"
+pywin32>=306; sys_platform == "win32"
+
+# Despois de instalar, descargar o modelo do idioma:
+#   python -m spacy download es_core_news_md
+#
+# O OCR de PDF escaneados precisa ademais o BINARIO de Tesseract instalado
+# no sistema (pytesseract e so un envoltorio, non o inclúe):
+#   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#   brew install tesseract tesseract-lang

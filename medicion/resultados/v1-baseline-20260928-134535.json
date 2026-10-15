@@ -1,0 +1,3182 @@
+{
+  "resultados": [
+    {
+      "id": "dni_solto",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 71234569J para acreditar su identidad ante el letrado.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad ante el letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "dni_pegado_a_guion_baixo",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "OTROS DOCUMENTOS: Solicitud_ApudActa_71234569J.pdf adxunto ao expediente.",
+      "texto_anonimizado": "OTROS DOCUMENTOS: Solicitud_ApudActa_[DNI_NIE].pdf adxunto ao expediente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "nie_estandar",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Presenta NIE Y1234567X como documento de identidad válido en España.",
+      "texto_anonimizado": "Presenta NIE [DNI_NIE] como documento de identidad válido en España.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "pasaporte_con_etiqueta",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Comparece con pasaporte número PAA123456 al no disponer de DNI español.",
+      "texto_anonimizado": "Comparece con pasaporte número [PASAPORTE] al no disponer de DNI español.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "pasaporte_sen_etiqueta",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia interna PAA123456 aparece en la tabla de expedientes.",
+      "texto_anonimizado": "El código de referencia interna PERSOA_000001 aparece en la tabla de expedientes.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "PAA123456"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "telefono_3_3_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 666 123 456 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "email_estandar",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo mcarballo.exemplo@dominio-ficticio.gal antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "enderezo_con_numero",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Rúa Nova de Abaixo 20, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "enderezo_sen_numero_control",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana típica.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana típica.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "colexiado_con_numero",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 4821 del ICA de Santiago.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA de Santiago.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "seguridade_social_con_etiqueta",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 28/12345678/40 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "seguridade_social_sen_etiqueta_control",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 28/12345678/40 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 28/12345678/40 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "nome_estandar",
+      "categoria": "nome",
+      "texto_orixinal": "Manuel Ferrándiz Salcedo presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "nome_orde_invertida_listaxe",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Fiolleda Outeiral, Xiana - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "nome_sen_coma_profesion",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Leandro del Valle Resua arquitecto colegiado en Pontevedra.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 arquitecto colegiado en Pontevedra.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "nome_contexto_testemuna",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la testigo Xiana Fiolleda Outeiral, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "cargo_publico_exento",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Preside la vista la magistrada Covadonga Freire Lameiro, titular del juzgado.",
+      "texto_anonimizado": "Preside la vista la magistrada Covadonga Freire Lameiro, titular del juzgado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "categoria_especial_saude",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "El Sr. Otero presenta un informe médico donde consta que padece una infección por VIH desde hace 5 años.",
+      "texto_anonimizado": "El Sr. PERSOA_000001 presenta un informe médico donde consta que padece una infección por VIH desde hace 5 años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "categoria_especial_relixion",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "La testigo declaró que profesa la religión musulmana y que acude a la mezquita cada viernes.",
+      "texto_anonimizado": "La testigo declaró que profesa la religión musulmana y que acude a la mezquita cada viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "categoria_especial_orientacion",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "El demandante manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "El demandante manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "categoria_especial_sindical",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que el trabajador es afiliado del sindicato CIG desde el año 2018.",
+      "texto_anonimizado": "Consta que el trabajador es afiliado del sindicato PERSOA_000001 desde el año 2018.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "papel_perito",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial don Ramón Falcón Bande, colegiado en el ICAI, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial don PERSOA_000001, colegiado en el ICAI, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "ocr_dni_con_ruido",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 71234569J presentado xunto coa solicitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa solicitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "iban_estandar",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES91 2100 0418 4502 0005 1332 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta en el expediente el DNI 15988000X de la parte demandante.",
+      "texto_anonimizado": "Consta en el expediente el DNI [DNI_NIE] de la parte demandante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 67446522B ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 86865468B para acreditar su identidad.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 29968745K ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 83414184S ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 56453983T ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 73526008E ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 65888073L ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_8",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 59202768D para acreditar su identidad.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_9",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Identificado mediante DNI número 00340220G ante el letrado actuante.",
+      "texto_anonimizado": "Identificado mediante DNI número [DNI_NIE] ante el letrado actuante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_10",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 10834547Y para acreditar su identidad.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_11",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 38552728J para acreditar su identidad.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_12",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El compareciente exhibe su DNI 60351650H para acreditar su identidad.",
+      "texto_anonimizado": "El compareciente exhibe su DNI [DNI_NIE] para acreditar su identidad.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_13",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta en el expediente el DNI 91963043G de la parte demandante.",
+      "texto_anonimizado": "Consta en el expediente el DNI [DNI_NIE] de la parte demandante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_dni_14",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta en el expediente el DNI 91186040X de la parte demandante.",
+      "texto_anonimizado": "Consta en el expediente el DNI [DNI_NIE] de la parte demandante.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE X6664202K en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE Y5983360Q en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Presenta NIE Z8616569S como documento de identidad válido en España.",
+      "texto_anonimizado": "Presenta NIE [DNI_NIE] como documento de identidad válido en España.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Presenta NIE Z5710873R como documento de identidad válido en España.",
+      "texto_anonimizado": "Presenta NIE [DNI_NIE] como documento de identidad válido en España.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE Z9027228D en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Presenta NIE Y7674700M como documento de identidad válido en España.",
+      "texto_anonimizado": "Presenta NIE [DNI_NIE] como documento de identidad válido en España.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE Z9687556F en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE X6188185N en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_8",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Presenta NIE Y7083634Q como documento de identidad válido en España.",
+      "texto_anonimizado": "Presenta NIE [DNI_NIE] como documento de identidad válido en España.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nie_9",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta NIE Y9826714R en la solicitud de residencia.",
+      "texto_anonimizado": "Consta NIE [DNI_NIE] en la solicitud de residencia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Comparece con pasaporte número LV3585958 al no disponer de DNI español.",
+      "texto_anonimizado": "Comparece con pasaporte número [PASAPORTE] al no disponer de DNI español.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte VZ741881 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte TZZ5637548 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Comparece con pasaporte número HG189893 al no disponer de DNI español.",
+      "texto_anonimizado": "Comparece con pasaporte número [PASAPORTE] al no disponer de DNI español.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte SMU8598390 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Comparece con pasaporte número YEL9693181 al no disponer de DNI español.",
+      "texto_anonimizado": "Comparece con pasaporte número [PASAPORTE] al no disponer de DNI español.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte AP611052 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte AR6954156 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_8",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Comparece con pasaporte número LD793485 al no disponer de DNI español.",
+      "texto_anonimizado": "Comparece con pasaporte número [PASAPORTE] al no disponer de DNI español.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_9",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Se identifica mediante pasaporte ACX869904 expedido en su país de origen.",
+      "texto_anonimizado": "Se identifica mediante pasaporte [PASAPORTE] expedido en su país de origen.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_0",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia HCY154356 aparece en la tabla de expedientes internos.",
+      "texto_anonimizado": "El código de referencia PERSOA_000001 aparece en la tabla de expedientes internos.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "HCY154356"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_1",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia PA058471 aparece en la tabla de expedientes internos.",
+      "texto_anonimizado": "El código de referencia PA058471 aparece en la tabla de expedientes internos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_2",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia DN183440 aparece en la tabla de expedientes internos.",
+      "texto_anonimizado": "El código de referencia DN183440 aparece en la tabla de expedientes internos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_3",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia EEM2154552 aparece en la tabla de expedientes internos.",
+      "texto_anonimizado": "El código de referencia PERSOA_000001 aparece en la tabla de expedientes internos.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "EEM2154552"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_4",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El código de referencia WF864786 aparece en la tabla de expedientes internos.",
+      "texto_anonimizado": "El código de referencia WF864786 aparece en la tabla de expedientes internos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 631 555 175 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 755 617 041 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 677 165 282 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 812 089 290 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 701 659 376 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 693 249 868 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 839 374 062 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel333_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Puede contactar en el teléfono 624 509 109 en horario de mañana.",
+      "texto_anonimizado": "Puede contactar en el teléfono [TELEFONO] en horario de mañana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 761 13 66 05, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 843 76 71 07, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 987 20 54 91, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 685 69 52 67, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 808 62 02 51, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 973 75 28 34, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 954 75 16 18, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_tel3222_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Número de contacto facilitado: 888 77 60 37, disponible por las tardes.",
+      "texto_anonimizado": "Número de contacto facilitado: [TELEFONO], disponible por las tardes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo leandro.carballo@dominio-ficticio.gal antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo ledicia.del@dominio-ficticio.gal antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo xacobe.freire@proba-anon.org antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo manuel.otero@proba-anon.org antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo ledicia.pazos@correo-exemplo.es antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo uxía.pazos@proba-anon.org antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo ramón.freire@dominio-ficticio.gal antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo xoel.vázquez@proba-anon.org antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_8",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo antón.freire@proba-anon.org antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_email_9",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Remite la documentación al correo xacobe.domínguez@dominio-ficticio.gal antes del viernes.",
+      "texto_anonimizado": "Remite la documentación al correo [EMAIL] antes del viernes.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Calle Nova de Abaixo 231, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Avenida do Home Santo 139, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Avenida das Hedras 35, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Praza da Estrela 250, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Rúa das Airas 166, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Praza do Pombal 92, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Camiño Nova de Abaixo 185, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Camiño das Fontiñas 46, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_8",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Avenida del Progreso 38, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_9",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Reside en la Calle das Fontiñas 228, según consta en el padrón municipal.",
+      "texto_anonimizado": "Reside en la [ENDEREZO], según consta en el padrón municipal.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_sen_numero_0",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_sen_numero_1",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_sen_numero_2",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_sen_numero_3",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_enderezo_sen_numero_4",
+      "categoria": "control_negativo",
+      "texto_orixinal": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "texto_anonimizado": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES47 1911 8437 0032 6136 1042 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES78 4958 3542 8718 2526 9822 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES13 4065 2072 1741 5345 7939 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES44 1198 6245 4301 4939 1925 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES31 7772 8171 1981 9102 8502 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES08 5876 7470 9589 5654 1352 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES21 1439 8107 5112 4346 3703 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_iban_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El reintegro se realizará en la cuenta ES41 5324 7087 8294 9200 5434 indicada por el interesado.",
+      "texto_anonimizado": "El reintegro se realizará en la cuenta [IBAN] indicada por el interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 94976 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 86220 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 64743 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 52931 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 41214 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 23266 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 25853 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_colexiado_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Informe suscrito por el letrado, colegiado número 60787 del ICA correspondiente.",
+      "texto_anonimizado": "Informe suscrito por el letrado, colegiado número [COLEXIADO] del ICA correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 15/92497635/44 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 49/46990221/52 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 52/79170107/48 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 14/20720337/56 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 48/76043714/84 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 48/17124039/55 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 18/44154075/15 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "Consta número de afiliación a la Seguridad Social 21/35763098/56 en el expediente laboral.",
+      "texto_anonimizado": "Consta número de afiliación a la Seguridad Social [SEGURIDADE_SOCIAL] en el expediente laboral.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_0",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 17/19510197/69 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 17/19510197/69 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_1",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 41/35994093/29 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 41/35994093/29 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_2",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 22/19255527/71 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 22/19255527/71 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_3",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 50/16540483/34 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 50/16540483/34 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_4",
+      "categoria": "control_negativo",
+      "texto_orixinal": "El expediente administrativo 19/77093109/58 sigue pendiente de resolución.",
+      "texto_anonimizado": "El expediente administrativo 19/77093109/58 sigue pendiente de resolución.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_0",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 6573KNJ quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_1",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 6711JSY quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_2",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 8952NLR quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_3",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 0983YTB quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_4",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 9157TDP quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_5",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 6793WWX quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_6",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 7912JBG quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_matricula_7",
+      "categoria": "identificador_directo",
+      "texto_orixinal": "El vehículo con matrícula 1979SYJ quedó estacionado en la vía pública.",
+      "texto_anonimizado": "El vehículo con matrícula [MATRICULA] quedó estacionado en la vía pública.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_0",
+      "categoria": "nome",
+      "texto_orixinal": "Breixo Meixide Castro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_1",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Brais Pazos Iglesias, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_2",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Antón Seoane Cortizo contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_3",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Mariña Fiolleda Outeiral a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_4",
+      "categoria": "nome",
+      "texto_orixinal": "Ledicia Rivas Bahamonde presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_5",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Breixo Pazos Iglesias, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento Breixo PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_6",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Xiana Fiolleda Outeiral contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_7",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Covadonga Veiga Lucas a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_8",
+      "categoria": "nome",
+      "texto_orixinal": "Noa Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_9",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Breixo Seoane Cortizo, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_10",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Uxía Rivas Bahamonde contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_11",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Sabela Fiolleda Outeiral a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_12",
+      "categoria": "nome",
+      "texto_orixinal": "Xacobe Otero Campos presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_13",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Roi Domínguez Rial, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_14",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Xacobe Pazos Iglesias contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición Xacobe PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_15",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Covadonga Fiolleda Outeiral a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_16",
+      "categoria": "nome",
+      "texto_orixinal": "Xiana Freire Lameiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_17",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Carme Ferrándiz Salcedo, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_18",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Uxía Pazos Iglesias contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_19",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Roi del Valle Resua a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación Roi del Valle Resua a favor de su letrado.",
+      "fugas": [
+        "Roi del Valle Resua"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_nome_20",
+      "categoria": "nome",
+      "texto_orixinal": "Olalla Domínguez Rial presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_21",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Iago Veiga Lucas, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_22",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Mariña Veiga Lucas contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_23",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Aldara Barroso Cordeiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_24",
+      "categoria": "nome",
+      "texto_orixinal": "Antón Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_25",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Iago Suárez Pena, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_26",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Antón Ferrándiz Salcedo contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_27",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Olalla Falcón Bande a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_28",
+      "categoria": "nome",
+      "texto_orixinal": "Xiana Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_29",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Mariña Freire Lameiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_30",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Brais del Valle Resua contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_31",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Mariña Freire Lameiro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_32",
+      "categoria": "nome",
+      "texto_orixinal": "Roi Suárez Pena presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_33",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Xoel Freire Lameiro, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_34",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Breixo Seoane Cortizo contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_35",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Manuel Suárez Pena a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_36",
+      "categoria": "nome",
+      "texto_orixinal": "Carme Suárez Pena presentó el escrito de alegaciones en tiempo y forma.",
+      "texto_anonimizado": "PERSOA_000001 presentó el escrito de alegaciones en tiempo y forma.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_37",
+      "categoria": "nome",
+      "texto_orixinal": "Firma el presente documento Ramón Rivas Bahamonde, en calidad de interesado.",
+      "texto_anonimizado": "Firma el presente documento PERSOA_000001, en calidad de interesado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_38",
+      "categoria": "nome",
+      "texto_orixinal": "Interpone recurso de reposición Roi Domínguez Rial contra la resolución dictada.",
+      "texto_anonimizado": "PERSOA_000002 recurso de reposición PERSOA_000001 contra la resolución dictada.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_nome_39",
+      "categoria": "nome",
+      "texto_orixinal": "Otorga poder de representación Ledicia Meixide Castro a favor de su letrado.",
+      "texto_anonimizado": "Otorga poder de representación PERSOA_000001 a favor de su letrado.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_0",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Barroso Cordeiro, Sabela - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_1",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Fiolleda Outeiral, Aldara - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_2",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Pazos Iglesias, Roi - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - Turno de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_3",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Veiga Lucas, Aldara - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_4",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Veiga Lucas, Olalla - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_5",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Veiga Lucas, Iago - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_6",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Fiolleda Outeiral, Uxía - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_7",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Suárez Pena, Ledicia - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_8",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Meixide Castro, Uxía - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_9",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Suárez Pena, Antón - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_10",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Pazos Iglesias, Roi - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - Turno de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_11",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Domínguez Rial, Xoel - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_12",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Carballo Doval, Leandro - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_13",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: del Valle Resua, Aldara - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_invertido_14",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Listaxe de persoal: Barroso Cordeiro, Xiana - Turno de mañá.",
+      "texto_anonimizado": "Listaxe de persoal: PERSOA_000001 - PERSOA_000002 de mañá.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno de mañá"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_0",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Noa del Valle Resua perito tasador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 perito tasador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_1",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Roi Suárez Pena aparejador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 aparejador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_2",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Roi del Valle Resua ingeniero técnico colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 ingeniero técnico colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_3",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Olalla Falcón Bande ingeniero técnico colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 ingeniero técnico colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_4",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Mariña Domínguez Rial perito tasador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 perito tasador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_5",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Ledicia Seoane Cortizo aparejador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 aparejador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_6",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Covadonga Seoane Cortizo aparejador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 aparejador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_7",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Covadonga Falcón Bande arquitecto colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 arquitecto colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_8",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Manuel Freire Lameiro ingeniero técnico colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 ingeniero técnico colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_9",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Uxía Falcón Bande ingeniero técnico colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 ingeniero técnico colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_10",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Ledicia Rivas Bahamonde ingeniero técnico colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 ingeniero técnico colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_11",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Covadonga Barroso Cordeiro aparejador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 aparejador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_12",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Uxía Rivas Bahamonde arquitecto colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 arquitecto colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_13",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Uxía Domínguez Rial aparejador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 aparejador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sen_coma_14",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "Firma el informe Carme Domínguez Rial perito tasador colegiado en la demarcación correspondiente.",
+      "texto_anonimizado": "Firma el informe PERSOA_000001 perito tasador colegiado en la demarcación correspondiente.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_0",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el acusado Ledicia Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el acusado PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_1",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la testigo Roi Veiga Lucas, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_2",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el acusado Carme Falcón Bande, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el acusado PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_3",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el demandante Roi Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_4",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la acusado Manuel Fiolleda Outeiral, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la acusado PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_5",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el testigo Iago Meixide Castro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_6",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la testigo Roi del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo Roi del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [
+        "Roi del Valle Resua"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_contexto_rol_7",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el denunciante Carme del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el denunciante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_8",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el demandante Noa Domínguez Rial, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_9",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la demandante Mariña Falcón Bande, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_10",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el acusado Brais Suárez Pena, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el acusado PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_11",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la demandante Sabela Domínguez Rial, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_12",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el denunciante Ramón Carballo Doval, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el denunciante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_13",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la testigo Leandro Meixide Castro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la testigo PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_14",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el denunciante Aldara Rivas Bahamonde, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el denunciante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_15",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el demandante Uxía del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_16",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la denunciante Carme Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la denunciante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_17",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la acusado Sabela Rivas Bahamonde, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la acusado PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_18",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara la demandante Xiana Barroso Cordeiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara la demandante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_contexto_rol_19",
+      "categoria": "nome_formato_dificil",
+      "texto_orixinal": "En el acto del juicio declara el denunciante Mariña Barroso Cordeiro, quien manifiesta no haber presenciado los hechos.",
+      "texto_anonimizado": "En el acto del juicio declara el denunciante PERSOA_000001, quien manifiesta no haber presenciado los hechos.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_0",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Covadonga Pazos Iglesias presenta un informe médico donde consta que padece esclerosis múltiple desde hace años.",
+      "texto_anonimizado": "Covadonga Pazos PERSOA_000001 presenta un informe médico donde consta que padece esclerosis múltiple desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_1",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Mariña Barroso Cordeiro presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_2",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Aldara Domínguez Rial presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_3",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Manuel Carballo Doval presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_4",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Iago Meixide Castro presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_5",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Ramón Barroso Cordeiro presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_6",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Mariña Pazos Iglesias presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_7",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Roi Fiolleda Outeiral presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "texto_anonimizado": "Roi Fiolleda Outeiral presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+      "fugas": [
+        "Roi Fiolleda Outeiral"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_saude_8",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Sabela Ferrándiz Salcedo presenta un informe médico donde consta que padece VIH desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece VIH desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_saude_9",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xacobe Ferrándiz Salcedo presenta un informe médico donde consta que padece VIH desde hace años.",
+      "texto_anonimizado": "PERSOA_000001 presenta un informe médico donde consta que padece VIH desde hace años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_0",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Roi Carballo Doval declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_1",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xacobe Fiolleda Outeiral declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "Xacobe PERSOA_000001 declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_2",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xacobe Barroso Cordeiro declaró que profesa la religión judía y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión judía y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_3",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Olalla Pazos Iglesias declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_4",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Covadonga Carballo Doval declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_5",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Covadonga Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "Covadonga Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [
+        "Covadonga Ferrándiz Salcedo"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_relixion_6",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xoel Fiolleda Outeiral declaró que profesa la religión evangélica y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión evangélica y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_7",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Ledicia Suárez Pena declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_8",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xiana Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_relixion_9",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Aldara Pazos Iglesias declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "texto_anonimizado": "PERSOA_000001 declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_0",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Iago Rivas Bahamonde manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_1",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Sabela Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_2",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Iago Rivas Bahamonde manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_3",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Noa Otero Campos manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_4",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Roi Suárez Pena manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_5",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Carme Ferrándiz Salcedo manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_6",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Noa Seoane Cortizo manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_7",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Brais del Valle Resua manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_8",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xacobe Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_orientacion_9",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Xoel Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "texto_anonimizado": "PERSOA_000001 manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_0",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Xiana Barroso Cordeiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_1",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Xoel Rivas Bahamonde es afiliado del sindicato CIG desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_2",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Roi Barroso Cordeiro es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que Roi Barroso Cordeiro es afiliado del sindicato PERSOA_000001 desde hace varios años.",
+      "fugas": [
+        "Roi Barroso Cordeiro"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_sindical_3",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Sabela del Valle Resua es afiliado del sindicato USO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_4",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Iago Freire Lameiro es afiliado del sindicato CSIF desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato CSIF desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_5",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Xacobe Ferrándiz Salcedo es afiliado del sindicato UGT desde hace varios años.",
+      "texto_anonimizado": "Consta que Xacobe Ferrándiz Salcedo es afiliado del sindicato UGT desde hace varios años.",
+      "fugas": [
+        "Xacobe Ferrándiz Salcedo"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_sindical_6",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Aldara Suárez Pena es afiliado del sindicato USO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato USO desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_7",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Uxía Pazos Iglesias es afiliado del sindicato CIG desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_8",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Xacobe Veiga Lucas es afiliado del sindicato CCOO desde hace varios años.",
+      "texto_anonimizado": "Consta que PERSOA_000001 es afiliado del sindicato PERSOA_000002 desde hace varios años.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_sindical_9",
+      "categoria": "categoria_especial",
+      "texto_orixinal": "Consta que Xacobe Fiolleda Outeiral es afiliado del sindicato USO desde hace varios años.",
+      "texto_anonimizado": "Consta que Xacobe Fiolleda Outeiral es afiliado del sindicato USO desde hace varios años.",
+      "fugas": [
+        "Xacobe Fiolleda Outeiral"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_papel_0",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como fiscal don Uxía Barroso Cordeiro, en representación del Ministerio Público.",
+      "texto_anonimizado": "Comparece como fiscal don PERSOA_000001, en representación del Ministerio Público.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_1",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como fiscal doña Leandro Meixide Castro, en representación del Ministerio Público.",
+      "texto_anonimizado": "Comparece como fiscal doña PERSOA_000001, en representación del Ministerio Público.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_2",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo don Xiana del Valle Resua, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo don PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_3",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo doña Antón Meixide Castro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_4",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Mariña Fiolleda Outeiral, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_5",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial doña Manuel del Valle Resua, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial doña PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_6",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial doña Ledicia Domínguez Rial, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial doña PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_7",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial don Brais Suárez Pena, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial don PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_8",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Olalla Ferrándiz Salcedo, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_9",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial doña Uxía Domínguez Rial, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial doña PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_10",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Breixo Ferrándiz Salcedo, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don Breixo Ferrándiz Salcedo, en el turno de intervenciones.",
+      "fugas": [
+        "Breixo Ferrándiz Salcedo"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_papel_11",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Olalla Carballo Doval, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_12",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo doña Ledicia Falcón Bande, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña Ledicia Falcón Bande, quien nada aportó de relevancia.",
+      "fugas": [
+        "Ledicia Falcón Bande"
+      ],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": false
+    },
+    {
+      "id": "gen_papel_13",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como letrado de la parte contraria don Manuel Pazos Iglesias, en el turno de intervenciones.",
+      "texto_anonimizado": "Comparece como letrado de la parte contraria don PERSOA_000001, en el turno de intervenciones.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_14",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como fiscal don Ledicia Otero Campos, en representación del Ministerio Público.",
+      "texto_anonimizado": "Comparece como fiscal don PERSOA_000001, en representación del Ministerio Público.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_15",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial doña Noa Ferrándiz Salcedo, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial doña PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_16",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como perito judicial doña Xoel Pazos Iglesias, para ratificar su informe.",
+      "texto_anonimizado": "Comparece como perito judicial doña PERSOA_000001, para ratificar su informe.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_17",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo don Aldara Falcón Bande, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo don PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_18",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo doña Uxía Pazos Iglesias, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_papel_19",
+      "categoria": "papel_persoa",
+      "texto_orixinal": "Comparece como testigo doña Xoel Freire Lameiro, quien nada aportó de relevancia.",
+      "texto_anonimizado": "Comparece como testigo doña PERSOA_000001, quien nada aportó de relevancia.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_0",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Turno, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "PERSOA_000001, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Turno"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_1",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Despois, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "PERSOA_000001, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Despois"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_2",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Ademais, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Ademais, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_3",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Considerando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Considerando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_4",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Antecedentes, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "PERSOA_000001, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [
+        "Antecedentes"
+      ],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_5",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Resultando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Resultando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_6",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Visto, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Visto, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_7",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Igualmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Igualmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_8",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Finalmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Finalmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_palabra_comun_9",
+      "categoria": "control_negativo",
+      "texto_orixinal": "Asimismo, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "texto_anonimizado": "Asimismo, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_0",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 12403822Z presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_1",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 02542354A presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_2",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 46215249S presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_3",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 09974432E presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_4",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 17487409A presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_5",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 76086876R presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_6",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 69366151Z presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_7",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 32642841E presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_8",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 63667615G presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    },
+    {
+      "id": "gen_ocr_9",
+      "categoria": "ocr_ruido",
+      "texto_orixinal": "D0cumento de identidad n.0 93071644M presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "texto_anonimizado": "D0cumento de identidad n.0 [DNI_NIE] presentado xunto coa s0licitude (dixitalizado por OCR).",
+      "fugas": [],
+      "sobre_anonimizacion": [],
+      "sobre_anonimizacion_sen_marcar": false,
+      "ok": true
+    }
+  ]
+}

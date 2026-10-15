@@ -1,0 +1,3180 @@
+{
+  "resultados": [
+    {
+      "id": "dni_solto",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.35,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "dni_pegado_a_guion_baixo",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "nie_estandar",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "pasaporte_con_etiqueta",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[PASAPORTE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "pasaporte_sen_etiqueta",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "telefono_3_3_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "email_estandar",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "enderezo_con_numero",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "enderezo_sen_numero_control",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "colexiado_con_numero",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "seguridade_social_con_etiqueta",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "seguridade_social_sen_etiqueta_control",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "nome_estandar",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "nome_orde_invertida_listaxe",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "nome_sen_coma_profesion",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "nome_contexto_testemuna",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "cargo_publico_exento",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "categoria_especial_saude",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.63,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "VIH"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "categoria_especial_relixion",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "categoria_especial_orientacion",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "categoria_especial_sindical",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "papel_perito",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "ocr_dni_con_ruido",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "iban_estandar",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_8",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_9",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[DNI_NIE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_10",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_11",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_12",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_13",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_dni_14",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_8",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nie_9",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[PASAPORTE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[PASAPORTE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[PASAPORTE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_8",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "[PASAPORTE]"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_9",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_0",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.25,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_1",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_2",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_3",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_pasaporte_sen_etiqueta_4",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel333_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_tel3222_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_8",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_email_9",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.19,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.19,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_8",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_9",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_sen_numero_0",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_sen_numero_1",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_sen_numero_2",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_sen_numero_3",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_enderezo_sen_numero_4",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_iban_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_colexiado_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "Seguridad Social"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_0",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_1",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_2",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_3",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ss_sen_etiqueta_4",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_0",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_1",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_2",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_3",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_4",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_5",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_6",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_matricula_7",
+      "categoria": "identificador_directo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_0",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_1",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_2",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_3",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_4",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_5",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_6",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_7",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_8",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_9",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_10",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_11",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_12",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_13",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_14",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_15",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_16",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_17",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_18",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_19",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [
+        "Roi del Valle Resua"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_20",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_21",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_22",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_23",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_24",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_25",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_26",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_27",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_28",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_29",
+      "categoria": "nome",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_30",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_31",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_32",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_33",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_34",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_35",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_36",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_37",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_38",
+      "categoria": "nome",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_nome_39",
+      "categoria": "nome",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_0",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_1",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_2",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_3",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_4",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_5",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_6",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_7",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_8",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_9",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_10",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_11",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_12",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_13",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_invertido_14",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_0",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_1",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_2",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_3",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_4",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_5",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_6",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_7",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_8",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_9",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_10",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_11",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_12",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_13",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sen_coma_14",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_0",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_1",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_2",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_3",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_4",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_5",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_6",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [
+        "Roi del Valle Resua"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_7",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_8",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_9",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_10",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_11",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_12",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_13",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_14",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_15",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_16",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_17",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_18",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_contexto_rol_19",
+      "categoria": "nome_formato_dificil",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_0",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.69,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "esclerosis múltiple"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_1",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.75,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "cáncer de mama"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_2",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.67,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "diabetes tipo 1"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_3",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.59,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "diabetes tipo 1"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_4",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "trastorno bipolar"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_5",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "cáncer de mama"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_6",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.64,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "diabetes tipo 1"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_7",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.68,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "trastorno bipolar"
+        }
+      ],
+      "fugas_v1": [
+        "Roi Fiolleda Outeiral"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_8",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.63,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "VIH"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_saude_9",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.52,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "VIH"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_0",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.67,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "testigo de Jehová"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_1",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.72,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "testigo de Jehová"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_2",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.69,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión judía"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_3",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.67,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión musulmana"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_4",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión budista"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_5",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión"
+        }
+      ],
+      "fugas_v1": [
+        "Covadonga Ferrándiz Salcedo"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_6",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.74,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión evangélica"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_7",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión budista"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_8",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.66,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión musulmana"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_relixion_9",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.61,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "religión musulmana"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_0",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_1",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_2",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación bisexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_3",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_4",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación bisexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_5",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación bisexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_6",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.6,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_7",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.54,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación homosexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_8",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.62,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación transexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_orientacion_9",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.56,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "orientación transexual"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_0",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_1",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_2",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.96,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "afiliado del sindicato PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [
+        "Roi Barroso Cordeiro"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_3",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.73,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "afiliado del sindicato USO"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_4",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.73,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "afiliado del sindicato CSIF"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_5",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.67,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "sindicato UGT"
+        }
+      ],
+      "fugas_v1": [
+        "Xacobe Ferrándiz Salcedo"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_6",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.73,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "afiliado del sindicato USO"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_7",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_8",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_sindical_9",
+      "categoria": "categoria_especial",
+      "duracion_seg": 0.73,
+      "hallazgos_ia": [
+        {
+          "tipo": "CATEGORIA_ESPECIAL",
+          "texto": "afiliado del sindicato USO"
+        }
+      ],
+      "fugas_v1": [
+        "Xacobe Fiolleda Outeiral"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_0",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_1",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.72,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_2",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.23,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_3",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.71,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_4",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_5",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.71,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_6",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_7",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.73,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "don PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_8",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_9",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.71,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_10",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [
+        "Breixo Ferrándiz Salcedo"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_11",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_12",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [
+        "Ledicia Falcón Bande"
+      ],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_13",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_14",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_15",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.71,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_16",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.66,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_17",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_18",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.71,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_papel_19",
+      "categoria": "papel_persoa",
+      "duracion_seg": 0.65,
+      "hallazgos_ia": [
+        {
+          "tipo": "FUGA",
+          "texto": "PERSOA_000001"
+        }
+      ],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_0",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_1",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_2",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_3",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_4",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_5",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_6",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_7",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_8",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_palabra_comun_9",
+      "categoria": "control_negativo",
+      "duracion_seg": 0.24,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_0",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.29,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_1",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_2",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_3",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_4",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_5",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_6",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_7",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_8",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    },
+    {
+      "id": "gen_ocr_9",
+      "categoria": "ocr_ruido",
+      "duracion_seg": 0.18,
+      "hallazgos_ia": [],
+      "fugas_v1": [],
+      "fugas_v1_detectadas_pola_ia": [],
+      "falsos_positivos": []
+    }
+  ]
+}

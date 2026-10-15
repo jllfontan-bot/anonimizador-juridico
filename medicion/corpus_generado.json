@@ -1,0 +1,3108 @@
+[
+  {
+    "id": "gen_dni_0",
+    "categoria": "identificador_directo",
+    "texto": "Consta en el expediente el DNI 15988000X de la parte demandante.",
+    "debe_desaparecer": [
+      "15988000X"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_1",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 67446522B ante el letrado actuante.",
+    "debe_desaparecer": [
+      "67446522B"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_2",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 86865468B para acreditar su identidad.",
+    "debe_desaparecer": [
+      "86865468B"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_3",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 29968745K ante el letrado actuante.",
+    "debe_desaparecer": [
+      "29968745K"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_4",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 83414184S ante el letrado actuante.",
+    "debe_desaparecer": [
+      "83414184S"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_5",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 56453983T ante el letrado actuante.",
+    "debe_desaparecer": [
+      "56453983T"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_6",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 73526008E ante el letrado actuante.",
+    "debe_desaparecer": [
+      "73526008E"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_7",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 65888073L ante el letrado actuante.",
+    "debe_desaparecer": [
+      "65888073L"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_8",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 59202768D para acreditar su identidad.",
+    "debe_desaparecer": [
+      "59202768D"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_9",
+    "categoria": "identificador_directo",
+    "texto": "Identificado mediante DNI número 00340220G ante el letrado actuante.",
+    "debe_desaparecer": [
+      "00340220G"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_10",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 10834547Y para acreditar su identidad.",
+    "debe_desaparecer": [
+      "10834547Y"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_11",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 38552728J para acreditar su identidad.",
+    "debe_desaparecer": [
+      "38552728J"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_12",
+    "categoria": "identificador_directo",
+    "texto": "El compareciente exhibe su DNI 60351650H para acreditar su identidad.",
+    "debe_desaparecer": [
+      "60351650H"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_13",
+    "categoria": "identificador_directo",
+    "texto": "Consta en el expediente el DNI 91963043G de la parte demandante.",
+    "debe_desaparecer": [
+      "91963043G"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_dni_14",
+    "categoria": "identificador_directo",
+    "texto": "Consta en el expediente el DNI 91186040X de la parte demandante.",
+    "debe_desaparecer": [
+      "91186040X"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_0",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE X6664202K en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "X6664202K"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_1",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE Y5983360Q en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "Y5983360Q"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_2",
+    "categoria": "identificador_directo",
+    "texto": "Presenta NIE Z8616569S como documento de identidad válido en España.",
+    "debe_desaparecer": [
+      "Z8616569S"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_3",
+    "categoria": "identificador_directo",
+    "texto": "Presenta NIE Z5710873R como documento de identidad válido en España.",
+    "debe_desaparecer": [
+      "Z5710873R"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_4",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE Z9027228D en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "Z9027228D"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_5",
+    "categoria": "identificador_directo",
+    "texto": "Presenta NIE Y7674700M como documento de identidad válido en España.",
+    "debe_desaparecer": [
+      "Y7674700M"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_6",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE Z9687556F en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "Z9687556F"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_7",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE X6188185N en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "X6188185N"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_8",
+    "categoria": "identificador_directo",
+    "texto": "Presenta NIE Y7083634Q como documento de identidad válido en España.",
+    "debe_desaparecer": [
+      "Y7083634Q"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nie_9",
+    "categoria": "identificador_directo",
+    "texto": "Consta NIE Y9826714R en la solicitud de residencia.",
+    "debe_desaparecer": [
+      "Y9826714R"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_0",
+    "categoria": "identificador_directo",
+    "texto": "Comparece con pasaporte número LV3585958 al no disponer de DNI español.",
+    "debe_desaparecer": [
+      "LV3585958"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_1",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte VZ741881 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "VZ741881"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_2",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte TZZ5637548 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "TZZ5637548"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_3",
+    "categoria": "identificador_directo",
+    "texto": "Comparece con pasaporte número HG189893 al no disponer de DNI español.",
+    "debe_desaparecer": [
+      "HG189893"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_4",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte SMU8598390 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "SMU8598390"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_5",
+    "categoria": "identificador_directo",
+    "texto": "Comparece con pasaporte número YEL9693181 al no disponer de DNI español.",
+    "debe_desaparecer": [
+      "YEL9693181"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_6",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte AP611052 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "AP611052"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_7",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte AR6954156 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "AR6954156"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_8",
+    "categoria": "identificador_directo",
+    "texto": "Comparece con pasaporte número LD793485 al no disponer de DNI español.",
+    "debe_desaparecer": [
+      "LD793485"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_9",
+    "categoria": "identificador_directo",
+    "texto": "Se identifica mediante pasaporte ACX869904 expedido en su país de origen.",
+    "debe_desaparecer": [
+      "ACX869904"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_pasaporte_sen_etiqueta_0",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia HCY154356 aparece en la tabla de expedientes internos.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "HCY154356"
+    ],
+    "nota": "Sen a etiqueta 'pasaporte' preto non debe tocarse."
+  },
+  {
+    "id": "gen_pasaporte_sen_etiqueta_1",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia PA058471 aparece en la tabla de expedientes internos.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "PA058471"
+    ],
+    "nota": "Sen a etiqueta 'pasaporte' preto non debe tocarse."
+  },
+  {
+    "id": "gen_pasaporte_sen_etiqueta_2",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia DN183440 aparece en la tabla de expedientes internos.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "DN183440"
+    ],
+    "nota": "Sen a etiqueta 'pasaporte' preto non debe tocarse."
+  },
+  {
+    "id": "gen_pasaporte_sen_etiqueta_3",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia EEM2154552 aparece en la tabla de expedientes internos.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "EEM2154552"
+    ],
+    "nota": "Sen a etiqueta 'pasaporte' preto non debe tocarse."
+  },
+  {
+    "id": "gen_pasaporte_sen_etiqueta_4",
+    "categoria": "control_negativo",
+    "texto": "El código de referencia WF864786 aparece en la tabla de expedientes internos.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "WF864786"
+    ],
+    "nota": "Sen a etiqueta 'pasaporte' preto non debe tocarse."
+  },
+  {
+    "id": "gen_tel333_0",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 631 555 175 en horario de mañana.",
+    "debe_desaparecer": [
+      "631 555 175"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_1",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 755 617 041 en horario de mañana.",
+    "debe_desaparecer": [
+      "755 617 041"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_2",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 677 165 282 en horario de mañana.",
+    "debe_desaparecer": [
+      "677 165 282"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_3",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 812 089 290 en horario de mañana.",
+    "debe_desaparecer": [
+      "812 089 290"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_4",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 701 659 376 en horario de mañana.",
+    "debe_desaparecer": [
+      "701 659 376"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_5",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 693 249 868 en horario de mañana.",
+    "debe_desaparecer": [
+      "693 249 868"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_6",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 839 374 062 en horario de mañana.",
+    "debe_desaparecer": [
+      "839 374 062"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel333_7",
+    "categoria": "identificador_directo",
+    "texto": "Puede contactar en el teléfono 624 509 109 en horario de mañana.",
+    "debe_desaparecer": [
+      "624 509 109"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_0",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 761 13 66 05, disponible por las tardes.",
+    "debe_desaparecer": [
+      "761 13 66 05"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_1",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 843 76 71 07, disponible por las tardes.",
+    "debe_desaparecer": [
+      "843 76 71 07"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_2",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 987 20 54 91, disponible por las tardes.",
+    "debe_desaparecer": [
+      "987 20 54 91"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_3",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 685 69 52 67, disponible por las tardes.",
+    "debe_desaparecer": [
+      "685 69 52 67"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_4",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 808 62 02 51, disponible por las tardes.",
+    "debe_desaparecer": [
+      "808 62 02 51"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_5",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 973 75 28 34, disponible por las tardes.",
+    "debe_desaparecer": [
+      "973 75 28 34"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_6",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 954 75 16 18, disponible por las tardes.",
+    "debe_desaparecer": [
+      "954 75 16 18"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_tel3222_7",
+    "categoria": "identificador_directo",
+    "texto": "Número de contacto facilitado: 888 77 60 37, disponible por las tardes.",
+    "debe_desaparecer": [
+      "888 77 60 37"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_0",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo leandro.carballo@dominio-ficticio.gal antes del viernes.",
+    "debe_desaparecer": [
+      "leandro.carballo@dominio-ficticio.gal"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_1",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo ledicia.del@dominio-ficticio.gal antes del viernes.",
+    "debe_desaparecer": [
+      "ledicia.del@dominio-ficticio.gal"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_2",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo xacobe.freire@proba-anon.org antes del viernes.",
+    "debe_desaparecer": [
+      "xacobe.freire@proba-anon.org"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_3",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo manuel.otero@proba-anon.org antes del viernes.",
+    "debe_desaparecer": [
+      "manuel.otero@proba-anon.org"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_4",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo ledicia.pazos@correo-exemplo.es antes del viernes.",
+    "debe_desaparecer": [
+      "ledicia.pazos@correo-exemplo.es"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_5",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo uxía.pazos@proba-anon.org antes del viernes.",
+    "debe_desaparecer": [
+      "uxía.pazos@proba-anon.org"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_6",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo ramón.freire@dominio-ficticio.gal antes del viernes.",
+    "debe_desaparecer": [
+      "ramón.freire@dominio-ficticio.gal"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_7",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo xoel.vázquez@proba-anon.org antes del viernes.",
+    "debe_desaparecer": [
+      "xoel.vázquez@proba-anon.org"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_8",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo antón.freire@proba-anon.org antes del viernes.",
+    "debe_desaparecer": [
+      "antón.freire@proba-anon.org"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_email_9",
+    "categoria": "identificador_directo",
+    "texto": "Remite la documentación al correo xacobe.domínguez@dominio-ficticio.gal antes del viernes.",
+    "debe_desaparecer": [
+      "xacobe.domínguez@dominio-ficticio.gal"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_0",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Calle Nova de Abaixo 231, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Calle Nova de Abaixo 231"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_1",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Avenida do Home Santo 139, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Avenida do Home Santo 139"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_2",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Avenida das Hedras 35, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Avenida das Hedras 35"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_3",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Praza da Estrela 250, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Praza da Estrela 250"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_4",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Rúa das Airas 166, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Rúa das Airas 166"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_5",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Praza do Pombal 92, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Praza do Pombal 92"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_6",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Camiño Nova de Abaixo 185, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Camiño Nova de Abaixo 185"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_7",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Camiño das Fontiñas 46, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Camiño das Fontiñas 46"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_8",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Avenida del Progreso 38, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Avenida del Progreso 38"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_9",
+    "categoria": "identificador_directo",
+    "texto": "Reside en la Calle das Fontiñas 228, según consta en el padrón municipal.",
+    "debe_desaparecer": [
+      "Calle das Fontiñas 228"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_enderezo_sen_numero_0",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Rúa Nova a modo de ejemplo"
+    ],
+    "nota": "Sen número/s/n non hai enderezo completo -- control negativo."
+  },
+  {
+    "id": "gen_enderezo_sen_numero_1",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Rúa Nova a modo de ejemplo"
+    ],
+    "nota": "Sen número/s/n non hai enderezo completo -- control negativo."
+  },
+  {
+    "id": "gen_enderezo_sen_numero_2",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Rúa Nova a modo de ejemplo"
+    ],
+    "nota": "Sen número/s/n non hai enderezo completo -- control negativo."
+  },
+  {
+    "id": "gen_enderezo_sen_numero_3",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Rúa Nova a modo de ejemplo"
+    ],
+    "nota": "Sen número/s/n non hai enderezo completo -- control negativo."
+  },
+  {
+    "id": "gen_enderezo_sen_numero_4",
+    "categoria": "control_negativo",
+    "texto": "La sentencia menciona la Rúa Nova a modo de ejemplo de vía urbana.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Rúa Nova a modo de ejemplo"
+    ],
+    "nota": "Sen número/s/n non hai enderezo completo -- control negativo."
+  },
+  {
+    "id": "gen_iban_0",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES47 1911 8437 0032 6136 1042 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES47 1911 8437 0032 6136 1042"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_1",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES78 4958 3542 8718 2526 9822 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES78 4958 3542 8718 2526 9822"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_2",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES13 4065 2072 1741 5345 7939 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES13 4065 2072 1741 5345 7939"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_3",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES44 1198 6245 4301 4939 1925 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES44 1198 6245 4301 4939 1925"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_4",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES31 7772 8171 1981 9102 8502 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES31 7772 8171 1981 9102 8502"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_5",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES08 5876 7470 9589 5654 1352 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES08 5876 7470 9589 5654 1352"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_6",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES21 1439 8107 5112 4346 3703 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES21 1439 8107 5112 4346 3703"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_iban_7",
+    "categoria": "identificador_directo",
+    "texto": "El reintegro se realizará en la cuenta ES41 5324 7087 8294 9200 5434 indicada por el interesado.",
+    "debe_desaparecer": [
+      "ES41 5324 7087 8294 9200 5434"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_0",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 94976 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "94976"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_1",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 86220 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "86220"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_2",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 64743 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "64743"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_3",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 52931 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "52931"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_4",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 41214 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "41214"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_5",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 23266 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "23266"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_6",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 25853 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "25853"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_colexiado_7",
+    "categoria": "identificador_directo",
+    "texto": "Informe suscrito por el letrado, colegiado número 60787 del ICA correspondiente.",
+    "debe_desaparecer": [
+      "60787"
+    ],
+    "debe_permanecer": [
+      "colegiado número"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_0",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 15/92497635/44 en el expediente laboral.",
+    "debe_desaparecer": [
+      "15/92497635/44"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_1",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 49/46990221/52 en el expediente laboral.",
+    "debe_desaparecer": [
+      "49/46990221/52"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_2",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 52/79170107/48 en el expediente laboral.",
+    "debe_desaparecer": [
+      "52/79170107/48"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_3",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 14/20720337/56 en el expediente laboral.",
+    "debe_desaparecer": [
+      "14/20720337/56"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_4",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 48/76043714/84 en el expediente laboral.",
+    "debe_desaparecer": [
+      "48/76043714/84"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_5",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 48/17124039/55 en el expediente laboral.",
+    "debe_desaparecer": [
+      "48/17124039/55"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_6",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 18/44154075/15 en el expediente laboral.",
+    "debe_desaparecer": [
+      "18/44154075/15"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_7",
+    "categoria": "identificador_directo",
+    "texto": "Consta número de afiliación a la Seguridad Social 21/35763098/56 en el expediente laboral.",
+    "debe_desaparecer": [
+      "21/35763098/56"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_ss_sen_etiqueta_0",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 17/19510197/69 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "17/19510197/69"
+    ],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera."
+  },
+  {
+    "id": "gen_ss_sen_etiqueta_1",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 41/35994093/29 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "41/35994093/29"
+    ],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera."
+  },
+  {
+    "id": "gen_ss_sen_etiqueta_2",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 22/19255527/71 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "22/19255527/71"
+    ],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera."
+  },
+  {
+    "id": "gen_ss_sen_etiqueta_3",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 50/16540483/34 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "50/16540483/34"
+    ],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera."
+  },
+  {
+    "id": "gen_ss_sen_etiqueta_4",
+    "categoria": "control_negativo",
+    "texto": "El expediente administrativo 19/77093109/58 sigue pendiente de resolución.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "19/77093109/58"
+    ],
+    "nota": "Sen etiqueta preto pode ser un expediente calquera."
+  },
+  {
+    "id": "gen_matricula_0",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 6573KNJ quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "6573KNJ"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_1",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 6711JSY quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "6711JSY"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_2",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 8952NLR quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "8952NLR"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_3",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 0983YTB quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "0983YTB"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_4",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 9157TDP quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "9157TDP"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_5",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 6793WWX quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "6793WWX"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_6",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 7912JBG quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "7912JBG"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_matricula_7",
+    "categoria": "identificador_directo",
+    "texto": "El vehículo con matrícula 1979SYJ quedó estacionado en la vía pública.",
+    "debe_desaparecer": [
+      "1979SYJ"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_0",
+    "categoria": "nome",
+    "texto": "Breixo Meixide Castro presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Breixo Meixide Castro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_1",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Brais Pazos Iglesias, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Brais Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_2",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Antón Seoane Cortizo contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Antón Seoane Cortizo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_3",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Mariña Fiolleda Outeiral a favor de su letrado.",
+    "debe_desaparecer": [
+      "Mariña Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_4",
+    "categoria": "nome",
+    "texto": "Ledicia Rivas Bahamonde presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Ledicia Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_5",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Breixo Pazos Iglesias, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Breixo Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_6",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Xiana Fiolleda Outeiral contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Xiana Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_7",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Covadonga Veiga Lucas a favor de su letrado.",
+    "debe_desaparecer": [
+      "Covadonga Veiga Lucas"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_8",
+    "categoria": "nome",
+    "texto": "Noa Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Noa Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_9",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Breixo Seoane Cortizo, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Breixo Seoane Cortizo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_10",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Uxía Rivas Bahamonde contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Uxía Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_11",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Sabela Fiolleda Outeiral a favor de su letrado.",
+    "debe_desaparecer": [
+      "Sabela Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_12",
+    "categoria": "nome",
+    "texto": "Xacobe Otero Campos presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Xacobe Otero Campos"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_13",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Roi Domínguez Rial, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Roi Domínguez Rial"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_14",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Xacobe Pazos Iglesias contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Xacobe Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_15",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Covadonga Fiolleda Outeiral a favor de su letrado.",
+    "debe_desaparecer": [
+      "Covadonga Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_16",
+    "categoria": "nome",
+    "texto": "Xiana Freire Lameiro presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Xiana Freire Lameiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_17",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Carme Ferrándiz Salcedo, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Carme Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_18",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Uxía Pazos Iglesias contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Uxía Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_19",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Roi del Valle Resua a favor de su letrado.",
+    "debe_desaparecer": [
+      "Roi del Valle Resua"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_20",
+    "categoria": "nome",
+    "texto": "Olalla Domínguez Rial presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Olalla Domínguez Rial"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_21",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Iago Veiga Lucas, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Iago Veiga Lucas"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_22",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Mariña Veiga Lucas contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Mariña Veiga Lucas"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_23",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Aldara Barroso Cordeiro a favor de su letrado.",
+    "debe_desaparecer": [
+      "Aldara Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_24",
+    "categoria": "nome",
+    "texto": "Antón Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Antón Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_25",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Iago Suárez Pena, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Iago Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_26",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Antón Ferrándiz Salcedo contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Antón Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_27",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Olalla Falcón Bande a favor de su letrado.",
+    "debe_desaparecer": [
+      "Olalla Falcón Bande"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_28",
+    "categoria": "nome",
+    "texto": "Xiana Barroso Cordeiro presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Xiana Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_29",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Mariña Freire Lameiro, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Mariña Freire Lameiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_30",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Brais del Valle Resua contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Brais del Valle Resua"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_31",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Mariña Freire Lameiro a favor de su letrado.",
+    "debe_desaparecer": [
+      "Mariña Freire Lameiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_32",
+    "categoria": "nome",
+    "texto": "Roi Suárez Pena presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Roi Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_33",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Xoel Freire Lameiro, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Xoel Freire Lameiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_34",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Breixo Seoane Cortizo contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Breixo Seoane Cortizo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_35",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Manuel Suárez Pena a favor de su letrado.",
+    "debe_desaparecer": [
+      "Manuel Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_36",
+    "categoria": "nome",
+    "texto": "Carme Suárez Pena presentó el escrito de alegaciones en tiempo y forma.",
+    "debe_desaparecer": [
+      "Carme Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_37",
+    "categoria": "nome",
+    "texto": "Firma el presente documento Ramón Rivas Bahamonde, en calidad de interesado.",
+    "debe_desaparecer": [
+      "Ramón Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_38",
+    "categoria": "nome",
+    "texto": "Interpone recurso de reposición Roi Domínguez Rial contra la resolución dictada.",
+    "debe_desaparecer": [
+      "Roi Domínguez Rial"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_nome_39",
+    "categoria": "nome",
+    "texto": "Otorga poder de representación Ledicia Meixide Castro a favor de su letrado.",
+    "debe_desaparecer": [
+      "Ledicia Meixide Castro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_invertido_0",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Barroso Cordeiro, Sabela - Turno de mañá.",
+    "debe_desaparecer": [
+      "Barroso Cordeiro, Sabela"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_1",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Fiolleda Outeiral, Aldara - Turno de mañá.",
+    "debe_desaparecer": [
+      "Fiolleda Outeiral, Aldara"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_2",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Pazos Iglesias, Roi - Turno de mañá.",
+    "debe_desaparecer": [
+      "Pazos Iglesias, Roi"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_3",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Veiga Lucas, Aldara - Turno de mañá.",
+    "debe_desaparecer": [
+      "Veiga Lucas, Aldara"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_4",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Veiga Lucas, Olalla - Turno de mañá.",
+    "debe_desaparecer": [
+      "Veiga Lucas, Olalla"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_5",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Veiga Lucas, Iago - Turno de mañá.",
+    "debe_desaparecer": [
+      "Veiga Lucas, Iago"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_6",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Fiolleda Outeiral, Uxía - Turno de mañá.",
+    "debe_desaparecer": [
+      "Fiolleda Outeiral, Uxía"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_7",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Suárez Pena, Ledicia - Turno de mañá.",
+    "debe_desaparecer": [
+      "Suárez Pena, Ledicia"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_8",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Meixide Castro, Uxía - Turno de mañá.",
+    "debe_desaparecer": [
+      "Meixide Castro, Uxía"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_9",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Suárez Pena, Antón - Turno de mañá.",
+    "debe_desaparecer": [
+      "Suárez Pena, Antón"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_10",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Pazos Iglesias, Roi - Turno de mañá.",
+    "debe_desaparecer": [
+      "Pazos Iglesias, Roi"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_11",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Domínguez Rial, Xoel - Turno de mañá.",
+    "debe_desaparecer": [
+      "Domínguez Rial, Xoel"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_12",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Carballo Doval, Leandro - Turno de mañá.",
+    "debe_desaparecer": [
+      "Carballo Doval, Leandro"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_13",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: del Valle Resua, Aldara - Turno de mañá.",
+    "debe_desaparecer": [
+      "del Valle Resua, Aldara"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_invertido_14",
+    "categoria": "nome_formato_dificil",
+    "texto": "Listaxe de persoal: Barroso Cordeiro, Xiana - Turno de mañá.",
+    "debe_desaparecer": [
+      "Barroso Cordeiro, Xiana"
+    ],
+    "debe_permanecer": [
+      "Listaxe de persoal",
+      "Turno de mañá"
+    ],
+    "nota": "Formato BOE, ver risco_residual.py."
+  },
+  {
+    "id": "gen_sen_coma_0",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Noa del Valle Resua perito tasador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Noa del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_1",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Roi Suárez Pena aparejador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Roi Suárez Pena"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_2",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Roi del Valle Resua ingeniero técnico colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Roi del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_3",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Olalla Falcón Bande ingeniero técnico colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Olalla Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_4",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Mariña Domínguez Rial perito tasador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Mariña Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_5",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Ledicia Seoane Cortizo aparejador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Ledicia Seoane Cortizo"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_6",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Covadonga Seoane Cortizo aparejador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Covadonga Seoane Cortizo"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_7",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Covadonga Falcón Bande arquitecto colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Covadonga Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_8",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Manuel Freire Lameiro ingeniero técnico colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Manuel Freire Lameiro"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_9",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Uxía Falcón Bande ingeniero técnico colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Uxía Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_10",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Ledicia Rivas Bahamonde ingeniero técnico colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Ledicia Rivas Bahamonde"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_11",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Covadonga Barroso Cordeiro aparejador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Covadonga Barroso Cordeiro"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_12",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Uxía Rivas Bahamonde arquitecto colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Uxía Rivas Bahamonde"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_13",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Uxía Domínguez Rial aparejador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Uxía Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_sen_coma_14",
+    "categoria": "nome_formato_dificil",
+    "texto": "Firma el informe Carme Domínguez Rial perito tasador colegiado en la demarcación correspondiente.",
+    "debe_desaparecer": [
+      "Carme Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "Firma el informe",
+      "colegiado en la demarcación"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_0",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el acusado Ledicia Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Ledicia Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "declara el acusado",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_1",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la testigo Roi Veiga Lucas, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Roi Veiga Lucas"
+    ],
+    "debe_permanecer": [
+      "declara la testigo",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_2",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el acusado Carme Falcón Bande, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Carme Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "declara el acusado",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_3",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el demandante Roi Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Roi Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "declara el demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_4",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la acusado Manuel Fiolleda Outeiral, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Manuel Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [
+      "declara la acusado",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_5",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el testigo Iago Meixide Castro, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Iago Meixide Castro"
+    ],
+    "debe_permanecer": [
+      "declara el testigo",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_6",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la testigo Roi del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Roi del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "declara la testigo",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_7",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el denunciante Carme del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Carme del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "declara el denunciante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_8",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el demandante Noa Domínguez Rial, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Noa Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "declara el demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_9",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la demandante Mariña Falcón Bande, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Mariña Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "declara la demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_10",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el acusado Brais Suárez Pena, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Brais Suárez Pena"
+    ],
+    "debe_permanecer": [
+      "declara el acusado",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_11",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la demandante Sabela Domínguez Rial, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Sabela Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "declara la demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_12",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el denunciante Ramón Carballo Doval, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Ramón Carballo Doval"
+    ],
+    "debe_permanecer": [
+      "declara el denunciante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_13",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la testigo Leandro Meixide Castro, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Leandro Meixide Castro"
+    ],
+    "debe_permanecer": [
+      "declara la testigo",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_14",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el denunciante Aldara Rivas Bahamonde, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Aldara Rivas Bahamonde"
+    ],
+    "debe_permanecer": [
+      "declara el denunciante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_15",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el demandante Uxía del Valle Resua, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Uxía del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "declara el demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_16",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la denunciante Carme Ferrándiz Salcedo, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Carme Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "declara la denunciante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_17",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la acusado Sabela Rivas Bahamonde, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Sabela Rivas Bahamonde"
+    ],
+    "debe_permanecer": [
+      "declara la acusado",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_18",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara la demandante Xiana Barroso Cordeiro, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Xiana Barroso Cordeiro"
+    ],
+    "debe_permanecer": [
+      "declara la demandante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_contexto_rol_19",
+    "categoria": "nome_formato_dificil",
+    "texto": "En el acto del juicio declara el denunciante Mariña Barroso Cordeiro, quien manifiesta no haber presenciado los hechos.",
+    "debe_desaparecer": [
+      "Mariña Barroso Cordeiro"
+    ],
+    "debe_permanecer": [
+      "declara el denunciante",
+      "no haber presenciado"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_saude_0",
+    "categoria": "categoria_especial",
+    "texto": "Covadonga Pazos Iglesias presenta un informe médico donde consta que padece esclerosis múltiple desde hace años.",
+    "debe_desaparecer": [
+      "Covadonga Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_1",
+    "categoria": "categoria_especial",
+    "texto": "Mariña Barroso Cordeiro presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+    "debe_desaparecer": [
+      "Mariña Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_2",
+    "categoria": "categoria_especial",
+    "texto": "Aldara Domínguez Rial presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+    "debe_desaparecer": [
+      "Aldara Domínguez Rial"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_3",
+    "categoria": "categoria_especial",
+    "texto": "Manuel Carballo Doval presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+    "debe_desaparecer": [
+      "Manuel Carballo Doval"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_4",
+    "categoria": "categoria_especial",
+    "texto": "Iago Meixide Castro presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+    "debe_desaparecer": [
+      "Iago Meixide Castro"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_5",
+    "categoria": "categoria_especial",
+    "texto": "Ramón Barroso Cordeiro presenta un informe médico donde consta que padece cáncer de mama desde hace años.",
+    "debe_desaparecer": [
+      "Ramón Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_6",
+    "categoria": "categoria_especial",
+    "texto": "Mariña Pazos Iglesias presenta un informe médico donde consta que padece diabetes tipo 1 desde hace años.",
+    "debe_desaparecer": [
+      "Mariña Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_7",
+    "categoria": "categoria_especial",
+    "texto": "Roi Fiolleda Outeiral presenta un informe médico donde consta que padece un trastorno bipolar desde hace años.",
+    "debe_desaparecer": [
+      "Roi Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_8",
+    "categoria": "categoria_especial",
+    "texto": "Sabela Ferrándiz Salcedo presenta un informe médico donde consta que padece VIH desde hace años.",
+    "debe_desaparecer": [
+      "Sabela Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_saude_9",
+    "categoria": "categoria_especial",
+    "texto": "Xacobe Ferrándiz Salcedo presenta un informe médico donde consta que padece VIH desde hace años.",
+    "debe_desaparecer": [
+      "Xacobe Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": "A v1 non marca isto coma categoría especial -- métrica informativa."
+  },
+  {
+    "id": "gen_relixion_0",
+    "categoria": "categoria_especial",
+    "texto": "Roi Carballo Doval declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Roi Carballo Doval"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_1",
+    "categoria": "categoria_especial",
+    "texto": "Xacobe Fiolleda Outeiral declaró que profesa la religión testigo de Jehová y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Xacobe Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_2",
+    "categoria": "categoria_especial",
+    "texto": "Xacobe Barroso Cordeiro declaró que profesa la religión judía y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Xacobe Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_3",
+    "categoria": "categoria_especial",
+    "texto": "Olalla Pazos Iglesias declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Olalla Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_4",
+    "categoria": "categoria_especial",
+    "texto": "Covadonga Carballo Doval declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Covadonga Carballo Doval"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_5",
+    "categoria": "categoria_especial",
+    "texto": "Covadonga Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Covadonga Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_6",
+    "categoria": "categoria_especial",
+    "texto": "Xoel Fiolleda Outeiral declaró que profesa la religión evangélica y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Xoel Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_7",
+    "categoria": "categoria_especial",
+    "texto": "Ledicia Suárez Pena declaró que profesa la religión budista y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Ledicia Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_8",
+    "categoria": "categoria_especial",
+    "texto": "Xiana Ferrándiz Salcedo declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Xiana Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_relixion_9",
+    "categoria": "categoria_especial",
+    "texto": "Aldara Pazos Iglesias declaró que profesa la religión musulmana y acude a su lugar de culto cada semana.",
+    "debe_desaparecer": [
+      "Aldara Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_0",
+    "categoria": "categoria_especial",
+    "texto": "Iago Rivas Bahamonde manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [
+      "Iago Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_1",
+    "categoria": "categoria_especial",
+    "texto": "Sabela Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [
+      "Sabela Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_2",
+    "categoria": "categoria_especial",
+    "texto": "Iago Rivas Bahamonde manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+    "debe_desaparecer": [
+      "Iago Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_3",
+    "categoria": "categoria_especial",
+    "texto": "Noa Otero Campos manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [
+      "Noa Otero Campos"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_4",
+    "categoria": "categoria_especial",
+    "texto": "Roi Suárez Pena manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+    "debe_desaparecer": [
+      "Roi Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_5",
+    "categoria": "categoria_especial",
+    "texto": "Carme Ferrándiz Salcedo manifestó que su despido se debió a conocerse su orientación bisexual en la empresa.",
+    "debe_desaparecer": [
+      "Carme Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_6",
+    "categoria": "categoria_especial",
+    "texto": "Noa Seoane Cortizo manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [
+      "Noa Seoane Cortizo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_7",
+    "categoria": "categoria_especial",
+    "texto": "Brais del Valle Resua manifestó que su despido se debió a conocerse su orientación homosexual en la empresa.",
+    "debe_desaparecer": [
+      "Brais del Valle Resua"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_8",
+    "categoria": "categoria_especial",
+    "texto": "Xacobe Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+    "debe_desaparecer": [
+      "Xacobe Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_orientacion_9",
+    "categoria": "categoria_especial",
+    "texto": "Xoel Barroso Cordeiro manifestó que su despido se debió a conocerse su orientación transexual en la empresa.",
+    "debe_desaparecer": [
+      "Xoel Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_0",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Xiana Barroso Cordeiro es afiliado del sindicato CCOO desde hace varios años.",
+    "debe_desaparecer": [
+      "Xiana Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_1",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Xoel Rivas Bahamonde es afiliado del sindicato CIG desde hace varios años.",
+    "debe_desaparecer": [
+      "Xoel Rivas Bahamonde"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_2",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Roi Barroso Cordeiro es afiliado del sindicato CCOO desde hace varios años.",
+    "debe_desaparecer": [
+      "Roi Barroso Cordeiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_3",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Sabela del Valle Resua es afiliado del sindicato USO desde hace varios años.",
+    "debe_desaparecer": [
+      "Sabela del Valle Resua"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_4",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Iago Freire Lameiro es afiliado del sindicato CSIF desde hace varios años.",
+    "debe_desaparecer": [
+      "Iago Freire Lameiro"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_5",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Xacobe Ferrándiz Salcedo es afiliado del sindicato UGT desde hace varios años.",
+    "debe_desaparecer": [
+      "Xacobe Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_6",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Aldara Suárez Pena es afiliado del sindicato USO desde hace varios años.",
+    "debe_desaparecer": [
+      "Aldara Suárez Pena"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_7",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Uxía Pazos Iglesias es afiliado del sindicato CIG desde hace varios años.",
+    "debe_desaparecer": [
+      "Uxía Pazos Iglesias"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_8",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Xacobe Veiga Lucas es afiliado del sindicato CCOO desde hace varios años.",
+    "debe_desaparecer": [
+      "Xacobe Veiga Lucas"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_sindical_9",
+    "categoria": "categoria_especial",
+    "texto": "Consta que Xacobe Fiolleda Outeiral es afiliado del sindicato USO desde hace varios años.",
+    "debe_desaparecer": [
+      "Xacobe Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [],
+    "nota": ""
+  },
+  {
+    "id": "gen_papel_0",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como fiscal don Uxía Barroso Cordeiro, en representación del Ministerio Público.",
+    "debe_desaparecer": [
+      "Uxía Barroso Cordeiro"
+    ],
+    "debe_permanecer": [
+      "fiscal"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_1",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como fiscal doña Leandro Meixide Castro, en representación del Ministerio Público.",
+    "debe_desaparecer": [
+      "Leandro Meixide Castro"
+    ],
+    "debe_permanecer": [
+      "fiscal"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_2",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo don Xiana del Valle Resua, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Xiana del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_3",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo doña Antón Meixide Castro, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Antón Meixide Castro"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_4",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como letrado de la parte contraria don Mariña Fiolleda Outeiral, en el turno de intervenciones.",
+    "debe_desaparecer": [
+      "Mariña Fiolleda Outeiral"
+    ],
+    "debe_permanecer": [
+      "letrado de la parte contraria"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_5",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial doña Manuel del Valle Resua, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Manuel del Valle Resua"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_6",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial doña Ledicia Domínguez Rial, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Ledicia Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_7",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial don Brais Suárez Pena, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Brais Suárez Pena"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_8",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como letrado de la parte contraria don Olalla Ferrándiz Salcedo, en el turno de intervenciones.",
+    "debe_desaparecer": [
+      "Olalla Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "letrado de la parte contraria"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_9",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial doña Uxía Domínguez Rial, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Uxía Domínguez Rial"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_10",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como letrado de la parte contraria don Breixo Ferrándiz Salcedo, en el turno de intervenciones.",
+    "debe_desaparecer": [
+      "Breixo Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "letrado de la parte contraria"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_11",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como letrado de la parte contraria don Olalla Carballo Doval, en el turno de intervenciones.",
+    "debe_desaparecer": [
+      "Olalla Carballo Doval"
+    ],
+    "debe_permanecer": [
+      "letrado de la parte contraria"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_12",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo doña Ledicia Falcón Bande, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Ledicia Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_13",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como letrado de la parte contraria don Manuel Pazos Iglesias, en el turno de intervenciones.",
+    "debe_desaparecer": [
+      "Manuel Pazos Iglesias"
+    ],
+    "debe_permanecer": [
+      "letrado de la parte contraria"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_14",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como fiscal don Ledicia Otero Campos, en representación del Ministerio Público.",
+    "debe_desaparecer": [
+      "Ledicia Otero Campos"
+    ],
+    "debe_permanecer": [
+      "fiscal"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_15",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial doña Noa Ferrándiz Salcedo, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Noa Ferrándiz Salcedo"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_16",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como perito judicial doña Xoel Pazos Iglesias, para ratificar su informe.",
+    "debe_desaparecer": [
+      "Xoel Pazos Iglesias"
+    ],
+    "debe_permanecer": [
+      "perito judicial"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_17",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo don Aldara Falcón Bande, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Aldara Falcón Bande"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_18",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo doña Uxía Pazos Iglesias, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Uxía Pazos Iglesias"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_papel_19",
+    "categoria": "papel_persoa",
+    "texto": "Comparece como testigo doña Xoel Freire Lameiro, quien nada aportó de relevancia.",
+    "debe_desaparecer": [
+      "Xoel Freire Lameiro"
+    ],
+    "debe_permanecer": [
+      "testigo"
+    ],
+    "nota": "O papel non se marca hoxe coma tal -- métrica informativa."
+  },
+  {
+    "id": "gen_palabra_comun_0",
+    "categoria": "control_negativo",
+    "texto": "Turno, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Turno"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_1",
+    "categoria": "control_negativo",
+    "texto": "Despois, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Despois"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_2",
+    "categoria": "control_negativo",
+    "texto": "Ademais, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Ademais"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_3",
+    "categoria": "control_negativo",
+    "texto": "Considerando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Considerando"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_4",
+    "categoria": "control_negativo",
+    "texto": "Antecedentes, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Antecedentes"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_5",
+    "categoria": "control_negativo",
+    "texto": "Resultando, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Resultando"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_6",
+    "categoria": "control_negativo",
+    "texto": "Visto, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Visto"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_7",
+    "categoria": "control_negativo",
+    "texto": "Igualmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Igualmente"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_8",
+    "categoria": "control_negativo",
+    "texto": "Finalmente, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Finalmente"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_palabra_comun_9",
+    "categoria": "control_negativo",
+    "texto": "Asimismo, se procede a dar por finalizado el acto sin más incidencias que reseñar.",
+    "debe_desaparecer": [],
+    "debe_permanecer": [
+      "Asimismo"
+    ],
+    "nota": "Palabra común de inicio de frase -- non é un apelido, control negativo."
+  },
+  {
+    "id": "gen_ocr_0",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 12403822Z presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "12403822Z"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_1",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 02542354A presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "02542354A"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_2",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 46215249S presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "46215249S"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_3",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 09974432E presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "09974432E"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_4",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 17487409A presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "17487409A"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_5",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 76086876R presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "76086876R"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_6",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 69366151Z presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "69366151Z"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_7",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 32642841E presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "32642841E"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_8",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 63667615G presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "63667615G"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  },
+  {
+    "id": "gen_ocr_9",
+    "categoria": "ocr_ruido",
+    "texto": "D0cumento de identidad n.0 93071644M presentado xunto coa s0licitude (dixitalizado por OCR).",
+    "debe_desaparecer": [
+      "93071644M"
+    ],
+    "debe_permanecer": [
+      "s0licitude"
+    ],
+    "nota": ""
+  }
+]

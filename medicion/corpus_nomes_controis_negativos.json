@@ -1,0 +1,253 @@
+[
+ {
+  "id": "ctl_nome_01",
+  "categoria": "control_negativo_nomes",
+  "texto": "La vista se celebró en Santiago de Compostela el pasado martes.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Santiago de Compostela"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_02",
+  "categoria": "control_negativo_nomes",
+  "texto": "El juzgado de Vilagarcía remitió el exhorto a Santiago.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Santiago"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_03",
+  "categoria": "control_negativo_nomes",
+  "texto": "La demandante vivía en A Mariña desde el año 2015.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "A Mariña"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_04",
+  "categoria": "control_negativo_nomes",
+  "texto": "Recorrió la Costa da Morte y A Mariña Lucense en verano.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "A Mariña Lucense"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_05",
+  "categoria": "control_negativo_nomes",
+  "texto": "El acusado conducía un Mercedes gris por la autovía.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Mercedes"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_06",
+  "categoria": "control_negativo_nomes",
+  "texto": "Compró un Mercedes Benz de segunda mano en Lugo.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Mercedes Benz"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_07",
+  "categoria": "control_negativo_nomes",
+  "texto": "El local está en la calle Rosalía de Castro de Vigo.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Rosalía de Castro"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_08",
+  "categoria": "control_negativo_nomes",
+  "texto": "La sede está en la rúa Concepción Arenal de Ferrol.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Concepción Arenal"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_09",
+  "categoria": "control_negativo_nomes",
+  "texto": "El IES Rosalía de Castro organizó la jornada de puertas abiertas.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Rosalía de Castro"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_10",
+  "categoria": "control_negativo_nomes",
+  "texto": "Recibió el Premio Rosalía de Castro de poesía en 2010.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Rosalía de Castro"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_11",
+  "categoria": "control_negativo_nomes",
+  "texto": "El vuelo aterrizó en el aeropuerto Rosalía de Castro con retraso.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Rosalía de Castro"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_12",
+  "categoria": "control_negativo_nomes",
+  "texto": "Fue trasladado al Hospital Álvaro Cunqueiro de Vigo.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Hospital Álvaro Cunqueiro"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_13",
+  "categoria": "control_negativo_nomes",
+  "texto": "El CEIP Manuel Murguía cerró por obras durante un mes.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Manuel Murguía"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_14",
+  "categoria": "control_negativo_nomes",
+  "texto": "El partido se jugó en el estadio Santiago Bernabéu.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Santiago Bernabéu"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_15",
+  "categoria": "control_negativo_nomes",
+  "texto": "Visitaron el santuario de Covadonga en agosto.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Covadonga"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_16",
+  "categoria": "control_negativo_nomes",
+  "texto": "La procesión de la Virgen del Pilar pasó por la plaza.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Virgen del Pilar"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_17",
+  "categoria": "control_negativo_nomes",
+  "texto": "Participó en la romería del Rocío con su familia.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Rocío"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_18",
+  "categoria": "control_negativo_nomes",
+  "texto": "La concentración tuvo lugar en la Praza de María Pita.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "María Pita"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_19",
+  "categoria": "control_negativo_nomes",
+  "texto": "La Sala Primera del Tribunal Supremo desestimó el recurso.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Sala Primera"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_20",
+  "categoria": "control_negativo_nomes",
+  "texto": "Colaboró como voluntario con Cruz Roja durante la emergencia.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Cruz Roja"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_21",
+  "categoria": "control_negativo_nomes",
+  "texto": "El hotel Sol Meliá de Sanxenxo cerró la temporada.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Sol Meliá"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_22",
+  "categoria": "control_negativo_nomes",
+  "texto": "Esa noche las Nieves de la sierra cortaron la carretera.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Nieves"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_23",
+  "categoria": "control_negativo_nomes",
+  "texto": "Dictó la resolución la magistrada Antía Queiruga Vilariño, titular del juzgado.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Antía Queiruga Vilariño"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_24",
+  "categoria": "control_negativo_nomes",
+  "texto": "Xurxo Lema Novoa, Magistrado-Juez del Juzgado de Primera Instancia nº 2.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Xurxo Lema Novoa"
+  ],
+  "nota": ""
+ },
+ {
+  "id": "ctl_nome_25",
+  "categoria": "control_negativo_nomes",
+  "texto": "La Paz y la Luz eran los nombres de las dos embarcaciones.",
+  "debe_desaparecer": [],
+  "debe_permanecer": [
+   "Paz",
+   "Luz"
+  ],
+  "nota": ""
+ }
+]

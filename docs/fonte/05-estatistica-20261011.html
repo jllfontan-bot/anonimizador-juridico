@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Estatística da versión 20261011</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:15mm 17mm 15mm 17mm; }
+  body{ font-size:12px; line-height:1.5; }
+  .portada{ padding:22px 30px 20px; margin-bottom:20px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; max-width:none; margin-bottom:16px; }
+  h2.sec{ margin:22px 0 10px; }
+  .cifras{ display:flex; gap:10px; margin:6px 0 14px; }
+  .cifra{ flex:1; border:1px solid var(--line); border-radius:6px; padding:10px 12px; break-inside:avoid; }
+  .cifra .v{ font-size:22px; font-weight:700; color:var(--accent); line-height:1.1; }
+  .cifra .antes{ font-size:11px; color:var(--ink-soft); }
+  .cifra .et{ font-size:11.5px; margin-top:4px; }
+  table.num td:not(:first-child), table.num th:not(:first-child){ text-align:right; white-space:nowrap; }
+  table.num td.forte{ font-weight:700; color:var(--accent); }
+  ul.compacta li{ margin-bottom:4px; }
+  .rodape{ font-size:10px; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:6px; margin-top:22px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Estatística · Anonimizador de expedientes xurídicos</span>
+  <h1>Canto mellora e canto acerta a versión 20261011</h1>
+  <p class="lede">Medición da versión instalada en Windows o 11 de outubro de 2026 fronte á anterior (20261004), e proba da súa fiabilidade con 500 documentos reais do BOE e do DOG de 2024 procesados pola instalación de Windows. Só cifras: ningún dato persoal dos documentos.</p>
+  <div class="meta">
+    <div><span>Versión medida</span>20261011-9a30d66</div>
+    <div><span>Fronte a</span>20261004-5a43ade</div>
+    <div><span>Data</span>11 de outubro de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · En poucas palabras</h2>
+<p>A versión nova <strong>tapa menos cousas que non son persoas</strong> (lugares, organismos, encabezados, cargos) <strong>sen destapar ningunha persoa</strong> en ningunha das medicións. Na proba con 500 documentos que nunca se viran, a instalación de Windows deixou <strong>sen ningún dato persoal á vista 56 de cada 60</strong> documentos lidos; os fallos que quedan son sobre todo <strong>nomes de pía parciais</strong> (o apelido si se tapa).</p>
+<div class="cifras">
+  <div class="cifra"><div class="v">0</div><div class="antes">en 780 documentos comparados</div><div class="et">persoas que a versión nova destapa e a anterior tapaba</div></div>
+  <div class="cifra"><div class="v">−28 %</div><div class="antes">102 → 73 nos lotes 3 e 4</div><div class="et">trozos tapados nun sitio e á vista noutro (control automático)</div></div>
+  <div class="cifra"><div class="v">98 %</div><div class="antes">IC 95 %: 96–99 %</div><div class="et">persoas tapadas enteiras na mostra de 2024</div></div>
+  <div class="cifra"><div class="v">497 / 499</div><div class="antes">Windows fronte a Mac</div><div class="et">documentos co mesmo resultado nos dous sistemas</div></div>
+</div>
+
+<h2 class="sec">02 · Que mellora fronte á versión anterior</h2>
+<p>As dúas versións procesaron os mesmos documentos e comparáronse os anacos tapados un a un. Cada diferenza leuse para saber se era unha persoa ou non.</p>
+<table class="num">
+  <thead><tr><th>Medición</th><th>Documentos</th><th>Destapado</th><th>Persoas destapadas</th><th>Tapado novo</th></tr></thead>
+  <tbody>
+    <tr><td>Lotes 3 e 4 (BOE e DOG, xullo de 2025 a maio de 2026)</td><td>560</td><td>152 anacos</td><td class="forte">0</td><td>0</td></tr>
+    <tr><td>Lote 5, documentos non revisados (xaneiro-xuño de 2025)</td><td>220</td><td>3 anacos</td><td class="forte">0</td><td>0</td></tr>
+  </tbody>
+</table>
+<p>O destapado son, entre outros, municipios e lugares que coinciden con apelidos, nomes de organismos e centros docentes, encabezados de formulario e de anexo en maiúsculas, siglas con puntos, nomes de plantas solares, especies en latín e a «Sala» dun tribunal. Indicador do control automático «tapado nun sitio e á vista noutro» (sinal de algo que non era persoa e se tapou):</p>
+<table class="num">
+  <thead><tr><th>Lote</th><th>Versión 20261004</th><th>Versión 20261011*</th><th>Mellora</th></tr></thead>
+  <tbody>
+    <tr><td>Lote 3 (280 docs, xaneiro-maio de 2026)</td><td>43</td><td class="forte">29</td><td>−33 %</td></tr>
+    <tr><td>Lote 4 (280 docs, xullo-decembro de 2025)</td><td>59</td><td class="forte">44</td><td>−25 %</td></tr>
+  </tbody>
+</table>
+<p class="peq">* Medido coa integración do 10 de outubro, que é a versión 20261011 sen os últimos arranxos do lote 5; con eles o resultado só pode ser igual ou mellor, porque no lote 5 non tapan nada novo.</p>
+<p>Tamén se arranxou unha fuga: un apelido que coincide coa palabra dun organismo («Xulgado» coma apelido) quedaba á vista nun anexo de nomeamentos.</p>
+<div class="nota"><h4>Lote 5 revisado (60 documentos): cifra só orientativa</h4>
+<p>Nos 60 documentos que se revisaron a man, a parte do tapado que era de verdade unha persoa pasou do <strong>73,2 % ao 90,1 %</strong>, e os documentos perfectos do 68 % ao 75 %. Está sesgada a favor: os arranxos fixéronse mirando eses documentos. Por iso as cifras de arriba e as da sección 03 usan só documentos que ninguén mirara.</p></div>
+
+<h2 class="sec">03 · Fiabilidade: 500 documentos de 2024 coa instalación de Windows</h2>
+<p>Descargáronse 500 documentos públicos de 2024 (360 do BOE e 140 do DOG), un ano que nunca se usara nas probas. Procesáronse coa versión instalada nunha máquina Windows 11, do mesmo xeito ca o modo automático do programa. Antes de procesar nada escolléronse ao chou 60 documentos (40 do BOE e 20 do DOG) e leronse enteiros comparando o orixinal co resultado.</p>
+<table class="num">
+  <thead><tr><th>Mostra de 60 documentos lidos</th><th>Resultado</th><th>Intervalo 95 %</th></tr></thead>
+  <tbody>
+    <tr><td>Documentos sen ningún dato persoal á vista</td><td class="forte">56 de 60 · 93,3 %</td><td>84,1–97,4 %</td></tr>
+    <tr><td>Persoas tapadas enteiras</td><td class="forte">405 de 413 · 98,1 %</td><td>96,2–99,0 %</td></tr>
+    <tr><td>Documentos con algo tapado que non é persoa</td><td>21 de 60 · 35,0 %</td><td>24,2–47,6 %</td></tr>
+    <tr><td>Documentos cun DNI asignado ao código doutra persoa</td><td>3 de 60 · 5,0 %</td><td>1,7–13,7 %</td></tr>
+    <tr><td>Documentos perfectos (sen ningún dos anteriores)</td><td class="forte">36 de 60 · 60,0 %</td><td>47,4–71,4 %</td></tr>
+  </tbody>
+</table>
+<p>As 8 persoas que non quedaron enteiras están en 4 documentos. En 7 queda á vista <strong>só unha parte do nome</strong> (o nome de pía, as iniciais ou un anaco de apelido cortado cun guión) e o resto tápase; son nomes compostos cataláns, «M.ª» pegado ao nome e iniciais tras o nome. Só nun caso queda un nome completo: estaba cortado cun guión ao final da liña.</p>
+<p><strong>Resto dos 500 documentos (control automático, sen lectura):</strong> atopou outros 4 documentos con nomes á vista: dous con nomes partidos entre dúas liñas (un deles cun guión), un cun nome estranxeiro e un no que o nome do título quedou á vista aínda que se tapou no resto do texto. O control automático só ve nomes que se taparon noutro sitio do mesmo documento, así que non substitúe a lectura da mostra.</p>
+<p><strong>Windows e Mac:</strong> a instalación de Windows procesou 499 dos 500 documentos (o que falta falla tamén en Mac, ver sección 04), en 2 h 32 min en total e unha mediana de 5 segundos por documento. O texto dos PDF que xera é idéntico ao do programa en Mac en 497 de 499; nos outros 2 só cambia como se le o logotipo da Xunta ao pé dunha páxina do DOG (o recoñecemento de texto da imaxe dá letras distintas en cada sistema), sen ningún dato persoal.</p>
+<p><strong>Texto conservado:</strong> o PDF de saída perdeu 59 palabras que non debía en 5 dos 499 documentos (37 delas nun só documento, arredor dun enderezo que se repite nunha táboa). No resto, o texto non persoal queda intacto.</p>
+
+<h2 class="sec">04 · Que queda por arranxar</h2>
+<ul class="compacta">
+  <li><strong>Nomes cortados ao final da liña</strong>, con guión ou sen el, e nomes de pía abreviados ou unidos («M.ª» pegado ao nome, unha inicial solta diante): é o fallo máis repetido.</li>
+  <li><strong>DNI dun anexo co código de quen asina</strong>: cando un anuncio leva un anexo só con DNI, o primeiro pode recibir o código da persoa que asina enriba. Non deixa nada á vista, pero no documento parece que ese DNI é de quen asina.</li>
+  <li><strong>Sobreanonimización</strong>: aínda se tapan algúns cargos («Fiscal Delegado», «Rector Magnífico»), rótulos de formulario en maiúsculas, nomes de entidades e palabras soltas («Marco», «Test»).</li>
+  <li><strong>Un PDF que non se pode procesar</strong> (1 de 500): o programa avisa do erro e non xera saída. Falla igual en Windows e en Mac.</li>
+</ul>
+<div class="aviso"><h4>A revisión humana segue sendo necesaria</h4>
+<p>Estes resultados son da lectura dunha mostra feita por Claude, sen revisión humana. Ningún sistema garante o 100 %: antes de entregar un documento anonimizado, revisa sobre todo as táboas, as listaxes de persoas e os nomes partidos entre liñas.</p></div>
+
+<h2 class="sec">05 · Como se mediu</h2>
+<ul class="compacta">
+  <li>Comparación de versións: o mesmo código da versión 20261004 e da nova sobre os mesmos documentos; lense todas as diferenzas.</li>
+  <li>Proba de 2024: 500 documentos públicos descargados respectando as condicións de reutilización do BOE e do DOG, procesados na máquina virtual Windows 11 coa instalación real 20261011-9a30d66 e un rexistro de proba (o rexistro real non se tocou).</li>
+  <li>Mostra: 60 documentos escollidos co número de semente 20261011 antes de procesar ningún. Intervalos de confianza de Wilson ao 95 %. Os documentos moi longos (3 de 60) revisáronse por todo o tapado e por patróns de nome, non palabra a palabra.</li>
+  <li>Control automático: relectura de cada PDF de saída buscando nomes á vista, texto oculto e outros indicios; 500 de 500 documentos.</li>
+  <li>As cifras son de documentos oficiais publicados; noutros tipos de escrito (demandas, contratos) poden ser distintas.</li>
+</ul>
+
+<p class="rodape">Anonimizador de expedientes xurídicos · Estatística da versión 20261011-9a30d66 · Outubro de 2026</p>
+</body>
+</html>

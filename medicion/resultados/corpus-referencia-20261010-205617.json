@@ -1,0 +1,40 @@
+{
+  "lote": "corpus_web_lote5",
+  "documentos": 60,
+  "documentos_con_erro": 0,
+  "persoas_referencia": 284,
+  "exhaustividade": {
+    "valor": 1.0,
+    "ic95": [
+      0.9866537706849879,
+      1.0
+    ]
+  },
+  "precision": {
+    "valor": 0.9012738853503185,
+    "ic95": [
+      0.8632731234917648,
+      0.9295746346368126
+    ]
+  },
+  "documentos_sen_fuga": {
+    "n": 60,
+    "valor": 1.0,
+    "ic95": [
+      0.9398260695220669,
+      0.9999999999999999
+    ]
+  },
+  "documentos_perfectos": {
+    "n": 45,
+    "valor": 0.75,
+    "ic95": [
+      0.6276768905451521,
+      0.8422361442158816
+    ]
+  },
+  "fugas": 0,
+  "sobreanonimizacions": 31,
+  "exentos": 0,
+  "exentos_incorrectos": 0
+}
