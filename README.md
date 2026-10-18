@@ -27,15 +27,19 @@ Interfaz en **castellano** (por defecto) o **gallego**, a elegir en la pantalla 
 
 ## Instalación
 
-El programa se distribuye para Windows. El instalador se genera con
-`instalador/crear-paquetes.sh` (ver [`instalador/README.md`](instalador/README.md)). La guía
-para usuarios está en `docs/`.
+El programa se distribuye para Windows 10 y 11 en la **Microsoft Store**:
+[Anonimizador jurídico](https://apps.microsoft.com/detail/9PK1J429MNN5). La guía de instalación
+y el manual de uso están en `docs/` (en castellano en `docs/es/`).
 
-Para desarrollar también se puede ejecutar desde el código fuente en Linux o macOS
-(Python 3.9 o posterior):
+El paquete de la Store (MSIX) lo genera GitHub Actions con `.github/workflows/msix.yml`; el
+instalador clásico (.exe) se genera con `instalador/crear-paquetes.sh` (ver
+[`instalador/README.md`](instalador/README.md)).
+
+Para desarrollar también se puede ejecutar desde el código fuente en Linux o macOS con
+**Python 3.12** (spaCy 3.7.5 no se instala con 3.13 ni 3.14):
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python -m spacy download es_core_news_md
@@ -73,7 +77,7 @@ entorno `ANONIMIZADOR_IDIOMA=es` o `gl` lo fija para pruebas y scripts.
 python3 -m unittest discover -s tests
 ```
 
-La suite completa tarda unos 35 minutos: una de las pruebas procesa un documento de más de un
+La suite completa tarda unos 25 minutos: una de las pruebas procesa un documento de más de un
 millón de caracteres.
 
 ## Documentación técnica

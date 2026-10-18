@@ -13,13 +13,11 @@ Partner Center pedirá una ficha para cada uno.
 - Categoría: **Empresa**, subcategoría **Legal y RR. HH.** (*Business › Legal & HR*). Es donde
   buscará el público al que va dirigido (despachos, procuradores, gestorías, administración).
   Alternativa: Productividad (sin subcategoría).
-- URL de la política de privacidad: dirección pública de `docs/store/politica-privacidad.md`
-  (por ejemplo, `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/politica-privacidad.md`,
-  que solo funcionará cuando el repositorio sea público y esta rama esté en `main`).
+- URL de la política de privacidad:
+  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/politica-privacidad.md`.
 - Condiciones de uso: `docs/store/condiciones-de-uso.md` (es y gl en el mismo archivo), enlazadas
   en «Términos de licencia adicionales» de cada ficha:
-  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md`
-  (como la política de privacidad, solo funcionará cuando el repositorio sea público).
+  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md`.
 - Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico
 - Contacto de soporte: jllfontan@gmail.com
 - La aplicación no recoge datos personales; no requiere cuenta; no tiene publicidad.
@@ -93,7 +91,7 @@ Primera versión publicada en la Microsoft Store. Los datos de trabajo (registro
 
 **Palabras clave** (hasta 7): anonimizar, anonimización, seudonimización, RGPD, protección de datos, documentos jurídicos, abogados
 
-**Capturas:** pendientes (hacerlas en la VM con la app maximizada y el expediente de ejemplo de `docs/fonte/datos_exemplo.py`, que solo usa datos inventados: pantalla de inicio, progreso de un lote, revisión con posibles homónimos y fugas, resultado guardado, reversión controlada). Las capturas de `docs/fonte/img/` sirven de referencia.
+**Capturas:** 6, de 1920×1080, con datos inventados (`docs/fonte/datos_exemplo.py`), hechas a partir de las capturas de `docs/fonte/img/`: pantalla de inicio, progreso de un lote, revisión con posibles homónimos y fugas, resultado guardado, reversión controlada.
 
 **Información de copyright:** © 2026 José Luis López Fontán. Licencia AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
