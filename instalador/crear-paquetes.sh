@@ -186,8 +186,16 @@ descargar_tesseract() {
 
     mkdir -p "$destino/bin" "$destino/tessdata"
 
-    python3 "$INSTALADOR/bundle/resolve_deps_pe.py" "$env/Library/bin" tesseract.exe \
-        | while read -r f; do cp "$env/Library/bin/$f" "$destino/bin/"; done
+    if [ "$plataforma" = "win-64" ]; then
+        python3 "$INSTALADOR/bundle/resolve_deps_pe.py" "$env/Library/bin" tesseract.exe \
+            | while read -r f; do cp "$env/Library/bin/$f" "$destino/bin/"; done
+    else
+        # macOS (osx-64 / osx-arm64): binario en bin/, bibliotecas en lib/
+        mkdir -p "$destino/lib"
+        cp "$env/bin/tesseract" "$destino/bin/"
+        python3 "$INSTALADOR/bundle/resolve_deps_macho.py" "$env" bin/tesseract \
+            | while read -r f; do cp "$env/lib/$f" "$destino/lib/"; done
+    fi
     for idioma in spa glg eng; do
         cp "$env/share/tessdata/$idioma.traineddata" "$destino/tessdata/"
     done
@@ -412,6 +420,59 @@ xerar_windows() {
 }
 
 # ---------------------------------------------------------------------
+# macOS: zip con Python e Tesseract para Intel e Apple Silicon e os
+# wheels locais; instalar-mac.command crea o .venv sen internet
+# (recuperado do commit cae45ed^, que o retirara do repo público)
+# ---------------------------------------------------------------------
+
+descargar_extras_mac() {
+    # pyobjc-* que pywebview precisa en Mac (marcadores condicionais que
+    # "pip download --platform" non resolve para a plataforma de DESTINO);
+    # fixado a 11.1 -- ver requirements.txt
+    local plataforma="$1" destino="$2"  # $1 = etiqueta --platform de pip
+    mkdir -p "$destino"
+    [ -n "$(ls "$destino"/pyobjc_core-* 2>/dev/null)" ] && return
+    python3 -m pip download --quiet --dest "$destino" --python-version 3.12 --platform "$plataforma" \
+        --implementation cp --abi cp312 --only-binary=:all: \
+        "pyobjc-core==11.1" "pyobjc-framework-Cocoa==11.1" "pyobjc-framework-WebKit==11.1" \
+        "pyobjc-framework-Quartz==11.1" "pyobjc-framework-security==11.1" \
+        "pyobjc-framework-UniformTypeIdentifiers==11.1"
+}
+
+xerar_mac() {
+    log "== macOS =="
+    python3 -c "import macholib" 2>/dev/null || { echo "ERRO: precísase o paquete de Python 'macholib'."; exit 1; }
+    descargar_python "x86_64-apple-darwin" "$CACHE/runtime/python-mac-x64"
+    descargar_python "aarch64-apple-darwin" "$CACHE/runtime/python-mac-arm64"
+    descargar_tesseract "osx-64" "$CACHE/runtime/tesseract-mac-x64"
+    descargar_tesseract "osx-arm64" "$CACHE/runtime/tesseract-mac-arm64"
+    descargar_wheels_comuns "mac-x64" --python-version 3.12 \
+        --platform macosx_10_13_x86_64 --platform macosx_11_0_x86_64 --platform macosx_12_0_x86_64 \
+        --implementation cp --abi cp312
+    descargar_wheels_comuns "mac-arm64" --python-version 3.12 \
+        --platform macosx_11_0_arm64 --platform macosx_12_0_arm64 \
+        --implementation cp --abi cp312
+    descargar_extras_mac "macosx_11_0_x86_64" "$CACHE/wheels/mac-x64"
+    descargar_extras_mac "macosx_11_0_arm64" "$CACHE/wheels/mac-arm64"
+
+    local paquete="$BUILD/$NOME-mac"
+    rm -rf "$paquete"; mkdir -p "$paquete/runtime" "$paquete/wheels" "$paquete/docs"
+    cp "$INSTALADOR/mac/"* "$paquete/"
+    cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$paquete/docs/"
+    if [ -d "$DOCS/es" ]; then mkdir -p "$paquete/docs/es"; cp "$DOCS/es/"*.pdf "$paquete/docs/es/"; fi
+    cp "$CACHE/wheels/mac-x64/"* "$CACHE/wheels/mac-arm64/"* "$CACHE/wheels/_odfpy/"* "$CACHE/wheels/_proxy_tools/"* "$CACHE/wheels/_pywebview/"* "$CACHE/wheels/_modelo/"* "$paquete/wheels/"
+    copiar_fonte_limpa "$paquete"
+    cp -R "$CACHE/runtime/python-mac-x64" "$paquete/runtime/python-x64"
+    cp -R "$CACHE/runtime/python-mac-arm64" "$paquete/runtime/python-arm64"
+    cp -R "$CACHE/runtime/tesseract-mac-x64" "$paquete/runtime/tesseract-x64"
+    cp -R "$CACHE/runtime/tesseract-mac-arm64" "$paquete/runtime/tesseract-arm64"
+    chmod +x "$paquete/"*.command
+    rm -f "$RAIZ/$NOME-mac.zip"
+    (cd "$paquete" && zip -r -X -q -y "$RAIZ/$NOME-mac.zip" .)
+    log "Xerado: $NOME-mac.zip ($(du -sh "$RAIZ/$NOME-mac.zip" | cut -f1))"
+}
+
+# ---------------------------------------------------------------------
 # Microsoft Store: cartafol do paquete MSIX (o .msix faise en Windows con
 # makeappx, ver .github/workflows/msix.yml e instalador/msix/)
 # ---------------------------------------------------------------------
@@ -428,8 +489,8 @@ xerar_msix() {
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|msix|todo) ;;
-    *) echo "Uso: $0 [windows|msix]"; exit 1 ;;
+    windows|msix|mac|todo) ;;
+    *) echo "Uso: $0 [windows|msix|mac]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -440,6 +501,7 @@ descargar_modelo_idioma
 
 case "$OBXECTIVO" in
     msix) xerar_msix ;;
+    mac) xerar_mac ;;
     *) xerar_windows ;;
 esac
 
