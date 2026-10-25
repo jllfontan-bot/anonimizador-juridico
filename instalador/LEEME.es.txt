@@ -28,7 +28,7 @@ Mac ni para Linux.
 - USAR: menú Inicio > «Anonimizador jurídico». Se abre en su propia
   ventana (no en el navegador). Tus datos quedan en
   Documentos\Anonimizador; el enlace «Acerca de este programa» de la
-  pantalla de inicio muestra la versión, la licencia (AGPL-3.0) y el
+  pantalla de inicio muestra la versión, las licencias (EUPL-1.2 o AGPL-3.0) y el
   código fuente.
 - DESINSTALAR: Configuración de Windows > Aplicaciones > Aplicaciones
   instaladas > «Anonimizador jurídico» > Desinstalar. Los registros

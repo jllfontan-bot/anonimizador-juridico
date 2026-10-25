@@ -266,10 +266,12 @@
  "acerca.titulo": "Acerca de",
  "acerca.version": "Versión {version}",
  "acerca.autor": "© 2026 José Luis López Fontán.",
- "acerca.licenza": "Software libre con licenza <strong>GNU Affero General Public License v3.0</strong> (AGPL-3.0): podes usalo, estudalo, modificalo e redistribuílo nas condicións desa licenza. Distribúese SEN NINGUNHA GARANTÍA.",
+ "acerca.licenza": "Software libre con dobre licenza, á túa escolla: <strong>Licenza Pública da Unión Europea (EUPL) v1.2</strong> ou <strong>GNU Affero General Public License v3.0</strong> (EUPL-1.2 OR AGPL-3.0-only). Podes usalo, estudalo, modificalo e redistribuílo nas condicións de calquera das dúas. Este paquete leva compoñentes con licenza AGPL-3.0 (PyMuPDF), así que como conxunto distribúese coa AGPL-3.0. Distribúese SEN NINGUNHA GARANTÍA.",
+ "acerca.ia": "Desenvolvido coa axuda de Claude, o modelo de intelixencia artificial de Anthropic (Claude Code). O programa non está afiliado a Anthropic.",
  "acerca.codigo": "Código fonte:",
  "acerca.privacidade": "Todo o proceso faise neste ordenador: o programa non envía documentos nin datos a internet.",
  "acerca.terceiros": "Inclúe compoñentes de terceiros (Python, Tesseract, spaCy, PyMuPDF e outros) coas súas propias licenzas: detállanse en <code>AVISOS-TERCEIROS.md</code>, no cartafol do programa.",
- "acerca.ver_licenza": "Ver o texto completo da licenza (en inglés)",
+ "acerca.ver_licenza": "Ver o texto completo da AGPL-3.0 (en inglés)",
+ "acerca.ver_licenza_eupl": "Ver o texto completo da EUPL v1.2 (texto oficial en castelán)",
  "acerca.volver": "Volver ao inicio"
 }

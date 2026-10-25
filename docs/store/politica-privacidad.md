@@ -3,7 +3,7 @@
 *[Versión en galego más abajo.](#política-de-privacidade--anonimizador-jurídico-aplicación-de-escritorio)*
 
 **Última actualización:** 15 de octubre de 2026
-**Desarrollador:** José Luis López Fontán (desarrollador particular). Aplicación gratuita y de código abierto (AGPL-3.0), sin ánimo de lucro.
+**Desarrollador:** José Luis López Fontán (desarrollador particular). Aplicación gratuita y de código abierto (EUPL-1.2 o AGPL-3.0), sin ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
 ## Resumen
@@ -59,7 +59,7 @@ Cualquier cambio de esta política se publicará en esta misma dirección, con s
 # Política de privacidade — Anonimizador jurídico (aplicación de escritorio)
 
 **Última actualización:** 15 de outubro de 2026
-**Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta e de código aberto (AGPL-3.0), sen ánimo de lucro.
+**Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta e de código aberto (EUPL-1.2 ou AGPL-3.0), sen ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
 ## Resumo

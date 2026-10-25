@@ -11,10 +11,26 @@ Funciona 100&nbsp;% en local: nin o texto nin ningún dato sae nunca a internet.
 ## Licenza
 
 Copyright © 2026 José Luis López Fontán.
+Licenza cedida conforme á EUPL v1.2 ou, á escolla do licenciatario, á GNU AGPL v3.
 
-Este programa é software libre: pode redistribuílo e/ou modificalo baixo os termos da
-**GNU Affero General Public License** publicada pola Free Software Foundation, versión 3
-(ver [`LICENSE`](../LICENSE)). Distribúese coa esperanza de que sexa útil, pero **SEN NINGUNHA
+Este programa desenvolveuse coa axuda de **Claude**, o modelo de intelixencia artificial de
+**Anthropic**, a través de Claude Code: o autor dirixiu, revisou e probou o traballo. Claude e
+Anthropic son marcas de Anthropic, PBC; o programa non está afiliado a Anthropic nin conta co
+seu respaldo.
+
+Este programa é software libre con **dobre licenza**: pode usalo, redistribuílo e/ou
+modificalo, á súa escolla, baixo os termos da **Licenza Pública da Unión Europea (EUPL) v1.2**
+(ver [`LICENCIA-EUPL-1.2.txt`](../LICENCIA-EUPL-1.2.txt), texto oficial en castelán: non hai
+versión oficial en galego) ou da **GNU Affero General Public License** publicada pola Free
+Software Foundation, versión 3 (ver [`LICENSE`](../LICENSE)). Identificador SPDX:
+`EUPL-1.2 OR AGPL-3.0-only`. As versións publicadas ata a 1.0.0 distribuíronse só coa AGPL-3.0.
+
+Os paquetes xa montados (Microsoft Store e instaladores) levan dentro PyMuPDF (AGPL-3.0) e o
+modelo `es_core_news_md` (GPL-3.0), así que o paquete completo distribúese coa AGPL-3.0, como
+permite a cláusula de compatibilidade da EUPL (artigo 5 e anexo). A escolla entre as dúas
+licenzas é para o código deste repositorio.
+
+Distribúese coa esperanza de que sexa útil, pero **SEN NINGUNHA
 GARANTÍA**, nin sequera a garantía implícita de COMERCIABILIDADE ou ADECUACIÓN A UN FIN
 DETERMINADO. Os compoñentes e datos de terceiros, coas súas licenzas, están en
 [`AVISOS-TERCEIROS.md`](../AVISOS-TERCEIROS.md).

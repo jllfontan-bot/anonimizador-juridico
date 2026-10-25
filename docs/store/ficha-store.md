@@ -66,9 +66,12 @@ La correspondencia entre cada código y la persona real se guarda cifrada en tu 
 TODO EN LOCAL
 No hay cuentas, ni publicidad, ni analítica. El programa no se conecta a internet: el reconocimiento de texto, el modelo de lenguaje y todo lo necesario van dentro del paquete.
 
-Interfaz en castellano o gallego. Software libre (AGPL-3.0), con el código fuente publicado. Se distribuye sin garantía: no sustituye la revisión profesional del documento ni el asesoramiento jurídico.
+Interfaz en castellano o gallego. Software libre (EUPL-1.2 o AGPL-3.0), con el código fuente publicado. Se distribuye sin garantía: no sustituye la revisión profesional del documento ni el asesoramiento jurídico.
 
-**Novedades de esta versión (1.0.0):**
+**Novedades de esta versión (1.1.0):**
+Nueva opción para guardar, junto a cada documento anonimizado, una copia en Markdown (.md) con el mismo texto anonimizado (títulos, listas, tablas y páginas), lista para leerla con otras herramientas sin convertirla. Doble licencia: EUPL v1.2 o AGPL-3.0, a elección del usuario. La página «Acerca de» muestra los textos completos de las dos licencias e indica que el programa se ha desarrollado con la ayuda de Claude, de Anthropic.
+
+**Novedades de la versión 1.0.0:**
 Primera versión publicada en la Microsoft Store. Los datos de trabajo (registro cifrado, idioma elegido y registro de errores) se guardan en Documentos\Anonimizador, para que no se pierdan al desinstalar o actualizar. Si ya usabas el instalador anterior del programa, la primera vez se copia tu registro a esa carpeta (el original no se toca) y la pantalla de inicio te lo avisa. Nueva página «Acerca de» con la versión, la licencia y el enlace al código fuente, y acceso al manual de uso desde la pantalla de inicio.
 
 **Características del producto** (hasta 20, una por línea):
@@ -87,15 +90,16 @@ Primera versión publicada en la Microsoft Store. Los datos de trabajo (registro
 - Registro de identidades cifrado, con la clave en el llavero de Windows
 - Reversión con contraseña, motivo obligatorio y auditoría cifrada
 - Interfaz en castellano y gallego
-- Software libre (AGPL-3.0). Sin cuentas, publicidad ni recogida de datos
+- Desarrollado con la ayuda de Claude, la IA de Anthropic (sin afiliación a Anthropic)
+- Software libre (EUPL-1.2 o AGPL-3.0). Sin cuentas, publicidad ni recogida de datos
 
 **Palabras clave** (hasta 7): anonimizar, anonimización, seudonimización, RGPD, protección de datos, documentos jurídicos, abogados
 
 **Capturas:** 6, de 1920×1080, con datos inventados (`docs/fonte/datos_exemplo.py`), hechas a partir de las capturas de `docs/fonte/img/`: pantalla de inicio, progreso de un lote, revisión con posibles homónimos y fugas, resultado guardado, reversión controlada.
 
-**Información de copyright:** © 2026 José Luis López Fontán. Licencia AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
+**Información de copyright:** © 2026 José Luis López Fontán. Doble licencia EUPL-1.2 o AGPL-3.0 (el paquete, por sus componentes, con AGPL-3.0). Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
-**Términos de licencia adicionales:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md
+**Términos de licencia adicionales:** Licencia Pública de la Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — o GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, a elección del usuario; el paquete, por sus componentes, se distribuye con la AGPL-3.0. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md
 
 ## Store listing (gl-ES)
 
@@ -133,9 +137,12 @@ A correspondencia entre cada código e a persoa real gárdase cifrada no teu ord
 TODO EN LOCAL
 Non hai contas, nin publicidade, nin analítica. O programa non se conecta a internet: o recoñecemento de texto, o modelo de linguaxe e todo o necesario van dentro do paquete.
 
-Interface en castelán ou galego. Software libre (AGPL-3.0), co código fonte publicado. Distribúese sen garantía: non substitúe a revisión profesional do documento nin o asesoramento xurídico.
+Interface en castelán ou galego. Software libre (EUPL-1.2 ou AGPL-3.0), co código fonte publicado. Distribúese sen garantía: non substitúe a revisión profesional do documento nin o asesoramento xurídico.
 
-**Novidades desta versión (1.0.0):**
+**Novidades desta versión (1.1.0):**
+Nova opción para gardar, canda cada documento anonimizado, unha copia en Markdown (.md) co mesmo texto anonimizado (títulos, listas, táboas e páxinas), lista para lela con outras ferramentas sen convertela. Dobre licenza: EUPL v1.2 ou AGPL-3.0, á escolla do usuario. A páxina «Acerca de» amosa os textos completos das dúas licenzas e indica que o programa se desenvolveu coa axuda de Claude, de Anthropic.
+
+**Novidades da versión 1.0.0:**
 Primeira versión publicada na Microsoft Store. Os datos de traballo (rexistro cifrado, idioma escollido e rexistro de erros) gárdanse en Documentos\Anonimizador, para que non se perdan ao desinstalar ou actualizar. Se xa usabas o instalador anterior do programa, a primeira vez cópiase o teu rexistro a ese cartafol (o orixinal non se toca) e a pantalla de inicio avísao. Nova páxina «Acerca de» coa versión, a licenza e a ligazón ao código fonte, e acceso ao manual de uso dende a pantalla de inicio.
 
 **Características do produto** (ata 20, unha por liña):
@@ -154,15 +161,16 @@ Primeira versión publicada na Microsoft Store. Os datos de traballo (rexistro c
 - Rexistro de identidades cifrado, coa clave no chaveiro de Windows
 - Reversión con contrasinal, motivo obrigatorio e auditoría cifrada
 - Interface en castelán e galego
-- Software libre (AGPL-3.0). Sen contas, publicidade nin recollida de datos
+- Desenvolvido coa axuda de Claude, a IA de Anthropic (sen afiliación a Anthropic)
+- Software libre (EUPL-1.2 ou AGPL-3.0). Sen contas, publicidade nin recollida de datos
 
 **Palabras clave** (ata 7): anonimizar, anonimización, seudonimización, RXPD, protección de datos, documentos xurídicos, avogados
 
 **Capturas:** as mesmas pantallas ca en es-ES, coa interface en galego.
 
-**Información de copyright:** © 2026 José Luis López Fontán. Licenza AGPL-3.0. Datos: INE (CC BY 4.0) e Nomenclátor de Galicia da Xunta de Galicia (CC BY-SA 4.0).
+**Información de copyright:** © 2026 José Luis López Fontán. Dobre licenza EUPL-1.2 ou AGPL-3.0 (o paquete, polos seus compoñentes, coa AGPL-3.0). Datos: INE (CC BY 4.0) e Nomenclátor de Galicia da Xunta de Galicia (CC BY-SA 4.0).
 
-**Termos de licenza adicionais:** GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html. Condicións de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md#condicións-de-uso--anonimizador-jurídico
+**Termos de licenza adicionais:** Licenza Pública da Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — ou GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, á escolla do usuario; o paquete, polos seus compoñentes, distribúese coa AGPL-3.0. Condicións de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md#condicións-de-uso--anonimizador-jurídico
 
 ## Submission options
 **Capacidades restringidas — justificación de runFullTrust** (en inglés, 485 caracteres):

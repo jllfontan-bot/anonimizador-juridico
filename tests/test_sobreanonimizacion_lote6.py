@@ -180,7 +180,7 @@ class TestCasosSoltos(unittest.TestCase):
 class TestCargoDianteDeApelidosNome(unittest.TestCase):
     """FUGA (lote 5 sen ver, AnuncioG2018-220425-0002_gl, medindo fronte á versión do 4/10):
     nas comisións de concursos "Presidente Lamela Pedrón, Manuel" quedaba enteiro á vista e
-    de "Secretario Pichel Campos, Juan Carlos" só se tapaba o nome de pía. O cargo
+    de "Secretario Páez Veiga, Xoán Carlos" só se tapaba o nome de pía. O cargo
     entraba nos apelidos e o recorte do cargo levaba o anaco enteiro."""
 
     TEXTO = ("Comisión titular\nPresidente Salcedo Roel, Ana\nCatedrática de universidade\nUniversidade de Santiago\n"

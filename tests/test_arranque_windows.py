@@ -81,9 +81,14 @@ class TestPantallas(unittest.TestCase):
     def test_acerca_de_con_licenza_version_e_codigo(self):
         html = self.client.get("/acerca").get_data(as_text=True)
         self.assertIn("AGPL-3.0", html)
+        self.assertIn("EUPL-1.2 OR AGPL-3.0-only", html)
         self.assertIn("José Luis López Fontán", html)
+        self.assertIn("Claude", html)
+        self.assertIn("Anthropic", html)
         self.assertIn("https://github.com/jllfontan-bot/anonimizador-juridico", html)
         self.assertIn("GNU AFFERO GENERAL PUBLIC LICENSE", html)
+        self.assertIn("LICENCIA PÚBLICA DE LA UNIÓN EUROPEA", html.upper())
+        self.assertIn("v. 1.2", html)
         version = (Path(web.__file__).resolve().parents[2] / "VERSION").read_text(encoding="utf-8").strip()
         self.assertIn(f"Versión {version}", html)
 

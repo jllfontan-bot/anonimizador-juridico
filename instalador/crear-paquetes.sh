@@ -325,7 +325,7 @@ copiar_fonte_limpa() {
     cp -R "$RAIZ/config" "$destino/"
     cp -R "$RAIZ/ejemplos" "$destino/"
     cp "$RAIZ/requirements.txt" "$destino/"
-    cp "$RAIZ/README.md" "$RAIZ/VERSION" "$RAIZ/LICENSE" "$RAIZ/AVISOS-TERCEIROS.md" "$destino/"
+    cp "$RAIZ/README.md" "$RAIZ/VERSION" "$RAIZ/LICENSE" "$RAIZ/LICENCIA-EUPL-1.2.txt" "$RAIZ/AVISOS-TERCEIROS.md" "$destino/"
     find "$destino" -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$destino" -name "*.pyc" -delete
 }

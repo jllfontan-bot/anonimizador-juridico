@@ -8,11 +8,11 @@
 
 ## 1. Licencia
 
-Anonimizador jurídico es software libre con licencia **GNU Affero General Public License v3.0** (AGPL-3.0): https://www.gnu.org/licenses/agpl-3.0.html. Estas condiciones no limitan ninguno de los derechos que da esa licencia (usar, estudiar, modificar y redistribuir el programa). Explican para qué sirve el programa, cómo debe usarse y qué corresponde a cada parte. Si algo de lo que aquí se dice contradijera la licencia, prevalece la licencia.
+Anonimizador jurídico es software libre con **doble licencia**, a elección de quien lo recibe: **Licencia Pública de la Unión Europea (EUPL) v1.2** (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) o **GNU Affero General Public License v3.0** (AGPL-3.0, https://www.gnu.org/licenses/agpl-3.0.html). El paquete de la Microsoft Store lleva dentro componentes con licencia AGPL-3.0 (PyMuPDF) y GPL-3.0 (el modelo de idioma), así que el paquete completo se distribuye con la AGPL-3.0, como permite el artículo 5 de la EUPL. Las versiones publicadas hasta la 1.0.0 se distribuyeron solo con la AGPL-3.0. Estas condiciones no limitan ninguno de los derechos que dan esas licencias (usar, estudiar, modificar y redistribuir el programa). Explican para qué sirve el programa, cómo debe usarse y qué corresponde a cada parte. Si algo de lo que aquí se dice contradijera la licencia, prevalece la licencia.
 
 ## 2. Sin garantía
 
-El programa se ofrece gratis y «tal cual», sin garantía de ningún tipo, en los términos de los apartados 15 y 16 de la licencia y en la medida en que lo permita la ley aplicable.
+El programa se ofrece gratis y «tal cual», sin garantía de ningún tipo, en los términos de los artículos 7 y 8 de la EUPL y de los apartados 15 y 16 de la AGPL-3.0, y en la medida en que lo permita la ley aplicable.
 
 ## 3. Es una herramienta de apoyo: la revisión final es del usuario
 
@@ -61,11 +61,11 @@ Cualquier cambio de estas condiciones se publicará en esta misma dirección, co
 
 ## 1. Licenza
 
-Anonimizador jurídico é software libre con licenza **GNU Affero General Public License v3.0** (AGPL-3.0): https://www.gnu.org/licenses/agpl-3.0.html. Estas condicións non limitan ningún dos dereitos que dá esa licenza (usar, estudar, modificar e redistribuír o programa). Explican para que serve o programa, como debe usarse e que lle corresponde a cada parte. Se algo do que aquí se di contradixese a licenza, prevalece a licenza.
+Anonimizador jurídico é software libre con **dobre licenza**, á escolla de quen o recibe: **Licenza Pública da Unión Europea (EUPL) v1.2** (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) ou **GNU Affero General Public License v3.0** (AGPL-3.0, https://www.gnu.org/licenses/agpl-3.0.html). O paquete da Microsoft Store leva dentro compoñentes con licenza AGPL-3.0 (PyMuPDF) e GPL-3.0 (o modelo de idioma), así que o paquete completo distribúese coa AGPL-3.0, como permite o artigo 5 da EUPL. As versións publicadas ata a 1.0.0 distribuíronse só coa AGPL-3.0. Estas condicións non limitan ningún dos dereitos que dan esas licenzas (usar, estudar, modificar e redistribuír o programa). Explican para que serve o programa, como debe usarse e que lle corresponde a cada parte. Se algo do que aquí se di contradixese a licenza, prevalece a licenza.
 
 ## 2. Sen garantía
 
-O programa ofrécese gratis e «tal cal», sen garantía de ningún tipo, nos termos dos apartados 15 e 16 da licenza e na medida en que o permita a lei aplicable.
+O programa ofrécese gratis e «tal cal», sen garantía de ningún tipo, nos termos dos artigos 7 e 8 da EUPL e dos apartados 15 e 16 da AGPL-3.0, e na medida en que o permita a lei aplicable.
 
 ## 3. É unha ferramenta de apoio: a revisión final é do usuario
 

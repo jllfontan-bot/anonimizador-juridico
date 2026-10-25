@@ -363,11 +363,17 @@ def abrir_externo(que):
 
 @app.route("/acerca")
 def acerca():
-    try:
-        licenza = (_RAIZ_CODIGO / "LICENSE").read_text(encoding="utf-8")
-    except OSError:
-        licenza = None
-    return render_template("acerca.html", version=_version(), licenza=licenza, url_codigo=_URL_CODIGO)
+    def ler(nome):
+        try:
+            return (_RAIZ_CODIGO / nome).read_text(encoding="utf-8")
+        except OSError:
+            return None
+    # Dobre licenza (EUPL-1.2 OR AGPL-3.0-only): os dous textos, sen ligazóns
+    # novas cara a fóra (a política de privacidade conta só dúas).
+    return render_template(
+        "acerca.html", version=_version(), licenza=ler("LICENSE"),
+        licenza_eupl=ler("LICENCIA-EUPL-1.2.txt"), url_codigo=_URL_CODIGO,
+    )
 
 
 @app.route("/")
