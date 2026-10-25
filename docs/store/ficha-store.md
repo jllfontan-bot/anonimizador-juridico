@@ -51,6 +51,7 @@ QUÉ HACE
 • Detecta personas y más de quince tipos de identificador: DNI/NIE, pasaporte, teléfono, correo, dirección, matrícula, IBAN, tarjeta, número de la Seguridad Social, referencia catastral, número de colegiado, CSV, números de referencia y de expediente, N.R.P.
 • Da a cada persona un código estable, el mismo en todos los documentos de un caso. Dos nombres iguales sin un DNI que lo confirme nunca se fusionan: se tratan como personas distintas y el programa avisa del posible homónimo.
 • Revisa también el nombre del archivo, para que no deje a la vista la identidad que el contenido ya tapa.
+• Si lo pides, guarda además una copia en Markdown (.md) del texto ya anonimizado, con sus títulos, listas, tablas y páginas, lista para leerla con otras herramientas sin convertirla.
 • No anonimiza a jueces, magistrados, letrados de la Administración de Justicia ni médicos forenses que actúan en su función (criterio de la AEPD), y los lista aparte para que compruebes la exención.
 
 REVISIÓN HUMANA Y AVISOS
@@ -66,7 +67,12 @@ La correspondencia entre cada código y la persona real se guarda cifrada en tu 
 TODO EN LOCAL
 No hay cuentas, ni publicidad, ni analítica. El programa no se conecta a internet: el reconocimiento de texto, el modelo de lenguaje y todo lo necesario van dentro del paquete.
 
-Interfaz en castellano o gallego. Software libre (EUPL-1.2 o AGPL-3.0), con el código fuente publicado. Se distribuye sin garantía: no sustituye la revisión profesional del documento ni el asesoramiento jurídico.
+Interfaz en castellano o gallego. Software libre con doble licencia, a tu elección: EUPL v1.2 o AGPL-3.0, con el código fuente publicado. Se distribuye sin garantía: no sustituye la revisión profesional del documento ni el asesoramiento jurídico.
+
+Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic.
+
+AGRADECIMIENTOS
+A José Manuel Piñeiro, por sus ideas, aportaciones y correcciones para llevar a buen término esta aplicación.
 
 **Novedades de esta versión (1.1.0):**
 Nueva opción para guardar, junto a cada documento anonimizado, una copia en Markdown (.md) con el mismo texto anonimizado (títulos, listas, tablas y páginas), lista para leerla con otras herramientas sin convertirla. Doble licencia: EUPL v1.2 o AGPL-3.0, a elección del usuario. La página «Acerca de» muestra los textos completos de las dos licencias e indica que el programa se ha desarrollado con la ayuda de Claude, de Anthropic.
@@ -90,14 +96,15 @@ Primera versión publicada en la Microsoft Store. Los datos de trabajo (registro
 - Registro de identidades cifrado, con la clave en el llavero de Windows
 - Reversión con contraseña, motivo obligatorio y auditoría cifrada
 - Interfaz en castellano y gallego
-- Desarrollado con la ayuda de Claude, la IA de Anthropic (sin afiliación a Anthropic)
 - Software libre (EUPL-1.2 o AGPL-3.0). Sin cuentas, publicidad ni recogida de datos
+- Copia opcional en Markdown (.md) del texto anonimizado
+- Desarrollado con la ayuda de Claude, la IA de Anthropic (sin afiliación a Anthropic)
 
 **Palabras clave** (hasta 7): anonimizar, anonimización, seudonimización, RGPD, protección de datos, documentos jurídicos, abogados
 
 **Capturas:** 6, de 1920×1080, con datos inventados (`docs/fonte/datos_exemplo.py`), hechas a partir de las capturas de `docs/fonte/img/`: pantalla de inicio, progreso de un lote, revisión con posibles homónimos y fugas, resultado guardado, reversión controlada.
 
-**Información de copyright:** © 2026 José Luis López Fontán. Doble licencia EUPL-1.2 o AGPL-3.0 (el paquete, por sus componentes, con AGPL-3.0). Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
+**Información de copyright:** © 2026 José Luis López Fontán. Doble licencia EUPL-1.2 o AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
 **Términos de licencia adicionales:** Licencia Pública de la Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — o GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, a elección del usuario; el paquete, por sus componentes, se distribuye con la AGPL-3.0. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md
 
@@ -122,6 +129,7 @@ QUE FAI
 • Detecta persoas e máis de quince tipos de identificador: DNI/NIE, pasaporte, teléfono, correo, enderezo, matrícula, IBAN, tarxeta, número da Seguridade Social, referencia catastral, número de colexiado, CSV, números de referencia e de expediente, N.R.P.
 • Dá a cada persoa un código estable, o mesmo en todos os documentos dun caso. Dous nomes iguais sen un DNI que o confirme nunca se fusionan: trátanse como persoas distintas e o programa avisa do posible homónimo.
 • Revisa tamén o nome do ficheiro, para que non deixe á vista a identidade que o contido xa tapa.
+• Se o pides, garda ademais unha copia en Markdown (.md) do texto xa anonimizado, cos seus títulos, listas, táboas e páxinas, lista para lela con outras ferramentas sen convertela.
 • Non anonimiza xuíces, maxistrados, letrados da Administración de Xustiza nin médicos forenses que actúan na súa función (criterio da AEPD), e lístaos á parte para que comprobes a exención.
 
 REVISIÓN HUMANA E AVISOS
@@ -137,7 +145,12 @@ A correspondencia entre cada código e a persoa real gárdase cifrada no teu ord
 TODO EN LOCAL
 Non hai contas, nin publicidade, nin analítica. O programa non se conecta a internet: o recoñecemento de texto, o modelo de linguaxe e todo o necesario van dentro do paquete.
 
-Interface en castelán ou galego. Software libre (EUPL-1.2 ou AGPL-3.0), co código fonte publicado. Distribúese sen garantía: non substitúe a revisión profesional do documento nin o asesoramento xurídico.
+Interface en castelán ou galego. Software libre con dobre licenza, á túa escolla: EUPL v1.2 ou AGPL-3.0, co código fonte publicado. Distribúese sen garantía: non substitúe a revisión profesional do documento nin o asesoramento xurídico.
+
+Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic.
+
+AGRADECEMENTOS
+A José Manuel Piñeiro, polas súas ideas, achegas e correccións para levar a bo termo esta aplicación.
 
 **Novidades desta versión (1.1.0):**
 Nova opción para gardar, canda cada documento anonimizado, unha copia en Markdown (.md) co mesmo texto anonimizado (títulos, listas, táboas e páxinas), lista para lela con outras ferramentas sen convertela. Dobre licenza: EUPL v1.2 ou AGPL-3.0, á escolla do usuario. A páxina «Acerca de» amosa os textos completos das dúas licenzas e indica que o programa se desenvolveu coa axuda de Claude, de Anthropic.
@@ -161,14 +174,15 @@ Primeira versión publicada na Microsoft Store. Os datos de traballo (rexistro c
 - Rexistro de identidades cifrado, coa clave no chaveiro de Windows
 - Reversión con contrasinal, motivo obrigatorio e auditoría cifrada
 - Interface en castelán e galego
-- Desenvolvido coa axuda de Claude, a IA de Anthropic (sen afiliación a Anthropic)
 - Software libre (EUPL-1.2 ou AGPL-3.0). Sen contas, publicidade nin recollida de datos
+- Copia opcional en Markdown (.md) do texto anonimizado
+- Desenvolvido coa axuda de Claude, a IA de Anthropic (sen afiliación a Anthropic)
 
 **Palabras clave** (ata 7): anonimizar, anonimización, seudonimización, RXPD, protección de datos, documentos xurídicos, avogados
 
 **Capturas:** as mesmas pantallas ca en es-ES, coa interface en galego.
 
-**Información de copyright:** © 2026 José Luis López Fontán. Dobre licenza EUPL-1.2 ou AGPL-3.0 (o paquete, polos seus compoñentes, coa AGPL-3.0). Datos: INE (CC BY 4.0) e Nomenclátor de Galicia da Xunta de Galicia (CC BY-SA 4.0).
+**Información de copyright:** © 2026 José Luis López Fontán. Dobre licenza EUPL-1.2 ou AGPL-3.0. Datos: INE (CC BY 4.0) e Nomenclátor de Galicia da Xunta de Galicia (CC BY-SA 4.0).
 
 **Termos de licenza adicionais:** Licenza Pública da Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — ou GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, á escolla do usuario; o paquete, polos seus compoñentes, distribúese coa AGPL-3.0. Condicións de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md#condicións-de-uso--anonimizador-jurídico
 
