@@ -52,6 +52,10 @@
   <p>«Comprobar antes de gardar» (botón <strong>«Anonimizar e revisar»</strong>) ou «Anonimización automática» (ver sección 04). Ao premer, aparece a pantalla de progreso (sección 05) e, cando remata, a pantalla de revisión (ou o resultado, en modo automático).</p>
 </div></div>
 <div class="nota">
+  <h4>Copia en Markdown (opcional)</h4>
+  <p>Antes de premer o botón podes marcar <strong>«Gardar tamén unha copia en Markdown (.md)»</strong>. Xunto a cada documento anonimizado gárdase outro ficheiro co mesmo texto xa anonimizado (por exemplo <code>demanda.anonimizado.pdf.md</code>), pensado para lelo sen convertelo: un PDF, nunha ferramenta de intelixencia artificial, cóstalle moito máis có texto simple. Conserva os títulos, as listas e as táboas dos Word e LibreOffice, as táboas con liñas dos PDF e unha marca de páxina (<code>&lt;!-- páxina 1 --&gt;</code>); nos documentos dixitalizados é o texto que le o OCR, con algún erro posible. Non leva ningún dato persoal: sae do texto xa anonimizado, e se revisas o documento a copia actualízase coa revisión. A casilla vén sen marcar e o programa lembra a túa escolla.</p>
+</div>
+<div class="nota">
   <h4>Onde queda o rexistro</h4>
   <p>O cartafol do rexistro (<code>datos_rexistro</code> ou o nome que lle deses) contén <code>clave.key</code> (ou nada, se usas o chaveiro do sistema, que é o normal), <code>rexistro.enc</code> e <code>auditoria.enc</code>.</p>
   <p><strong>NON O BORRES NIN O MOVAS</strong> mentres sigas a traballar co mesmo caso: é a única forma de manter os códigos consistentes e de poder reverter un código no futuro.</p>
@@ -61,7 +65,7 @@
 <p>Ao premer calquera botón <strong>«Escoller cartafol…»</strong> (o do documento, o de saída ou o do rexistro) ábrese o explorador do propio programa. A diferenza do diálogo nativo do sistema, que só amosa cartafoles, este amosa <strong>tamén os ficheiros</strong> que hai dentro, para que poidas recoñecer o cartafol correcto antes de escollelo.</p>
 <figure><img src="img/explorador.png" alt="Explorador de cartafoles" style="max-width:430px"><figcaption>O explorador: subcartafoles á cabeza; os ficheiros en gris (non se poden escoller) e os documentos soportados coa etiqueta «documento soportado».</figcaption></figure>
 <ul>
-  <li><strong>Cartafoles:</strong> fai clic nun cartafol para entrar nel. Os <strong>ficheiros</strong> aparecen en gris e non se poden seleccionar; os que o programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes coma <code>.jpg</code>, <code>.png</code> ou <code>.tif</code>) levan a etiqueta <strong>«documento soportado»</strong>. Os ficheiros e cartafoles ocultos non se amosan.</li>
+  <li><strong>Cartafoles:</strong> fai clic nun cartafol para entrar nel. Os <strong>ficheiros</strong> aparecen en gris e non se poden seleccionar; os que o programa sabe anonimizar (<code>.txt</code>, <code>.md</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes coma <code>.jpg</code>, <code>.png</code> ou <code>.tif</code>) levan a etiqueta <strong>«documento soportado»</strong>. Os ficheiros e cartafoles ocultos non se amosan.</li>
   <li><strong>Atallos</strong> (columna da esquerda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> e, ao final, <em>Este equipo</em> (as unidades C:, D:…).</li>
   <li><strong>«↑ Subir»</strong> vai ao cartafol pai. O <strong>campo de ruta</strong> pódese editar: escribe unha ruta e preme <kbd>Intro</kbd> ou «Ir».</li>
   <li><strong>«Novo cartafol…»</strong> crea un cartafol novo dentro do que estás vendo (pide o nome e o botón «Crear»).</li>
@@ -106,7 +110,7 @@
 <p>A mensaxe final di «Cancelaches o proceso: os K ficheiro(s) restantes non se tocaron» (modo automático) ou «Proceso cancelado: N de M ficheiro(s) procesado(s) (pendentes de revisión abaixo); o resto non se tocou» (modo revisión).</p>
 
 <h2 class="sec">06 · Anonimizar un cartafol enteiro</h2>
-<p>No canto dun ficheiro solto, o mesmo campo acepta un CARTAFOL: procésase automaticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes) que atope dentro, buscando tamén en subcartafoles. En modo revisión créase unha sesión de revisión propia para CADA documento — nunca se garda nada en bloque sen revisar antes.</p>
+<p>No canto dun ficheiro solto, o mesmo campo acepta un CARTAFOL: procésase automaticamente cada documento soportado (<code>.txt</code>, <code>.md</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imaxes) que atope dentro, buscando tamén en subcartafoles. En modo revisión créase unha sesión de revisión propia para CADA documento — nunca se garda nada en bloque sen revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/inicio_pendentes.png" alt="Cartafol procesado" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados e pendentes de revisar; o ficheiro estragado avísase á parte.</figcaption></figure>
 <p>Os ficheiros dun formato non soportado (planos, follas de cálculo…) quedan fóra e cóntanse coma «omitidos» — nunca se inclúen nin se modifican. Revisa cada sesión pendente da lista unha a unha, exactamente igual que se procesases os documentos por separado.</p>
 <div class="aviso">

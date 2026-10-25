@@ -1039,8 +1039,8 @@ def ruta_saida_por_defecto(
     ruta_provisional_propia: str | None = None,
 ) -> str:
     """Para .docx/.odt e .zip mantén a mesma extensión (conserva formato,
-    ou estrutura de cartafoles no caso do zip); para calquera outro
-    formato de entrada, garda coma .txt plano. Sen `cartafol_saida`, o
+    ou estrutura de cartafoles no caso do zip), e un .md segue sendo .md;
+    para calquera outro formato de entrada, garda coma .txt plano. Sen `cartafol_saida`, o
     ficheiro final vai canda o orixinal (comportamento de sempre); con el,
     vai nese cartafol en vez de alí. Se se pasa `rexistro`, o NOME do
     ficheiro tamén se anonimiza (`nome_ficheiro_anonimizado`) -- útil
@@ -1061,7 +1061,7 @@ def ruta_saida_por_defecto(
     if rexistro is not None:
         nome_ficheiro = nome_ficheiro_anonimizado(nome_ficheiro, rexistro, persoas_do_documento)
     stem = Path(nome_ficheiro).stem
-    if sufixo in FORMATOS_CON_ESTRUTURA or sufixo == ".zip":
+    if sufixo in FORMATOS_CON_ESTRUTURA or sufixo in (".zip", ".md"):
         extension_saida = ".anonimizado" + sufixo
     else:
         extension_saida = ".anonimizado.txt"
@@ -1085,7 +1085,11 @@ def ruta_saida_por_defecto(
     return str(ruta_saida)
 
 
-EXTENSIONS_SOPORTADAS = (".pdf", ".docx", ".odt", ".txt", *imaxes.FORMATOS)
+EXTENSIONS_SOPORTADAS = (".pdf", ".docx", ".odt", ".txt", ".md", *imaxes.FORMATOS)
+
+# Copia Markdown dunha pasada anterior (`copia_md.ruta_copia`):
+# "demanda.anonimizado.pdf.md".
+_COPIA_MD_ANTERIOR = re.compile(r"\.anonimizado\.[^.]+$")
 
 
 def listar_ficheiros_soportados(cartafol: str) -> tuple[list, list]:
@@ -1100,13 +1104,16 @@ def listar_ficheiros_soportados(cartafol: str) -> tuple[list, list]:
     repite un cartafol co mesmo cartafol de saída (ou sen ningún: saen
     canda o orixinal), senón se anonimizarían as propias copias xa
     anonimizadas e o cartafol encheríase de `.anonimizado.anonimizado`.
-    Van a `omitidos`."""
+    O mesmo coas copias Markdown (`demanda.anonimizado.pdf.md`). Van a
+    `omitidos`."""
     raiz = Path(cartafol)
     soportados, omitidos = [], []
     for ruta in sorted(raiz.rglob("*")):
         if ruta.is_dir():
             continue
-        if ruta.suffix.lower() in EXTENSIONS_SOPORTADAS and not ruta.stem.lower().endswith(".anonimizado"):
+        stem = ruta.stem.lower()
+        if (ruta.suffix.lower() in EXTENSIONS_SOPORTADAS and not stem.endswith(".anonimizado")
+                and not _COPIA_MD_ANTERIOR.search(stem)):
             soportados.append(str(ruta))
         else:
             omitidos.append(str(ruta))
@@ -1118,6 +1125,7 @@ def anonimizar_zip(
     ruta_saida: str,
     rexistro: RexistroCorrespondencias,
     ficheiro_config: str = _CONFIG_POR_DEFECTO,
+    copia_md: bool = False,
 ) -> dict:
     """Anonimiza cada ficheiro soportado (.pdf, .docx, .odt, .txt e
     imaxes) dentro dun .zip, mantendo a estrutura de cartafoles.
@@ -1139,7 +1147,12 @@ def anonimizar_zip(
     (A10). As entradas de metadatos do propio ZIP xerados por macOS
     (`__MACOSX/` e ficheiros `._*`) NON se tentan procesar -- son copias
     de metadatos de Finder, non documentos reais -- e quedan en
-    `omitidos`."""
+    `omitidos`.
+
+    Con `copia_md`, cada documento leva ao lado, dentro do zip, a súa copia
+    Markdown (`copia_md.py`)."""
+    from . import copia_md as modulo_copia_md
+
     informes_por_ficheiro = {}
     omitidos = []
 
@@ -1173,14 +1186,19 @@ def anonimizar_zip(
             nome_ficheiro_saida = nome_ficheiro_anonimizado(nome_p.name, rexistro, informe["persoas"])
             stem_saida = PurePosixPath(nome_ficheiro_saida).stem
             cartafol_saida = _anonimizar_cartafoles_ruta(nome_p.parent, rexistro, informe["persoas"])
+            texto_md = modulo_copia_md.xerar(contexto, texto_anon, substitucions) if copia_md else None
             if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
                 nome_saida = str(cartafol_saida / (stem_saida + ".anonimizado" + sufixo))
                 tmp_saida = Path(tmp) / ("saida_" + Path(nome).name)
                 gardar_documento_estruturado(contexto, texto_anon, str(tmp_saida), substitucions)
                 zip_saida.write(str(tmp_saida), arcname=nome_saida)
             else:
-                nome_saida = str(cartafol_saida / (stem_saida + ".anonimizado.txt"))
+                extension = ".anonimizado.md" if sufixo == ".md" else ".anonimizado.txt"
+                nome_saida = str(cartafol_saida / (stem_saida + extension))
                 zip_saida.writestr(nome_saida, texto_anon)
+            nome_copia = modulo_copia_md.ruta_copia(nome_saida)
+            if texto_md is not None and nome_copia:
+                zip_saida.writestr(nome_copia, texto_md)
 
             tmp_entrada.unlink()
 
@@ -1192,12 +1210,16 @@ def anonimizar_e_gardar(
     ruta_saida: str,
     rexistro: RexistroCorrespondencias,
     ficheiro_config: str = _CONFIG_POR_DEFECTO,
+    copia_md: bool = False,
 ) -> tuple:
     """Anonimiza `ruta_entrada` e garda en `ruta_saida`. Conserva o formato
     orixinal (incluída a mestura de formatos dentro de cada parágrafo)
     cando a entrada é .docx/.odt E a saída pide a mesma extensión; en
-    calquera outro caso garda coma texto plano."""
-    texto_anonimizado, informe, _ = anonimizar_e_gardar_detallado(ruta_entrada, ruta_saida, rexistro, ficheiro_config)
+    calquera outro caso garda coma texto plano. Con `copia_md`, garda
+    ademais a copia Markdown (`copia_md.py`) en `<ruta_saida>.md`."""
+    texto_anonimizado, informe, _ = anonimizar_e_gardar_detallado(
+        ruta_entrada, ruta_saida, rexistro, ficheiro_config, copia_md=copia_md
+    )
     return texto_anonimizado, informe
 
 
@@ -1206,17 +1228,24 @@ def anonimizar_e_gardar_detallado(
     ruta_saida: str,
     rexistro: RexistroCorrespondencias,
     ficheiro_config: str = _CONFIG_POR_DEFECTO,
+    copia_md: bool = False,
 ) -> tuple:
     """Coma `anonimizar_e_gardar`, pero devolve tamén as substitucións (as
     necesita a revisión posterior dun documento procesado en automático)."""
+    from . import copia_md as modulo_copia_md
+
     texto, contexto = cargar_documento_estruturado(ruta_entrada)
     texto_anonimizado, informe, substitucions = anonimizar_texto_detallado(
         texto, rexistro, ficheiro_config, contexto=contexto
     )
+    # ANTES de gardar: gardar un PDF redacta `contexto["documento"]` no sitio.
+    texto_md = modulo_copia_md.xerar(contexto, texto_anonimizado, substitucions) if copia_md else None
 
     if conserva_formato(contexto, ruta_saida):
         gardar_documento_estruturado(contexto, texto_anonimizado, ruta_saida, substitucions)
     else:
         Path(ruta_saida).write_text(texto_anonimizado, encoding="utf-8")
+    if texto_md is not None:
+        modulo_copia_md.escribir(texto_md, ruta_saida)
 
     return texto_anonimizado, informe, substitucions

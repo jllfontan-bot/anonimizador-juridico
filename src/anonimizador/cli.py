@@ -10,6 +10,7 @@ import getpass
 import json
 from pathlib import Path
 
+from . import copia_md
 from .pipeline import anonimizar_e_gardar, anonimizar_zip, ruta_saida_por_defecto
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
@@ -32,8 +33,9 @@ def main():
     )
 
     p_anon = sub.add_parser("anonimizar", help="Anonimiza un documento")
-    p_anon.add_argument("entrada", help="Ficheiro .txt ou .docx de entrada")
-    p_anon.add_argument("--saida", default=None, help="Ficheiro de saida (por defecto, mesma extension ca entrada para .docx/.odt -- conserva formato -- e .anonimizado.txt nos demais casos)")
+    p_anon.add_argument("entrada", help="Ficheiro de entrada (.pdf, .docx, .odt, .txt, .md, imaxe ou .zip)")
+    p_anon.add_argument("--saida", default=None, help="Ficheiro de saida (por defecto, mesma extension ca entrada para .pdf/.docx/.odt/.md/imaxes/.zip -- conserva formato -- e .anonimizado.txt nos demais casos)")
+    p_anon.add_argument("--markdown", action="store_true", help="Garda tamén unha copia en Markdown do texto anonimizado (<saida>.md; dentro do zip, canda cada documento)")
     p_anon.add_argument("--informe", default=None, help="Ficheiro JSON co informe de revision")
     p_anon.add_argument("--rexistro", default="./datos_rexistro", help="Cartafol do rexistro de correspondencias cifrado")
     p_anon.add_argument("--chaveiro-sistema", action="store_true", help=_AXUDA_CHAVEIRO)
@@ -91,7 +93,7 @@ def main():
         saida = args.saida or ruta_saida_por_defecto(args.entrada)
 
         if Path(args.entrada).suffix.lower() == ".zip":
-            resultado = anonimizar_zip(args.entrada, saida, rexistro)
+            resultado = anonimizar_zip(args.entrada, saida, rexistro, copia_md=args.markdown)
             if not saida_explicita:
                 saida_final = ruta_saida_por_defecto(args.entrada, rexistro=rexistro)
                 if saida_final != saida:
@@ -116,7 +118,7 @@ def main():
                     print(f"  {nome}")
             return
 
-        texto_anon, informe = anonimizar_e_gardar(args.entrada, saida, rexistro)
+        texto_anon, informe = anonimizar_e_gardar(args.entrada, saida, rexistro, copia_md=args.markdown)
         if not saida_explicita:
             saida_final = ruta_saida_por_defecto(
                 args.entrada,
@@ -126,8 +128,11 @@ def main():
             )
             if saida_final != saida:
                 substituir_con_reintentos(Path(saida), Path(saida_final))
+                copia_md.mover(saida, saida_final)
                 saida = saida_final
         print(f"Documento anonimizado -> {saida}")
+        if args.markdown and copia_md.ruta_copia(saida):
+            print(f"Copia Markdown -> {copia_md.ruta_copia(saida)}")
 
         if args.informe:
             Path(args.informe).write_text(

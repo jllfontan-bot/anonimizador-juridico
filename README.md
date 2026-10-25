@@ -11,8 +11,12 @@ Interfaz en **castellano** (por defecto) o **gallego**, a elegir en la pantalla 
 
 ## Qué hace
 
-- **Lee** `.txt`, `.docx`, `.odt`, `.pdf` (también escaneados, con OCR) e imágenes, una a una o
+- **Lee** `.txt`, `.md`, `.docx`, `.odt`, `.pdf` (también escaneados, con OCR) e imágenes, una a una o
   una carpeta entera, y guarda el resultado **con el mismo formato** que el original.
+- **Copia en Markdown (opcional)**: con la casilla de la pantalla inicial (o `--markdown` en la
+  línea de comandos) guarda junto a cada documento anonimizado un `.md` con el mismo texto
+  (`demanda.anonimizado.pdf.md`), con títulos, listas, tablas y marcas de página, para leerlo
+  sin convertirlo. Sale siempre del texto ya anonimizado.
 - **Detecta** personas (modelo de lenguaje de spaCy, tablas de nombres y apellidos del INE y
   reglas propias para escritos judiciales y boletines oficiales), DNI/NIE, pasaportes,
   teléfonos, correos, direcciones, matrículas, IBAN, tarjetas, número de la Seguridad Social,

@@ -39,7 +39,8 @@
 <ul class="pendentes">
   {% for r in resultados %}
   <li>
-    <strong>{{ r.ruta_orixe }}</strong> → <code>{{ r.ruta_saida }}</code><br>
+    <strong>{{ r.ruta_orixe }}</strong> → <code>{{ r.ruta_saida }}</code>
+    {%- if r.ruta_copia_md %} ({{ t("auto.copia_md") }}: <code>{{ r.ruta_copia_md }}</code>){% endif %}<br>
     {{ t("auto.resumo", marcadas=r.n_marcadas, mosaico=r.n_mosaico) }}
     {%- if r.n_risco_alto %}, <strong>{{ t("auto.resumo_fugas", n=r.n_risco_alto) }}</strong>{% endif %}
     {%- if r.n_exentos_cargo_publico %}, {{ t("auto.resumo_exentos", n=r.n_exentos_cargo_publico) }}{% endif %}

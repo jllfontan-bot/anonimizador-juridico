@@ -33,7 +33,7 @@ from urllib.parse import urlsplit
 
 from flask import Flask, jsonify, make_response, redirect, render_template, request, url_for
 
-from . import corpus_revision, explorador, idioma, informe_pdf, ner, selector
+from . import copia_md, corpus_revision, explorador, idioma, informe_pdf, ner, selector
 from .pipeline import (
     _aplicar_substitucions_a_texto,
     anonimizar_e_gardar_detallado,
@@ -70,8 +70,21 @@ def _abrir_rexistro(rexistro_dir: str) -> RexistroCorrespondencias:
 _CAMPOS_PERSISTIBLES = (
     "ruta_orixe", "rexistro_dir", "cartafol_saida", "texto_anonimizado", "informe",
     "substitucions", "n_marcadas", "n_mosaico", "confirmado", "creado", "corpus_id", "corpus_control", "proposta", "corpus_posicion", "corpus_titulo",
-    "ruta_saida_fixa",
+    "ruta_saida_fixa", "copia_md",
 )
+
+def _copia_md_do_formulario() -> bool:
+    """A casilla da copia Markdown. O formulario da pantalla de inicio leva
+    ademais `lembrar_copia_md`: só entón se garda a elección para a próxima
+    vez (unha petición doutra orixe -- tests, scripts -- non a cambia). Vai
+    no mesmo ficheiro de preferencias có idioma (`idioma.gardar_preferencia`)."""
+    copia = request.form.get("copia_md") == "1"
+    if request.form.get("lembrar_copia_md") == "1" and idioma.ler_preferencia("copia_md") != copia:
+        try:
+            idioma.gardar_preferencia("copia_md", copia)
+        except OSError:
+            pass  # non poder lembrala nunca impide anonimizar
+    return copia
 
 
 def _sesion_persistible(sesion: dict) -> dict:
@@ -287,6 +300,7 @@ def _render_index(**kwargs):
     kwargs.setdefault("aviso_modelo", ner.aviso_compatibilidade_modelo())
     kwargs.setdefault("aviso_migracion", _aviso_migracion())
     kwargs.setdefault("hai_manual", _manual_de_uso() is not None)
+    kwargs.setdefault("copia_md", bool(idioma.ler_preferencia("copia_md")))
     return render_template("index.html", **kwargs)
 
 
@@ -427,7 +441,7 @@ def explorar_nova_carpeta():
     return jsonify({"ruta": ruta})
 
 
-def _crear_sesion(ruta: str, rexistro_dir: str, cartafol_saida: str | None, rexistro) -> str:
+def _crear_sesion(ruta: str, rexistro_dir: str, cartafol_saida: str | None, rexistro, con_copia_md: bool = False) -> str:
     """Crea e persiste unha sesión de revisión para UN documento. Reutilizado
     tanto para un ficheiro solto coma para cada ficheiro atopado dentro dun
     cartafol (informe: "que anonimice todos os arquivos do cartafol" --
@@ -448,13 +462,14 @@ def _crear_sesion(ruta: str, rexistro_dir: str, cartafol_saida: str | None, rexi
         "n_mosaico": len(informe["riscos_mosaico"]),
         "confirmado": False,
         "creado": datetime.now(timezone.utc).isoformat(),
+        "copia_md": con_copia_md,
     }
     SESIONS[sid] = sesion
     rexistro.gardar_sesion(sid, _sesion_persistible(sesion))
     return sid
 
 
-def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro) -> dict:
+def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro, con_copia_md: bool = False) -> dict:
     """Anonimiza e garda UN documento sen crear sesión de revisión --
     modo "automático" (informe: preguntar ao usuario se quere comprobar
     o proceso ou anonimización automática). Aplica sempre a decisión MÁIS
@@ -472,13 +487,16 @@ def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro) -> dic
     mesmo arranxo)."""
     ruta_saida_provisional = ruta_saida_por_defecto(ruta, cartafol_saida)
     Path(ruta_saida_provisional).parent.mkdir(parents=True, exist_ok=True)
-    texto_anonimizado, informe, substitucions = anonimizar_e_gardar_detallado(ruta, ruta_saida_provisional, rexistro)
+    texto_anonimizado, informe, substitucions = anonimizar_e_gardar_detallado(
+        ruta, ruta_saida_provisional, rexistro, copia_md=con_copia_md
+    )
 
     ruta_saida = ruta_saida_por_defecto(
         ruta, cartafol_saida, rexistro, informe["persoas"], ruta_saida_provisional
     )
     if ruta_saida != ruta_saida_provisional:
         substituir_con_reintentos(Path(ruta_saida_provisional), Path(ruta_saida))
+        copia_md.mover(ruta_saida_provisional, ruta_saida)
 
     risco_residual = informe.get("risco_residual", [])
     n_risco_alto = sum(1 for r in risco_residual if r["confianza"] == "alta")
@@ -501,6 +519,7 @@ def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro) -> dic
             "confirmado": False,
             "creado": datetime.now(timezone.utc).isoformat(),
             "ruta_saida_fixa": ruta_saida,
+            "copia_md": con_copia_md,
         }
         SESIONS[sid_revision] = sesion
         rexistro.gardar_sesion(sid_revision, _sesion_persistible(sesion))
@@ -508,6 +527,7 @@ def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro) -> dic
         "sid_revision": sid_revision,
         "ruta_orixe": ruta,
         "ruta_saida": ruta_saida,
+        "ruta_copia_md": copia_md.ruta_copia(ruta_saida) if con_copia_md else None,
         "n_marcadas": sum(1 for p in informe["persoas"] if p["marcado_para_revision"]),
         "n_mosaico": len(informe["riscos_mosaico"]),
         "n_risco_alto": n_risco_alto,
@@ -531,7 +551,8 @@ _BLOQUEO_TRABALLOS = threading.Lock()
 _VIDA_TRABALLO_REMATADO_S = 3600  # un traballo rematado esquécese pasada 1 hora
 
 
-def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None, modo: str):
+def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None, modo: str,
+                       con_copia_md: bool = False):
     """Valida a petición e crea (sen arrincar) o traballo. Devolve
     `(traballo, None)` ou `(None, mensaxe_de_erro)`."""
     ruta_p = Path(ruta)
@@ -552,6 +573,7 @@ def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None,
         "e_cartafol": ruta_p.is_dir(),
         "rexistro_dir": rexistro_dir,
         "cartafol_saida": cartafol_saida,
+        "copia_md": con_copia_md,
         "estado": "en_curso",  # -> "rematado" | "cancelado" | "erro"
         "cancelar": threading.Event(),  # activado polo usuario: para ANTES do seguinte ficheiro
         "feitos": 0,
@@ -588,11 +610,12 @@ def _executar_traballo(traballo: dict) -> None:
             try:
                 if traballo["modo"] == "automatico":
                     traballo["resultados"].append(
-                        _procesar_automatico(ficheiro, traballo["cartafol_saida"], rexistro)
+                        _procesar_automatico(ficheiro, traballo["cartafol_saida"], rexistro, traballo["copia_md"])
                     )
                 else:
                     traballo["sids"].append(
-                        _crear_sesion(ficheiro, traballo["rexistro_dir"], traballo["cartafol_saida"], rexistro)
+                        _crear_sesion(ficheiro, traballo["rexistro_dir"], traballo["cartafol_saida"], rexistro,
+                                      traballo["copia_md"])
                     )
             except Exception as e:  # un ficheiro roto NON debe tirar o resto do lote
                 traceback.print_exc()
@@ -643,7 +666,7 @@ def iniciar_traballo():
     cartafol_saida = request.form.get("cartafol_saida", "").strip() or None
     modo = "automatico" if request.form.get("modo") == "automatico" else "revisar"
 
-    traballo, erro = _preparar_traballo(ruta, rexistro_dir, cartafol_saida, modo)
+    traballo, erro = _preparar_traballo(ruta, rexistro_dir, cartafol_saida, modo, _copia_md_do_formulario())
     if erro:
         return jsonify({"erro": erro}), 400
 
@@ -729,6 +752,7 @@ def procesar():
     rexistro_dir = request.form.get("rexistro", "./datos_rexistro").strip() or "./datos_rexistro"
     cartafol_saida = request.form.get("cartafol_saida", "").strip() or None
     modo = request.form.get("modo", "revisar")
+    copia = _copia_md_do_formulario()
 
     ruta_p = Path(ruta)
     if not ruta_p.exists():
@@ -747,9 +771,9 @@ def procesar():
                     pendentes=[], rexistro_dir=rexistro_dir,
                     erro=idioma.t("web.sen_soportados", ruta=ruta),
                 )
-            resultados = [_procesar_automatico(f, cartafol_saida, rexistro) for f in soportados]
+            resultados = [_procesar_automatico(f, cartafol_saida, rexistro, copia) for f in soportados]
         else:
-            resultados = [_procesar_automatico(ruta, cartafol_saida, rexistro)]
+            resultados = [_procesar_automatico(ruta, cartafol_saida, rexistro, copia)]
             omitidos = []
         return render_template(
             "automatico.html", resultados=resultados, omitidos=len(omitidos), rexistro_dir=rexistro_dir,
@@ -763,12 +787,12 @@ def procesar():
                 erro=idioma.t("web.sen_soportados", ruta=ruta),
             )
         for ficheiro in soportados:
-            _crear_sesion(ficheiro, rexistro_dir, cartafol_saida, rexistro)
+            _crear_sesion(ficheiro, rexistro_dir, cartafol_saida, rexistro, copia)
         return redirect(url_for(
             "index", rexistro=rexistro_dir, creados=len(soportados), omitidos=len(omitidos)
         ))
 
-    sid = _crear_sesion(ruta, rexistro_dir, cartafol_saida, rexistro)
+    sid = _crear_sesion(ruta, rexistro_dir, cartafol_saida, rexistro, copia)
     return redirect(url_for("revisar", sid=sid, rexistro=rexistro_dir))
 
 
@@ -868,9 +892,21 @@ def confirmar(sid):
     Path(ruta_saida).parent.mkdir(parents=True, exist_ok=True)
     aviso_formato = None
     contexto = sesion.get("contexto")
+    # A copia Markdown vai SEMPRE co nome da saída prevista (a do modo
+    # automático, se a houbo: o revisado substitúe tamén a súa copia) e
+    # xérase do MESMO texto que se garda, xusto antes de gardalo (gardar un
+    # PDF redacta `contexto["documento"]` no sitio).
+    ruta_saida_prevista = ruta_saida
+    texto_md = None
+
+    def _xerar_copia_md(texto: str, subs) -> None:
+        nonlocal texto_md
+        if sesion.get("copia_md"):
+            texto_md = copia_md.xerar(contexto, texto, subs)
 
     if conserva_formato(contexto, ruta_saida):
         try:
+            _xerar_copia_md(texto_final, substitucions)
             gardar_documento_estruturado(contexto, texto_final, ruta_saida, substitucions)
         except ValueError:
             if texto_orixinal is None or substitucions is None:
@@ -878,14 +914,16 @@ def confirmar(sid):
                 Path(ruta_saida).write_text(texto_final, encoding="utf-8")
                 aviso_formato = idioma.t("web.formato_texto_plano", ruta=ruta_saida)
             else:
-                gardar_documento_estruturado(
-                    contexto, _aplicar_substitucions_a_texto(texto_orixinal, substitucions), ruta_saida, substitucions
-                )
+                texto_gardado = _aplicar_substitucions_a_texto(texto_orixinal, substitucions)
+                _xerar_copia_md(texto_gardado, substitucions)
+                gardar_documento_estruturado(contexto, texto_gardado, ruta_saida, substitucions)
                 ruta_edicion = Path(ruta_saida).with_suffix(".edicion-manual.txt")
                 ruta_edicion.write_text(texto_final, encoding="utf-8")
                 aviso_formato = idioma.t("web.edicion_fora", ruta=ruta_saida, ruta_edicion=ruta_edicion)
     else:
+        _xerar_copia_md(texto_final, substitucions)
         Path(ruta_saida).write_text(texto_final, encoding="utf-8")
+    ruta_copia_md = copia_md.escribir(texto_md, ruta_saida_prevista) if texto_md is not None else None
     if edicion_aparte is not None:
         ruta_edicion = Path(ruta_saida).with_suffix(".edicion-manual.txt")
         ruta_edicion.write_text(edicion_aparte, encoding="utf-8")
@@ -905,6 +943,7 @@ def confirmar(sid):
     sesion["confirmado"] = True
     sesion["texto_final"] = texto_final
     sesion["ruta_saida"] = ruta_saida
+    sesion["ruta_copia_md"] = ruta_copia_md
     # xa non fai falta sobrevivir a un reinicio -- elimínase de disco, non só de memoria
     rexistro.eliminar_sesion(sid)
     # Modo corpus: fluxo pechado, ao seguinte documento sen pantalla intermedia
@@ -913,7 +952,7 @@ def confirmar(sid):
         return redirect(seguinte_corpus)
     return render_template(
         "confirmado.html", sesion=sesion, ruta_saida=ruta_saida, aviso_formato=aviso_formato,
-        seguinte_corpus=seguinte_corpus,
+        seguinte_corpus=seguinte_corpus, ruta_copia_md=ruta_copia_md,
     )
 
 

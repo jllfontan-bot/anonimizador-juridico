@@ -52,6 +52,10 @@
   <p>«Comprobar antes de guardar» (botón <strong>«Anonimizar y revisar»</strong>) o «Anonimización automática» (ver sección 04). Al pulsarlo aparece la pantalla de progreso (sección 05) y, cuando termina, la pantalla de revisión (o el resultado, en modo automático).</p>
 </div></div>
 <div class="nota">
+  <h4>Copia en Markdown (opcional)</h4>
+  <p>Antes de pulsar el botón puedes marcar <strong>«Guardar también una copia en Markdown (.md)»</strong>. Junto a cada documento anonimizado se guarda otro archivo con el mismo texto ya anonimizado (por ejemplo <code>demanda.anonimizado.pdf.md</code>), pensado para leerlo sin convertirlo: un PDF, en una herramienta de inteligencia artificial, cuesta mucho más que el texto simple. Conserva los títulos, las listas y las tablas de Word y LibreOffice, las tablas con líneas de los PDF y una marca de página (<code>&lt;!-- página 1 --&gt;</code>); en los documentos digitalizados es el texto que lee el OCR, con algún posible error. No lleva ningún dato personal: sale del texto ya anonimizado, y si revisas el documento la copia se actualiza con la revisión. La casilla viene sin marcar y el programa recuerda tu elección.</p>
+</div>
+<div class="nota">
   <h4>Dónde queda el registro</h4>
   <p>La carpeta del registro (<code>datos_rexistro</code> o el nombre que le hayas dado) contiene <code>clave.key</code> (o nada, si usas el llavero del sistema, que es lo normal), <code>rexistro.enc</code> y <code>auditoria.enc</code>.</p>
   <p><strong>NO LA BORRES NI LA MUEVAS</strong> mientras sigas trabajando con el mismo caso: es la única forma de mantener los códigos coherentes y de poder revertir un código en el futuro.</p>
@@ -61,7 +65,7 @@
 <p>Al pulsar cualquier botón <strong>«Elegir carpeta…»</strong> (el del documento, el de salida o el del registro) se abre el explorador del propio programa. A diferencia del diálogo nativo del sistema, que solo muestra carpetas, este muestra <strong>también los archivos</strong> que hay dentro, para que puedas reconocer la carpeta correcta antes de elegirla.</p>
 <figure><img src="img/es/explorador.png" alt="Explorador de carpetas" style="max-width:430px"><figcaption>El explorador: las subcarpetas primero; los archivos en gris (no se pueden elegir) y los documentos soportados con la etiqueta «documento soportado».</figcaption></figure>
 <ul>
-  <li><strong>Carpetas:</strong> haz clic en una carpeta para entrar en ella. Los <strong>archivos</strong> aparecen en gris y no se pueden seleccionar; los que el programa sabe anonimizar (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes como <code>.jpg</code>, <code>.png</code> o <code>.tif</code>) llevan la etiqueta <strong>«documento soportado»</strong>. Los archivos y carpetas ocultos no se muestran.</li>
+  <li><strong>Carpetas:</strong> haz clic en una carpeta para entrar en ella. Los <strong>archivos</strong> aparecen en gris y no se pueden seleccionar; los que el programa sabe anonimizar (<code>.txt</code>, <code>.md</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes como <code>.jpg</code>, <code>.png</code> o <code>.tif</code>) llevan la etiqueta <strong>«documento soportado»</strong>. Los archivos y carpetas ocultos no se muestran.</li>
   <li><strong>Accesos rápidos</strong> (columna de la izquierda): <em>Inicio</em>, <em>Documentos</em>, <em>Escritorio</em>, <em>Descargas</em> y, al final, <em>Este equipo</em> (las unidades C:, D:…).</li>
   <li><strong>«↑ Subir»</strong> va a la carpeta superior. El <strong>campo de ruta</strong> se puede editar: escribe una ruta y pulsa <kbd>Intro</kbd> o «Ir».</li>
   <li><strong>«Nueva carpeta…»</strong> crea una carpeta nueva dentro de la que estás viendo (pide el nombre y el botón «Crear»).</li>
@@ -106,7 +110,7 @@
 <p>El mensaje final dice «Has cancelado el proceso: los K archivo(s) restantes no se han tocado» (modo automático) o «Proceso cancelado: N de M archivo(s) procesado(s) (pendientes de revisión más abajo); el resto no se ha tocado» (modo revisión).</p>
 
 <h2 class="sec">06 · Anonimizar una carpeta entera</h2>
-<p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
+<p>En lugar de un archivo suelto, el mismo campo acepta una CARPETA: se procesa automáticamente cada documento soportado (<code>.txt</code>, <code>.md</code>, <code>.docx</code>, <code>.odt</code>, <code>.pdf</code> e imágenes) que encuentre dentro, buscando también en las subcarpetas. En modo revisión se crea una revisión propia para CADA documento: nunca se guarda nada en bloque sin revisar antes.</p>
 <figure><div class="recorte fade" style="max-height:330px;"><img src="img/es/inicio_pendentes.png" alt="Carpeta procesada" style="width:100%;display:block"></div><figcaption>Lote en modo revisión: 12 documentos procesados y pendientes de revisar; el archivo dañado se avisa aparte.</figcaption></figure>
 <p>Los archivos de un formato no soportado (planos, hojas de cálculo…) quedan fuera y se cuentan como «omitidos»: nunca se incluyen ni se modifican. Revisa cada revisión pendiente de la lista una a una, exactamente igual que si procesaras los documentos por separado.</p>
 <div class="aviso">

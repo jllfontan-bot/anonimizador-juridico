@@ -97,6 +97,13 @@
       {{ t("inicio.modo_automatico") }}
     </label>
   </div>
+  <div class="campo">
+    <label class="opcion-modo">
+      <input type="checkbox" name="copia_md" value="1"{% if copia_md %} checked{% endif %}>
+      {{ t("inicio.copia_md") }}
+    </label>
+    <input type="hidden" name="lembrar_copia_md" value="1">
+  </div>
   <button type="submit" id="boton-procesar">{{ t("inicio.boton_revisar") }}</button>
 </form>
 

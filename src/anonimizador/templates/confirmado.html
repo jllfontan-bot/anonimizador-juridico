@@ -7,6 +7,7 @@
 {% endif %}
 <div class="aviso-ok">
   {{ t("confirmado.gardado", ruta=ruta_saida|e)|safe }}
+  {% if ruta_copia_md %}{{ t("confirmado.copia_md", ruta=ruta_copia_md|e)|safe }}{% endif %}
 </div>
 <h2>{{ t("confirmado.texto_final") }}</h2>
 <textarea readonly>{{ sesion.texto_final }}</textarea>

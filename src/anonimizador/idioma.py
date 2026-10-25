@@ -69,16 +69,28 @@ def actual() -> str:
     return valor if valor in IDIOMAS else POR_DEFECTO
 
 
-def gardar(idioma: str) -> None:
-    """Garda a escolla da pantalla de inicio (sobrevive a pechar o programa)."""
-    if idioma not in IDIOMAS:
-        raise ValueError(f"idioma descoñecido: {idioma}")
+def ler_preferencia(clave: str, defecto=None):
+    """Valor gardado dunha preferencia da pantalla de inicio (ex. `copia_md`)."""
+    return _ler_preferencias().get(clave, defecto)
+
+
+def gardar_preferencia(clave: str, valor) -> None:
+    """Garda unha preferencia da pantalla de inicio no mesmo ficheiro có
+    idioma (sobrevive a pechar o programa: a xanela de escritorio abre en
+    modo privado e esquece o `localStorage`)."""
     datos = _ler_preferencias()
-    datos["idioma"] = idioma
+    datos[clave] = valor
     ruta = ficheiro_preferencias()
     temporal = ruta.with_suffix(".tmp")
     temporal.write_text(json.dumps(datos, ensure_ascii=False, indent=2), encoding="utf-8")
     os.replace(temporal, ruta)
+
+
+def gardar(idioma: str) -> None:
+    """Garda a escolla da pantalla de inicio (sobrevive a pechar o programa)."""
+    if idioma not in IDIOMAS:
+        raise ValueError(f"idioma descoñecido: {idioma}")
+    gardar_preferencia("idioma", idioma)
 
 
 # -- textos -------------------------------------------------------------------
