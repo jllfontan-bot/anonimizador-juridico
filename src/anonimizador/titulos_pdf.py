@@ -23,6 +23,10 @@ que necesita un documento real, medidas sobre o corpus do BOE e do DOG:
   maior a menor, ata `NIVEIS_MAXIMOS`. As liñas seguidas do mesmo tamaño son un só título
   (títulos partidos en varias liñas).
 
+- Estruturais («Artigo 1.», «ANEXO I», «CAPÍTULO II», «Disposición final»...):
+  só se a liña COMEZA por esa palabra e vai en negra, en maiúsculas ou en
+  cursiva (como o BOE e o DOG os escriben), curta e soa; ver `_rango_estrutural`.
+
 `detectar_titulos` devolve onde está cada título no texto da páxina, que é
 o que le `pdf_estrutura`; o texto do título non se le de aquí.
 """
@@ -52,9 +56,11 @@ _FRACCION_MAXIMA = 0.25  # de caracteres do documento en letra de título
 _PALABRAS_ESTRUTURAL = 12  # o que vai despois de «Artigo 1.» nun título estrutural
 _LONGO_ESTRUTURAL = 100
 _NIVEIS_TOTAIS = 6
-# O BOE escribe «Artículo 1. Objeto.» en letra normal co nome en cursiva, nin negra nin
-# maiúsculas. Sen isto non se detecta ningún artigo no corpus; fóra por defecto (decide o usuario).
-_ADMITE_CURSIVA = False
+# O BOE e o DOG escriben «Artículo 1. Objeto.» en letra normal co nome en cursiva, nin en
+# negra nin en maiúsculas. Con isto, unha liña en cursiva (a partir do 25 % das letras) que
+# comeza en maiúscula cumpre a forma que se pide da negra (medido o 31/10/2026 sobre 1770 PDF:
+# 1072 artigos, seccións e disposicións máis, 45 de 45 revisados a man correctos).
+_ADMITE_CURSIVA = True
 _HUECO_MAXIMO = 2.0  # entre anacos dunha mesma fila, en tamaños de letra
 _SEPARACION_MAXIMA = 1.7  # entre a parte de arriba de dúas liñas dun mesmo título, en tamaños de letra
 

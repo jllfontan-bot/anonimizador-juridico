@@ -11,7 +11,8 @@ sáltanse se non está. Mostra do que hai en cada un, medida o 31/10/2026:
 - BOE-A-2026-13711: unha liña en negra que COMEZA por «Artículo 48.4 de la Ley de
   Montes» (a mención dunha lei, non un título).
 - BOE-A-2025-25943: mencións de «anexo I» e «artículo 89.3» en medio de frases.
-- BOE-A-2026-3005: `Artículo N. Título.` en cursiva (o do BOE).
+- BOE-A-2026-3005: `Artículo N. Título.` en cursiva (o do BOE); BOE-A-2026-13002 e
+  os do DOG AnuncioG0761-290726-0002, AnuncioG0767-270625-0001 (Artigo, Artigo único).
 """
 
 import glob
@@ -29,8 +30,8 @@ from anonimizador import conversor, titulos_pdf  # noqa: E402
 from anonimizador.registry import RexistroCorrespondencias  # noqa: E402
 
 _RAICES = (
-    "/Volumes/PENDRIVE/_CLAUDE_ARCHIVO_PORTATIL/proyectos/anonimizador-xuridico/corpus_web_orixinais/*/boe/{}.pdf",
-    "/Volumes/ext SSD MAC/_COPIAS_LOCALES/proyectos/anonimizador-xuridico/corpus_web*/docs/boe/{}.pdf",
+    "/Volumes/PENDRIVE/_CLAUDE_ARCHIVO_PORTATIL/proyectos/anonimizador-xuridico/corpus_web_orixinais/*/*/{}.pdf",
+    "/Volumes/ext SSD MAC/_COPIAS_LOCALES/proyectos/anonimizador-xuridico/corpus_web*/docs/*/{}.pdf",
 )
 
 
@@ -59,10 +60,12 @@ class TestEstruturais(unittest.TestCase):
 
     def test_baixan_un_nivel_dos_titulos_por_tamano(self):
         titulos = _titulos("BOE-A-2026-4219")
-        por_tamano = [n for t, n in titulos if not t.startswith(("CAPÍTULO", "ANEXO"))]
+        por_tamano = [n for t, n in titulos if not t.startswith(("CAPÍTULO", "ANEXO", "Artículo", "Disposición"))]
         niveis = {t.split()[0]: n for t, n in titulos if t.startswith(("CAPÍTULO", "ANEXO"))}
         self.assertEqual(niveis["ANEXO"], max(por_tamano) + 1)
         self.assertEqual(niveis["CAPÍTULO"], niveis["ANEXO"] + 1)  # o anexo vai por riba do capítulo
+        artigos = {n for t, n in titulos if t.startswith("Artículo")}
+        self.assertEqual(artigos, {niveis["CAPÍTULO"] + 1})  # e o capítulo por riba do artigo
 
     def test_anexos_en_negra(self):
         titulos = [t for t, _ in _titulos("BOE-A-2026-18411")]
@@ -79,17 +82,8 @@ class TestEstruturais(unittest.TestCase):
         self.assertFalse([t for t in titulos if re.match(r"(?i)(art[ií]culo|anexo) ", t) and t != t.upper()], titulos)
         self.assertEqual([t for t in titulos if t.upper().startswith("ANEXO")], ["ANEXO I", "ANEXO II", "ANEXO III"])
 
-    def test_artigo_en_cursiva_non_se_detecta_por_defecto(self):
-        titulos = [t for t, _ in _titulos("BOE-A-2026-3005")]
-        self.assertFalse([t for t in titulos if t.startswith("Artículo")], titulos)
-
-    def test_artigo_en_cursiva_con_a_opcion(self):
-        antes = titulos_pdf._ADMITE_CURSIVA
-        titulos_pdf._ADMITE_CURSIVA = True
-        try:
-            titulos = _titulos("BOE-A-2026-3005")
-        finally:
-            titulos_pdf._ADMITE_CURSIVA = antes
+    def test_artigo_en_cursiva_detectase_por_defecto(self):
+        titulos = _titulos("BOE-A-2026-3005")
         artigos = [(t, n) for t, n in titulos if t.startswith("Artículo")]
         capitulos = {n for t, n in titulos if t.startswith("CAPÍTULO")}
         self.assertGreaterEqual(len(artigos), 10)
@@ -97,6 +91,28 @@ class TestEstruturais(unittest.TestCase):
         # O título partido en dúas liñas sae completo, nunha soa.
         self.assertIn("Artículo 16. Coordinación con equipos de medios adecuados de solución de controversias.",
                       [t for t, _ in artigos])
+
+    def test_artigo_en_cursiva_co_interruptor_apagado(self):
+        antes = titulos_pdf._ADMITE_CURSIVA
+        titulos_pdf._ADMITE_CURSIVA = False
+        try:
+            titulos = _titulos("BOE-A-2026-3005")
+        finally:
+            titulos_pdf._ADMITE_CURSIVA = antes
+        self.assertFalse([t for t, _ in titulos if t.startswith("Artículo")], titulos)
+
+    def test_artigos_do_dog_en_galego(self):
+        titulos = [t for t, _ in _titulos("AnuncioG0761-290726-0002_gl")]
+        self.assertEqual([t for t in titulos if t.startswith("Artigo")], ["Artigo 1. Cesamentos.", "Artigo 2. Nomeamentos"])
+
+    def test_artigo_unico_do_dog(self):
+        titulos = [t for t, _ in _titulos("AnuncioG0767-270625-0001_gl")]
+        self.assertEqual([t for t in titulos if t.startswith("Artigo")], ["Artigo único. Nomeamento de vogal"])
+
+    def test_mencion_dun_artigo_nunha_frase_non_e_titulo_con_cursiva(self):
+        # «artículo 48 del mencionado reglamento.»: empeza en minúscula (frase partida).
+        titulos = [t for t, _ in _titulos("BOE-A-2026-18516")]
+        self.assertFalse([t for t in titulos if re.match(r"(?i)art[ií]culo", t)], titulos)
 
     def test_demasiado_texto_como_titulo_non_marca_estruturais(self):
         antes = titulos_pdf._FRACCION_MAXIMA
@@ -137,6 +153,13 @@ class TestMarkdownEstruturais(unittest.TestCase):
         conversor.converter(str(carpeta), un_so_md=True, aforro=False)
         md = (self.dir / "caixa.md").read_text(encoding="utf-8")
         self.assertRegex(md, r"(?m)^#{3,} ANEXO I$")
+
+    def test_artigos_no_md_do_boe(self):
+        conversor.converter(str(self._copia("BOE-A-2026-13002")), aforro=False)
+        md = (self.dir / "BOE-A-2026-13002.pdf.md").read_text(encoding="utf-8")
+        self.assertRegex(md, r"(?m)^#{2,} Artículo 1\. Veda\.$")
+        self.assertRegex(md, r"(?m)^#{2,} Artículo 2\. Régimen sancionador\.$")
+        self.assertRegex(md, r"(?m)^#{2,} Disposición final primera\. Título competencial\.$")
 
     def test_anonimizando_o_anexo_segue_a_ser_titulo(self):
         ruta = self._copia("BOE-A-2025-21301")
