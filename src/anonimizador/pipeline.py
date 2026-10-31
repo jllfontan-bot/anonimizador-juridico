@@ -36,6 +36,7 @@ from .registry import RexistroCorrespondencias
 # A lectura vive en `lectura.py` (sen NER). Os nomes que aquí non se usan
 # reexpórtanse para quen os importa de `pipeline` (web, cli, tests...).
 from .lectura import (  # noqa: F401
+    _QNAMES_ESPAZADO_ODT,
     _aceptar_control_de_cambios_docx,
     _agrupar_liñas_por_paragrafo,
     _aplicar_substitucions_a_texto,
@@ -47,6 +48,7 @@ from .lectura import (  # noqa: F401
     _paragrafos_dun_contedor_docx,
     _paragrafos_odt,
     _partes_docx_con_texto,
+    _texto_fillo_odt,
     _texto_paragrafo_odt,
     cargar_documento_estruturado,
     cargar_texto,
@@ -307,12 +309,15 @@ def _substituir_texto_paragrafo_odt(paragrafo, texto_novo: str) -> None:
     Nota técnica: non se usa `paragrafo.removeChild()` para baleirar o
     paragrafo porque odfpy falla ao tentar actualizar as súas caches
     internas cando o fillo é un nodo de texto plano nun documento cargado
-    de disco; manipular `childNodes` directamente evita ese fallo."""
+    de disco; manipular `childNodes` directamente evita ese fallo.
+
+    `teletype.addTextToElement` volve escribir os "\\n", "\\t" e espazos
+    repetidos coma salto, tabulador e `text:s` (ver `_texto_fillo_odt`)."""
     for fillo in _fillos_de_texto_odt(paragrafo):
         fillo.parentNode = None
         paragrafo.childNodes.remove(fillo)
     if texto_novo:
-        paragrafo.addText(texto_novo)
+        teletype.addTextToElement(paragrafo, texto_novo)
 
 
 def _aplicar_substitucions_paragrafo_odt(paragrafo, substitucions_locais: list) -> None:
@@ -322,24 +327,36 @@ def _aplicar_substitucions_paragrafo_odt(paragrafo, substitucions_locais: list) 
     frase). Un nodo de texto plano reescríbese cambiando `.data`
     directamente; un "span" baléirase e reescríbese coma na reserva, pero
     SO o seu contido -- o seu propio estilo non se toca. Unha eventual
-    anotación fillo directo QUEDA FÓRA (ver `_fillos_de_texto_odt`)."""
+    anotación fillo directo QUEDA FÓRA (ver `_fillos_de_texto_odt`).
+
+    Un salto, tabulador ou `text:s` fillo directo (ver `_texto_fillo_odt`)
+    queda tal cal se ningunha substitución o toca; se o cobre unha, cámbiase
+    polo seu texto novo (baleiro ou o código, se a mención empeza nel)."""
     fillos = _fillos_de_texto_odt(paragrafo)
     if not fillos:
         return
-    textos = [
-        fillo.data if isinstance(fillo, TextoOdt) else teletype.extractText(fillo)
-        for fillo in fillos
-    ]
+    textos = [_texto_fillo_odt(fillo) for fillo in fillos]
     novos = _distribuir_por_anacos(textos, substitucions_locais)
-    for fillo, novo in zip(fillos, novos):
+    for fillo, texto, novo in zip(fillos, textos, novos):
         if isinstance(fillo, TextoOdt):
             fillo.data = novo
+        elif fillo.qname in _QNAMES_ESPAZADO_ODT:
+            if novo == texto:
+                continue
+            indice = paragrafo.childNodes.index(fillo)
+            fillo.parentNode = None
+            if novo:
+                nodo = TextoOdt(novo)
+                nodo.parentNode = paragrafo
+                paragrafo.childNodes[indice] = nodo
+            else:
+                del paragrafo.childNodes[indice]
         else:
             while fillo.childNodes:
                 fillo.childNodes[0].parentNode = None
                 del fillo.childNodes[0]
             if novo:
-                fillo.addText(novo)
+                teletype.addTextToElement(fillo, novo)
 
 
 def _redactar_imaxes_docx(documento) -> None:
@@ -476,15 +493,19 @@ def _limites_por_contexto(contexto: dict | None) -> list | None:
         return None
     if contexto["tipo"] == "pdf":
         return _limites_paxinas(contexto["paxinas"])
-    return _limites_paragrafos(contexto["textos_orixinais"])
+    # Por liña, non por parágrafo: unha mención que cruza un salto de liña
+    # manual dentro do parágrafo ("Antía Varela" + Maiús+Intro + "Doval")
+    # quitaríalle unha liña ao texto e `gardar_documento_estruturado` xa
+    # non podería escribilo.
+    return _limites_paragrafos("\n".join(contexto["textos_orixinais"]).split("\n"))
 
 
 def _clamp_substitucions_a_limites(substitucions: list, limites: list) -> list:
     """Se unha substitución cruza a fronteira entre dous "contedores"
-    (parágrafos en .docx/.odt, páxinas en .pdf) -- practicamente sempre un
-    erro de detección do NER/patróns esparexendo unha mención máis alá do
-    que debería, nunca unha mención real que abarque dous contedores --
-    pártese en anacos, un por cada contedor que toca. Isto evita desaliñar
+    (liñas en .docx/.odt, páxinas en .pdf) -- entre parágrafos ou páxinas
+    practicamente sempre un erro de detección do NER/patróns esparexendo
+    unha mención máis alá do que debería; entre liñas dun parágrafo pode
+    ser un nome real partido cun salto manual --, pártese en anacos, un por cada contedor que toca. Isto evita desaliñar
     o número de parágrafos/páxinas do documento orixinal (o que faría
     fallar `gardar_documento_estruturado`/`gardar_pdf_estruturado` xa na
     primeira comprobación, mesmo SEN que un letrado editase nada a man).

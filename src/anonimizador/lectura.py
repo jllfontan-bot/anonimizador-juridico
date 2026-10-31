@@ -17,7 +17,10 @@ from odf.element import Text as TextoOdt
 from odf.office import Annotation as AnotacionOdt
 from odf.opendocument import load as cargar_odt
 from odf.text import H as TituloOdt
+from odf.text import LineBreak as SaltoLiñaOdt
 from odf.text import P as ParagrafoOdt
+from odf.text import S as EspazosOdt
+from odf.text import Tab as TabuladorOdt
 
 from . import imaxes
 from .pdf_estrutura import cargar_pdf_estruturado
@@ -27,6 +30,10 @@ from .pdf_estrutura import cargar_pdf_estruturado
 _QNAME_PARAGRAFO_ODT = ParagrafoOdt().qname
 _QNAME_TITULO_ODT = TituloOdt(outlinelevel=1).qname
 _QNAME_ANOTACION_ODT = AnotacionOdt().qname
+_QNAME_SALTO_ODT = SaltoLiñaOdt().qname
+_QNAME_TABULADOR_ODT = TabuladorOdt().qname
+_QNAME_ESPAZOS_ODT = EspazosOdt().qname
+_QNAMES_ESPAZADO_ODT = (_QNAME_SALTO_ODT, _QNAME_TABULADOR_ODT, _QNAME_ESPAZOS_ODT)
 
 
 def _paragrafos_dun_contedor_docx(contedor) -> list:
@@ -194,13 +201,30 @@ def _fillos_de_texto_odt(paragrafo) -> list:
     ]
 
 
+def _texto_fillo_odt(fillo) -> str:
+    """Texto que aporta un fillo directo dun parágrafo/título.
+    `teletype.extractText` só converte os saltos de liña manuais
+    (`text:line-break`), os tabuladores (`text:tab`) e os espazos
+    repetidos (`text:s`) cando van DENTRO do elemento que se lle pasa (un
+    span): pasándolle o propio salto devolve "". Por iso un salto fillo
+    directo do parágrafo desaparecía e as palabras de cada lado chegaban
+    pegadas á detección -- "representación de" + salto + "Antía Varela
+    Doval" líase "deAntía Varela Doval" e "Antía" quedaba á vista."""
+    if isinstance(fillo, TextoOdt):
+        return fillo.data
+    if fillo.qname == _QNAME_SALTO_ODT:
+        return "\n"
+    if fillo.qname == _QNAME_TABULADOR_ODT:
+        return "\t"
+    if fillo.qname == _QNAME_ESPAZOS_ODT:
+        return " " * int(fillo.getAttribute("c") or 1)
+    return teletype.extractText(fillo)
+
+
 def _texto_paragrafo_odt(paragrafo) -> str:
     """Texto dun parágrafo/título coma `teletype.extractText`, pero sen
     contar o contido das anotacións (ver `_fillos_de_texto_odt`)."""
-    return "".join(
-        fillo.data if isinstance(fillo, TextoOdt) else teletype.extractText(fillo)
-        for fillo in _fillos_de_texto_odt(paragrafo)
-    )
+    return "".join(_texto_fillo_odt(fillo) for fillo in _fillos_de_texto_odt(paragrafo))
 
 
 def cargar_documento_estruturado(ruta: str):

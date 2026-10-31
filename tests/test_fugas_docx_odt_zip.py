@@ -32,7 +32,7 @@ from odf.meta import InitialCreator as InitialCreatorOdt
 from odf.office import Annotation as AnnotationOdt
 from odf.opendocument import OpenDocumentText
 from odf.style import Footer, Header, MasterPage, PageLayout
-from odf.text import H, P
+from odf.text import H, LineBreak, P, Tab
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
@@ -364,6 +364,55 @@ class TestFugasDocx(unittest.TestCase):
         self.assertEqual(doc_final.core_properties.comments, "")
 
 
+class TestNomePartidoPorSaltoManual(unittest.TestCase):
+    """Unha mención que cruza un salto de liña manual (Maiús+Intro) dentro
+    dun parágrafo substituíase enteira por un só código, o texto perdía
+    unha liña e `gardar_documento_estruturado` fallaba (ValueError): o
+    documento non se gardaba. Agora pártese en cada salto, co mesmo código
+    en cada anaco."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self._tmp.name)
+        self.rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_docx(self):
+        doc = docx.Document()
+        paragrafo = doc.add_paragraph("Comparece Antía Varela")
+        paragrafo.add_run().add_break()
+        paragrafo.add_run("Doval, maior de idade.")
+        entrada, saida = self.dir / "nome.docx", self.dir / "nome.anonimizado.docx"
+        doc.save(str(entrada))
+
+        anonimizar_e_gardar(str(entrada), str(saida), self.rexistro)
+
+        xml = _todo_o_xml_interno(saida)
+        for dato in ("Antía", "Varela", "Doval"):
+            self.assertNotIn(dato, xml)
+        texto = docx.Document(str(saida)).paragraphs[0].text
+        self.assertRegex(texto, r"^Comparece PERSOA_\d+\nPERSOA_\d+, maior de idade\.$")
+
+    def test_odt(self):
+        doc = OpenDocumentText()
+        paragrafo = P()
+        paragrafo.addText("Comparece Antía Varela")
+        paragrafo.addElement(LineBreak())
+        paragrafo.addText("Doval, maior de idade.")
+        doc.text.addElement(paragrafo)
+        entrada, saida = self.dir / "nome.odt", self.dir / "nome.anonimizado.odt"
+        doc.save(str(entrada))
+
+        anonimizar_e_gardar(str(entrada), str(saida), self.rexistro)
+
+        xml = _todo_o_xml_interno(saida)
+        for dato in ("Antía", "Varela", "Doval"):
+            self.assertNotIn(dato, xml)
+        self.assertIn("text:line-break", xml)
+
+
 class TestFugasOdt(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -451,6 +500,41 @@ class TestFugasOdt(unittest.TestCase):
 
         xml = _todo_o_xml_interno(saida)
         self.assertNotIn("Carballo Portela", xml)
+
+    def test_salto_de_liña_non_pega_o_nome_á_palabra_anterior(self):
+        """Un salto de liña manual (`text:line-break`) fillo directo do
+        parágrafo líase coma "", así que "representación de" + salto +
+        "Antía..." chegaba á detección coma "deAntía Varela Doval" e o
+        nome quedaba a medio tapar ("Antía" á vista)."""
+        doc = OpenDocumentText()
+        paragrafo = P()
+        paragrafo.addText("Actúa en representación de")
+        paragrafo.addElement(LineBreak())
+        paragrafo.addText("Antía Varela Doval, veciña de Lugo.")
+        doc.text.addElement(paragrafo)
+
+        saida = self._anonimizar(doc, "salto.odt")
+
+        xml = _todo_o_xml_interno(saida)
+        for dato in ("Antía", "Varela", "Doval"):
+            self.assertNotIn(dato, xml)
+
+    def test_tabulador_non_pega_o_nome_á_palabra_anterior(self):
+        """Igual có salto de liña, cun tabulador (`text:tab`): "firmado
+        por" + tabulador + "Brais Castro Bouzas" deixaba "Brais" e "Bouzas"
+        á vista."""
+        doc = OpenDocumentText()
+        paragrafo = P()
+        paragrafo.addText("Documento firmado por")
+        paragrafo.addElement(Tab())
+        paragrafo.addText("Brais Castro Bouzas")
+        doc.text.addElement(paragrafo)
+
+        saida = self._anonimizar(doc, "tabulador.odt")
+
+        xml = _todo_o_xml_interno(saida)
+        for dato in ("Brais", "Castro", "Bouzas"):
+            self.assertNotIn(dato, xml)
 
 
 class TestFugasZip(unittest.TestCase):
