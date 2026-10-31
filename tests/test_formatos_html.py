@@ -94,14 +94,22 @@ class TestHtml(unittest.TestCase):
         md = self.md("<body><p>Antes <img src='data:image/png;base64,AAAA' alt='Plano da parcela'> "
                      "e <img src='x.png'> despois</p></body>")
         self.assertIn("[imaxe: Plano da parcela]", md)
-        self.assertIn("[imaxe]", md)
         self.assertNotIn("base64", md)
         self.assertNotIn("x.png", md)
 
     def test_alt_que_e_un_nome_de_arquivo_non_e_texto_alternativo(self):
-        md = self.md("<body><p><img src='a.png' alt='IMG_2043_Ana_Pena.jpg'></p></body>")
-        self.assertIn("[imaxe]", md)
+        md = self.md("<body><p>Texto <img src='a.png' alt='IMG_2043_Ana_Pena.jpg'></p></body>")
+        self.assertNotIn("[imaxe", md)
         self.assertNotIn("Ana_Pena", md)
+
+    def test_imaxes_sen_alt_omitense_e_avisase_do_total(self):
+        ruta = self.dir / "p.html"
+        ruta.write_text("<body><p>Texto <img src='a.png'> <img src='b.png' alt=''> "
+                        "<img src='c.png' alt='Plano'></p></body>", encoding="utf-8")
+        c = paxinas_html.convertir(str(ruta))
+        self.assertEqual(c.markdown.count("[imaxe"), 1)
+        self.assertEqual(len(c.avisos), 1)
+        self.assertIn("2", c.avisos[0])
 
     def test_liñas_do_fonte_unense_nun_so_paragrafo(self):
         md = self.md("<body><p>Visto o expediente,\n   resolvo o\nseguinte.</p>"

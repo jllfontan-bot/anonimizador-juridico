@@ -35,7 +35,7 @@ _TEXTOS = {
         "diapositiva": "Diapositiva {n}",
         "diapositiva_oculta": "Diapositiva {n} oculta omitida.",
         "notas_orador": "Notas del orador:",
-        "imaxe": "[imagen]",
+        "imaxes_omitidas": "{n} imágenes sin texto alternativo omitidas.",
         "imaxe_alt": "[imagen: {alt}]",
         "grafico": "[gráfico]",
         "obxecto": "[objeto no convertido]",
@@ -53,7 +53,7 @@ _TEXTOS = {
         "diapositiva": "Diapositiva {n}",
         "diapositiva_oculta": "Diapositiva {n} agochada omitida.",
         "notas_orador": "Notas do orador:",
-        "imaxe": "[imaxe]",
+        "imaxes_omitidas": "{n} imaxes sen texto alternativo omitidas.",
         "imaxe_alt": "[imaxe: {alt}]",
         "grafico": "[gráfico]",
         "obxecto": "[obxecto non convertido]",
@@ -104,10 +104,12 @@ _NOME_DE_IMAXE = re.compile(r"\.(png|jpe?g|gif|bmp|tiff?|webp|emf|wmf|svg)$", re
 
 
 def marca_imaxe(alt: str = "") -> str:
-    """`[imaxe]` ou `[imaxe: texto alternativo]`. Os programas poñen o NOME
+    """`[imaxe: texto alternativo]`, ou `""` se non hai: unha imaxe sen texto
+    alternativo é case sempre decorativa e unha marca baleira só gasta
+    tokens (quen chama conta as omitidas e avisa). Os programas poñen o NOME
     DO ARQUIVO da imaxe coma texto alternativo (`foto.png`): non é texto
     alternativo, e pode levar nomes de persoas."""
     alt = " ".join((alt or "").split())
     if not alt or _NOME_DE_IMAXE.search(alt):
-        return t("imaxe")
+        return ""
     return t("imaxe_alt", alt=alt)

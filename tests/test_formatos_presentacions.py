@@ -143,7 +143,8 @@ class TestPptx(_Base):
         prs.save(ruta)
         md = presentacions.a_markdown(ruta)
         self.assertIn("[imaxe: Plano da parcela]", md)
-        self.assertIn("[imaxe]", md)
+        self.assertEqual(md.count("[imaxe"), 1)  # a segunda, sen alt, omítese
+        self.assertIn("1 imaxes sen texto alternativo omitidas", presentacions.convertir(ruta).avisos[0])
 
     def test_formas_agrupadas(self):
         prs = Presentation()
@@ -324,7 +325,7 @@ class TestOdp(_Base):
         self.assertNotIn("PE REPETIDO", md)
         self.assertNotIn("DATA REPETIDA", md)
 
-    def test_imaxe_marcase(self):
+    def test_imaxe_sen_alt_omitese_e_avisase(self):
         doc = OpenDocumentPresentation()
         p = self._pagina(doc, "page1", "Foto", ["a"])
         marco = Frame(width="5cm", height="2cm", x="0cm", y="0cm")
@@ -332,7 +333,9 @@ class TestOdp(_Base):
         p.addElement(marco)
         ruta = self.ruta("p.odp")
         doc.save(ruta)
-        self.assertIn("[imaxe]", presentacions.a_markdown(ruta))
+        c = presentacions.convertir(ruta)
+        self.assertNotIn("[imaxe", c.markdown)
+        self.assertIn("1 imaxes sen texto alternativo omitidas", c.avisos[0])
 
 
 if __name__ == "__main__":
