@@ -227,6 +227,9 @@ def _texto_paragrafo_odt(paragrafo) -> str:
     return "".join(_texto_fillo_odt(fillo) for fillo in _fillos_de_texto_odt(paragrafo))
 
 
+EXTENSIONS_SOPORTADAS = (".pdf", ".docx", ".odt", ".txt", ".md", *imaxes.FORMATOS)
+
+
 def cargar_documento_estruturado(ruta: str):
     """Para `.docx`/`.odt` devolve (texto_plano, contexto), onde `contexto`
     garda o necesario para escribir de volta conservando o formato

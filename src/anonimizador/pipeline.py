@@ -36,6 +36,7 @@ from .registry import RexistroCorrespondencias
 # A lectura vive en `lectura.py` (sen NER). Os nomes que aquí non se usan
 # reexpórtanse para quen os importa de `pipeline` (web, cli, tests...).
 from .lectura import (  # noqa: F401
+    EXTENSIONS_SOPORTADAS,
     _QNAMES_ESPAZADO_ODT,
     _aceptar_control_de_cambios_docx,
     _agrupar_liñas_por_paragrafo,
@@ -861,8 +862,6 @@ def ruta_saida_por_defecto(
         contador += 1
     return str(ruta_saida)
 
-
-EXTENSIONS_SOPORTADAS = (".pdf", ".docx", ".odt", ".txt", ".md", *imaxes.FORMATOS)
 
 # Copia Markdown dunha pasada anterior (`copia_md.ruta_copia`):
 # "demanda.anonimizado.pdf.md".
