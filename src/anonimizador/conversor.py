@@ -59,7 +59,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import aforro_ia, copia_md, formatos, idioma, lectura
+from . import aforro_ia, copia_md, formatos, idioma, lectura, titulos_pdf
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -206,14 +206,15 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro) -> tuple:
 
     if not anonimizar:
         # Un .md de entrada xa é Markdown: tal cal (`xerar` escaparía os seus títulos).
-        corpo = texto if sufixo == ".md" else copia_md.xerar(contexto, texto)
+        corpo = texto if sufixo == ".md" else titulos_pdf.marcar_titulos_md(copia_md.xerar(contexto, texto), contexto, texto)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
                            str(doc.nome), corpo, paxinas), None
 
     from . import pipeline  # só aquí: o modo sen anonimizar non carga o NER
 
     texto_anon, informe, substitucions = pipeline.anonimizar_texto_detallado(texto, rexistro, contexto=contexto)
-    corpo = texto_anon if sufixo == ".md" else copia_md.xerar(contexto, texto_anon, substitucions)
+    corpo = texto_anon if sufixo == ".md" else titulos_pdf.marcar_titulos_md(
+        copia_md.xerar(contexto, texto_anon, substitucions), contexto, texto_anon, substitucions)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
     nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
     cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
