@@ -205,13 +205,16 @@ class TestHtml(unittest.TestCase):
         self.assertIn("| A | B |", md)
 
     def test_taboa_de_maquetacion_con_taboas_dentro_deixa_as_de_dentro_coma_taboas(self):
-        mes = ("<table><tr><th colspan='2'>{m}</th></tr><tr><td>L</td><td>M</td></tr>"
-               "<tr><td>1</td><td>2</td></tr></table>")
-        md = self.md("<body><table><tr><td>" + mes.format(m="Xaneiro") + "</td><td>"
-                     + mes.format(m="Febreiro") + "</td></tr></table></body>")
+        def mes(nome):
+            return (f"<table><tr><th colspan='2'>{nome}</th></tr><tr><td>L</td><td>M</td></tr>"
+                    "<tr><td>1</td><td>2</td></tr></table>")
+        md = self.md("<body><table>"
+                     f"<tr><td>{mes('Xaneiro')}</td><td>{mes('Febreiro')}</td></tr>"
+                     f"<tr><td>{mes('Marzo')}</td><td>{mes('Abril')}</td></tr>"
+                     "</table></body>")
         self.assertIn("| Xaneiro |  |", md)
-        self.assertIn("| Febreiro |  |", md)
-        self.assertEqual(md.count("| L | M |"), 2)
+        self.assertIn("| Abril |  |", md)
+        self.assertEqual(md.count("| L | M |"), 4)
 
     def test_portada_do_dog_sen_buscador_nin_ligazons_laterais(self):
         md = self.md("<body><div class='box-color-gris'>Busca no DOG</div>"
