@@ -1,4 +1,10 @@
 {
+ "aforro_ia.caracteres": "{n} caracteres",
+ "aforro_ia.estimacion": "Estimación (no es el contador real de Claude, que solo existe en línea; se calcula a razón de unos 3,5 caracteres por token): antes {antes} tokens, después {despois} tokens ({aforro} % menos).",
+ "aforro_ia.indice": "Índice de {nome}",
+ "aforro_ia.indice_aviso": "Cada parte empieza en una página o en un título y nunca corta una tabla. Lee solo la que necesites.",
+ "aforro_ia.parte": "parte {n} de {total}",
+ "aforro_ia.paxinas": "páginas {a}-{b}",
  "app.nome": "Anonimizador de expedientes jurídicos",
  "auto.cancelaches": "<strong>Has cancelado el proceso:</strong> los {n} archivo(s) restantes no se han tocado.",
  "auto.con_erro": "{n} con error",
