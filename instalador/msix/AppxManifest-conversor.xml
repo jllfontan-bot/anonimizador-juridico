@@ -2,11 +2,10 @@
 <!-- Manifesto do paquete MSIX do Conversor de archivos para IA, unha
      aplicación PROPIA na Store (non vai dentro do paquete do anonimizador).
      montar_msix.py substitúe {VERSION} (a de conversor.VERSION).
-     A identidade (Name, Publisher, PublisherDisplayName) ten que ser a que dea
-     Partner Center ao reservar o nome "Conversor de archivos para IA": se non
-     coincide letra a letra, a Store rexeita o paquete. Publisher é o da conta
-     (o mesmo có anonimizador); o Name de aquí é PROVISIONAL (vale para a
-     copia de proba na VM) ata reservar o nome. -->
+     A identidade (Name, Publisher, PublisherDisplayName) é a que deu Partner
+     Center ao reservar o nome "Conversor de archivos para IA" (Store ID
+     9NMM4DRL6FCC, 31/10/2026): se non coincide letra a letra, a Store rexeita
+     o paquete. Publisher é o da conta, o mesmo có anonimizador. -->
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"

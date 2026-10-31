@@ -1,17 +1,16 @@
 # Ficha de la Microsoft Store — Conversor de archivos para IA
 
-Textos para Partner Center. Es una **aplicación propia**, distinta del Anonimizador jurídico
-(otra ficha, otra certificación y otra clasificación IARC), con el mismo editor y la misma licencia.
-Idiomas del paquete: español (España, `es-ES`) y gallego (`gl-ES`), los dos declarados en
-`instalador/msix/AppxManifest-conversor.xml`, así que Partner Center pedirá una ficha para cada uno.
+Textos para Partner Center (Store ID `9NMM4DRL6FCC`, nombre reservado el 31/10/2026: hay que
+enviarla a la Store antes de tres meses o se pierde la reserva). Es una **aplicación propia**, distinta
+del Anonimizador jurídico (otra ficha, otra certificación y otra clasificación IARC), con el mismo
+editor y la misma licencia. Idiomas del paquete: español (España, `es-ES`) y gallego (`gl-ES`), los
+dos declarados en `instalador/msix/AppxManifest-conversor.xml`, así que Partner Center pedirá una
+ficha para cada uno.
 
 ## Antes de enviar
-1. **Reservar el nombre** «Conversor de archivos para IA» en Partner Center (Aplicaciones y juegos ›
-   Nueva aplicación). Partner Center da entonces la identidad del paquete (*Product identity*):
-   `Package/Identity/Name` y `Publisher`. Copiarlos letra a letra en
-   `instalador/msix/AppxManifest-conversor.xml`: el `Name` que hay ahora es provisional (vale para
-   la copia de prueba en la VM) y, si no coincide, la Store rechaza el paquete. El `Publisher`
-   debería ser el mismo que el del anonimizador (la misma cuenta).
+1. Identidad del paquete (*Product identity* de Partner Center), ya en el manifiesto:
+   `JosLuisLpezFontn.ConversordearchivosparaIA`, `CN=D4ECC9E2-BE4E-46B0-A68D-EF12B55919C3`,
+   «José Luis López Fontán»; PFN `JosLuisLpezFontn.ConversordearchivosparaIA_90j83w49ny88e`.
 2. Compilar el paquete con el workflow «Paquete MSIX (Microsoft Store)», aplicación `conversor`
    (o con una etiqueta `msix-conversor-v1.0.0`), y probar en la VM la copia firmada de prueba.
 3. Subir `Conversor-archivos-IA-<versión>-x64.msix` (artefacto `paquete-msix-store-conversor`).
