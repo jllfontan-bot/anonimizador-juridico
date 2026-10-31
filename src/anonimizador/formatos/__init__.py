@@ -17,10 +17,10 @@ from __future__ import annotations
 import inspect
 from pathlib import Path
 
-from . import follas, paxinas_html, presentacions
+from . import correos, follas, paxinas_html, presentacions
 from ._comun import Conversion
 
-LECTORES = {ext: modulo for modulo in (follas, presentacions, paxinas_html) for ext in modulo.FORMATOS}
+LECTORES = {ext: modulo for modulo in (follas, presentacions, paxinas_html, correos) for ext in modulo.FORMATOS}
 EXTENSIONS = tuple(sorted(LECTORES))
 # Todas, de momento: ningunha ten aínda os tests de fuga do modo anonimizado.
 EXTENSIONS_SO_SEN_ANONIMIZAR = EXTENSIONS

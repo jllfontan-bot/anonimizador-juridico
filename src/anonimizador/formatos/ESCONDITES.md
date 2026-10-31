@@ -101,6 +101,21 @@ se detectan. Un `.csv` anonimizado debería escribirse de novo con delimitador e
 | Elementos concretos do BOE e do DOG: botón de audio (`rs_skip`/`rsbtn`), ligazón «Subir» (`linkSubir`), selector de apartados da lei consolidada (`marcadores`), menús e pés do sumario, buscador e ligazóns laterais da portada do DOG | Fóra | Idem |
 | Codificación (`<meta charset>`) | Detéctase | — |
 
+## .eml (correos gardados)
+
+| Escondite | Modo sen anonimizar | Para o modo anonimizado |
+|---|---|---|
+| Cabeceiras técnicas: `Received` (IP e servidores), `Message-ID`, `Return-Path` (enderezo de rebote), `X-*` (`X-Originating-IP`, `X-Mailer`, `X-MS-*`), DKIM, `Thread-Topic` | Fóra | Borrar |
+| Cabeceiras que ve a persoa: De, Para, Cc, Cco, Responder a, Data (nomes e correos) | **Entran** | Anonimizar nomes e correos |
+| Asunto | **Entra** coma `# título` | Anonimizar |
+| Versión HTML cando hai texto plano (`multipart/alternative`) | Fóra (pode dicir máis ca o texto plano: compróbase só o plano) | Anonimizar as dúas ou borrar a HTML |
+| Corpo HTML: os mesmos escondites ca un `.html` (comentarios, elementos agochados, `<title>`...) | Polo lector de páxinas, sen o `<title>` | Idem .html |
+| Historial citado da resposta (`> ...`, «Mensaje original») | **Entra** (é texto visible) | Anonimizar: adoita levar os datos doutras persoas |
+| Anexos (nome, tamaño e contido) | Lístanse nome e tamaño, sen o contido; aviso para convertelos á parte | Anonimizar o nome; o contido, co seu propio lector, ou fóra |
+| Mensaxes reenviadas coma anexo (`message/rfc822`) | Lístase o asunto, sen entrar nelas | Idem anexos, recursivamente |
+| Imaxes incrustadas (`cid:`: sinaturas, logotipos, capturas) | Fóra, con aviso | OCR ou borrar |
+| Formatos de Outlook `.msg` | Non se len (non son `.eml`) | — |
+
 ## Nota para o motor
 
 - Todos entran sen anonimizar con `formatos.a_markdown(ruta)` / `formatos.convertir(ruta)`; os avisos

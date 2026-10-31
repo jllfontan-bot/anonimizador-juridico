@@ -301,6 +301,9 @@ class TestFormatosNovos(_Base):
         (raiz / "norma.html").write_text(
             "<html><head><title>x</title><script>var a;</script></head>"
             "<body><h1>Lei de proba</h1><p>Artigo primeiro.</p></body></html>", encoding="utf-8")
+        (raiz / "aviso.eml").write_bytes(
+            b"Subject: Prazo de contestacion\nFrom: Ana Pena <ana@example.org>\n"
+            b"Received: from IP-ESCONDIDA\n\nVence o luns.\n")
         return raiz
 
     def test_sen_anonimizar(self):
@@ -314,6 +317,10 @@ class TestFormatosNovos(_Base):
         norma = (raiz / "norma.html.md").read_text(encoding="utf-8")
         self.assertIn("# Lei de proba", norma)
         self.assertNotIn("var a", norma)
+        aviso = (raiz / "aviso.eml.md").read_text(encoding="utf-8")
+        self.assertIn("# Prazo de contestacion", aviso)
+        self.assertIn("Vence o luns.", aviso)
+        self.assertNotIn("IP-ESCONDIDA", aviso)
         self.assertEqual(list(resultado.avisos), ["contas.xlsx"])
         self.assertIn("Interna", resultado.avisos["contas.xlsx"][0])
 
@@ -322,7 +329,8 @@ class TestFormatosNovos(_Base):
         rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
         resultado = conversor.converter(str(raiz), anonimizar=True, rexistro=rexistro, saida=str(self.dir / "s"))
         self.assertEqual(sorted(resultado.omitidos), [
-            ("contas.xlsx", "sen_proba_de_fugas"), ("norma.html", "sen_proba_de_fugas"),
+            ("aviso.eml", "sen_proba_de_fugas"), ("contas.xlsx", "sen_proba_de_fugas"),
+            ("norma.html", "sen_proba_de_fugas"),
             ("resumo.pptx", "sen_proba_de_fugas")])
         self.assertEqual(resultado.saidas, [])
 

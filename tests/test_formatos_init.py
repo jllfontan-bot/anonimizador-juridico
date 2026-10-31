@@ -17,7 +17,7 @@ class TestFormatos(unittest.TestCase):
     def test_cada_extension_apunta_ao_seu_modulo(self):
         self.assertEqual(
             set(formatos.LECTORES),
-            {".xlsx", ".ods", ".csv", ".pptx", ".odp", ".html", ".htm"},
+            {".xlsx", ".ods", ".csv", ".pptx", ".odp", ".html", ".htm", ".eml"},
         )
         for ext in follas.FORMATOS:
             self.assertIs(formatos.LECTORES[ext], follas)

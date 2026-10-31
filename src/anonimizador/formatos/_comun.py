@@ -39,6 +39,16 @@ _TEXTOS = {
         "imaxe_alt": "[imagen: {alt}]",
         "grafico": "[gráfico]",
         "obxecto": "[objeto no convertido]",
+        "correo_de": "De",
+        "correo_para": "Para",
+        "correo_cc": "CC",
+        "correo_cco": "CCO",
+        "correo_responder_a": "Responder a",
+        "correo_data": "Fecha",
+        "correo_anexos": "Adjuntos:",
+        "correo_anexos_sen_converter": ("{n} adjuntos sin convertir (se listan al final del .md): "
+                                        "guárdalos y conviértelos aparte."),
+        "correo_imaxes_incrustadas": "{n} imágenes incrustadas en el correo omitidas (firmas, logotipos...).",
     },
     "gl": {
         "folla_oculta": "Folla agochada omitida: «{nome}».",
@@ -57,6 +67,16 @@ _TEXTOS = {
         "imaxe_alt": "[imaxe: {alt}]",
         "grafico": "[gráfico]",
         "obxecto": "[obxecto non convertido]",
+        "correo_de": "De",
+        "correo_para": "Para",
+        "correo_cc": "Cc",
+        "correo_cco": "Cco",
+        "correo_responder_a": "Responder a",
+        "correo_data": "Data",
+        "correo_anexos": "Anexos:",
+        "correo_anexos_sen_converter": ("{n} anexos sen converter (lístanse ao final do .md): "
+                                        "gárdaos e convérteos á parte."),
+        "correo_imaxes_incrustadas": "{n} imaxes incrustadas no correo omitidas (sinaturas, logotipos...).",
     },
 }
 
