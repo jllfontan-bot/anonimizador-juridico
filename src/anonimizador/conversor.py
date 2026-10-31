@@ -58,7 +58,6 @@ from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 if TYPE_CHECKING:
     from .registry import RexistroCorrespondencias
 
-NOME_PROGRAMA = "Conversor para IA"
 VERSION = "0.1.0"
 
 LECTORES_EXTRA: dict[str, Callable] = {ext: formatos.convertir for ext in formatos.EXTENSIONS}
@@ -230,7 +229,7 @@ def _cabeceira(orixe: str, anonimizado: bool, data: datetime.date, paxinas: int 
     if ficheiros is not None:
         liñas.append(f"{idioma.t('conversor.ficheiros')}: {ficheiros}")
     liñas.append(f"anonimizado: {idioma.t('conversor.si' if anonimizado else 'conversor.non')}")
-    liñas.append(f"{idioma.t('conversor.convertido')}: {data.isoformat()}, {NOME_PROGRAMA} {VERSION}")
+    liñas.append(f"{idioma.t('conversor.convertido')}: {data.isoformat()}, {idioma.t('conversor.nome')} {VERSION}")
     return "\n".join(liñas) + "\n---\n"
 
 

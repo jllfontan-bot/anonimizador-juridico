@@ -17,6 +17,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+from unittest import mock
 from contextlib import redirect_stdout
 from pathlib import Path
 
@@ -30,7 +31,7 @@ os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 _RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_RAIZ / "src"))
 
-from anonimizador import arranque_windows, cli_conversor, conversor
+from anonimizador import arranque_windows, cli_conversor, conversor, idioma
 from anonimizador.pipeline import anonimizar_e_gardar, ruta_saida_por_defecto
 from anonimizador.registry import RexistroCorrespondencias
 
@@ -106,6 +107,14 @@ class TestSenAnonimizar(_Base):
         self.assertIn(f"Comparece don {_NOME}, con DNI {_DNI}", md)
         self.assertIn("| Concepto | Importe |\n| --- | --- |\n| Custas | 300 euros |", md)
         self.assertEqual(resultado.omitidos, [])
+
+    def test_nome_do_programa_na_cabeceira(self):
+        """Nome decidido polo usuario o 31/10/2026, un por idioma coma `app.nome`."""
+        for lingua, nome in (("es", "Conversor de archivos para IA"), ("gl", "Conversor de ficheiros para IA")):
+            with mock.patch.dict(os.environ, {idioma.VARIABLE: lingua}):
+                conversor.converter(str(_docx(self.dir / f"demanda-{lingua}.docx")))
+            md = (self.dir / f"demanda-{lingua}.docx.md").read_text(encoding="utf-8")
+            self.assertIn(f", {nome} {conversor.VERSION}\n---", md)
 
     def test_odt(self):
         conversor.converter(str(_odt(self.dir / "informe.odt")))
