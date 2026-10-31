@@ -220,14 +220,15 @@ def _intervalo(palabras: list, rect: tuple) -> tuple | None:
 
 def _semella_frase(texto: str) -> bool:
     """Un título non é unha frase: non continúa unha anterior (empeza en
-    minúscula ou remata en coma), non é longa (máis de `_PALABRAS_MAXIMAS`)
-    nin remata en punto cunha boa tirada de palabras (sinaturas, parágrafos
-    en letra grande), nin é un campo de formulario ou unha data (`_NON_TITULO`)."""
+    minúscula ou remata en coma), non é o rótulo dun campo (remata en dous
+    puntos), non é longa (máis de `_PALABRAS_MAXIMAS`) nin remata en punto
+    cunha boa tirada de palabras (sinaturas, parágrafos en letra grande), e
+    non é un campo de formulario ou unha data (`_NON_TITULO`)."""
     primeira = next((c for c in texto if c.isalpha()), "")
     palabras = len(texto.split())
     return (primeira.islower() or palabras > _PALABRAS_MAXIMAS
             or (texto.rstrip().endswith(".") and palabras >= _PALABRAS_FRASE)
-            or texto.rstrip().endswith(",") or bool(_NON_TITULO.search(texto)))
+            or texto.rstrip().endswith((",", ":")) or bool(_NON_TITULO.search(texto)))
 
 
 def grupos_de_titulos(documento: "fitz.Document") -> list:

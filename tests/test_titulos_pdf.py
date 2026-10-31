@@ -125,6 +125,9 @@ class TestDeteccion(_Base):
     def test_campo_de_formulario_non_e_titulo(self):
         self.assertEqual(self._titulos([[("CENTRO DE DESTINO: SECRETARÍA XERAL", 14, 120)] + _corpo()]), [])
 
+    def test_rotulo_de_campo_con_dous_puntos_non_e_titulo(self):
+        self.assertEqual(self._titulos([[("Apellidos:", 14, 120)] + _corpo()]), [])
+
     def test_cabeceira_de_columnas_na_mesma_fila_non_e_titulo(self):
         documento = fitz.open()
         paxina = documento.new_page()
