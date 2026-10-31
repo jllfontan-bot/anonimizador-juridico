@@ -390,5 +390,7 @@
  "pantalla_conversor.en_marcha": "Xa hai unha conversión en marcha.",
  "pantalla_conversor.sen_entradas": "Escolle polo menos un ficheiro ou cartafol.",
  "pantalla_conversor.non_existe": "Non existe: {ruta}",
- "pantalla_conversor.erro_trocear": "O tamaño das partes ten que ser de polo menos 100 tokens."
+ "pantalla_conversor.erro_trocear": "O tamaño das partes ten que ser de polo menos 100 tokens.",
+ "pantalla_conversor.manual": "Manual de uso",
+ "pantalla_conversor.sen_manual": "O manual non está neste cartafol do programa."
 }

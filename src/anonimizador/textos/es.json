@@ -390,5 +390,7 @@
  "pantalla_conversor.en_marcha": "Ya hay una conversión en marcha.",
  "pantalla_conversor.sen_entradas": "Elige al menos un archivo o carpeta.",
  "pantalla_conversor.non_existe": "No existe: {ruta}",
- "pantalla_conversor.erro_trocear": "El tamaño de las partes tiene que ser de al menos 100 tokens."
+ "pantalla_conversor.erro_trocear": "El tamaño de las partes tiene que ser de al menos 100 tokens.",
+ "pantalla_conversor.manual": "Manual de uso",
+ "pantalla_conversor.sen_manual": "El manual no está en esta carpeta del programa."
 }

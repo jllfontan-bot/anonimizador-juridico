@@ -99,6 +99,9 @@
   .saidas{ list-style:none; padding:0; margin:0; }
   .saidas li{ display:flex; gap:8px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); }
   .saidas .ruta{ flex:1; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; word-break:break-all; }
+  .pe{ margin-top:36px; font-size:13px; display:flex; gap:18px; justify-content:center; }
+  .pe a, .tarxeta a{ color:var(--accent); }
+  pre.licenza{ white-space:pre-wrap; font-size:12px; }
   pre.vista{ white-space:pre-wrap; max-height:420px; overflow:auto; background:var(--surface);
              border:1px solid var(--line); border-radius:8px; padding:12px; font-size:13px; }
 </style>
@@ -179,12 +182,21 @@
 <!-- 4. Resultado -->
 <section id="resultado" hidden></section>
 
+<!-- 5. Acerca de -->
+<section id="acerca" hidden></section>
+
+<p class="pe" id="pe">
+  <a href="#" id="ligazon-manual" data-t="manual" hidden></a>
+  <a href="#" id="ligazon-acerca" data-t="acerca.titulo"></a>
+</p>
+
 </div>
 <script>
 "use strict";
 let T = __TEXTOS__;
 let entradas = [];
-let ultimoResultado = null, ultimoEvento = null, ultimaRevision = null;
+let ultimoResultado = null, ultimoEvento = null, ultimaRevision = null, ultimoAcerca = null;
+let seccionAntesDeAcerca = "inicio";
 
 function t(clave, valores) {
   let texto = (clave in T) ? T[clave] : clave;
@@ -213,10 +225,12 @@ function aplicarTextos() {
   pintarEntradas();
   if (ultimaRevision && !$("revision").hidden) pintarRevision(ultimaRevision);
   if (ultimoResultado && !$("resultado").hidden) pintarResultado(ultimoEvento, ultimoResultado);
+  if (ultimoAcerca && !$("acerca").hidden) pintarAcerca(ultimoAcerca);
 }
 
 function amosar(seccion) {
-  for (const s of ["inicio", "progreso", "revision", "resultado"]) $(s).hidden = s !== seccion;
+  for (const s of ["inicio", "progreso", "revision", "resultado", "acerca"]) $(s).hidden = s !== seccion;
+  $("pe").hidden = seccion === "acerca";
   window.scrollTo(0, 0);
 }
 
@@ -434,6 +448,32 @@ function pintarResultado(evento, d) {
     el("button", {type: "button", onclick: () => { entradas = []; pintarEntradas(); amosar("inicio"); }}, t("nova"))));
 }
 
+// -- acerca de -----------------------------------------------------------------------
+// Os textos `acerca.*` son os do anonimizador (os nosos, con <strong> e <code>): innerHTML.
+function conHtml(clave) { const n = el("p"); n.innerHTML = t(clave); return n; }
+function pintarAcerca(d) {
+  ultimoAcerca = d;
+  const s = $("acerca");
+  s.replaceChildren(
+    el("h2", {style: "margin-top:0;"}, t("acerca.titulo")),
+    el("p", {class: "subtitulo"}, t("acerca.version", {version: d.version})),
+    el("div", {class: "tarxeta"}, conHtml("acerca.autor"), conHtml("acerca.licenza"), el("p", {}, t("acerca.ia")),
+      el("p", {}, t("acerca.codigo") + " ",
+        el("a", {href: "#", onclick: (e) => { e.preventDefault(); api().abrir_codigo(); }}, d.url_codigo))),
+    el("div", {class: "tarxeta"}, el("p", {}, t("acerca.privacidade")), conHtml("acerca.terceiros")));
+  for (const [texto, clave] of [[d.licenza_eupl, "acerca.ver_licenza_eupl"], [d.licenza, "acerca.ver_licenza"]]) {
+    if (texto) s.append(el("details", {class: "tarxeta"}, el("summary", {}, t(clave)), el("pre", {class: "licenza"}, texto)));
+  }
+  s.append(el("p", {}, el("button", {type: "button", class: "boton-secundario",
+    onclick: () => amosar(seccionAntesDeAcerca)}, "← " + t("acerca.volver"))));
+}
+async function abrirAcerca() {
+  const visible = ["inicio", "progreso", "revision", "resultado"].find((x) => !$(x).hidden);
+  seccionAntesDeAcerca = visible || "inicio";
+  pintarAcerca(await api().acerca());
+  amosar("acerca");
+}
+
 // -- arranque ---------------------------------------------------------------------
 async function iniciar() {
   const estado = await api().estado_inicial();
@@ -446,6 +486,9 @@ async function iniciar() {
   $("converter").addEventListener("click", () => converter(false));
   $("converter-anon").addEventListener("click", () => converter(true));
   $("cancelar").addEventListener("click", cancelar);
+  $("ligazon-acerca").addEventListener("click", (e) => { e.preventDefault(); abrirAcerca(); });
+  $("ligazon-manual").hidden = !estado.hai_manual;
+  $("ligazon-manual").addEventListener("click", (e) => { e.preventDefault(); api().abrir_manual(); });
   document.querySelectorAll(".selector-idioma button").forEach((b) => b.addEventListener("click", async () => {
     const r = await api().cambiar_idioma(b.dataset.lingua);
     if (r.erro) return;

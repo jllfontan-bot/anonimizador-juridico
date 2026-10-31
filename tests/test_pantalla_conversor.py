@@ -116,6 +116,45 @@ class TestHtml(_Base):
                          set(pantalla_conversor.textos_da_pantalla("es")))
 
 
+class TestAcercaEManual(_Base):
+    """Coma o anonimizador: versión, dobre licenza, autoría, código fonte e
+    manual (requisitos xerais da Store)."""
+
+    def test_acerca_con_version_licenzas_e_codigo(self):
+        from anonimizador import web
+
+        datos = self.api.acerca()
+        self.assertEqual(datos["version"], conversor.VERSION)
+        self.assertIn("GNU AFFERO GENERAL PUBLIC LICENSE", datos["licenza"])
+        self.assertIn("v. 1.2", datos["licenza_eupl"])
+        self.assertEqual(datos["url_codigo"], web._URL_CODIGO)
+        textos = pantalla_conversor.textos_da_pantalla("gl")
+        self.assertIn("EUPL-1.2 OR AGPL-3.0-only", textos["acerca.licenza"])
+        self.assertIn("Anthropic", textos["acerca.ia"])
+        self.assertIn('id="ligazon-acerca"', pantalla_conversor.html())
+
+    def test_abrir_codigo_so_abre_o_repositorio(self):
+        with mock.patch.object(pantalla_conversor, "_abrir_fora") as abrir:
+            self.assertEqual(self.api.abrir_codigo(), {"ok": True})
+        abrir.assert_called_once_with(pantalla_conversor.URL_CODIGO)
+
+    def test_manual_no_idioma_escollido_ou_aviso_se_non_esta(self):
+        raiz = self.dir / "paquete" / "anonimizador-xuridico"
+        with mock.patch.object(pantalla_conversor, "_RAIZ_CODIGO", raiz), \
+                mock.patch.object(pantalla_conversor, "_abrir_fora") as abrir:
+            self.assertFalse(self.api.estado_inicial()["hai_manual"])
+            self.assertIn("erro", self.api.abrir_manual())
+            for nome in pantalla_conversor.MANUAL.values():
+                (raiz.parent / "docs" / nome).parent.mkdir(parents=True, exist_ok=True)
+                (raiz.parent / "docs" / nome).write_bytes(b"%PDF")
+            self.assertTrue(self.api.estado_inicial()["hai_manual"])
+            for lingua in ("es", "gl"):
+                with mock.patch.dict(os.environ, {"ANONIMIZADOR_IDIOMA": lingua}):
+                    self.assertEqual(self.api.abrir_manual(), {"ok": True})
+        es, gl = (Path(c.args[0]) for c in abrir.call_args_list)
+        self.assertEqual((es.parent.name, gl.parent.name), ("es", "docs"))
+
+
 class TestEntradas(_Base):
     def test_describir_rutas(self):
         ficheiro = _docx(self.dir / "a.docx")

@@ -45,6 +45,34 @@ def debuxar() -> Image.Image:
     return im
 
 
+AZUL = (35, 82, 140, 255)
+
+
+def debuxar_conversor() -> Image.Image:
+    """Icona do Conversor de archivos para IA (o seu paquete MSIX): a mesma
+    folla sobre fondo azul, coas liñas á vista e a marca de Markdown (M e
+    frecha cara abaixo) na parte de abaixo."""
+    im = Image.new("RGBA", (BASE, BASE), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((32, 32, BASE - 32, BASE - 32), radius=200, fill=AZUL)
+    x0, y0, x1, y1 = 250, 170, 774, 854
+    dobra = 150
+    d.polygon([(x0, y0), (x1 - dobra, y0), (x1, y0 + dobra), (x1, y1), (x0, y1)], fill=BRANCO)
+    d.polygon([(x1 - dobra, y0), (x1 - dobra, y0 + dobra), (x1, y0 + dobra)], fill=CINTO)
+    for i, y in enumerate((360, 450)):
+        ancho = 524 - 2 * 60 - (0 if i == 0 else 130)
+        d.rounded_rectangle((x0 + 60, y - 14, x0 + 60 + ancho, y + 14), radius=14, fill=LIÑA)
+    # marca de Markdown: M (trazo groso) e frecha cara abaixo
+    grosor = 46
+    m = [(320, 760), (320, 560), (410, 660), (500, 560), (500, 760)]
+    d.line(m, fill=BARRA, width=grosor, joint="curve")
+    for x, y in (m[0], m[-1]):
+        d.ellipse((x - grosor // 2, y - grosor // 2, x + grosor // 2, y + grosor // 2), fill=BARRA)
+    d.rectangle((604 - grosor // 2, 560, 604 + grosor // 2, 680), fill=BARRA)
+    d.polygon([(536, 668), (672, 668), (604, 770)], fill=BARRA)
+    return im
+
+
 def bitmap_asistente(icona: Image.Image) -> Image.Image:
     """164x314, o tamaño que espera MUI2 para as páxinas de benvida/final:
     degradado verde con a icona arriba."""

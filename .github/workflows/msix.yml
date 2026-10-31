@@ -7,14 +7,27 @@ name: Paquete MSIX (Microsoft Store)
 #    .pyc, cada arranque compilaría de novo spaCy, NumPy...) e empaqueta
 #    con makeappx. O .msix sae SEN asinar: asínao a Store ao publicalo.
 #
-# Execútase á man dende a pestana Actions ("Run workflow") ou cunha
-# etiqueta msix-v*. A versión do paquete é a do ficheiro VERSION.
+# Execútase á man dende a pestana Actions ("Run workflow", escollendo a
+# aplicación) ou cunha etiqueta: msix-v* (anonimizador) ou msix-conversor-v*
+# (Conversor de archivos para IA, aplicación propia na Store co mesmo árbore).
+# A versión do anonimizador é a do ficheiro VERSION; a do conversor,
+# `VERSION` de src/anonimizador/conversor.py.
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      app:
+        description: "Aplicación"
+        type: choice
+        options: [anonimizador, conversor]
+        default: anonimizador
   push:
     tags:
       - "msix-v*"
+      - "msix-conversor-v*"
+
+env:
+  APP: ${{ inputs.app || (startsWith(github.ref_name, 'msix-conversor-v') && 'conversor' || 'anonimizador') }}
 
 jobs:
   arbore:
@@ -28,7 +41,7 @@ jobs:
           python3 -m pip install --quiet --break-system-packages pillow
 
       - name: Montar o cartafol do paquete
-        run: ./instalador/crear-paquetes.sh msix
+        run: ./instalador/crear-paquetes.sh ${{ env.APP == 'conversor' && 'msix-conversor' || 'msix' }}
 
       - name: Empaquetar o cartafol nun só ficheiro (miles de ficheiros soltos soben moi lentos)
         run: tar -cf msix-cartafol.tar -C build msix
@@ -63,7 +76,11 @@ jobs:
       - name: Comprobar que arrinca o código (importar o módulo de arranque e o programa)
         shell: pwsh
         run: |
-          & msix\runtime\python\python.exe -c "import anonimizador.arranque_windows, anonimizador.web, spacy, fitz, webview; print('imports OK')"
+          if ($env:APP -eq "conversor") {
+            & msix\runtime\python\python.exe -c "import anonimizador.arranque_conversor, anonimizador.pantalla_conversor, anonimizador.pipeline, spacy, fitz, webview, openpyxl, pptx, bs4, markdownify; print('imports OK')"
+          } else {
+            & msix\runtime\python\python.exe -c "import anonimizador.arranque_windows, anonimizador.web, spacy, fitz, webview; print('imports OK')"
+          }
           if ($LASTEXITCODE -ne 0) { exit 1 }
 
       - name: makeappx pack
@@ -72,7 +89,8 @@ jobs:
           $makeappx = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\makeappx.exe" |
             Sort-Object FullName -Descending | Select-Object -First 1
           $version = ([xml](Get-Content msix\AppxManifest.xml)).Package.Identity.Version
-          $saida = "Anonimizador-juridico-$version-x64.msix"
+          $nome = if ($env:APP -eq "conversor") { "Conversor-archivos-IA" } else { "Anonimizador-juridico" }
+          $saida = "$nome-$version-x64.msix"
           & $makeappx.FullName pack /d msix /p $saida /o
           if ($LASTEXITCODE -ne 0) { exit 1 }
           Get-Item $saida | Format-List Name, Length
@@ -98,14 +116,14 @@ jobs:
 
       - uses: actions/upload-artifact@v6
         with:
-          name: paquete-msix-store
+          name: paquete-msix-store-${{ env.APP }}
           path: "*.msix"
           retention-days: 14
           compression-level: 0
 
       - uses: actions/upload-artifact@v6
         with:
-          name: paquete-msix-proba-asinado
+          name: paquete-msix-proba-asinado-${{ env.APP }}
           path: proba/
           retention-days: 3
           compression-level: 0

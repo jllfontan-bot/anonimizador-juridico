@@ -32,6 +32,7 @@ import re
 import subprocess
 import sys
 import threading
+import webbrowser
 from pathlib import Path
 
 from . import aforro_ia, conversor, idioma
@@ -40,6 +41,9 @@ PREFERENCIA_MODO = "conversor_modo_anonimizado"
 MODOS = ("revisar", "automatico")
 _PLANTILLA = Path(__file__).resolve().parent / "templates" / "conversor.html"
 _VISTA_PREVIA_MAXIMA = 200_000  # caracteres do texto anonimizado na revisión
+_RAIZ_CODIGO = Path(__file__).resolve().parents[2]
+URL_CODIGO = "https://github.com/jllfontan-bot/anonimizador-juridico"  # o mesmo ca `web._URL_CODIGO`
+MANUAL = {"gl": "10-Manual-do-conversor.pdf", "es": "es/10-Manual-del-conversor.pdf"}
 
 
 def modo_anonimizado() -> str:
@@ -53,7 +57,7 @@ def textos_da_pantalla(lingua: str | None = None) -> dict:
     do anonimizador (`revisar.*`, `categoria.*`, `mosaico.*`), os mesmos nos
     dous programas."""
     textos = idioma.textos_con_prefixo("pantalla_conversor.", lingua)
-    for prefixo in ("revisar.", "categoria.", "mosaico."):
+    for prefixo in ("revisar.", "categoria.", "mosaico.", "acerca."):
         textos.update({prefixo + c: v for c, v in idioma.textos_con_prefixo(prefixo, lingua).items()})
     textos["titulo"] = idioma.t("conversor.nome", lingua)
     return textos
@@ -66,6 +70,31 @@ def html() -> str:
             .replace("__LINGUA__", idioma.actual())
             .replace("__TITULO__", idioma.t("conversor.nome"))
             .replace("__TEXTOS__", textos))
+
+
+def manual_de_uso() -> Path | None:
+    """O PDF do manual do conversor no idioma escollido (no paquete, `docs/`
+    vai canda o código; no repositorio, na súa raíz)."""
+    for docs in (_RAIZ_CODIGO.parent / "docs", _RAIZ_CODIGO / "docs"):
+        pdf = docs / MANUAL["es" if idioma.actual() == "es" else "gl"]
+        if pdf.is_file():
+            return pdf
+    return None
+
+
+def _ler_licenza(nome: str) -> str | None:
+    try:
+        return (_RAIZ_CODIGO / nome).read_text(encoding="utf-8")
+    except OSError:
+        return None
+
+
+def _abrir_fora(destino: str) -> None:
+    """O PDF do manual co visor do sistema ou a ligazón no navegador, fóra da xanela."""
+    if sys.platform == "win32" and not destino.startswith("http"):
+        os.startfile(destino)  # noqa: S606 -- só o manual propio
+    else:
+        webbrowser.open(destino if destino.startswith("http") else Path(destino).as_uri())
 
 
 def _tipo(ruta: Path) -> str:
@@ -127,7 +156,26 @@ class Api:
 
     def estado_inicial(self) -> dict:
         return {"modo_anonimizado": modo_anonimizado(), "lingua": idioma.actual(),
-                "rexistro": str(self._cartafol_rexistro())}
+                "rexistro": str(self._cartafol_rexistro()), "hai_manual": manual_de_uso() is not None}
+
+    # -- acerca de e manual ----------------------------------------------------
+
+    def acerca(self) -> dict:
+        """Versión, licenzas (dobre: EUPL-1.2 OR AGPL-3.0-only, os dous
+        textos) e código fonte, coma o «Acerca de» do anonimizador."""
+        return {"version": conversor.VERSION, "licenza": _ler_licenza("LICENSE"),
+                "licenza_eupl": _ler_licenza("LICENCIA-EUPL-1.2.txt"), "url_codigo": URL_CODIGO}
+
+    def abrir_codigo(self) -> dict:
+        _abrir_fora(URL_CODIGO)
+        return {"ok": True}
+
+    def abrir_manual(self) -> dict:
+        pdf = manual_de_uso()
+        if pdf is None:
+            return {"erro": idioma.t("pantalla_conversor.sen_manual")}
+        _abrir_fora(str(pdf))
+        return {"ok": True}
 
     def gardar_modo_anonimizado(self, modo: str) -> dict:
         if modo not in MODOS:

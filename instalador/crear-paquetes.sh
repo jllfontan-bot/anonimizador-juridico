@@ -422,10 +422,13 @@ xerar_windows() {
 # makeappx, ver .github/workflows/msix.yml e instalador/msix/)
 # ---------------------------------------------------------------------
 
+# $1: anonimizador (por defecto) ou conversor (Conversor de archivos para
+# IA: aplicación propia na Store, co mesmo árbore de Windows)
 xerar_msix() {
-    log "== MSIX (Microsoft Store) =="
+    local app="${1:-anonimizador}"
+    log "== MSIX (Microsoft Store): $app =="
     montar_staging_windows
-    python3 "$INSTALADOR/msix/montar_msix.py" "$BUILD/staging-windows" "$BUILD/msix"
+    python3 "$INSTALADOR/msix/montar_msix.py" "$BUILD/staging-windows" "$BUILD/msix" "$app"
 }
 
 # ---------------------------------------------------------------------
@@ -434,8 +437,8 @@ xerar_msix() {
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|msix|todo) ;;
-    *) echo "Uso: $0 [windows|msix]"; exit 1 ;;
+    windows|msix|msix-conversor|todo) ;;
+    *) echo "Uso: $0 [windows|msix|msix-conversor]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -446,6 +449,7 @@ descargar_modelo_idioma
 
 case "$OBXECTIVO" in
     msix) xerar_msix ;;
+    msix-conversor) xerar_msix conversor ;;
     *) xerar_windows ;;
 esac
 
