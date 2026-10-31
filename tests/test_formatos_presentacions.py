@@ -13,7 +13,7 @@ from odf.opendocument import OpenDocumentPresentation
 from odf.presentation import Notes
 from odf.style import DrawingPageProperties, Style
 from odf.table import Table, TableCell, TableRow
-from odf.text import List, ListItem, P
+from odf.text import A, List, ListItem, P
 from pptx import Presentation
 from pptx.util import Inches
 from PIL import Image
@@ -146,6 +146,33 @@ class TestPptx(_Base):
         self.assertEqual(md.count("[imaxe"), 1)  # a segunda, sen alt, omítese
         self.assertIn("1 imaxes sen texto alternativo omitidas", presentacions.convertir(ruta).avisos[0])
 
+    def test_ligazons_web_en_texto_e_taboas_con_runs_partidos(self):
+        prs = Presentation()
+        d = self._diapositiva(prs, "Ligazóns", ["Ver o "])
+        parrafo = d.placeholders[1].text_frame.paragraphs[0]
+        for fragmento in ("Dia", "rio"):  # unha ligazón partida en dous runs
+            run = parrafo.add_run()
+            run.text = fragmento
+            run.hyperlink.address = "https://www.xunta.gal/dog"
+        interna = parrafo.add_run()
+        interna.text = " e mailto "
+        correo = parrafo.add_run()
+        correo.text = "escribir"
+        correo.hyperlink.address = "mailto:info@exemplo.gal"
+        taboa = d.shapes.add_table(2, 2, Inches(1), Inches(4), Inches(4), Inches(1)).table
+        for i, texto in enumerate(("Norma", "Ligazón")):
+            taboa.cell(0, i).text = texto
+        taboa.cell(1, 0).text = "BOE"
+        taboa.cell(1, 1).text_frame.paragraphs[0].add_run().text = "Lei"
+        run = taboa.cell(1, 1).text_frame.paragraphs[0].runs[0]
+        run.hyperlink.address = "https://www.boe.es/x"
+        ruta = self.ruta("l.pptx")
+        prs.save(ruta)
+        md = presentacions.a_markdown(ruta)
+        self.assertIn("[Diario](https://www.xunta.gal/dog)", md)
+        self.assertIn("[escribir](mailto:info@exemplo.gal)", md)
+        self.assertIn("| BOE | [Lei](https://www.boe.es/x) |", md)
+
     def test_formas_agrupadas(self):
         prs = Presentation()
         d = prs.slides.add_slide(prs.slide_layouts[6])
@@ -257,6 +284,25 @@ class TestOdp(_Base):
         self.assertIn("  - Subpunto", md)
         self.assertIn("- Segundo", md)
         self.assertIn("## Diapositiva 2: Prazos", md)
+
+    def test_ligazons_web_en_paragrafos(self):
+        doc = OpenDocumentPresentation()
+        p = P()
+        p.addText("Ver o ")
+        a = A(href="https://www.xunta.gal/dog", type="simple")
+        a.addText("DOG")
+        p.addElement(a)
+        p.addText(" e ")
+        interna = A(href="#Diapositiva2", type="simple")
+        interna.addText("a seguinte")
+        p.addElement(interna)
+        pagina = self._pagina(doc, "page1", "Ligazóns")
+        pagina.addElement(_frame("outline", _caixa(p)))
+        ruta = self.ruta("l.odp")
+        doc.save(ruta)
+        md = presentacions.a_markdown(ruta)
+        self.assertIn("Ver o [DOG](https://www.xunta.gal/dog) e a seguinte", md)
+        self.assertNotIn("Diapositiva2", md)
 
     def test_notas_do_orador(self):
         doc = OpenDocumentPresentation()

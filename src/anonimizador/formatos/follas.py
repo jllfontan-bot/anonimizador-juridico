@@ -32,12 +32,15 @@ from odf.opendocument import load as cargar_odf
 
 from . import _odf
 from ._comun import (
-    Conversion, _escapar_cela, _escapar_liña, formatar_data, formatar_numero,
-    t, taboa_ou_liñas,
+    Conversion, _escapar_cela, _escapar_liña, formatar_data, formatar_numero, ligazon_md,
+    t, taboa_ou_liñas, url_ligazon,
 )
+from .formato_numero import formatar as formatar_con_formato
 
 FORMATOS = (".xlsx", ".ods", ".csv")
 MAX_FILAS = 500
+# Un .csv con máis columnas ca isto non é lexible coma táboa Markdown: queda tal cal.
+MAX_COLUMNAS_TABOA = 20
 
 
 class _Folla:
@@ -45,6 +48,7 @@ class _Folla:
         self.nome = nome  # None: sen título (.csv)
         self.filas = filas  # listas de str, sen escapar
         self.notas = list(notas)  # (referencia, texto)
+        self.literal = None  # .csv: o texto orixinal, para deixalo tal cal se é moi ancho
 
 
 def a_markdown(ruta: str, **opcions) -> str:
@@ -75,7 +79,7 @@ def convertir(ruta: str, *, max_filas: int = MAX_FILAS, dir_csv: str | None = No
             if dir_csv is None:
                 avisos.append(t("folla_grande", nome=folla.nome or Path(ruta).name,
                                 n=len(folla.filas), max=max_filas))
-                bloques.append(taboa_ou_liñas(_escapar_filas(folla.filas)))
+                bloques.append(_taboa_ou_literal(folla))
             else:
                 csv_aparte = _gardar_csv(folla, ruta, dir_csv, ficheiros)
                 avisos.append(t("aviso_a_csv", nome=folla.nome or Path(ruta).name,
@@ -84,12 +88,22 @@ def convertir(ruta: str, *, max_filas: int = MAX_FILAS, dir_csv: str | None = No
                 bloques.append(t("folla_a_csv", n=len(folla.filas), m=len(folla.filas[0]),
                                  ficheiro=csv_aparte.name, columnas=columnas))
         else:
-            bloques.append(taboa_ou_liñas(_escapar_filas(folla.filas)))
+            bloques.append(_taboa_ou_literal(folla))
         if folla.notas:
             bloques.append(t("comentarios") + "\n"
                            + "\n".join(f"- {ref}: {_escapar_cela(texto)}" for ref, texto in folla.notas))
     markdown = "\n\n".join(b for b in bloques if b)
     return Conversion(markdown + "\n" if markdown else "", avisos, ficheiros)
+
+
+def _taboa_ou_literal(folla: _Folla) -> str:
+    """Táboa Markdown; un .csv moi ancho vai tal cal nun bloque de código."""
+    if folla.literal is not None and folla.filas and len(folla.filas[0]) > MAX_COLUMNAS_TABOA:
+        valla = "```"
+        while valla in folla.literal:
+            valla += "`"
+        return f"{valla}csv\n{folla.literal.strip()}\n{valla}"
+    return taboa_ou_liñas(_escapar_filas(folla.filas))
 
 
 def _escapar_filas(filas: list) -> list:
@@ -117,7 +131,7 @@ def _gardar_csv(folla: _Folla, ruta: str, dir_csv: str, ficheiros: list) -> Path
 
 # -- .xlsx ------------------------------------------------------------------
 
-def _valor_xlsx(valor) -> str:
+def _valor_xlsx(valor, formato: str = "General") -> str:
     if valor is None:
         return ""
     if isinstance(valor, bool):
@@ -125,10 +139,24 @@ def _valor_xlsx(valor) -> str:
     if isinstance(valor, (datetime.datetime, datetime.date, datetime.time)):
         return formatar_data(valor)
     if isinstance(valor, (int, float)):
-        return formatar_numero(valor)
+        return formatar_con_formato(valor, formato) or formatar_numero(valor)
     if hasattr(valor, "text"):  # fórmula matricial
         return str(valor.text or "")
     return str(valor)
+
+
+_HYPERLINK = re.compile(r'=\s*HYPERLINK\(\s*"([^"]*)"\s*(?:[,;]\s*"([^"]*)"\s*)?\)', re.I)
+
+
+def _con_ligazon_xlsx(cela, texto: str) -> str:
+    """Ligazón da cela (`hyperlink`) ou da fórmula `=HYPERLINK("url";"texto")`."""
+    url = url_ligazon(cela.hyperlink.target if cela.hyperlink is not None else None)
+    if not url and isinstance(cela.value, str):
+        formula = _HYPERLINK.match(cela.value)
+        url = url_ligazon(formula.group(1)) if formula else ""
+        if url and texto.startswith("="):  # sen valor gardado: o rótulo da fórmula
+            texto = formula.group(2) or ""
+    return ligazon_md(texto, url) if url else texto
 
 
 def _columnas_ocultas_xlsx(folla) -> set:
@@ -165,7 +193,8 @@ def _ler_xlsx(ruta: str, avisos: list) -> list:
                 if cela.column in columnas_ocultas:
                     continue
                 valor = valores[cela.coordinate].value
-                fila.append(_valor_xlsx(cela.value if valor is None else valor))
+                fila.append(_con_ligazon_xlsx(
+                    cela, _valor_xlsx(cela.value if valor is None else valor, cela.number_format)))
                 if cela.comment is not None and cela.comment.text:
                     notas.append((cela.coordinate, cela.comment.text))
             filas.append(fila)
@@ -253,4 +282,6 @@ def _ler_csv(ruta: str) -> list:
         return []
     csv.field_size_limit(2 ** 30)
     filas = list(csv.reader(texto.splitlines(), delimiter=_delimitador(texto)))
-    return [_Folla(None, filas)]
+    folla = _Folla(None, filas)
+    folla.literal = texto
+    return [folla]

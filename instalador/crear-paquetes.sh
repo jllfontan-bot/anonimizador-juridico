@@ -78,10 +78,16 @@ MICROMAMBA="$CACHE/tools/micromamba"
 # (só existe wheel para Mac) e fallaba con "No matching distribution".
 # Mesmo motivo xa documentado máis abaixo para pywin32 (`descargar_extras_windows`).
 #
+# openpyxl, python-pptx, beautifulsoup4 e markdownify (lectores de follas,
+# presentacións e HTML do conversor, `formatos/`): Python puro, wheel
+# universal; as súas indirectas (et_xmlfile, XlsxWriter, soupsieve, six,
+# typing_extensions) tamén, e lxml xa o trae python-docx. Comprobado con
+# `pip download --platform win_amd64 --python-version 3.12 --abi cp312`.
+#
 # cryptography, pymupdf e opencv-python-headless: fixadas nas versións
 # xa probadas co instalador de Windows; ao subilas, comprobar antes que
 # hai wheel para win_amd64 / cp312.
-PAQUETES_COMUNS="cryptography==46.0.7 PyYAML==6.0.3 python-docx==1.2.0 pymupdf==1.26.0 pytesseract==0.3.13 pillow==11.3.0 flask==3.1.3 keyring==25.7.0 spacy==3.7.5 numpy==1.26.4 opencv-python-headless==4.10.0.84"
+PAQUETES_COMUNS="cryptography==46.0.7 PyYAML==6.0.3 python-docx==1.2.0 pymupdf==1.26.0 pytesseract==0.3.13 pillow==11.3.0 flask==3.1.3 keyring==25.7.0 spacy==3.7.5 numpy==1.26.4 opencv-python-headless==4.10.0.84 openpyxl==3.1.5 python-pptx==1.0.2 beautifulsoup4==4.15.0 markdownify==1.2.3"
 
 mkdir -p "$CACHE/tools" "$CACHE/runtime" "$CACHE/wheels" "$BUILD"
 

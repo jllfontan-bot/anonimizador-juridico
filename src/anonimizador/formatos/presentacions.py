@@ -28,9 +28,13 @@ from pptx.shapes.graphfrm import GraphicFrame
 from pptx.shapes.group import GroupShape
 from pptx.shapes.picture import Picture
 
-from ..lectura import _texto_paragrafo_odt
+from pptx.text.text import _Run
+
 from . import _odf
-from ._comun import Conversion, _escapar_cela, _escapar_liña, marca_imaxe, t, taboa_ou_liñas
+from ._comun import (
+    Conversion, _escapar_cela, _escapar_liña, ligazon_md, marca_imaxe, t, taboa_ou_liñas,
+    url_ligazon,
+)
 
 FORMATOS = (".pptx", ".odp")
 
@@ -117,6 +121,25 @@ def _e_lista_pptx(forma, paragrafo) -> bool:
     return forma.is_placeholder and forma.placeholder_format.type in _CORPO
 
 
+def _texto_pptx_con_ligazons(paragrafo) -> str:
+    """O texto do parágrafo (`\\v` nos saltos manuais) con `[texto](url)` nas
+    ligazóns web e de correo; as partidas en varios fragmentos únense."""
+    partes: list = []  # (URL ou "", texto)
+    for fillo in paragrafo._p.content_children:
+        url = ""
+        if fillo.tag == qn("a:r"):
+            url = url_ligazon(_Run(fillo, paragrafo).hyperlink.address)
+        if partes and partes[-1][0] == url:
+            partes[-1] = (url, partes[-1][1] + fillo.text)
+        else:
+            partes.append((url, fillo.text))
+    return "".join(ligazon_md(texto, url) if url else texto for url, texto in partes)
+
+
+def _texto_cela_pptx(cela) -> str:
+    return "\n".join(_texto_pptx_con_ligazons(p) for p in cela.text_frame.paragraphs)
+
+
 def _texto_alternativo(forma) -> str:
     valores = forma._element.xpath("./*[1]/p:cNvPr/@descr")
     return _unha_liña(valores[0]) if valores else ""
@@ -133,7 +156,8 @@ def _formas_pptx(formas, dia: _Dia, id_titulo) -> None:
         elif isinstance(forma, GraphicFrame):
             if forma.has_table:
                 dia.bloques.append(taboa_ou_liñas(
-                    [[_escapar_cela(c.text) for c in fila.cells] for fila in forma.table.rows]))
+                    [[_escapar_cela(_texto_cela_pptx(c)) for c in fila.cells]
+                     for fila in forma.table.rows]))
             elif forma.has_chart:
                 dia.bloques.append(t("grafico"))
             else:
@@ -147,7 +171,7 @@ def _formas_pptx(formas, dia: _Dia, id_titulo) -> None:
 def _texto_pptx(forma, dia: _Dia) -> None:
     lista: list = []
     for paragrafo in forma.text_frame.paragraphs:
-        texto = paragrafo.text
+        texto = _texto_pptx_con_ligazons(paragrafo)
         if not texto.strip():
             continue
         if _e_lista_pptx(forma, paragrafo):
@@ -175,7 +199,8 @@ def _ler_pptx(ruta: str, avisos: list) -> list:
         if diapositiva.has_notes_slide:
             cadro = diapositiva.notes_slide.notes_text_frame
             if cadro is not None:
-                dia.notas = [_paragrafo(p.text) for p in cadro.paragraphs if p.text.strip()]
+                dia.notas = [_paragrafo(_texto_pptx_con_ligazons(p)) for p in cadro.paragraphs
+                             if p.text.strip()]
         dias.append(dia)
     return dias
 
@@ -198,7 +223,7 @@ def _lista_odp(lista, nivel: int, saida: list) -> None:
                 if _odf.e_elemento(fillo, TEXTNS, "list"):
                     _lista_odp(fillo, nivel + 1, saida)
                 elif _odf.e_elemento(fillo, TEXTNS, "p") or _odf.e_elemento(fillo, TEXTNS, "h"):
-                    texto = _texto_paragrafo_odt(fillo)
+                    texto = _odf.texto_con_ligazons(fillo)
                     if texto.strip():
                         saida.append(_elemento_lista(texto, nivel))
 
@@ -216,7 +241,7 @@ def _texto_odp(contedor, dia_bloques: list, como_lista: bool) -> None:
         if _odf.e_elemento(fillo, TEXTNS, "list"):
             _lista_odp(fillo, 0, lista)
         elif _odf.e_elemento(fillo, TEXTNS, "p") or _odf.e_elemento(fillo, TEXTNS, "h"):
-            texto = _texto_paragrafo_odt(fillo)
+            texto = _odf.texto_con_ligazons(fillo)
             if not texto.strip():
                 continue
             if como_lista:

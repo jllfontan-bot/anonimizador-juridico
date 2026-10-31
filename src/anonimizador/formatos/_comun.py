@@ -82,6 +82,45 @@ def formatar_data(valor) -> str:
     return valor.isoformat()
 
 
+_ESQUEMAS_LIGAZON = ("http://", "https://", "mailto:")
+
+
+def url_ligazon(url: str | None) -> str:
+    """O URL listo para `[texto](url)`, ou `""` se non é unha ligazón web ou
+    de correo (as internas, `#folla`, e as de ficheiros locais non valen)."""
+    url = (url or "").strip()
+    if not url.lower().startswith(_ESQUEMAS_LIGAZON):
+        return ""
+    return url.replace(" ", "%20").replace("(", "%28").replace(")", "%29").replace("|", "%7C")
+
+
+def ligazon_md(texto: str, url: str) -> str:
+    """`[texto](url)`; sen texto, o propio URL. Os brancos das beiras quedan fóra."""
+    cuberto = texto.strip()
+    if not cuberto:
+        return url
+    return texto[:len(texto) - len(texto.lstrip())] + f"[{cuberto}]({url})" + \
+        texto[len(texto.rstrip()):]
+
+
+def con_ligazons(texto: str, ligazons: list) -> str:
+    """Pon `[texto](url)` onde o texto dunha ligazón aparece no `texto` do
+    parágrafo, en orde; as que non se atopan van ao final entre paréntese.
+    `ligazons`: (texto da ligazón, URL xa limpo con `url_ligazon`)."""
+    cursor, saida, sobran = 0, [], []
+    for texto_ligazon, url in ligazons:
+        texto_ligazon = " ".join(texto_ligazon.split())
+        posicion = texto.find(texto_ligazon, cursor) if texto_ligazon else -1
+        if posicion < 0:
+            sobran.append(url)
+            continue
+        saida.append(texto[cursor:posicion])
+        saida.append(f"[{texto_ligazon}]({url})")
+        cursor = posicion + len(texto_ligazon)
+    saida.append(texto[cursor:])
+    return "".join(saida) + "".join(f" ({u})" for u in sobran)
+
+
 def taboa_ou_liñas(filas: list) -> str:
     """`filas`: listas de celas YA escapadas (`_escapar_cela`). Táboa
     Markdown; se non o é de verdade (unha columna, unha fila), a lista ou a

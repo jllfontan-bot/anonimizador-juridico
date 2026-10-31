@@ -15,7 +15,7 @@ from odf.office import Annotation
 from odf.opendocument import OpenDocumentSpreadsheet
 from odf.style import Style, TableProperties
 from odf.table import CoveredTableCell, Table, TableCell, TableColumn, TableRow
-from odf.text import P
+from odf.text import A, P
 
 os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -120,6 +120,39 @@ class TestXlsx(_Base):
         md = follas.a_markdown(ruta)
         self.assertIn("| 2026-10-31 | 3 | TRUE |", md)
         self.assertIn("| 2026-10-31 14:30 | 0.25 | FALSE |", md)
+
+    def test_numeros_co_formato_de_cela_que_ve_a_persoa(self):
+        libro = openpyxl.Workbook()
+        folla = libro.active
+        folla.title = "Contas"
+        folla.append(["Importe", "IVA", "Código", "Total"])
+        folla.append([1234.5, 0.21, 123, 3.5])
+        for cela, formato in zip(folla[2], ('#,##0.00 "€"', "0%", "00000", "General")):
+            cela.number_format = formato
+        ruta = self.ruta("contas.xlsx")
+        libro.save(ruta)
+        md = follas.a_markdown(ruta)
+        self.assertIn("| 1.234,50 € | 21% | 00123 | 3.5 |", md)
+
+    def test_ligazons_web_entran_e_as_internas_non(self):
+        libro = openpyxl.Workbook()
+        folla = libro.active
+        folla.title = "Ligazóns"
+        folla.append(["Texto", "Destino"])
+        folla.append(["BOE", "x"])
+        folla.append(["Interna", "y"])
+        folla.append(["Fórmula", "z"])
+        folla["A2"].hyperlink = "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-10565"
+        folla["A3"].hyperlink = "#Outra!A1"
+        folla["B4"] = '=HYPERLINK("https://www.xunta.gal/dog","DOG")'
+        ruta = self.ruta("l.xlsx")
+        libro.save(ruta)
+        md = follas.a_markdown(ruta)
+        self.assertIn("[BOE](https://www.boe.es/buscar/doc.php?id=BOE-A-2015-10565)", md)
+        self.assertIn("| Interna | y |", md)
+        self.assertNotIn("Outra", md)
+        self.assertIn("[DOG](https://www.xunta.gal/dog)", md)
+        self.assertNotIn("HYPERLINK", md)
 
     def test_formula_co_valor_gardado_e_sen_el(self):
         ruta = self.ruta("formulas.xlsx")
@@ -239,6 +272,21 @@ class TestCsv(_Base):
         self.assertIn("| Nome | Cargo |", md)
         self.assertNotIn("﻿", md)
 
+    def test_csv_moi_ancho_vai_tal_cal_nun_bloque_de_codigo(self):
+        cabeceira = ",".join(f"c{i}" for i in range(25))
+        ruta = self.ruta("ancho.csv")
+        Path(ruta).write_text(cabeceira + "\n" + ",".join(str(i) for i in range(25)) + "\n",
+                              encoding="utf-8")
+        md = follas.a_markdown(ruta)
+        self.assertTrue(md.startswith("```csv\n" + cabeceira + "\n0,1,2"))
+        self.assertTrue(md.rstrip().endswith("```"))
+        self.assertNotIn("| ---", md)
+
+    def test_csv_estreito_segue_sendo_taboa(self):
+        ruta = self.ruta("estreito.csv")
+        Path(ruta).write_text("a,b,c\n1,2,3\n", encoding="utf-8")
+        self.assertIn("| a | b | c |", follas.a_markdown(ruta))
+
     def test_baleiro_da_markdown_baleiro(self):
         self.assertEqual(follas.a_markdown(self._csv("")).strip(), "")
 
@@ -283,6 +331,40 @@ class TestOds(_Base):
         self.assertIn("| Ana Pena | Xefa |", md)
         self.assertIn("## Gastos", md)
         self.assertIn("| Material | 12 |", md)
+
+    def test_ligazon_dentro_da_cela(self):
+        doc = self._libro()
+        folla = Table(name="Ligazóns")
+        tr = TableRow()
+        for texto, url in (("Ver o ", None), ("BOE", "https://www.boe.es/x(1)"), ("Interna", "#Folla2.A1")):
+            tc = TableCell(valuetype="string")
+            p = P()
+            if url is None:
+                p.addText(texto)
+                a = A(href="https://www.xunta.gal/dog", type="simple")
+                a.addText("DOG")
+                p.addElement(a)
+            else:
+                a = A(href=url, type="simple")
+                a.addText(texto)
+                p.addElement(a)
+            tc.addElement(p)
+            tr.addElement(tc)
+        folla.addElement(tr)
+        fila2 = TableRow()
+        for texto in ("a", "b", "c"):
+            tc = TableCell(valuetype="string")
+            tc.addElement(P(text=texto))
+            fila2.addElement(tc)
+        folla.addElement(fila2)
+        doc.spreadsheet.addElement(folla)
+        ruta = self.ruta("l.ods")
+        doc.save(ruta)
+        md = follas.a_markdown(ruta)
+        self.assertIn("Ver o [DOG](https://www.xunta.gal/dog)", md)
+        self.assertIn("[BOE](https://www.boe.es/x%281%29)", md)
+        self.assertIn("| Interna |", md)
+        self.assertNotIn("Folla2", md)
 
     def test_usa_o_texto_mostrado_da_cela(self):
         doc = self._libro()

@@ -204,6 +204,27 @@ class TestHtml(unittest.TestCase):
         self.assertEqual(md.count("interior"), 1)
         self.assertIn("| A | B |", md)
 
+    def test_taboa_de_maquetacion_con_taboas_dentro_deixa_as_de_dentro_coma_taboas(self):
+        def mes(nome):
+            return (f"<table><tr><th colspan='2'>{nome}</th></tr><tr><td>L</td><td>M</td></tr>"
+                    "<tr><td>1</td><td>2</td></tr></table>")
+        md = self.md("<body><table>"
+                     f"<tr><td>{mes('Xaneiro')}</td><td>{mes('Febreiro')}</td></tr>"
+                     f"<tr><td>{mes('Marzo')}</td><td>{mes('Abril')}</td></tr>"
+                     "</table></body>")
+        self.assertIn("| Xaneiro |  |", md)
+        self.assertIn("| Abril |  |", md)
+        self.assertEqual(md.count("| L | M |"), 4)
+
+    def test_portada_do_dog_sen_buscador_nin_ligazons_laterais(self):
+        md = self.md("<body><div class='box-color-gris'>Busca no DOG</div>"
+                     "<div class='anuncios-laterales'>DOG en app</div>"
+                     "<ul class='lista-boletines'><li>Boletín Oficial da Provincia</li></ul>"
+                     "<div id='menu-footer'>Pé da web</div><h2>Sumario</h2><p>Contido</p></body>")
+        self.assertIn("Contido", md)
+        for lixo in ("Busca no DOG", "DOG en app", "Boletín Oficial da Provincia", "Pé da web"):
+            self.assertNotIn(lixo, md)
+
     def test_colspan_enche_columnas(self):
         md = self.md("<body><table><tr><th colspan='2'>Título largo</th><th>C</th></tr>"
                      "<tr><td>1</td><td>2</td><td>3</td></tr></table></body>")
