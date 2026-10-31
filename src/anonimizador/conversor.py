@@ -11,9 +11,9 @@ mesmo motor có anonimizador, nunca unha copia:
 - **Anonimizando**: `pipeline.anonimizar_texto_detallado` sobre o mesmo
   texto lido, e `copia_md.xerar` co texto anonimizado (do orixinal só a
   estrutura, coma na copia .md do anonimizador). Os nomes de ficheiro e
-  de cartafol anonimízanse coma no zip do anonimizador. Aquí non hai
-  revisión humana: quen chama debe avisalo (a revisión chegará coa
-  pantalla).
+  de cartafol anonimízanse coma no zip do anonimizador. Sen o enganche
+  `revisar` (a liña de comandos) non hai revisión humana: quen chama debe
+  avisalo, e o .md leva `revisado: non`.
 
 Nomes de saída: `demanda.pdf.md` sen anonimizar e
 `<nome anonimizado>.anonimizado.pdf.md` anonimizando (o criterio da copia
@@ -46,6 +46,16 @@ pásanse soltas á IA). `Resultado.tokens_antes`/`tokens_despois`: estimación.
   Markdown de cada documento antes da cabeceira (`aforro_ia.py`). No modo
   anonimizado reciben o texto xa anonimizado, así que non poden sacar á
   luz nada orixinal.
+
+Enganches da pantalla (`pantalla_conversor.py`, fase 2b), argumentos de
+`converter`: `progreso(feito, total, nome)` antes de cada documento e ao
+remate; `cancelar() -> bool`, mirado antes de cada documento (se di que
+si, `Cancelado` e non se escribe nada: as escrituras van todas despois de
+ler); e, anonimizando, `revisar(nome, texto, contexto, texto_anonimizado,
+informe, substitucions)`, que devolve `(texto_anonimizado, substitucions)`
+xa revisados (o documento leva `revisado: si`) ou `None` (queda coma
+automático, `revisado: non`). A revisión en si (`pipeline.aplicar_decisions`)
+faina quen chama: aquí só se usa o seu resultado.
 """
 
 from __future__ import annotations
@@ -71,6 +81,10 @@ LECTORES_EXTRA: dict[str, Callable] = {ext: formatos.convertir for ext in format
 POSPROCESADOS: list[Callable[[str], str]] = []
 
 
+class Cancelado(Exception):
+    """A pantalla cancelou a conversión (`cancelar` ou `revisar`)."""
+
+
 def rexistro_por_defecto() -> Path:
     """O rexistro do anonimizador da Store (`Documentos\\Anonimizador`, ver
     `arranque_windows`): co mesmo rexistro, unha persoa recibe o mesmo
@@ -88,6 +102,7 @@ class Resultado:
     avisos: dict = field(default_factory=dict)  # nome orixinal -> avisos do lector (formatos novos)
     tokens_antes: int = 0  # estimación (`aforro_ia.estimar_tokens`) do Markdown sen aforro
     tokens_despois: int = 0  # ... e do escrito
+    revisados: list = field(default_factory=list)  # nomes anonimizados (coma `informes`) revisados por unha persoa
 
     def resumo_tokens(self) -> str:
         """Frase da estimación de tokens antes e despois (di que é unha estimación)."""
@@ -109,6 +124,7 @@ class _Convertido:
     corpo: str
     paxinas: int | None
     avisos: list = field(default_factory=list)
+    revisado: bool = False
 
 
 def _extensions() -> tuple:
@@ -189,7 +205,7 @@ def _con_salto_final(texto: str) -> str:
     return texto.rstrip("\n") + "\n"
 
 
-def _converter_documento(doc: _Documento, anonimizar: bool, rexistro) -> tuple:
+def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=None) -> tuple:
     """(_Convertido, informe ou None)."""
     sufixo_orixinal = PurePosixPath(doc.nome.name).suffix
     sufixo = sufixo_orixinal.lower()
@@ -213,13 +229,19 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro) -> tuple:
     from . import pipeline  # só aquí: o modo sen anonimizar non carga o NER
 
     texto_anon, informe, substitucions = pipeline.anonimizar_texto_detallado(texto, rexistro, contexto=contexto)
+    revisado = None
+    if revisar is not None:
+        revisado = revisar(str(doc.nome), texto, contexto, texto_anon, informe, substitucions)
+        if revisado is not None:
+            texto_anon, substitucions = revisado
     corpo = texto_anon if sufixo == ".md" else copia_md.xerar(contexto, texto_anon, substitucions)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
     nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
     cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
     nome_visible = str(cartafol / nome_ficheiro)
     stem = PurePosixPath(nome_ficheiro).stem
-    return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, corpo, paxinas), informe
+    return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, corpo, paxinas,
+                       revisado=revisado is not None), informe
 
 
 def _nome_omitido_visible(nome: str, rexistro) -> str:
@@ -242,13 +264,15 @@ def _valor_yaml(valor: str) -> str:
 
 
 def _cabeceira(orixe: str, anonimizado: bool, data: datetime.date, paxinas: int | None = None,
-               ficheiros: int | None = None) -> str:
+               ficheiros: int | None = None, revisado: bool = False) -> str:
     liñas = ["---", f"{idioma.t('conversor.orixe')}: {_valor_yaml(orixe)}"]
     if paxinas:
         liñas.append(f"{idioma.t('conversor.paxinas')}: {paxinas}")
     if ficheiros is not None:
         liñas.append(f"{idioma.t('conversor.ficheiros')}: {ficheiros}")
     liñas.append(f"anonimizado: {idioma.t('conversor.si' if anonimizado else 'conversor.non')}")
+    if anonimizado:
+        liñas.append(f"{idioma.t('conversor.revisado')}: {idioma.t('conversor.si' if revisado else 'conversor.non')}")
     liñas.append(f"{idioma.t('conversor.convertido')}: {data.isoformat()}, {idioma.t('conversor.nome')} {VERSION}")
     return "\n".join(liñas) + "\n---\n"
 
@@ -335,6 +359,9 @@ def converter(
     data: datetime.date | None = None,
     aforro: bool = True,
     caracteres_por_parte: int | None = None,
+    progreso: Callable[[int, int, str], None] | None = None,
+    cancelar: Callable[[], bool] | None = None,
+    revisar: Callable | None = None,
 ) -> Resultado:
     """Converte `entrada` (ficheiro, cartafol ou .zip) a .md.
 
@@ -346,7 +373,8 @@ def converter(
     - `un_so_md` (cartafol ou .zip): `expediente.md` / `expediente.zip.md`
       canda a entrada.
     Anonimizando, os nomes de cartafoles e ficheiros de saída tamén van
-    anonimizados. `rexistro` é obrigatorio para anonimizar."""
+    anonimizados. `rexistro` é obrigatorio para anonimizar. `progreso`,
+    `cancelar` e `revisar`: ver o comezo do módulo."""
     entrada = Path(entrada)
     if anonimizar and rexistro is None:
         raise ValueError("Para anonimizar fai falta o rexistro de correspondencias")
@@ -361,9 +389,15 @@ def converter(
     with tempfile.TemporaryDirectory() as tmp:
         documentos, resultado.omitidos = _documentos(entrada, Path(tmp), anonimizar)
         convertidos = []
-        for doc in documentos:
+        for i, doc in enumerate(documentos):
+            if cancelar is not None and cancelar():
+                raise Cancelado
+            if progreso is not None:
+                progreso(i, len(documentos), str(doc.nome))
             try:
-                convertido, informe = _converter_documento(doc, anonimizar, rexistro)
+                convertido, informe = _converter_documento(doc, anonimizar, rexistro, revisar if anonimizar else None)
+            except Cancelado:
+                raise
             except Exception as e:  # noqa: BLE001 -- un documento roto non para o lote
                 resultado.omitidos.append((str(doc.nome), "erro"))
                 resultado.erros[str(doc.nome)] = f"{type(e).__name__}: {e}"
@@ -373,6 +407,10 @@ def converter(
                 resultado.avisos[str(doc.nome)] = convertido.avisos
             if informe is not None:
                 resultado.informes[convertido.nome_visible] = informe
+            if convertido.revisado:
+                resultado.revisados.append(convertido.nome_visible)
+        if progreso is not None:
+            progreso(len(documentos), len(documentos), "")
 
     # Nome da entrada tal como pode saír (anonimizado DESPOIS do contido).
     nome_entrada = entrada.name
@@ -391,7 +429,8 @@ def converter(
         destino.mkdir(parents=True, exist_ok=True)
         ruta = destino / (base_entrada + cola)
         corpos = [_corpo_final(c, aforro, resultado) for c in convertidos]
-        cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos))
+        cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos),
+                               revisado=bool(convertidos) and all(c.revisado for c in convertidos))
         _escribir(ruta, cabeceira, _un_so_md(convertidos, corpos, omitidos), caracteres_por_parte, resultado.saidas)
         return resultado
 
@@ -412,6 +451,6 @@ def converter(
             contador += 1
         usadas.add(ruta)
         ruta.parent.mkdir(parents=True, exist_ok=True)
-        cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas)
+        cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado)
         _escribir(ruta, cabeceira, _corpo_final(c, aforro, resultado), caracteres_por_parte, resultado.saidas)
     return resultado

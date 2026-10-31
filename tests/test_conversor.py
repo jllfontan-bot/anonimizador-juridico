@@ -480,6 +480,71 @@ class TestAnonimizando(_Base):
             conversor.converter(str(_docx(self.dir / "demanda.docx")), anonimizar=True)
 
 
+class TestProgresoCancelarRevisar(_Base):
+    """Os enganches da pantalla (fase 2b): progreso, cancelar e revisar."""
+
+    def setUp(self):
+        super().setUp()
+        self.rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
+        self.raiz = self.dir / "expediente"
+        _docx(self.raiz / "a.docx")
+        _odt(self.raiz / "b.odt")
+
+    def test_progreso_por_documento_e_final(self):
+        chamadas = []
+        conversor.converter(str(self.raiz), progreso=lambda *a: chamadas.append(a))
+        self.assertEqual(chamadas, [(0, 2, "a.docx"), (1, 2, "b.odt"), (2, 2, "")])
+
+    def test_cancelar_non_escribe_nada(self):
+        chamadas = []
+        with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(self.raiz), progreso=lambda *a: chamadas.append(a),
+                                cancelar=lambda: len(chamadas) > 0)
+        self.assertEqual(sorted(p.name for p in self.raiz.iterdir()), ["a.docx", "b.odt"])
+
+    def test_automatico_revisado_non_e_sen_anonimizar_sen_liña(self):
+        resultado = conversor.converter(str(self.raiz / "a.docx"), anonimizar=True, rexistro=self.rexistro)
+        self.assertIn("anonimizado: si\nrevisado: non\n", Path(resultado.saidas[0]).read_text(encoding="utf-8"))
+        self.assertEqual(resultado.revisados, [])
+        md = Path(conversor.converter(str(self.raiz / "a.docx")).saidas[0]).read_text(encoding="utf-8")
+        self.assertNotIn("revisado", md.split("---")[1])
+
+    def test_revisar_cambia_o_texto_e_marca_revisado(self):
+        vistos = []
+
+        def revisar(nome, texto, contexto, texto_anon, informe, substitucions):
+            vistos.append((nome, len(informe["persoas"])))
+            inicio = texto.index("xulgado")
+            return (texto_anon.replace("xulgado", "[ÓRGANO]"),
+                    [*substitucions, (inicio, inicio + len("xulgado"), "[ÓRGANO]")])
+
+        resultado = conversor.converter(str(self.raiz / "a.docx"), anonimizar=True, rexistro=self.rexistro,
+                                        revisar=revisar)
+        md = Path(resultado.saidas[0]).read_text(encoding="utf-8")
+        self.assertEqual(vistos, [("a.docx", 1)])
+        self.assertIn("revisado: si\n", md)
+        self.assertIn("ante o [ÓRGANO].", md)
+        self._sen_datos(md)
+        self.assertEqual(resultado.revisados, list(resultado.informes))
+
+    def test_revisar_none_queda_sen_revisar_e_un_so_md_mixto(self):
+        resultado = conversor.converter(
+            str(self.raiz), anonimizar=True, un_so_md=True, rexistro=self.rexistro,
+            revisar=lambda nome, *_: (_[2], _[4]) if nome == "a.docx" else None,
+        )
+        md = Path(resultado.saidas[0]).read_text(encoding="utf-8")
+        self.assertIn("revisado: non\n", md)  # un só .md: "si" só se se revisaron todos
+        self.assertEqual(len(resultado.revisados), 1)
+
+    def test_revisar_pode_cancelar(self):
+        def revisar(*_):
+            raise conversor.Cancelado
+
+        with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(self.raiz), anonimizar=True, rexistro=self.rexistro, revisar=revisar)
+        self.assertEqual(sorted(p.name for p in self.raiz.iterdir()), ["a.docx", "b.odt"])
+
+
 class TestRexistroCompartido(unittest.TestCase):
     def test_mesmo_cartafol_ca_o_anonimizador_da_store(self):
         self.assertEqual(

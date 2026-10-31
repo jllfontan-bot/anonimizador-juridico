@@ -6,8 +6,8 @@ Uso:
         [--sen-aforro] [--trocear TOKENS]
 
 Sen `--anonimizar` non se carga o NER (spaCy). Con el, a anonimización é
-AUTOMÁTICA, sen revisión humana, e avísase diso: a revisión chegará coa
-pantalla do conversor. O rexistro por defecto é o do anonimizador da
+AUTOMÁTICA, sen revisión humana (`revisado: non` na cabeceira), e avísase
+diso: a revisión está na pantalla (`pantalla_conversor.py`). O rexistro por defecto é o do anonimizador da
 Store, para que cada persoa teña o mesmo código nos dous programas.
 """
 
