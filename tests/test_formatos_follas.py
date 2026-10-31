@@ -121,6 +121,19 @@ class TestXlsx(_Base):
         self.assertIn("| 2026-10-31 | 3 | TRUE |", md)
         self.assertIn("| 2026-10-31 14:30 | 0.25 | FALSE |", md)
 
+    def test_numeros_co_formato_de_cela_que_ve_a_persoa(self):
+        libro = openpyxl.Workbook()
+        folla = libro.active
+        folla.title = "Contas"
+        folla.append(["Importe", "IVA", "Código", "Total"])
+        folla.append([1234.5, 0.21, 123, 3.5])
+        for cela, formato in zip(folla[2], ('#,##0.00 "€"', "0%", "00000", "General")):
+            cela.number_format = formato
+        ruta = self.ruta("contas.xlsx")
+        libro.save(ruta)
+        md = follas.a_markdown(ruta)
+        self.assertIn("| 1.234,50 € | 21% | 00123 | 3.5 |", md)
+
     def test_formula_co_valor_gardado_e_sen_el(self):
         ruta = self.ruta("formulas.xlsx")
         libro = xlsxwriter.Workbook(ruta)

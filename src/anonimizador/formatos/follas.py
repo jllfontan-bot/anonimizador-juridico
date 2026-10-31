@@ -35,6 +35,7 @@ from ._comun import (
     Conversion, _escapar_cela, _escapar_liña, formatar_data, formatar_numero,
     t, taboa_ou_liñas,
 )
+from .formato_numero import formatar as formatar_con_formato
 
 FORMATOS = (".xlsx", ".ods", ".csv")
 MAX_FILAS = 500
@@ -117,7 +118,7 @@ def _gardar_csv(folla: _Folla, ruta: str, dir_csv: str, ficheiros: list) -> Path
 
 # -- .xlsx ------------------------------------------------------------------
 
-def _valor_xlsx(valor) -> str:
+def _valor_xlsx(valor, formato: str = "General") -> str:
     if valor is None:
         return ""
     if isinstance(valor, bool):
@@ -125,7 +126,7 @@ def _valor_xlsx(valor) -> str:
     if isinstance(valor, (datetime.datetime, datetime.date, datetime.time)):
         return formatar_data(valor)
     if isinstance(valor, (int, float)):
-        return formatar_numero(valor)
+        return formatar_con_formato(valor, formato) or formatar_numero(valor)
     if hasattr(valor, "text"):  # fórmula matricial
         return str(valor.text or "")
     return str(valor)
@@ -165,7 +166,7 @@ def _ler_xlsx(ruta: str, avisos: list) -> list:
                 if cela.column in columnas_ocultas:
                     continue
                 valor = valores[cela.coordinate].value
-                fila.append(_valor_xlsx(cela.value if valor is None else valor))
+                fila.append(_valor_xlsx(cela.value if valor is None else valor, cela.number_format))
                 if cela.comment is not None and cela.comment.text:
                     notas.append((cela.coordinate, cela.comment.text))
             filas.append(fila)
