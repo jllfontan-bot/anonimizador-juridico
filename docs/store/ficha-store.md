@@ -74,7 +74,10 @@ Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El
 AGRADECIMIENTOS
 A José Manuel Piñeiro, por sus ideas, aportaciones y correcciones para llevar a buen término esta aplicación.
 
-**Novedades de esta versión (1.1.0):**
+**Novedades de esta versión (1.1.1):**
+Corrección: en documentos .odt (LibreOffice), también dentro de un .zip, un nombre escrito justo después de un salto de línea manual (Mayús+Intro), un tabulador o varios espacios seguidos podía quedar sin anonimizar, entero o en parte. Ahora se tapa, también en la copia en Markdown (.md). Además, un nombre partido por un salto de línea manual ya no impide guardar el documento en .docx. Si anonimizaste archivos .odt con una versión anterior, revísalos o anonimízalos de nuevo.
+
+**Novedades de la versión 1.1.0:**
 Nueva opción para guardar, junto a cada documento anonimizado, una copia en Markdown (.md) con el mismo texto anonimizado (títulos, listas, tablas y páginas), lista para leerla con otras herramientas sin convertirla. Doble licencia: EUPL v1.2 o AGPL-3.0, a elección del usuario. La página «Acerca de» muestra los textos completos de las dos licencias e indica que el programa se ha desarrollado con la ayuda de Claude, de Anthropic.
 
 **Novedades de la versión 1.0.0:**
@@ -152,7 +155,10 @@ Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O prog
 AGRADECEMENTOS
 A José Manuel Piñeiro, polas súas ideas, achegas e correccións para levar a bo termo esta aplicación.
 
-**Novidades desta versión (1.1.0):**
+**Novidades desta versión (1.1.1):**
+Corrección: en documentos .odt (LibreOffice), tamén dentro dun .zip, un nome escrito xusto despois dun salto de liña manual (Maiús+Intro), un tabulador ou varios espazos seguidos podía quedar sen anonimizar, enteiro ou en parte. Agora tápase, tamén na copia en Markdown (.md). Ademais, un nome partido por un salto de liña manual xa non impide gardar o documento en .docx. Se anonimizaches ficheiros .odt cunha versión anterior, revísaos ou anonimízaos de novo.
+
+**Novidades da versión 1.1.0:**
 Nova opción para gardar, canda cada documento anonimizado, unha copia en Markdown (.md) co mesmo texto anonimizado (títulos, listas, táboas e páxinas), lista para lela con outras ferramentas sen convertela. Dobre licenza: EUPL v1.2 ou AGPL-3.0, á escolla do usuario. A páxina «Acerca de» amosa os textos completos das dúas licenzas e indica que o programa se desenvolveu coa axuda de Claude, de Anthropic.
 
 **Novidades da versión 1.0.0:**

@@ -2,7 +2,7 @@
 """Xera os PDF de documentación a partir dos HTML de docs/fonte/.
 
     python3 docs/fonte/xerar_pdfs.py            # todos
-    python3 docs/fonte/xerar_pdfs.py 02 03      # só algúns (01, 02, 03, 04, 05, 06, 07, leeme, 01es, 02es, 03es, leemees)
+    python3 docs/fonte/xerar_pdfs.py 02 03      # só algúns (01, 02, 03, 04, 05, 06, 07, 08, leeme, 01es, 02es, 03es, leemees)
 
 Imprime cada HTML a PDF con Chrome/Chromium en modo headless (o mesmo
 método co que se fixeron os PDF orixinais). Non precisa instalar nada: só
@@ -38,6 +38,7 @@ DOCUMENTOS = {
     "05": ("05-estatistica-20261011.html", RAIZ / "docs" / "05-Estatistica-version-20261011.pdf"),
     "06": ("06-novidades.html", RAIZ / "docs" / "06-Novidades-segunda-version-11-outubro-2026.pdf"),
     "07": ("07-novidades.html", RAIZ / "docs" / "07-Novidades-version-12-outubro-2026.pdf"),
+    "08": ("08-novidades.html", RAIZ / "docs" / "08-Novidades-version-1.1.1.pdf"),
     "leeme": ("leeme.html", RAIZ / "instalador" / "LEEME.pdf"),
     # en castelán
     "01es": ("01-caracteristicas-tecnicas-y-seguridad.es.html", RAIZ / "docs" / "es" / "01-Caracteristicas-tecnicas-y-seguridad.pdf"),

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="gl">
+<head>
+<meta charset="utf-8">
+<title>Novidades da versión 1.1.1</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  @page{ margin:15mm 17mm 15mm 17mm; }
+  body{ font-size:12px; line-height:1.5; }
+  .portada{ padding:22px 30px 20px; margin-bottom:20px; }
+  .portada h1{ font-size:27px; margin:12px 0 8px; }
+  .portada .lede{ font-size:13.5px; max-width:none; margin-bottom:16px; }
+  h2.sec{ margin:22px 0 10px; }
+  table.comparacion td, table.comparacion th{ vertical-align:top; }
+  table.comparacion code{ white-space:nowrap; }
+  ul.compacta li{ margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Novidades · Anonimizador de expedientes xurídicos</span>
+  <h1>Que corrixe a versión 1.1.1 fronte á 1.1.0</h1>
+  <p class="lede">Versión de corrección: tapa nomes que nos documentos <strong>.odt</strong> (LibreOffice) podían quedar á vista. Non hai funcións novas: o resto do programa é igual ca na 1.1.0.</p>
+  <div class="meta">
+    <div><span>Versión</span>1.1.1 (31 de outubro de 2026)</div>
+    <div><span>Compárase con</span>1.1.0</div>
+    <div><span>Afecta a</span>.odt (tamén dentro dun .zip) e .docx</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · En poucas palabras</h2>
+<p>Nun documento <strong>.odt</strong>, un nome escrito xusto despois dun <strong>salto de liña manual</strong> (Maiús+Intro), dun <strong>tabulador</strong> ou de <strong>varios espazos seguidos</strong> podía quedar sen anonimizar, enteiro ou en parte. O programa lía esas dúas palabras pegadas («representación deIria») e non recoñecía o nome. A versión 1.1.1 tápao, tanto no documento anonimizado coma na copia en Markdown (.md).</p>
+<p>O fallo estaba xa na primeira versión publicada, non só na 1.1.0.</p>
+
+<h2 class="sec">02 · Que quedaba á vista</h2>
+<p>Exemplo cun .odt de proba (nomes inventados), anonimizado coas dúas versións:</p>
+<table class="comparacion">
+  <thead><tr><th>No documento orixinal</th><th>Versión 1.1.0</th><th>Versión 1.1.1</th></tr></thead>
+  <tbody>
+    <tr><td>«en representación de» + salto de liña + «Iria Souto Barreiro»</td><td><strong>«Iria»</strong> á vista</td><td>tapado</td></tr>
+    <tr><td>«Documento asinado por» + tabulador + «Martiño Doval Seoane»</td><td><strong>o nome enteiro</strong> á vista</td><td>tapado</td></tr>
+    <tr><td>«Testemuña:» + tres espazos + «Roi Amoedo Figueiras»</td><td>tapado</td><td>tapado</td></tr>
+  </tbody>
+</table>
+<p>A copia en Markdown (.md) repetía o mesmo texto, co mesmo nome á vista. Na 1.1.1 os saltos de liña, os tabuladores e os espazos quedan no seu sitio.</p>
+
+<h2 class="sec">03 · Nomes partidos por un salto de liña manual</h2>
+<p>Un nome cortado por un salto de liña manual dentro do mesmo parágrafo («Sabela Regueiro» + Maiús+Intro + «Castiñeiras»):</p>
+<ul class="compacta">
+  <li><strong>En .docx</strong>, a versión 1.1.0 non podía gardar o documento anonimizado e daba un erro («o texto ten 1 liña(s) pero o documento orixinal agarda 2…»). Non deixaba nada á vista, pero o documento quedaba sen anonimizar.</li>
+  <li><strong>En .odt</strong>, a 1.1.0 lía o nome pegado («RegueiroCastiñeiras») e perdíase o salto de liña na copia .md.</li>
+</ul>
+<p>Agora o nome tápase nas dúas liñas co mesmo código de persoa, o salto de liña consérvase e o documento gárdase.</p>
+
+<h2 class="sec">04 · Que non cambia</h2>
+<ul class="compacta">
+  <li>Os <strong>.docx</strong> non tiñan a fuga do apartado 02: neles os saltos de liña e os tabuladores xa se lían ben.</li>
+  <li>Os .pdf, .txt, .md e as imaxes procésanse igual ca na 1.1.0.</li>
+  <li>O rexistro de nomes reais, os códigos xa asignados e as preferencias consérvanse ao actualizar.</li>
+</ul>
+
+<h2 class="sec">05 · Como se comprobou</h2>
+<p>Engadíronse <strong>10 comprobacións automáticas</strong> con documentos inventados; todas agás unha fallaban coa 1.1.0. O programa ten agora <strong>821 comprobacións</strong> e pasan todas. Ademais, o .odt de proba do apartado 02 anonimizouse no programa real, coa revisión humana e a copia .md, coas versións 1.1.0 e 1.1.1: na 1.1.1 non queda ningún dos nomes nin no documento nin na copia .md.</p>
+
+<h2 class="sec">06 · Que facer cos .odt xa anonimizados</h2>
+<div class="aviso"><h4>Revisa os .odt anonimizados con versións anteriores</h4>
+<p>Se anonimizaches documentos .odt (soltos ou dentro dun .zip) cunha versión anterior á 1.1.1, revisa se queda algún nome á vista despois dun salto de liña manual ou dun tabulador, sobre todo en bloques de sinatura, enderezos e listaxes de comparecentes. O máis seguro é anonimizar de novo o .odt orixinal coa 1.1.1: co mesmo rexistro, cada persoa conserva o seu código.</p></div>
+
+<h2 class="sec">07 · Como actualizar</h2>
+<ul class="compacta">
+  <li><strong>Microsoft Store:</strong> a actualización chega soa; para non agardar, búscaa na Biblioteca da Microsoft Store. A versión instalada vese na páxina «Acerca de» do programa («Versión 1.1.1»).</li>
+  <li><strong>Código fonte:</strong> rama <code>main</code> do repositorio público en GitHub.</li>
+</ul>
+
+<p class="rodape">Anonimizador de expedientes xurídicos · Novidades da versión 1.1.1 (fronte á 1.1.0) · Outubro de 2026</p>
+</body>
+</html>
