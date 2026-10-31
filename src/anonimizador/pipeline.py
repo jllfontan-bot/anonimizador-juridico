@@ -28,7 +28,10 @@ from odf.meta import UserDefined as PersonalizadoMetaOdt
 from odf.office import Annotation as AnotacionOdt
 from odf.opendocument import load as cargar_odt
 from odf.text import H as TituloOdt
+from odf.text import LineBreak as SaltoLiñaOdt
 from odf.text import P as ParagrafoOdt
+from odf.text import S as EspazosOdt
+from odf.text import Tab as TabuladorOdt
 
 from . import codigos, idioma, imaxes, mosaic, ner, resolution
 from .categoria_especial import escanear_categoria_especial
@@ -73,6 +76,10 @@ def conserva_formato(contexto: dict | None, ruta_saida: str) -> bool:
 _QNAME_PARAGRAFO_ODT = ParagrafoOdt().qname
 _QNAME_TITULO_ODT = TituloOdt(outlinelevel=1).qname
 _QNAME_ANOTACION_ODT = AnotacionOdt().qname
+_QNAME_SALTO_ODT = SaltoLiñaOdt().qname
+_QNAME_TABULADOR_ODT = TabuladorOdt().qname
+_QNAME_ESPAZOS_ODT = EspazosOdt().qname
+_QNAMES_ESPAZADO_ODT = (_QNAME_SALTO_ODT, _QNAME_TABULADOR_ODT, _QNAME_ESPAZOS_ODT)
 
 
 def _paragrafos_dun_contedor_docx(contedor) -> list:
@@ -340,13 +347,30 @@ def _fillos_de_texto_odt(paragrafo) -> list:
     ]
 
 
+def _texto_fillo_odt(fillo) -> str:
+    """Texto que aporta un fillo directo dun parágrafo/título.
+    `teletype.extractText` só converte os saltos de liña manuais
+    (`text:line-break`), os tabuladores (`text:tab`) e os espazos
+    repetidos (`text:s`) cando van DENTRO do elemento que se lle pasa (un
+    span): pasándolle o propio salto devolve "". Por iso un salto fillo
+    directo do parágrafo desaparecía e as palabras de cada lado chegaban
+    pegadas á detección -- "representación de" + salto + "Antía Varela
+    Doval" líase "deAntía Varela Doval" e "Antía" quedaba á vista."""
+    if isinstance(fillo, TextoOdt):
+        return fillo.data
+    if fillo.qname == _QNAME_SALTO_ODT:
+        return "\n"
+    if fillo.qname == _QNAME_TABULADOR_ODT:
+        return "\t"
+    if fillo.qname == _QNAME_ESPAZOS_ODT:
+        return " " * int(fillo.getAttribute("c") or 1)
+    return teletype.extractText(fillo)
+
+
 def _texto_paragrafo_odt(paragrafo) -> str:
     """Texto dun parágrafo/título coma `teletype.extractText`, pero sen
     contar o contido das anotacións (ver `_fillos_de_texto_odt`)."""
-    return "".join(
-        fillo.data if isinstance(fillo, TextoOdt) else teletype.extractText(fillo)
-        for fillo in _fillos_de_texto_odt(paragrafo)
-    )
+    return "".join(_texto_fillo_odt(fillo) for fillo in _fillos_de_texto_odt(paragrafo))
 
 
 def _limpar_anotacions_odt(documento) -> None:
@@ -551,12 +575,15 @@ def _substituir_texto_paragrafo_odt(paragrafo, texto_novo: str) -> None:
     Nota técnica: non se usa `paragrafo.removeChild()` para baleirar o
     paragrafo porque odfpy falla ao tentar actualizar as súas caches
     internas cando o fillo é un nodo de texto plano nun documento cargado
-    de disco; manipular `childNodes` directamente evita ese fallo."""
+    de disco; manipular `childNodes` directamente evita ese fallo.
+
+    `teletype.addTextToElement` volve escribir os "\\n", "\\t" e espazos
+    repetidos coma salto, tabulador e `text:s` (ver `_texto_fillo_odt`)."""
     for fillo in _fillos_de_texto_odt(paragrafo):
         fillo.parentNode = None
         paragrafo.childNodes.remove(fillo)
     if texto_novo:
-        paragrafo.addText(texto_novo)
+        teletype.addTextToElement(paragrafo, texto_novo)
 
 
 def _aplicar_substitucions_paragrafo_odt(paragrafo, substitucions_locais: list) -> None:
@@ -566,24 +593,36 @@ def _aplicar_substitucions_paragrafo_odt(paragrafo, substitucions_locais: list) 
     frase). Un nodo de texto plano reescríbese cambiando `.data`
     directamente; un "span" baléirase e reescríbese coma na reserva, pero
     SO o seu contido -- o seu propio estilo non se toca. Unha eventual
-    anotación fillo directo QUEDA FÓRA (ver `_fillos_de_texto_odt`)."""
+    anotación fillo directo QUEDA FÓRA (ver `_fillos_de_texto_odt`).
+
+    Un salto, tabulador ou `text:s` fillo directo (ver `_texto_fillo_odt`)
+    queda tal cal se ningunha substitución o toca; se o cobre unha, cámbiase
+    polo seu texto novo (baleiro ou o código, se a mención empeza nel)."""
     fillos = _fillos_de_texto_odt(paragrafo)
     if not fillos:
         return
-    textos = [
-        fillo.data if isinstance(fillo, TextoOdt) else teletype.extractText(fillo)
-        for fillo in fillos
-    ]
+    textos = [_texto_fillo_odt(fillo) for fillo in fillos]
     novos = _distribuir_por_anacos(textos, substitucions_locais)
-    for fillo, novo in zip(fillos, novos):
+    for fillo, texto, novo in zip(fillos, textos, novos):
         if isinstance(fillo, TextoOdt):
             fillo.data = novo
+        elif fillo.qname in _QNAMES_ESPAZADO_ODT:
+            if novo == texto:
+                continue
+            indice = paragrafo.childNodes.index(fillo)
+            fillo.parentNode = None
+            if novo:
+                nodo = TextoOdt(novo)
+                nodo.parentNode = paragrafo
+                paragrafo.childNodes[indice] = nodo
+            else:
+                del paragrafo.childNodes[indice]
         else:
             while fillo.childNodes:
                 fillo.childNodes[0].parentNode = None
                 del fillo.childNodes[0]
             if novo:
-                fillo.addText(novo)
+                teletype.addTextToElement(fillo, novo)
 
 
 def _redactar_imaxes_docx(documento) -> None:
@@ -720,15 +759,19 @@ def _limites_por_contexto(contexto: dict | None) -> list | None:
         return None
     if contexto["tipo"] == "pdf":
         return _limites_paxinas(contexto["paxinas"])
-    return _limites_paragrafos(contexto["textos_orixinais"])
+    # Por liña, non por parágrafo: unha mención que cruza un salto de liña
+    # manual dentro do parágrafo ("Antía Varela" + Maiús+Intro + "Doval")
+    # quitaríalle unha liña ao texto e `gardar_documento_estruturado` xa
+    # non podería escribilo.
+    return _limites_paragrafos("\n".join(contexto["textos_orixinais"]).split("\n"))
 
 
 def _clamp_substitucions_a_limites(substitucions: list, limites: list) -> list:
     """Se unha substitución cruza a fronteira entre dous "contedores"
-    (parágrafos en .docx/.odt, páxinas en .pdf) -- practicamente sempre un
-    erro de detección do NER/patróns esparexendo unha mención máis alá do
-    que debería, nunca unha mención real que abarque dous contedores --
-    pártese en anacos, un por cada contedor que toca. Isto evita desaliñar
+    (liñas en .docx/.odt, páxinas en .pdf) -- entre parágrafos ou páxinas
+    practicamente sempre un erro de detección do NER/patróns esparexendo
+    unha mención máis alá do que debería; entre liñas dun parágrafo pode
+    ser un nome real partido cun salto manual --, pártese en anacos, un por cada contedor que toca. Isto evita desaliñar
     o número de parágrafos/páxinas do documento orixinal (o que faría
     fallar `gardar_documento_estruturado`/`gardar_pdf_estruturado` xa na
     primeira comprobación, mesmo SEN que un letrado editase nada a man).
