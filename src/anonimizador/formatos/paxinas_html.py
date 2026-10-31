@@ -39,7 +39,8 @@ _CONTEDORES_XENERICOS = ("div", "ul", "section")
 # nunca fragmentos, para non levar por diante contido doutras webs.
 _CLASES_LIXO |= {"banda-menu", "franjaMigas", "logosInicio", "selector-idioma", "filtros", "pie",
                  "menuPie", "migas", "zonaNavegacion", "selectorIdioma", "selectorIdiomaMenu",
-                 "menuPrincipal", "opciones-menu", "loggin-container"}
+                 "menuPrincipal", "opciones-menu", "loggin-container", "anuncios-laterales",
+                 "lista-boletines", "box-color-gris", "menu-footer"}
 # Elementos de lixo en calquera etiqueta: botón de audio (ReadSpeaker, no DOG),
 # ligazón «Subir» e selector de apartados da lei consolidada (BOE).
 _CLASES_LIXO_CALQUERA = {"rs_skip", "rsbtn", "linkSubir", "marcadores"}
@@ -85,6 +86,12 @@ class _Conversor(MarkdownConverter):
     maquetación."""
 
     def convert_table(self, el, text, *args, **kwargs):
+        cabeceira_propia = any(c.find_parent("table") is el for c in el.find_all("th"))
+        if el.find("table") is not None and not cabeceira_propia:
+            # Con táboas dentro e sen cabeceira (un calendario de meses...) a de
+            # fóra é de maquetación: as de dentro saen coma táboas, non
+            # aplanadas nunha cela.
+            return "\n\n" + text.strip() + "\n\n"
         filas = []
         for tr in el.find_all("tr"):
             if tr.find_parent("table") is not el:

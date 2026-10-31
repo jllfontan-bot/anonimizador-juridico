@@ -98,7 +98,7 @@ se detectan. Un `.csv` anonimizado debería escribirse de novo con delimitador e
 | Imaxes en base64 (`data:image/...`) | Fóra | OCR ou borrar |
 | Formularios (valores xa escritos en `<input>`, `<textarea>`, `<select>`) | Fóra | Idem (aquí poden estar os datos da persoa) |
 | Menús, cabeceiras e pés (`nav`, `aside`, `header`, `footer`, `role=navigation/banner/contentinfo`) e contedores con clase `menu`, `sidebar`... | Fóra | Idem |
-| Elementos concretos do BOE e do DOG: botón de audio (`rs_skip`/`rsbtn`), ligazón «Subir» (`linkSubir`), selector de apartados da lei consolidada (`marcadores`), menús e pés do sumario | Fóra | Idem |
+| Elementos concretos do BOE e do DOG: botón de audio (`rs_skip`/`rsbtn`), ligazón «Subir» (`linkSubir`), selector de apartados da lei consolidada (`marcadores`), menús e pés do sumario, buscador e ligazóns laterais da portada do DOG | Fóra | Idem |
 | Codificación (`<meta charset>`) | Detéctase | — |
 
 ## Nota para o motor

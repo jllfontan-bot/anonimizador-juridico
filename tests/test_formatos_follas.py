@@ -272,6 +272,21 @@ class TestCsv(_Base):
         self.assertIn("| Nome | Cargo |", md)
         self.assertNotIn("﻿", md)
 
+    def test_csv_moi_ancho_vai_tal_cal_nun_bloque_de_codigo(self):
+        cabeceira = ",".join(f"c{i}" for i in range(25))
+        ruta = self.ruta("ancho.csv")
+        Path(ruta).write_text(cabeceira + "\n" + ",".join(str(i) for i in range(25)) + "\n",
+                              encoding="utf-8")
+        md = follas.a_markdown(ruta)
+        self.assertTrue(md.startswith("```csv\n" + cabeceira + "\n0,1,2"))
+        self.assertTrue(md.rstrip().endswith("```"))
+        self.assertNotIn("| ---", md)
+
+    def test_csv_estreito_segue_sendo_taboa(self):
+        ruta = self.ruta("estreito.csv")
+        Path(ruta).write_text("a,b,c\n1,2,3\n", encoding="utf-8")
+        self.assertIn("| a | b | c |", follas.a_markdown(ruta))
+
     def test_baleiro_da_markdown_baleiro(self):
         self.assertEqual(follas.a_markdown(self._csv("")).strip(), "")
 
