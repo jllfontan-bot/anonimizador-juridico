@@ -32,8 +32,8 @@ from odf.opendocument import load as cargar_odf
 
 from . import _odf
 from ._comun import (
-    Conversion, _escapar_cela, _escapar_liña, formatar_data, formatar_numero,
-    t, taboa_ou_liñas,
+    Conversion, _escapar_cela, _escapar_liña, formatar_data, formatar_numero, ligazon_md,
+    t, taboa_ou_liñas, url_ligazon,
 )
 from .formato_numero import formatar as formatar_con_formato
 
@@ -132,6 +132,20 @@ def _valor_xlsx(valor, formato: str = "General") -> str:
     return str(valor)
 
 
+_HYPERLINK = re.compile(r'=\s*HYPERLINK\(\s*"([^"]*)"\s*(?:[,;]\s*"([^"]*)"\s*)?\)', re.I)
+
+
+def _con_ligazon_xlsx(cela, texto: str) -> str:
+    """Ligazón da cela (`hyperlink`) ou da fórmula `=HYPERLINK("url";"texto")`."""
+    url = url_ligazon(cela.hyperlink.target if cela.hyperlink is not None else None)
+    if not url and isinstance(cela.value, str):
+        formula = _HYPERLINK.match(cela.value)
+        url = url_ligazon(formula.group(1)) if formula else ""
+        if url and texto.startswith("="):  # sen valor gardado: o rótulo da fórmula
+            texto = formula.group(2) or ""
+    return ligazon_md(texto, url) if url else texto
+
+
 def _columnas_ocultas_xlsx(folla) -> set:
     ocultas = set()
     for dimension in folla.column_dimensions.values():
@@ -166,7 +180,8 @@ def _ler_xlsx(ruta: str, avisos: list) -> list:
                 if cela.column in columnas_ocultas:
                     continue
                 valor = valores[cela.coordinate].value
-                fila.append(_valor_xlsx(cela.value if valor is None else valor, cela.number_format))
+                fila.append(_con_ligazon_xlsx(
+                    cela, _valor_xlsx(cela.value if valor is None else valor, cela.number_format)))
                 if cela.comment is not None and cela.comment.text:
                     notas.append((cela.coordinate, cela.comment.text))
             filas.append(fila)

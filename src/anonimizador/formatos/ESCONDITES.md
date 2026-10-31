@@ -26,14 +26,14 @@ forma de marcar "isto estaba agochado". Os metadatos do arquivo non son contido 
 | Metadatos do documento (`docProps/core.xml`: creador, último en modificar, título, asunto, palabras clave, descrición; `app.xml`: empresa, xestor) | Non se len | Borrar |
 | Nomes definidos (`definedNames`) e rangos con nome | Non se len | Revisar: poden levar texto |
 | Texto de gráficos (títulos, series, categorías) e caixas de texto / formas (`drawings`) | Non se len | Anonimizar |
-| Ligazóns (`hyperlink`), con URL que pode levar un nome ou un correo | Non se len (só o texto da cela) | Anonimizar ou borrar |
+| Ligazóns (`hyperlink`, fórmula `HYPERLINK`), con URL que pode levar un nome ou un correo | **Entran** as `http(s)` e `mailto:` coma `[texto](url)`; as internas non | Anonimizar o URL (ou deixar só o texto) |
 | Validacións de datos (listas desplegables, mensaxes) | Non se len | Revisar |
 | Cabeceiras e pés de impresión (`headerFooter`) | Non se len | Anonimizar |
 | Fórmulas con texto literal (`="Ana Pena"`) | Entra o valor gardado | Anonimizar o valor **e** a fórmula do arquivo de saída |
 | Follas con protección sen contrasinal, comentarios de cambios (`revisions`) | Non se len | Revisar |
 | Imaxes incrustadas (DNI escaneado, firma) | Non se len | OCR ou borrar |
 | Datos externos / ligazóns a outros libros (`externalLinks`) | Non se len | Revisar: rutas con nome de usuario (`C:\Users\Ana...`) |
-| Formato das celas (cor, números) | Non se len | — |
+| Cor e estilo das celas; o formato dos números SI se aplica (millares, decimais, moeda, `%`, ceros á esquerda) | Só o formato numérico | — |
 
 ## .ods
 
@@ -44,7 +44,7 @@ forma de marcar "isto estaba agochado". Os metadatos do arquivo non son contido 
 | Anotacións das celas (`office:annotation`) | **Entran**, sen autor nin data | Anonimizar o texto; borrar `dc:creator` e `dc:date` |
 | `meta.xml` (creador inicial, creador, datas, palabras clave, xerador) | Non se le | Borrar |
 | Texto de formas e gráficos (`draw:*`, `chart`) | Non se le | Anonimizar |
-| Ligazóns (`text:a`) | Non se len | Anonimizar |
+| Ligazóns (`text:a`) | **Entran** as `http(s)` e `mailto:` coma `[texto](url)`; as internas non | Anonimizar o URL (ou deixar só o texto) |
 | Rexistro de cambios (`text:tracked-changes`) | Non se le | Borrar / aceptar cambios, como no .docx |
 | Imaxes incrustadas (`Pictures/`) e miniatura (`Thumbnails/thumbnail.png`: imaxe da primeira folla) | Non se len | Borrar a miniatura; OCR ou borrar as imaxes |
 | Estilos con nomes, `settings.xml` (último cursor, impresora, usuario) | Non se len | Revisar |
@@ -68,7 +68,7 @@ se detectan. Un `.csv` anonimizado debería escribirse de novo con delimitador e
 | Imaxes incrustadas (fotos, DNI, capturas) | Marca `[imaxe]` | OCR ou borrar |
 | Texto de SmartArt (`diagrams/data*.xml`) e de obxectos incrustados (`embeddings/`: un .xlsx dentro) | Marca `[obxecto non convertido]` | Anonimizar: os `embeddings/` son arquivos completos co seu propio contido e metadatos |
 | Texto de gráficos (títulos, series, caches de datos, `charts/` con o seu .xlsx incrustado) | Marca `[gráfico]` | Anonimizar tamén o libro incrustado |
-| Ligazóns (`hlinkClick` con URL) | Non se len | Anonimizar ou borrar |
+| Ligazóns (`hlinkClick` con URL, nos runs de texto e nas táboas) | **Entran** as `http(s)` e `mailto:` coma `[texto](url)`; a ligazón de toda unha forma non | Anonimizar o URL (ou deixar só o texto) |
 | Miniatura (`docProps/thumbnail.jpeg`) | Non se le | Borrar |
 | Texto fóra da diapositiva (formas colocadas fóra da área visible) | **Entra** (le todas as formas) | Anonimizar |
 | Táboas con celas combinadas (o texto das celas absorbidas) | Entra o texto de cada cela | Anonimizar |

@@ -5,11 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from odf.element import Element
-from odf.namespaces import OFFICENS, TABLENS, TEXTNS
+from odf.text import A
+from odf.namespaces import OFFICENS, TABLENS, TEXTNS, XLINKNS
 from odf import teletype
 
 from ..lectura import _texto_paragrafo_odt
-from ._comun import formatar_numero
+from ._comun import con_ligazons, formatar_numero, url_ligazon
 
 # Un .ods pode traer 1.048.576 filas baleiras repetidas e 16.384 columnas:
 # as baleiras non se expanden e as repeticións limítanse.
@@ -17,6 +18,7 @@ _MAX_REPETICIONS = 1024
 _CONTEDORES = {"table-columns", "table-header-columns", "table-column-group",
                "table-rows", "table-header-rows", "table-row-group"}
 _OCULTO = ("collapse", "filter")
+
 
 
 @dataclass
@@ -42,13 +44,28 @@ def letra_columna(n: int) -> str:
     return letras
 
 
+def _ligazons(paragrafo) -> list:
+    """(texto, URL limpo) das ligazóns `text:a` dun parágrafo."""
+    saida = []
+    for a in paragrafo.getElementsByType(A):
+        url = url_ligazon(a.getAttrNS(XLINKNS, "href"))
+        if url:
+            saida.append((teletype.extractText(a), url))
+    return saida
+
+
+def texto_con_ligazons(paragrafo) -> str:
+    """O texto do parágrafo con `[texto](url)` nas ligazóns web e de correo."""
+    return con_ligazons(_texto_paragrafo_odt(paragrafo), _ligazons(paragrafo))
+
+
 def paragrafos(nodo) -> list:
     """Texto de cada parágrafo/título (e das listas) dentro de `nodo`, sen
     entrar nas anotacións (os comentarios das celas)."""
     saida = []
     for fillo in nodo.childNodes:
         if e_elemento(fillo, TEXTNS, "p") or e_elemento(fillo, TEXTNS, "h"):
-            saida.append(_texto_paragrafo_odt(fillo))
+            saida.append(texto_con_ligazons(fillo))
         elif e_elemento(fillo, TEXTNS, "list"):
             saida.append(" ".join(teletype.extractText(fillo).split()))
     return saida
