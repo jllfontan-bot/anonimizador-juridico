@@ -185,6 +185,15 @@ class TestCabeceirasRepetidas(unittest.TestCase):
         self.assertIn(longa + "\nCVE-DOG:", unha)
         self.assertEqual(aforro_ia.aforrar(unha).texto, unha)
 
+    def test_se_o_bloque_custa_máis_do_que_aforra_non_se_quita_nada(self):
+        # Tres liñas curtas repetidas: o comentario do bloque custaría máis có que se quita.
+        corpos = [f"Ab\nCorpo único {n}" for n in range(1, 4)]
+        md = documento(corpos)
+        r = aforro_ia.aforrar(md, dict(unir_liñas=False, limpar_espazos=False))
+        self.assertEqual(r.texto, md)
+        self.assertEqual((r.repetidas, r.eliminadas), ([], []))
+        self.assertLessEqual(r.tokens_despois, r.tokens_antes)
+
     def test_a_marca_das_cabeceiras_é_a_do_idioma(self):
         saida = so(con_cabeceira(), quitar_repetidas=True)
         self.assertIn(f"<!-- {idioma.t('copia_md.cabeceiras', 'gl')} -->", saida)
@@ -425,9 +434,9 @@ class TestEntrada(unittest.TestCase):
     def test_sen_opcións_aplica_as_tres_transformacións_e_non_trocea(self):
         def corpo(n):
             liñas = [f"{l} [{n}]" for l in parrafo(LOREM).split("\n")]
-            return "Cab\n" + "\n".join(liñas) + "\n\n\n\nPé"
+            return "Cabeceira común do diario oficial\n" + "\n".join(liñas) + "\n\n\n\nPé común do diario oficial"
         r = aforro_ia.aforrar(documento([corpo(n) for n in range(1, 6)]))
-        self.assertEqual(r.texto.count("Cab"), 1)
+        self.assertEqual(r.texto.count("Cabeceira común"), 1)
         self.assertNotIn("\n\n\n", r.texto)
         pax3 = r.texto.split(marca(3))[1].split(marca(4))[0].strip()
         self.assertNotIn("\n", pax3)
@@ -449,7 +458,7 @@ class TestEntrada(unittest.TestCase):
             aforro_ia.aforrar("x", dict(troceo=True))
 
     def test_é_idempotente(self):
-        corpos = ["Cab\n" + "\n".join(f"{l} [{n}]" for l in parrafo(LOREM).split("\n")) + "\n\nPé" for n in range(1, 6)]
+        corpos = ["Cabeceira común do diario oficial\n" + "\n".join(f"{l} [{n}]" for l in parrafo(LOREM).split("\n")) + "\n\nPé común do diario oficial" for n in range(1, 6)]
         unha = aforro_ia.aforrar(documento(corpos)).texto
         self.assertEqual(aforro_ia.aforrar(unha).texto, unha)
 

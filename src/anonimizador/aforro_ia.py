@@ -126,7 +126,11 @@ def aforrar(md: str, opcions: Opcions | dict | None = None, nome_base: str = "do
     if op.limpar_espazos:
         texto = _limpar_espazos(texto)
     if op.quitar_repetidas:
-        texto, repetidas, eliminadas = _quitar_repetidas(texto)
+        sen_repetidas, repetidas, eliminadas = _quitar_repetidas(texto)
+        # Co comentario do bloque, quitar tres liñas curtas podería custar máis ca aforrar.
+        if repetidas and len(_con_bloque_de_repetidas(sen_repetidas, repetidas)) >= len(texto):
+            sen_repetidas, repetidas, eliminadas = texto, [], []
+        texto = sen_repetidas
     if op.unir_liñas:
         texto = _unir_liñas(texto)
     if op.limpar_espazos:
