@@ -78,10 +78,16 @@ MICROMAMBA="$CACHE/tools/micromamba"
 # (só existe wheel para Mac) e fallaba con "No matching distribution".
 # Mesmo motivo xa documentado máis abaixo para pywin32 (`descargar_extras_windows`).
 #
+# openpyxl, python-pptx, beautifulsoup4 e markdownify (lectores de follas,
+# presentacións e HTML do conversor, `formatos/`): Python puro, wheel
+# universal; as súas indirectas (et_xmlfile, XlsxWriter, soupsieve, six,
+# typing_extensions) tamén, e lxml xa o trae python-docx. Comprobado con
+# `pip download --platform win_amd64 --python-version 3.12 --abi cp312`.
+#
 # cryptography, pymupdf e opencv-python-headless: fixadas nas versións
 # xa probadas co instalador de Windows; ao subilas, comprobar antes que
 # hai wheel para win_amd64 / cp312.
-PAQUETES_COMUNS="cryptography==46.0.7 PyYAML==6.0.3 python-docx==1.2.0 pymupdf==1.26.0 pytesseract==0.3.13 pillow==11.3.0 flask==3.1.3 keyring==25.7.0 spacy==3.7.5 numpy==1.26.4 opencv-python-headless==4.10.0.84"
+PAQUETES_COMUNS="cryptography==46.0.7 PyYAML==6.0.3 python-docx==1.2.0 pymupdf==1.26.0 pytesseract==0.3.13 pillow==11.3.0 flask==3.1.3 keyring==25.7.0 spacy==3.7.5 numpy==1.26.4 opencv-python-headless==4.10.0.84 openpyxl==3.1.5 python-pptx==1.0.2 beautifulsoup4==4.15.0 markdownify==1.2.3"
 
 mkdir -p "$CACHE/tools" "$CACHE/runtime" "$CACHE/wheels" "$BUILD"
 
@@ -381,7 +387,8 @@ montar_staging_windows() {
     # só as guías de usuario: as notas de versións antigas (04-07) quedan no
     # repo coma histórico, pero non van no paquete
     cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$stage/docs/"
-    if [ -d "$DOCS/es" ]; then mkdir -p "$stage/docs/es"; cp "$DOCS/es/"*.pdf "$stage/docs/es/"; fi
+    # só os do anonimizador (0*): o manual do conversor (10-*) vai no seu paquete (montar_msix.py)
+    if [ -d "$DOCS/es" ]; then mkdir -p "$stage/docs/es"; cp "$DOCS/es/"0*.pdf "$stage/docs/es/"; fi
     cp "$INSTALADOR/windows/Iniciar-Anonimizador.vbs" "$INSTALADOR/windows/anonimizador.ico" "$stage/"
 }
 
@@ -416,10 +423,13 @@ xerar_windows() {
 # makeappx, ver .github/workflows/msix.yml e instalador/msix/)
 # ---------------------------------------------------------------------
 
+# $1: anonimizador (por defecto) ou conversor (Conversor de archivos para
+# IA: aplicación propia na Store, co mesmo árbore de Windows)
 xerar_msix() {
-    log "== MSIX (Microsoft Store) =="
+    local app="${1:-anonimizador}"
+    log "== MSIX (Microsoft Store): $app =="
     montar_staging_windows
-    python3 "$INSTALADOR/msix/montar_msix.py" "$BUILD/staging-windows" "$BUILD/msix"
+    python3 "$INSTALADOR/msix/montar_msix.py" "$BUILD/staging-windows" "$BUILD/msix" "$app"
 }
 
 # ---------------------------------------------------------------------
@@ -428,8 +438,8 @@ xerar_msix() {
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|msix|todo) ;;
-    *) echo "Uso: $0 [windows|msix]"; exit 1 ;;
+    windows|msix|msix-conversor|todo) ;;
+    *) echo "Uso: $0 [windows|msix|msix-conversor]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -440,6 +450,7 @@ descargar_modelo_idioma
 
 case "$OBXECTIVO" in
     msix) xerar_msix ;;
+    msix-conversor) xerar_msix conversor ;;
     *) xerar_windows ;;
 esac
 

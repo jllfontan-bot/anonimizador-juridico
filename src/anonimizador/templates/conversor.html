@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="__LINGUA__">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' 'unsafe-eval'; img-src data:">
+<title>__TITULO__</title>
+<!-- Pantalla do Conversor de ficheiros para IA (`pantalla_conversor.py`).
+     Todo vai dentro desta páxina (CSS, JavaScript e textos): pywebview
+     cárgaa sen servidor e a política de seguridade de enriba non deixa
+     pedir nada fóra ('unsafe-eval': `evaluate_js` de pywebview usa eval). Estilos copiados de `base.html` do anonimizador. -->
+<style>
+  :root{
+    --ink:#1a241f; --ink-soft:#4c5850; --paper:#f4f5f2; --surface:#fff;
+    --line:#d7ddd4; --accent:#1f6f5c; --accent-soft:#e2efe9;
+    --warn:#8f5623; --warn-soft:#f4e9d9;
+  }
+  *{box-sizing:border-box;}
+  [hidden]{ display:none !important; }
+  body{
+    background:var(--paper); color:var(--ink); margin:0; padding:28px 24px 60px;
+    font-family:-apple-system,"Segoe UI",sans-serif; font-size:15px; line-height:1.55;
+  }
+  .envoltorio{ max-width:860px; margin:0 auto; }
+  h1{ font-size:22px; margin:0 0 6px; }
+  h2{ font-size:16px; margin:26px 0 10px; }
+  .subtitulo{ color:var(--ink-soft); margin:0 0 22px; font-size:14px; }
+  label{ font-size:14px; }
+  button{
+    background:var(--accent); color:#fff; border:none; padding:10px 18px;
+    border-radius:6px; font-size:14px; cursor:pointer;
+  }
+  button:hover{ opacity:.92; }
+  button:disabled{ opacity:.45; cursor:default; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+  .boton-secundario{
+    background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    padding:8px 14px; border-radius:6px; font-size:13px; white-space:nowrap;
+  }
+  .boton-secundario:hover{ background:var(--paper); }
+  input[type=text], input[type=number]{
+    padding:8px 10px; border:1px solid var(--line); border-radius:6px;
+    font-size:14px; background:var(--surface); color:var(--ink);
+  }
+  textarea{
+    width:100%; min-height:90px; padding:10px; border:1px solid var(--line);
+    border-radius:8px; font-family:ui-monospace,Menlo,monospace; font-size:13px;
+    background:var(--surface); color:var(--ink); resize:vertical;
+  }
+  .tarxeta{
+    background:var(--surface); border:1px solid var(--line); border-radius:8px;
+    padding:14px 16px; margin-bottom:10px;
+  }
+  .tarxeta.marcada{ border-left:3px solid var(--warn); background:var(--warn-soft); }
+  .codigo{
+    font-family:ui-monospace,Menlo,monospace; background:var(--ink); color:var(--paper);
+    padding:2px 7px; border-radius:4px; font-size:13px;
+  }
+  .motivo, .mencions{ color:var(--ink-soft); font-size:13px; }
+  .aviso{ background:var(--warn-soft); border:1px solid var(--warn); border-radius:6px; padding:10px 14px; color:var(--warn); font-size:13.5px; }
+  .aviso-ok{ background:var(--accent-soft); border-radius:6px; padding:12px 16px; margin-bottom:16px; }
+  .fila{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .esp{ flex:1; }
+
+  .selector-idioma{ float:right; display:flex; gap:4px; margin:0 0 8px 12px; }
+  .selector-idioma button{ background:var(--surface); color:var(--ink-soft); border:1px solid var(--line); padding:4px 10px; font-size:12.5px; }
+  .selector-idioma button[aria-pressed="true"]{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  .zona{
+    border:2px dashed var(--line); border-radius:10px; background:var(--surface);
+    padding:26px 18px; text-align:center; transition:border-color .15s, background .15s;
+  }
+  .zona.enriba{ border-color:var(--accent); background:var(--accent-soft); }
+  .zona p{ margin:0 0 12px; color:var(--ink-soft); }
+  .entradas{ list-style:none; padding:0; margin:12px 0 0; text-align:left; }
+  .entradas li{ display:flex; gap:10px; align-items:center; padding:6px 4px; border-bottom:1px solid var(--line); font-size:14px; }
+  .entradas .tipo{ font-size:11px; border:1px solid var(--line); border-radius:9px; padding:0 7px; color:var(--ink-soft); white-space:nowrap; }
+  .entradas .ruta{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .entradas button{ all:unset; cursor:pointer; color:var(--ink-soft); padding:0 6px; font-size:16px; }
+
+  details.opcions{ margin:18px 0 0; }
+  details.opcions summary{ cursor:pointer; color:var(--ink-soft); font-size:14px; }
+  .opcion{ display:flex; gap:8px; align-items:flex-start; margin:10px 0 0; }
+  .opcion input[type=checkbox]{ margin-top:4px; }
+  .axuda{ display:block; color:var(--ink-soft); font-size:12.5px; }
+
+  .botons-grandes{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px; }
+  .modo{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:10px; }
+  .modo button.grande{ font-size:16px; padding:14px 18px; font-weight:600; }
+  .modo.sen-anon button.grande{ background:#3d4a43; }
+  .modo .radio{ display:flex; gap:8px; align-items:flex-start; font-size:13.5px; }
+  .modo .radio input{ margin-top:4px; }
+  @media (max-width:640px){ .botons-grandes{ grid-template-columns:1fr; } }
+
+  .barra{ position:relative; height:22px; background:var(--accent-soft); border-radius:11px; overflow:hidden; }
+  .barra .feito{ position:absolute; left:0; top:0; bottom:0; width:0; background:var(--accent); transition:width .35s ease; }
+  .porcentaxe{ font-size:28px; font-weight:600; margin:14px 0 2px; }
+  .ficheiro-actual{ font-size:14px; word-break:break-all; }
+
+  .saidas{ list-style:none; padding:0; margin:0; }
+  .saidas li{ display:flex; gap:8px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); }
+  .saidas .ruta{ flex:1; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; word-break:break-all; }
+  .pe{ margin-top:36px; font-size:13px; display:flex; gap:18px; justify-content:center; }
+  .pe a, .tarxeta a{ color:var(--accent); }
+  pre.licenza{ white-space:pre-wrap; font-size:12px; }
+  pre.vista{ white-space:pre-wrap; max-height:420px; overflow:auto; background:var(--surface);
+             border:1px solid var(--line); border-radius:8px; padding:12px; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="envoltorio">
+
+<div class="selector-idioma" role="group">
+  <button type="button" data-lingua="gl">Galego</button>
+  <button type="button" data-lingua="es">Español</button>
+</div>
+<h1 data-t="titulo">__TITULO__</h1>
+<p class="subtitulo" data-t="subtitulo"></p>
+
+<!-- 1. Escoller e converter -->
+<section id="inicio">
+  <div class="zona" id="zona">
+    <p data-t="soltar"></p>
+    <div class="fila" style="justify-content:center;">
+      <button type="button" class="boton-secundario" id="escoller-ficheiros" data-t="escoller_ficheiros"></button>
+      <button type="button" class="boton-secundario" id="escoller-cartafol" data-t="escoller_cartafol"></button>
+    </div>
+    <ul class="entradas" id="entradas"></ul>
+  </div>
+
+  <h2 data-t="saida_titulo"></h2>
+  <div class="fila">
+    <input type="text" id="saida" readonly class="esp">
+    <button type="button" class="boton-secundario" id="escoller-saida" data-t="escoller_saida"></button>
+    <button type="button" class="boton-secundario" id="limpar-saida" data-t="saida_limpar"></button>
+  </div>
+  <span class="axuda" data-t="saida_defecto"></span>
+
+  <details class="opcions">
+    <summary data-t="opcions"></summary>
+    <label class="opcion"><input type="checkbox" id="un-so-md">
+      <span><span data-t="un_so_md"></span><span class="axuda" data-t="un_so_md_axuda"></span></span></label>
+    <label class="opcion"><input type="checkbox" id="aforro" checked>
+      <span><span data-t="aforro"></span><span class="axuda" data-t="aforro_axuda"></span></span></label>
+    <label class="opcion"><input type="checkbox" id="trocear">
+      <span><span data-t="trocear"></span>
+        <input type="number" id="tokens" value="30000" min="100" step="1000" style="width:110px; margin-left:6px;">
+        <span data-t="tokens"></span>
+        <span class="axuda" data-t="trocear_axuda"></span></span></label>
+  </details>
+
+  <div class="botons-grandes">
+    <div class="modo sen-anon">
+      <button type="button" class="grande" id="converter" data-t="converter"></button>
+      <div class="aviso" data-t="aviso_sen_anon"></div>
+    </div>
+    <div class="modo">
+      <button type="button" class="grande" id="converter-anon" data-t="converter_anon"></button>
+      <label class="radio"><input type="radio" name="modo" value="revisar">
+        <span><span data-t="modo_revisar"></span><span class="axuda" data-t="modo_revisar_axuda"></span></span></label>
+      <label class="radio"><input type="radio" name="modo" value="automatico">
+        <span><span data-t="modo_automatico"></span><span class="axuda" data-t="modo_automatico_axuda"></span></span></label>
+    </div>
+  </div>
+  <p class="aviso" id="erro-inicio" hidden style="margin-top:16px;"></p>
+</section>
+
+<!-- 2. Progreso -->
+<section id="progreso" hidden>
+  <div class="tarxeta">
+    <h2 style="margin-top:0;" data-t="progreso_titulo"></h2>
+    <div class="barra"><div class="feito" id="barra"></div></div>
+    <div class="porcentaxe" id="porcentaxe">0 %</div>
+    <div class="ficheiro-actual" id="ficheiro-actual"></div>
+    <div class="motivo" id="detalle-progreso"></div>
+    <div style="margin-top:14px;"><button type="button" class="boton-secundario" id="cancelar" data-t="cancelar"></button></div>
+  </div>
+</section>
+
+<!-- 3. Revisión dun documento -->
+<section id="revision" hidden></section>
+
+<!-- 4. Resultado -->
+<section id="resultado" hidden></section>
+
+<!-- 5. Acerca de -->
+<section id="acerca" hidden></section>
+
+<p class="pe" id="pe">
+  <a href="#" id="ligazon-manual" data-t="manual" hidden></a>
+  <a href="#" id="ligazon-acerca" data-t="acerca.titulo"></a>
+</p>
+
+</div>
+<script>
+"use strict";
+let T = __TEXTOS__;
+let entradas = [];
+let ultimoResultado = null, ultimoEvento = null, ultimaRevision = null, ultimoAcerca = null;
+let seccionAntesDeAcerca = "inicio";
+
+function t(clave, valores) {
+  let texto = (clave in T) ? T[clave] : clave;
+  for (const [k, v] of Object.entries(valores || {})) texto = texto.split("{" + k + "}").join(String(v));
+  return texto;
+}
+function el(etiqueta, atributos, ...fillos) {
+  const nodo = document.createElement(etiqueta);
+  for (const [k, v] of Object.entries(atributos || {})) {
+    if (k === "class") nodo.className = v;
+    else if (k.startsWith("on")) nodo.addEventListener(k.slice(2), v);
+    else if (v !== false && v !== null && v !== undefined) nodo.setAttribute(k, v === true ? "" : v);
+  }
+  for (const f of fillos) if (f !== null && f !== undefined) nodo.append(f);
+  return nodo;
+}
+const $ = (id) => document.getElementById(id);
+const api = () => window.pywebview.api;
+
+function aplicarTextos() {
+  document.querySelectorAll("[data-t]").forEach((n) => { n.textContent = t(n.dataset.t); });
+  document.title = t("titulo");
+  document.querySelectorAll(".selector-idioma button").forEach((b) => {
+    b.setAttribute("aria-pressed", String(b.dataset.lingua === document.documentElement.lang));
+  });
+  pintarEntradas();
+  if (ultimaRevision && !$("revision").hidden) pintarRevision(ultimaRevision);
+  if (ultimoResultado && !$("resultado").hidden) pintarResultado(ultimoEvento, ultimoResultado);
+  if (ultimoAcerca && !$("acerca").hidden) pintarAcerca(ultimoAcerca);
+}
+
+function amosar(seccion) {
+  for (const s of ["inicio", "progreso", "revision", "resultado", "acerca"]) $(s).hidden = s !== seccion;
+  $("pe").hidden = seccion === "acerca";
+  window.scrollTo(0, 0);
+}
+
+// -- entradas ---------------------------------------------------------------
+function engadirEntradas(novas) {
+  for (const e of novas || []) if (!entradas.some((x) => x.ruta === e.ruta)) entradas.push(e);
+  pintarEntradas();
+}
+function pintarEntradas() {
+  const lista = $("entradas");
+  lista.replaceChildren();
+  if (!entradas.length) lista.append(el("li", {class: "motivo"}, t("entradas_baleiro")));
+  entradas.forEach((e, i) => lista.append(el("li", {},
+    el("span", {class: "tipo"}, t("tipo." + e.tipo)),
+    el("span", {class: "ruta", title: e.ruta}, e.ruta),
+    el("button", {type: "button", title: t("quitar"), "aria-label": t("quitar"),
+                  onclick: () => { entradas.splice(i, 1); pintarEntradas(); }}, "×"))));
+  $("converter").disabled = $("converter-anon").disabled = !entradas.length;
+}
+
+// Soltar ficheiros: as rutas chegan de Python (`soltadas`); aquí só se
+// evita que a xanela navegue ao ficheiro e márcase a zona.
+let profundidade = 0;
+document.addEventListener("dragenter", (e) => { e.preventDefault(); profundidade++; $("zona").classList.add("enriba"); });
+document.addEventListener("dragleave", () => { if (--profundidade <= 0) { profundidade = 0; $("zona").classList.remove("enriba"); } });
+document.addEventListener("dragover", (e) => e.preventDefault());
+document.addEventListener("drop", (e) => { e.preventDefault(); profundidade = 0; $("zona").classList.remove("enriba"); });
+
+// -- converter ----------------------------------------------------------------
+function opcions(anonimizar) {
+  return {
+    rutas: entradas.map((e) => e.ruta),
+    anonimizar,
+    modo: document.querySelector("input[name=modo]:checked")?.value,
+    un_so_md: $("un-so-md").checked,
+    aforro: $("aforro").checked,
+    trocear: $("trocear").checked ? Number($("tokens").value) : null,
+    saida: $("saida").value,
+  };
+}
+async function converter(anonimizar) {
+  $("erro-inicio").hidden = true;
+  const r = await api().converter(opcions(anonimizar));
+  if (r.erro) { $("erro-inicio").textContent = r.erro; $("erro-inicio").hidden = false; return; }
+  $("barra").style.width = "0"; $("porcentaxe").textContent = "0 %";
+  $("ficheiro-actual").textContent = ""; $("detalle-progreso").textContent = "";
+  $("cancelar").disabled = false; $("cancelar").textContent = t("cancelar");
+  amosar("progreso");
+}
+
+// Eventos que manda Python (`Api._emitir`).
+function recibir(evento, datos) {
+  if (evento === "soltadas") { engadirEntradas(datos); return; }
+  if (evento === "progreso") {
+    const parte = datos.total ? datos.feito / datos.total : 1;
+    const pct = Math.floor(100 * (datos.entrada + parte) / datos.entradas);
+    $("barra").style.width = pct + "%";
+    $("porcentaxe").textContent = pct + " %";
+    $("ficheiro-actual").textContent = datos.nome;
+    $("detalle-progreso").textContent = datos.total
+      ? t("progreso_doc", {feito: Math.min(datos.feito + 1, datos.total), total: datos.total})
+        + (datos.entradas > 1 ? " · " + t("progreso_entrada", {i: datos.entrada + 1, n: datos.entradas}) : "")
+      : "";
+    amosar("progreso");
+    return;
+  }
+  if (evento === "revisar") { ultimaRevision = datos; pintarRevision(datos); amosar("revision"); return; }
+  ultimaRevision = null;
+  ultimoEvento = evento; ultimoResultado = datos;
+  pintarResultado(evento, datos);
+  amosar("resultado");
+}
+
+// -- revisión -------------------------------------------------------------------
+function pintarRevision(d) {
+  const s = $("revision");
+  s.replaceChildren();
+  s.append(el("h2", {style: "margin-top:0; font-size:19px;"}, t("revision_titulo", {nome: d.nome})));
+  if (d.motivo === "fugas") s.append(el("div", {class: "aviso", style: "margin-bottom:14px;"}, t("revision_por_fugas")));
+  const fragmentos = el("textarea", {id: "fragmentos", rows: 4});
+  if (d.fugas.length) {
+    s.append(el("h2", {}, t("revisar.fugas_titulo")), el("p", {class: "mencions"}, t("revisar.fugas_texto")));
+    for (const r of d.fugas) s.append(el("div", {class: "tarxeta marcada"},
+      el("strong", {}, t(r.tipo === "nome_en_orde_invertida" ? "revisar.orde_invertida" : "revisar.numero_solto")),
+      el("div", {class: "mencions"}, "“" + r.texto + "”"),
+      el("div", {class: "motivo"}, "…" + r.contexto + "…"),
+      el("button", {type: "button", class: "boton-secundario", style: "margin-top:6px;",
+                    onclick: () => { fragmentos.value += (fragmentos.value && !fragmentos.value.endsWith("\n") ? "\n" : "") + r.texto + "\n"; }},
+         t("engadir_ao_cadro"))));
+  }
+  if (d.opcionais.length) {
+    const det = el("details", {style: "margin:12px 0;"}, el("summary", {class: "mencions", style: "cursor:pointer;"}, t("revisar.opcionais", {n: d.opcionais.length})));
+    for (const r of d.opcionais) det.append(el("div", {class: "tarxeta", style: "margin-top:8px;"}, el("div", {class: "mencions"}, "“" + r.texto + "” — …" + r.contexto + "…")));
+    s.append(det);
+  }
+  if (d.exentos.length) {
+    const det = el("details", {open: true, style: "margin:12px 0;"}, el("summary", {class: "mencions", style: "cursor:pointer;"}, t("revisar.exentos_resumo", {n: d.exentos.length})),
+                   el("p", {class: "mencions"}, t("revisar.exentos_texto")));
+    for (const x of d.exentos) det.append(el("div", {class: "tarxeta"}, el("div", {class: "mencions"}, "“" + x.texto + "” — " + t("revisar.cargo_detectado") + " " + x.cargo)));
+    s.append(det);
+  }
+  const marcadas = d.persoas.filter((p) => p.marcado);
+  if (marcadas.length) {
+    s.append(el("h2", {}, t("revisar.homonimos")));
+    for (const p of marcadas) s.append(el("div", {class: "tarxeta marcada"},
+      el("span", {class: "codigo"}, p.codigo),
+      el("div", {class: "mencions"}, t("revisar.mencions") + " " + p.mencions.join(", ")),
+      el("div", {class: "motivo"}, p.motivo),
+      el("div", {class: "mencions"}, t("revisar.homonimo_separado"))));
+  }
+  if (d.mosaico.length) {
+    s.append(el("h2", {}, t("revisar.mosaico_titulo")));
+    for (const r of d.mosaico) s.append(el("div", {class: "tarxeta"},
+      el("strong", {}, t("mosaico." + r.tipo)), el("div", {class: "mencions"}, r.frase), el("div", {class: "motivo"}, r.detalle)));
+  }
+  if (d.categoria.length) {
+    s.append(el("h2", {}, t("revisar.categoria_titulo")), el("p", {class: "mencions"}, t("revisar.categoria_texto")));
+    for (const a of d.categoria) s.append(el("div", {class: "tarxeta"},
+      el("strong", {}, t("categoria." + a.categoria)), el("div", {class: "mencions"}, "«" + a.termo + "»"),
+      el("div", {class: "motivo"}, "…" + a.contexto + "…")));
+  }
+  s.append(el("h2", {}, t("revisar.persoas_titulo")), el("p", {class: "mencions"}, t("revision_persoas_texto")));
+  if (!d.persoas.length) s.append(el("p", {class: "motivo"}, t("revision_sen_persoas")));
+  for (const p of d.persoas) s.append(el("label", {class: "tarxeta", style: "display:flex; gap:10px; align-items:baseline;"},
+    el("input", {type: "checkbox", name: "anonimizar", value: p.codigo, checked: true}),
+    el("span", {class: "codigo"}, p.codigo), el("span", {class: "mencions"}, p.mencions.join(", "))));
+  const axuda = el("p", {class: "mencions"});
+  axuda.innerHTML = t("revisar.engadir_texto");  // texto propio do programa, con <code>
+  s.append(el("h2", {}, t("revisar.engadir_titulo")), axuda, fragmentos);
+  s.append(el("details", {style: "margin-top:16px;"},
+    el("summary", {class: "mencions", style: "cursor:pointer;"}, t("revisar.vista_previa")),
+    el("pre", {class: "vista"}, d.vista_previa)));
+  s.append(el("div", {class: "fila", style: "margin-top:18px;"},
+    el("button", {type: "button", id: "confirmar-revision", onclick: confirmarRevision}, t("revision_confirmar")),
+    el("span", {class: "esp"}),
+    el("button", {type: "button", class: "boton-secundario", onclick: cancelar}, t("cancelar"))));
+}
+async function confirmarRevision() {
+  const anonimizar = [...document.querySelectorAll("#revision input[name=anonimizar]:checked")].map((c) => c.value);
+  $("confirmar-revision").disabled = true;
+  await api().confirmar_revision({anonimizar, fragmentos: $("fragmentos").value});
+  amosar("progreso");
+}
+async function cancelar() {
+  $("cancelar").disabled = true;
+  $("cancelar").textContent = t("cancelando");
+  await api().cancelar();
+  amosar("progreso");
+}
+
+// -- resultado ----------------------------------------------------------------
+function copiarTexto(texto, boton) {
+  const feito = () => { const antes = boton.textContent; boton.textContent = t("copiada"); setTimeout(() => { boton.textContent = antes; }, 1500); };
+  const reserva = () => {
+    const area = el("textarea", {style: "position:fixed; left:-9999px;"}); area.value = texto;
+    document.body.append(area); area.select();
+    try { document.execCommand("copy"); feito(); } finally { area.remove(); }
+  };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(feito, reserva);
+  else reserva();
+}
+function pintarResultado(evento, d) {
+  const s = $("resultado");
+  s.replaceChildren();
+  const titulo = {rematado: "rematado_titulo", cancelado: "cancelado_titulo", erro: "erro_titulo"}[evento];
+  s.append(el("h2", {style: "margin-top:0; font-size:19px;"}, t(titulo)));
+  if (evento === "erro") s.append(el("p", {class: "aviso"}, d.mensaxe));
+  if (evento === "cancelado") s.append(el("p", {class: "motivo"}, t(d.saidas.length ? "cancelado_con_saidas" : "cancelado_sen_saidas")));
+  if (evento === "rematado" && !d.saidas.length) s.append(el("p", {class: "aviso"}, t("nada")));
+  if (d.saidas.length) {
+    s.append(el("div", {class: d.anonimizado ? "aviso-ok" : "aviso", style: "margin-bottom:14px;"},
+      t(d.anonimizado ? (d.automatico ? "resultado_automatico" : "resultado_revisado") : "resultado_sen_anon")));
+    if (d.tokens) s.append(el("div", {class: "tarxeta"}, el("strong", {}, t("tokens_titulo")), el("div", {}, d.tokens)));
+    s.append(el("h2", {}, t("saidas_titulo")));
+    const lista = el("ul", {class: "saidas"});
+    for (const ruta of d.saidas) {
+      const copiar = el("button", {type: "button", class: "boton-secundario"}, t("copiar_ruta"));
+      copiar.addEventListener("click", () => copiarTexto(ruta, copiar));
+      lista.append(el("li", {}, el("span", {class: "ruta"}, ruta), copiar,
+        el("button", {type: "button", class: "boton-secundario", onclick: () => api().abrir_carpeta(ruta)}, t("abrir_carpeta"))));
+    }
+    s.append(lista);
+  }
+  if (d.documentos.length) {
+    s.append(el("h2", {}, t("documentos_titulo")));
+    for (const doc of d.documentos) {
+      // As fugas dun documento revisado xa as viu unha persoa: só se avisa das doutros.
+      const fugas = doc.revisado ? 0 : doc.fugas;
+      const tarxeta = el("div", {class: "tarxeta" + ((doc.marcadas.length && !doc.revisado) || fugas ? " marcada" : "")},
+        el("strong", {}, doc.nome),
+        el("div", {class: "mencions"}, t("doc_resumo", {persoas: doc.persoas, marcadas: doc.marcadas.length})
+          + " · " + t(doc.revisado ? "doc_revisado" : "doc_sen_revisar")));
+      if (fugas) tarxeta.append(el("div", {class: "motivo"}, t("doc_fugas", {n: fugas})));
+      if (doc.marcadas.length) {
+        const det = el("details", {}, el("summary", {class: "mencions", style: "cursor:pointer;"}, t("doc_marcadas")));
+        for (const p of doc.marcadas) det.append(el("div", {class: "mencions", style: "margin-top:6px;"},
+          el("span", {class: "codigo"}, p.codigo), " " + p.mencions.join(", ") + (p.motivo ? " — " + p.motivo : "")));
+        tarxeta.append(det);
+      }
+      s.append(tarxeta);
+    }
+  }
+  if (d.avisos.length) {
+    s.append(el("h2", {}, t("avisos_titulo")));
+    for (const a of d.avisos) s.append(el("div", {class: "tarxeta"}, el("strong", {}, a.nome),
+      el("ul", {class: "mencions"}, ...a.avisos.map((x) => el("li", {}, x)))));
+  }
+  if (d.omitidos.length) {
+    const det = el("details", {style: "margin-top:16px;"}, el("summary", {class: "mencions", style: "cursor:pointer;"}, t("omitidos_titulo", {n: d.omitidos.length})));
+    for (const o of d.omitidos) det.append(el("div", {class: "mencions", style: "margin-top:4px;"},
+      o.nome + " (" + o.motivo + ")" + (o.erro ? ": " + o.erro : "")));
+    s.append(det);
+  }
+  s.append(el("div", {style: "margin-top:22px;"},
+    el("button", {type: "button", onclick: () => { entradas = []; pintarEntradas(); amosar("inicio"); }}, t("nova"))));
+}
+
+// -- acerca de -----------------------------------------------------------------------
+// Os textos `acerca.*` son os do anonimizador (os nosos, con <strong> e <code>): innerHTML.
+function conHtml(clave) { const n = el("p"); n.innerHTML = t(clave); return n; }
+function pintarAcerca(d) {
+  ultimoAcerca = d;
+  const s = $("acerca");
+  s.replaceChildren(
+    el("h2", {style: "margin-top:0;"}, t("acerca.titulo")),
+    el("p", {class: "subtitulo"}, t("acerca.version", {version: d.version})),
+    el("div", {class: "tarxeta"}, conHtml("acerca.autor"), conHtml("acerca.licenza"), el("p", {}, t("acerca.ia")),
+      el("p", {}, t("acerca.codigo") + " ",
+        el("a", {href: "#", onclick: (e) => { e.preventDefault(); api().abrir_codigo(); }}, d.url_codigo))),
+    el("div", {class: "tarxeta"}, el("p", {}, t("acerca.privacidade")), conHtml("acerca.terceiros")));
+  for (const [texto, clave] of [[d.licenza_eupl, "acerca.ver_licenza_eupl"], [d.licenza, "acerca.ver_licenza"]]) {
+    if (texto) s.append(el("details", {class: "tarxeta"}, el("summary", {}, t(clave)), el("pre", {class: "licenza"}, texto)));
+  }
+  s.append(el("p", {}, el("button", {type: "button", class: "boton-secundario",
+    onclick: () => amosar(seccionAntesDeAcerca)}, "← " + t("acerca.volver"))));
+}
+async function abrirAcerca() {
+  const visible = ["inicio", "progreso", "revision", "resultado"].find((x) => !$(x).hidden);
+  seccionAntesDeAcerca = visible || "inicio";
+  pintarAcerca(await api().acerca());
+  amosar("acerca");
+}
+
+// -- arranque ---------------------------------------------------------------------
+async function iniciar() {
+  const estado = await api().estado_inicial();
+  document.querySelector(`input[name=modo][value=${estado.modo_anonimizado}]`).checked = true;
+  document.querySelectorAll("input[name=modo]").forEach((r) => r.addEventListener("change", () => api().gardar_modo_anonimizado(r.value)));
+  $("escoller-ficheiros").addEventListener("click", async () => engadirEntradas(await api().escoller_entradas(false)));
+  $("escoller-cartafol").addEventListener("click", async () => engadirEntradas(await api().escoller_entradas(true)));
+  $("escoller-saida").addEventListener("click", async () => { const r = await api().escoller_saida(); if (r) $("saida").value = r; });
+  $("limpar-saida").addEventListener("click", () => { $("saida").value = ""; });
+  $("converter").addEventListener("click", () => converter(false));
+  $("converter-anon").addEventListener("click", () => converter(true));
+  $("cancelar").addEventListener("click", cancelar);
+  $("ligazon-acerca").addEventListener("click", (e) => { e.preventDefault(); abrirAcerca(); });
+  $("ligazon-manual").hidden = !estado.hai_manual;
+  $("ligazon-manual").addEventListener("click", (e) => { e.preventDefault(); api().abrir_manual(); });
+  document.querySelectorAll(".selector-idioma button").forEach((b) => b.addEventListener("click", async () => {
+    const r = await api().cambiar_idioma(b.dataset.lingua);
+    if (r.erro) return;
+    T = r.textos; document.documentElement.lang = r.lingua; aplicarTextos();
+  }));
+}
+aplicarTextos();
+if (window.pywebview && window.pywebview.api) iniciar();
+else window.addEventListener("pywebviewready", iniciar);
+</script>
+</body>
+</html>

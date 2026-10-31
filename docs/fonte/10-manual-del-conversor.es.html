@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual del Conversor de archivos para IA</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  pre.md{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-size:11px; line-height:1.45; white-space:pre-wrap; break-inside:avoid; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <span class="chip">Manual de uso · Conversor de archivos para IA</span>
+  <h1>Cómo pasar documentos a Markdown para una IA, paso a paso</h1>
+  <p class="lede">Guía práctica del programa, con capturas reales de cada pantalla (con datos inventados): cómo elegir los documentos, qué opciones hay para gastar menos tokens, qué lleva cada .md y cómo convertirlos anonimizando, con la misma revisión que el Anonimizador jurídico.</p>
+  <div class="meta">
+    <div><span>Interfaz</span>Ventana propia del programa<br>(sin servidor ni puertos abiertos)</div>
+    <div><span>Idioma</span>Castellano o gallego<br>(se elige arriba a la derecha)</div>
+    <div><span>Fecha</span>Octubre de 2026</div>
+  </div>
+</div>
+
+<h2 class="sec">01 · Para qué sirve</h2>
+<p>Si le das un PDF o un Word a una inteligencia artificial (Claude, ChatGPT, Copilot…), gasta tokens y herramientas en convertirlo a texto, y a veces lo lee mal: cabeceras repetidas en cada página, líneas cortadas, tablas deshechas. El programa hace esa conversión <strong>en tu ordenador</strong> y guarda un archivo <code>.md</code> (Markdown) con el texto limpio, con sus títulos, listas y tablas, listo para pasárselo a la IA.</p>
+<p>Menú Inicio de Windows → <em>Conversor de archivos para IA</em>. El programa se abre en una ventana propia; para cerrarlo, cierra esa ventana. No se conecta a internet ni abre ningún puerto en el ordenador: la ventana llama directamente al programa.</p>
+<figure><img src="img/es/conversor/inicio.png" alt="Pantalla inicial" style="max-width:340px"><figcaption>Pantalla inicial: los documentos elegidos, la carpeta de salida y los dos botones, «Convertir» y «Convertir anonimizando».</figcaption></figure>
+
+<h2 class="sec">02 · Convertir sin anonimizar</h2>
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Elige los documentos</p>
+  <p>Arrástralos a la ventana o usa <strong>«Elegir archivos…»</strong> y <strong>«Elegir carpeta…»</strong>. Puedes mezclar archivos, carpetas enteras y archivos <code>.zip</code>; cada uno aparece en la lista con su tipo y con una <strong>×</strong> para quitarlo.</p>
+</div></div>
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">Carpeta de salida (opcional)</p>
+  <p>Vacía, cada <code>.md</code> queda junto a su original (el de un <code>.zip</code>, en una carpeta a su lado). Con <strong>«Elegir…»</strong> puedes mandarlos todos a otra carpeta; <strong>«Junto a los originales»</strong> vuelve al comportamiento por defecto.</p>
+</div></div>
+<div class="paso"><div class="n">3</div><div class="corpo">
+  <p class="t">Pulsa «Convertir»</p>
+  <p>El documento original nunca se modifica. El archivo nuevo lleva el mismo nombre con el añadido <code>.md</code>: <code>sentencia.pdf</code> → <code>sentencia.pdf.md</code>, de modo que un <code>.pdf</code> y un <code>.docx</code> con el mismo nombre no se pisan.</p>
+</div></div>
+<div class="aviso">
+  <h4>El .md sin anonimizar lleva los datos personales</h4>
+  <p>Convertir sin anonimizar conserva <strong>todos los datos personales</strong> del documento (nombres, DNI, direcciones…), y el programa lo avisa en las dos pantallas. Si pasas ese <code>.md</code> a una IA en línea, esos datos salen del equipo. Para documentos con datos de terceros, usa «Convertir anonimizando» (sección 06).</p>
+</div>
+
+<h2 class="sec">03 · Opciones: gastar menos tokens</h2>
+<figure><img src="img/es/conversor/opcions.png" alt="Más opciones" style="max-width:400px"><figcaption>«Más opciones», plegadas debajo de la carpeta de salida.</figcaption></figure>
+<ul>
+  <li><strong>Un solo .md por carpeta o .zip.</strong> Con una carpeta o un <code>.zip</code>, junta todos los documentos en un solo archivo (<code>expediente.md</code>, con un índice al principio): cómodo para pasarle a la IA un expediente entero de una vez.</li>
+  <li><strong>Ahorro para IA</strong> (activado por defecto). Quita las cabeceras y pies de página que se repiten en cada hoja (los deja una vez al principio), une las líneas cortadas y los guiones de final de línea, y marca los títulos, también los de los PDF (anexos, capítulos, artículos). Desactívalo si necesitas el texto línea a línea tal como está en el original.</li>
+  <li><strong>Trocear los .md largos.</strong> Parte los documentos largos en varios <code>.md</code> de un tamaño máximo en tokens (por ejemplo 30.000), con un índice: útil cuando la IA tiene un límite por mensaje.</li>
+</ul>
+
+<h2 class="sec">04 · Progreso y resultado</h2>
+<div class="par" style="max-width:420px; margin:0 auto;">
+  <figure><img src="img/es/conversor/progreso.png" alt="Progreso"><figcaption>Progreso del lote, con el documento en curso. «Cancelar» termina el documento que está convirtiendo y no empieza ninguno más.</figcaption></figure>
+</div>
+<figure><img src="img/es/conversor/resultado.png" alt="Resultado" style="max-width:360px"><figcaption>Resultado: la estimación de tokens antes y después, la lista de los .md con «Copiar ruta» y «Abrir carpeta», y los avisos de cada documento.</figcaption></figure>
+<ul>
+  <li><strong>Tokens.</strong> Una estimación (a razón de unos 3,5 caracteres por token) de cuánto ocupaba el texto antes del ahorro y cuánto ocupa el <code>.md</code>. No es el contador real de la IA, que solo existe en línea, pero sirve para comparar.</li>
+  <li><strong>Avisos.</strong> Lo que se dejó fuera y conviene saber: hojas o diapositivas ocultas, imágenes sin texto alternativo, adjuntos de un correo que hay que convertir aparte…</li>
+  <li><strong>Omitidos.</strong> Los archivos que no se pudieron convertir (formato desconocido, PDF dañado) quedan listados con su motivo; el resto del lote sigue.</li>
+</ul>
+
+<h2 class="sec">05 · Qué lleva cada .md</h2>
+<p>Una cabecera mínima (pocos tokens, útil también para la IA) y el texto con marcas de Markdown: <code>#</code> para los títulos, tablas con <code>|</code> y una marca de página en los PDF. Por ejemplo, la primera página de una sentencia en PDF:</p>
+<pre class="md">---
+origen: sentencia.pdf
+paginas: 3
+anonimizado: no
+convertido: 2026-10-31, Conversor de archivos para IA 1.0.0
+---
+
+&lt;!-- cabeceras y pies de página --&gt;
+
+JUZGADO DE PRIMERA INSTANCIA N.º 2 DE LUGO
+
+&lt;!-- página 1 --&gt;
+
+# SENTENCIA 214/2026
+
+## ANTECEDENTES DE HECHO
+
+Juzgado de Primera Instancia. Notificación. Por medio de la presente se comunica…</pre>
+<p>La cabecera del juzgado, que se repetía en cada página, aparece una sola vez al principio. En los documentos digitalizados el texto es el que lee el reconocimiento de texto (OCR), con algún error posible.</p>
+
+<h2 class="sec">06 · Convertir anonimizando</h2>
+<p>El botón <strong>«Convertir anonimizando»</strong> usa el mismo motor que el <strong>Anonimizador jurídico</strong>: los nombres, DNI, teléfonos, direcciones y demás datos personales pasan a códigos (<code>PERSONA_000001</code>, <code>[TELÉFONO]</code>…) antes de escribir el <code>.md</code>. Usa también el <strong>mismo registro cifrado</strong> (<code>Documentos\Anonimizador</code>), de modo que una persona recibe el mismo código en los dos programas.</p>
+<div class="paso"><div class="n">1</div><div class="corpo">
+  <p class="t">Revisar cada documento (recomendado, por defecto)</p>
+  <p>Antes de guardar cada <code>.md</code> aparece la pantalla de revisión, como en el anonimizador: las personas detectadas (desmarca las que no son una persona) y un recuadro para tapar lo que se haya escapado o generalizar un dato.</p>
+</div></div>
+<figure><img src="img/es/conversor/revision.png" alt="Revisión" style="max-width:380px"><figcaption>Revisión de un documento: cada persona con su código y un recuadro para añadir o generalizar.</figcaption></figure>
+<div class="paso"><div class="n">2</div><div class="corpo">
+  <p class="t">O automático, sin revisión</p>
+  <p>Para lotes grandes. El programa recuerda tu elección. Cada <code>.md</code> lleva <code>revisado: no</code> en la cabecera, el resultado resume las personas marcadas, y un documento con posibles fugas pasa igual por la revisión.</p>
+</div></div>
+<p>El <code>.md</code> anonimizado se llama <code>&lt;nombre anonimizado&gt;.anonimizado.&lt;extensión&gt;.md</code> y lleva <code>anonimizado: sí</code> en la cabecera:</p>
+<pre class="md">---
+origen: declaracion.docx
+anonimizado: sí
+revisado: sí
+convertido: 2026-10-31, Conversor de archivos para IA 1.0.0
+---
+
+Declaración de PERSONA_000001
+
+PERSONA_000001, con DNI PERSONA_000001 y teléfono [TELÉFONO], vecina de Lugo, declara que conocía a PERSONA_000002 desde hacía diez años…</pre>
+<div class="nota">
+  <h4>Ningún sistema automático lo detecta todo</h4>
+  <p>Revisa siempre el <code>.md</code> antes de pasarlo a una IA externa. Mientras se conserve el registro, el resultado está seudonimizado, no anonimizado de forma irreversible: la correspondencia entre cada código y la persona real se puede consultar con el Anonimizador jurídico (reversión con contraseña y motivo).</p>
+</div>
+
+<h2 class="sec">07 · Formatos</h2>
+<table>
+  <thead><tr><th style="width:38%">Formato</th><th>Sin anonimizar</th><th>Anonimizando</th></tr></thead>
+  <tbody>
+    <tr><td>PDF con texto y escaneados (OCR)</td><td>Sí, con títulos, tablas y páginas</td><td>Sí</td></tr>
+    <tr><td><code>.docx</code>, <code>.odt</code>, <code>.txt</code></td><td>Sí, con títulos, listas y tablas</td><td>Sí</td></tr>
+    <tr><td>Imágenes (<code>.jpg</code>, <code>.png</code>, <code>.tif</code>…)</td><td>Sí, el texto que lee el OCR</td><td>Sí</td></tr>
+    <tr><td>Hojas de cálculo (<code>.xlsx</code>, <code>.ods</code>, <code>.csv</code>)</td><td>Sí, cada hoja como tabla; las ocultas, fuera y con aviso</td><td>Todavía no</td></tr>
+    <tr><td>Presentaciones (<code>.pptx</code>, <code>.odp</code>)</td><td>Sí, diapositiva a diapositiva, con las notas del orador</td><td>Todavía no</td></tr>
+    <tr><td>Páginas web guardadas (<code>.html</code>)</td><td>Sí, sin menús ni pies de la web</td><td>Todavía no</td></tr>
+    <tr><td>Correos guardados (<code>.eml</code>)</td><td>Sí: asunto, remitente y destinatarios, fecha, texto y lista de adjuntos (los adjuntos se convierten aparte)</td><td>Todavía no</td></tr>
+    <tr><td>Carpetas y <code>.zip</code></td><td>Sí, cada documento de dentro</td><td>Sí, los formatos que admite</td></tr>
+  </tbody>
+</table>
+<p class="peq">«Todavía no»: esos formatos tienen sitios donde se esconden datos (comentarios, hojas ocultas, cabeceras de un correo…) y solo se convertirán anonimizando cuando cada uno tenga sus propias pruebas de fugas. Mientras, en el modo anonimizado quedan fuera, listados como omitidos.</p>
+
+<h2 class="sec">08 · Privacidad y datos que guarda</h2>
+<ul>
+  <li>Todo se hace en el ordenador: ni los documentos ni los <code>.md</code> salen a internet, y el programa no abre ningún puerto.</li>
+  <li>En <code>Documentos\Anonimizador</code> (la misma carpeta que el anonimizador) se guarda <code>preferencias.json</code> (idioma y modo de revisión) y, solo si conviertes anonimizando, el registro cifrado <code>datos_rexistro</code>, con la clave en el Administrador de credenciales de Windows. Nada de eso se borra al desinstalar: sin el registro no se podría saber a quién corresponde cada código.</li>
+  <li>El enlace <strong>«Acerca de»</strong>, abajo, muestra la versión, la autoría, la doble licencia (EUPL v1.2 o AGPL-3.0, con los textos completos) y el enlace al código fuente.</li>
+</ul>
+<figure><img src="img/es/conversor/acerca.png" alt="Acerca de" style="max-width:340px"><figcaption>«Acerca de»: versión, licencias, autoría y código fuente.</figcaption></figure>
+
+<h2 class="sec nova-pax">09 · Preguntas frecuentes</h2>
+<table>
+  <thead><tr><th style="width:30%">Pregunta</th><th>Respuesta</th></tr></thead>
+  <tbody>
+    <tr><td>¿Por qué Markdown y no texto simple?</td><td>Porque conserva la estructura (títulos, listas, tablas) con muy pocos caracteres, y las IA lo leen muy bien. Un PDF o un Word cuestan muchos más tokens de convertir.</td></tr>
+    <tr><td>¿El .md ocupa lo mismo que el texto del original?</td><td>Algo menos con el «Ahorro para IA», sobre todo en los PDF con cabeceras y pies repetidos. El resumen final da la estimación de tokens antes y después.</td></tr>
+    <tr><td>¿Qué pasa si convierto el mismo documento dos veces?</td><td>Se sobrescribe el <code>.md</code> anterior. Anonimizando, la misma persona recibe el mismo código.</td></tr>
+    <tr><td>¿El programa lee los .md que ya generó?</td><td>No: los <code>.md</code> de otras conversiones y los documentos <code>.anonimizado</code> del anonimizador quedan fuera, listados como «resultado de una conversión o anonimización anterior».</td></tr>
+    <tr><td>¿Los adjuntos de un correo se convierten?</td><td>No: el <code>.md</code> del correo lista los adjuntos con su nombre y tamaño, y un aviso te recuerda guardarlos y convertirlos aparte.</td></tr>
+    <tr><td>¿Puedo cambiar el idioma?</td><td>Sí, con los botones «Galego | Español» de arriba a la derecha. Se recuerda al cerrar el programa y cambia también las etiquetas de la cabecera de los .md.</td></tr>
+    <tr><td>¿Necesito el Anonimizador jurídico?</td><td>No para convertir: los dos programas son independientes. Para consultar la identidad real detrás de un código (reversión), sí.</td></tr>
+  </tbody>
+</table>
+
+<div class="rodape">Conversor de archivos para IA — manual de uso · Elaborado con Claude Code</div>
+</body>
+</html>

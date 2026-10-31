@@ -58,6 +58,30 @@ class TestCopiaDoRexistroAntigo(unittest.TestCase):
             self.assertTrue(os.environ["PATH"].endswith("orixinal"))
 
 
+class TestArranqueDoConversor(unittest.TestCase):
+    """O paquete MSIX do conversor: Tesseract do paquete e o MESMO cartafol
+    de traballo có anonimizador (o mesmo rexistro)."""
+
+    def test_entorno_cartafol_compartido_e_pantalla(self):
+        from anonimizador import arranque_conversor, pantalla_conversor
+
+        with tempfile.TemporaryDirectory() as tmp:
+            raiz, documentos = Path(tmp) / "paquete", Path(tmp) / "Documentos"
+            cwd = os.getcwd()
+            try:
+                with mock.patch.dict(os.environ, {"PATH": "orixinal"}), \
+                        mock.patch.object(arranque_conversor, "raiz_instalacion", return_value=raiz), \
+                        mock.patch.object(arranque_conversor, "cartafol_documentos", return_value=documentos), \
+                        mock.patch.object(pantalla_conversor, "executar") as executar:
+                    arranque_conversor.main()
+                    self.assertEqual(os.environ["TESSDATA_PREFIX"], str(raiz / "runtime" / "tesseract" / "tessdata"))
+                    self.assertEqual(Path(os.getcwd()).resolve(), (documentos / "Anonimizador").resolve())
+            finally:
+                os.chdir(cwd)
+            executar.assert_called_once_with()
+            self.assertEqual(arranque_conversor.NOME_CARTAFOL, arranque_windows.NOME_CARTAFOL)
+
+
 class TestPantallas(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
