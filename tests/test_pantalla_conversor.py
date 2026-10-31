@@ -336,7 +336,11 @@ def start(*args, **kwargs):
     def comprobar():
         try:
             xanela = webview.windows[0]
-            print("CARGADA", xanela.events.loaded.wait(60), flush=True)
+            # `loaded` e a API de Python actívanse xuntos (webview.util); cun equipo en repouso
+            # ou ocupado pode pasar do minuto, así que hai marxe e anótase o que tardou.
+            inicio = time.monotonic()
+            print("CARGADA", xanela.events.loaded.wait(180), flush=True)
+            print(f"TARDOU {time.monotonic() - inicio:.1f} s", flush=True)
             time.sleep(1)
             print("API", xanela.evaluate_js("typeof window.pywebview.api.converter"), flush=True)
             portos = subprocess.run(["lsof", "-nP", "-a", "-p", str(os.getpid()), "-i"],
@@ -365,10 +369,10 @@ class TestSenPortosAbertos(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             proceso = subprocess.run(
                 [sys.executable, "-c", _SCRIPT_XANELA, str(_RAIZ / "src"), str(Path(tmp) / "rexistro")],
-                capture_output=True, text=True, timeout=180, cwd=tmp,
+                capture_output=True, text=True, timeout=300, cwd=tmp,
             )
         saida = proceso.stdout
-        self.assertIn("CARGADA True", saida, proceso.stderr[-2000:])
+        self.assertIn("CARGADA True", saida, saida + proceso.stderr[-2000:])
         self.assertIn("API function", saida)
         self.assertIn("PORTOS<<>>", saida)
         self.assertIn("SERVIDOR None", saida)
