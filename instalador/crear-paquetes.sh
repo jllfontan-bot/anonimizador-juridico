@@ -387,7 +387,8 @@ montar_staging_windows() {
     # só as guías de usuario: as notas de versións antigas (04-07) quedan no
     # repo coma histórico, pero non van no paquete
     cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$stage/docs/"
-    if [ -d "$DOCS/es" ]; then mkdir -p "$stage/docs/es"; cp "$DOCS/es/"*.pdf "$stage/docs/es/"; fi
+    # só os do anonimizador (0*): o manual do conversor (10-*) vai no seu paquete (montar_msix.py)
+    if [ -d "$DOCS/es" ]; then mkdir -p "$stage/docs/es"; cp "$DOCS/es/"0*.pdf "$stage/docs/es/"; fi
     cp "$INSTALADOR/windows/Iniciar-Anonimizador.vbs" "$INSTALADOR/windows/anonimizador.ico" "$stage/"
 }
 

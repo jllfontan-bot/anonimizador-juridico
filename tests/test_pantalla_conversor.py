@@ -133,6 +133,10 @@ class TestAcercaEManual(_Base):
         self.assertIn("Anthropic", textos["acerca.ia"])
         self.assertIn('id="ligazon-acerca"', pantalla_conversor.html())
 
+    def test_o_manual_esta_no_repositorio_nos_dous_idiomas(self):
+        for nome in pantalla_conversor.MANUAL.values():
+            self.assertTrue((_RAIZ / "docs" / nome).is_file(), nome)
+
     def test_abrir_codigo_so_abre_o_repositorio(self):
         with mock.patch.object(pantalla_conversor, "_abrir_fora") as abrir:
             self.assertEqual(self.api.abrir_codigo(), {"ok": True})

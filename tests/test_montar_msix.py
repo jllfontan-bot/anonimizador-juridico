@@ -64,6 +64,10 @@ class TestMontarMsix(unittest.TestCase):
             self.assertTrue((conversor / "Assets" / nome).is_file())
         self.assertNotEqual((conversor / "Assets" / "StoreLogo.png").read_bytes(),
                             (anonimizador / "Assets" / "StoreLogo.png").read_bytes())
+        # O manual do conversor vai só no seu paquete.
+        for manual in ("10-Manual-do-conversor.pdf", "es/10-Manual-del-conversor.pdf"):
+            self.assertTrue((conversor / "docs" / manual).is_file(), manual)
+            self.assertFalse((anonimizador / "docs" / manual).exists(), manual)
 
 
 if __name__ == "__main__":
