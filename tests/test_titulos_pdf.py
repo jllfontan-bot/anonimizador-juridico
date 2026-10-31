@@ -98,7 +98,7 @@ class TestDeteccion(_Base):
         self.assertEqual(self._titulos([[("PRIMEIRO. DEMANDANTE", 11, 120)] + _corpo()]), [])
 
     def test_negra_e_maiusculas_nun_documento_con_titulo_real(self):
-        titulos = self._titulos([[("ESCRITO DE DEMANDA", 16, 110), ("ANEXO", 11, 140, "hebo")] + _corpo(180)])
+        titulos = self._titulos([[("ESCRITO DE DEMANDA", 16, 110), ("HECHOS", 11, 140, "hebo")] + _corpo(180)])
         self.assertEqual(titulos, [("ESCRITO DE DEMANDA", 1)])
 
     def test_todo_nun_tamano_sen_titulos(self):

@@ -49,6 +49,12 @@ _PALABRAS_FRASE = 8  # con punto final
 _MINIMO_TEXTO_CORRIDO = 8  # liñas dun tamaño con media longa: texto, non títulos
 _LONGO_TEXTO_CORRIDO = 55
 _FRACCION_MAXIMA = 0.25  # de caracteres do documento en letra de título
+_PALABRAS_ESTRUTURAL = 12  # o que vai despois de «Artigo 1.» nun título estrutural
+_LONGO_ESTRUTURAL = 100
+_NIVEIS_TOTAIS = 6
+# O BOE escribe «Artículo 1. Objeto.» en letra normal co nome en cursiva, nin negra nin
+# maiúsculas. Sen isto non se detecta ningún artigo no corpus; fóra por defecto (decide o usuario).
+_ADMITE_CURSIVA = False
 _HUECO_MAXIMO = 2.0  # entre anacos dunha mesma fila, en tamaños de letra
 _SEPARACION_MAXIMA = 1.7  # entre a parte de arriba de dúas liñas dun mesmo título, en tamaños de letra
 
@@ -57,6 +63,8 @@ _DIXITOS = re.compile(r"\d+")
 # Espazos para encher (....., …), campos de formulario («Centro de destino: X»)
 # e a data dunha sinatura («Santiago de Compostela, 25 de setembro de 2024»).
 _NON_TITULO = re.compile(r"\.{4,}|…|:\s*\S{3}|\d{1,2} de \w+ de \d{4}\s*$", re.IGNORECASE)
+_FONTE_NEGRA = re.compile(r"bold|black|heavy|[-,]bd\b", re.IGNORECASE)
+_FONTE_CURSIVA = re.compile(r"italic|oblique", re.IGNORECASE)
 _MATEMATICAS = re.compile("[\U0001d400-\U0001d7ff]")  # letras matemáticas: unha fórmula
 
 
@@ -77,6 +85,8 @@ class _Liña:
     tamano: float
     caracteres: int
     horizontal: bool = True
+    negra: bool = False  # polo menos o 90 % das letras en negra
+    cursiva: bool = False  # polo menos o 25 % das letras en cursiva
 
 
 def _tamano(valor: float) -> float:
@@ -87,14 +97,20 @@ def _liñas_da_paxina(pagina: "fitz.Page", numero: int) -> list:
     liñas = []
     for bloque in pagina.get_text("dict", flags=fitz.TEXTFLAGS_TEXT)["blocks"]:
         for liña in bloque.get("lines", ()):
-            por_tamano = Counter()
+            por_tamano, en_negra, en_cursiva = Counter(), 0, 0
             for span in liña["spans"]:
                 por_tamano[_tamano(span["size"])] += len(span["text"].strip())
+                if _FONTE_NEGRA.search(span["font"]) or span["flags"] & 16:
+                    en_negra += len(span["text"].strip())
+                if _FONTE_CURSIVA.search(span["font"]) or span["flags"] & 2:
+                    en_cursiva += len(span["text"].strip())
             texto = " ".join("".join(s["text"] for s in liña["spans"]).split())
             if texto and por_tamano:
                 tamano, caracteres = max(por_tamano.items(), key=lambda t: (t[1], t[0]))
                 horizontal = tuple(round(c) for c in liña["dir"]) == (1, 0)
-                liñas.append(_Liña(numero, tuple(liña["bbox"]), texto, tamano, caracteres, horizontal))
+                negra = en_negra >= 0.9 * sum(por_tamano.values())
+                cursiva = en_cursiva >= 0.25 * sum(por_tamano.values())
+                liñas.append(_Liña(numero, tuple(liña["bbox"]), texto, tamano, caracteres, horizontal, negra, cursiva))
     return _fusionar_fragmentos(liñas)
 
 
@@ -115,7 +131,8 @@ def _fusionar_fragmentos(liñas: list) -> list:
                     primeiro, segundo = (o, l) if o.rect[0] <= l.rect[0] else (l, o)
                     saida[k] = _Liña(o.paxina, (min(o.rect[0], l.rect[0]), min(o.rect[1], l.rect[1]),
                                                 max(o.rect[2], l.rect[2]), max(o.rect[3], l.rect[3])),
-                                     primeiro.texto + " " + segundo.texto, o.tamano, o.caracteres + l.caracteres)
+                                     primeiro.texto + " " + segundo.texto, o.tamano, o.caracteres + l.caracteres,
+                                     True, o.negra and l.negra, o.cursiva and l.cursiva)
                     break
             else:
                 saida.append(l)
@@ -146,7 +163,7 @@ def _na_mesma_fila(l: _Liña, outras: list) -> bool:
     ou unha fórmula, non un título."""
     alto = l.rect[3] - l.rect[1]
     for o in outras:
-        if o is l:
+        if o is l or not o.horizontal:  # o texto vertical do margo (cve, «Verificable en…») non é unha fila
             continue
         solape = min(l.rect[3], o.rect[3]) - max(l.rect[1], o.rect[1])
         if solape > 0.5 * min(alto, o.rect[3] - o.rect[1]):
@@ -231,9 +248,101 @@ def _semella_frase(texto: str) -> bool:
             or texto.rstrip().endswith((",", ":")) or bool(_NON_TITULO.search(texto)))
 
 
+# -- títulos estruturais: «Artigo 1.», «ANEXO I», «CAPÍTULO II»... en negra ao
+# tamaño do corpo (e, polo tanto, invisibles para o criterio do tamaño) ------
+
+_ORDINAL = (r"(?:[úu]nic[oa]|primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|quint[oa]|sext[oa]|s[ée]ptim[oa]|octav[oa]|"
+            r"noven[oa]|d[ée]cim[oa]|undécim[oa]|duod[ée]cim[oa]|preliminar|[ivxlc]+|\d+(?:\.\d+)*[.ºª°]*)")
+# Lista pechada: (rango, expresión). O rango só ordena os niveis (1 = o máis alto).
+_ESTRUTURAIS = (
+    (1, re.compile(r"(?:anexo|anexos)(?:\s+" + _ORDINAL + r")?(?![\w])", re.IGNORECASE)),
+    (1, re.compile(r"t[ií]tulo\s+" + _ORDINAL + r"(?![\w])", re.IGNORECASE)),
+    (2, re.compile(r"cap[ií]tulo\s+" + _ORDINAL + r"(?![\w])", re.IGNORECASE)),
+    (3, re.compile(r"secci[óo]n\s+" + _ORDINAL + r"(?![\w])", re.IGNORECASE)),
+    (4, re.compile(r"(?:art[ií]culo|artigo)\s+(?:\d+(?:\.\d+)*[.ºª°]*(?:\s*(?:bis|ter|qu[aá]ter|quinquies))?|[úu]nic[oa])(?![\w])",
+                   re.IGNORECASE)),
+    (4, re.compile(r"disposici[óo]ns?\s+(?:adicional|transitoria|derogatoria|final|adicionais|transitorias|derogatorias|finais)"
+                   r"(?:\s+" + _ORDINAL + r")?(?![\w])", re.IGNORECASE)),
+)
+_RELLENO = re.compile(r"\.{4,}|…|\d{1,2} de \w+ de \d{4}\s*$", re.IGNORECASE)
+
+
+def _rango_estrutural(l: _Liña) -> int | None:
+    """Rango do título estrutural que abre `l`, ou `None`. Só vale unha liña
+    que COMEZA por unha palabra da lista, en negra (todo o que leva) ou toda
+    en maiúsculas, curta, soa (o que siga a «Artigo 1.» é, como moito, o seu
+    nome: se hai un texto, non é un título) e que non é a mención dunha
+    norma («artigo 5 da Lei...» non comeza a liña en negra nin en maiúsculas)."""
+    texto = l.texto
+    forma = l.negra or texto.isupper() or (_ADMITE_CURSIVA and l.cursiva and texto[:1].isupper())
+    if len(texto) > _LONGO_ESTRUTURAL or not forma:
+        return None
+    for rango, expresion in _ESTRUTURAIS:
+        m = expresion.match(texto)
+        if not m:
+            continue
+        resto = texto[m.end():].strip()
+        if resto:
+            primeira = resto[0]
+            curto_anexo = rango == 1 and expresion.pattern.startswith("(?:anexo") and len(resto.split()) <= 6
+            if not (primeira in ".:–—-«\"“(" or primeira.isupper() or curto_anexo):
+                return None  # «Artigo 5 da Lei...»: unha frase
+            if (len(resto.split()) > _PALABRAS_ESTRUTURAL or resto.endswith(",") or _RELLENO.search(resto)
+                    or (resto.endswith(".") and len(resto.split()) >= _PALABRAS_FRASE)):
+                return None
+        return rango
+    return None
+
+
+def _con_continuacion(l: _Liña, liñas: list) -> list:
+    """`l` e, se o título quedou partido (non remata en punto), as liñas
+    seguintes co mesmo tamaño e estilo, pegadas a ela: «Artigo 16. Coordinación
+    con equipos de medios adecuados de solución de» / «controversias."""
+    grupo = [l]
+    k = liñas.index(l)
+    while (not grupo[-1].texto.rstrip().endswith((".", ":")) and len(grupo) < _LIÑAS_MAXIMAS_TITULO
+           and k + len(grupo) < len(liñas)):
+        o = liñas[k + len(grupo)]
+        if (o.paxina != l.paxina or not o.horizontal or o.tamano != l.tamano or o.negra != l.negra
+                or o.cursiva != l.cursiva or not 0 < o.rect[1] - grupo[-1].rect[1] <= l.tamano * _SEPARACION_MAXIMA
+                or _rango_estrutural(o) is not None or sum(len(x.texto) for x in grupo + [o]) > _LONGO_MAXIMO_TITULO):
+            break
+        grupo.append(o)
+    return grupo
+
+
+def _grupos_estruturais(liñas: list, altos: list, corpo: float, ocupadas: set) -> list:
+    """[(rango, [_Liña])] dos títulos estruturais (cada un, as súas liñas). `ocupadas`: ids das liñas
+    que xa son título polo tamaño (ou que o tamaño xa rexeitou)."""
+    por_paxina = {}
+    for l in liñas:
+        por_paxina.setdefault(l.paxina, []).append(l)
+    repetidas = Counter()
+    if len(altos) > 1:  # idéntica en varias páxinas: cabeceira (non «Artigo 1.» e «Artigo 2.»)
+        for pax, texto in {(l.paxina, l.texto.casefold()) for l in liñas}:
+            repetidas[texto] += 1
+    achados = []
+    for l in liñas:
+        if (not l.horizontal or id(l) in ocupadas or l.tamano < corpo - _SALTO_MINIMO
+                or l.tamano >= corpo + _SALTO_MINIMO and l.tamano >= corpo * _RATIO_MINIMO):
+            continue
+        rango = _rango_estrutural(l)
+        if rango is None or _MATEMATICAS.search(l.texto) or repetidas[l.texto.casefold()] > 1:
+            continue
+        centro = (l.rect[1] + l.rect[3]) / 2
+        if centro < altos[l.paxina] * _MARXE_PAXINA or centro > altos[l.paxina] * (1 - _MARXE_PAXINA):
+            continue
+        if _na_mesma_fila(l, por_paxina[l.paxina]):
+            continue
+        achados.append((rango, _con_continuacion(l, liñas)))
+    return achados
+
+
 def grupos_de_titulos(documento: "fitz.Document") -> list:
     """Os títulos do documento, na súa orde: cada un, unha lista de
-    (`_Liña`, nivel) -- as liñas do PDF que o forman."""
+    (`_Liña`, nivel) -- as liñas do PDF que o forman. Primeiro os do tamaño
+    da letra; despois, un nivel por debaixo, os estruturais (Artigo, Anexo,
+    Capítulo...) en negra ou maiúsculas ao tamaño do corpo."""
     liñas, altos = [], []
     for i, pagina in enumerate(documento):
         altos.append(pagina.rect.height)
@@ -245,14 +354,30 @@ def grupos_de_titulos(documento: "fitz.Document") -> list:
     if not total:
         return []
     corpo = max(total.items(), key=lambda t: (t[1], t[0]))[0]
+    texto_total = sum(total.values())
+
     candidatas = _liñas_de_titulo(liñas, altos, corpo)
-    if sum(l.caracteres for l in candidatas) > _FRACCION_MAXIMA * sum(total.values()):
-        return []
-    niveis = _niveis(candidatas, corpo)
-    return [[(l, niveis[l.tamano]) for l in grupo]
-            for grupo in _agrupar(candidatas)
-            if len(grupo) <= _LIÑAS_MAXIMAS_TITULO and sum(len(l.texto) for l in grupo) <= _LONGO_MAXIMO_TITULO
-            and not _semella_frase(" ".join(l.texto for l in grupo))]
+    por_tamano, base = [], 0
+    if sum(l.caracteres for l in candidatas) <= _FRACCION_MAXIMA * texto_total:
+        niveis = _niveis(candidatas, corpo)
+        por_tamano = [[(l, niveis[l.tamano]) for l in grupo]
+                      for grupo in _agrupar(candidatas)
+                      if len(grupo) <= _LIÑAS_MAXIMAS_TITULO and sum(len(l.texto) for l in grupo) <= _LONGO_MAXIMO_TITULO
+                      and not _semella_frase(" ".join(l.texto for l in grupo))]
+        base = max((nivel for grupo in por_tamano for _, nivel in grupo), default=0)
+
+    # Lectura grande (letra por riba do corpo): xa a tratou o tamaño, ben ou rexeitada.
+    ocupadas = {id(l) for l in liñas if l.tamano >= corpo + _SALTO_MINIMO and l.tamano >= corpo * _RATIO_MINIMO}
+    estruturais = _grupos_estruturais(liñas, altos, corpo, ocupadas)
+    if sum(x.caracteres for _, grupo in estruturais for x in grupo) > _FRACCION_MAXIMA * texto_total:
+        estruturais = []
+    posicion = {id(l): k for k, l in enumerate(liñas)}
+    rangos = sorted({rango for rango, _ in estruturais})
+    grupos = [(posicion[id(grupo[0][0])], grupo) for grupo in por_tamano]
+    for rango, ls in estruturais:
+        nivel = min(base + rangos.index(rango) + 1, _NIVEIS_TOTAIS)
+        grupos.append((posicion[id(ls[0])], [(x, nivel) for x in ls]))
+    return [grupo for _, grupo in sorted(grupos, key=lambda g: g[0])]
 
 
 def detectar_titulos(documento: "fitz.Document", paxinas: list) -> list:
