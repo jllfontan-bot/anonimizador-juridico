@@ -23,7 +23,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup, Comment
 from markdownify import MarkdownConverter
 
-from ._comun import Conversion, _escapar_cela, marca_imaxe, taboa_ou_liñas
+from ._comun import Conversion, _escapar_cela, marca_imaxe, t, taboa_ou_liñas
 
 FORMATOS = (".html", ".htm")
 
@@ -132,8 +132,14 @@ def convertir(ruta: str) -> Conversion:
     for tag in raiz.find_all("form"):
         tag.unwrap()
 
+    omitidas = 0
     for imaxe in raiz.find_all("img"):
-        imaxe.replace_with(marca_imaxe(imaxe.get("alt") or ""))
+        marca = marca_imaxe(imaxe.get("alt") or "")
+        if marca:
+            imaxe.replace_with(marca)
+        else:
+            imaxe.decompose()
+            omitidas += 1
     for ligazon in raiz.find_all("a"):
         href = (ligazon.get("href") or "").strip()
         if not href or href.startswith(("#", "javascript:", "data:")):
@@ -151,4 +157,5 @@ def convertir(ruta: str) -> Conversion:
     markdown = re.sub(r"\n{3,}", "\n\n", markdown).strip()
     if titulo and not raiz.find("h1"):
         markdown = f"# {titulo}\n\n{markdown}".rstrip()
-    return Conversion(markdown + "\n" if markdown else "")
+    avisos = [t("imaxes_omitidas", n=omitidas)] if omitidas else []
+    return Conversion(markdown + "\n" if markdown else "", avisos)

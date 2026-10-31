@@ -41,6 +41,15 @@ class _Dia:
         self.titulo = ""
         self.bloques: list = []
         self.notas: list = []
+        self.imaxes_omitidas = 0
+
+
+def _imaxe(dia: "_Dia", alt: str) -> None:
+    marca = marca_imaxe(alt)
+    if marca:
+        dia.bloques.append(marca)
+    else:
+        dia.imaxes_omitidas += 1
 
 
 def a_markdown(ruta: str) -> str:
@@ -56,6 +65,9 @@ def convertir(ruta: str) -> Conversion:
         dias = _ler_odp(ruta, avisos)
     else:
         raise ValueError(f"Formato de presentación non soportado: {sufixo}")
+    omitidas = sum(dia.imaxes_omitidas for dia in dias)
+    if omitidas:
+        avisos.append(t("imaxes_omitidas", n=omitidas))
     seccions = []
     for dia in dias:
         cabeceira = "## " + t("diapositiva", n=dia.numero)
@@ -127,7 +139,7 @@ def _formas_pptx(formas, dia: _Dia, id_titulo) -> None:
             else:
                 dia.bloques.append(t("obxecto"))
         elif isinstance(forma, Picture) or forma._element.tag == qn("p:pic"):
-            dia.bloques.append(marca_imaxe(_texto_alternativo(forma)))
+            _imaxe(dia, _texto_alternativo(forma))
         elif getattr(forma, "has_text_frame", False) and forma.has_text_frame:
             _texto_pptx(forma, dia)
 
@@ -256,7 +268,7 @@ def _marco_odp(marco, dia: _Dia) -> None:
             dia.bloques.append(taboa_ou_liñas(
                 [[_escapar_cela(c) for c in f] for f in _odf.ler_taboa(fillo).filas]))
         elif espazo == DRAWNS and nome == "image":
-            dia.bloques.append(marca_imaxe(_alt_odp(marco)))
+            _imaxe(dia, _alt_odp(marco))
         elif espazo == DRAWNS and nome in ("object", "object-ole", "plugin", "applet", "floating-frame"):
             dia.bloques.append(t("obxecto"))
 
