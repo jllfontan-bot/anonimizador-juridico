@@ -29,10 +29,12 @@ queda en `Resultado.omitidos`, coma os `omitidos` de `anonimizar_zip`.
 
 Puntos de enganche (as ramas que os enchen intégranse ao fusionar):
 
-- `LECTORES_EXTRA`: extensión -> `a_markdown(ruta) -> str`, para formatos
-  novos (`formatos/`). Só se usan SEN anonimizar: un formato novo non se
-  converte anonimizando ata ter as súas probas de fugas (estudo, punto 6);
-  ata entón queda omitido con motivo `sen_proba_de_fugas`.
+- `LECTORES_EXTRA`: extensión -> lector, para formatos novos. Un lector
+  devolve o Markdown (`str`) ou un `formatos.Conversion` (Markdown e avisos,
+  que van a `Resultado.avisos`). Énchese cos de `formatos/` (fase 4). Só se
+  usan SEN anonimizar: un formato novo non se converte anonimizando ata ter
+  as súas probas de fugas (estudo, punto 6; `formatos/ESCONDITES.md`); ata
+  entón queda omitido con motivo `sen_proba_de_fugas`.
 - `POSPROCESADOS`: funcións `str -> str` que se aplican, en orde, ao
   Markdown de cada documento antes da cabeceira (`aforro_ia.py`). No modo
   anonimizado reciben o texto xa anonimizado, así que non poden sacar á
@@ -50,7 +52,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import copia_md, idioma, lectura
+from . import copia_md, formatos, idioma, lectura
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -59,7 +61,7 @@ if TYPE_CHECKING:
 NOME_PROGRAMA = "Conversor para IA"
 VERSION = "0.1.0"
 
-LECTORES_EXTRA: dict[str, Callable[[str], str]] = {}
+LECTORES_EXTRA: dict[str, Callable] = {ext: formatos.convertir for ext in formatos.EXTENSIONS}
 POSPROCESADOS: list[Callable[[str], str]] = []
 
 
@@ -77,6 +79,7 @@ class Resultado:
     omitidos: list = field(default_factory=list)  # (nome orixinal, motivo)
     erros: dict = field(default_factory=dict)  # nome orixinal -> erro ao ler
     informes: dict = field(default_factory=dict)  # nome anonimizado -> informe (só anonimizando)
+    avisos: dict = field(default_factory=dict)  # nome orixinal -> avisos do lector (formatos novos)
 
 
 @dataclass
@@ -93,6 +96,7 @@ class _Convertido:
     nome_visible: str  # nome do orixinal (anonimizado se cómpre) para cabeceira e índice
     corpo: str
     paxinas: int | None
+    avisos: list = field(default_factory=list)
 
 
 def _extensions() -> tuple:
@@ -171,9 +175,10 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro) -> tuple:
     sufixo_orixinal = PurePosixPath(doc.nome.name).suffix
     sufixo = sufixo_orixinal.lower()
     if sufixo not in lectura.EXTENSIONS_SOPORTADAS:  # formato novo: só chega aquí sen anonimizar
-        corpo = LECTORES_EXTRA[sufixo](str(doc.ruta))
+        lido = LECTORES_EXTRA[sufixo](str(doc.ruta))
+        corpo, avisos = (lido, []) if isinstance(lido, str) else (lido.markdown, list(lido.avisos))
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, None), None
+                           str(doc.nome), corpo, None, avisos), None
 
     texto, contexto = lectura.cargar_documento_estruturado(str(doc.ruta))
     paxinas = None
@@ -316,6 +321,8 @@ def converter(
                 resultado.erros[str(doc.nome)] = f"{type(e).__name__}: {e}"
                 continue
             convertidos.append(convertido)
+            if convertido.avisos:
+                resultado.avisos[str(doc.nome)] = convertido.avisos
             if informe is not None:
                 resultado.informes[convertido.nome_visible] = informe
 

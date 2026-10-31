@@ -56,6 +56,10 @@ def main(argv: list | None = None) -> int:
 
     for ruta in resultado.saidas:
         print(t("conversor.cli.saida", ruta=ruta))
+    for nome, avisos in resultado.avisos.items():
+        print(t("conversor.cli.avisos", nome=nome))
+        for aviso in avisos:
+            print(t("conversor.cli.aviso", aviso=aviso))
     for nome, informe in resultado.informes.items():
         marcadas = sum(1 for p in informe["persoas"] if p["marcado_para_revision"])
         print(t("conversor.cli.informe", nome=nome, persoas=len(informe["persoas"]), marcadas=marcadas))

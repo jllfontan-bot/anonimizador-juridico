@@ -234,8 +234,13 @@ class TestSenAnonimizar(_Base):
 
 
 class TestPuntosDeEnganche(_Base):
+    def setUp(self):
+        super().setUp()
+        self._lectores = dict(conversor.LECTORES_EXTRA)
+
     def tearDown(self):
-        conversor.LECTORES_EXTRA.pop(".csv", None)
+        conversor.LECTORES_EXTRA.clear()
+        conversor.LECTORES_EXTRA.update(self._lectores)
         conversor.POSPROCESADOS.clear()
         super().tearDown()
 
@@ -259,6 +264,65 @@ class TestPuntosDeEnganche(_Base):
         md = (self.dir / "demanda.docx.md").read_text(encoding="utf-8")
         self.assertIn("ANTE O XULGADO", md)
         self.assertIn("anonimizado: non", md)  # a cabeceira non pasa polo posprocesado
+
+
+class TestFormatosNovos(_Base):
+    """Os lectores de `formatos/` (fase 4) enganchados ao motor: só sen
+    anonimizar, e cos seus avisos (follas agochadas...) no resultado."""
+
+    def _cartafol(self) -> Path:
+        import openpyxl
+        from pptx import Presentation
+
+        raiz = self.dir / "formatos"
+        raiz.mkdir()
+        libro = openpyxl.Workbook()
+        libro.active.title = "Contas"
+        libro.active.append(["Concepto", "Importe"])
+        libro.active.append(["Taxas", 120])
+        agochada = libro.create_sheet("Interna")
+        agochada.append(["dato", "agochado"])
+        agochada.sheet_state = "hidden"
+        libro.save(str(raiz / "contas.xlsx"))
+        presentacion = Presentation()
+        diapositiva = presentacion.slides.add_slide(presentacion.slide_layouts[1])
+        diapositiva.shapes.title.text = "Resumo do caso"
+        diapositiva.placeholders[1].text = "Primeiro punto"
+        presentacion.save(str(raiz / "resumo.pptx"))
+        (raiz / "norma.html").write_text(
+            "<html><head><title>x</title><script>var a;</script></head>"
+            "<body><h1>Lei de proba</h1><p>Artigo primeiro.</p></body></html>", encoding="utf-8")
+        return raiz
+
+    def test_sen_anonimizar(self):
+        raiz = self._cartafol()
+        resultado = conversor.converter(str(raiz))
+        self.assertEqual(resultado.omitidos, [])
+        contas = (raiz / "contas.xlsx.md").read_text(encoding="utf-8")
+        self.assertIn("| Taxas | 120 |", contas)
+        self.assertNotIn("agochado", contas)
+        self.assertIn("Resumo do caso", (raiz / "resumo.pptx.md").read_text(encoding="utf-8"))
+        norma = (raiz / "norma.html.md").read_text(encoding="utf-8")
+        self.assertIn("# Lei de proba", norma)
+        self.assertNotIn("var a", norma)
+        self.assertEqual(list(resultado.avisos), ["contas.xlsx"])
+        self.assertIn("Interna", resultado.avisos["contas.xlsx"][0])
+
+    def test_anonimizando_rexeitanse(self):
+        raiz = self._cartafol()
+        rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
+        resultado = conversor.converter(str(raiz), anonimizar=True, rexistro=rexistro, saida=str(self.dir / "s"))
+        self.assertEqual(sorted(resultado.omitidos), [
+            ("contas.xlsx", "sen_proba_de_fugas"), ("norma.html", "sen_proba_de_fugas"),
+            ("resumo.pptx", "sen_proba_de_fugas")])
+        self.assertEqual(resultado.saidas, [])
+
+    def test_liña_de_comandos_amosa_os_avisos(self):
+        raiz = self._cartafol()
+        saida = io.StringIO()
+        with redirect_stdout(saida):
+            cli_conversor.main([str(raiz / "contas.xlsx")])
+        self.assertIn("Interna", saida.getvalue())
 
 
 class TestAnonimizando(_Base):

@@ -308,6 +308,8 @@
  "conversor.cli.saida": "Markdown -> {ruta}",
  "conversor.cli.informe": "  {nome}: {persoas} persoa(s) ({marcadas} marcadas para revisión)",
  "conversor.cli.fugas": "  ⚠ {nome}: {n} posible(s) fuga(s) sen detectar -- revise o .md a man",
+ "conversor.cli.avisos": "Avisos de {nome}:",
+ "conversor.cli.aviso": "  {aviso}",
  "conversor.cli.omitidos": "Sen converter:",
  "conversor.cli.omitido": "  {nome} ({motivo})",
  "conversor.cli.erro": "    {erro}",
