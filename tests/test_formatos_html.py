@@ -111,6 +111,46 @@ class TestHtml(unittest.TestCase):
         self.assertEqual(len(c.avisos), 1)
         self.assertIn("2", c.avisos[0])
 
+    def test_boe_dog_botons_de_audio_e_ligazons_subir_non_entran(self):
+        md = self.md("<body><div id='textoxslt'><div class='lector'><div class='rs_skip rsbtn'>"
+                     "<a class='rsbtn_play' href='http://app.eu.readspeaker.com/x'>Escoitar</a></div></div>"
+                     "<p>Artigo 1. Obxecto.</p><p><a class='linkSubir' href='#top'>Subir</a></p>"
+                     "<p>Artigo 2. Ámbito.</p></div></body>")
+        self.assertIn("Artigo 1. Obxecto.", md)
+        self.assertIn("Artigo 2. Ámbito.", md)
+        for lixo in ("Escoitar", "readspeaker", "Subir"):
+            self.assertNotIn(lixo, md)
+
+    def test_boe_indice_de_apartados_da_lei_consolidada_non_entra(self):
+        md = self.md("<body><div id='textoxslt'><div class='marcadores'><div id='selector-marcador'>"
+                     "<label>Seleccionar apartado</label><ul><li>Artículo 1</li><li>Artículo 2</li></ul>"
+                     "</div></div><p class='articulo'>Artículo 1. Objeto de la ley.</p></div></body>")
+        self.assertIn("Objeto de la ley", md)
+        self.assertNotIn("Seleccionar apartado", md)
+        self.assertEqual(md.count("Artículo 2"), 0)
+
+    def test_boe_menus_e_pe_do_sumario_non_entran_pero_si_o_contido(self):
+        md = self.md("<body><div class='banda-menu'><ul><li>Menú do BOE</li></ul></div>"
+                     "<div id='franjaMigas'>Está Vd. en Inicio</div>"
+                     "<div id='contenido'><h2>I. Disposiciones generales</h2><ul><li>Real Decreto 1/2026</li></ul></div>"
+                     "<div id='pie'><div class='lista-pie'>Avda. de Manoteras</div></div></body>")
+        self.assertIn("I. Disposiciones generales", md)
+        self.assertIn("Real Decreto 1/2026", md)
+        for lixo in ("Menú do BOE", "Está Vd.", "Manoteras"):
+            self.assertNotIn(lixo, md)
+
+    def test_titulo_do_dog_non_se_repite_se_o_corpo_xa_o_leva(self):
+        resolucion = "RESOLUCIÓN do 23 de outubro de 2026 pola que se nomean funcionarios de carreira"
+        md = self.md(f"<html><head><title>DOG 208 do 30/10/2026 - {resolucion}</title></head>"
+                     f"<body><h1> </h1><p>{resolucion}</p><p>Corpo.</p></body></html>")
+        self.assertTrue(md.startswith("# DOG 208 do 30/10/2026\n"))
+        self.assertEqual(md.count("RESOLUCIÓN do 23"), 1)
+
+    def test_titulo_distinto_do_corpo_mantense_enteiro(self):
+        md = self.md("<html><head><title>DOG 208 do 30/10/2026 - Sumario</title></head>"
+                     "<body><p>Outro texto.</p></body></html>")
+        self.assertTrue(md.startswith("# DOG 208 do 30/10/2026 - Sumario\n"))
+
     def test_liñas_do_fonte_unense_nun_so_paragrafo(self):
         md = self.md("<body><p>Visto o expediente,\n   resolvo o\nseguinte.</p>"
                      "<pre>codigo\n  con sangria</pre></body>")

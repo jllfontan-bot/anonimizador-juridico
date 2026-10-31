@@ -35,6 +35,14 @@ _ROLES_LIXO = {"navigation", "banner", "contentinfo", "complementary", "search"}
 _CLASES_LIXO = {"menu", "navbar", "breadcrumb", "breadcrumbs", "cookies", "cookie-banner",
                 "sidebar", "skip-link"}
 _CONTEDORES_XENERICOS = ("div", "ul", "section")
+# Menús e pés concretos do BOE (boe.es) e do DOG (xunta.gal): só nomes exactos,
+# nunca fragmentos, para non levar por diante contido doutras webs.
+_CLASES_LIXO |= {"banda-menu", "franjaMigas", "logosInicio", "selector-idioma", "filtros", "pie",
+                 "menuPie", "migas", "zonaNavegacion", "selectorIdioma", "selectorIdiomaMenu",
+                 "menuPrincipal", "opciones-menu", "loggin-container"}
+# Elementos de lixo en calquera etiqueta: botón de audio (ReadSpeaker, no DOG),
+# ligazón «Subir» e selector de apartados da lei consolidada (BOE).
+_CLASES_LIXO_CALQUERA = {"rs_skip", "rsbtn", "linkSubir", "marcadores"}
 _AGOCHADO = re.compile(r"display\s*:\s*none|visibility\s*:\s*hidden", re.I)
 _ATRIBUTOS_QUE_QUEDAN = {"href", "colspan", "rowspan", "start"}
 
@@ -51,6 +59,8 @@ def _e_lixo(tag) -> bool:
     if (tag.get("role") or "") in _ROLES_LIXO:
         return True
     if tag.name in ("header", "footer") and tag.find_parent(["article", "main", "section"]) is None:
+        return True
+    if _CLASES_LIXO_CALQUERA & set(tag.get("class") or []):
         return True
     if tag.name in _CONTEDORES_XENERICOS:
         clases = set(tag.get("class") or []) | {tag.get("id") or ""}
@@ -155,7 +165,12 @@ def convertir(ruta: str) -> Conversion:
     markdown = markdown.replace("\xa0", " ")
     markdown = re.sub(r"[ \t]+\n", "\n", markdown)
     markdown = re.sub(r"\n{3,}", "\n\n", markdown).strip()
-    if titulo and not raiz.find("h1"):
-        markdown = f"# {titulo}\n\n{markdown}".rstrip()
+    if titulo and not any(h.get_text(strip=True) for h in raiz.find_all("h1")):
+        # O DOG pon no `<title>` «DOG n - TITULO» e o corpo repite o TITULO: queda só o prefixo.
+        cabeza, separador, resto = titulo.partition(" - ")
+        if (resto if separador else titulo)[:60] in markdown:
+            titulo = cabeza if separador else ""
+        if titulo:
+            markdown = f"# {titulo}\n\n{markdown}".rstrip()
     avisos = [t("imaxes_omitidas", n=omitidas)] if omitidas else []
     return Conversion(markdown + "\n" if markdown else "", avisos)
