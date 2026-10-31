@@ -32,7 +32,7 @@ Var RutaPS1   ; ruta do pechar-programa.ps1 (o do instalador vive en $PLUGINSDIR
   !define VERSION "dev"
 !endif
 !ifndef VERSION_NUM
-  !define VERSION_NUM "1.1.0.0"
+  !define VERSION_NUM "1.1.1.0"
 !endif
 !ifndef RECURSOS
   !define RECURSOS "."
