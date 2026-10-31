@@ -86,30 +86,9 @@ class _Conversor(MarkdownConverter):
     maquetación."""
 
     def convert_table(self, el, text, *args, **kwargs):
-        cabeceira_propia = any(c.find_parent("table") is el for c in el.find_all("th"))
-        if el.find("table") is not None and not cabeceira_propia:
-            # Con táboas dentro e sen cabeceira (un calendario de meses...) a de
-            # fóra é de maquetación: as de dentro saen coma táboas, non
-            # aplanadas nunha cela.
-            return "\n\n" + text.strip() + "\n\n"
-        filas = []
-        for tr in el.find_all("tr"):
-            if tr.find_parent("table") is not el:
-                continue
-            fila = []
-            for cela in tr.find_all(["td", "th"], recursive=False):
-                fila.append(_escapar_cela(cela.get_text(" ")))
-                try:
-                    extra = min(int(cela.get("colspan", 1)), 50) - 1
-                except ValueError:
-                    extra = 0
-                fila.extend([""] * max(extra, 0))
-            filas.append(fila)
-        taboa = None
-        if _taboa_de_verdade(filas):
-            taboa = taboa_ou_liñas(filas)
+        # As de maquetación xa non chegan aquí (`_desfacer_taboas_de_maquetacion`).
+        taboa = taboa_ou_liñas(_filas(el)) if not _e_de_maquetacion(el) else None
         if taboa is None:
-            # Taboa de maquetación: o seu contido, coma parágrafos normais.
             return "\n\n" + text.strip() + "\n\n"
         titulo = el.find("caption")
         previo = f"{_escapar_cela(titulo.get_text(' '))}\n\n" if titulo is not None else ""
@@ -126,6 +105,45 @@ class _Conversor(MarkdownConverter):
     convert_thead = convert_tbody = convert_tfoot = convert_caption = convert_tr
 
 
+def _filas(taboa) -> list:
+    """As celas (escapadas) de cada fila da `taboa`, sen as das aniñadas."""
+    filas = []
+    for tr in taboa.find_all("tr"):
+        if tr.find_parent("table") is not taboa:
+            continue
+        fila = []
+        for cela in tr.find_all(["td", "th"], recursive=False):
+            fila.append(_escapar_cela(cela.get_text(" ")))
+            try:
+                extra = min(int(cela.get("colspan", 1)), 50) - 1
+            except ValueError:
+                extra = 0
+            fila.extend([""] * max(extra, 0))
+        filas.append(fila)
+    return filas
+
+
+def _e_de_maquetacion(taboa) -> bool:
+    """Con táboas dentro e sen cabeceira propia (un calendario de meses, un
+    boletín por correo), ou sen dúas filas e dúas columnas con texto."""
+    cabeceira_propia = any(c.find_parent("table") is taboa for c in taboa.find_all("th"))
+    if taboa.find("table") is not None and not cabeceira_propia:
+        return True
+    return not _taboa_de_verdade(_filas(taboa))
+
+
+def _desfacer_taboas_de_maquetacion(raiz) -> None:
+    """As táboas de maquetación pasan a bloques normais ANTES de converter:
+    dentro dunha cela, markdownify aplana títulos e parágrafos nunha liña.
+    Decídese sobre a estrutura orixinal de todas e despois desfanse."""
+    de_maquetacion = [t for t in raiz.find_all("table") if _e_de_maquetacion(t)]
+    for taboa in de_maquetacion:
+        for parte in taboa.find_all(["thead", "tbody", "tfoot", "tr", "td", "th", "caption"]):
+            if parte.find_parent("table") is taboa:
+                parte.name = "div"
+        taboa.name = "div"
+
+
 def _taboa_de_verdade(filas: list) -> bool:
     con_texto = [f for f in filas if any(f)]
     n_columnas = max((i + 1 for f in con_texto for i, c in enumerate(f) if c), default=0)
@@ -133,7 +151,12 @@ def _taboa_de_verdade(filas: list) -> bool:
 
 
 def convertir(ruta: str) -> Conversion:
-    datos = Path(ruta).read_bytes()
+    return convertir_html(Path(ruta).read_bytes())
+
+
+def convertir_html(datos: bytes | str, con_titulo: bool = True) -> Conversion:
+    """O mesmo ca `convertir`, dende o HTML xa lido (o corpo dun correo).
+    Sen `con_titulo`, o `<title>` non se usa coma título."""
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         sopa = BeautifulSoup(datos, "lxml")
@@ -167,12 +190,13 @@ def convertir(ruta: str) -> Conversion:
     for tag in raiz.find_all(True):
         tag.attrs = {k: v for k, v in tag.attrs.items() if k in _ATRIBUTOS_QUE_QUEDAN}
 
+    _desfacer_taboas_de_maquetacion(raiz)
     markdown = _Conversor(heading_style="ATX", bullets="-", newline_style="spaces",
                            escape_asterisks=False, escape_underscores=False).convert_soup(raiz)
     markdown = markdown.replace("\xa0", " ")
     markdown = re.sub(r"[ \t]+\n", "\n", markdown)
     markdown = re.sub(r"\n{3,}", "\n\n", markdown).strip()
-    if titulo and not any(h.get_text(strip=True) for h in raiz.find_all("h1")):
+    if con_titulo and titulo and not any(h.get_text(strip=True) for h in raiz.find_all("h1")):
         # O DOG pon no `<title>` «DOG n - TITULO» e o corpo repite o TITULO: queda só o prefixo.
         cabeza, separador, resto = titulo.partition(" - ")
         if (resto if separador else titulo)[:60] in markdown:

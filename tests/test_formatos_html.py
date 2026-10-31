@@ -198,6 +198,12 @@ class TestHtml(unittest.TestCase):
         self.assertIn("Segundo parágrafo", md)
         self.assertNotIn("|", md)
 
+    def test_taboa_de_maquetacion_conserva_titulos_e_parágrafos(self):
+        # Os correos e boletíns HTML maquétanse con táboas: o de dentro é contido normal.
+        md = self.md("<body><table><tr><td><h1>Novidades</h1><p>Primeiro parágrafo</p>"
+                     "<p>Segundo parágrafo</p><h2>Prazos</h2><p>Vence o luns.</p></td></tr></table></body>")
+        self.assertIn("# Novidades\n\nPrimeiro parágrafo\n\nSegundo parágrafo\n\n## Prazos\n\nVence o luns.", md)
+
     def test_taboa_aniñada_non_duplica_texto(self):
         md = self.md("<body><table><tr><th>A</th><th>B</th></tr>"
                      "<tr><td>1</td><td><table><tr><td>interior</td><td>dato</td></tr></table></td></tr></table></body>")
