@@ -40,7 +40,7 @@ from odf.namespaces import STYLENS, TABLENS, TEXTNS
 
 from . import idioma, taboas_pdf
 from .pdf_estrutura import SEPARADOR_PAXINAS, _limites_paxinas
-from .pipeline import (
+from .lectura import (
     _agrupar_liñas_por_paragrafo,
     _aplicar_substitucions_a_texto,
     _cabeceiras_e_pes_docx,
