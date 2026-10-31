@@ -23,6 +23,10 @@ artigo 5 da EUPL. Inclúe ou usa os compoñentes seguintes, cada un baixo a súa
 | keyring | MIT |
 | python-docx | MIT |
 | odfpy | Apache-2.0 (licenza triple; escóllese Apache-2.0) |
+| openpyxl | MIT |
+| python-pptx | MIT |
+| beautifulsoup4 | MIT |
+| markdownify | MIT |
 | PyYAML | MIT |
 | lxml | BSD-3-Clause |
 | pywin32 (só Windows) | PSF |
@@ -44,10 +48,10 @@ mpdecimal (BSD-2-Clause).
 
 | Licenza | Paquetes |
 |---|---|
-| MIT | annotated-doc, annotated-types, blinker, bottle, catalogue, charset-normalizer, clr-loader, cloudpathlib, confection, cymem, jaraco.classes, jaraco.context, jaraco.functools, jeepney, langcodes, markdown-it-py, mdurl, more-itertools, murmurhash, pip, preshed, proxy-tools, pydantic, pydantic-core, pythonnet, rich, setuptools, smart-open, spacy-legacy, spacy-loggers, srsly, typer, typer-slim, typing-inspection, urllib3, wasabi, weasel |
+| MIT | annotated-doc, annotated-types, blinker, bottle, catalogue, charset-normalizer, clr-loader, cloudpathlib, confection, cymem, et-xmlfile, jaraco.classes, jaraco.context, jaraco.functools, jeepney, langcodes, markdown-it-py, mdurl, more-itertools, murmurhash, pip, preshed, proxy-tools, pydantic, pydantic-core, pythonnet, rich, setuptools, six, smart-open, soupsieve, spacy-legacy, spacy-loggers, srsly, typer, typer-slim, typing-inspection, urllib3, wasabi, weasel |
 | MIT-0 | cffi |
 | BSD-3-Clause | blis, click, colorama, idna, pycparser, pywin32-ctypes, SecretStorage |
-| BSD-2-Clause | Pygments, wrapt |
+| BSD-2-Clause | Pygments, wrapt, XlsxWriter |
 | Apache-2.0 | requests |
 | Apache-2.0 ou BSD-2-Clause | packaging |
 | ISC | shellingham |
