@@ -42,7 +42,13 @@ from anonimizador import pantalla_conversor  # noqa: E402
 
 IMG = Path(__file__).resolve().parent / ("img/conversor" if LINGUA == "gl" else f"img/{LINGUA}/conversor")
 BASE = Path(sys.argv[2] if len(sys.argv) > 2 else "/tmp/Conversor")
-ANCHO, ALTO = 980, 820  # o tamaño da xanela do programa
+ANCHO, ALTO, ESCALA = 980, 820, 2  # o tamaño da xanela do programa
+# Coa variable CAPTURAS_STORE=<cartafol>: capturas para a ficha da Store, de
+# 1920x1080 (a xanela enteira, sen recortes), nese cartafol.
+STORE = os.environ.get("CAPTURAS_STORE")
+if STORE:
+    IMG = Path(STORE) / LINGUA
+    ANCHO, ALTO, ESCALA = 1200, 675, 1.6
 
 T = {
     "gl": {"pdf": "sentenza.pdf", "cabeceira": "XULGADO DE PRIMEIRA INSTANCIA N.º 2 DE LUGO", "sentenza": "SENTENZA 214/2026",
@@ -129,7 +135,10 @@ class Capturador:
     def foto(self, nome, selector=None):
         IMG.mkdir(parents=True, exist_ok=True)
         self.paxina.wait_for_timeout(300)
-        if selector:
+        if STORE:
+            self.paxina.evaluate("window.scrollTo(0, 0)")
+            self.paxina.screenshot(path=str(IMG / nome))
+        elif selector:
             self.paxina.locator(selector).screenshot(path=str(IMG / nome))
         else:
             self.paxina.screenshot(path=str(IMG / nome), full_page=True)
@@ -147,7 +156,7 @@ def main() -> None:
 
     with sync_playwright() as p:
         navegador = p.chromium.launch(channel="chrome")  # o Chrome instalado (coma xerar_pdfs.py)
-        contexto = navegador.new_context(viewport={"width": ANCHO, "height": ALTO}, device_scale_factor=2,
+        contexto = navegador.new_context(viewport={"width": ANCHO, "height": ALTO}, device_scale_factor=ESCALA,
                                          bypass_csp=True, locale="gl-ES" if LINGUA == "gl" else "es-ES")
         paxina = contexto.new_page()
         paxina.expose_function("__api", lambda metodo, args: getattr(api, metodo)(*args))

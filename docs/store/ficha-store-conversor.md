@@ -98,10 +98,12 @@ Primera versión publicada en la Microsoft Store.
 - Software libre (EUPL-1.2 o AGPL-3.0). Sin cuentas, publicidad ni recogida de datos
 - Desarrollado con la ayuda de Claude, la IA de Anthropic (sin afiliación a Anthropic)
 
-**Palabras clave** (hasta 7): markdown, convertir PDF, IA, tokens, anonimizar, documentos, Claude
+**Palabras clave** (hasta 7): markdown, convertir PDF, IA, tokens, anonimizar, documentos jurídicos, inteligencia artificial
+(sin «Claude»: una marca ajena como palabra clave puede chocar con las normas de la Store)
 
-**Capturas:** pendientes (pantalla de inicio, progreso, revisión, resultado con el resumen de tokens), con
-datos inventados.
+**Capturas:** 6 por idioma, de 1920×1080, con datos inventados, con pie de foto: «Acerca de», inicio,
+progreso, resultado anonimizado, resultado y revisión. Se generan con
+`CAPTURAS_STORE=<cartafol> .venv/bin/python docs/fonte/capturar_pantallas_conversor.py es|gl`.
 
 **Información de copyright:** © 2026 José Luis López Fontán. Doble licencia EUPL-1.2 o AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
@@ -166,6 +168,6 @@ Primeira versión publicada na Microsoft Store.
 - Software libre (EUPL-1.2 ou AGPL-3.0). Sen contas, publicidade nin recollida de datos
 - Desenvolvido coa axuda de Claude, a IA de Anthropic (sen afiliación a Anthropic)
 
-**Palabras clave** (ata 7): markdown, converter PDF, IA, tokens, anonimizar, documentos, Claude
+**Palabras clave** (ata 7): markdown, converter PDF, IA, tokens, anonimizar, documentos xurídicos, intelixencia artificial
 
 **Información de copyright** e **termos de licenza adicionais:** os mesmos ca na ficha en castelán.
