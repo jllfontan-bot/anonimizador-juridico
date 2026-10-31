@@ -3,6 +3,7 @@
 Uso:
     python -m anonimizador.cli_conversor ARQUIVO|CARTAFOL|ZIP \\
         [--anonimizar] [--un-solo-md] [--saida DIR] [--rexistro DIR]
+        [--sen-aforro] [--trocear TOKENS]
 
 Sen `--anonimizar` non se carga o NER (spaCy). Con el, a anonimización é
 AUTOMÁTICA, sen revisión humana, e avísase diso: a revisión chegará coa
@@ -16,7 +17,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import conversor, idioma
+from . import aforro_ia, conversor, idioma
 
 
 def main(argv: list | None = None) -> int:
@@ -30,6 +31,8 @@ def main(argv: list | None = None) -> int:
     parser.add_argument("--rexistro", default=None,
                         help=t("conversor.cli.axuda_rexistro", ruta=conversor.rexistro_por_defecto()))
     parser.add_argument("--chaveiro-sistema", action="store_true", help=t("conversor.cli.axuda_chaveiro"))
+    parser.add_argument("--sen-aforro", dest="aforro", action="store_false", help=t("conversor.cli.axuda_sen_aforro"))
+    parser.add_argument("--trocear", type=int, default=None, metavar="TOKENS", help=t("conversor.cli.axuda_trocear"))
     args = parser.parse_args(argv)
 
     if not Path(args.entrada).exists():
@@ -51,11 +54,15 @@ def main(argv: list | None = None) -> int:
         print(t("conversor.cli.aviso_sen_anonimizar"))
 
     resultado = conversor.converter(
-        args.entrada, anonimizar=args.anonimizar, un_so_md=args.un_so_md, saida=args.saida, rexistro=rexistro
+        args.entrada, anonimizar=args.anonimizar, un_so_md=args.un_so_md, saida=args.saida, rexistro=rexistro,
+        aforro=args.aforro,
+        caracteres_por_parte=round(args.trocear * aforro_ia.CARACTERES_POR_TOKEN) if args.trocear else None,
     )
 
     for ruta in resultado.saidas:
         print(t("conversor.cli.saida", ruta=ruta))
+    if resultado.saidas:
+        print(resultado.resumo_tokens())
     for nome, avisos in resultado.avisos.items():
         print(t("conversor.cli.avisos", nome=nome))
         for aviso in avisos:

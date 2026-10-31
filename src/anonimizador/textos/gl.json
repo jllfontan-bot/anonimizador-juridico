@@ -308,6 +308,8 @@
  "conversor.cli.axuda_saida": "Cartafol de saída (por defecto, canda a entrada)",
  "conversor.cli.axuda_rexistro": "Cartafol do rexistro de correspondencias (por defecto, o do anonimizador: {ruta})",
  "conversor.cli.axuda_chaveiro": "Cun --rexistro propio: garda a clave dun rexistro NOVO no chaveiro do sistema (no rexistro por defecto faino sempre, coma o anonimizador)",
+ "conversor.cli.axuda_sen_aforro": "Non aplicar o aforro para IA (cabeceiras e pés repetidos, unir liñas, espazos).",
+ "conversor.cli.axuda_trocear": "Trocear cada .md máis longo ca TOKENS (estimados) en partes cun índice.",
  "conversor.cli.non_existe": "non existe: {ruta}",
  "conversor.cli.aviso_sen_anonimizar": "Aviso: modo SEN anonimizar. Cada .md conserva os datos persoais do orixinal: se o pasa a unha IA en liña, eses datos saen do equipo.",
  "conversor.cli.aviso_automatico": "Aviso: modo anonimizado automático, sen revisión humana. Ningunha detección automática o atopa todo: revise cada .md antes de pasalo a unha IA.",

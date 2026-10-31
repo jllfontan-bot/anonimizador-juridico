@@ -334,6 +334,74 @@ class TestFormatosNovos(_Base):
         self.assertIn("Interna", saida.getvalue())
 
 
+def _pdf_con_cabeceira(ruta: Path, paxinas: int = 4) -> Path:
+    """Cada páxina co mesmo membrete arriba e un parágrafo distinto."""
+    documento = fitz.open()
+    for n in range(1, paxinas + 1):
+        paxina = documento.new_page()
+        paxina.insert_text((50, 40), "DIARIO OFICIAL DE GALICIA", fontsize=9)
+        y = 90
+        for i in range(12):
+            paxina.insert_text((50, y), f"Texto da páxina {n}, liña {i}, sen máis contido relevante.", fontsize=10)
+            y += 14
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    documento.save(str(ruta))
+    return ruta
+
+
+class TestAforro(_Base):
+    """O aforro para IA (`aforro_ia`, fase 3) enganchado ao motor."""
+
+    def test_por_defecto_cabeceira_repetida_unha_vez(self):
+        resultado = conversor.converter(str(_pdf_con_cabeceira(self.dir / "dog.pdf")))
+        md = (self.dir / "dog.pdf.md").read_text(encoding="utf-8")
+        self.assertEqual(md.count("DIARIO OFICIAL DE GALICIA"), 1)
+        self.assertLess(resultado.tokens_despois, resultado.tokens_antes)
+
+    def test_sen_aforro(self):
+        resultado = conversor.converter(str(_pdf_con_cabeceira(self.dir / "dog.pdf")), aforro=False)
+        md = (self.dir / "dog.pdf.md").read_text(encoding="utf-8")
+        self.assertEqual(md.count("DIARIO OFICIAL DE GALICIA"), 4)
+        self.assertEqual(resultado.tokens_despois, resultado.tokens_antes)
+
+    def test_trocear_con_cabeceira_en_cada_parte(self):
+        raiz = self.dir / "expediente"
+        _pdf_con_cabeceira(raiz / "memoria.pdf", paxinas=10)
+        resultado = conversor.converter(str(raiz), caracteres_por_parte=1500)
+        partes = sorted(raiz.glob("memoria.pdf.parte-*.md"))
+        self.assertGreater(len(partes), 1)
+        indice = raiz / "memoria.pdf.indice.md"
+        self.assertTrue(indice.exists())
+        self.assertFalse((raiz / "memoria.pdf.md").exists())
+        self.assertEqual(sorted(resultado.saidas), sorted(map(str, [*partes, indice])))
+        for ruta in [*partes, indice]:
+            self.assertIn("anonimizado: non\n", ruta.read_text(encoding="utf-8"))
+        # outra pasada polo cartafol non volve converter as partes nin o índice
+        resultado = conversor.converter(str(raiz), caracteres_por_parte=1500)
+        self.assertEqual({motivo for _, motivo in resultado.omitidos}, {"saida_anterior"})
+        self.assertEqual(len(resultado.omitidos), len(partes) + 1)
+        self.assertFalse(list(raiz.glob("*.md.md")))
+
+    def test_un_so_md_troceado(self):
+        raiz = self.dir / "expediente"
+        _pdf_con_cabeceira(raiz / "a.pdf", paxinas=6)
+        _pdf_con_cabeceira(raiz / "b.pdf", paxinas=6)
+        conversor.converter(str(raiz), un_so_md=True, caracteres_por_parte=2000)
+        self.assertTrue((self.dir / "expediente.indice.md").exists())
+        self.assertGreater(len(list(self.dir.glob("expediente.parte-*.md"))), 1)
+
+    def test_liña_de_comandos(self):
+        ruta = _pdf_con_cabeceira(self.dir / "dog.pdf", paxinas=10)
+        saida = io.StringIO()
+        with redirect_stdout(saida):
+            cli_conversor.main([str(ruta), "--trocear", "400"])
+        self.assertIn("tokens", saida.getvalue())
+        self.assertTrue((self.dir / "dog.pdf.indice.md").exists())
+        with redirect_stdout(io.StringIO()):
+            cli_conversor.main([str(ruta), "--sen-aforro"])
+        self.assertEqual((self.dir / "dog.pdf.md").read_text(encoding="utf-8").count("DIARIO OFICIAL DE GALICIA"), 10)
+
+
 class TestAnonimizando(_Base):
     def setUp(self):
         super().setUp()

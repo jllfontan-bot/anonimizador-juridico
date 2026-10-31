@@ -35,6 +35,13 @@ Puntos de enganche (as ramas que os enchen intégranse ao fusionar):
   usan SEN anonimizar: un formato novo non se converte anonimizando ata ter
   as súas probas de fugas (estudo, punto 6; `formatos/ESCONDITES.md`); ata
   entón queda omitido con motivo `sen_proba_de_fugas`.
+Aforro para IA (`aforro_ia`, fase 3), por defecto: cabeceiras e pés
+repetidos unha vez, liñas partidas unidas e espazos de sobra fóra, en cada
+documento (`aforro=False` para non tocalo). Con `caracteres_por_parte`, un
+.md máis longo trócease en `<nome>.parte-01.md`... e `<nome>.indice.md`,
+cada un coa súa cabeceira (`anonimizado: si/non` vai en todos: as partes
+pásanse soltas á IA). `Resultado.tokens_antes`/`tokens_despois`: estimación.
+
 - `POSPROCESADOS`: funcións `str -> str` que se aplican, en orde, ao
   Markdown de cada documento antes da cabeceira (`aforro_ia.py`). No modo
   anonimizado reciben o texto xa anonimizado, así que non poden sacar á
@@ -52,7 +59,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import copia_md, formatos, idioma, lectura
+from . import aforro_ia, copia_md, formatos, idioma, lectura
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -79,6 +86,12 @@ class Resultado:
     erros: dict = field(default_factory=dict)  # nome orixinal -> erro ao ler
     informes: dict = field(default_factory=dict)  # nome anonimizado -> informe (só anonimizando)
     avisos: dict = field(default_factory=dict)  # nome orixinal -> avisos do lector (formatos novos)
+    tokens_antes: int = 0  # estimación (`aforro_ia.estimar_tokens`) do Markdown sen aforro
+    tokens_despois: int = 0  # ... e do escrito
+
+    def resumo_tokens(self) -> str:
+        """Frase da estimación de tokens antes e despois (di que é unha estimación)."""
+        return aforro_ia.Resultado("", 0, 0, self.tokens_antes, self.tokens_despois).resumo()
 
 
 @dataclass
@@ -111,10 +124,17 @@ def _motivo_omision(nome: str, anonimizar: bool) -> str | None:
     return "formato"
 
 
+_PARTE_OU_INDICE = re.compile(r"\.(parte-\d+|indice)\.md$")
+
+
 def _e_saida_anterior(nome: str) -> bool:
     """`demanda.pdf.md`, `x.anonimizado.pdf.md` (conversor ou copia .md do
-    anonimizador), `x.anonimizado.pdf` (anonimizador), `expediente.zip.md`:
-    nun cartafol, volver convertelos enchería o cartafol de `.md.md`."""
+    anonimizador), `x.anonimizado.pdf` (anonimizador), `expediente.zip.md`,
+    e as partes e índices dun troceado (`demanda.pdf.parte-01.md`,
+    `expediente.indice.md`): nun cartafol, volver convertelos enchería o
+    cartafol de `.md.md`."""
+    if _PARTE_OU_INDICE.search(nome.lower()):
+        return True
     ruta = PurePosixPath(nome.lower())
     if ruta.stem.endswith(".anonimizado"):
         return True
@@ -260,9 +280,10 @@ def _paxinas_texto(paxinas: int) -> str:
     return idioma.t("conversor.unha_paxina") if paxinas == 1 else idioma.t("conversor.n_paxinas", n=paxinas)
 
 
-def _un_so_md(orixe: str, convertidos: list, omitidos: list, anonimizado: bool, data: datetime.date) -> str:
-    """`omitidos`: [(nome visible, motivo)]."""
-    partes = [_cabeceira(orixe, anonimizado, data, ficheiros=len(convertidos)).rstrip("\n")]
+def _un_so_md(convertidos: list, corpos: list, omitidos: list) -> str:
+    """Corpo (sen cabeceira) do .md único. `corpos`: o de cada convertido,
+    xa posprocesado. `omitidos`: [(nome visible, motivo)]."""
+    partes = []
     indice = [f"# {idioma.t('conversor.indice')}", ""]
     for i, c in enumerate(convertidos, 1):
         indice.append(f"{i}. {c.nome_visible}" + (f" ({_paxinas_texto(c.paxinas)})" if c.paxinas else ""))
@@ -270,10 +291,36 @@ def _un_so_md(orixe: str, convertidos: list, omitidos: list, anonimizado: bool, 
         indice += ["", f"{idioma.t('conversor.sen_converter')}:", ""]
         indice += [f"- {nome} ({idioma.t('conversor.motivo.' + motivo)})" for nome, motivo in omitidos]
     partes.append("\n".join(indice))
-    for c in convertidos:
-        corpo = _baixar_titulos(_posprocesar(c.corpo)).strip("\n")
+    for c, corpo in zip(convertidos, corpos):
+        corpo = _baixar_titulos(corpo).strip("\n")
         partes.append(f"# {c.nome_visible}" + ("\n\n" + corpo if corpo else ""))
     return "\n\n".join(partes) + "\n"
+
+
+def _corpo_final(c: _Convertido, aforro: bool, resultado: Resultado) -> str:
+    """Corpo posprocesado e, con `aforro`, aforrado; suma a estimación de tokens."""
+    corpo = _posprocesar(c.corpo)
+    resultado.tokens_antes += aforro_ia.estimar_tokens(corpo)
+    if aforro:
+        corpo = aforro_ia.aforrar(corpo).texto
+    resultado.tokens_despois += aforro_ia.estimar_tokens(corpo)
+    return corpo
+
+
+def _escribir(ruta: Path, cabeceira: str, corpo: str, caracteres_por_parte: int | None, saidas: list) -> None:
+    """Escribe `ruta` ou, se o corpo pasa de `caracteres_por_parte`, as súas
+    partes e o índice no mesmo cartafol, todos coa cabeceira."""
+    textos = [(ruta, corpo)]
+    if caracteres_por_parte and len(corpo) > caracteres_por_parte:
+        so_trocear = aforro_ia.Opcions(quitar_repetidas=False, unir_liñas=False, limpar_espazos=False,
+                                       caracteres_por_parte=caracteres_por_parte)
+        troceado = aforro_ia.aforrar(corpo, so_trocear, nome_base=ruta.name.removesuffix(".md"))
+        if troceado.partes:
+            textos = [(ruta.with_name(p.nome), p.texto) for p in troceado.partes]
+            textos.append((ruta.with_name(troceado.nome_indice), troceado.indice))
+    for destino, texto in textos:
+        destino.write_text(cabeceira + "\n" + _con_salto_final(texto), encoding="utf-8")
+        saidas.append(str(destino))
 
 
 # -- conversión -----------------------------------------------------------------
@@ -286,6 +333,8 @@ def converter(
     saida: str | None = None,
     rexistro: RexistroCorrespondencias | None = None,
     data: datetime.date | None = None,
+    aforro: bool = True,
+    caracteres_por_parte: int | None = None,
 ) -> Resultado:
     """Converte `entrada` (ficheiro, cartafol ou .zip) a .md.
 
@@ -341,8 +390,9 @@ def converter(
         destino = Path(saida) if saida else entrada.parent
         destino.mkdir(parents=True, exist_ok=True)
         ruta = destino / (base_entrada + cola)
-        ruta.write_text(_un_so_md(nome_entrada, convertidos, omitidos, anonimizar, data), encoding="utf-8")
-        resultado.saidas.append(str(ruta))
+        corpos = [_corpo_final(c, aforro, resultado) for c in convertidos]
+        cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos))
+        _escribir(ruta, cabeceira, _un_so_md(convertidos, corpos, omitidos), caracteres_por_parte, resultado.saidas)
         return resultado
 
     if saida:
@@ -363,6 +413,5 @@ def converter(
         usadas.add(ruta)
         ruta.parent.mkdir(parents=True, exist_ok=True)
         cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas)
-        ruta.write_text(cabeceira + "\n" + _con_salto_final(_posprocesar(c.corpo)), encoding="utf-8")
-        resultado.saidas.append(str(ruta))
+        _escribir(ruta, cabeceira, _corpo_final(c, aforro, resultado), caracteres_por_parte, resultado.saidas)
     return resultado

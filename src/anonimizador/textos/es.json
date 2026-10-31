@@ -308,6 +308,8 @@
  "conversor.cli.axuda_saida": "Carpeta de salida (por defecto, junto a la entrada)",
  "conversor.cli.axuda_rexistro": "Carpeta del registro de correspondencias (por defecto, la del anonimizador: {ruta})",
  "conversor.cli.axuda_chaveiro": "Con un --rexistro propio: guarda la clave de un registro NUEVO en el llavero del sistema (en el registro por defecto lo hace siempre, como el anonimizador)",
+ "conversor.cli.axuda_sen_aforro": "No aplicar el ahorro para IA (cabeceras y pies repetidos, unir líneas, espacios).",
+ "conversor.cli.axuda_trocear": "Trocear cada .md más largo que TOKENS (estimados) en partes con un índice.",
  "conversor.cli.non_existe": "no existe: {ruta}",
  "conversor.cli.aviso_sen_anonimizar": "Aviso: modo SIN anonimizar. Cada .md conserva los datos personales del original: si lo pasa a una IA en línea, esos datos salen del equipo.",
  "conversor.cli.aviso_automatico": "Aviso: modo anonimizado automático, sin revisión humana. Ninguna detección automática lo encuentra todo: revise cada .md antes de pasarlo a una IA.",
