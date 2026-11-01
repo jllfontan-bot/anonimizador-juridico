@@ -219,10 +219,15 @@ descargar_wheels_comuns() {
     # $1 = etiqueta cacheada   $2.. = argumentos --platform/--python-version/etc. de pip
     local etiqueta="$1"; shift
     local destino="$CACHE/wheels/$etiqueta"
-    if [ -d "$destino" ]; then return; fi
+    # A caché vale mentres non cambie a lista de paquetes: se se engade un
+    # (openpyxl & cía. para o conversor), descárgase de novo; pip reaproveita
+    # os ficheiros que xa están.
+    local lista="$* | $PAQUETES_COMUNS"
+    if [ -f "$destino/.paquetes" ] && [ "$(cat "$destino/.paquetes")" = "$lista" ]; then return; fi
     log "Descargando paquetes de Python ($etiqueta)..."
     mkdir -p "$destino"
     python3 -m pip download --quiet --dest "$destino" "$@" --only-binary=:all: $PAQUETES_COMUNS
+    printf '%s' "$lista" > "$destino/.paquetes"
 }
 
 descargar_odfpy() {
