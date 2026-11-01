@@ -89,9 +89,13 @@ def bitmap_asistente(icona: Image.Image) -> Image.Image:
 
 
 if __name__ == "__main__":
-    im = debuxar()
-    bitmap_asistente(im).save(Path(__file__).with_name("asistente.bmp"), format="BMP")
-    saida = Path(__file__).with_name("anonimizador.ico")
+    # Tamén a icona e a imaxe do asistente do instalador clásico do Conversor
+    # de archivos para IA (conversor.ico, asistente-conversor.bmp).
     tamanos = [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
-    im.resize((256, 256), Image.LANCZOS).save(saida, format="ICO", sizes=tamanos)
-    print("Xerado", saida)
+    for funcion, ico, bmp in ((debuxar, "anonimizador.ico", "asistente.bmp"),
+                              (debuxar_conversor, "conversor.ico", "asistente-conversor.bmp")):
+        im = funcion()
+        bitmap_asistente(im).save(Path(__file__).with_name(bmp), format="BMP")
+        saida = Path(__file__).with_name(ico)
+        im.resize((256, 256), Image.LANCZOS).save(saida, format="ICO", sizes=tamanos)
+        print("Xerado", saida)

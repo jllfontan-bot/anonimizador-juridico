@@ -400,11 +400,22 @@ montar_staging_windows() {
     cp "$INSTALADOR/windows/Iniciar-Anonimizador.vbs" "$INSTALADOR/windows/anonimizador.ico" "$stage/"
 }
 
+# $1: anonimizador (por defecto) ou conversor (Conversor de archivos para IA:
+# o mesmo árbore co seu lanzador, icona, manual e script NSIS)
 xerar_windows() {
-    log "== Windows =="
+    local app="${1:-anonimizador}"
+    log "== Windows: $app =="
     command -v makensis >/dev/null || { echo "ERRO: precísase 'makensis' (paquete nsis)."; exit 1; }
     montar_staging_windows
     local stage="$BUILD/staging-windows"
+    local nsi="$INSTALADOR/windows/instalador.nsi" nome_exe="Anonimizador-Xuridico-Instalador"
+    if [ "$app" = "conversor" ]; then
+        nsi="$INSTALADOR/windows/instalador-conversor.nsi"; nome_exe="Conversor-Archivos-IA-Instalador"
+        rm -f "$stage/Iniciar-Anonimizador.vbs" "$stage/anonimizador.ico"
+        rm -rf "$stage/docs"; mkdir -p "$stage/docs/es"
+        cp "$DOCS/"10-*.pdf "$stage/docs/"; cp "$DOCS/es/"10-*.pdf "$stage/docs/es/"
+        cp "$INSTALADOR/windows/Iniciar-Conversor.vbs" "$INSTALADOR/windows/conversor.ico" "$stage/"
+    fi
 
     # 2) Lista de ficheiros para NSIS + compilación (cross-compile con makensis)
     local xerado="$BUILD/nsis"
@@ -412,17 +423,17 @@ xerar_windows() {
     python3 "$INSTALADOR/windows/xerar_arbore_nsh.py" "$stage" "$xerado"
     # versión numérica a.b.c.d para as propiedades do .exe: AAAA.M.D.0
     local numerica="${_VERSION_DATA:0:4}.$((10#${_VERSION_DATA:4:2})).$((10#${_VERSION_DATA:6:2})).0"
-    local saida="$RAIZ/Anonimizador-Xuridico-Instalador-${VERSION}.exe" extra=""
+    local saida="$RAIZ/${nome_exe}-${VERSION}.exe" extra=""
     if [ -n "${INSTALADOR_PROBA:-}" ]; then
         # so desenvolvemento: sen compresión, para iterar rápido (build/proba/)
-        mkdir -p "$BUILD/proba"; saida="$BUILD/proba/Anonimizador-Xuridico-Instalador-PROBA.exe"; extra="-DPROBA=1"
+        mkdir -p "$BUILD/proba"; saida="$BUILD/proba/${nome_exe}-PROBA.exe"; extra="-DPROBA=1"
     fi
     rm -f "$saida"
     log "Compilando o instalador (LZMA sobre ~$(du -sm "$stage" | cut -f1) MB; pode tardar varios minutos)..."
     # makensis (Unicode) le o script en UTF-8 só se a locale o é
     local loc="en_US.UTF-8"; if [ "$(uname -s)" = "Linux" ]; then loc="C.UTF-8"; fi
     LC_ALL="$loc" makensis -V2 $extra -DVERSION="$VERSION" -DVERSION_NUM="$numerica" -DXERADO="$xerado" \
-        -DRECURSOS="$INSTALADOR/windows" -DSAIDA="$saida" "$INSTALADOR/windows/instalador.nsi"
+        -DRECURSOS="$INSTALADOR/windows" -DSAIDA="$saida" "$nsi"
     log "Xerado: $(basename "$saida") ($(du -sh "$saida" | cut -f1))"
 }
 
@@ -446,8 +457,11 @@ descargar_extras_mac() {
         "pyobjc-framework-UniformTypeIdentifiers==11.1"
 }
 
+# $1: anonimizador (por defecto) ou conversor (os seus scripts en
+# instalador/mac-conversor e o seu manual)
 xerar_mac() {
-    log "== macOS =="
+    local app="${1:-anonimizador}"
+    log "== macOS: $app =="
     python3 -c "import macholib" 2>/dev/null || { echo "ERRO: precísase o paquete de Python 'macholib'."; exit 1; }
     descargar_python "x86_64-apple-darwin" "$CACHE/runtime/python-mac-x64"
     descargar_python "aarch64-apple-darwin" "$CACHE/runtime/python-mac-arm64"
@@ -462,11 +476,17 @@ xerar_mac() {
     descargar_extras_mac "macosx_11_0_x86_64" "$CACHE/wheels/mac-x64"
     descargar_extras_mac "macosx_11_0_arm64" "$CACHE/wheels/mac-arm64"
 
-    local paquete="$BUILD/$NOME-mac"
-    rm -rf "$paquete"; mkdir -p "$paquete/runtime" "$paquete/wheels" "$paquete/docs"
-    cp "$INSTALADOR/mac/"* "$paquete/"
-    cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$paquete/docs/"
-    if [ -d "$DOCS/es" ]; then mkdir -p "$paquete/docs/es"; cp "$DOCS/es/"*.pdf "$paquete/docs/es/"; fi
+    local nome="$NOME" scripts="$INSTALADOR/mac"
+    if [ "$app" = "conversor" ]; then nome="conversor-ia-instalacion-${VERSION}"; scripts="$INSTALADOR/mac-conversor"; fi
+    local paquete="$BUILD/$nome-mac"
+    rm -rf "$paquete"; mkdir -p "$paquete/runtime" "$paquete/wheels" "$paquete/docs/es"
+    cp "$scripts/"* "$paquete/"
+    if [ "$app" = "conversor" ]; then
+        cp "$DOCS/"10-*.pdf "$paquete/docs/"; cp "$DOCS/es/"10-*.pdf "$paquete/docs/es/"
+    else
+        cp "$DOCS/"0[1-3]-*.pdf "$DOCS/"criterios_*.pdf "$paquete/docs/"
+        cp "$DOCS/es/"0*.pdf "$paquete/docs/es/"
+    fi
     cp "$CACHE/wheels/mac-x64/"* "$CACHE/wheels/mac-arm64/"* "$CACHE/wheels/_odfpy/"* "$CACHE/wheels/_proxy_tools/"* "$CACHE/wheels/_pywebview/"* "$CACHE/wheels/_modelo/"* "$paquete/wheels/"
     copiar_fonte_limpa "$paquete"
     cp -R "$CACHE/runtime/python-mac-x64" "$paquete/runtime/python-x64"
@@ -474,9 +494,9 @@ xerar_mac() {
     cp -R "$CACHE/runtime/tesseract-mac-x64" "$paquete/runtime/tesseract-x64"
     cp -R "$CACHE/runtime/tesseract-mac-arm64" "$paquete/runtime/tesseract-arm64"
     chmod +x "$paquete/"*.command
-    rm -f "$RAIZ/$NOME-mac.zip"
-    (cd "$paquete" && zip -r -X -q -y "$RAIZ/$NOME-mac.zip" .)
-    log "Xerado: $NOME-mac.zip ($(du -sh "$RAIZ/$NOME-mac.zip" | cut -f1))"
+    rm -f "$RAIZ/$nome-mac.zip"
+    (cd "$paquete" && zip -r -X -q -y "$RAIZ/$nome-mac.zip" .)
+    log "Xerado: $nome-mac.zip ($(du -sh "$RAIZ/$nome-mac.zip" | cut -f1))"
 }
 
 # ---------------------------------------------------------------------
@@ -499,8 +519,8 @@ xerar_msix() {
 
 OBXECTIVO="${1:-todo}"
 case "$OBXECTIVO" in
-    windows|msix|msix-conversor|mac|todo) ;;
-    *) echo "Uso: $0 [windows|msix|msix-conversor|mac]"; exit 1 ;;
+    windows|windows-conversor|msix|msix-conversor|mac|mac-conversor|todo) ;;
+    *) echo "Uso: $0 [windows|windows-conversor|msix|msix-conversor|mac|mac-conversor]"; exit 1 ;;
 esac
 
 asegurar_ferramentas
@@ -513,6 +533,8 @@ case "$OBXECTIVO" in
     msix) xerar_msix ;;
     msix-conversor) xerar_msix conversor ;;
     mac) xerar_mac ;;
+    mac-conversor) xerar_mac conversor ;;
+    windows-conversor) xerar_windows conversor ;;
     *) xerar_windows ;;
 esac
 
