@@ -220,6 +220,18 @@ class TestSenAnonimizar(_Base):
         self.assertEqual(kwargs["caracteres_por_parte"], round(500 * aforro_ia.CARACTERES_POR_TOKEN))
         self.assertIn("expediente.indice.md", [Path(s).name for s in self.eventos[-1][1]["saidas"]])
 
+    def test_opcion_csv_aparte(self):
+        raiz = self.dir / "expediente"
+        raiz.mkdir(parents=True)
+        (raiz / "libro.csv").write_text("id;x\n" + "".join(f"{i};{i}\n" for i in range(600)), encoding="utf-8")
+        for opcions, esperado in (({}, True), ({"csv_aparte": False}, False)):
+            with mock.patch.object(conversor, "converter", wraps=conversor.converter) as espia:
+                self.api.converter({"rutas": [str(raiz)], **opcions})
+                self._final()
+            self.assertIs(espia.call_args.kwargs["csv_aparte"], esperado)
+            self.assertEqual((raiz / "libro.datos.csv").is_file(), esperado)
+            (raiz / "libro.datos.csv").unlink(missing_ok=True)
+
     def test_varias_entradas_soltas(self):
         a = _docx(self.dir / "a.docx")
         b = _docx(self.dir / "b.docx")

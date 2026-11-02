@@ -124,3 +124,9 @@ se detectan. Un `.csv` anonimizado debería escribirse de novo con delimitador e
   fóra o que non sabe revisar.
 - Follas grandes: pasar `dir_csv` (cartafol de saída) se se quere o `.csv` á parte; sen el a táboa sae
   enteira e só se avisa.
+  O conversor (`conversor.converter`, `csv_aparte=True` por defecto) pasa `dir_csv` ao lector de follas: o `.csv`
+  queda canda o `.md`, no seu cartafol, e a súa ruta sae en `Resultado.csv` e nos avisos.
+- CUIDADO ao activar estes formatos anonimizando: o `.csv` á parte tamén hai que anonimizalo (o mesmo
+  tratamento ca cada cela do `.md`, e o seu nome, que leva o do ficheiro e o da folla). Mentres tanto,
+  `conversor._converter_documento` non pide `dir_csv` anonimizando e `tests/test_conversor.py`
+  (`test_anonimizando_non_escribe_csv`) comproba que ningún `.csv` sae nese modo.

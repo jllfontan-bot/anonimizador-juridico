@@ -3,7 +3,7 @@
 Uso:
     python -m anonimizador.cli_conversor ARQUIVO|CARTAFOL|ZIP \\
         [--anonimizar] [--un-solo-md] [--saida DIR] [--rexistro DIR]
-        [--sen-aforro] [--trocear TOKENS]
+        [--sen-aforro] [--trocear TOKENS] [--sen-csv-aparte]
 
 Sen `--anonimizar` non se carga o NER (spaCy). Con el, a anonimización é
 AUTOMÁTICA, sen revisión humana (`revisado: non` na cabeceira), e avísase
@@ -32,6 +32,8 @@ def main(argv: list | None = None) -> int:
                         help=t("conversor.cli.axuda_rexistro", ruta=conversor.rexistro_por_defecto()))
     parser.add_argument("--chaveiro-sistema", action="store_true", help=t("conversor.cli.axuda_chaveiro"))
     parser.add_argument("--sen-aforro", dest="aforro", action="store_false", help=t("conversor.cli.axuda_sen_aforro"))
+    parser.add_argument("--sen-csv-aparte", dest="csv_aparte", action="store_false",
+                        help=t("conversor.cli.axuda_sen_csv"))
     parser.add_argument("--trocear", type=int, default=None, metavar="TOKENS", help=t("conversor.cli.axuda_trocear"))
     args = parser.parse_args(argv)
 
@@ -55,7 +57,7 @@ def main(argv: list | None = None) -> int:
 
     resultado = conversor.converter(
         args.entrada, anonimizar=args.anonimizar, un_so_md=args.un_so_md, saida=args.saida, rexistro=rexistro,
-        aforro=args.aforro,
+        aforro=args.aforro, csv_aparte=args.csv_aparte,
         caracteres_por_parte=round(args.trocear * aforro_ia.CARACTERES_POR_TOKEN) if args.trocear else None,
     )
 

@@ -141,6 +141,8 @@
       <span><span data-t="un_so_md"></span><span class="axuda" data-t="un_so_md_axuda"></span></span></label>
     <label class="opcion"><input type="checkbox" id="aforro" checked>
       <span><span data-t="aforro"></span><span class="axuda" data-t="aforro_axuda"></span></span></label>
+    <label class="opcion"><input type="checkbox" id="csv-aparte" checked>
+      <span><span data-t="csv_aparte"></span><span class="axuda" data-t="csv_aparte_axuda"></span></span></label>
     <label class="opcion"><input type="checkbox" id="trocear">
       <span><span data-t="trocear"></span>
         <input type="number" id="tokens" value="30000" min="100" step="1000" style="width:110px; margin-left:6px;">
@@ -267,6 +269,7 @@ function opcions(anonimizar) {
     modo: document.querySelector("input[name=modo]:checked")?.value,
     un_so_md: $("un-so-md").checked,
     aforro: $("aforro").checked,
+    csv_aparte: $("csv-aparte").checked,
     trocear: $("trocear").checked ? Number($("tokens").value) : null,
     saida: $("saida").value,
   };

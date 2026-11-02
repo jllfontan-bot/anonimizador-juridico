@@ -63,6 +63,7 @@ from __future__ import annotations
 import datetime
 import json
 import re
+import shutil
 import tempfile
 import zipfile
 from dataclasses import dataclass, field
@@ -103,6 +104,7 @@ class Resultado:
     tokens_antes: int = 0  # estimación (`aforro_ia.estimar_tokens`) do Markdown sen aforro
     tokens_despois: int = 0  # ... e do escrito
     revisados: list = field(default_factory=list)  # nomes anonimizados (coma `informes`) revisados por unha persoa
+    csv: list = field(default_factory=list)  # rutas dos .csv á parte (follas grandes), canda o seu .md
 
     def resumo_tokens(self) -> str:
         """Frase da estimación de tokens antes e despois (di que é unha estimación)."""
@@ -125,6 +127,7 @@ class _Convertido:
     paxinas: int | None
     avisos: list = field(default_factory=list)
     revisado: bool = False
+    csv: list = field(default_factory=list)  # .csv á parte que o lector deixou nun cartafol temporal
 
 
 def _extensions() -> tuple:
@@ -205,15 +208,19 @@ def _con_salto_final(texto: str) -> str:
     return texto.rstrip("\n") + "\n"
 
 
-def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=None) -> tuple:
-    """(_Convertido, informe ou None)."""
+def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=None, dir_csv: Path | None = None) -> tuple:
+    """(_Convertido, informe ou None). `dir_csv`: onde o lector deixa os .csv
+    á parte (só sen anonimizar; ver `converter`)."""
     sufixo_orixinal = PurePosixPath(doc.nome.name).suffix
     sufixo = sufixo_orixinal.lower()
     if sufixo not in lectura.EXTENSIONS_SOPORTADAS:  # formato novo: só chega aquí sen anonimizar
-        lido = LECTORES_EXTRA[sufixo](str(doc.ruta))
-        corpo, avisos = (lido, []) if isinstance(lido, str) else (lido.markdown, list(lido.avisos))
+        # Nunca se pide o .csv á parte anonimizando: o .csv non pasaría polo anonimizador.
+        opcions = {"dir_csv": str(dir_csv)} if dir_csv is not None and not anonimizar else {}
+        lido = LECTORES_EXTRA[sufixo](str(doc.ruta), **opcions)
+        corpo, avisos, ficheiros = (lido, [], []) if isinstance(lido, str) else (
+            lido.markdown, list(lido.avisos), list(lido.ficheiros))
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, None, avisos), None
+                           str(doc.nome), corpo, None, avisos, csv=ficheiros), None
 
     texto, contexto = lectura.cargar_documento_estruturado(str(doc.ruta))
     paxinas = None
@@ -332,6 +339,26 @@ def _corpo_final(c: _Convertido, aforro: bool, resultado: Resultado) -> str:
     return corpo
 
 
+def _colocar_csv(c: _Convertido, destino: Path, usados: set, resultado: Resultado) -> None:
+    """Move os .csv á parte de `c` ao cartafol do seu .md. Se o nome xa o
+    colleu outro documento da mesma execución, leva un contador, e o .md e os
+    avisos (que o nomean) cámbianse con el."""
+    destino.mkdir(parents=True, exist_ok=True)
+    for orixe in map(Path, c.csv):
+        final = destino / orixe.name
+        contador = 2
+        while final in usados:
+            final = destino / f"{orixe.stem}-{contador}{orixe.suffix}"
+            contador += 1
+        usados.add(final)
+        shutil.move(str(orixe), final)
+        if final.name != orixe.name:
+            c.corpo = c.corpo.replace(orixe.name, final.name)
+            c.avisos[:] = [a.replace(orixe.name, final.name) for a in c.avisos]  # no sitio: `Resultado.avisos` comparte a lista
+        c.avisos.append(idioma.t("conversor.aviso_csv_aparte", ruta=final))
+        resultado.csv.append(str(final))
+
+
 def _escribir(ruta: Path, cabeceira: str, corpo: str, caracteres_por_parte: int | None, saidas: list) -> None:
     """Escribe `ruta` ou, se o corpo pasa de `caracteres_por_parte`, as súas
     partes e o índice no mesmo cartafol, todos coa cabeceira."""
@@ -363,6 +390,7 @@ def converter(
     progreso: Callable[[int, int, str], None] | None = None,
     cancelar: Callable[[], bool] | None = None,
     revisar: Callable | None = None,
+    csv_aparte: bool = True,
 ) -> Resultado:
     """Converte `entrada` (ficheiro, cartafol ou .zip) a .md.
 
@@ -375,7 +403,20 @@ def converter(
       canda a entrada.
     Anonimizando, os nomes de cartafoles e ficheiros de saída tamén van
     anonimizados. `rexistro` é obrigatorio para anonimizar. `progreso`,
-    `cancelar` e `revisar`: ver o comezo do módulo."""
+    `cancelar` e `revisar`: ver o comezo do módulo.
+
+    `csv_aparte` (por defecto si): as follas de máis de `follas.MAX_FILAS`
+    filas van a un `.csv` canda o seu `.md` (no mesmo cartafol; a ruta sae
+    en `Resultado.csv` e nos avisos) e o `.md` leva só a cabeceira de
+    columnas; sen el a táboa sae enteira, cun aviso. Só afecta aos formatos
+    novos, que só se converten sen anonimizar."""
+    with tempfile.TemporaryDirectory() as tmp_csv:  # os .csv viven aquí ata a fase de escritura
+        return _converter(entrada, Path(tmp_csv), anonimizar, un_so_md, saida, rexistro, data, aforro,
+                          caracteres_por_parte, progreso, cancelar, revisar, csv_aparte)
+
+
+def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, aforro, caracteres_por_parte,
+               progreso, cancelar, revisar, csv_aparte) -> Resultado:
     entrada = Path(entrada)
     if anonimizar and rexistro is None:
         raise ValueError("Para anonimizar fai falta o rexistro de correspondencias")
@@ -395,8 +436,13 @@ def converter(
                 raise Cancelado
             if progreso is not None:
                 progreso(i, len(documentos), str(doc.nome))
+            dir_csv = None
+            if csv_aparte and not anonimizar:
+                dir_csv = tmp_csv / str(i)
+                dir_csv.mkdir()
             try:
-                convertido, informe = _converter_documento(doc, anonimizar, rexistro, revisar if anonimizar else None)
+                convertido, informe = _converter_documento(
+                    doc, anonimizar, rexistro, revisar if anonimizar else None, dir_csv)
             except Cancelado:
                 raise
             except Exception as e:  # noqa: BLE001 -- un documento roto non para o lote
@@ -429,6 +475,9 @@ def converter(
         destino = Path(saida) if saida else entrada.parent
         destino.mkdir(parents=True, exist_ok=True)
         ruta = destino / (base_entrada + cola)
+        usados_csv: set = set()
+        for c in convertidos:
+            _colocar_csv(c, destino, usados_csv, resultado)
         corpos = [_corpo_final(c, aforro, resultado) for c in convertidos]
         cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos),
                                revisado=bool(convertidos) and all(c.revisado for c in convertidos))
@@ -444,6 +493,7 @@ def converter(
     else:
         destino = entrada.parent
     usadas = set()
+    usados_csv: set = set()
     for c in convertidos:
         ruta = destino / c.cartafol / (c.stem + c.cola)
         contador = 2
@@ -452,6 +502,7 @@ def converter(
             contador += 1
         usadas.add(ruta)
         ruta.parent.mkdir(parents=True, exist_ok=True)
+        _colocar_csv(c, ruta.parent, usados_csv, resultado)
         cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado)
         _escribir(ruta, cabeceira, _corpo_final(c, aforro, resultado), caracteres_por_parte, resultado.saidas)
     return resultado

@@ -235,7 +235,7 @@ class Api:
 
     def converter(self, opcions: dict) -> dict:
         """Arrinca a conversión nun fío. `opcions`: `rutas`, `anonimizar`,
-        `un_so_md`, `aforro`, `trocear` (tokens por parte ou nada), `saida`
+        `un_so_md`, `aforro`, `csv_aparte` (por defecto si), `trocear` (tokens por parte ou nada), `saida`
         (cartafol ou nada) e, anonimizando, `modo` ("revisar"/"automatico")."""
         if self._fio is not None and self._fio.is_alive():
             return {"erro": idioma.t("pantalla_conversor.en_marcha")}
@@ -264,6 +264,7 @@ class Api:
             "un_so_md": bool(opcions.get("un_so_md")),
             "saida": (opcions.get("saida") or "").strip() or None,
             "aforro": opcions.get("aforro", True) is not False,
+            "csv_aparte": opcions.get("csv_aparte", True) is not False,
             "caracteres_por_parte": round(trocear * aforro_ia.CARACTERES_POR_TOKEN) if trocear else None,
         }
         self._fio = threading.Thread(target=self._traballo, args=(rutas, argumentos), daemon=True)
@@ -393,6 +394,7 @@ def _sumar(total: conversor.Resultado, resultado: conversor.Resultado, prefixo: 
     total.informes.update(resultado.informes)
     total.avisos.update({nome(n): a for n, a in resultado.avisos.items()})
     total.revisados += resultado.revisados
+    total.csv += resultado.csv
     total.tokens_antes += resultado.tokens_antes
     total.tokens_despois += resultado.tokens_despois
 

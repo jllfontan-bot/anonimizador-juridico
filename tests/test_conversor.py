@@ -19,7 +19,7 @@ import unittest
 import zipfile
 from unittest import mock
 from contextlib import redirect_stdout
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import docx
 import fitz  # PyMuPDF
@@ -254,7 +254,7 @@ class TestPuntosDeEnganche(_Base):
         super().tearDown()
 
     def test_lector_dun_formato_novo_so_sen_anonimizar(self):
-        conversor.LECTORES_EXTRA[".csv"] = lambda ruta: "| a | b |\n| --- | --- |\n| 1 | 2 |\n"
+        conversor.LECTORES_EXTRA[".csv"] = lambda ruta, **_: "| a | b |\n| --- | --- |\n| 1 | 2 |\n"
         raiz = self.dir / "cartafol"
         raiz.mkdir()
         (raiz / "taboa.csv").write_text("a;b\n1;2\n", encoding="utf-8")
@@ -340,6 +340,120 @@ class TestFormatosNovos(_Base):
         with redirect_stdout(saida):
             cli_conversor.main([str(raiz / "contas.xlsx")])
         self.assertIn("Interna", saida.getvalue())
+
+class TestCsvAparte(_Base):
+    """Follas de máis de 500 filas: `.csv` á parte canda o `.md` (opción
+    `csv_aparte`, por defecto si)."""
+
+    def _folla(self, ruta: Path, filas: int = 600) -> Path:
+        ruta.parent.mkdir(parents=True, exist_ok=True)
+        ruta.write_text("id;importe\n" + "".join(f"{i};{i * 2}\n" for i in range(filas)), encoding="utf-8")
+        return ruta
+
+    def test_folla_grande_vai_a_csv_canda_o_md(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "contas" / "libro.csv")
+        resultado = conversor.converter(str(raiz))
+        md = raiz / "contas" / "libro.csv.md"
+        csv_aparte = raiz / "contas" / "libro.datos.csv"
+        self.assertTrue(csv_aparte.is_file())
+        self.assertEqual(len(csv_aparte.read_text(encoding="utf-8").splitlines()), 601)
+        texto = md.read_text(encoding="utf-8")
+        self.assertIn("libro.datos.csv", texto)
+        self.assertIn("importe", texto)
+        self.assertNotIn("| 599 |", texto)
+        self.assertEqual(resultado.csv, [str(csv_aparte)])
+        self.assertIn(str(csv_aparte), " ".join(resultado.avisos["contas/libro.csv"]))
+        self.assertEqual(resultado.saidas, [str(md)])
+
+    def test_con_saida_e_un_so_md_o_csv_queda_canda_o_md(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "libro.csv")
+        saida = self.dir / "saida"
+        resultado = conversor.converter(str(raiz), saida=str(saida), un_so_md=True)
+        self.assertTrue((saida / "expediente.md").is_file())
+        self.assertTrue((saida / "libro.datos.csv").is_file())
+        self.assertFalse((raiz / "libro.datos.csv").exists())
+        self.assertEqual(resultado.csv, [str(saida / "libro.datos.csv")])
+
+    def test_homonimos_en_un_so_md_non_se_pisan(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "a" / "libro.csv", 600)
+        self._folla(raiz / "b" / "libro.csv", 700)
+        saida = self.dir / "saida"
+        resultado = conversor.converter(str(raiz), saida=str(saida), un_so_md=True)
+        self.assertEqual(sorted(Path(r).name for r in resultado.csv), ["libro.datos-2.csv", "libro.datos.csv"])
+        md = (saida / "expediente.md").read_text(encoding="utf-8")
+        self.assertIn("libro.datos-2.csv", md)
+        self.assertEqual(len((saida / "libro.datos-2.csv").read_text(encoding="utf-8").splitlines()), 701)
+
+    def test_sen_a_opcion_a_taboa_sae_enteira_con_aviso(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "libro.csv")
+        resultado = conversor.converter(str(raiz), csv_aparte=False)
+        self.assertEqual(list(raiz.glob("*.datos.csv")), [])
+        self.assertEqual(resultado.csv, [])
+        self.assertIn("| 599 |", (raiz / "libro.csv.md").read_text(encoding="utf-8"))
+        self.assertTrue(resultado.avisos["libro.csv"])
+
+    def test_folla_pequena_non_xera_csv(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "libro.csv", 20)
+        resultado = conversor.converter(str(raiz))
+        self.assertEqual(list(raiz.glob("*.datos.csv")), [])
+        self.assertEqual(resultado.csv, [])
+
+    def test_cancelar_non_deixa_csv(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "a.csv")
+        self._folla(raiz / "b.csv")
+        chamadas = iter([False, True])
+        with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(raiz), cancelar=lambda: next(chamadas, True))
+        self.assertEqual(sorted(p.name for p in raiz.glob("*.csv")), ["a.csv", "b.csv"])
+
+    def test_anonimizando_non_escribe_csv(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "libro.csv")
+        saida = self.dir / "saida"
+        rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
+        resultado = conversor.converter(str(raiz), anonimizar=True, rexistro=rexistro, saida=str(saida),
+                                        csv_aparte=True)
+        self.assertEqual(resultado.omitidos, [("libro.csv", "sen_proba_de_fugas")])
+        self.assertEqual(resultado.csv, [])
+        self.assertEqual(sorted(p.name for p in raiz.rglob("*.csv")), ["libro.csv"])
+        self.assertFalse(saida.exists() and list(saida.rglob("*")))
+        # e se un lector chegase a executarse anonimizando, non recibe `dir_csv`
+        recibido = {}
+
+        def lector(ruta, **opcions):
+            recibido.update(opcions)
+            return "| a |\n"
+
+        orixinal = dict(conversor.LECTORES_EXTRA)
+        self.addCleanup(lambda: (conversor.LECTORES_EXTRA.clear(), conversor.LECTORES_EXTRA.update(orixinal)))
+        conversor.LECTORES_EXTRA[".csv"] = lector
+        doc = conversor._Documento(PurePosixPath("libro.csv"), raiz / "libro.csv")
+        conversor._converter_documento(doc, False, None, None, self.dir / "x")
+        self.assertEqual(recibido, {"dir_csv": str(self.dir / "x")})
+        recibido.clear()
+        with mock.patch.object(conversor, "lectura") as lectura:
+            lectura.EXTENSIONS_SOPORTADAS = ()
+            conversor._converter_documento(doc, True, rexistro, None, self.dir / "x")
+        self.assertEqual(recibido, {})
+
+    def test_liña_de_comandos(self):
+        raiz = self.dir / "expediente"
+        self._folla(raiz / "libro.csv")
+        saida = io.StringIO()
+        with redirect_stdout(saida):
+            cli_conversor.main([str(raiz)])
+        self.assertTrue((raiz / "libro.datos.csv").is_file())
+        self.assertIn("libro.datos.csv", saida.getvalue())
+        (raiz / "libro.datos.csv").unlink()
+        with redirect_stdout(io.StringIO()):
+            cli_conversor.main([str(raiz), "--sen-csv-aparte"])
+        self.assertFalse((raiz / "libro.datos.csv").exists())
 
 
 def _pdf_con_cabeceira(ruta: Path, paxinas: int = 4) -> Path:
