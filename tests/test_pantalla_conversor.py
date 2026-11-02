@@ -31,7 +31,7 @@ sys.path.insert(0, str(_RAIZ / "src"))
 from anonimizador import aforro_ia, conversor, idioma, pantalla_conversor
 
 _NOME = "Xoán Pérez Vázquez"
-_DNI = "33045521Z"
+_DNI = "30014811Z"
 
 
 def _docx(ruta: Path, texto: str = f"Comparece don {_NOME}, con DNI {_DNI}, ante o xulgado de Lugo.") -> Path:

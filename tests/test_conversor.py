@@ -36,7 +36,7 @@ from anonimizador.pipeline import anonimizar_e_gardar, ruta_saida_por_defecto
 from anonimizador.registry import RexistroCorrespondencias
 
 _NOME = "Xoán Pérez Vázquez"
-_DNI = "33045521Z"
+_DNI = "30014811Z"
 _NOME_CARTAFOL = "Antía Varela Doval"
 _DATOS_ORIXINAIS = ("Xoán", "Pérez", "Vázquez", _DNI, "Antía", "Varela", "Doval")
 
