@@ -59,7 +59,7 @@ class TestMontarMsix(unittest.TestCase):
         self.assertNotEqual(identidade.get("Name"), anon.get("Name"))
         aplicacion = paquete.find("m:Applications/m:Application", _NS)
         self.assertEqual(aplicacion.get(_PARAMETROS), "-m anonimizador.arranque_conversor")
-        self.assertEqual(paquete.find("m:Properties/m:DisplayName", _NS).text, "Conversor de archivos para IA")
+        self.assertEqual(paquete.find("m:Properties/m:DisplayName", _NS).text, "Reductor de tokens")
         for nome in ("Square44x44Logo.png", "Square150x150Logo.png", "StoreLogo.png", "Wide310x150Logo.png"):
             self.assertTrue((conversor / "Assets" / nome).is_file())
         self.assertNotEqual((conversor / "Assets" / "StoreLogo.png").read_bytes(),

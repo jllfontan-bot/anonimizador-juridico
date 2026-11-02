@@ -96,8 +96,8 @@ class TestPreferencias(_Base):
         self.api._xanela = mock.Mock()
         resposta = self.api.cambiar_idioma("es")
         self.assertEqual(resposta["textos"]["converter_anon"], "Convertir anonimizando")
-        self.assertEqual(resposta["textos"]["titulo"], "Conversor de archivos para IA")
-        self.api._xanela.set_title.assert_called_once_with("Conversor de archivos para IA")
+        self.assertEqual(resposta["textos"]["titulo"], "Reductor de tokens")
+        self.api._xanela.set_title.assert_called_once_with("Reductor de tokens")
         self.assertEqual(resposta["textos"]["revisar.persoas_titulo"], idioma.t("revisar.persoas_titulo", "es"))
         self.assertEqual(json.loads((self.dir / "preferencias.json").read_text())["idioma"], "es")
 

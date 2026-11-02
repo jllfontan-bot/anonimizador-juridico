@@ -1,5 +1,5 @@
 #!/bin/bash
-# Instalador para macOS del Conversor de archivos para IA.
+# Instalador para macOS del Reductor de tokens.
 # Haz doble clic en este archivo para ejecutarlo (la primera vez, macOS puede
 # pedir confirmación en Ajustes del Sistema > Privacidad y seguridad).
 #
@@ -17,7 +17,7 @@ else
 fi
 
 echo "======================================================"
-echo " Instalador del Conversor de archivos para IA"
+echo " Instalador del Reductor de tokens"
 echo "======================================================"
 echo
 

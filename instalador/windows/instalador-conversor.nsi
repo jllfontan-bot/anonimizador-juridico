@@ -1,4 +1,4 @@
-﻿; Instalador de Windows do Conversor de archivos para IA (NSIS, MUI2).
+﻿; Instalador de Windows do Reductor de tokens (NSIS, MUI2).
 ;
 ; O mesmo esquema có do anonimizador (instalador.nsi): cross-compile dende o
 ; Mac/Linux con `makensis`, chamado dende `instalador/crear-paquetes.sh
@@ -23,16 +23,16 @@ Var RutaPS1
   !define VERSION "dev"
 !endif
 !ifndef VERSION_NUM
-  !define VERSION_NUM "1.0.0.0"
+  !define VERSION_NUM "1.1.0.0"
 !endif
 !ifndef RECURSOS
   !define RECURSOS "."
 !endif
 
-!define NOME_PROGRAMA "Conversor de archivos para IA"
+!define NOME_PROGRAMA "Reductor de tokens"
 !define CLAVE_DESINSTALAR "Software\Microsoft\Windows\CurrentVersion\Uninstall\ConversorIA"
 !define NOME_DESINSTALADOR "Desinstalar-Conversor.exe"
-!define CARTAFOL_INICIO "Conversor de archivos para IA"
+!define CARTAFOL_INICIO "Reductor de tokens"
 !define EDITOR "JL López"
 
 Name "${NOME_PROGRAMA}"
@@ -104,18 +104,18 @@ VIProductVersion "${VERSION_NUM}"
   !endif
 !macroend
 
-!insertmacro TEXTO TXT_BENVIDA_TITULO "Benvida ao instalador do Conversor" "Bienvenida al instalador del Conversor"
+!insertmacro TEXTO TXT_BENVIDA_TITULO "Benvida ao instalador do Reductor de tokens" "Bienvenida al instalador del Reductor de tokens"
 !insertmacro TEXTO TXT_BENVIDA "Este asistente instalará o ${NOME_PROGRAMA} no seu ordenador: pasa documentos a Markdown (.md), con ou sen anonimizar, para dárllelos a unha IA gastando menos tokens.$\r$\n$\r$\nO programa inclúe todo o necesario (Python, OCR e o modelo de idioma): non fai falta conexión a internet nin permisos de administrador.$\r$\n$\r$\nPreme Seguinte para continuar." "Este asistente instalará el ${NOME_PROGRAMA} en su ordenador: pasa documentos a Markdown (.md), con o sin anonimizar, para dárselos a una IA gastando menos tokens.$\r$\n$\r$\nEl programa incluye todo lo necesario (Python, OCR y el modelo de idioma): no hace falta conexión a internet ni permisos de administrador.$\r$\n$\r$\nPulse Siguiente para continuar."
 !insertmacro TEXTO TXT_FIN_TITULO "Instalación completada" "Instalación completada"
 !insertmacro TEXTO TXT_FIN "O ${NOME_PROGRAMA} quedou instalado. Pode abrilo dende o menú Inicio.$\r$\n$\r$\nPara desinstalalo: Configuración > Aplicacións > Aplicacións instaladas, ou o acceso Desinstalar do menú Inicio." "El ${NOME_PROGRAMA} ha quedado instalado. Puede abrirlo desde el menú Inicio.$\r$\n$\r$\nPara desinstalarlo: Configuración > Aplicaciones > Aplicaciones instaladas, o el acceso Desinstalar del menú Inicio."
 !insertmacro TEXTO TXT_UN_FIN_TITULO "Desinstalación completada" "Desinstalación completada"
 !insertmacro TEXTO TXT_UN_FIN "O ${NOME_PROGRAMA} foi eliminado deste ordenador. Os datos de Documentos\Anonimizador (compartidos co anonimizador) non se tocaron." "El ${NOME_PROGRAMA} ha sido eliminado de este ordenador. Los datos de Documentos\Anonimizador (compartidos con el anonimizador) no se han tocado."
-!insertmacro TEXTO TXT_ABRIR "Abrir o Conversor agora" "Abrir el Conversor ahora"
+!insertmacro TEXTO TXT_ABRIR "Abrir o Reductor de tokens agora" "Abrir el Reductor de tokens ahora"
 !insertmacro TEXTO TXT_ESCRITORIO "Crear un acceso directo no escritorio" "Crear un acceso directo en el escritorio"
-!insertmacro TEXTO TXT_UN_BENVIDA_TITULO "Desinstalar o Conversor" "Desinstalar el Conversor"
+!insertmacro TEXTO TXT_UN_BENVIDA_TITULO "Desinstalar o Reductor de tokens" "Desinstalar el Reductor de tokens"
 !insertmacro TEXTO TXT_UN_BENVIDA "Vaise desinstalar o ${NOME_PROGRAMA} de:$\r$\n$\r$\n$INSTDIR$\r$\n$\r$\nOs datos de Documentos\Anonimizador (o rexistro cifrado, compartido co anonimizador) non se borran.$\r$\n$\r$\nPreme Seguinte para continuar." "Se va a desinstalar el ${NOME_PROGRAMA} de:$\r$\n$\r$\n$INSTDIR$\r$\n$\r$\nLos datos de Documentos\Anonimizador (el registro cifrado, compartido con el anonimizador) no se borran.$\r$\n$\r$\nPulse Siguiente para continuar."
-!insertmacro TEXTO TXT_ESTA_ABERTO "O Conversor está aberto. Para continuar hai que pechalo.$\r$\n$\r$\nPreme Aceptar para que o asistente o peche, ou Cancelar para saír." "El Conversor está abierto. Para continuar hay que cerrarlo.$\r$\n$\r$\nPulse Aceptar para que el asistente lo cierre, o Cancelar para salir."
-!insertmacro TEXTO TXT_NON_SE_PECHOU "Non se puido pechar o Conversor. Péchao a man e volve tentalo." "No se pudo cerrar el Conversor. Ciérrelo a mano y vuelva a intentarlo."
+!insertmacro TEXTO TXT_ESTA_ABERTO "O Reductor de tokens está aberto. Para continuar hai que pechalo.$\r$\n$\r$\nPreme Aceptar para que o asistente o peche, ou Cancelar para saír." "El Reductor de tokens está abierto. Para continuar hay que cerrarlo.$\r$\n$\r$\nPulse Aceptar para que el asistente lo cierre, o Cancelar para salir."
+!insertmacro TEXTO TXT_NON_SE_PECHOU "Non se puido pechar o Reductor de tokens. Péchao a man e volve tentalo." "No se pudo cerrar el Reductor de tokens. Ciérrelo a mano y vuelva a intentarlo."
 !insertmacro TEXTO TXT_SO_64 "Este programa só funciona en Windows de 64 bits." "Este programa solo funciona en Windows de 64 bits."
 !insertmacro TEXTO TXT_LIMPANDO "Preparando a instalación (eliminando a versión anterior, se a hai)..." "Preparando la instalación (eliminando la versión anterior, si la hay)..."
 !insertmacro TEXTO TXT_INSTALANDO "Instalando o programa..." "Instalando el programa..."
@@ -238,7 +238,7 @@ Function CrearAccesoEscritorio
     '"$INSTDIR\Iniciar-Conversor.vbs"' "$INSTDIR\conversor.ico" 0 SW_SHOWNORMAL "" "${NOME_PROGRAMA}"
 FunctionEnd
 
-Section "Conversor" SecPrincipal
+Section "Reductor de tokens" SecPrincipal
   SectionIn RO
   InitPluginsDir
   SetDetailsPrint textonly

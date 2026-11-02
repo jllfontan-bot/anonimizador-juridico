@@ -1,5 +1,5 @@
 #!/bin/bash
-# Arranca el Conversor de archivos para IA en una ventana propia (sin
+# Arranca el Reductor de tokens en una ventana propia (sin
 # navegador ni servidor: no abre ningún puerto). Haz doble clic en este
 # archivo para usarlo.
 #
@@ -29,7 +29,7 @@ export TESSDATA_PREFIX="$RAIZ/runtime/tesseract-$ARQ/tessdata"
 export PATH="$RAIZ/runtime/tesseract-$ARQ/bin:$PATH"
 
 echo "======================================================"
-echo " Conversor de archivos para IA"
+echo " Reductor de tokens"
 echo " Abriendo en ventana propia; para salir, cierra esa ventana."
 echo "======================================================"
 

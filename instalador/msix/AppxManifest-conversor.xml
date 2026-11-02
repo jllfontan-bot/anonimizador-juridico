@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Manifesto do paquete MSIX do Conversor de archivos para IA, unha
+<!-- Manifesto do paquete MSIX do Reductor de tokens, unha
      aplicación PROPIA na Store (non vai dentro do paquete do anonimizador).
      montar_msix.py substitúe {VERSION} (a de conversor.VERSION).
      A identidade (Name, Publisher, PublisherDisplayName) é a que deu Partner
-     Center ao reservar o nome "Conversor de archivos para IA" (Store ID
+     Center ao reservar o nome "Reductor de tokens" (Store ID
      9NMM4DRL6FCC, 31/10/2026): se non coincide letra a letra, a Store rexeita
      o paquete. Publisher é o da conta, o mesmo có anonimizador. -->
 <Package
@@ -20,7 +20,7 @@
     ProcessorArchitecture="x64" />
 
   <Properties>
-    <DisplayName>Conversor de archivos para IA</DisplayName>
+    <DisplayName>Reductor de tokens</DisplayName>
     <PublisherDisplayName>José Luis López Fontán</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -44,7 +44,7 @@
       EntryPoint="Windows.FullTrustApplication"
       uap10:Parameters="-m anonimizador.arranque_conversor">
       <uap:VisualElements
-        DisplayName="Conversor de archivos para IA"
+        DisplayName="Reductor de tokens"
         Description="Convierte documentos a Markdown en este ordenador, con o sin anonimizar, para pasarlos a una IA gastando menos tokens."
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"

@@ -9,7 +9,7 @@ name: Paquete MSIX (Microsoft Store)
 #
 # Execútase á man dende a pestana Actions ("Run workflow", escollendo a
 # aplicación) ou cunha etiqueta: msix-v* (anonimizador) ou msix-conversor-v*
-# (Conversor de archivos para IA, aplicación propia na Store co mesmo árbore).
+# (Reductor de tokens, aplicación propia na Store co mesmo árbore).
 # A versión do anonimizador é a do ficheiro VERSION; a do conversor,
 # `VERSION` de src/anonimizador/conversor.py.
 

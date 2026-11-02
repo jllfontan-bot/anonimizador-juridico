@@ -2,7 +2,7 @@
 <html lang="gl">
 <head>
 <meta charset="utf-8">
-<title>Manual do Conversor de ficheiros para IA</title>
+<title>Manual do Reductor de tokens</title>
 <link rel="stylesheet" href="estilo.css">
 <style>
   pre.md{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-size:11px; line-height:1.45; white-space:pre-wrap; break-inside:avoid; }
@@ -11,7 +11,7 @@
 <body>
 
 <div class="portada">
-  <span class="chip">Manual de uso · Conversor de ficheiros para IA</span>
+  <span class="chip">Manual de uso · Reductor de tokens</span>
   <h1>Como pasar documentos a Markdown para unha IA, paso a paso</h1>
   <p class="lede">Guía práctica do programa, con capturas reais de cada pantalla (con datos inventados): como escoller os documentos, que opcións hai para gastar menos tokens, que leva cada .md e como convertelos anonimizando, coa mesma revisión ca o Anonimizador jurídico.</p>
   <div class="meta">
@@ -23,7 +23,7 @@
 
 <h2 class="sec">01 · Para que serve</h2>
 <p>Se lle das un PDF ou un Word a unha intelixencia artificial (Claude, ChatGPT, Copilot…), gasta tokens e ferramentas en convertelo a texto, e ás veces leo mal: cabeceiras repetidas en cada páxina, liñas cortadas, táboas desfeitas. O programa fai esa conversión <strong>no teu ordenador</strong> e garda un ficheiro <code>.md</code> (Markdown) co texto limpo, cos seus títulos, listas e táboas, listo para pasarllo á IA.</p>
-<p>Menú Inicio de Windows → <em>Conversor de archivos para IA</em>. O programa ábrese nunha xanela propia; para pechalo, pecha esa xanela. Non se conecta a internet nin abre ningún porto no ordenador: a xanela chama directamente ao programa.</p>
+<p>Menú Inicio de Windows → <em>Reductor de tokens</em>. O programa ábrese nunha xanela propia; para pechalo, pecha esa xanela. Non se conecta a internet nin abre ningún porto no ordenador: a xanela chama directamente ao programa.</p>
 <figure><img src="img/conversor/inicio.png" alt="Pantalla inicial" style="max-width:340px"><figcaption>Pantalla inicial: os documentos escollidos, o cartafol de saída e os dous botóns, «Converter» e «Converter anonimizando».</figcaption></figure>
 
 <h2 class="sec">02 · Converter sen anonimizar</h2>
@@ -49,6 +49,7 @@
 <ul>
   <li><strong>Un só .md por cartafol ou .zip.</strong> Cun cartafol ou un <code>.zip</code>, xunta todos os documentos nun só ficheiro (<code>expediente.md</code>, cun índice ao principio): cómodo para pasarlle á IA un expediente enteiro dunha vez.</li>
   <li><strong>Aforro para IA</strong> (activado por defecto). Quita as cabeceiras e pés de páxina que se repiten en cada folla (déixaos unha vez ao principio), une as liñas cortadas e os guións de final de liña, e marca os títulos, tamén os dos PDF (anexos, capítulos, artigos). Desactívao se precisas o texto liña a liña tal como está no orixinal.</li>
+  <li><strong>Follas grandes a un .csv aparte</strong> (novo na 1.1; activado por defecto). As follas de máis de 500 filas non se meten enteiras no <code>.md</code>: gárdanse nun <code>.csv</code> canda el, e o <code>.md</code> leva só os nomes das columnas e a ruta do <code>.csv</code>. A IA le o <code>.csv</code> só se o precisa, e así o <code>.md</code> gasta moitos menos tokens. Non se aplica ao anonimizar.
   <li><strong>Trocear os .md longos.</strong> Parte os documentos longos en varios <code>.md</code> dun tamaño máximo en tokens (por exemplo 30.000), cun índice: útil cando a IA ten un límite por mensaxe.</li>
 </ul>
 
@@ -69,7 +70,7 @@
 orixe: sentenza.pdf
 paxinas: 3
 anonimizado: non
-convertido: 2026-10-31, Conversor de ficheiros para IA 1.0.0
+convertido: 2026-10-31, Reductor de tokens 1.1.0
 ---
 
 &lt;!-- cabeceiras e pés de páxina --&gt;
@@ -101,7 +102,7 @@ Xulgado de Primeira Instancia. Notificación. Por medio da presente comunícase�
 orixe: declaracion.docx
 anonimizado: si
 revisado: si
-convertido: 2026-10-31, Conversor de ficheiros para IA 1.0.0
+convertido: 2026-10-31, Reductor de tokens 1.1.0
 ---
 
 Declaración de PERSOA_000001
@@ -150,6 +151,6 @@ PERSOA_000001, con DNI PERSOA_000001 e teléfono [TELEFONO], veciña de Lugo, de
   </tbody>
 </table>
 
-<div class="rodape">Conversor de ficheiros para IA — manual de uso · Elaborado con Claude Code</div>
+<div class="rodape">Reductor de tokens — manual de uso · Elaborado con Claude Code</div>
 </body>
 </html>

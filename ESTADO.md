@@ -1,7 +1,7 @@
 # Estado dos dous programas (02/11/2026)
 
 Este repositorio contén dous programas que comparten o mesmo motor:
-o **Anonimizador xurídico** e o **Conversor de arquivos para IA**.
+o **Anonimizador xurídico** e o **Reductor de tokens** (antes «Conversor de arquivos para IA»).
 Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
 
 ## Anonimizador xurídico
@@ -13,7 +13,7 @@ Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
   hai instaladores clásicos de Mac nas ramas `instalador-mac-*`.
 - Pendente: nada urxente.
 
-## Conversor de arquivos para IA
+## Reductor de tokens (antes «Conversor de arquivos para IA»)
 
 - Microsoft Store: **publicado**, Store ID `9NMM4DRL6FCC`, paquete 1.0.0.0.
 - Política de privacidade: `docs/store/politica-privacidad-conversor.md`; ficha: `docs/store/ficha-store-conversor.md`.

@@ -1,4 +1,4 @@
-"""Arranque do Conversor de archivos para IA instalado dende a Microsoft
+"""Arranque do Reductor de tokens instalado dende a Microsoft
 Store (o seu propio paquete MSIX).
 
 O manifesto do paquete lanza `runtime\\python\\pythonw.exe -m

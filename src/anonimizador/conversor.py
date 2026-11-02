@@ -76,7 +76,7 @@ from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 if TYPE_CHECKING:
     from .registry import RexistroCorrespondencias
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 LECTORES_EXTRA: dict[str, Callable] = {ext: formatos.convertir for ext in formatos.EXTENSIONS}
 POSPROCESADOS: list[Callable[[str], str]] = []

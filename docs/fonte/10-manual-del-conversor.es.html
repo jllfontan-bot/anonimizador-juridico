@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Manual del Conversor de archivos para IA</title>
+<title>Manual del Reductor de tokens</title>
 <link rel="stylesheet" href="estilo.css">
 <style>
   pre.md{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-size:11px; line-height:1.45; white-space:pre-wrap; break-inside:avoid; }
@@ -11,7 +11,7 @@
 <body>
 
 <div class="portada">
-  <span class="chip">Manual de uso · Conversor de archivos para IA</span>
+  <span class="chip">Manual de uso · Reductor de tokens</span>
   <h1>Cómo pasar documentos a Markdown para una IA, paso a paso</h1>
   <p class="lede">Guía práctica del programa, con capturas reales de cada pantalla (con datos inventados): cómo elegir los documentos, qué opciones hay para gastar menos tokens, qué lleva cada .md y cómo convertirlos anonimizando, con la misma revisión que el Anonimizador jurídico.</p>
   <div class="meta">
@@ -23,7 +23,7 @@
 
 <h2 class="sec">01 · Para qué sirve</h2>
 <p>Si le das un PDF o un Word a una inteligencia artificial (Claude, ChatGPT, Copilot…), gasta tokens y herramientas en convertirlo a texto, y a veces lo lee mal: cabeceras repetidas en cada página, líneas cortadas, tablas deshechas. El programa hace esa conversión <strong>en tu ordenador</strong> y guarda un archivo <code>.md</code> (Markdown) con el texto limpio, con sus títulos, listas y tablas, listo para pasárselo a la IA.</p>
-<p>Menú Inicio de Windows → <em>Conversor de archivos para IA</em>. El programa se abre en una ventana propia; para cerrarlo, cierra esa ventana. No se conecta a internet ni abre ningún puerto en el ordenador: la ventana llama directamente al programa.</p>
+<p>Menú Inicio de Windows → <em>Reductor de tokens</em>. El programa se abre en una ventana propia; para cerrarlo, cierra esa ventana. No se conecta a internet ni abre ningún puerto en el ordenador: la ventana llama directamente al programa.</p>
 <figure><img src="img/es/conversor/inicio.png" alt="Pantalla inicial" style="max-width:340px"><figcaption>Pantalla inicial: los documentos elegidos, la carpeta de salida y los dos botones, «Convertir» y «Convertir anonimizando».</figcaption></figure>
 
 <h2 class="sec">02 · Convertir sin anonimizar</h2>
@@ -49,6 +49,7 @@
 <ul>
   <li><strong>Un solo .md por carpeta o .zip.</strong> Con una carpeta o un <code>.zip</code>, junta todos los documentos en un solo archivo (<code>expediente.md</code>, con un índice al principio): cómodo para pasarle a la IA un expediente entero de una vez.</li>
   <li><strong>Ahorro para IA</strong> (activado por defecto). Quita las cabeceras y pies de página que se repiten en cada hoja (los deja una vez al principio), une las líneas cortadas y los guiones de final de línea, y marca los títulos, también los de los PDF (anexos, capítulos, artículos). Desactívalo si necesitas el texto línea a línea tal como está en el original.</li>
+  <li><strong>Hojas grandes a un .csv aparte</strong> (novedad de la 1.1; activado por defecto). Las hojas de más de 500 filas no se meten enteras en el <code>.md</code>: se guardan en un <code>.csv</code> junto a él, y el <code>.md</code> lleva solo los nombres de las columnas y la ruta del <code>.csv</code>. La IA lee el <code>.csv</code> solo si lo necesita, y así el <code>.md</code> gasta muchos menos tokens. No se aplica al anonimizar.
   <li><strong>Trocear los .md largos.</strong> Parte los documentos largos en varios <code>.md</code> de un tamaño máximo en tokens (por ejemplo 30.000), con un índice: útil cuando la IA tiene un límite por mensaje.</li>
 </ul>
 
@@ -69,7 +70,7 @@
 origen: sentencia.pdf
 paginas: 3
 anonimizado: no
-convertido: 2026-10-31, Conversor de archivos para IA 1.0.0
+convertido: 2026-10-31, Reductor de tokens 1.1.0
 ---
 
 &lt;!-- cabeceras y pies de página --&gt;
@@ -101,7 +102,7 @@ Juzgado de Primera Instancia. Notificación. Por medio de la presente se comunic
 origen: declaracion.docx
 anonimizado: sí
 revisado: sí
-convertido: 2026-10-31, Conversor de archivos para IA 1.0.0
+convertido: 2026-10-31, Reductor de tokens 1.1.0
 ---
 
 Declaración de PERSONA_000001
@@ -150,6 +151,6 @@ PERSONA_000001, con DNI PERSONA_000001 y teléfono [TELÉFONO], vecina de Lugo, 
   </tbody>
 </table>
 
-<div class="rodape">Conversor de archivos para IA — manual de uso · Elaborado con Claude Code</div>
+<div class="rodape">Reductor de tokens — manual de uso · Elaborado con Claude Code</div>
 </body>
 </html>

@@ -405,7 +405,7 @@ montar_staging_windows() {
     cp "$INSTALADOR/windows/Iniciar-Anonimizador.vbs" "$INSTALADOR/windows/anonimizador.ico" "$stage/"
 }
 
-# $1: anonimizador (por defecto) ou conversor (Conversor de archivos para IA:
+# $1: anonimizador (por defecto) ou conversor (Reductor de tokens:
 # o mesmo árbore co seu lanzador, icona, manual e script NSIS)
 xerar_windows() {
     local app="${1:-anonimizador}"

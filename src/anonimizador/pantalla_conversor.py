@@ -1,4 +1,4 @@
-"""Pantalla de escritorio do Conversor de ficheiros para IA (estudo, fase 2b).
+"""Pantalla de escritorio do Reductor de tokens (estudo, fase 2b).
 
 SEN servidor local: a diferenza do anonimizador (`desktop.py`, que amosa a
 app Flask de `web.py` en 127.0.0.1), aquí pywebview carga o HTML

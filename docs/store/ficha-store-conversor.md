@@ -1,4 +1,4 @@
-# Ficha de la Microsoft Store — Conversor de archivos para IA
+# Ficha de la Microsoft Store — Reductor de tokens
 
 Textos para Partner Center (Store ID `9NMM4DRL6FCC`, nombre reservado el 31/10/2026: hay que
 enviarla a la Store antes de tres meses o se pierde la reserva). Es una **aplicación propia**, distinta
@@ -8,11 +8,15 @@ dos declarados en `instalador/msix/AppxManifest-conversor.xml`, así que Partner
 ficha para cada uno.
 
 ## Antes de enviar
+0. **Versión 1.1.0 (cambio de nombre):** la identidad del paquete NO cambia (sigue siendo
+   «Conversor de archivos para IA» por dentro, `JosLuisLpezFontn.ConversordearchivosparaIA`); solo cambia el
+   nombre visible. Antes de enviar, reservar «Reductor de tokens» en Partner Center y comprobar que
+   la ficha y el `DisplayName` del manifiesto coinciden.
 1. Identidad del paquete (*Product identity* de Partner Center), ya en el manifiesto:
    `JosLuisLpezFontn.ConversordearchivosparaIA`, `CN=D4ECC9E2-BE4E-46B0-A68D-EF12B55919C3`,
    «José Luis López Fontán»; PFN `JosLuisLpezFontn.ConversordearchivosparaIA_90j83w49ny88e`.
 2. Compilar el paquete con el workflow «Paquete MSIX (Microsoft Store)», aplicación `conversor`
-   (o con una etiqueta `msix-conversor-v1.0.0`), y probar en la VM la copia firmada de prueba.
+   (o con una etiqueta `msix-conversor-v1.1.0`), y probar en la VM la copia firmada de prueba.
 3. Subir `Conversor-archivos-IA-<versión>-x64.msix` (artefacto `paquete-msix-store-conversor`).
 
 ## Pricing and availability
@@ -45,7 +49,7 @@ ficha para cada uno.
 
 ## Store listing (es-ES)
 
-**Nombre:** Conversor de archivos para IA
+**Nombre:** Reductor de tokens
 
 **Descripción corta** (≤ 270 caracteres):
 Convierte documentos a Markdown (.md) en tu propio ordenador, con o sin anonimizar, para pasárselos
@@ -53,7 +57,7 @@ a una IA gastando menos tokens: PDF (también escaneados), Word, LibreOffice, ho
 presentaciones, páginas web y correos. Sin internet.
 
 **Descripción:**
-Conversor de archivos para IA pasa tus documentos a Markdown (.md), el formato que las inteligencias artificiales leen mejor y más barato. Si le das un PDF o un Word a una IA, gasta tokens y herramientas en convertirlo, y a veces lo lee mal; con el .md ya hecho, la IA recibe solo el texto, con sus títulos, listas y tablas. Todo se hace en tu ordenador: ni los documentos ni ningún dato salen a internet.
+Reductor de tokens pasa tus documentos a Markdown (.md), el formato que las inteligencias artificiales leen mejor y más barato. Si le das un PDF o un Word a una IA, gasta tokens y herramientas en convertirlo, y a veces lo lee mal; con el .md ya hecho, la IA recibe solo el texto, con sus títulos, listas y tablas. Todo se hace en tu ordenador: ni los documentos ni ningún dato salen a internet.
 
 QUÉ CONVIERTE
 • PDF con texto y escaneados (con OCR), .docx, .odt, .txt e imágenes.
@@ -78,8 +82,9 @@ Interfaz en castellano o gallego. Software libre con doble licencia, a tu elecci
 
 Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic.
 
-**Novedades de esta versión (1.0.0):**
-Primera versión publicada en la Microsoft Store.
+**Novedades de esta versión (1.1.0):**
+Nuevo nombre: «Reductor de tokens» (antes «Conversor de archivos para IA»).
+Las hojas de cálculo de más de 500 filas se guardan en un .csv aparte junto al .md, que lleva solo los nombres de las columnas: la IA lee el .csv únicamente si lo necesita y se gastan muchos menos tokens.
 
 **Características del producto** (hasta 20, una por línea):
 - Convierte a Markdown (.md) en tu ordenador: nada sale a internet
@@ -89,6 +94,7 @@ Primera versión publicada en la Microsoft Store.
 - Quita cabeceras y pies repetidos y une las líneas cortadas
 - Títulos también en los PDF: anexos, capítulos y artículos
 - Troceado de documentos largos y estimación de tokens
+- Hojas grandes a un .csv aparte, con solo las columnas en el .md
 - Modo anonimizado con el motor del Anonimizador jurídico
 - Mismo registro cifrado: el mismo código en los dos programas
 - Revisión de cada documento por defecto, o automático
@@ -111,11 +117,11 @@ progreso, resultado anonimizado, resultado y revisión. Se generan con
 
 ## Store listing (gl-ES)
 
-**Nome:** Conversor de archivos para IA
+**Nome:** Reductor de tokens
 
-(Partner Center só deixa escoller entre os nomes reservados. Para usar «Conversor de ficheiros para
-IA» habería que reservalo tamén e comprobar que a certificación o acepta co `DisplayName` do
-manifesto, que é único para os dous idiomas; o mesmo caso ca «Anonimizador xurídico».)
+(Partner Center só deixa escoller entre os nomes reservados: o nome «Reductor de tokens», igual en
+galego e en castelán, hai que reservalo na Store antes de enviar a 1.1.0 e debe coincidir co
+`DisplayName` do manifesto, que é único para os dous idiomas.)
 
 **Descrición curta** (≤ 270 caracteres):
 Converte documentos a Markdown (.md) no teu propio ordenador, con ou sen anonimizar, para pasarllos
@@ -123,7 +129,7 @@ a unha IA gastando menos tokens: PDF (tamén escaneados), Word, LibreOffice, fol
 presentacións, páxinas web e correos. Sen internet.
 
 **Descrición:**
-Conversor de archivos para IA pasa os teus documentos a Markdown (.md), o formato que as intelixencias artificiais len mellor e máis barato. Se lle dás un PDF ou un Word a unha IA, gasta tokens e ferramentas en convertelo, e ás veces leo mal; co .md xa feito, a IA recibe só o texto, cos seus títulos, listas e táboas. Todo se fai no teu ordenador: nin os documentos nin ningún dato saen a internet.
+Reductor de tokens pasa os teus documentos a Markdown (.md), o formato que as intelixencias artificiais len mellor e máis barato. Se lle dás un PDF ou un Word a unha IA, gasta tokens e ferramentas en convertelo, e ás veces leo mal; co .md xa feito, a IA recibe só o texto, cos seus títulos, listas e táboas. Todo se fai no teu ordenador: nin os documentos nin ningún dato saen a internet.
 
 QUE CONVERTE
 • PDF con texto e escaneados (con OCR), .docx, .odt, .txt e imaxes.
@@ -148,8 +154,9 @@ Interface en castelán ou galego. Software libre con dobre licenza, á túa esco
 
 Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic.
 
-**Novidades desta versión (1.0.0):**
-Primeira versión publicada na Microsoft Store.
+**Novidades desta versión (1.1.0):**
+Novo nome: «Reductor de tokens» (antes «Conversor de ficheiros para IA»).
+As follas de cálculo de máis de 500 filas gárdanse nun .csv á parte canda o .md, que leva só os nomes das columnas: a IA le o .csv unicamente se o precisa e gástanse moitos menos tokens.
 
 **Características do produto** (ata 20, unha por liña):
 - Converte a Markdown (.md) no teu ordenador: nada sae a internet
@@ -159,6 +166,7 @@ Primeira versión publicada na Microsoft Store.
 - Quita cabeceiras e pés repetidos e une as liñas cortadas
 - Títulos tamén nos PDF: anexos, capítulos e artigos
 - Troceado de documentos longos e estimación de tokens
+- Follas grandes a un .csv á parte, cos nomes das columnas no .md
 - Modo anonimizado co motor do Anonimizador jurídico
 - O mesmo rexistro cifrado: o mesmo código nos dous programas
 - Revisión de cada documento por defecto, ou automático

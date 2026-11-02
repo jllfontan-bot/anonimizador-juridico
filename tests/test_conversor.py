@@ -110,7 +110,7 @@ class TestSenAnonimizar(_Base):
 
     def test_nome_do_programa_na_cabeceira(self):
         """Nome decidido polo usuario o 31/10/2026, un por idioma coma `app.nome`."""
-        for lingua, nome in (("es", "Conversor de archivos para IA"), ("gl", "Conversor de ficheiros para IA")):
+        for lingua, nome in (("es", "Reductor de tokens"), ("gl", "Reductor de tokens")):
             with mock.patch.dict(os.environ, {idioma.VARIABLE: lingua}):
                 conversor.converter(str(_docx(self.dir / f"demanda-{lingua}.docx")))
             md = (self.dir / f"demanda-{lingua}.docx.md").read_text(encoding="utf-8")

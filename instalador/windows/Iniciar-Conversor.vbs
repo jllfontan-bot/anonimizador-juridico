@@ -1,4 +1,4 @@
-' Lanzador do Conversor de archivos para IA (Windows, instalador clasico).
+' Lanzador do Reductor de tokens (Windows, instalador clasico).
 '
 ' Arrinca a pantalla do conversor SEN ventana de consola: os accesos
 ' directos apuntan a "wscript.exe" con este ficheiro. (En ASCII a
@@ -21,7 +21,7 @@ pythonw = dirInst & "\runtime\python\pythonw.exe"
 
 If Not fso.FileExists(pythonw) Then
     MsgBox "Non se atopa o programa en:" & vbCrLf & vbCrLf & dirInst & vbCrLf & vbCrLf & _
-           "Volve executar o instalador do Conversor.", 16, "Conversor de archivos para IA"
+           "Volve executar o instalador do Reductor de tokens.", 16, "Reductor de tokens"
     WScript.Quit 1
 End If
 

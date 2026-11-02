@@ -11,7 +11,7 @@ un Chrome, Chromium ou Edge. Ruta propia: variable de contorno CHROME.
   01-caracteristicas-tecnicas-e-seguridade.html -> docs/01-Caracteristicas-tecnicas-e-seguridade.pdf
   02-guia-de-instalacion.html                   -> docs/02-Guia-de-instalacion.pdf
   03-manual-de-uso.html                         -> docs/03-Manual-de-uso.pdf
-  10-manual-do-conversor.html                   -> docs/10-Manual-do-conversor.pdf (Conversor de archivos para IA)
+  10-manual-do-conversor.html                   -> docs/10-Manual-do-conversor.pdf (Reductor de tokens)
   leeme.html                                    -> instalador/LEEME.pdf  (mesmo contido ca instalador/LEEME.txt)
   (en castelán: *.es.html -> docs/es/, e leeme.es.html -> instalador/LEEME.es.pdf, igual ca LEEME.es.txt)
 
@@ -40,7 +40,7 @@ DOCUMENTOS = {
     "06": ("06-novidades.html", RAIZ / "docs" / "06-Novidades-segunda-version-11-outubro-2026.pdf"),
     "07": ("07-novidades.html", RAIZ / "docs" / "07-Novidades-version-12-outubro-2026.pdf"),
     "08": ("08-novidades.html", RAIZ / "docs" / "08-Novidades-version-1.1.1.pdf"),
-    # manual do Conversor de archivos para IA (vai só no seu paquete MSIX)
+    # manual do Reductor de tokens (vai só no seu paquete MSIX)
     "10": ("10-manual-do-conversor.html", RAIZ / "docs" / "10-Manual-do-conversor.pdf"),
     "leeme": ("leeme.html", RAIZ / "instalador" / "LEEME.pdf"),
     # en castelán

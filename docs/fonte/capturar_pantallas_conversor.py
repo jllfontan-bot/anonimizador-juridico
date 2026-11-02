@@ -1,4 +1,4 @@
-"""Fai as capturas da pantalla do Conversor de archivos para IA para o seu
+"""Fai as capturas da pantalla do Reductor de tokens para o seu
 manual, nun idioma.
 
 A páxina é a real (`pantalla_conversor.html()`) e as chamadas da páxina van

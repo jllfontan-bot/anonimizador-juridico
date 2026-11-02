@@ -1,4 +1,4 @@
-# Política de privacidad — Conversor de archivos para IA (aplicación de escritorio)
+# Política de privacidad — Reductor de tokens (aplicación de escritorio)
 
 *[Versión en galego más abajo.](#política-de-privacidade--conversor-de-archivos-para-ia-aplicación-de-escritorio)*
 
@@ -53,7 +53,7 @@ Cualquier cambio de esta política se publicará en esta misma dirección, con s
 
 ---
 
-# Política de privacidade — Conversor de archivos para IA (aplicación de escritorio)
+# Política de privacidade — Reductor de tokens (aplicación de escritorio)
 
 **Última actualización:** 31 de outubro de 2026
 **Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta e de código aberto (EUPL-1.2 ou AGPL-3.0), sen ánimo de lucro.

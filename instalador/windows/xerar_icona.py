@@ -49,7 +49,7 @@ AZUL = (35, 82, 140, 255)
 
 
 def debuxar_conversor() -> Image.Image:
-    """Icona do Conversor de archivos para IA (o seu paquete MSIX): a mesma
+    """Icona do Reductor de tokens (o seu paquete MSIX): a mesma
     folla sobre fondo azul, coas liñas á vista e a marca de Markdown (M e
     frecha cara abaixo) na parte de abaixo."""
     im = Image.new("RGBA", (BASE, BASE), (0, 0, 0, 0))
