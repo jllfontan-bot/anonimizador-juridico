@@ -70,7 +70,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import aforro_ia, copia_md, formatos, idioma, lectura, titulos_pdf
+from . import aforro_ia, copia_md, formatos, idioma, lectura, pdf_estrutura, titulos_pdf
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -391,6 +391,7 @@ def converter(
     cancelar: Callable[[], bool] | None = None,
     revisar: Callable | None = None,
     csv_aparte: bool = True,
+    progreso_paxina: Callable[[int, int], None] | None = None,
 ) -> Resultado:
     """Converte `entrada` (ficheiro, cartafol ou .zip) a .md.
 
@@ -412,11 +413,12 @@ def converter(
     novos, que só se converten sen anonimizar."""
     with tempfile.TemporaryDirectory() as tmp_csv:  # os .csv viven aquí ata a fase de escritura
         return _converter(entrada, Path(tmp_csv), anonimizar, un_so_md, saida, rexistro, data, aforro,
-                          caracteres_por_parte, progreso, cancelar, revisar, csv_aparte)
+                          caracteres_por_parte, progreso, cancelar, revisar, csv_aparte,
+                          progreso_paxina)
 
 
 def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, aforro, caracteres_por_parte,
-               progreso, cancelar, revisar, csv_aparte) -> Resultado:
+               progreso, cancelar, revisar, csv_aparte, progreso_paxina=None) -> Resultado:
     entrada = Path(entrada)
     if anonimizar and rexistro is None:
         raise ValueError("Para anonimizar fai falta o rexistro de correspondencias")
@@ -440,9 +442,16 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
             if csv_aparte and not anonimizar:
                 dir_csv = tmp_csv / str(i)
                 dir_csv.mkdir()
+            def _paxina(feita, total_paxinas):
+                if cancelar is not None and cancelar():  # tamén no medio dun PDF longo
+                    raise Cancelado
+                if progreso_paxina is not None:
+                    progreso_paxina(feita, total_paxinas)
+
             try:
-                convertido, informe = _converter_documento(
-                    doc, anonimizar, rexistro, revisar if anonimizar else None, dir_csv)
+                with pdf_estrutura.progreso_paxinas(_paxina):
+                    convertido, informe = _converter_documento(
+                        doc, anonimizar, rexistro, revisar if anonimizar else None, dir_csv)
             except Cancelado:
                 raise
             except Exception as e:  # noqa: BLE001 -- un documento roto non para o lote

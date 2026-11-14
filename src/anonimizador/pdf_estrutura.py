@@ -30,6 +30,8 @@ Deseño (paralelo ao de .docx/.odt, pero a nivel de PALABRA en vez de
 
 from __future__ import annotations
 
+import contextlib
+import contextvars
 import difflib
 import re
 import shutil
@@ -479,6 +481,26 @@ def _puntuacion_ocr(datos: dict) -> int:
     return total
 
 
+# Máximo por páxina para Tesseract: se se cuelga (páxina enorme, imaxe
+# corrompida), `RuntimeError` -> ese documento sae coma erro e o lote segue,
+# en vez de quedar a barra parada para sempre.
+_TIMEOUT_OCR_PAXINA = 180
+
+# `callback(paxina_feita, total)` chamado ANTES de ler cada páxina do PDF
+# (o OCR tarda segundos por páxina e sen isto a barra non se move en todo
+# o documento). Non cambia a API: `conversor` pono con `progreso_paxinas`.
+_PROGRESO_PAXINAS = contextvars.ContextVar("progreso_paxinas", default=None)
+
+
+@contextlib.contextmanager
+def progreso_paxinas(callback):
+    token = _PROGRESO_PAXINAS.set(callback)
+    try:
+        yield
+    finally:
+        _PROGRESO_PAXINAS.reset(token)
+
+
 def _ocr_do_render(pagina: "fitz.Page", matriz: "fitz.Matrix", clip) -> tuple:
     pix = pagina.get_pixmap(matrix=matriz, clip=clip)
     if pix.width < 2 or pix.height < 2:
@@ -486,7 +508,7 @@ def _ocr_do_render(pagina: "fitz.Page", matriz: "fitz.Matrix", clip) -> tuple:
     imaxe_proc = _preprocesar(Image.frombytes("RGB", (pix.width, pix.height), pix.samples))
     return pix, pytesseract.image_to_data(
         imaxe_proc, lang=_idioma_dispoñible(), config=_CONFIG_TESSERACT,
-        output_type=Output.DICT,
+        output_type=Output.DICT, timeout=_TIMEOUT_OCR_PAXINA,
     )
 
 
@@ -895,7 +917,10 @@ def cargar_pdf_estruturado(ruta: str | None, documento: "fitz.Document | None" =
     paxinas = []
     papeis_herdados = None  # papeis das columnas dunha táboa que pode continuar
     filas = 0
-    for pagina in documento:
+    aviso = _PROGRESO_PAXINAS.get()
+    for i, pagina in enumerate(documento):
+        if aviso is not None:
+            aviso(i, len(documento))
         paxina = _extraer_paxina(pagina)
         paxina.celas, papeis_herdados, filas_usadas = taboas_pdf.celas_da_paxina(
             pagina, paxina.texto, paxina.palabras, papeis_herdados, filas

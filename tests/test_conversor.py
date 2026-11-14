@@ -617,6 +617,29 @@ class TestProgresoCancelarRevisar(_Base):
         conversor.converter(str(self.raiz), progreso=lambda *a: chamadas.append(a))
         self.assertEqual(chamadas, [(0, 2, "a.docx"), (1, 2, "b.odt"), (2, 2, "")])
 
+    def _pdf_paxinas(self, ruta, n):
+        import fitz
+
+        d = fitz.open()
+        for i in range(n):
+            d.new_page().insert_text((72, 72), f"Texto da paxina {i} do documento de proba.")
+        d.save(str(ruta))
+        return ruta
+
+    def test_progreso_por_paxina_dentro_dun_pdf(self):
+        pdf = self._pdf_paxinas(self.dir / "tres.pdf", 3)
+        paxinas = []
+        conversor.converter(str(pdf), progreso_paxina=lambda *a: paxinas.append(a))
+        self.assertEqual(paxinas, [(0, 3), (1, 3), (2, 3)])
+
+    def test_cancelar_no_medio_dun_pdf(self):
+        pdf = self._pdf_paxinas(self.dir / "tres.pdf", 3)
+        paxinas = []
+        with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(pdf), progreso_paxina=lambda *a: paxinas.append(a),
+                                cancelar=lambda: len(paxinas) >= 1)
+        self.assertEqual(len(paxinas), 1)
+
     def test_cancelar_non_escribe_nada(self):
         chamadas = []
         with self.assertRaises(conversor.Cancelado):

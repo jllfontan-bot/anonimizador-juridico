@@ -291,8 +291,12 @@ class Api:
                     self._emitir("progreso", {"entrada": i, "entradas": len(rutas), "feito": feito,
                                               "total": n, "nome": nome})
 
+                def paxina(feita, n_paxinas, i=i):
+                    self._emitir("paxina", {"entrada": i, "entradas": len(rutas), "pagina": feita,
+                                            "paxinas": n_paxinas})
+
                 resultado = conversor.converter(
-                    ruta, rexistro=self._rexistro, progreso=progreso, cancelar=self._cancelado.is_set,
+                    ruta, rexistro=self._rexistro, progreso=progreso, progreso_paxina=paxina, cancelar=self._cancelado.is_set,
                     revisar=self._revisar if anonimizar else None, **argumentos,
                 )
                 _sumar(total, resultado, prefixo=Path(ruta).name if len(rutas) > 1 else "")

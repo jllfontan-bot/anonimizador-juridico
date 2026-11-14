@@ -284,22 +284,35 @@ async function converter(anonimizar) {
   amosar("progreso");
 }
 
+// Progreso: documento a documento (`progreso`) e, dentro dun PDF, páxina a páxina (`paxina`).
+let ultimoProgreso = null, ultimaPaxina = null;
+function pintarProgreso() {
+  const datos = ultimoProgreso;
+  if (!datos) return;
+  let parte = datos.total ? datos.feito / datos.total : 1;
+  if (ultimaPaxina && datos.total && ultimaPaxina.paxinas > 0) {
+    parte += (ultimaPaxina.pagina / ultimaPaxina.paxinas) / datos.total;
+  }
+  const pct = Math.floor(100 * (datos.entrada + Math.min(parte, 1)) / datos.entradas);
+  $("barra").style.width = pct + "%";
+  $("porcentaxe").textContent = pct + " %";
+  $("ficheiro-actual").textContent = datos.nome;
+  let detalle = datos.total
+    ? t("progreso_doc", {feito: Math.min(datos.feito + 1, datos.total), total: datos.total})
+      + (datos.entradas > 1 ? " · " + t("progreso_entrada", {i: datos.entrada + 1, n: datos.entradas}) : "")
+    : "";
+  if (ultimaPaxina && ultimaPaxina.paxinas > 1) {
+    detalle += (detalle ? " · " : "") + t("progreso_paxina", {pagina: ultimaPaxina.pagina + 1, paxinas: ultimaPaxina.paxinas});
+  }
+  $("detalle-progreso").textContent = detalle;
+  amosar("progreso");
+}
+
 // Eventos que manda Python (`Api._emitir`).
 function recibir(evento, datos) {
   if (evento === "soltadas") { engadirEntradas(datos); return; }
-  if (evento === "progreso") {
-    const parte = datos.total ? datos.feito / datos.total : 1;
-    const pct = Math.floor(100 * (datos.entrada + parte) / datos.entradas);
-    $("barra").style.width = pct + "%";
-    $("porcentaxe").textContent = pct + " %";
-    $("ficheiro-actual").textContent = datos.nome;
-    $("detalle-progreso").textContent = datos.total
-      ? t("progreso_doc", {feito: Math.min(datos.feito + 1, datos.total), total: datos.total})
-        + (datos.entradas > 1 ? " · " + t("progreso_entrada", {i: datos.entrada + 1, n: datos.entradas}) : "")
-      : "";
-    amosar("progreso");
-    return;
-  }
+  if (evento === "progreso") { ultimoProgreso = datos; ultimaPaxina = null; pintarProgreso(); return; }
+  if (evento === "paxina") { ultimaPaxina = datos; pintarProgreso(); return; }
   if (evento === "revisar") { ultimaRevision = datos; pintarRevision(datos); amosar("revision"); return; }
   ultimaRevision = null;
   ultimoEvento = evento; ultimoResultado = datos;

@@ -359,6 +359,7 @@
  "pantalla_conversor.progreso_titulo": "Convertendo…",
  "pantalla_conversor.progreso_doc": "Documento {feito} de {total}",
  "pantalla_conversor.progreso_entrada": "entrada {i} de {n}",
+ "pantalla_conversor.progreso_paxina": "Páxina {pagina} de {paxinas}",
  "pantalla_conversor.cancelar": "Cancelar",
  "pantalla_conversor.cancelando": "Cancelando…",
  "pantalla_conversor.revision_titulo": "Revisión: {nome}",
