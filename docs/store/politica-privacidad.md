@@ -2,7 +2,7 @@
 
 *[Versión en galego más abajo.](#política-de-privacidade--anonimizador-jurídico-aplicación-de-escritorio)*
 
-**Última actualización:** 15 de octubre de 2026
+**Última actualización:** 15 de noviembre de 2026
 **Desarrollador:** José Luis López Fontán (desarrollador particular). Aplicación gratuita y de código abierto (EUPL-1.2 o AGPL-3.0), sin ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
@@ -17,11 +17,11 @@ Sustituye los nombres, DNI y demás datos personales de los documentos que el us
 - La lectura de los documentos, el reconocimiento de texto (OCR) y la detección de datos personales funcionan sin conexión: todo lo necesario va dentro del paquete instalado.
 - La interfaz es una ventana propia del programa (componente Microsoft Edge WebView2 de Windows) que solo muestra páginas del propio programa, servidas por un servidor interno que escucha únicamente en `127.0.0.1`: no es accesible desde otros equipos.
 - La aplicación no envía a internet ni los documentos, ni su contenido, ni los resultados, ni ningún otro dato.
-- Lo único que se abre fuera del programa son los dos enlaces de la página «Acerca de» (código fuente y texto de la licencia), en el navegador del usuario y solo si los pulsa; esa visita se rige por las condiciones de cada sitio web.
+- Lo único que se abre fuera del programa, y solo si el usuario lo pulsa, es el enlace al código fuente de la página «Acerca de», en su navegador (esa visita se rige por las condiciones del sitio web), y el manual de uso (un PDF del propio paquete), en el visor de PDF del sistema.
 
 ## Qué se guarda en el ordenador
 
-La aplicación lee únicamente los archivos y carpetas que el usuario le indica y guarda:
+La aplicación lee únicamente los archivos, carpetas y `.zip` que el usuario le indica (para elegirlos, muestra el contenido de las carpetas de este ordenador por las que navega) y guarda:
 
 - **Los documentos anonimizados**, junto al original o en la carpeta de salida que elija el usuario. El documento original nunca se modifica ni se borra.
 - En la carpeta **`Documentos\Anonimizador`** del usuario:
@@ -58,7 +58,7 @@ Cualquier cambio de esta política se publicará en esta misma dirección, con s
 
 # Política de privacidade — Anonimizador jurídico (aplicación de escritorio)
 
-**Última actualización:** 15 de outubro de 2026
+**Última actualización:** 15 de novembro de 2026
 **Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta e de código aberto (EUPL-1.2 ou AGPL-3.0), sen ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
@@ -73,11 +73,11 @@ Substitúe os nomes, DNI e demais datos persoais dos documentos que o usuario es
 - A lectura dos documentos, o recoñecemento de texto (OCR) e a detección de datos persoais funcionan sen conexión: todo o necesario vai dentro do paquete instalado.
 - A interface é unha xanela propia do programa (compoñente Microsoft Edge WebView2 de Windows) que só amosa páxinas do propio programa, servidas por un servidor interno que escoita unicamente en `127.0.0.1`: non é accesible dende outros equipos.
 - A aplicación non envía a internet nin os documentos, nin o seu contido, nin os resultados, nin ningún outro dato.
-- O único que se abre fóra do programa son as dúas ligazóns da páxina «Acerca de» (código fonte e texto da licenza), no navegador do usuario e só se as preme; esa visita réxese polas condicións de cada sitio web.
+- O único que se abre fóra do programa, e só se o usuario o preme, é a ligazón ao código fonte da páxina «Acerca de», no seu navegador (esa visita réxese polas condicións do sitio web), e o manual de uso (un PDF do propio paquete), no visor de PDF do sistema.
 
 ## Que se garda no ordenador
 
-A aplicación le unicamente os ficheiros e cartafoles que o usuario lle indica e garda:
+A aplicación le unicamente os ficheiros, cartafoles e `.zip` que o usuario lle indica (para escollelos, amosa o contido dos cartafoles deste ordenador polos que navega) e garda:
 
 - **Os documentos anonimizados**, xunto ao orixinal ou no cartafol de saída que escolla o usuario. O documento orixinal nunca se modifica nin se borra.
 - No cartafol **`Documentos\Anonimizador`** do usuario:

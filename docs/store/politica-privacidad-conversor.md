@@ -1,8 +1,8 @@
 # Política de privacidad — Reductor de tokens (aplicación de escritorio)
 
-*[Versión en galego más abajo.](#política-de-privacidade--conversor-de-archivos-para-ia-aplicación-de-escritorio)*
+*[Versión en galego más abajo.](#política-de-privacidade--reductor-de-tokens-aplicación-de-escritorio)*
 
-**Última actualización:** 31 de octubre de 2026
+**Última actualización:** 15 de noviembre de 2026
 **Desarrollador:** José Luis López Fontán (desarrollador particular). Aplicación gratuita y de código abierto (EUPL-1.2 o AGPL-3.0), sin ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
@@ -17,7 +17,7 @@ Convierte a Markdown (`.md`) los documentos que el usuario elige, con o sin anon
 - La lectura de los documentos, el reconocimiento de texto (OCR) y, en el modo anonimizado, la detección de datos personales funcionan sin conexión: todo lo necesario va dentro del paquete instalado.
 - La interfaz es una ventana propia del programa (componente Microsoft Edge WebView2 de Windows) que llama directamente al programa, **sin servidor**: no hay ningún puerto abierto al que pueda conectarse otro programa o equipo.
 - La aplicación no envía a internet ni los documentos, ni su contenido, ni los `.md` resultantes, ni ningún otro dato.
-- Lo único que se abre fuera del programa es el enlace al código fuente de la página «Acerca de», en el navegador del usuario y solo si lo pulsa, y el manual de uso (un PDF del propio paquete), en el visor de PDF del sistema.
+- Lo único que se abre fuera del programa, y solo si el usuario lo pulsa, es: el enlace al código fuente de «Acerca de», en su navegador; el manual de uso (un PDF del propio paquete), en el visor de PDF del sistema; y la carpeta de los resultados («Abrir carpeta»), en el Explorador de Windows.
 
 ## Los .md sin anonimizar
 
@@ -37,6 +37,8 @@ Si la carpeta Documentos del usuario se sincroniza con OneDrive u otro servicio 
 
 Estos datos **no se borran al desinstalar** la aplicación, a propósito: el registro lo usa también el Anonimizador jurídico, y sin él ya no se podría saber a quién corresponde cada código. Para eliminarlos, el usuario puede borrar la carpeta `Documentos\Anonimizador` y, en el Administrador de credenciales de Windows (Credenciales de Windows), las entradas que llevan «anonimizador-xuridico» en el nombre.
 
+Para leer un `.zip`, y para preparar los `.csv` de las hojas grandes, el programa usa una carpeta temporal del sistema que borra al terminar. Si en una carpeta elegida hay un `.zip`, se abre también (solo ese nivel: un `.zip` dentro de otro no se abre, y una conversión descomprime como mucho 2 GiB), y sus `.md` se guardan en una carpeta `<nombre del zip>-md` a su lado.
+
 ## Responsabilidad sobre los datos de los documentos
 
 Los documentos que se convierten pueden contener datos personales de terceros. **El usuario (o la organización para la que trabaja) es el responsable del tratamiento** de esos datos conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD): decide qué documentos convierte, en qué modo, a quién pasa los `.md` y cuánto tiempo los conserva. El desarrollador no accede a esos datos ni los trata por cuenta de nadie.
@@ -55,7 +57,7 @@ Cualquier cambio de esta política se publicará en esta misma dirección, con s
 
 # Política de privacidade — Reductor de tokens (aplicación de escritorio)
 
-**Última actualización:** 31 de outubro de 2026
+**Última actualización:** 15 de novembro de 2026
 **Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta e de código aberto (EUPL-1.2 ou AGPL-3.0), sen ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
@@ -70,7 +72,7 @@ Converte a Markdown (`.md`) os documentos que o usuario escolle, con ou sen anon
 - A lectura dos documentos, o recoñecemento de texto (OCR) e, no modo anonimizado, a detección de datos persoais funcionan sen conexión: todo o necesario vai dentro do paquete instalado.
 - A interface é unha xanela propia do programa (compoñente Microsoft Edge WebView2 de Windows) que chama directamente ao programa, **sen servidor**: non hai ningún porto aberto ao que se poida conectar outro programa ou equipo.
 - A aplicación non envía a internet nin os documentos, nin o seu contido, nin os `.md` resultantes, nin ningún outro dato.
-- O único que se abre fóra do programa é a ligazón ao código fonte da páxina «Acerca de», no navegador do usuario e só se a preme, e o manual de uso (un PDF do propio paquete), no visor de PDF do sistema.
+- O único que se abre fóra do programa, e só se o usuario o preme, é: a ligazón ao código fonte de «Acerca de», no seu navegador; o manual de uso (un PDF do propio paquete), no visor de PDF do sistema; e o cartafol dos resultados («Abrir cartafol»), no Explorador de Windows.
 
 ## Os .md sen anonimizar
 
@@ -89,6 +91,8 @@ A aplicación le unicamente os ficheiros, cartafoles e `.zip` que o usuario lle 
 Se o cartafol Documentos do usuario se sincroniza con OneDrive ou outro servizo na nube, ese servizo copiará tamén estes ficheiros: faino o sistema, non a aplicación, e o rexistro viaxa cifrado (a clave non está nese cartafol).
 
 Estes datos **non se borran ao desinstalar** a aplicación, a propósito: o rexistro úsao tamén o Anonimizador jurídico, e sen el xa non se podería saber a quen corresponde cada código. Para eliminalos, o usuario pode borrar o cartafol `Documentos\Anonimizador` e, no Administrador de credenciais de Windows (Credenciais de Windows), as entradas que levan «anonimizador-xuridico» no nome.
+
+Para ler un `.zip`, e para preparar os `.csv` das follas grandes, o programa usa un cartafol temporal do sistema que borra ao rematar. Se nun cartafol escollido hai un `.zip`, ábrese tamén (só ese nivel: un `.zip` dentro doutro non se abre, e unha conversión descomprime como moito 2 GiB), e os seus `.md` gárdanse nun cartafol `<nome do zip>-md` ao seu carón.
 
 ## Responsabilidade sobre os datos dos documentos
 

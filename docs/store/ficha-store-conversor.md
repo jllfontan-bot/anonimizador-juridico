@@ -34,7 +34,7 @@ ficha para cada uno.
   `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md`.
 - Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico
 - Contacto de soporte: jllfontan@gmail.com
-- La aplicación no recoge datos personales; no requiere cuenta; no tiene publicidad.
+- La aplicación trata en local los datos personales de los documentos (no los recoge ni los envía): en Partner Center, «Sí» a información personal y la URL de la política, como en el Anonimizador. No requiere cuenta; no tiene publicidad.
 
 ## Age ratings (cuestionario IARC)
 - Categoría: **Aplicación** (no juego).
@@ -57,7 +57,7 @@ a una IA gastando menos tokens: PDF (también escaneados), Word, LibreOffice, ho
 presentaciones, páginas web y correos. Sin internet.
 
 **Descripción:**
-Reductor de tokens pasa tus documentos a Markdown (.md), el formato que las inteligencias artificiales leen mejor y más barato. Si le das un PDF o un Word a una IA, gasta tokens y herramientas en convertirlo, y a veces lo lee mal; con el .md ya hecho, la IA recibe solo el texto, con sus títulos, listas y tablas. Todo se hace en tu ordenador: ni los documentos ni ningún dato salen a internet.
+Reductor de tokens pasa tus documentos a Markdown (.md), un formato que las inteligencias artificiales leen bien y con menos tokens. Si le das un PDF o un Word a una IA, gasta tokens y herramientas en convertirlo, y a veces lo lee mal; con el .md ya hecho, la IA recibe solo el texto, con sus títulos, listas y tablas. Todo se hace en tu ordenador: ni los documentos ni ningún dato salen a internet.
 
 QUÉ CONVIERTE
 • PDF con texto y escaneados (con OCR), .docx, .odt, .txt e imágenes.
@@ -72,7 +72,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON O SIN ANONIMIZAR
 • Convertir sin anonimizar: el .md conserva los datos personales y el programa lo avisa con claridad, porque al pasarlo a una IA en línea esos datos salen del equipo.
-• Convertir anonimizando: usa el mismo motor que el Anonimizador jurídico (nombres, DNI y demás datos personales pasan a códigos) y el mismo registro cifrado, de modo que una persona recibe el mismo código en los dos programas. Por defecto revisas cada documento antes de guardarlo; si prefieres el modo automático, el .md lo indica (revisado: no) y los documentos con más riesgo pasan igual a revisión.
+• Convertir anonimizando: usa el mismo motor que el Anonimizador jurídico (nombres, DNI y demás datos personales pasan a códigos) y el mismo registro cifrado, de modo que una persona recibe el mismo código en los dos programas. Por defecto revisas cada documento antes de guardarlo. En modo automático no se detiene: cada .md lo indica (revisado: no) y, al terminar, el resumen lista los documentos con posibles fugas, con un botón «Revisar» para cada uno. Revisa siempre todos los .md antes de usarlos: ninguna detección automática lo encuentra todo.
 • Las hojas de cálculo, presentaciones, páginas web y correos solo se convierten sin anonimizar, hasta que cada formato tenga sus propias pruebas de fugas.
 
 TODO EN LOCAL, SIN PUERTOS ABIERTOS
@@ -82,9 +82,8 @@ Interfaz en castellano o gallego. Software libre con doble licencia, a tu elecci
 
 Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic.
 
-**Novedades de esta versión (1.1.0):**
-Nuevo nombre: «Reductor de tokens» (antes «Conversor de archivos para IA»).
-Las hojas de cálculo de más de 500 filas se guardan en un .csv aparte junto al .md, que lleva solo los nombres de las columnas: la IA lee el .csv únicamente si lo necesita y se gastan muchos menos tokens.
+**Novedades de esta versión (1.2.0):**
+Un .zip dentro de una carpeta también se convierte (solo ese nivel, hasta 2 GiB descomprimidos por conversión), y sus .md quedan en una carpeta «<nombre>-md» a su lado. En modo anonimizado automático la conversión ya no se detiene: al final verás los documentos con posibles fugas y podrás revisarlos uno a uno con el botón «Revisar». Correcciones en la detección de datos personales (por ejemplo, en las tablas de titulares del Catastro).
 
 **Características del producto** (hasta 20, una por línea):
 - Convierte a Markdown (.md) en tu ordenador: nada sale a internet
@@ -129,7 +128,7 @@ a unha IA gastando menos tokens: PDF (tamén escaneados), Word, LibreOffice, fol
 presentacións, páxinas web e correos. Sen internet.
 
 **Descrición:**
-Reductor de tokens pasa os teus documentos a Markdown (.md), o formato que as intelixencias artificiais len mellor e máis barato. Se lle dás un PDF ou un Word a unha IA, gasta tokens e ferramentas en convertelo, e ás veces leo mal; co .md xa feito, a IA recibe só o texto, cos seus títulos, listas e táboas. Todo se fai no teu ordenador: nin os documentos nin ningún dato saen a internet.
+Reductor de tokens pasa os teus documentos a Markdown (.md), un formato que as intelixencias artificiais len ben e con menos tokens. Se lle dás un PDF ou un Word a unha IA, gasta tokens e ferramentas en convertelo, e ás veces leo mal; co .md xa feito, a IA recibe só o texto, cos seus títulos, listas e táboas. Todo se fai no teu ordenador: nin os documentos nin ningún dato saen a internet.
 
 QUE CONVERTE
 • PDF con texto e escaneados (con OCR), .docx, .odt, .txt e imaxes.
@@ -144,7 +143,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON OU SEN ANONIMIZAR
 • Converter sen anonimizar: o .md conserva os datos persoais e o programa avísao con claridade, porque ao pasalo a unha IA en liña eses datos saen do equipo.
-• Converter anonimizando: usa o mesmo motor ca o Anonimizador jurídico (nomes, DNI e demais datos persoais pasan a códigos) e o mesmo rexistro cifrado, de modo que unha persoa recibe o mesmo código nos dous programas. Por defecto revisas cada documento antes de gardalo; se prefires o modo automático, o .md indícao (revisado: non) e os documentos con máis risco pasan igual a revisión.
+• Converter anonimizando: usa o mesmo motor ca o Anonimizador jurídico (nomes, DNI e demais datos persoais pasan a códigos) e o mesmo rexistro cifrado, de modo que unha persoa recibe o mesmo código nos dous programas. Por defecto revisas cada documento antes de gardalo. En modo automático non se detén: cada .md indícao (revisado: non) e, ao rematar, o resumo lista os documentos con posibles fugas, cun botón «Revisar» para cada un. Revisa sempre todos os .md antes de usalos: ningunha detección automática o atopa todo.
 • As follas de cálculo, presentacións, páxinas web e correos só se converten sen anonimizar, ata que cada formato teña as súas propias probas de fugas.
 
 TODO EN LOCAL, SEN PORTOS ABERTOS
@@ -154,9 +153,8 @@ Interface en castelán ou galego. Software libre con dobre licenza, á túa esco
 
 Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic.
 
-**Novidades desta versión (1.1.0):**
-Novo nome: «Reductor de tokens» (antes «Conversor de ficheiros para IA»).
-As follas de cálculo de máis de 500 filas gárdanse nun .csv á parte canda o .md, que leva só os nomes das columnas: a IA le o .csv unicamente se o precisa e gástanse moitos menos tokens.
+**Novidades desta versión (1.2.0):**
+Un .zip dentro dun cartafol tamén se converte (só ese nivel, ata 2 GiB descomprimidos por conversión), e os seus .md quedan nun cartafol «<nome>-md» ao seu carón. En modo anonimizado automático a conversión xa non se detén: ao final verás os documentos con posibles fugas e poderás revisalos un a un co botón «Revisar». Correccións na detección de datos persoais (por exemplo, nas táboas de titulares do Catastro).
 
 **Características do produto** (ata 20, unha por liña):
 - Converte a Markdown (.md) no teu ordenador: nada sae a internet

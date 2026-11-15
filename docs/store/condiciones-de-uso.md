@@ -2,7 +2,7 @@
 
 *[Versión en galego más abajo.](#condicións-de-uso--anonimizador-jurídico)*
 
-**Última actualización:** 15 de octubre de 2026
+**Última actualización:** 25 de octubre de 2026
 **Desarrollador:** José Luis López Fontán (desarrollador particular). Aplicación gratuita, sin ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
@@ -55,7 +55,7 @@ Cualquier cambio de estas condiciones se publicará en esta misma dirección, co
 
 # Condicións de uso — Anonimizador jurídico
 
-**Última actualización:** 15 de outubro de 2026
+**Última actualización:** 25 de outubro de 2026
 **Desenvolvedor:** José Luis López Fontán (desenvolvedor particular). Aplicación gratuíta, sen ánimo de lucro.
 **Contacto:** jllfontan@gmail.com
 
