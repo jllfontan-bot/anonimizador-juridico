@@ -75,6 +75,29 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
   podería enviarse antes que o Reductor (o informe explica por que); o Reductor debería agardar polas súas condicións.
 - Pendente menor: recapturar a pantalla de resultado do manual do Reductor (o texto cambiou) e a copia `NOVEDADES`.
 
+## Para a seguinte versión: anonimizar os formatos novos do Reductor (decidido 15/11/2026)
+
+Decisión de José Luis: a **1.2.0 sae como está** (as follas, presentacións, `.html` e `.eml`
+seguen convertíndose só SEN anonimizar; a ficha, as condicións e a valoración xurídica xa o din).
+Traballo apuntado para a versión seguinte, non para esta:
+
+- **Que**: facer que o motor anonimice `.xlsx/.ods/.csv`, `.pptx/.odp`, `.html` e `.eml`. Hoxe
+  `conversor.py` (~167-173) omíteos con `sen_proba_de_fugas` e `formatos.EXTENSIONS_SO_SEN_ANONIMIZAR`
+  inclúe todos.
+- **Mapa**: `src/anonimizador/formatos/ESCONDITES.md` (columna «que hai que facer»). Entra no `.md`
+  e hai que anonimizalo: comentarios e notas de cela, notas do orador, URL de ligazóns http(s)/mailto,
+  nomes de follas e diapositivas, cabeceiras de correo (De/Para/Asunto), o `.csv` á parte das follas
+  grandes e os nomes de arquivo e cartafol. O que hoxe non se le (metadatos, comentarios con fíos,
+  embeddings) debe seguir fóra.
+- **Como**: formato a formato (ou por familia: follas / presentacións / web+correo), cada un cos seus
+  tests de fugas (datos inventados en cada escondite -> ningún no `.md` nin no `.csv`). Un formato
+  só sae de `EXTENSIONS_SO_SEN_ANONIMIZAR` cando os seus tests pasan.
+- **Sesións**: Opus / esforzo alto (risco de fugas), unha por familia, en rama propia desde `main`.
+- **Ao publicalo cambian**: `docs/store/ficha-store-conversor.md` (es ~76, gl ~148: «só se convirten
+  sen anonimizar»), a diferenza B das condicións do Reductor, a sección 4.1 da valoración xurídica
+  (`~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`), e unha **valoración xurídica
+  nova** antes de enviar á Store.
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.
