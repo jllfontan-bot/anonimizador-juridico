@@ -881,19 +881,243 @@ def listar_ficheiros_soportados(cartafol: str) -> tuple[list, list]:
     canda o orixinal), senón se anonimizarían as propias copias xa
     anonimizadas e o cartafol encheríase de `.anonimizado.anonimizado`.
     O mesmo coas copias Markdown (`demanda.anonimizado.pdf.md`). Van a
-    `omitidos`."""
+    `omitidos`.
+
+    Os `.zip` van en `soportados` (`EXTENSIONS_ENTRADA`): quen procesa o
+    lote ábreos con `preparar_zip`/`gardar_zip_preparado`; un
+    `.anonimizado.zip` anterior vai a `omitidos` coma os demais."""
     raiz = Path(cartafol)
     soportados, omitidos = [], []
     for ruta in sorted(raiz.rglob("*")):
         if ruta.is_dir():
             continue
         stem = ruta.stem.lower()
-        if (ruta.suffix.lower() in EXTENSIONS_SOPORTADAS and not stem.endswith(".anonimizado")
+        if (ruta.suffix.lower() in EXTENSIONS_ENTRADA and not stem.endswith(".anonimizado")
                 and not _COPIA_MD_ANTERIOR.search(stem)):
             soportados.append(str(ruta))
         else:
             omitidos.append(str(ruta))
     return soportados, omitidos
+
+
+# Un .zip (dado directamente ou atopado dentro dun cartafol) procésase en dúas
+# fases: `preparar_zip` anonimiza o CONTIDO de cada documento a un temporal, no
+# seu sitio da orde do lote; `gardar_zip_preparado` pon despois os nomes
+# (entradas, cartafoles internos) e escribe o zip de saída. Quen procesa un
+# cartafol chama á segunda ao rematar o lote enteiro: así un nome de persoa no
+# nome do zip ou dun cartafol interno nunca crea un código no rexistro ANTES
+# de que apareza no contido dun documento posterior (os códigos e o aviso de
+# posible homónimo saen igual ca sen o zip -- ver `nome_ficheiro_anonimizado`).
+
+MAX_DESCOMPRIMIDO = 2 * 1024**3  # bytes que un lote descomprime en total dos .zip (contra zip bombs)
+EXTENSIONS_ENTRADA = (*EXTENSIONS_SOPORTADAS, ".zip")  # o que se procesa dentro dun cartafol
+
+
+class ZipRexeitado(Exception):
+    """Un .zip que non se abre enteiro: `motivo` é "zip_demasiado_grande",
+    "zip_cifrado" (con contrasinal) ou "zip_ilexible" (danado). Non se
+    escribe nada del, nin a medias."""
+
+    def __init__(self, motivo: str):
+        super().__init__(motivo)
+        self.motivo = motivo
+
+
+class LimiteDescompresion:
+    """Bytes que aínda se poden descomprimir neste lote (compartido por
+    todos os .zip dun mesmo cartafol)."""
+
+    def __init__(self, maximo: int | None = None):
+        self.queda = MAX_DESCOMPRIMIDO if maximo is None else maximo
+
+
+def _ruta_segura_zip(nome: str) -> PurePosixPath:
+    """Ruta dunha entrada dun .zip sen `..`, raíz nin unidade (`C:`): os
+    nomes do zip de saída saen desta ruta, así que un `../../x.pdf` nunca
+    leva a que, ao descomprimir o zip anonimizado, algo caia fóra do seu
+    cartafol."""
+    partes = [p for p in nome.replace("\\", "/").split("/") if p not in ("", ".", "..") and not p.endswith(":")]
+    return PurePosixPath(*partes) if partes else PurePosixPath("_")
+
+
+class ZipPreparado:
+    """Contido xa anonimizado dun .zip, en temporais, á espera dos nomes
+    (`gardar_zip_preparado`). `limpar()` borra os temporais."""
+
+    def __init__(self, ruta_entrada: str):
+        self.ruta_entrada = ruta_entrada
+        self._tmp = DirectorioTemporal()
+        self.dir = Path(self._tmp.name)
+        self.entradas = []  # (nome orixinal, ruta segura, extensión de saída, ficheiro anonimizado, copia .md ou None, informe)
+        self.omitidos = []  # nomes orixinais das entradas que NON van no zip de saída
+        self.motivos = {}  # nome orixinal -> motivo da omisión
+
+    def omitir(self, nome: str, motivo: str) -> None:
+        self.omitidos.append(nome)
+        self.motivos[nome] = motivo
+
+    @property
+    def informes(self) -> dict:
+        return {nome: informe for nome, _, _, _, _, informe in self.entradas}
+
+    def persoas(self) -> list:
+        """Persoas de todos os documentos do zip (para os nomes)."""
+        return [p for *_, informe in self.entradas for p in informe["persoas"]]
+
+    def limpar(self) -> None:
+        self._tmp.cleanup()
+
+
+def preparar_zip(
+    ruta_entrada: str,
+    rexistro: RexistroCorrespondencias,
+    ficheiro_config: str = _CONFIG_POR_DEFECTO,
+    copia_md: bool = False,
+    limite: LimiteDescompresion | None = None,
+) -> ZipPreparado:
+    """Fase 1 dun .zip: le e anonimiza o CONTIDO de cada documento soportado
+    (.pdf, .docx, .odt, .txt, .md e imaxes) a temporais. Os nomes, despois
+    (`gardar_zip_preparado`).
+
+    Primeiro descomprímese todo (e compróbase): un zip danado, con
+    contrasinal ou que descomprimiría máis do que queda en `limite` lanza
+    `ZipRexeitado` sen anonimizar nada. Despois, un documento concreto que
+    non se pode ler ou anonimizar queda fóra do zip de saída (omitido, co
+    motivo), sen parar os demais. Non van nunca no zip de saída: o que non
+    se pode analizar (`formato`), os metadatos de macOS (`__MACOSX/`,
+    `._*`) e un .zip dentro do zip (`zip_dentro_de_zip`: só se abre un
+    nivel)."""
+    from . import markdown_ia
+
+    limite = limite or LimiteDescompresion()
+    preparado = ZipPreparado(ruta_entrada)
+    try:
+        try:
+            zip_entrada = zipfile.ZipFile(ruta_entrada)
+        except (zipfile.BadZipFile, zipfile.LargeZipFile, OSError, ValueError, EOFError) as e:
+            raise ZipRexeitado("zip_ilexible") from e
+        candidatos = []
+        with zip_entrada:
+            for info in zip_entrada.infolist():
+                if info.is_dir():
+                    continue
+                nome = info.filename
+                ruta = _ruta_segura_zip(nome)
+                sufixo = ruta.suffix.lower()
+                if "__MACOSX" in ruta.parts or ruta.name.startswith("._"):
+                    preparado.omitir(nome, "metadatos_macos")
+                elif sufixo == ".zip":
+                    preparado.omitir(nome, "zip_dentro_de_zip")
+                elif sufixo not in EXTENSIONS_SOPORTADAS:
+                    preparado.omitir(nome, "formato")
+                elif info.flag_bits & 0x1:
+                    raise ZipRexeitado("zip_cifrado")
+                else:
+                    candidatos.append((info, ruta))
+            if sum(info.file_size for info, _ in candidatos) > limite.queda:
+                raise ZipRexeitado("zip_demasiado_grande")
+            usados = 0
+            extraidos = []
+            try:
+                for numero, (info, ruta) in enumerate(candidatos):
+                    # Nome neutro no temporal: só conta a extensión.
+                    destino = preparado.dir / str(numero) / ("documento" + ruta.suffix.lower())
+                    destino.parent.mkdir()
+                    with zip_entrada.open(info) as orixe, destino.open("wb") as saida:
+                        while bloque := orixe.read(1 << 20):
+                            usados += len(bloque)
+                            if usados > limite.queda:  # a cabeceira do zip mentía sobre o tamaño
+                                raise ZipRexeitado("zip_demasiado_grande")
+                            saida.write(bloque)
+                    extraidos.append((info.filename, ruta, destino))
+            except ZipRexeitado:
+                raise
+            except Exception as e:  # noqa: BLE001 -- CRC mal, datos truncados...: zip danado
+                raise ZipRexeitado("zip_ilexible") from e
+            limite.queda -= usados
+
+        for nome, ruta, tmp_entrada in extraidos:
+            sufixo = ruta.suffix.lower()
+            try:
+                texto, contexto = cargar_documento_estruturado(str(tmp_entrada))
+                texto_anon, informe, substitucions = anonimizar_texto_detallado(
+                    texto, rexistro, ficheiro_config, contexto=contexto
+                )
+                # ANTES de gardar: gardar un PDF redacta `contexto["documento"]` no sitio.
+                texto_md = markdown_ia.copia_do_anonimizador(
+                    contexto, texto_anon, substitucions, sufixo) if copia_md else None
+                if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
+                    extension = ".anonimizado" + sufixo
+                    tmp_saida = tmp_entrada.parent / ("anonimizado" + sufixo)
+                    gardar_documento_estruturado(contexto, texto_anon, str(tmp_saida), substitucions)
+                else:
+                    extension = ".anonimizado.md" if sufixo == ".md" else ".anonimizado.txt"
+                    tmp_saida = tmp_entrada.parent / "anonimizado.txt"
+                    tmp_saida.write_text(texto_anon, encoding="utf-8")
+                tmp_md = None
+                if texto_md is not None:  # a disco: un lote pode ter moitos zips grandes
+                    tmp_md = tmp_entrada.parent / "copia.md"
+                    tmp_md.write_text(texto_md, encoding="utf-8")
+            except Exception:  # noqa: BLE001 -- un documento roto non entra no zip nin para os demais
+                import traceback
+                traceback.print_exc()
+                preparado.omitir(nome, "documento_ilexible")
+                continue
+            finally:
+                tmp_entrada.unlink(missing_ok=True)
+            preparado.entradas.append((nome, ruta, extension, tmp_saida, tmp_md, informe))
+    except BaseException:
+        preparado.limpar()
+        raise
+    return preparado
+
+
+def gardar_zip_preparado(
+    preparado: ZipPreparado,
+    ruta_saida: str,
+    rexistro: RexistroCorrespondencias,
+) -> dict:
+    """Fase 2 dun .zip: anonimiza os nomes das entradas e dos cartafoles
+    internos (compoñente a compoñente, A10) e escribe o zip de saída coa
+    mesma estrutura, máis a copia .md de cada documento se se pediu. Para os
+    nomes úsanse as persoas de todos os documentos do zip (primeiro as do
+    propio documento): un cartafol "Cliente Xosé Carballo/" recibe o
+    código co que Xosé Carballo aparece dentro. Dous nomes que quedan
+    iguais despois de anonimizar levan contador (nunca se pisan). Se algo
+    falla ao escribir, bórrase o zip a medias. Non borra os temporais
+    (`preparado.limpar()`)."""
+    from . import copia_md as modulo_copia_md
+
+    persoas_zip = preparado.persoas()
+    usados = set()
+    saidas = {}
+    try:
+        with zipfile.ZipFile(ruta_saida, "w", zipfile.ZIP_DEFLATED) as zip_saida:
+            for nome, ruta, extension, tmp_saida, tmp_md, informe in preparado.entradas:
+                persoas = persoas_zip + informe["persoas"]  # as propias, as últimas: gañan
+                stem = PurePosixPath(nome_ficheiro_anonimizado(ruta.name, rexistro, persoas)).stem
+                cartafol = _anonimizar_cartafoles_ruta(ruta.parent, rexistro, persoas)
+                nome_saida = str(cartafol / (stem + extension))
+                contador = 2
+                while nome_saida.casefold() in usados:
+                    nome_saida = str(cartafol / (f"{stem}-{contador}" + extension))
+                    contador += 1
+                usados.add(nome_saida.casefold())
+                zip_saida.write(str(tmp_saida), arcname=nome_saida)
+                saidas[nome] = nome_saida
+                nome_copia = modulo_copia_md.ruta_copia(nome_saida)
+                if tmp_md is not None and nome_copia:
+                    zip_saida.write(str(tmp_md), arcname=nome_copia)
+                    usados.add(nome_copia.casefold())
+    except BaseException:
+        Path(ruta_saida).unlink(missing_ok=True)
+        raise
+    return {
+        "ficheiros": preparado.informes,
+        "omitidos": list(preparado.omitidos),
+        "motivos": dict(preparado.motivos),
+        "saidas": saidas,
+    }
 
 
 def anonimizar_zip(
@@ -902,9 +1126,11 @@ def anonimizar_zip(
     rexistro: RexistroCorrespondencias,
     ficheiro_config: str = _CONFIG_POR_DEFECTO,
     copia_md: bool = False,
+    limite: LimiteDescompresion | None = None,
 ) -> dict:
-    """Anonimiza cada ficheiro soportado (.pdf, .docx, .odt, .txt e
-    imaxes) dentro dun .zip, mantendo a estrutura de cartafoles.
+    """Anonimiza cada ficheiro soportado (.pdf, .docx, .odt, .txt, .md e
+    imaxes) dentro dun .zip, mantendo a estrutura de cartafoles: as dúas
+    fases (`preparar_zip` e `gardar_zip_preparado`) seguidas.
 
     Conserva o formato e a extensión orixinais para .docx/.odt/.pdf e as
     imaxes coma en `anonimizar_e_gardar` (`pdf_estrutura.py` para o caso de
@@ -913,8 +1139,9 @@ def anonimizar_zip(
 
     Calquera outro tipo de ficheiro (planos CAD, HEIC...) NON se pode
     analizar en busca de datos persoais e por seguridade NON se inclúe no
-    zip de saída -- queda listado en `omitidos` do informe devolto, para
-    que quede constancia explícita do que non se puido revisar.
+    zip de saída -- queda listado en `omitidos` do informe devolto (e o
+    motivo en `motivos`), para que quede constancia explícita do que non se
+    puido revisar.
 
     Os nomes de CARTAFOL tamén se anonimizan compoñente a compoñente
     (`_anonimizar_cartafoles_ruta`) -- un cartafol chamado coma unha
@@ -926,61 +1153,13 @@ def anonimizar_zip(
     `omitidos`.
 
     Con `copia_md`, cada documento leva ao lado, dentro do zip, a súa copia
-    Markdown (`markdown_ia.copia_do_anonimizador`, a cadea do Reductor)."""
-    from . import copia_md as modulo_copia_md
-    from . import markdown_ia
-
-    informes_por_ficheiro = {}
-    omitidos = []
-
-    with zipfile.ZipFile(ruta_entrada) as zip_entrada, \
-         zipfile.ZipFile(ruta_saida, "w", zipfile.ZIP_DEFLATED) as zip_saida, \
-         DirectorioTemporal() as tmp:
-        for info in zip_entrada.infolist():
-            if info.is_dir():
-                continue
-
-            nome = info.filename
-            nome_p = PurePosixPath(nome)
-            if "__MACOSX" in nome_p.parts or nome_p.name.startswith("._"):
-                omitidos.append(nome)
-                continue
-
-            sufixo = Path(nome).suffix.lower()
-            if sufixo not in EXTENSIONS_SOPORTADAS:
-                omitidos.append(nome)
-                continue
-
-            tmp_entrada = Path(tmp) / Path(nome).name
-            tmp_entrada.write_bytes(zip_entrada.read(nome))
-
-            texto, contexto = cargar_documento_estruturado(str(tmp_entrada))
-            texto_anon, informe, substitucions = anonimizar_texto_detallado(
-                texto, rexistro, ficheiro_config, contexto=contexto
-            )
-            informes_por_ficheiro[nome] = informe
-
-            nome_ficheiro_saida = nome_ficheiro_anonimizado(nome_p.name, rexistro, informe["persoas"])
-            stem_saida = PurePosixPath(nome_ficheiro_saida).stem
-            cartafol_saida = _anonimizar_cartafoles_ruta(nome_p.parent, rexistro, informe["persoas"])
-            texto_md = markdown_ia.copia_do_anonimizador(
-                contexto, texto_anon, substitucions, sufixo) if copia_md else None
-            if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
-                nome_saida = str(cartafol_saida / (stem_saida + ".anonimizado" + sufixo))
-                tmp_saida = Path(tmp) / ("saida_" + Path(nome).name)
-                gardar_documento_estruturado(contexto, texto_anon, str(tmp_saida), substitucions)
-                zip_saida.write(str(tmp_saida), arcname=nome_saida)
-            else:
-                extension = ".anonimizado.md" if sufixo == ".md" else ".anonimizado.txt"
-                nome_saida = str(cartafol_saida / (stem_saida + extension))
-                zip_saida.writestr(nome_saida, texto_anon)
-            nome_copia = modulo_copia_md.ruta_copia(nome_saida)
-            if texto_md is not None and nome_copia:
-                zip_saida.writestr(nome_copia, texto_md)
-
-            tmp_entrada.unlink()
-
-    return {"ficheiros": informes_por_ficheiro, "omitidos": omitidos}
+    Markdown (`markdown_ia.copia_do_anonimizador`). Un zip que non se pode
+    abrir enteiro lanza `ZipRexeitado` e non escribe nada."""
+    preparado = preparar_zip(ruta_entrada, rexistro, ficheiro_config, copia_md, limite)
+    try:
+        return gardar_zip_preparado(preparado, ruta_saida, rexistro)
+    finally:
+        preparado.limpar()
 
 
 def anonimizar_e_gardar(

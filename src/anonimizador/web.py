@@ -42,8 +42,12 @@ from .pipeline import (
     cargar_documento_estruturado,
     conserva_formato,
     gardar_documento_estruturado,
+    LimiteDescompresion,
+    ZipRexeitado,
+    gardar_zip_preparado,
     ler_fragmentos,
     listar_ficheiros_soportados,
+    preparar_zip,
     ruta_saida_por_defecto,
 )
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
@@ -536,6 +540,81 @@ def _procesar_automatico(ruta: str, cartafol_saida: str | None, rexistro, con_co
     }
 
 
+def _e_zip(ruta: str) -> bool:
+    return Path(ruta).suffix.lower() == ".zip"
+
+
+class _ZipsDoLote:
+    """Os .zip dun lote (un cartafol, ou un .zip dado directamente). Un .zip
+    non ten revisión documento a documento: anonimízase sempre en
+    automático, tamén en modo «revisar», e a pantalla dio.
+
+    `preparar` anonimiza o contido de cada documento do zip no seu sitio da
+    orde do lote (mesmo rexistro ca o resto do cartafol); `pechar`, ao
+    rematar o lote (tamén se se cancelou), pon os nomes e escribe cada
+    `.anonimizado.zip` onde saen os demais ficheiros -- ver
+    `pipeline.preparar_zip`: así un nome de persoa no nome do zip non
+    cambia os códigos nin os avisos de homónimo dos documentos. Un zip que
+    non se pode abrir (danado, con contrasinal, demasiado grande) vai a
+    `erros` co motivo, sen escribir nada nin parar o lote."""
+
+    def __init__(self, rexistro, cartafol_saida: str | None, con_copia_md: bool, erros: list):
+        self.rexistro = rexistro
+        self.cartafol_saida = cartafol_saida
+        self.con_copia_md = con_copia_md
+        self.erros = erros
+        self.limite = LimiteDescompresion()
+        self.pendentes = []
+
+    def preparar(self, ruta: str) -> None:
+        try:
+            self.pendentes.append((ruta, preparar_zip(
+                ruta, self.rexistro, copia_md=self.con_copia_md, limite=self.limite)))
+        except ZipRexeitado as e:
+            self.erros.append({"ruta": ruta, "mensaxe": idioma.t(f"zip.motivo.{e.motivo}")})
+
+    def pechar(self) -> list:
+        resultados = []
+        while self.pendentes:
+            ruta, preparado = self.pendentes.pop(0)
+            try:
+                resultados.append(self._gardar(ruta, preparado))
+            except Exception as e:  # noqa: BLE001 -- o zip a medias xa se borrou; o resto segue
+                traceback.print_exc()
+                self.erros.append({"ruta": ruta, "mensaxe": _mensaxe_erro(e)})
+            finally:
+                preparado.limpar()
+        return resultados
+
+    def _gardar(self, ruta: str, preparado) -> dict:
+        ruta_saida = ruta_saida_por_defecto(ruta, self.cartafol_saida, self.rexistro, preparado.persoas())
+        Path(ruta_saida).parent.mkdir(parents=True, exist_ok=True)
+        resultado = gardar_zip_preparado(preparado, ruta_saida, self.rexistro)
+        informes = list(resultado["ficheiros"].values())
+        return {
+            "e_zip": True,
+            "sid_revision": None,
+            "ruta_orixe": ruta,
+            "ruta_saida": ruta_saida,
+            "ruta_copia_md": None,
+            "n_documentos": len(informes),
+            "n_marcadas": sum(1 for i in informes for p in i["persoas"] if p["marcado_para_revision"]),
+            "n_mosaico": sum(len(i["riscos_mosaico"]) for i in informes),
+            "n_risco_alto": sum(1 for i in informes for r in i.get("risco_residual", []) if r["confianza"] == "alta"),
+            "n_exentos_cargo_publico": sum(len(i.get("exentos_cargo_publico", [])) for i in informes),
+            "n_categoria_especial": sum(len(i.get("categoria_especial", [])) for i in informes),
+            "documentos_con_fugas": [
+                {"orixe": nome, "saida": resultado["saidas"][nome]}
+                for nome, i in resultado["ficheiros"].items()
+                if any(r["confianza"] == "alta" for r in i.get("risco_residual", []))
+            ],
+            "omitidos_zip": [
+                {"nome": nome, "motivo": idioma.t(f"zip.motivo.{resultado['motivos'][nome]}")}
+                for nome in resultado["omitidos"]
+            ],
+        }
+
+
 # -- Traballos en segundo plano (barra de progreso) ----------------------
 #
 # Procesar un cartafol enteiro (ou un PDF grande) pode tardar minutos. Coa
@@ -578,8 +657,9 @@ def _preparar_traballo(ruta: str, rexistro_dir: str, cartafol_saida: str | None,
         "cancelar": threading.Event(),  # activado polo usuario: para ANTES do seguinte ficheiro
         "feitos": 0,
         "actual": None,
-        "resultados": [],  # modo automático
+        "resultados": [],  # modo automático (tamén os .zip)
         "sids": [],  # modo revisar
+        "zips": [],  # modo revisar: os .zip, anonimizados en automático (`_ZipsDoLote`)
         "erros": [],  # ficheiros que fallaron (o resto segue)
         "erro": None,  # fallo xeral que abortou o traballo
         "inicio": time.time(),
@@ -595,20 +675,26 @@ _ERROS_FICHEIRO_DANADO = {"FileDataError", "EmptyFileError", "UnidentifiedImageE
 
 
 def _mensaxe_erro(e: Exception) -> str:
+    if isinstance(e, ZipRexeitado):
+        return idioma.t(f"zip.motivo.{e.motivo}")
     if type(e).__name__ in _ERROS_FICHEIRO_DANADO:
         return idioma.t("web.ficheiro_danado")
     return f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"
 
 
 def _executar_traballo(traballo: dict) -> None:
+    zips = None
     try:
         rexistro = _abrir_rexistro(traballo["rexistro_dir"])
+        zips = _ZipsDoLote(rexistro, traballo["cartafol_saida"], traballo["copia_md"], traballo["erros"])
         for ficheiro in traballo["ficheiros"]:
             if traballo["cancelar"].is_set():
                 break
             traballo["actual"] = ficheiro
             try:
-                if traballo["modo"] == "automatico":
+                if _e_zip(ficheiro):
+                    zips.preparar(ficheiro)
+                elif traballo["modo"] == "automatico":
                     traballo["resultados"].append(
                         _procesar_automatico(ficheiro, traballo["cartafol_saida"], rexistro, traballo["copia_md"])
                     )
@@ -621,14 +707,31 @@ def _executar_traballo(traballo: dict) -> None:
                 traceback.print_exc()
                 traballo["erros"].append({"ruta": ficheiro, "mensaxe": _mensaxe_erro(e)})
             traballo["feitos"] += 1
+        _pechar_zips(traballo, zips)
         traballo["estado"] = "cancelado" if traballo["cancelar"].is_set() and traballo["feitos"] < len(traballo["ficheiros"]) else "rematado"
     except Exception as e:
         traceback.print_exc()
         traballo["estado"] = "erro"
         traballo["erro"] = f"{type(e).__name__}: {idioma.traducir_mensaxe(str(e))}"
     finally:
+        # Un fallo xeral non deixa temporais con documentos do zip.
+        if zips is not None:
+            for _, preparado in zips.pendentes:
+                preparado.limpar()
         traballo["actual"] = None
         traballo["fin"] = time.time()
+
+
+def _pechar_zips(traballo: dict, zips: _ZipsDoLote) -> None:
+    """Escribe os .zip do lote, ao final (ver `_ZipsDoLote`)."""
+    if not zips.pendentes:
+        return
+    traballo["actual"] = zips.pendentes[0][0]
+    pechados = zips.pechar()
+    if traballo["modo"] == "automatico":
+        traballo["resultados"].extend(pechados)
+    else:
+        traballo["zips"].extend(pechados)
 
 
 def _esquecer_traballos_vellos() -> None:
@@ -722,27 +825,36 @@ def resultado_traballo(jid):
         )
 
     sids = traballo["sids"]
+    zips = traballo["zips"]
     if cancelado:
         return _render_index(
-            pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir,
+            pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir, zips=zips,
             aviso_cartafol=idioma.t("web.cancelado", n=traballo["feitos"], total=len(traballo["ficheiros"])),
             erro=idioma.t(
                 "web.non_procesados", n=len(erros),
                 detalle="; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros),
             ) if erros else None,
         )
-    if not erros:
+    if not erros and not zips:
         if not traballo["e_cartafol"]:
             return redirect(url_for("revisar", sid=sids[0], rexistro=rexistro_dir))
         return redirect(url_for(
             "index", rexistro=rexistro_dir, creados=len(sids), omitidos=traballo["omitidos"]
         ))
+    return _render_revisar_con_zips(rexistro_dir, sids, zips, erros, traballo["omitidos"])
 
+
+def _render_revisar_con_zips(rexistro_dir: str, sids: list, zips: list, erros: list, omitidos: int):
+    """Resultado do modo «revisar» cando houbo erros ou .zip (estes
+    anonimizáronse en automático: lístanse aquí, cos seus omitidos)."""
+    aviso = idioma.t("web.procesados_pendentes", n=len(sids)) if sids or not zips else ""
+    if omitidos:
+        aviso += " " + idioma.t("comun.omitidos", n=omitidos)
     detalle = "; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros)
     return _render_index(
-        pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir,
-        aviso_cartafol=idioma.t("web.procesados_pendentes", n=len(sids)),
-        erro=idioma.t("web.non_procesados", n=len(erros), detalle=detalle),
+        pendentes=_pendentes(rexistro_dir), rexistro_dir=rexistro_dir, zips=zips,
+        aviso_cartafol=aviso.strip() or None,
+        erro=idioma.t("web.non_procesados", n=len(erros), detalle=detalle) if erros else None,
     )
 
 
@@ -762,23 +874,16 @@ def procesar():
         )
 
     rexistro = _abrir_rexistro(rexistro_dir)
+    erros = []
+    zips = _ZipsDoLote(rexistro, cartafol_saida, copia, erros)
+    try:
+        return _procesar_sincrono(ruta, ruta_p, rexistro_dir, cartafol_saida, modo, copia, rexistro, zips, erros)
+    finally:
+        for _, preparado in zips.pendentes:  # só se algo fallou antes de pechalos
+            preparado.limpar()
 
-    if modo == "automatico":
-        if ruta_p.is_dir():
-            soportados, omitidos = listar_ficheiros_soportados(ruta)
-            if not soportados:
-                return _render_index(
-                    pendentes=[], rexistro_dir=rexistro_dir,
-                    erro=idioma.t("web.sen_soportados", ruta=ruta),
-                )
-            resultados = [_procesar_automatico(f, cartafol_saida, rexistro, copia) for f in soportados]
-        else:
-            resultados = [_procesar_automatico(ruta, cartafol_saida, rexistro, copia)]
-            omitidos = []
-        return render_template(
-            "automatico.html", resultados=resultados, omitidos=len(omitidos), rexistro_dir=rexistro_dir,
-        )
 
+def _procesar_sincrono(ruta, ruta_p, rexistro_dir, cartafol_saida, modo, copia, rexistro, zips, erros):
     if ruta_p.is_dir():
         soportados, omitidos = listar_ficheiros_soportados(ruta)
         if not soportados:
@@ -786,14 +891,36 @@ def procesar():
                 pendentes=[], rexistro_dir=rexistro_dir,
                 erro=idioma.t("web.sen_soportados", ruta=ruta),
             )
-        for ficheiro in soportados:
-            _crear_sesion(ficheiro, rexistro_dir, cartafol_saida, rexistro, copia)
+    else:
+        soportados, omitidos = [ruta], []
+
+    if modo == "automatico":
+        resultados = []
+        for f in soportados:
+            if _e_zip(f):
+                zips.preparar(f)
+            else:
+                resultados.append(_procesar_automatico(f, cartafol_saida, rexistro, copia))
+        resultados.extend(zips.pechar())
+        return render_template(
+            "automatico.html", resultados=resultados, omitidos=len(omitidos), rexistro_dir=rexistro_dir,
+            erros=erros, total=len(soportados),
+        )
+
+    sids = []
+    for ficheiro in soportados:
+        if _e_zip(ficheiro):
+            zips.preparar(ficheiro)
+        else:
+            sids.append(_crear_sesion(ficheiro, rexistro_dir, cartafol_saida, rexistro, copia))
+    pechados = zips.pechar()
+    if pechados or erros:
+        return _render_revisar_con_zips(rexistro_dir, sids, pechados, erros, len(omitidos))
+    if ruta_p.is_dir():
         return redirect(url_for(
             "index", rexistro=rexistro_dir, creados=len(soportados), omitidos=len(omitidos)
         ))
-
-    sid = _crear_sesion(ruta, rexistro_dir, cartafol_saida, rexistro, copia)
-    return redirect(url_for("revisar", sid=sid, rexistro=rexistro_dir))
+    return redirect(url_for("revisar", sid=sids[0], rexistro=rexistro_dir))
 
 
 @app.route("/revisar/<sid>")

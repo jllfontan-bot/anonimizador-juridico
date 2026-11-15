@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block titulo %}{{ t("auto.titulo") }}{% endblock %}
 {% block contido %}
+{% from "_zip.html" import detalle_zip with context %}
 <h1>{{ t("auto.titulo") }}</h1>
 {% set erros = erros|default([]) %}
 {% set cancelado = cancelado|default(false) %}
@@ -45,6 +46,7 @@
     {%- if r.n_risco_alto %}, <strong>{{ t("auto.resumo_fugas", n=r.n_risco_alto) }}</strong>{% endif %}
     {%- if r.n_exentos_cargo_publico %}, {{ t("auto.resumo_exentos", n=r.n_exentos_cargo_publico) }}{% endif %}
     {%- if r.n_categoria_especial %}, {{ t("auto.resumo_categoria", n=r.n_categoria_especial) }}{% endif %}
+    {%- if r.e_zip %}{{ detalle_zip(r) }}{% endif %}
     {%- if r.sid_revision %}<br>
     <a href="{{ url_for('revisar', sid=r.sid_revision, rexistro=rexistro_dir) }}"><button type="button">{{ t("auto.revisar_documento") }}</button></a>
     <span class="mencions">{{ t("auto.revisado_substitue") }}</span>{% endif %}

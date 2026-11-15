@@ -1,0 +1,23 @@
+{# Detalle dun .zip anonimizado (web._ZipsDoLote): documentos, os que teñen
+   posibles fugas (sen botón «Revisar»: un zip non ten revisión documento a
+   documento) e o que NON vai no zip de saída, co motivo. #}
+{% macro detalle_zip(r) %}
+<br>{{ t("zip.documentos", n=r.n_documentos) }}
+{%- if r.documentos_con_fugas %}
+<div class="mencions"><strong>{{ t("zip.revisar_fugas", n=r.documentos_con_fugas|length) }}</strong>
+  <ul>{% for d in r.documentos_con_fugas %}<li><code>{{ d.orixe }}</code> → <code>{{ d.saida }}</code></li>{% endfor %}</ul>
+</div>
+{%- endif %}
+{%- if r.omitidos_zip %}
+<div class="mencions">{{ t("zip.omitidos", n=r.omitidos_zip|length) }}
+  <ul>{% for o in r.omitidos_zip %}<li><code>{{ o.nome }}</code> — {{ o.motivo }}</li>{% endfor %}</ul>
+</div>
+{%- endif %}
+{% endmacro %}
+
+{% macro resumo_zip(r) %}
+{{ t("auto.resumo", marcadas=r.n_marcadas, mosaico=r.n_mosaico) }}
+{%- if r.n_risco_alto %}, <strong>{{ t("auto.resumo_fugas", n=r.n_risco_alto) }}</strong>{% endif %}
+{%- if r.n_exentos_cargo_publico %}, {{ t("auto.resumo_exentos", n=r.n_exentos_cargo_publico) }}{% endif %}
+{%- if r.n_categoria_especial %}, {{ t("auto.resumo_categoria", n=r.n_categoria_especial) }}{% endif %}
+{%- endmacro %}

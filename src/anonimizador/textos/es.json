@@ -407,5 +407,16 @@
  "pantalla_conversor.non_existe": "No existe: {ruta}",
  "pantalla_conversor.erro_trocear": "El tamaño de las partes tiene que ser de al menos 100 tokens.",
  "pantalla_conversor.manual": "Manual de uso",
- "pantalla_conversor.sen_manual": "El manual no está en esta carpeta del programa."
+ "pantalla_conversor.sen_manual": "El manual no está en esta carpeta del programa.",
+ "zip.motivo.formato": "formato que no se puede analizar",
+ "zip.motivo.metadatos_macos": "metadatos de macOS (no es un documento)",
+ "zip.motivo.zip_dentro_de_zip": ".zip dentro de otro .zip: no se abre (solo se abre un nivel)",
+ "zip.motivo.zip_demasiado_grande": ".zip demasiado grande al descomprimirlo (límite de seguridad): no se ha abierto",
+ "zip.motivo.zip_cifrado": ".zip protegido con contraseña: no se ha abierto",
+ "zip.motivo.zip_ilexible": "no se pudo abrir el .zip (dañado)",
+ "zip.motivo.documento_ilexible": "no se pudo leer o anonimizar (dañado o no es del tipo que indica su extensión)",
+ "zip.documentos": "{n} documento(s) anonimizado(s) dentro del .zip.",
+ "zip.revisar_fugas": "{n} documento(s) del .zip con posibles fugas sin detectar: ábrelos en el .zip anonimizado y léelos enteros antes de darlos por buenos (un .zip no tiene el botón «Revisar este documento»):",
+ "zip.omitidos": "No van en el .zip anonimizado ({n}), para no arriesgar que quede algo sin revisar:",
+ "zip.en_automatico": "{n} archivo(s) .zip anonimizado(s) en automático: un .zip no admite la revisión documento a documento."
 }
