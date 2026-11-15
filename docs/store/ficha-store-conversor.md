@@ -72,7 +72,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON O SIN ANONIMIZAR
 • Convertir sin anonimizar: el .md conserva los datos personales y el programa lo avisa con claridad, porque al pasarlo a una IA en línea esos datos salen del equipo.
-• Convertir anonimizando: usa el mismo motor que el Anonimizador jurídico (nombres, DNI y demás datos personales pasan a códigos) y el mismo registro cifrado, de modo que una persona recibe el mismo código en los dos programas. Por defecto revisas cada documento antes de guardarlo. En modo automático no se detiene: cada .md lo indica (revisado: no) y, al terminar, el resumen lista los documentos con posibles fugas, con un botón «Revisar» para cada uno. Revisa siempre todos los .md antes de usarlos: ninguna detección automática lo encuentra todo.
+• Convertir anonimizando: usa el mismo motor que el Anonimizador jurídico (nombres, DNI y demás datos personales pasan a códigos) y el mismo registro cifrado, de modo que una persona recibe el mismo código en los dos programas. Por defecto revisas cada documento antes de guardarlo. En modo automático no se detiene: cada .md lo indica (revisado: no), los que tienen posibles fugas llevan además «posibles_fugas» en la cabecera y, al terminar, el resumen lista los documentos con posibles fugas, con un botón «Revisar» para cada uno. Revisa siempre todos los .md antes de usarlos: ninguna detección automática lo encuentra todo.
 • Las hojas de cálculo, presentaciones, páginas web y correos solo se convierten sin anonimizar, hasta que cada formato tenga sus propias pruebas de fugas.
 
 TODO EN LOCAL, SIN PUERTOS ABIERTOS
@@ -143,7 +143,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON OU SEN ANONIMIZAR
 • Converter sen anonimizar: o .md conserva os datos persoais e o programa avísao con claridade, porque ao pasalo a unha IA en liña eses datos saen do equipo.
-• Converter anonimizando: usa o mesmo motor ca o Anonimizador jurídico (nomes, DNI e demais datos persoais pasan a códigos) e o mesmo rexistro cifrado, de modo que unha persoa recibe o mesmo código nos dous programas. Por defecto revisas cada documento antes de gardalo. En modo automático non se detén: cada .md indícao (revisado: non) e, ao rematar, o resumo lista os documentos con posibles fugas, cun botón «Revisar» para cada un. Revisa sempre todos os .md antes de usalos: ningunha detección automática o atopa todo.
+• Converter anonimizando: usa o mesmo motor ca o Anonimizador jurídico (nomes, DNI e demais datos persoais pasan a códigos) e o mesmo rexistro cifrado, de modo que unha persoa recibe o mesmo código nos dous programas. Por defecto revisas cada documento antes de gardalo. En modo automático non se detén: cada .md indícao (revisado: non), os que teñen posibles fugas levan ademais «posibles_fugas» na cabeceira e, ao rematar, o resumo lista os documentos con posibles fugas, cun botón «Revisar» para cada un. Revisa sempre todos os .md antes de usalos: ningunha detección automática o atopa todo.
 • As follas de cálculo, presentacións, páxinas web e correos só se converten sen anonimizar, ata que cada formato teña as súas propias probas de fugas.
 
 TODO EN LOCAL, SEN PORTOS ABERTOS
