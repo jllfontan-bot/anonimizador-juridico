@@ -87,6 +87,36 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
   non levan «Acerca de»; cinco son idénticas ás do 15/10 e cambia só a de inicio.
 - Pendente menor: a copia `NOVEDADES`.
 
+## Separar Anonimizador e Reductor (decidido 15/11/2026)
+
+O usuario non quere que os dous programas se mesturen nin en GitHub nin na Microsoft Store.
+
+**Feito agora (só textos e ligazóns, antes de publicar 1.1.2 / 1.2.0):** `8222d5b`, `03fc30a`, `b701228`. Ficha,
+política, condicións, manual (e PDF) e NOVEDADES do Reductor sen nomear o Anonimizador, e ficha do Anonimizador sen
+nomear o Reductor. O rexistro compartido descríbese sen nomear o outro programa («outra aplicación do mesmo
+desenvolvedor pode compartilo»), para que a política siga sendo exacta.
+
+**Queda (non se tocou por ser `src/`, que edita outra sesión, ou o instalador clásico):**
+- Textos da app: `conversor.cli.axuda_anonimizar`, `conversor.cli.axuda_rexistro`, `conversor.cli.axuda_chaveiro`,
+  `conversor.cli.rexistro` e `pantalla_conversor.modo_revisar_axuda` (es e gl) nomean «o anonimizador». Despois,
+  rexenerar as capturas do manual do Reductor (a de inicio amosa `modo_revisar_axuda`) e da súa ficha.
+- Instalador clásico do Reductor (`instalador/windows/instalador-conversor.nsi`, textos do desinstalador
+  `TXT_UN_FIN` e `TXT_UN_BENVIDA`): «compartidos co anonimizador».
+- As tres URL da ficha do Reductor (política, condicións e sitio web) levan o nome do repositorio actual
+  (`anonimizador-juridico`), e o sitio web é o README do Anonimizador.
+
+**Obxectivo seguinte (non agora; Opus · alto, unha fase por punto):**
+1. Repositorio de GitHub propio para o Reductor: o seu código (ou o motor compartido como dependencia), política,
+   condicións, manual, `AVISOS-TERCEIROS.md`, workflow MSIX e etiquetas propios; cambiar as tres URL da ficha.
+2. Rexistro cifrado propio do Reductor (o seu cartafol e a súa entrada no Administrador de credenciais), sen
+   compartir o do Anonimizador.
+3. Workflow e etiquetas separados (`msix-conversor-v*` deixa de vivir no repo do Anonimizador).
+
+**Riscos:** migrar o rexistro sen perder correspondencias de quen xa usou o Reductor anonimizando (copiar, non
+mover; os códigos deixarán de coincidir entre programas); URL da ficha: publicar primeiro no repo novo e cambiar a
+ficha despois, sen deixar ligazóns rotas; o cambio altera a política e as condicións do Reductor, así que fai falta
+unha valoración xurídica nova antes de envialo á Store.
+
 ## Para a seguinte versión: anonimizar os formatos novos do Reductor (decidido 15/11/2026)
 
 Decisión de José Luis: a **1.2.0 sae como está** (as follas, presentacións, `.html` e `.eml`
