@@ -16,9 +16,13 @@ mira antes de cada documento.
 Revisión (decisión 12.3 do usuario): anonimizando, por defecto cada
 documento pasa pola pantalla de revisión; a persoa pode cambiar a
 automático e a escolla gárdase (`preferencias.json`, coma o idioma). En
-automático o documento leva `revisado: non` e a pantalla final resume as
-persoas marcadas, pero un documento con risco residual alto pasa igual a
-revisión. A revisión usa o motor do anonimizador (`pipeline.aplicar_decisions`,
+automático NUNCA se detén: o documento leva `revisado: non`, e a pantalla
+final resume as persoas marcadas e lista os documentos con posibles fugas
+(risco residual de confianza alta) cun botón «Revisar» por documento
+(`revisar_documento`): abre a mesma pantalla de revisión e, ao confirmar,
+substitúe o seu .md (`conversor.substituir_revisado`, con `revisado: si`) e
+volve ao resumo. Para iso, en automático gárdase na memoria o necesario
+(texto, contexto, informe) dos documentos con aviso alto. A revisión usa o motor do anonimizador (`pipeline.aplicar_decisions`,
 `rexistro.manter_separadas`, `rexistro.descartar_por_humano`), coma
 `web.confirmar`: o fío de traballo agarda no enganche `revisar` de
 `converter` ata que a páxina chama `confirmar_revision`.
@@ -33,6 +37,7 @@ import subprocess
 import sys
 import threading
 import webbrowser
+from dataclasses import dataclass
 from pathlib import Path
 
 from . import aforro_ia, conversor, idioma
@@ -131,6 +136,13 @@ class Api:
         self._modo = "revisar"
         self._rexistro = None
         self._avisos_revision = {}
+        self._candidatos = {}  # (entrada, nome orixe) -> datos dun documento con fugas, ata acabar a súa entrada
+        self._fugas = {}  # id -> _ConFugas: os documentos do resumo con botón «Revisar»
+        self._revision_despois = None  # o _ConFugas que a persoa revisa agora (despois de converter)
+        self._entrada_actual = 0
+        self._total = conversor.Resultado()
+        self._anonimizar = False
+        self._ultimo_evento = "rematado"
 
     # -- comunicación coa páxina ---------------------------------------------
 
@@ -259,6 +271,7 @@ class Api:
         self._cancelado.clear()
         self._modo = modo
         self._avisos_revision = {}
+        self._candidatos, self._fugas, self._revision_despois = {}, {}, None
         argumentos = {
             "anonimizar": bool(opcions.get("anonimizar")),
             "un_so_md": bool(opcions.get("un_so_md")),
@@ -277,8 +290,8 @@ class Api:
         return {"ok": True}
 
     def _traballo(self, rutas: list, argumentos: dict) -> None:
-        total = conversor.Resultado()
-        anonimizar = argumentos["anonimizar"]
+        total = self._total = conversor.Resultado()
+        anonimizar = self._anonimizar = argumentos["anonimizar"]
         self._rexistro = None
         try:
             if anonimizar:
@@ -287,6 +300,8 @@ class Api:
                 # Coma a CLI e o anonimizador da Store: clave dun rexistro novo no chaveiro.
                 self._rexistro = RexistroCorrespondencias(self._cartafol_rexistro(), usar_chaveiro=self._usar_chaveiro)
             for i, ruta in enumerate(rutas):
+                self._entrada_actual = i
+
                 def progreso(feito, n, nome, i=i):
                     self._emitir("progreso", {"entrada": i, "entradas": len(rutas), "feito": feito,
                                               "total": n, "nome": nome})
@@ -300,27 +315,47 @@ class Api:
                     revisar=self._revisar if anonimizar else None, **argumentos,
                 )
                 _sumar(total, resultado, prefixo=Path(ruta).name if len(rutas) > 1 else "")
+                self._rexistrar_fugas(i, resultado)
         except conversor.Cancelado:
+            self._candidatos.clear()
+            self._ultimo_evento = "cancelado"
             self._emitir("cancelado", self._resumo(total, anonimizar))
             return
         except Exception as e:  # noqa: BLE001 -- que a pantalla o diga en vez de quedar parada
+            self._candidatos.clear()
+            self._ultimo_evento = "erro"
             self._emitir("erro", {"mensaxe": idioma.traducir_mensaxe(f"{type(e).__name__}: {e}"),
                                   **self._resumo(total, anonimizar)})
             return
+        self._ultimo_evento = "rematado"
         self._emitir("rematado", self._resumo(total, anonimizar))
+
+    def _rexistrar_fugas(self, entrada: int, resultado: conversor.Resultado) -> None:
+        """Os documentos desta entrada con aviso alto que a revisión deixou
+        pasar en automático, co que fai falta para revisalos despois."""
+        for orixe, doc in resultado.documentos.items():
+            datos = self._candidatos.pop((entrada, orixe), None)
+            if datos is not None and doc.informe is not None:
+                self._fugas[len(self._fugas)] = _ConFugas(resultado, orixe, doc.nome_visible, **datos)
+        for chave in [c for c in self._candidatos if c[0] == entrada]:  # documentos que despois deron erro
+            del self._candidatos[chave]
 
     # -- revisión ----------------------------------------------------------------
 
     def _revisar(self, nome, texto, contexto, texto_anon, informe, substitucions):
         """Enganche `revisar` de `converter`, no fío de traballo."""
-        fugas = [r for r in informe.get("risco_residual", []) if r["confianza"] == "alta"]
-        if self._modo == "automatico" and not fugas:
+        if self._modo == "automatico":
+            # Nunca se detén: apúntase o documento e o seu aviso para o resumo final.
+            if any(r["confianza"] == "alta" for r in informe.get("risco_residual", [])):
+                self._candidatos[(self._entrada_actual, nome)] = {
+                    "texto": texto, "contexto": contexto, "texto_anon": texto_anon,
+                    "informe": informe, "substitucions": substitucions}
             return None
         self._resposta = None
         self._hai_resposta.clear()
         if self._cancelado.is_set():  # cancelado mentres se anonimizaba: o `set` de antes xa se borrou
             raise conversor.Cancelado
-        self._emitir("revisar", _datos_revision(nome, texto_anon, informe, "fugas" if self._modo == "automatico" else "revisar"))
+        self._emitir("revisar", _datos_revision(nome, texto_anon, informe, "revisar"))
         self._hai_resposta.wait()
         if self._cancelado.is_set() or self._resposta is None:
             raise conversor.Cancelado
@@ -328,11 +363,56 @@ class Api:
 
     def confirmar_revision(self, decisions: dict) -> dict:
         """`decisions`: `anonimizar` (os códigos que quedan tapados; os demais
-        "non son persoa") e `fragmentos` (o cadro "engadir ou xeneralizar")."""
-        self._resposta = {"anonimizar": [str(c) for c in decisions.get("anonimizar") or []],
-                          "fragmentos": str(decisions.get("fragmentos") or "")}
+        "non son persoa") e `fragmentos` (o cadro "engadir ou xeneralizar").
+        Se a persoa revisa un documento despois de converter
+        (`revisar_documento`), aplícase aquí mesmo e devólvese o resumo novo."""
+        resposta = {"anonimizar": [str(c) for c in decisions.get("anonimizar") or []],
+                    "fragmentos": str(decisions.get("fragmentos") or "")}
+        if self._revision_despois is not None:
+            return self._confirmar_despois(resposta)
+        self._resposta = resposta
         self._hai_resposta.set()
         return {"ok": True}
+
+    # -- revisar un documento despois de converter (modo automático) -----------------
+
+    def revisar_documento(self, id) -> dict:
+        """Botón «Revisar» do resumo: devolve os datos da pantalla de revisión
+        dese documento (`revision`, os mesmos ca durante a conversión)."""
+        if self._fio is not None and self._fio.is_alive():
+            return {"erro": idioma.t("pantalla_conversor.en_marcha")}
+        try:
+            doc = self._fugas[int(id)]
+        except (KeyError, TypeError, ValueError):
+            return {"erro": idioma.t("pantalla_conversor.sen_documento")}
+        if doc.revisado:
+            return {"erro": idioma.t("pantalla_conversor.xa_revisado")}
+        self._revision_despois = doc
+        return {"ok": True, "revision": _datos_revision(doc.nome_visible, doc.texto_anon, doc.informe, "despois")}
+
+    def cancelar_revision_despois(self) -> dict:
+        """Volve ao resumo sen tocar o .md: queda automático, coma estaba."""
+        self._revision_despois = None
+        return {"ok": True, "resumo": self._resumo(self._total, self._anonimizar)}
+
+    def _confirmar_despois(self, resposta: dict) -> dict:
+        doc = self._revision_despois
+        try:
+            texto_final, substitucions = self._aplicar_decisions(
+                doc.orixe, doc.texto, doc.contexto, doc.informe, doc.substitucions, resposta)
+            antigas, novas = conversor.substituir_revisado(
+                doc.resultado, doc.orixe, texto_final, substitucions, doc.contexto)
+        except Exception as e:  # noqa: BLE001 -- que a pantalla o diga e deixe volver intentalo
+            return {"erro": idioma.traducir_mensaxe(f"{type(e).__name__}: {e}")}
+        total = self._total
+        restantes = [s for s in total.saidas if s not in antigas]
+        total.saidas = restantes + [s for s in novas if s not in restantes]
+        if doc.nome_visible not in total.revisados:
+            total.revisados.append(doc.nome_visible)
+        doc.revisado = True
+        doc.texto = doc.contexto = doc.texto_anon = doc.substitucions = None  # a memoria xa non fai falta
+        self._revision_despois = None
+        return {"ok": True, "resumo": self._resumo(total, self._anonimizar)}
 
     def _aplicar_decisions(self, nome, texto, contexto, informe, substitucions, resposta) -> tuple:
         """O mesmo ca `web.confirmar` coas decisións (`decisions_v2`)."""
@@ -384,7 +464,27 @@ class Api:
             "omitidos": [{"nome": n, "motivo": idioma.t("conversor.motivo." + m), "erro": total.erros.get(n, "")}
                          for n, m in total.omitidos],
             "documentos": documentos,
+            "fugas_docs": [{"id": i, "nome": d.nome_visible, "revisado": d.revisado,
+                            "fugas": [{"tipo": r["tipo"], "texto": r["texto"]}
+                                      for r in d.informe.get("risco_residual", []) if r["confianza"] == "alta"]}
+                           for i, d in self._fugas.items()],
         }
+
+
+@dataclass
+class _ConFugas:
+    """Un documento anonimizado en automático con aviso alto: o necesario para
+    revisalo despois (`revisar_documento`)."""
+
+    resultado: conversor.Resultado  # o da súa entrada (`conversor.substituir_revisado`)
+    orixe: str
+    nome_visible: str
+    texto: str | None
+    contexto: dict | None
+    texto_anon: str | None
+    informe: dict
+    substitucions: list | None
+    revisado: bool = False
 
 
 def _sumar(total: conversor.Resultado, resultado: conversor.Resultado, prefixo: str = "") -> None:
@@ -409,7 +509,7 @@ def _datos_revision(nome: str, texto_anon: str, informe: dict, motivo: str) -> d
     persoas = sorted(informe["persoas"], key=lambda p: not p["marcado_para_revision"])
     return {
         "nome": nome,
-        "motivo": motivo,  # "revisar" (modo revisión) ou "fugas" (automático con risco alto)
+        "motivo": motivo,  # "revisar" (modo revisión) ou "despois" (botón «Revisar» do resumo, en automático)
         "persoas": [{"codigo": p["codigo"], "mencions": list(dict.fromkeys(p["mencions"])),
                      "marcado": p["marcado_para_revision"],
                      "motivo": idioma.traducir_mensaxe(p["motivo"] or "")} for p in persoas],

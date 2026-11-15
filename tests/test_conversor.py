@@ -242,6 +242,122 @@ class TestSenAnonimizar(_Base):
         self.assertTrue((raiz / "probas" / "escrito.pdf.md").exists())
 
 
+class TestZipDentroDeCartafol(_Base):
+    """Un .zip dentro dun cartafol ábrese coma o de entrada, no subcartafol
+    `<nome do zip>-md`; un .zip dentro dun .zip non."""
+
+    def _zip(self, ruta: Path, **ficheiros) -> Path:
+        ruta.parent.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(ruta, "w") as z:
+            for nome, orixe in ficheiros.items():
+                z.write(orixe, nome.replace("__", "/"))
+        return ruta
+
+    def _carpeta_con_zip(self) -> Path:
+        raiz = self.dir / "demanda"
+        _docx(raiz / "01 Demanda.docx")
+        self._zip(raiz / "anexos" / "10 Proxecto básico.zip",
+                  **{"memoria.docx": _docx(self.dir / "orixe" / "memoria.docx"),
+                     "planos__lista.odt": _odt(self.dir / "orixe" / "lista.odt")})
+        return raiz
+
+    def test_zip_nun_cartafol_ábrese_nun_subcartafol_co_seu_nome(self):
+        raiz = self._carpeta_con_zip()
+        resultado = conversor.converter(str(raiz))
+        relativas = sorted(Path(r).relative_to(raiz).as_posix() for r in resultado.saidas)
+        self.assertEqual(relativas, [
+            "01 Demanda.docx.md",
+            "anexos/10 Proxecto básico-md/memoria.docx.md",
+            "anexos/10 Proxecto básico-md/planos/lista.odt.md",
+        ])
+        self.assertEqual(resultado.omitidos, [])
+        md = (raiz / "anexos" / "10 Proxecto básico-md" / "memoria.docx.md").read_text(encoding="utf-8")
+        self.assertIn(f"Comparece don {_NOME}", md)
+
+    def test_zip_dentro_de_zip_non_se_abre_e_consta_como_omitido(self):
+        interior = self._zip(self.dir / "interior.zip", **{"a.docx": _docx(self.dir / "orixe" / "a.docx")})
+        exterior = self._zip(self.dir / "exterior.zip", **{"b.docx": _docx(self.dir / "orixe" / "b.docx"),
+                                                           "caixa__interior.zip": interior})
+        resultado = conversor.converter(str(exterior))
+        self.assertEqual([Path(r).name for r in resultado.saidas], ["b.docx.md"])
+        self.assertEqual(resultado.omitidos, [("caixa/interior.zip", "zip_dentro_de_zip")])
+        # O mesmo se o zip exterior está nun cartafol.
+        raiz = self.dir / "cartafol"
+        shutil.copy(exterior, raiz.mkdir() or raiz / "exterior.zip")
+        resultado = conversor.converter(str(raiz))
+        self.assertEqual([Path(r).name for r in resultado.saidas], ["b.docx.md"])
+        self.assertEqual(resultado.omitidos, [("exterior-md/caixa/interior.zip", "zip_dentro_de_zip")])
+        self.assertTrue((raiz / "exterior-md" / "b.docx.md").exists())
+
+    def test_ruta_con_punto_punto_non_escribe_fora_da_saida(self):
+        raiz = self.dir / "cartafol"
+        with zipfile.ZipFile(raiz.mkdir() or raiz / "malo.zip", "w") as z:
+            z.write(_docx(self.dir / "orixe" / "a.docx"), "../../a.docx")
+            z.write(_docx(self.dir / "orixe" / "b.docx"), "/abs/b.docx")
+        resultado = conversor.converter(str(raiz))
+        permitido = raiz.resolve()
+        for ruta in resultado.saidas:
+            self.assertTrue(Path(ruta).resolve().is_relative_to(permitido), ruta)
+        self.assertEqual(len(resultado.saidas), 2)
+        self.assertFalse((self.dir / "a.docx.md").exists())
+        # Tampouco co zip de entrada directa.
+        resultado = conversor.converter(str(raiz / "malo.zip"))
+        saida = (raiz / "malo-md").resolve()
+        for ruta in resultado.saidas:
+            self.assertTrue(Path(ruta).resolve().is_relative_to(saida), ruta)
+
+    def test_macosx_e_homonimos_dentro_do_zip_dun_cartafol(self):
+        raiz = self.dir / "cartafol"
+        with zipfile.ZipFile(raiz.mkdir() or raiz / "dous.zip", "w") as z:
+            z.write(_docx(self.dir / "orixe" / "1" / "igual.docx"), "x/igual.docx")
+            z.write(_docx(self.dir / "orixe" / "2" / "igual.docx", "Outra"), "y/igual.docx")
+            z.writestr("__MACOSX/x/._igual.docx", b"\x00")
+        resultado = conversor.converter(str(raiz))
+        self.assertEqual(sorted(Path(r).relative_to(raiz).as_posix() for r in resultado.saidas),
+                         ["dous-md/x/igual.docx.md", "dous-md/y/igual.docx.md"])
+        self.assertEqual(resultado.omitidos, [("dous-md/__MACOSX/x/._igual.docx", "metadatos_macos")])
+        self.assertIn("# Outra", (raiz / "dous-md" / "y" / "igual.docx.md").read_text(encoding="utf-8"))
+
+    def test_limite_de_tamano_descomprimido(self):
+        raiz = self.dir / "cartafol"
+        self._zip(raiz / "grande.zip", **{"a.docx": _docx(self.dir / "orixe" / "a.docx")})
+        _docx(raiz / "solto.docx")
+        with mock.patch.object(conversor, "MAX_DESCOMPRIMIDO", 100):
+            resultado = conversor.converter(str(raiz))
+        self.assertEqual([Path(r).name for r in resultado.saidas], ["solto.docx.md"])
+        self.assertEqual(resultado.omitidos, [("grande.zip", "zip_demasiado_grande")])
+        self.assertFalse((raiz / "grande-md").exists())
+
+    def test_zip_roto_nun_cartafol_non_para_o_resto(self):
+        raiz = self.dir / "cartafol"
+        _docx(raiz / "solto.docx")
+        (raiz / "roto.zip").write_bytes(b"isto non e un zip")
+        resultado = conversor.converter(str(raiz))
+        self.assertEqual([Path(r).name for r in resultado.saidas], ["solto.docx.md"])
+        self.assertEqual(resultado.omitidos, [("roto.zip", "zip_ilexible")])
+
+    def test_un_so_md_incluiu_os_documentos_do_zip(self):
+        raiz = self._carpeta_con_zip()
+        resultado = conversor.converter(str(raiz), un_so_md=True)
+        md = Path(resultado.saidas[0]).read_text(encoding="utf-8")
+        self.assertIn("ficheiros: 3\n", md)
+        self.assertIn("anexos/10 Proxecto básico-md/memoria.docx", md)
+
+    def test_anonimizando_aplica_as_mesmas_regras_ao_zip_do_cartafol(self):
+        rexistro = RexistroCorrespondencias(str(self.dir / "rexistro"))
+        raiz = self._carpeta_con_zip()
+        self._zip(raiz / f"Poder {_NOME}.zip", **{"a.docx": _docx(self.dir / "orixe" / "a.docx")})
+        saida = self.dir / "saida"
+        resultado = conversor.converter(str(raiz), anonimizar=True, rexistro=rexistro, saida=str(saida))
+        self.assertEqual(len(resultado.saidas), 4)
+        for ficheiro in saida.rglob("*"):
+            self._sen_datos(str(ficheiro.relative_to(saida)))
+            if ficheiro.is_file():
+                self.assertIn(".anonimizado.", ficheiro.name)
+                self._sen_datos(ficheiro.read_text(encoding="utf-8"))
+        self.assertTrue((saida / "anexos" / "10 Proxecto básico-md").is_dir())
+
+
 class TestPuntosDeEnganche(_Base):
     def setUp(self):
         super().setUp()

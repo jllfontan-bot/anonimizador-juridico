@@ -111,6 +111,22 @@ class TestHtml(_Base):
         for externo in ('src="http', "src='http", 'href="http', "<link"):
             self.assertNotIn(externo, html)
 
+    def test_o_subtitulo_non_promete_que_a_ia_non_gaste_tokens(self):
+        for lingua in ("gl", "es"):
+            textos = pantalla_conversor.textos_da_pantalla(lingua)
+            for clave in ("subtitulo",):
+                self.assertNotRegex(textos[clave], r"(?i)s[ei]n gastar tokens")
+                self.assertIn("mínimos tokens", textos[clave])
+            self.assertNotRegex(idioma.t("conversor.cli.descricion", lingua), r"(?i)s[ei]n que gaste")
+            self.assertIn("mínimos tokens", idioma.t("conversor.cli.descricion", lingua))
+        self.assertNotRegex(conversor.__doc__, r"(?i)non gaste tokens")
+
+    def test_html_ten_a_lista_de_fugas_e_o_boton_revisar(self):
+        html = pantalla_conversor.html()
+        for clave in ("fugas_titulo", "revisar_documento", "revision_despois"):
+            self.assertIn('"' + clave + '"', html)
+        self.assertIn("revisar_documento", html)
+
     def test_mesmas_claves_en_galego_e_castelan(self):
         self.assertEqual(set(pantalla_conversor.textos_da_pantalla("gl")),
                          set(pantalla_conversor.textos_da_pantalla("es")))
@@ -343,18 +359,129 @@ class TestAnonimizando(_Base):
         self.assertGreaterEqual(documento["persoas"], 1)
         self.assertIn("marcadas", documento)
 
-    def test_automatico_con_risco_alto_pasa_a_revision(self):
-        ficheiro = _docx(self.dir / "con_risco.docx", "Comparece don Xoán Páez Veiga. Referencia 34867809 do expediente.")
-        self.api.converter({"rutas": [str(ficheiro)], "anonimizar": True, "modo": "automatico"})
-        revision = self._agardar("revisar")
-        self.assertEqual(revision["motivo"], "fugas")
+    _RISCO = "Comparece don Xoán Páez Veiga. Referencia 34867809 do expediente."
+
+    def _expediente_con_un_risco(self) -> Path:
+        raiz = self.dir / "expediente"
+        _docx(raiz / "con_risco.docx", self._RISCO)
+        _docx(raiz / "limpo.docx", "O xulgado de Lugo cita ás partes para o día dez.")
+        return raiz
+
+    def _automatico(self, raiz, **opcions):
+        self.api.converter({"rutas": [str(raiz)], "anonimizar": True, "modo": "automatico", **opcions})
+        evento, datos = self._final()
+        self.assertEqual(evento, "rematado")
+        return datos
+
+    def _md_de(self, datos, fragmento):
+        ruta = next(Path(r) for r in datos["saidas"] if fragmento in Path(r).name)
+        return ruta, ruta.read_text(encoding="utf-8")
+
+    def test_automatico_nunca_se_detén_e_lista_so_os_documentos_con_aviso_alto(self):
+        datos = self._automatico(self._expediente_con_un_risco())
+        self.assertNotIn("revisar", [e for e, _ in self.eventos])
+        self.assertEqual(len(datos["saidas"]), 2)
+        for ruta in datos["saidas"]:
+            self.assertIn("revisado: non\n", Path(ruta).read_text(encoding="utf-8"))
+        self.assertEqual(len(datos["fugas_docs"]), 1)
+        doc = datos["fugas_docs"][0]
+        self.assertIn("con_risco", doc["nome"])
+        self.assertFalse(doc["revisado"])
+        self.assertIn("34867809", [f["texto"] for f in doc["fugas"]])
+        self.assertTrue(all({"tipo", "texto"} <= set(f) for f in doc["fugas"]))
+
+    def test_sen_avisos_altos_non_hai_lista(self):
+        datos = self._automatico(_docx(self.dir / "limpo.docx", "O xulgado de Lugo cita ás partes."))
+        self.assertEqual(datos["fugas_docs"], [])
+
+    def test_revisar_substitúe_o_md_e_marca_revisado(self):
+        raiz = self._expediente_con_un_risco()
+        datos = self._automatico(raiz)
+        ruta, md = self._md_de(datos, "con_risco")
+        self.assertIn("34867809", md)  # o número suelto quedou á vista en automático
+        eventos_antes = len(self.eventos)
+        r = self.api.revisar_documento(datos["fugas_docs"][0]["id"])
+        revision = r["revision"]
+        self.assertEqual(revision["motivo"], "despois")
+        self.assertEqual(len(self.eventos), eventos_antes)  # non hai fío agardando
         self.assertIn("34867809", [f["texto"] for f in revision["fugas"]])
-        self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
-                                     "fragmentos": "34867809 => [NÚMERO]"})
-        _, datos = self._final()
-        md = self._md(datos)
+        self.assertNotIn("Páez", revision["vista_previa"])
+        json.dumps(r)
+        resposta = self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
+                                                "fragmentos": "34867809 => [NÚMERO]"})
+        resumo = resposta["resumo"]
+        _, md = self._md_de(resumo, "con_risco")
+        self.assertEqual(ruta.read_text(encoding="utf-8"), md)  # o mesmo ficheiro, sobrescrito
         self.assertIn("revisado: si\n", md)
         self.assertNotIn("34867809", md)
+        self.assertNotIn("Páez", md)
+        self.assertEqual(sorted(resumo["saidas"]), sorted(datos["saidas"]))
+        self.assertTrue(resumo["fugas_docs"][0]["revisado"])
+        revisados = {d["nome"]: d["revisado"] for d in resumo["documentos"]}
+        self.assertEqual(sorted(revisados.values()), [False, True])
+        # O outro documento queda automático.
+        _, md_limpo = self._md_de(resumo, "limpo")
+        self.assertIn("revisado: non\n", md_limpo)
+        # Xa revisado: o botón non vale dúas veces.
+        self.assertIn("erro", self.api.revisar_documento(resumo["fugas_docs"][0]["id"]))
+
+    def test_cancelar_a_revision_deixa_o_md_automatico(self):
+        raiz = self._expediente_con_un_risco()
+        datos = self._automatico(raiz)
+        ruta, antes = self._md_de(datos, "con_risco")
+        self.api.revisar_documento(datos["fugas_docs"][0]["id"])
+        resumo = self.api.cancelar_revision_despois()["resumo"]
+        self.assertEqual(ruta.read_text(encoding="utf-8"), antes)
+        self.assertIn("revisado: non\n", antes)
+        self.assertFalse(resumo["fugas_docs"][0]["revisado"])
+        # E pódese volver abrir.
+        self.assertIn("revision", self.api.revisar_documento(resumo["fugas_docs"][0]["id"]))
+
+    def test_revisar_un_documento_inexistente(self):
+        self._automatico(self._expediente_con_un_risco())
+        self.assertIn("erro", self.api.revisar_documento(99))
+        self.assertIn("erro", self.api.revisar_documento("x"))
+
+    def test_revisar_con_un_so_md_rescribe_o_md_unico(self):
+        raiz = self._expediente_con_un_risco()
+        datos = self._automatico(raiz, un_so_md=True)
+        self.assertEqual(len(datos["saidas"]), 1)
+        ruta = Path(datos["saidas"][0])
+        self.assertIn("34867809", ruta.read_text(encoding="utf-8"))
+        revision = self.api.revisar_documento(datos["fugas_docs"][0]["id"])["revision"]
+        resumo = self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
+                                              "fragmentos": "34867809 => [NÚMERO]"})["resumo"]
+        md = ruta.read_text(encoding="utf-8")
+        self.assertEqual(resumo["saidas"], [str(ruta)])
+        self.assertNotIn("34867809", md)
+        self.assertIn("ficheiros: 2\n", md)
+        self.assertIn("Lugo", md)  # o outro documento segue aí
+        self.assertIn("revisado: non\n", md)  # un só dos dous revisado: a cabeceira non o di
+
+    def test_varias_entradas_cada_documento_revisase_na_sua(self):
+        a = _docx(self.dir / "a" / "primeiro.docx", self._RISCO)
+        b = _docx(self.dir / "b" / "primeiro.docx", "Comparece don Xoán Páez Veiga. Referencia 55512344 do outro.")
+        self.api.converter({"rutas": [str(a.parent), str(b.parent)], "anonimizar": True, "modo": "automatico"})
+        _, datos = self._final()
+        self.assertEqual(len(datos["fugas_docs"]), 2)
+        outro = next(d for d in datos["fugas_docs"] if any(f["texto"] == "55512344" for f in d["fugas"]))
+        revision = self.api.revisar_documento(outro["id"])["revision"]
+        resumo = self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
+                                              "fragmentos": "55512344 => [NÚMERO]"})["resumo"]
+        mds = {Path(r).parent.parent.name + "/" + Path(r).parent.name: Path(r).read_text(encoding="utf-8")
+               for r in resumo["saidas"]}
+        self.assertEqual(len(mds), 2)
+        self.assertTrue(all(("revisado: si\n" in m) == ("[NÚMERO]" in m) for m in mds.values()))
+        self.assertEqual(sorted(d["revisado"] for d in resumo["fugas_docs"]), [False, True])
+
+    def test_no_modo_revisar_non_hai_lista_de_fugas(self):
+        ficheiro = _docx(self.dir / "con_risco.docx", self._RISCO)
+        self.api.converter({"rutas": [str(ficheiro)], "anonimizar": True, "modo": "revisar"})
+        revision = self._agardar("revisar")
+        self.assertEqual(revision["motivo"], "revisar")
+        self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]], "fragmentos": ""})
+        _, datos = self._final()
+        self.assertEqual(datos["fugas_docs"], [])
 
 
 class TestXanelaSenServidor(unittest.TestCase):

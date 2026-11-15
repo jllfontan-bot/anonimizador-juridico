@@ -1238,6 +1238,94 @@ def _detectar_persoas_por_taboa(texto: str, texto_suavizado: str, ocupado: list,
     return atopadas
 
 
+# Sexto recoñecedor de reserva: "APELIDO APELIDO NOME" TODO EN MAIÚSCULAS e
+# SEN coma -- a orde do bloque de enderezo das notificacións do Catastro
+# ("- CAMPOS VILAR PABLO") e das táboas de titulares ("(46) 33344455A CAMPOS
+# VILAR PABLO 100,00"). FUGA GRAVE medida (nov. 2026): suavizado a Title Case,
+# spaCy (`es_core_news_md`) etiqueta "Campos Vilar Pablo" coma MISC/LOC en
+# vez de PER en ~29 % das combinacións apelido+apelido+nome (443 de 1.520
+# probadas), e o nome quedaba enteiro á vista (ou, nas táboas, só se tapaba o
+# nome de pía e quedaba "CAMPOS VILAR" solto). Como `_detectar_persoas_por_taboa`
+# esixe un nome de pía PRIMEIRO, non cobre esta orde.
+#
+# Regras (restritivas a propósito, para non crear sobreanonimización):
+#  - o texto ORIXINAL do tramo vai todo en maiúsculas (o fallo medido é o das
+#    maiúsculas; en Title Case spaCy xa o resolve mellor e o risco de
+#    confundir unha frase é maior);
+#  - dúas palabras que son apelidos da táboa do INE + unha que é nome de pía
+#    da táboa (+ un segundo nome de pía opcional), todas na MESMA liña e sen
+#    conectores nin puntuación polo medio;
+#  - o tramo remata a fin de liña, ante `| , ; )`, un díxito ou `-`, e non vai
+#    seguido doutra palabra capitalizada (se non, é un título ou unha frase);
+#  - mesmos filtros ca o recoñecedor por táboa: palabra anterior de vía/centro
+#    (`_PREFIXOS_LUGAR`), `_NON_APELIDOS`, palabras funcionais/de prosa, cargos
+#    e `_EXCEPCIONS_NOME_TABOA`.
+_RACHA_CAPITALIZADA_MESMA_LIÑA_RE = re.compile(
+    r"(?<![\w'’.\-])" + _PALABRA_CAPITALIZADA_RE + r"(?:[ \t]+" + _PALABRA_CAPITALIZADA_RE + r"(?![\w'’]))*"
+)
+_PALABRA_SOLTA_RE = re.compile(_PALABRA_CAPITALIZADA_RE)
+_REMATE_NOME_SEN_COMA_RE = re.compile(r"[ \t]*(?:\Z|\n|\r|[|,;)\-]|\d)")
+
+
+def _palabra_valida_para_nome_sen_coma(palabra: str) -> bool:
+    baixa = palabra.lower()
+    return not (
+        nomes_ine.normalizar(palabra) in _NON_APELIDOS
+        or baixa in _PALABRAS_FUNCIONAIS
+        or baixa in _PALABRAS_NON_NOME
+        or re.fullmatch(_CARGOS_EXENTOS_RE, palabra, re.IGNORECASE)
+    )
+
+
+def _detectar_persoas_apelidos_nome_sen_coma(texto: str, texto_suavizado: str, ocupado: list, nlp) -> list:
+    """Ver o comentario de `_RACHA_CAPITALIZADA_MESMA_LIÑA_RE`."""
+    nomes_validos = nomes_ine.nomes_para_detector(nlp)
+    atopadas = []
+    for racha in _RACHA_CAPITALIZADA_MESMA_LIÑA_RE.finditer(texto_suavizado):
+        palabras = [(m.start() + racha.start(), m.group()) for m in _PALABRA_SOLTA_RE.finditer(racha.group())]
+        if len(palabras) < 3:
+            continue
+        for i in range(len(palabras) - 2):
+            (inicio, ap1), (_, ap2), (_, nome) = palabras[i:i + 3]
+            if not (
+                _palabra_valida_para_nome_sen_coma(ap1) and _e_apelido_da_taboa(ap1)
+                and _palabra_valida_para_nome_sen_coma(ap2) and _e_apelido_da_taboa(ap2)
+                and _palabra_valida_para_nome_sen_coma(nome)
+                and nomes_ine.normalizar(nome) in nomes_validos
+            ):
+                continue
+            ultima = palabras[i + 2]
+            if i + 3 < len(palabras):
+                # Segundo nome de pía: só se é a última palabra da racha.
+                if i + 4 != len(palabras):
+                    continue
+                if not (_palabra_valida_para_nome_sen_coma(palabras[i + 3][1])
+                        and nomes_ine.normalizar(palabras[i + 3][1]) in nomes_validos):
+                    continue
+                ultima = palabras[i + 3]
+            fin = ultima[0] + len(ultima[1])
+            if not _REMATE_NOME_SEN_COMA_RE.match(texto_suavizado, fin):
+                continue
+            tramo = texto[inicio:fin]
+            if tramo != tramo.upper():
+                continue
+            if nomes_ine.normalizar(texto_suavizado[inicio:fin]).startswith(_EXCEPCIONS_NOME_TABOA):
+                continue
+            anteriores = [p.lower().translate(_ACENTOS) for p in _palabras_anteriores(texto_suavizado, inicio)]
+            if anteriores and (
+                anteriores[0] in _PREFIXOS_LUGAR or anteriores[0] in _PREVIOS_NON_PERSOA
+                or (anteriores[0] in {"de", "do", "da"} and anteriores[1:2] and anteriores[1] in _PREFIXOS_LUGAR)
+            ):
+                continue
+            if any(ocupado[inicio:fin]):
+                continue
+            atopadas.append(Entidade(inicio, fin, tramo, "PERSOA"))
+            for k in range(inicio, fin):
+                ocupado[k] = True
+            break
+    return atopadas
+
+
 _PALABRA_ANTERIOR_RE = re.compile(
     r"(?<![\w'’.\-])(" + _PALABRA_CAPITALIZADA_RE + r")[ \t]+\Z"
 )
@@ -3447,10 +3535,20 @@ def _detectar(texto: str, celas: list | None = None):
         for i in range(entidade.inicio, entidade.fin):
             ocupado[i] = True
 
+    # Sexto: "APELIDO APELIDO NOME" en maiúsculas e sen coma (ver
+    # `_detectar_persoas_apelidos_nome_sen_coma`). ANTES ca o da táboa: se un
+    # apelido tamén é nome de pía ("RIOS LEIRA LUIS"), o da táboa collería só
+    # "LEIRA LUIS" e deixaría "RIOS" á vista.
+    for entidade in _detectar_persoas_apelidos_nome_sen_coma(texto, texto_suavizado_completo, ocupado, nlp):
+        entidades.append(entidade)
+        for i in range(entidade.inicio, entidade.fin):
+            ocupado[i] = True
+
     # Quinto recoñecedor de reserva: nome da táboa oficial do INE + apelido
     # da táboa (ver `_detectar_persoas_por_taboa`). Vai o ÚLTIMO dos de
     # reserva: os anteriores están ancorados por sinais máis fortes
-    # (tratamento, profesión, orde invertida) e deben gañarlle.
+    # (tratamento, profesión, orde invertida, apelidos+nome en maiúsculas
+    # a fin de liña) e deben gañarlle.
     for entidade in _detectar_persoas_por_taboa(texto, texto_suavizado_completo, ocupado, nlp):
         entidades.append(entidade)
         for i in range(entidade.inicio, entidade.fin):

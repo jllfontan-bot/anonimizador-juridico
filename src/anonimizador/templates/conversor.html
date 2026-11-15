@@ -325,7 +325,7 @@ function pintarRevision(d) {
   const s = $("revision");
   s.replaceChildren();
   s.append(el("h2", {style: "margin-top:0; font-size:19px;"}, t("revision_titulo", {nome: d.nome})));
-  if (d.motivo === "fugas") s.append(el("div", {class: "aviso", style: "margin-bottom:14px;"}, t("revision_por_fugas")));
+  if (d.motivo === "despois") s.append(el("div", {class: "aviso", style: "margin-bottom:14px;"}, t("revision_despois")));
   const fragmentos = el("textarea", {id: "fragmentos", rows: 4});
   if (d.fugas.length) {
     s.append(el("h2", {}, t("revisar.fugas_titulo")), el("p", {class: "mencions"}, t("revisar.fugas_texto")));
@@ -382,13 +382,33 @@ function pintarRevision(d) {
   s.append(el("div", {class: "fila", style: "margin-top:18px;"},
     el("button", {type: "button", id: "confirmar-revision", onclick: confirmarRevision}, t("revision_confirmar")),
     el("span", {class: "esp"}),
-    el("button", {type: "button", class: "boton-secundario", onclick: cancelar}, t("cancelar"))));
+    el("button", {type: "button", class: "boton-secundario", onclick: d.motivo === "despois" ? cancelarDespois : cancelar}, t("cancelar"))));
+  s.append(el("p", {class: "aviso", id: "erro-revision", hidden: true, style: "margin-top:12px;"}));
 }
 async function confirmarRevision() {
   const anonimizar = [...document.querySelectorAll("#revision input[name=anonimizar]:checked")].map((c) => c.value);
   $("confirmar-revision").disabled = true;
-  await api().confirmar_revision({anonimizar, fragmentos: $("fragmentos").value});
+  const r = await api().confirmar_revision({anonimizar, fragmentos: $("fragmentos").value});
+  if (r.erro) { $("erro-revision").textContent = r.erro; $("erro-revision").hidden = false; $("confirmar-revision").disabled = false; return; }
+  if (r.resumo) { volverAoResumo(r.resumo); return; }  // revisión dun documento despois de converter
   amosar("progreso");
+}
+function volverAoResumo(resumo) {
+  ultimaRevision = null;
+  ultimoResultado = resumo;
+  pintarResultado(ultimoEvento, resumo);
+  amosar("resultado");
+}
+async function cancelarDespois() {
+  const r = await api().cancelar_revision_despois();
+  volverAoResumo(r.resumo || ultimoResultado);
+}
+async function revisarDocumento(id, erro) {
+  const r = await api().revisar_documento(id);
+  if (r.erro) { erro.textContent = r.erro; erro.hidden = false; return; }
+  ultimaRevision = r.revision;
+  pintarRevision(r.revision);
+  amosar("revision");
 }
 async function cancelar() {
   $("cancelar").disabled = true;
@@ -430,11 +450,24 @@ function pintarResultado(evento, d) {
     }
     s.append(lista);
   }
+  if ((d.fugas_docs || []).length) {
+    s.append(el("h2", {}, t("fugas_titulo")), el("p", {class: "mencions"}, t("fugas_texto")));
+    for (const f of d.fugas_docs) {
+      const erro = el("p", {class: "aviso", hidden: true, style: "margin-top:8px;"});
+      s.append(el("div", {class: "tarxeta" + (f.revisado ? "" : " marcada")},
+        el("div", {class: "fila"}, el("strong", {class: "esp"}, f.nome),
+          f.revisado ? el("span", {class: "motivo"}, t("fugas_revisado"))
+                     : el("button", {type: "button", class: "boton-secundario", onclick: () => revisarDocumento(f.id, erro)}, t("revisar_documento"))),
+        ...f.fugas.map((r) => el("div", {class: "mencions"},
+          t(r.tipo === "nome_en_orde_invertida" ? "revisar.orde_invertida" : "revisar.numero_solto") + ": “" + r.texto + "”")),
+        erro));
+    }
+  }
   if (d.documentos.length) {
     s.append(el("h2", {}, t("documentos_titulo")));
     for (const doc of d.documentos) {
       // As fugas dun documento revisado xa as viu unha persoa: só se avisa das doutros.
-      const fugas = doc.revisado ? 0 : doc.fugas;
+      const fugas = doc.revisado || d.automatico ? 0 : doc.fugas;  // en automático van na lista «posibles fugas»
       const tarxeta = el("div", {class: "tarxeta" + ((doc.marcadas.length && !doc.revisado) || fugas ? " marcada" : "")},
         el("strong", {}, doc.nome),
         el("div", {class: "mencions"}, t("doc_resumo", {persoas: doc.persoas, marcadas: doc.marcadas.length})

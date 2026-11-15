@@ -427,7 +427,12 @@ _SEGURIDADE_SOCIAL = re.compile(
 _NUMERO_PORTAL = r"\d+[A-ZÁÉÍÓÚÑ]?"  # IGNORECASE aplícase a todo o patrón -> tamén casa minúscula
 _ENDEREZO = re.compile(
     r"\b(?:r[uú]a|calle|c/|avenida|avda\.?|estrada|carretera|cami[ñn]o|traves[íi]a|paseo|rolda|ronda|"
-    r"urbanizaci[oó]n|praz[ae]|plaza|lugar)[ \t]+"
+    r"urbanizaci[oó]n|praz[ae]|plaza|lugar|"
+    # Abreviaturas curtas do Catastro e doutros rexistros ("AV ROSALIA CASTRO
+    # 43", "CL NOVA 5", "PZA. MAIOR 2"). Sen punto, só en MAIÚSCULAS (ou
+    # "Av"/"Avd"/"Pza"): "33 cl de agua y 2 de vino" non é un enderezo. Co
+    # punto, en calquera caixa ("av. Rosalía de Castro 43").
+    r"(?-i:AVD?|CL|PZA|Avd?|Pza)\.?|(?:avd?|cl|pza)\.)[ \t]+"
     r"(?:d[eoa]s?[ \t]+)?[\wáéíóúñÁÉÍÓÚÑ.'-]+(?:[ \t]+[\wáéíóúñÁÉÍÓÚÑ.'-]+){0,4}"
     r"(?:,?[ \t]*" + _N_ORDINAL + r"[ \t]*" + _NUMERO_PORTAL
     + r"|,?[ \t]*n[uú]mero[ \t]*" + _NUMERO_PORTAL

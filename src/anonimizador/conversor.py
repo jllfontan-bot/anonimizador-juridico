@@ -1,7 +1,7 @@
 """Conversor de ficheiros a .md para IA (ESTUDIO-CONVERSOR-MD, fase 2).
 
 Converte en local un ficheiro, un cartafol ou un .zip a Markdown, para que
-a IA non gaste tokens nin chamadas a ferramentas convertíndoo ela. Usa o
+a IA non teña que convertelos e gaste os mínimos tokens ao lelos. Usa o
 mesmo motor có anonimizador, nunca unha copia:
 
 - **Sen anonimizar**: `lectura.cargar_documento_estruturado` +
@@ -105,10 +105,22 @@ class Resultado:
     tokens_despois: int = 0  # ... e do escrito
     revisados: list = field(default_factory=list)  # nomes anonimizados (coma `informes`) revisados por unha persoa
     csv: list = field(default_factory=list)  # rutas dos .csv á parte (follas grandes), canda o seu .md
+    documentos: dict = field(default_factory=dict)  # nome orixe (o que recibe `revisar`) -> DocumentoSaida
+    _lote: object = field(default=None, repr=False, compare=False)  # o que fai falta para `substituir_revisado`
 
     def resumo_tokens(self) -> str:
         """Frase da estimación de tokens antes e despois (di que é unha estimación)."""
         return aforro_ia.Resultado("", 0, 0, self.tokens_antes, self.tokens_despois).resumo()
+
+
+@dataclass
+class DocumentoSaida:
+    """Un documento convertido: de onde ven e onde quedou."""
+
+    orixe: str  # nome relativo á entrada (un ficheiro solto: o seu nome), coma o que recibe `revisar`
+    nome_visible: str  # o mesmo nome tal como sae no .md (anonimizado se cómpre): a chave de `Resultado.informes`
+    informe: dict | None = None  # só anonimizando
+    saidas: list = field(default_factory=list)  # .md escritos (o .md único, se hai `un_so_md`; con partes e índice, todos)
 
 
 @dataclass
@@ -128,6 +140,24 @@ class _Convertido:
     avisos: list = field(default_factory=list)
     revisado: bool = False
     csv: list = field(default_factory=list)  # .csv á parte que o lector deixou nun cartafol temporal
+    orixe: str = ""  # str(_Documento.nome)
+    ruta: Path | None = None  # o .md principal escrito (sen `un_so_md`)
+
+
+@dataclass
+class _Lote:
+    """O necesario para volver escribir un documento xa convertido (`substituir_revisado`)."""
+
+    convertidos: dict  # nome orixe -> _Convertido
+    anonimizar: bool
+    un_so_md: bool
+    aforro: bool
+    caracteres_por_parte: int | None
+    data: datetime.date
+    nome_entrada: str
+    ruta_unico: Path | None = None  # o .md único (`un_so_md`)
+    omitidos: list = field(default_factory=list)  # (nome visible, motivo) para o índice do .md único
+    saidas_unico: list = field(default_factory=list)
 
 
 def _extensions() -> tuple:
@@ -160,16 +190,98 @@ def _e_saida_anterior(nome: str) -> bool:
     return ruta.suffix == ".md" and PurePosixPath(ruta.stem).suffix in (*_extensions(), ".zip")
 
 
-def _documentos(entrada: Path, tmp: Path, anonimizar: bool) -> tuple[list, list]:
-    """(documentos, omitidos) dun ficheiro, un cartafol ou un .zip."""
-    documentos, omitidos = [], []
+MAX_DESCOMPRIMIDO = 2 * 1024**3  # bytes que unha execución descomprime en total dos .zip (contra zip bombs)
+SUFIXO_CARTAFOL_ZIP = "-md"  # un .zip nun cartafol sae no subcartafol `<nome do zip sen .zip>-md`
 
-    def engadir(nome: PurePosixPath, ruta_ou_lector):
+
+class _ZipRexeitado(Exception):
+    """Un .zip que non se abre enteiro (demasiado grande ao descomprimir); leva o motivo."""
+
+    def __init__(self, motivo: str):
+        super().__init__(motivo)
+        self.motivo = motivo
+
+
+def _nome_seguro(nome: str) -> PurePosixPath:
+    """Ruta dunha entrada dun .zip sen `..`, raíz nin unidade: o cartafol de
+    saída sae desta ruta, así que un `../../x.pdf` nunca escribe fóra del."""
+    partes = [p for p in nome.replace("\\", "/").split("/") if p not in ("", ".", "..") and not p.endswith(":")]
+    return PurePosixPath(*partes) if partes else PurePosixPath("_")
+
+
+def _documentos(entrada: Path, tmp: Path, anonimizar: bool) -> tuple[list, list]:
+    """(documentos, omitidos) dun ficheiro, un cartafol ou un .zip.
+
+    Un .zip dentro dun cartafol ábrese coma se fose a entrada, e os seus
+    documentos saen no subcartafol `<nome do zip sen .zip>-md` (á altura do
+    zip). Un .zip dentro dun .zip non se abre (profundidade 1: `zip_dentro_de_zip`).
+    Un .zip que descomprimiría máis do que queda de `MAX_DESCOMPRIMIDO` ou
+    que non se pode abrir omítese enteiro (`zip_demasiado_grande`,
+    `zip_ilexible`); non se escribe nada a medias."""
+    documentos, omitidos = [], []
+    queda = [MAX_DESCOMPRIMIDO]
+    numero = [0]
+
+    def engadir(nome: PurePosixPath, ruta_ou_lector, docs=documentos, omit=omitidos):
         motivo = _motivo_omision(nome.name, anonimizar)
         if motivo:
-            omitidos.append((str(nome), motivo))
+            omit.append((str(nome), motivo))
         else:
-            documentos.append(_Documento(nome, ruta_ou_lector()))
+            docs.append(_Documento(nome, ruta_ou_lector()))
+
+    def abrir_zip(ruta_zip: Path, prefixo: PurePosixPath, aniñado: bool, docs: list, omit: list) -> None:
+        """Documentos e omitidos dun .zip en `docs` e `omit`. `prefixo`: o
+        subcartafol de saída dos seus documentos (baleiro se o zip é a
+        entrada); `aniñado`: o zip está dentro doutro (un .zip dentro non se abre)."""
+        usados = 0
+
+        def nome_visible(nome: PurePosixPath) -> str:
+            return str(prefixo / nome) if prefixo.parts else str(nome)
+
+        with zipfile.ZipFile(ruta_zip) as zip_entrada:
+            candidatos = []
+            for info in zip_entrada.infolist():
+                if info.is_dir():
+                    continue
+                nome = _nome_seguro(info.filename)
+                if "__MACOSX" in nome.parts or nome.name.startswith("._"):
+                    omit.append((nome_visible(nome), "metadatos_macos"))
+                elif nome.suffix.lower() == ".zip":
+                    omit.append((nome_visible(nome), "zip_dentro_de_zip"))
+                elif _motivo_omision(nome.name, anonimizar):
+                    omit.append((nome_visible(nome), _motivo_omision(nome.name, anonimizar)))
+                else:
+                    candidatos.append((info, nome))
+            if sum(info.file_size for info, _ in candidatos) > queda[0]:
+                raise _ZipRexeitado("zip_demasiado_grande")
+            for info, nome in candidatos:
+                numero[0] += 1
+                # Só o nome do ficheiro, nun cartafol propio: nunca a ruta do
+                # zip nin choques entre homónimos.
+                destino = tmp / str(numero[0]) / nome.name
+                destino.parent.mkdir()
+                with zip_entrada.open(info) as orixe, destino.open("wb") as saida:
+                    while bloque := orixe.read(1 << 20):
+                        usados += len(bloque)
+                        if usados > queda[0]:  # a cabeceira do zip mentía sobre o tamaño
+                            raise _ZipRexeitado("zip_demasiado_grande")
+                        saida.write(bloque)
+                docs.append(_Documento(prefixo / nome, destino))
+        queda[0] -= usados
+
+    def abrir_zip_de_cartafol(ruta: Path, nome: PurePosixPath) -> None:
+        subcartafol = nome.parent / (nome.stem + SUFIXO_CARTAFOL_ZIP)
+        docs, omit = [], []
+        try:
+            abrir_zip(ruta, subcartafol, False, docs, omit)
+        except _ZipRexeitado as e:
+            omitidos.append((str(nome), e.motivo))
+            return
+        except Exception:  # noqa: BLE001 -- un .zip roto ou cifrado non para o cartafol
+            omitidos.append((str(nome), "zip_ilexible"))
+            return
+        documentos.extend(docs)
+        omitidos.extend(omit)
 
     if entrada.is_dir():
         for ruta in sorted(entrada.rglob("*")):
@@ -178,27 +290,15 @@ def _documentos(entrada: Path, tmp: Path, anonimizar: bool) -> tuple[list, list]
             nome = PurePosixPath(ruta.relative_to(entrada).as_posix())
             if _e_saida_anterior(nome.name):
                 omitidos.append((str(nome), "saida_anterior"))
+            elif nome.suffix.lower() == ".zip":
+                abrir_zip_de_cartafol(ruta, nome)
             else:
                 engadir(nome, lambda ruta=ruta: ruta)
     elif entrada.suffix.lower() == ".zip":
-        with zipfile.ZipFile(entrada) as zip_entrada:
-            for i, info in enumerate(zip_entrada.infolist()):
-                if info.is_dir():
-                    continue
-                nome = PurePosixPath(info.filename)
-                if "__MACOSX" in nome.parts or nome.name.startswith("._"):
-                    omitidos.append((info.filename, "metadatos_macos"))
-                    continue
-
-                def extraer(info=info, nome=nome, i=i):
-                    # Só o nome do ficheiro, nun cartafol propio: nunca a
-                    # ruta do zip ("../") nin choques entre homónimos.
-                    destino = tmp / str(i) / nome.name
-                    destino.parent.mkdir()
-                    destino.write_bytes(zip_entrada.read(info))
-                    return destino
-
-                engadir(nome, extraer)
+        try:
+            abrir_zip(entrada, PurePosixPath(), True, documentos, omitidos)
+        except _ZipRexeitado as e:
+            omitidos.append((entrada.name, e.motivo))
     else:
         engadir(PurePosixPath(entrada.name), lambda: entrada)
     return documentos, omitidos
@@ -220,7 +320,7 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         corpo, avisos, ficheiros = (lido, [], []) if isinstance(lido, str) else (
             lido.markdown, list(lido.avisos), list(lido.ficheiros))
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, None, avisos, csv=ficheiros), None
+                           str(doc.nome), corpo, None, avisos, csv=ficheiros, orixe=str(doc.nome)), None
 
     texto, contexto = lectura.cargar_documento_estruturado(str(doc.ruta))
     paxinas = None
@@ -231,7 +331,7 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         # Un .md de entrada xa é Markdown: tal cal (`xerar` escaparía os seus títulos).
         corpo = texto if sufixo == ".md" else titulos_pdf.marcar_titulos_md(copia_md.xerar(contexto, texto), contexto, texto)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, paxinas), None
+                           str(doc.nome), corpo, paxinas, orixe=str(doc.nome)), None
 
     from . import pipeline  # só aquí: o modo sen anonimizar non carga o NER
 
@@ -241,15 +341,19 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         revisado = revisar(str(doc.nome), texto, contexto, texto_anon, informe, substitucions)
         if revisado is not None:
             texto_anon, substitucions = revisado
-    corpo = texto_anon if sufixo == ".md" else titulos_pdf.marcar_titulos_md(
-        copia_md.xerar(contexto, texto_anon, substitucions), contexto, texto_anon, substitucions)
+    corpo = _corpo_anonimizado(sufixo, contexto, texto_anon, substitucions)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
     nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
     cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
     nome_visible = str(cartafol / nome_ficheiro)
     stem = PurePosixPath(nome_ficheiro).stem
     return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, corpo, paxinas,
-                       revisado=revisado is not None), informe
+                       revisado=revisado is not None, orixe=str(doc.nome)), informe
+
+
+def _corpo_anonimizado(sufixo: str, contexto, texto_anon: str, substitucions) -> str:
+    return texto_anon if sufixo == ".md" else titulos_pdf.marcar_titulos_md(
+        copia_md.xerar(contexto, texto_anon, substitucions), contexto, texto_anon, substitucions)
 
 
 def _nome_omitido_visible(nome: str, rexistro) -> str:
@@ -429,6 +533,9 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
     lote = entrada.is_dir() or e_zip
     un_so_md = un_so_md and lote
     resultado = Resultado()
+    paquete = _Lote({}, anonimizar, un_so_md, aforro, caracteres_por_parte, data, entrada.name)
+    if anonimizar:  # só se pode revisar despois o que se anonimizou
+        resultado._lote = paquete
 
     with tempfile.TemporaryDirectory() as tmp:
         documentos, resultado.omitidos = _documentos(entrada, Path(tmp), anonimizar)
@@ -461,12 +568,14 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
             convertidos.append(convertido)
             if convertido.avisos:
                 resultado.avisos[str(doc.nome)] = convertido.avisos
+            resultado.documentos[convertido.orixe] = DocumentoSaida(convertido.orixe, convertido.nome_visible, informe)
             if informe is not None:
                 resultado.informes[convertido.nome_visible] = informe
             if convertido.revisado:
                 resultado.revisados.append(convertido.nome_visible)
         if progreso is not None:
             progreso(len(documentos), len(documentos), "")
+    paquete.convertidos = {c.orixe: c for c in convertidos}
 
     # Nome da entrada tal como pode saír (anonimizado DESPOIS do contido).
     nome_entrada = entrada.name
@@ -475,6 +584,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
 
         nome_entrada = pipeline.nome_ficheiro_anonimizado(entrada.name, rexistro)
     base_entrada = PurePosixPath(nome_entrada).stem if e_zip else nome_entrada
+    paquete.nome_entrada = nome_entrada
 
     if un_so_md:
         omitidos = resultado.omitidos
@@ -491,6 +601,9 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
         cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos),
                                revisado=bool(convertidos) and all(c.revisado for c in convertidos))
         _escribir(ruta, cabeceira, _un_so_md(convertidos, corpos, omitidos), caracteres_por_parte, resultado.saidas)
+        paquete.ruta_unico, paquete.omitidos, paquete.saidas_unico = ruta, omitidos, list(resultado.saidas)
+        for c in convertidos:
+            resultado.documentos[c.orixe].saidas = paquete.saidas_unico
         return resultado
 
     if saida:
@@ -513,5 +626,54 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
         ruta.parent.mkdir(parents=True, exist_ok=True)
         _colocar_csv(c, ruta.parent, usados_csv, resultado)
         cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado)
+        antes = len(resultado.saidas)
         _escribir(ruta, cabeceira, _corpo_final(c, aforro, resultado), caracteres_por_parte, resultado.saidas)
+        c.ruta = ruta
+        resultado.documentos[c.orixe].saidas = resultado.saidas[antes:]
     return resultado
+
+
+def substituir_revisado(resultado: Resultado, orixe: str, texto_anon: str, substitucions, contexto) -> tuple[list, list]:
+    """Despois de converter en automático: un documento que unha persoa
+    acaba de revisar (co motor do anonimizador, fóra de `converter`) substitúe
+    o seu .md, agora con `revisado: si`. `orixe`: a chave de
+    `Resultado.documentos`; `texto_anon` e `substitucions`: o resultado da
+    revisión (`pipeline.aplicar_decisions`); `contexto`: o da lectura. O nome
+    de saída non cambia. Con `un_so_md`, rescríbese o .md único enteiro (o
+    seu índice e as demais seccións quedan como estaban). Devolve
+    (saídas de antes, saídas de agora); a estimación de tokens do
+    `Resultado` non se corrixe."""
+    lote: _Lote = resultado._lote
+    c = lote.convertidos[orixe]
+    c.corpo = _corpo_anonimizado(PurePosixPath(orixe).suffix.lower(), contexto, texto_anon, substitucions)
+    c.revisado = True
+    marcador = Resultado()  # a estimación dos tokens non se conta dúas veces
+    if lote.un_so_md:
+        antigas = list(lote.saidas_unico)
+        convertidos = list(lote.convertidos.values())
+        corpos = [_corpo_final(x, lote.aforro, marcador) for x in convertidos]
+        cabeceira = _cabeceira(lote.nome_entrada, lote.anonimizar, lote.data, ficheiros=len(convertidos),
+                               revisado=all(x.revisado for x in convertidos))
+        novas: list = []
+        _borrar(antigas)
+        _escribir(lote.ruta_unico, cabeceira, _un_so_md(convertidos, corpos, lote.omitidos),
+                  lote.caracteres_por_parte, novas)
+        lote.saidas_unico[:] = novas
+        for x in convertidos:
+            resultado.documentos[x.orixe].saidas = lote.saidas_unico
+    else:
+        antigas = list(resultado.documentos[orixe].saidas)
+        novas = []
+        _borrar(antigas)
+        cabeceira = _cabeceira(c.nome_visible, lote.anonimizar, lote.data, paxinas=c.paxinas, revisado=True)
+        _escribir(c.ruta, cabeceira, _corpo_final(c, lote.aforro, marcador), lote.caracteres_por_parte, novas)
+        resultado.documentos[orixe].saidas = novas
+    resultado.saidas = [s for s in resultado.saidas if s not in antigas] + novas
+    if c.nome_visible not in resultado.revisados:
+        resultado.revisados.append(c.nome_visible)
+    return antigas, novas
+
+
+def _borrar(rutas: list) -> None:
+    for ruta in rutas:
+        Path(ruta).unlink(missing_ok=True)
