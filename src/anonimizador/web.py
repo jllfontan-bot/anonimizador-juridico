@@ -33,7 +33,7 @@ from urllib.parse import urlsplit
 
 from flask import Flask, jsonify, make_response, redirect, render_template, request, url_for
 
-from . import copia_md, corpus_revision, explorador, idioma, informe_pdf, ner, selector
+from . import copia_md, corpus_revision, explorador, idioma, informe_pdf, markdown_ia, ner, selector
 from .pipeline import (
     _aplicar_substitucions_a_texto,
     anonimizar_e_gardar_detallado,
@@ -902,7 +902,7 @@ def confirmar(sid):
     def _xerar_copia_md(texto: str, subs) -> None:
         nonlocal texto_md
         if sesion.get("copia_md"):
-            texto_md = copia_md.xerar(contexto, texto, subs)
+            texto_md = markdown_ia.copia_do_anonimizador(contexto, texto, subs, Path(sesion["ruta_orixe"]).suffix)
 
     if conserva_formato(contexto, ruta_saida):
         try:

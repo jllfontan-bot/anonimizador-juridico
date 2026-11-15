@@ -5,12 +5,13 @@ a IA non teña que convertelos e gaste os mínimos tokens ao lelos. Usa o
 mesmo motor có anonimizador, nunca unha copia:
 
 - **Sen anonimizar**: `lectura.cargar_documento_estruturado` +
-  `copia_md.xerar` co texto orixinal. Este camiño NON importa `pipeline`,
+  `markdown_ia.xerar` co texto orixinal. Este camiño NON importa `pipeline`,
   `ner` nin `spacy` (`tests/test_conversor.py` compróbao nun subproceso):
   un paquete que só converta non ten que levar o NER.
 - **Anonimizando**: `pipeline.anonimizar_texto_detallado` sobre o mesmo
-  texto lido, e `copia_md.xerar` co texto anonimizado (do orixinal só a
-  estrutura, coma na copia .md do anonimizador). Os nomes de ficheiro e
+  texto lido, e `markdown_ia.xerar` co texto anonimizado (do orixinal só a
+  estrutura): a MESMA función, coas mesmas opcións, cá copia .md do
+  anonimizador (`tests/test_markdown_ia.py`). Os nomes de ficheiro e
   de cartafol anonimízanse coma no zip do anonimizador. Sen o enganche
   `revisar` (a liña de comandos) non hai revisión humana: quen chama debe
   avisalo, e o .md leva `revisado: non`.
@@ -35,15 +36,16 @@ Puntos de enganche (as ramas que os enchen intégranse ao fusionar):
   usan SEN anonimizar: un formato novo non se converte anonimizando ata ter
   as súas probas de fugas (estudo, punto 6; `formatos/ESCONDITES.md`); ata
   entón queda omitido con motivo `sen_proba_de_fugas`.
-Aforro para IA (`aforro_ia`, fase 3), por defecto: cabeceiras e pés
-repetidos unha vez, liñas partidas unidas e espazos de sobra fóra, en cada
-documento (`aforro=False` para non tocalo). Con `caracteres_por_parte`, un
+Aforro para IA (`aforro_ia`, fase 3, dentro de `markdown_ia.xerar`), por
+defecto: cabeceiras e pés repetidos unha vez, liñas partidas unidas e
+espazos de sobra fóra, en cada documento (`aforro=False` para non tocalo). Con `caracteres_por_parte`, un
 .md máis longo trócease en `<nome>.parte-01.md`... e `<nome>.indice.md`,
 cada un coa súa cabeceira (`anonimizado: si/non` vai en todos: as partes
 pásanse soltas á IA). `Resultado.tokens_antes`/`tokens_despois`: estimación.
 
 - `POSPROCESADOS`: funcións `str -> str` que se aplican, en orde, ao
-  Markdown de cada documento antes da cabeceira (`aforro_ia.py`). No modo
+  Markdown de cada documento, despois dos títulos e antes do aforro
+  (`markdown_ia.xerar`). No modo
   anonimizado reciben o texto xa anonimizado, así que non poden sacar á
   luz nada orixinal.
 
@@ -70,7 +72,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import aforro_ia, copia_md, formatos, idioma, lectura, pdf_estrutura, titulos_pdf
+from . import aforro_ia, formatos, idioma, lectura, markdown_ia, pdf_estrutura
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -142,6 +144,8 @@ class _Convertido:
     csv: list = field(default_factory=list)  # .csv á parte que o lector deixou nun cartafol temporal
     orixe: str = ""  # str(_Documento.nome)
     ruta: Path | None = None  # o .md principal escrito (sen `un_so_md`)
+    tokens_antes: int = 0  # estimación do Markdown antes do aforro (`markdown_ia.xerar`)
+    tokens_despois: int = 0
 
 
 @dataclass
@@ -308,19 +312,24 @@ def _con_salto_final(texto: str) -> str:
     return texto.rstrip("\n") + "\n"
 
 
-def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=None, dir_csv: Path | None = None) -> tuple:
+def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=None, dir_csv: Path | None = None,
+                         aforro: bool = True) -> tuple:
     """(_Convertido, informe ou None). `dir_csv`: onde o lector deixa os .csv
-    á parte (só sen anonimizar; ver `converter`)."""
+    á parte (só sen anonimizar; ver `converter`). O corpo sae SEMPRE de
+    `markdown_ia.xerar`, a mesma cadea cá copia .md do anonimizador."""
+    opcions = markdown_ia.opcions_do_reductor(aforro)
     sufixo_orixinal = PurePosixPath(doc.nome.name).suffix
     sufixo = sufixo_orixinal.lower()
     if sufixo not in lectura.EXTENSIONS_SOPORTADAS:  # formato novo: só chega aquí sen anonimizar
         # Nunca se pide o .csv á parte anonimizando: o .csv non pasaría polo anonimizador.
-        opcions = {"dir_csv": str(dir_csv)} if dir_csv is not None and not anonimizar else {}
-        lido = LECTORES_EXTRA[sufixo](str(doc.ruta), **opcions)
+        opcions_lector = {"dir_csv": str(dir_csv)} if dir_csv is not None and not anonimizar else {}
+        lido = LECTORES_EXTRA[sufixo](str(doc.ruta), **opcions_lector)
         corpo, avisos, ficheiros = (lido, [], []) if isinstance(lido, str) else (
             lido.markdown, list(lido.avisos), list(lido.ficheiros))
+        md = markdown_ia.xerar(None, corpo, aforro=opcions, xa_markdown=True, posprocesados=POSPROCESADOS)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, None, avisos, csv=ficheiros, orixe=str(doc.nome)), None
+                           str(doc.nome), md.texto, None, avisos, csv=ficheiros, orixe=str(doc.nome),
+                           tokens_antes=md.tokens_antes, tokens_despois=md.tokens_despois), None
 
     texto, contexto = lectura.cargar_documento_estruturado(str(doc.ruta))
     paxinas = None
@@ -328,10 +337,12 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         paxinas = len(contexto["paxinas"])
 
     if not anonimizar:
-        # Un .md de entrada xa é Markdown: tal cal (`xerar` escaparía os seus títulos).
-        corpo = texto if sufixo == ".md" else titulos_pdf.marcar_titulos_md(copia_md.xerar(contexto, texto), contexto, texto)
+        # Un .md de entrada xa é Markdown: tal cal (`copia_md.xerar` escaparía os seus títulos).
+        md = markdown_ia.xerar(contexto, texto, aforro=opcions, xa_markdown=sufixo == ".md",
+                               posprocesados=POSPROCESADOS)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
-                           str(doc.nome), corpo, paxinas, orixe=str(doc.nome)), None
+                           str(doc.nome), md.texto, paxinas, orixe=str(doc.nome),
+                           tokens_antes=md.tokens_antes, tokens_despois=md.tokens_despois), None
 
     from . import pipeline  # só aquí: o modo sen anonimizar non carga o NER
 
@@ -341,19 +352,20 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         revisado = revisar(str(doc.nome), texto, contexto, texto_anon, informe, substitucions)
         if revisado is not None:
             texto_anon, substitucions = revisado
-    corpo = _corpo_anonimizado(sufixo, contexto, texto_anon, substitucions)
+    md = _corpo_anonimizado(sufixo, contexto, texto_anon, substitucions, aforro)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
     nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
     cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
     nome_visible = str(cartafol / nome_ficheiro)
     stem = PurePosixPath(nome_ficheiro).stem
-    return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, corpo, paxinas,
-                       revisado=revisado is not None, orixe=str(doc.nome)), informe
+    return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, md.texto, paxinas,
+                       revisado=revisado is not None, orixe=str(doc.nome),
+                       tokens_antes=md.tokens_antes, tokens_despois=md.tokens_despois), informe
 
 
-def _corpo_anonimizado(sufixo: str, contexto, texto_anon: str, substitucions) -> str:
-    return texto_anon if sufixo == ".md" else titulos_pdf.marcar_titulos_md(
-        copia_md.xerar(contexto, texto_anon, substitucions), contexto, texto_anon, substitucions)
+def _corpo_anonimizado(sufixo: str, contexto, texto_anon: str, substitucions, aforro: bool) -> aforro_ia.Resultado:
+    return markdown_ia.xerar(contexto, texto_anon, substitucions, aforro=markdown_ia.opcions_do_reductor(aforro),
+                             xa_markdown=sufixo == ".md", posprocesados=POSPROCESADOS)
 
 
 def _nome_omitido_visible(nome: str, rexistro) -> str:
@@ -387,12 +399,6 @@ def _cabeceira(orixe: str, anonimizado: bool, data: datetime.date, paxinas: int 
         liñas.append(f"{idioma.t('conversor.revisado')}: {idioma.t('conversor.si' if revisado else 'conversor.non')}")
     liñas.append(f"{idioma.t('conversor.convertido')}: {data.isoformat()}, {idioma.t('conversor.nome')} {VERSION}")
     return "\n".join(liñas) + "\n---\n"
-
-
-def _posprocesar(corpo: str) -> str:
-    for funcion in POSPROCESADOS:
-        corpo = funcion(corpo)
-    return corpo
 
 
 _TITULO = re.compile(r"(#{1,5})(\s)")
@@ -433,14 +439,11 @@ def _un_so_md(convertidos: list, corpos: list, omitidos: list) -> str:
     return "\n\n".join(partes) + "\n"
 
 
-def _corpo_final(c: _Convertido, aforro: bool, resultado: Resultado) -> str:
-    """Corpo posprocesado e, con `aforro`, aforrado; suma a estimación de tokens."""
-    corpo = _posprocesar(c.corpo)
-    resultado.tokens_antes += aforro_ia.estimar_tokens(corpo)
-    if aforro:
-        corpo = aforro_ia.aforrar(corpo).texto
-    resultado.tokens_despois += aforro_ia.estimar_tokens(corpo)
-    return corpo
+def _corpo_final(c: _Convertido, resultado: Resultado) -> str:
+    """Corpo xa posprocesado e aforrado (`markdown_ia.xerar`); suma a estimación de tokens."""
+    resultado.tokens_antes += c.tokens_antes
+    resultado.tokens_despois += c.tokens_despois
+    return c.corpo
 
 
 def _colocar_csv(c: _Convertido, destino: Path, usados: set, resultado: Resultado) -> None:
@@ -558,7 +561,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
             try:
                 with pdf_estrutura.progreso_paxinas(_paxina):
                     convertido, informe = _converter_documento(
-                        doc, anonimizar, rexistro, revisar if anonimizar else None, dir_csv)
+                        doc, anonimizar, rexistro, revisar if anonimizar else None, dir_csv, aforro)
             except Cancelado:
                 raise
             except Exception as e:  # noqa: BLE001 -- un documento roto non para o lote
@@ -597,7 +600,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
         usados_csv: set = set()
         for c in convertidos:
             _colocar_csv(c, destino, usados_csv, resultado)
-        corpos = [_corpo_final(c, aforro, resultado) for c in convertidos]
+        corpos = [_corpo_final(c, resultado) for c in convertidos]
         cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos),
                                revisado=bool(convertidos) and all(c.revisado for c in convertidos))
         _escribir(ruta, cabeceira, _un_so_md(convertidos, corpos, omitidos), caracteres_por_parte, resultado.saidas)
@@ -627,7 +630,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
         _colocar_csv(c, ruta.parent, usados_csv, resultado)
         cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado)
         antes = len(resultado.saidas)
-        _escribir(ruta, cabeceira, _corpo_final(c, aforro, resultado), caracteres_por_parte, resultado.saidas)
+        _escribir(ruta, cabeceira, _corpo_final(c, resultado), caracteres_por_parte, resultado.saidas)
         c.ruta = ruta
         resultado.documentos[c.orixe].saidas = resultado.saidas[antes:]
     return resultado
@@ -645,13 +648,14 @@ def substituir_revisado(resultado: Resultado, orixe: str, texto_anon: str, subst
     `Resultado` non se corrixe."""
     lote: _Lote = resultado._lote
     c = lote.convertidos[orixe]
-    c.corpo = _corpo_anonimizado(PurePosixPath(orixe).suffix.lower(), contexto, texto_anon, substitucions)
+    md = _corpo_anonimizado(PurePosixPath(orixe).suffix.lower(), contexto, texto_anon, substitucions, lote.aforro)
+    c.corpo, c.tokens_antes, c.tokens_despois = md.texto, md.tokens_antes, md.tokens_despois
     c.revisado = True
     marcador = Resultado()  # a estimación dos tokens non se conta dúas veces
     if lote.un_so_md:
         antigas = list(lote.saidas_unico)
         convertidos = list(lote.convertidos.values())
-        corpos = [_corpo_final(x, lote.aforro, marcador) for x in convertidos]
+        corpos = [_corpo_final(x, marcador) for x in convertidos]
         cabeceira = _cabeceira(lote.nome_entrada, lote.anonimizar, lote.data, ficheiros=len(convertidos),
                                revisado=all(x.revisado for x in convertidos))
         novas: list = []
@@ -666,7 +670,7 @@ def substituir_revisado(resultado: Resultado, orixe: str, texto_anon: str, subst
         novas = []
         _borrar(antigas)
         cabeceira = _cabeceira(c.nome_visible, lote.anonimizar, lote.data, paxinas=c.paxinas, revisado=True)
-        _escribir(c.ruta, cabeceira, _corpo_final(c, lote.aforro, marcador), lote.caracteres_por_parte, novas)
+        _escribir(c.ruta, cabeceira, _corpo_final(c, marcador), lote.caracteres_por_parte, novas)
         resultado.documentos[orixe].saidas = novas
     resultado.saidas = [s for s in resultado.saidas if s not in antigas] + novas
     if c.nome_visible not in resultado.revisados:

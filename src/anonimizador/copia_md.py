@@ -22,6 +22,10 @@ Estrutura que se conserva:
   - Imaxes: o texto do OCR.
 Se o texto revisado xa non casa coa estrutura (edición libre que engade ou
 quita liñas), a copia é o texto tal cal, sen estrutura.
+
+`xerar` é o primeiro paso: a copia que se escribe sae de
+`markdown_ia.copia_do_anonimizador`, a mesma cadea có Reductor (estrutura,
+títulos do PDF e aforro para IA).
 """
 
 from __future__ import annotations

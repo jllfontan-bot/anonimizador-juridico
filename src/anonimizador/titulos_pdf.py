@@ -1,6 +1,6 @@
 """Títulos nun PDF con texto, polo tamaño da letra (ESTUDIO-CONVERSOR-MD,
-fase 5). SÓ para o conversor a .md: nin a copia .md do anonimizador nin o PDF
-anonimizado usan este módulo.
+fase 5). Para o Markdown (`markdown_ia.xerar`: o Reductor e a copia .md do
+anonimizador); o PDF anonimizado non usa este módulo.
 
 Un PDF non garda que unha liña é un título; o único rastro fiable é que vai
 en letra máis grande ca o corpo do texto. O criterio é o de `pymupdf4llm`
@@ -437,7 +437,9 @@ def marcar_titulos_md(md: str, contexto: dict | None, texto_final: str, substitu
     for i in {t.paxina for t in titulos}:
         locais = None if substitucions is None else [
             (s - limites[i][0], f - limites[i][0], n) for s, f, n in substitucions if limites[i][0] <= s and f <= limites[i][1]]
-        if locais is not None and _aplicar_substitucions_a_texto(paxinas[i].texto, locais) != partes[i]:
+        # Sen substitucións, a páxina ten que ser o texto orixinal tal cal: un texto
+        # editado a man (ou anonimizado sen as súas substitucións) non se mapea.
+        if _aplicar_substitucions_a_texto(paxinas[i].texto, locais or []) != partes[i]:
             mapas[i] = None
         else:
             mapas[i] = _Desprazamentos(locais or [])

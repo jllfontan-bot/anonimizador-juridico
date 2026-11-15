@@ -199,20 +199,22 @@ class TestMarkdownDoConversor(_Base):
         self.assertRegex(md, r"(?m)^# DEMANDA DE ")
 
 
-class TestAnonimizadorSenCambios(_Base):
-    """Os títulos son só do conversor: a copia .md do anonimizador segue igual."""
+class TestTitulosSoNaCadeaCompartida(_Base):
+    """Os títulos póñense só en `markdown_ia.xerar`, a cadea que comparten o
+    Reductor e a copia .md do anonimizador (fase 1b, 15/11/2026); `copia_md.xerar`
+    só, sen esa cadea, segue sen eles."""
 
-    def test_copia_md_do_anonimizador_non_leva_titulos(self):
+    def test_copia_md_xerar_soa_non_leva_titulos(self):
         ruta = _pdf(self.dir / "escrito.pdf", [[("CONTRATO DE ARRENDAMENTO", 16, 120)] + _corpo()])
         texto, contexto = lectura.cargar_documento_estruturado(str(ruta))
         md = copia_md.xerar(contexto, texto)
         self.assertNotRegex(md, r"(?m)^#")
         self.assertIn("CONTRATO DE ARRENDAMENTO", md)
 
-    def test_so_o_conversor_importa_titulos_pdf(self):
+    def test_so_a_cadea_compartida_importa_titulos_pdf(self):
         src = Path(__file__).resolve().parent.parent / "src" / "anonimizador"
         usuarios = {p.name for p in src.glob("*.py") if re.search(r"\btitulos_pdf\b", p.read_text(encoding="utf-8"))}
-        self.assertEqual(usuarios, {"conversor.py"})
+        self.assertEqual(usuarios, {"markdown_ia.py"})
 
 
 if __name__ == "__main__":

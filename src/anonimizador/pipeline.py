@@ -926,8 +926,9 @@ def anonimizar_zip(
     `omitidos`.
 
     Con `copia_md`, cada documento leva ao lado, dentro do zip, a súa copia
-    Markdown (`copia_md.py`)."""
+    Markdown (`markdown_ia.copia_do_anonimizador`, a cadea do Reductor)."""
     from . import copia_md as modulo_copia_md
+    from . import markdown_ia
 
     informes_por_ficheiro = {}
     omitidos = []
@@ -962,7 +963,8 @@ def anonimizar_zip(
             nome_ficheiro_saida = nome_ficheiro_anonimizado(nome_p.name, rexistro, informe["persoas"])
             stem_saida = PurePosixPath(nome_ficheiro_saida).stem
             cartafol_saida = _anonimizar_cartafoles_ruta(nome_p.parent, rexistro, informe["persoas"])
-            texto_md = modulo_copia_md.xerar(contexto, texto_anon, substitucions) if copia_md else None
+            texto_md = markdown_ia.copia_do_anonimizador(
+                contexto, texto_anon, substitucions, sufixo) if copia_md else None
             if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
                 nome_saida = str(cartafol_saida / (stem_saida + ".anonimizado" + sufixo))
                 tmp_saida = Path(tmp) / ("saida_" + Path(nome).name)
@@ -992,7 +994,8 @@ def anonimizar_e_gardar(
     orixinal (incluída a mestura de formatos dentro de cada parágrafo)
     cando a entrada é .docx/.odt E a saída pide a mesma extensión; en
     calquera outro caso garda coma texto plano. Con `copia_md`, garda
-    ademais a copia Markdown (`copia_md.py`) en `<ruta_saida>.md`."""
+    ademais a copia Markdown (`markdown_ia.copia_do_anonimizador`) en
+    `<ruta_saida>.md`."""
     texto_anonimizado, informe, _ = anonimizar_e_gardar_detallado(
         ruta_entrada, ruta_saida, rexistro, ficheiro_config, copia_md=copia_md
     )
@@ -1009,13 +1012,15 @@ def anonimizar_e_gardar_detallado(
     """Coma `anonimizar_e_gardar`, pero devolve tamén as substitucións (as
     necesita a revisión posterior dun documento procesado en automático)."""
     from . import copia_md as modulo_copia_md
+    from . import markdown_ia
 
     texto, contexto = cargar_documento_estruturado(ruta_entrada)
     texto_anonimizado, informe, substitucions = anonimizar_texto_detallado(
         texto, rexistro, ficheiro_config, contexto=contexto
     )
     # ANTES de gardar: gardar un PDF redacta `contexto["documento"]` no sitio.
-    texto_md = modulo_copia_md.xerar(contexto, texto_anonimizado, substitucions) if copia_md else None
+    texto_md = markdown_ia.copia_do_anonimizador(
+        contexto, texto_anonimizado, substitucions, Path(ruta_entrada).suffix) if copia_md else None
 
     if conserva_formato(contexto, ruta_saida):
         gardar_documento_estruturado(contexto, texto_anonimizado, ruta_saida, substitucions)
