@@ -19,6 +19,10 @@ Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
 - Política de privacidade: `docs/store/politica-privacidad-conversor.md`; ficha: `docs/store/ficha-store-conversor.md`.
 - Instaladores clásicos sen asinar para Windows e Mac (`instalador/crear-paquetes.sh windows-conversor|mac-conversor`).
 - Notas de deseño e límites en `src/anonimizador/formatos/ESCONDITES.md` e estudos previos en `docs/estudios/`.
+- Rama `correcciones-fugas-reductor` (sen fusionar): en automático nunca se detén e o resumo final lista os
+  «Documentos con posibles fugas» cun botón «Revisar» (`conversor.substituir_revisado`); un `.zip` dentro dun
+  cartafol ábrese en `<nome do zip>-md` (un `.zip` dentro dun `.zip`, non; límite de 2 GiB descomprimidos);
+  subtítulo novo. Falta probar a xanela real (pywebview) con «Revisar» no portátil Windows.
 - Pendente: formatos novos en modo anonimizado (con tests de fugas), adxuntos de `.eml` nun `.zip`,
   menú contextual de Windows, extensión para Claude Desktop.
 
