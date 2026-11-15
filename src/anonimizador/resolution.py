@@ -94,6 +94,13 @@ def _emparellar(persoas: list, dnis: list, texto: str) -> list:
         etapas.etapa("agrupar", n_mencion, len(persoas))  # só indica o avance (`etapas`): non cambia nada
         for d in dnis:
             distancia = min(abs(d.inicio - m.fin), abs(m.inicio - d.fin))
+            # Lonxe: nunca se emparella. Mírase ANTES da busca do "ANEXO" (que non
+            # ten efectos): o par só se engadía con distancia <= _DISTANCIA_DNI e
+            # sen anexo, así que o resultado é o mesmo, pero xa non se percorre o
+            # texto entre cada persoa e cada DNI do documento enteiro (cúbico: 416 s
+            # en 100 páxinas sintéticas; tests/test_resolucion_emparellar.py).
+            if distancia > _DISTANCIA_DNI:
+                continue
             # Un encabezado "ANEXO" entre os dous: o DNI é doutra sección (lote 6,
             # AnuncioG0426-080324-0005_gl: o 1º "DNI denunciado" do anexo levaba o
             # código da xefa territorial que asina xusto enriba).
