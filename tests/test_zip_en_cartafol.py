@@ -283,6 +283,30 @@ class TestZipEnCartafol(_Base):
         self.assertTrue(any(n.startswith("fora/") for n in textos), sorted(textos))
         self.assertFalse((self.dir / "fora").exists())
 
+    def test_nomes_con_unidade_ou_caracteres_invalidos_en_windows(self):
+        """`C:nota.txt` (unidade relativa), `a:b` (fluxo alternativo en NTFS)
+        e `<>"|?*` non poden chegar ao zip de saída: en Windows o nome
+        cambiaría ao escribir ou ao descomprimir e podería pisar a
+        `nota.txt` (saltándose o contador de nomes repetidos). Tampouco un
+        cartafol con punto ou espazo final, que Windows lle quita."""
+        _zip(self.cartafol / "raro.zip", {
+            "C:nota.txt": TEXTO_MANUEL,
+            "nota.txt": TEXTO_MANUEL,
+            "a:b.txt": TEXTO_MANUEL,
+            'x<>"|?*.txt': TEXTO_MANUEL,
+            "carpeta. /fin.txt": TEXTO_MANUEL,
+            "carpeta/fin.txt": TEXTO_MANUEL,
+        })
+        self.procesar()
+        with zipfile.ZipFile(self.zips_de_saida()[0]) as z:
+            nomes = z.namelist()
+        self.assertEqual(len(nomes), 6, nomes)
+        self.assertEqual(len({n.casefold() for n in nomes}), 6, nomes)
+        for nome in nomes:
+            self.assertFalse(set('<>:"|?*\\') & set(nome), nome)
+            for parte in nome.split("/"):
+                self.assertFalse(parte.endswith((" ", ".")), nome)
+
     def test_limite_de_descompresion_compartido_no_lote(self):
         _zip(self.cartafol / "a.zip", {"a.txt": TEXTO_MANUEL})
         _zip(self.cartafol / "b.zip", {"Xosé Carballo Portela.txt": TEXTO_XOSE})

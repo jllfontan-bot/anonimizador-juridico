@@ -8,6 +8,7 @@ from __future__ import annotations
 import gc
 import os
 import re
+import shutil
 import tempfile
 import time
 import zipfile
@@ -940,8 +941,32 @@ def _ruta_segura_zip(nome: str) -> PurePosixPath:
     nomes do zip de saída saen desta ruta, así que un `../../x.pdf` nunca
     leva a que, ao descomprimir o zip anonimizado, algo caia fóra do seu
     cartafol."""
-    partes = [p for p in nome.replace("\\", "/").split("/") if p not in ("", ".", "..") and not p.endswith(":")]
+    partes = []
+    for parte in nome.replace("\\", "/").split("/"):
+        if parte in ("", ".", "..") or _UNIDADE.fullmatch(parte):
+            continue
+        # `C:nota.txt` (unidade relativa), `a:b` (fluxo alternativo en NTFS) e
+        # `<>"|?*`: en Windows o nome cambiaría ao escribir ou descomprimir e
+        # podería pisar outra entrada. Windows tamén quita o punto ou espazo final.
+        parte = _CARACTERES_INVALIDOS.sub("_", parte).rstrip(" .")
+        partes.append(parte or "_")
     return PurePosixPath(*partes) if partes else PurePosixPath("_")
+
+
+_UNIDADE = re.compile(r"[A-Za-z]:")
+_CARACTERES_INVALIDOS = re.compile(r'[<>:"|?*\x00-\x1f]')
+
+
+def _escribir_no_zip(zip_saida: zipfile.ZipFile, orixe: Path, nome: str) -> None:
+    """Copia `orixe` ao zip co nome `nome` TAL CAL: `ZipFile.write` pasaría o
+    nome por `os.path.splitdrive`/`normpath` (en Windows `C:x` -> `x`), e
+    entón a comprobación de nomes repetidos xa non valería."""
+    info = zipfile.ZipInfo(nome, date_time=time.localtime()[:6])
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = 0o644 << 16
+    info.file_size = orixe.stat().st_size  # para que decida zip64 se fai falla
+    with orixe.open("rb") as entrada, zip_saida.open(info, "w") as saida:
+        shutil.copyfileobj(entrada, saida, 1 << 20)
 
 
 class ZipPreparado:
@@ -1150,11 +1175,11 @@ def gardar_zip_preparado(
                     nome_saida = str(cartafol / (f"{stem}-{contador}" + extension))
                     contador += 1
                 usados.add(nome_saida.casefold())
-                zip_saida.write(str(tmp_saida), arcname=nome_saida)
+                _escribir_no_zip(zip_saida, tmp_saida, nome_saida)
                 saidas.append(nome_saida)
                 nome_copia = modulo_copia_md.ruta_copia(nome_saida)
                 if tmp_md is not None and nome_copia:
-                    zip_saida.write(str(tmp_md), arcname=nome_copia)
+                    _escribir_no_zip(zip_saida, tmp_md, nome_copia)
                     usados.add(nome_copia.casefold())
         substituir_con_reintentos(tmp_zip, destino)
     except BaseException:
