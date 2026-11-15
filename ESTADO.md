@@ -259,7 +259,16 @@ Feitas polo usuario co meu apoio por SSH (só lectura e copia de ficheiros compr
     «convertido, pero non se puido gardar o .md» co PermissionError, queda intacto e non hai `.tmp`/`.parcial` orfos. NON probado co bloqueo en modo anonimizado.
   - Rastro do usuario/meu no portátil a limpar ao final: RT7, RT8, RT9, AN3 (Escritorio), `C:\Users\Public\Documents\prueba-final` (copia
     da instalación + RT10), `copia-antes-arreglo-20261115`, `Iniciar-Anonimizador-prueba.vbs`, carpeta de nome estragado «Demanda rǧa…» (10:06).
-- **Non probado aínda en Windows**: `progreso-fase-final`, `anon-zip-en-carpetas`, o paquete MSIX, o rexistro propio do Reductor (fase B).
+- **Anonimizador con `.zip` dentro dun cartafol (rama `anon-zip-en-carpetas`, xa unida), probado pola API web real do programa aberto no portátil**:
+  - AN4 (código anterior ao arranxo): 4 de 5 ben; `demandapresentada.zip` fallou con `PermissionError WinError 32` ao borrar o PDF temporal
+    (mesmo fallo que o do Reductor; o código novo dos zips non usaba `temporales.DirectorioTemporal`). Reproducido illado en AN5.
+  - Arranxo (90f4f83) e proba de novo en AN6: **5 de 5**, dous `.anonimizado.zip` ben formados (estrutura e `.md` dentro, comentario baleiro),
+    sen `.tmp` en AN6. Os 3 PDF soltos coa copia `.md`; mesmos códigos.
+  - NON probado en Windows: modo revisar manual con zips; limpeza ao pechar a xanela a mitad de lote.
+- **`progreso-fase-final`** (a944329, sen integrar): medido no portátil co doc real de 351 páxinas: 738 s sen o cambio e 734 s con el,
+  `.md` idéntico (SHA-256 igual) → `_emparellar` non acelera ese documento (si o PDF sintético de 100 páxinas: 557→129 s). Perfil cProfile
+  do doc real en curso no portátil (prueba-final\perfil.txt) para achar o cuello real.
+- **Non probado aínda en Windows**: `progreso-fase-final`, o paquete MSIX, o rexistro propio do Reductor (fase B).
 
 ## Suite sobre o resultado integrado (15/11/2026, noite)
 `motor-md-unico` fda1f53 (escritura incremental + `.zip` dentro de cartafoles + textos da valoración xurídica): **1277 tests, OK (skipped=1)**, 24 min.
