@@ -56,13 +56,13 @@ T = {
            "parrafo": "O xulgado examinou as probas achegadas polas partes no procedemento, ",
            "asunto": "Documentación do expediente 0142", "corpo": "Bo día:\n\nEnvío a documentación pendente do expediente.\n\nSaúdos,\nMarta",
            "concepto": "Concepto", "importe": "Importe", "taxas": "Taxas xudiciais", "perito": "Informe pericial",
-           "interna": "Notas internas"},
+           "interna": "Notas internas", "revisar": "Revisar"},
     "es": {"pdf": "sentencia.pdf", "cabeceira": "JUZGADO DE PRIMERA INSTANCIA N.º 2 DE LUGO", "sentenza": "SENTENCIA 214/2026",
            "feitos": "ANTECEDENTES DE HECHO", "fundamentos": "FUNDAMENTOS DE DERECHO",
            "parrafo": "El juzgado ha examinado las pruebas aportadas por las partes en el procedimiento, ",
            "asunto": "Documentación del expediente 0142", "corpo": "Buenos días:\n\nEnvío la documentación pendiente del expediente.\n\nUn saludo,\nMarta",
            "concepto": "Concepto", "importe": "Importe", "taxas": "Tasas judiciales", "perito": "Informe pericial",
-           "interna": "Notas internas"},
+           "interna": "Notas internas", "revisar": "Revisar"},
 }[LINGUA]
 
 
@@ -108,6 +108,24 @@ def crear_documentos(exp: Path) -> list:
                           filename="informe_pericial.pdf")
     (exp / "correo.eml").write_bytes(bytes(correo))
     return [exp / "declaracion.docx", exp / T["pdf"], exp / "contas.xlsx", exp / "correo.eml"]
+
+
+def crear_documentos_con_fugas(cartafol: Path) -> Path:
+    """Tres escritos INVENTADOS (persoas e números que non existen): dous cun
+    número solto e un nome en orde invertida, que a detección automática non
+    tapa, e un limpo. Para o resumo do modo automático con posibles fugas."""
+    cartafol.mkdir(parents=True)
+    textos = {
+        "gl": {"a": "Comparece don Antón Seoane Rilo, en nome da comunidade. Referencia 48210377 do expediente.",
+               "b": "Segundo o informe, Varela Doval, Carme, entregou os planos. Número de rexistro 71500234.",
+               "c": "O xulgado cita ás partes para o día dez de decembro."},
+        "es": {"a": "Comparece don Antón Seoane Rilo, en nombre de la comunidad. Referencia 48210377 del expediente.",
+               "b": "Según el informe, Varela Doval, Carme, entregó los planos. Número de registro 71500234.",
+               "c": "El juzgado cita a las partes para el día diez de diciembre."},
+    }[LINGUA]
+    for nome, texto in (("escrito_comunidade", textos["a"]), ("informe_planos", textos["b"]), ("citacion", textos["c"])):
+        datos_exemplo.crear_docx(cartafol / f"{nome}.docx", texto)
+    return cartafol
 
 
 PONTE = """
@@ -202,7 +220,28 @@ def main() -> None:
         for md in sorted(exp.glob("*.anonimizado.*.md")):
             shutil.copy(md, BASE / f"exemplo-{md.name}")
 
-        # 5. Acerca de
+        # 5. Anonimizando en automático: o resumo lista os documentos con posibles
+        #    fugas, cun botón «Revisar» cada un (non na ficha da Store: ten as súas 6).
+        if not STORE:
+            fugas = crear_documentos_con_fugas(BASE / "Escritos_con_fugas")
+            paxina.evaluate("() => { entradas = []; pintarEntradas(); amosar('inicio'); }")
+            paxina.evaluate("(e) => engadirEntradas(e)", api.describir_rutas([str(fugas)]))
+            paxina.check("input[name=modo][value=automatico]")
+            paxina.click("#converter-anon")
+            datos = c.agardar_evento("rematado")
+            if not datos["fugas_docs"]:
+                raise SystemExit("Os escritos de exemplo non deron ningún aviso alto: revisa o texto inventado")
+            c.foto("resultado_fugas.png")
+            # Comprobación do botón: «Revisar» abre a revisión dese documento e, ao
+            # confirmar, volve ao resumo co documento marcado coma revisado.
+            paxina.click("#resultado .tarxeta button:text-is('" + T["revisar"] + "')")
+            paxina.wait_for_selector("#revision:not([hidden]) #confirmar-revision")
+            paxina.click("#confirmar-revision")
+            paxina.wait_for_selector("#resultado:not([hidden])")
+            if paxina.locator("#resultado .tarxeta button:text-is('" + T["revisar"] + "')").count() != len(datos["fugas_docs"]) - 1:
+                raise SystemExit("O botón «Revisar» non deixou o documento coma revisado")
+
+        # 6. Acerca de
         paxina.click("#ligazon-acerca")
         paxina.wait_for_selector("#acerca:not([hidden]) .tarxeta")
         c.foto("acerca.png")

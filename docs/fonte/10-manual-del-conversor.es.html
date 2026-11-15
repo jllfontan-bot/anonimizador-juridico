@@ -29,7 +29,7 @@
 <h2 class="sec">02 · Convertir sin anonimizar</h2>
 <div class="paso"><div class="n">1</div><div class="corpo">
   <p class="t">Elige los documentos</p>
-  <p>Arrástralos a la ventana o usa <strong>«Elegir archivos…»</strong> y <strong>«Elegir carpeta…»</strong>. Puedes mezclar archivos, carpetas enteras y archivos <code>.zip</code>; cada uno aparece en la lista con su tipo y con una <strong>×</strong> para quitarlo.</p>
+  <p>Arrástralos a la ventana o usa <strong>«Elegir archivos…»</strong> y <strong>«Elegir carpeta…»</strong>. Puedes mezclar archivos, carpetas enteras y archivos <code>.zip</code>; cada uno aparece en la lista con su tipo y con una <strong>×</strong> para quitarlo. Un <code>.zip</code> que esté <strong>dentro de una carpeta</strong> se abre igual que si lo hubieras elegido solo, y sus documentos salen en una subcarpeta con el nombre del zip y <code>-md</code> (<code>10 Proyecto básico.zip</code> da <code>10 Proyecto básico-md</code>), junto al zip. Un <code>.zip</code> dentro de otro <code>.zip</code> no se abre (solo un nivel): queda en la lista de omitidos. Por seguridad, hay un límite de 2 GB descomprimidos por conversión; un <code>.zip</code> que lo supere queda sin convertir y aparece en los omitidos con el motivo.</p>
 </div></div>
 <div class="paso"><div class="n">2</div><div class="corpo">
   <p class="t">Carpeta de salida (opcional)</p>
@@ -95,8 +95,9 @@ Juzgado de Primera Instancia. Notificación. Por medio de la presente se comunic
 <figure><img src="img/es/conversor/revision.png" alt="Revisión" style="max-width:380px"><figcaption>Revisión de un documento: cada persona con su código y un recuadro para añadir o generalizar.</figcaption></figure>
 <div class="paso"><div class="n">2</div><div class="corpo">
   <p class="t">O automático, sin revisión</p>
-  <p>Para lotes grandes. El programa recuerda tu elección. Cada <code>.md</code> lleva <code>revisado: no</code> en la cabecera, el resultado resume las personas marcadas, y un documento con posibles fugas pasa igual por la revisión.</p>
+  <p>Para lotes grandes. El programa recuerda tu elección. Nunca se detiene a preguntar. Cada <code>.md</code> lleva <code>revisado: no</code> en la cabecera y, al terminar, el resultado resume las personas marcadas y muestra <strong>una sola lista de «Documentos con posibles fugas»</strong>: el nombre de cada uno y lo que se detectó (un número suelto, un nombre en orden invertido…). Cada documento de la lista tiene un botón <strong>«Revisar»</strong> que abre la misma pantalla de revisión de ese documento; al confirmar, su <code>.md</code> se sustituye por la versión revisada (con <code>revisado: sí</code>) y vuelves al resumen, con el documento marcado como revisado. Si cancelas, el <code>.md</code> queda como estaba.</p>
 </div></div>
+<figure><img src="img/es/conversor/resultado_fugas.png" alt="Resumen en automático" style="max-width:380px"><figcaption>Resumen final en automático: la lista de documentos con posibles fugas, cada uno con su botón «Revisar». Los documentos y los datos de la imagen son inventados.</figcaption></figure>
 <p>El <code>.md</code> anonimizado se llama <code>&lt;nombre anonimizado&gt;.anonimizado.&lt;extensión&gt;.md</code> y lleva <code>anonimizado: sí</code> en la cabecera:</p>
 <pre class="md">---
 origen: declaracion.docx
