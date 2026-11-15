@@ -9,6 +9,17 @@
 
 {% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
 {% if aviso_cartafol %}<div class="aviso-ok">{{ aviso_cartafol }}</div>{% endif %}
+{% if zips %}
+{% from "_zip.html" import detalle_zip, resumo_zip with context %}
+<div class="tarxeta">
+  <p style="margin-top:0;"><strong>{{ t("zip.en_automatico", n=zips|length) }}</strong></p>
+  <ul class="pendentes">
+    {% for r in zips %}
+    <li><strong>{{ r.ruta_orixe }}</strong> → <code>{{ r.ruta_saida }}</code><br>{{ resumo_zip(r) }}{{ detalle_zip(r) }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
 {% if aviso_migracion %}
 <div class="tarxeta marcada">

@@ -8,16 +8,29 @@ Uso:
 import argparse
 import getpass
 import json
+import os
+import sys
 from pathlib import Path
 
-from . import copia_md
-from .pipeline import anonimizar_e_gardar, anonimizar_zip, ruta_saida_por_defecto
+from . import copia_md, idioma
+from .pipeline import ZipRexeitado, anonimizar_e_gardar, gardar_zip_preparado, preparar_zip, ruta_saida_por_defecto
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
 _DESCRICION_ORIXE_CLAVE = {
     "ficheiro": "ficheiro local (clave.key)",
     "chaveiro_sistema": "chaveiro do sistema operativo",
 }
+
+
+def _mesmo_ficheiro(a: str, b: str) -> bool:
+    """`a` e `b` son o mesmo ficheiro (mesma ruta, ou ligazóns, ou só cambia
+    maiúsculas nun disco que non as distingue)."""
+    if Path(a).resolve() == Path(b).resolve():
+        return True
+    try:
+        return os.path.samefile(a, b)
+    except OSError:  # `a` aínda non existe
+        return False
 
 
 def main():
@@ -91,21 +104,38 @@ def main():
         # se o usuario indicou `--saida` a man, respétase tal cal.
         saida_explicita = args.saida is not None
         saida = args.saida or ruta_saida_por_defecto(args.entrada)
+        if saida_explicita and _mesmo_ficheiro(saida, args.entrada):
+            # O anonimizado substituiría ao orixinal (que se perdería).
+            print("Erro: --saida non pode ser o mesmo ficheiro ca a entrada (perderíase o orixinal).",
+                  file=sys.stderr)
+            sys.exit(2)
 
         if Path(args.entrada).suffix.lower() == ".zip":
-            resultado = anonimizar_zip(args.entrada, saida, rexistro, copia_md=args.markdown)
-            if not saida_explicita:
-                saida_final = ruta_saida_por_defecto(args.entrada, rexistro=rexistro)
-                if saida_final != saida:
-                    substituir_con_reintentos(Path(saida), Path(saida_final))
-                    saida = saida_final
+            try:
+                preparado = preparar_zip(args.entrada, rexistro, copia_md=args.markdown)
+            except ZipRexeitado as e:
+                # Non se escribiu nada (nin a medias).
+                print(f"Non se anonimizou {args.entrada}: {idioma.t('zip.motivo.' + e.motivo)}", file=sys.stderr)
+                sys.exit(1)
+            try:
+                if not saida_explicita:
+                    # O nome final ANTES de escribir (nunca un provisional co
+                    # nome real) e coas persoas do contido: o mesmo código ca
+                    # dentro (A17).
+                    saida = ruta_saida_por_defecto(
+                        args.entrada, rexistro=rexistro, persoas_do_documento=preparado.persoas())
+                resultado = gardar_zip_preparado(preparado, saida, rexistro)
+            finally:
+                if not preparado.limpar():
+                    print(idioma.t("zip.temporal_sen_borrar", ruta=str(preparado.dir)), file=sys.stderr)
             print(f"Arquivo anonimizado -> {saida}")
             if args.informe:
                 Path(args.informe).write_text(
                     json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8"
                 )
                 print(f"Informe de revision -> {args.informe}")
-            for nome, informe in resultado["ficheiros"].items():
+            for documento in resultado["documentos"]:
+                nome, informe = documento["nome"], documento["informe"]
                 n_marcados = sum(1 for p in informe["persoas"] if p["marcado_para_revision"])
                 n_risco = sum(1 for r in informe.get("risco_residual", []) if r["confianza"] == "alta")
                 aviso_risco = f" -- ⚠ {n_risco} posible(s) fuga(s) sen detectar" if n_risco else ""
@@ -113,9 +143,9 @@ def main():
                 aviso_especial = f" -- {n_especial} dato(s) de categoría especial" if n_especial else ""
                 print(f"  {nome}: {len(informe['persoas'])} persoa(s) ({n_marcados} marcadas){aviso_risco}{aviso_especial}")
             if resultado["omitidos"]:
-                print("Ficheiros OMITIDOS do zip de saida (formato non analizable):")
-                for nome in resultado["omitidos"]:
-                    print(f"  {nome}")
+                print("Ficheiros OMITIDOS do zip de saida (non se puideron revisar):")
+                for nome, motivo in resultado["omisions"]:
+                    print(f"  {nome} -- {idioma.t('zip.motivo.' + motivo)}")
             return
 
         texto_anon, informe = anonimizar_e_gardar(args.entrada, saida, rexistro, copia_md=args.markdown)

@@ -410,5 +410,17 @@
  "pantalla_conversor.non_existe": "Non existe: {ruta}",
  "pantalla_conversor.erro_trocear": "O tamaño das partes ten que ser de polo menos 100 tokens.",
  "pantalla_conversor.manual": "Manual de uso",
- "pantalla_conversor.sen_manual": "O manual non está neste cartafol do programa."
+ "pantalla_conversor.sen_manual": "O manual non está neste cartafol do programa.",
+ "zip.motivo.formato": "formato que non se pode analizar",
+ "zip.motivo.metadatos_macos": "metadatos de macOS (non é un documento)",
+ "zip.motivo.zip_dentro_de_zip": ".zip dentro doutro .zip: non se abre (só se abre un nivel)",
+ "zip.motivo.zip_demasiado_grande": ".zip demasiado grande ao descomprimilo (límite de seguridade): non se abriu",
+ "zip.motivo.zip_cifrado": ".zip protexido con contrasinal: non se abriu",
+ "zip.motivo.zip_ilexible": "non se puido abrir o .zip (danado)",
+ "zip.motivo.documento_ilexible": "non se puido ler ou anonimizar (danado ou non é do tipo que indica a súa extensión)",
+ "zip.documentos": "{n} documento(s) anonimizado(s) dentro do .zip.",
+ "zip.revisar_fugas": "{n} documento(s) do .zip con posibles fugas sen detectar: ábreos no .zip anonimizado e leos enteiros antes de dalos por bos (un .zip non ten o botón «Revisar este documento»):",
+ "zip.omitidos": "Non van no .zip anonimizado ({n}), para non arriscar que quede algo sen revisar:",
+ "zip.en_automatico": "{n} ficheiro(s) .zip anonimizado(s) en automático: un .zip non admite a revisión documento a documento.",
+ "zip.temporal_sen_borrar": "Non se puido borrar o cartafol temporal {ruta} (outro programa tiña un ficheiro aberto): pode conter unha copia dun documento do .zip, orixinal ou xa anonimizado. Borrarase só a próxima vez que anonimices un .zip, ou bórrao a man. O .zip anonimizado está ben."
 }

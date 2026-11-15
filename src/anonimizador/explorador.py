@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 
 from . import idioma
-from .pipeline import EXTENSIONS_SOPORTADAS
+from .pipeline import EXTENSIONS_ENTRADA
 
 # Marcador especial de "ruta": en Windows é a vista de UNIDADES (C:\, V:\...),
 # que non ten ningún cartafol pai real; en Mac/Linux equivale á raíz "/".
@@ -214,7 +214,7 @@ def listar(ruta: str | None) -> dict:
         + [
             {
                 "nome": n, "tipo": "ficheiro",
-                "soportado": Path(n).suffix.lower() in EXTENSIONS_SOPORTADAS,
+                "soportado": Path(n).suffix.lower() in EXTENSIONS_ENTRADA,
             }
             for n in sorted(ficheiros, key=clave)
         ]
