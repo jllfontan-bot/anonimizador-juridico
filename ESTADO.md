@@ -157,7 +157,7 @@ Traballo apuntado para a versión seguinte, non para esta:
   (`~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`), e unha **valoración xurídica
   nova** antes de enviar á Store.
 
-## Anonimizador: `.zip` dentro dun cartafol (rama `anon-zip-en-carpetas`, 15/11/2026, en curso)
+## Anonimizador: `.zip` dentro dun cartafol (rama `anon-zip-en-carpetas`, 15/11/2026, feito sen probar en Windows)
 
 Deseño (o cartafol procesábase sen os `.zip`; e a xanela tampouco abría un `.zip` dado directamente: só a CLI):
 - Un `.zip` (directo ou dentro do cartafol) sae coma `<nome anonimizado>.anonimizado.zip` onde saen os demais ficheiros, coa mesma estrutura de subcartafoles e a copia `.md` de cada documento se está activada. Tamén en modo «revisar»: un zip non ten revisión documento a documento, así que se anonimiza en automático e a pantalla dio.
@@ -165,6 +165,20 @@ Deseño (o cartafol procesábase sen os `.zip`; e a xanela tampouco abría un `.
 - Seguridade coma no Reductor (código propio en `pipeline.py`, sen importar `conversor.py`): rutas sen `..`/raíz/unidade; 2 GiB descomprimidos por lote como máximo (cabeceiras e conta real ao descomprimir: zip bomb); `.zip` dentro de `.zip` non se abre; zip con contrasinal, danado ou demasiado grande omítese enteiro, listado, sen escribir nada e sen parar o lote; `__MACOSX`/`._*` omitidos; nomes repetidos tras anonimizar levan contador.
 - O que non se pode analizar nunca entra no zip de saída: a pantalla de resultado e a CLI listan, por zip, os omitidos co motivo. Un `.anonimizado.zip` anterior non se volve procesar.
 - Mesmo rexistro para cartafol e zips (os códigos dunha persoa con DNI coinciden).
+
+Feito (commits na rama `anon-zip-en-carpetas`, sen mergear en `motor-md-unico`):
+- Código: `pipeline.preparar_zip`/`gardar_zip_preparado` (e `anonimizar_zip` coma as dúas seguidas), `web._ZipsDoLote` (barra de progreso e `/procesar`, modos automático e revisar), CLI con motivos, explorador marca os `.zip` coma soportados. Plantilla nova `templates/_zip.html`; textos `zip.*` en `es.json`/`gl.json`.
+- Escritura: o `.anonimizado.zip` vai a un temporal neutro (`.anonimizando-*.zip.tmp`) e só substitúe ao rematar (reintentos por PermissionError); se falla, bórrase o temporal e un zip anterior non se pisa. A CLI calcula o nome final antes de escribir (sen provisional co nome real).
+- Suite completa: 1210 tests OK (1 omitido), en Mac.
+- Tests: `tests/test_zip_en_cartafol.py` (25: nada sen anonimizar en nomes, cartafoles, contido, metadatos docx/pdf e copias .md; `__MACOSX`; danado, CRC mal, contrasinal; zip dentro de zip; `..`/raíz/unidade; límite compartido e cabeceira mentirosa; nome do zip cunha persoa que aparece despois → mesmo texto e mesmos avisos ca sen o zip; `.anonimizado.zip` non se reprocesa; modo revisar; zip directo na xanela; cancelar; erro ao escribir sen pisar o anterior; PermissionError ao substituír e ao borrar o temporal; persoa no 2.º documento do zip (k>1); CLI). Os dous de orde fallan co código antigo / pechando o zip xusto despois do seu contido (comprobado).
+- Textos: ficha 1.1.2 (es e gl) e manual (gl e es, sección 12 e explorador), PDF do manual rexenerados.
+
+Queda:
+- PROBAR NO PORTÁTIL WINDOWS e na xanela real (pywebview): cartafol con 2 `.zip` e PDF soltos, en automático e en revisar; un `.zip` directo; ver a pantalla de resultado. Nada disto está probado en Windows.
+- Decidir co usuario: en modo «revisar» o zip anonimízase en automático (non hai revisión documento a documento dun zip); alternativa: omitilo nese modo.
+- Limitación previa do motor (non nova): nun nome de cartafol «Cliente Xosé Carballo Portela» detecta a persoa con «Cliente» incluído e dálle código propio (sen fuga).
+- Temporais: o contido dun zip descomprímese no temporal do sistema mentres se procesa ese zip e o anonimizado queda alí ata o fin do lote; bórrase sempre agás se o proceso morre (p. ex. apagar o ordenador). Valorar se a política de privacidade o debe dicir.
+- Se o proceso morre mentres escribe un zip, pode quedar un `.anonimizando-*.zip.tmp` no cartafol de saída (nome neutro, contido xa anonimizado); se o borrado falla tras os reintentos (PermissionError persistente), tamén.
 
 ## Ramas vivas
 
