@@ -82,8 +82,9 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
   L4 termos de Microsoft, D2 TXUE, D3 Regulamento de IA).
 - Capturas rexeneradas (`4987588`, `237e2d2`, PDF en `e83944a`): todas as do manual do Reductor (o subtítulo sae en
   todas) e «Acerca de» do Anonimizador. Capturas da ficha do Reductor 1.2.0, fóra do repo:
-  `~/Documents/anonimizador-xuridico/store-reductor-1.2.0/capturas/{gl,es}`. As da ficha do Anonimizador (con
-  `lenzos.py` no pendrive) non se refixeron: a de «Acerca de» non leva a frase das marcas.
+  `~/Documents/anonimizador-xuridico/store-reductor-1.2.0/capturas/{gl,es}`. As da ficha do Anonimizador 1.1.2
+  (`lenzos.py` do pendrive sobre as do manual), en `~/Documents/anonimizador-xuridico/store-anonimizador-1.1.2/capturas/`:
+  non levan «Acerca de»; cinco son idénticas ás do 15/10 e cambia só a de inicio.
 - Pendente menor: a copia `NOVEDADES`.
 
 ## Para a seguinte versión: anonimizar os formatos novos do Reductor (decidido 15/11/2026)
