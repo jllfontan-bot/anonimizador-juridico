@@ -316,12 +316,15 @@ class Api:
                 )
                 _sumar(total, resultado, prefixo=Path(ruta).name if len(rutas) > 1 else "")
                 self._rexistrar_fugas(i, resultado)
-        except conversor.Cancelado:
+        except conversor.Cancelado as e:
+            # Os .md xa escritos quedan: entran no resumo (e o seu «Revisar», se teñen posibles fugas).
+            self._recoller_parcial(e, total, rutas)
             self._candidatos.clear()
             self._ultimo_evento = "cancelado"
             self._emitir("cancelado", self._resumo(total, anonimizar))
             return
         except Exception as e:  # noqa: BLE001 -- que a pantalla o diga en vez de quedar parada
+            self._recoller_parcial(e, total, rutas)
             self._candidatos.clear()
             self._ultimo_evento = "erro"
             self._emitir("erro", {"mensaxe": idioma.traducir_mensaxe(f"{type(e).__name__}: {e}"),
@@ -329,6 +332,15 @@ class Api:
             return
         self._ultimo_evento = "rematado"
         self._emitir("rematado", self._resumo(total, anonimizar))
+
+    def _recoller_parcial(self, erro: Exception, total: conversor.Resultado, rutas: list) -> None:
+        """O lote parou (cancelado ou erro) a media entrada: o que `converter` xa
+        gardou (`resultado_parcial`) suma ao resumo, coma se a entrada rematase."""
+        parcial = getattr(erro, "resultado_parcial", None)
+        if parcial is None:
+            return
+        _sumar(total, parcial, prefixo=Path(rutas[self._entrada_actual]).name if len(rutas) > 1 else "")
+        self._rexistrar_fugas(self._entrada_actual, parcial)
 
     def _rexistrar_fugas(self, entrada: int, resultado: conversor.Resultado) -> None:
         """Os documentos desta entrada con aviso alto que a revisión deixou
