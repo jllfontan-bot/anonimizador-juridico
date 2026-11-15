@@ -208,3 +208,21 @@ O historial de decisións e medicións de 09–10/2026 e os datos reais viven nu
 ## Regra de ouro
 
 Non engadir nunca ao repositorio datos reais (nomes, DNI, expedientes). Ver `docs/estudios/` e `medicion/README.md`.
+
+## Probas en Windows (portátil Windows 11, 15/11/2026) — resultados
+
+Feitas polo usuario co meu apoio por SSH (só lectura e copia de ficheiros comprobada con hash):
+- **Reductor 1.2.0 (instalación clásica, sen escritura incremental), RT7**: 2 `.zip` + 6 PDF, automático e anonimizando: 12 `.md`,
+  carpetas `<zip>-md`, nomes anonimizados; o PDF que daba WinError 32 (`Justificante presentacion demanda`) convértese. Arranxo
+  de `temporales.py` CONFIRMADO en Windows.
+- **Anonimizador 1.1.2, carpeta con PDF**: explorador (atallos Escritorio/Documentos a `D:`) ben; 6 PDF anonimizados + 6 `.md`
+  co mesmo motor (tamaños case iguais aos do Reductor); códigos de persoa coincidentes co Reductor. Os `.zip` dentro da carpeta
+  ignoráronse (entón non se abrían: ver a rama `anon-zip-en-carpetas`).
+- **Reductor con escritura incremental (rama `escritura-incremental`, HEAD 7d29f6a), RT8**: os `.md` aparecen un a un; cancelar
+  conserva o feito e a xanela final mantén os pendentes de «Revisar»; execución completa con 3 `.zip` (15 `.md`, 0 `.tmp`/`.parcial`);
+  `posibles_fugas: N` na cabeceira. Sen fugas reseñables segundo o usuario; os avisos de persoa posible homónima son esperables
+  por traballar repetidamente cos mesmos documentos (rexistro compartido con persoas de execucións anteriores).
+- Lentitude medida: PDF de 351 páxinas ~11 min (fase posterior ao OCR ~4-5 min); planos (22 páxinas) varios minutos cada un.
+  Rama `progreso-fase-final` (indicador de progreso + optimización de `resolution._emparellar`) en curso.
+- **Non probado aínda en Windows**: o código das correccións de revisión posteriores (as que non están na copia de proba),
+  `progreso-fase-final`, `anon-zip-en-carpetas`, o paquete MSIX, o rexistro propio do Reductor (fase B).
