@@ -1,9 +1,8 @@
 # Ficha de la Microsoft Store — Reductor de tokens
 
 Textos para Partner Center (Store ID `9NMM4DRL6FCC`, nombre reservado el 31/10/2026: hay que
-enviarla a la Store antes de tres meses o se pierde la reserva). Es una **aplicación propia**, distinta
-del Anonimizador jurídico (otra ficha, otra certificación y otra clasificación IARC), con el mismo
-editor y la misma licencia. Idiomas del paquete: español (España, `es-ES`) y gallego (`gl-ES`), los
+enviarla a la Store antes de tres meses o se pierde la reserva). Es una **aplicación propia**, con su ficha,
+su certificación y su clasificación IARC; no se presenta junto a ninguna otra. Idiomas del paquete: español (España, `es-ES`) y gallego (`gl-ES`), los
 dos declarados en `instalador/msix/AppxManifest-conversor.xml`, así que Partner Center pedirá una
 ficha para cada uno.
 
@@ -25,16 +24,17 @@ ficha para cada uno.
 - Visibilidad: pública.
 
 ## Properties
-- Categoría: **Productividad**. Alternativa: Empresa › Legal y RR. HH., como el anonimizador (el
-  conversor sirve para cualquier documento, pero el modo anonimizado está pensado para despachos).
+- Categoría: **Productividad**. Alternativa: Empresa › Legal y RR. HH. (el programa sirve para
+  cualquier documento, pero el modo anonimizado está pensado para despachos).
 - URL de la política de privacidad:
   `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/politica-privacidad-conversor.md`
   (existirá en esa dirección cuando el conversor esté en `main`).
 - Condiciones de uso propias del Reductor (es y gl en el mismo archivo), aprobadas por el usuario el 15/11/2026:
   `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso-reductor.md`.
-- Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico
+- Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico (hasta que el Reductor tenga su propio
+  repositorio, estas tres URL llevan el nombre del repositorio actual; ver `ESTADO.md`).
 - Contacto de soporte: jllfontan@gmail.com
-- La aplicación trata en local los datos personales de los documentos (no los recoge ni los envía): en Partner Center, «Sí» a información personal y la URL de la política, como en el Anonimizador. No requiere cuenta; no tiene publicidad.
+- La aplicación trata en local los datos personales de los documentos (no los recoge ni los envía): en Partner Center, «Sí» a información personal y la URL de la política. No requiere cuenta; no tiene publicidad.
 
 ## Age ratings (cuestionario IARC)
 - Categoría: **Aplicación** (no juego).
@@ -72,7 +72,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON O SIN ANONIMIZAR
 • Convertir sin anonimizar: el .md conserva los datos personales y el programa lo avisa con claridad, porque al pasarlo a una IA en línea esos datos salen del equipo.
-• Convertir anonimizando: usa el mismo motor que el Anonimizador jurídico (nombres, DNI y demás datos personales pasan a códigos) y el mismo registro cifrado, de modo que una persona recibe el mismo código en los dos programas. Por defecto revisas cada documento antes de guardarlo. En modo automático no se detiene: cada .md lo indica (revisado: no), los que tienen posibles fugas llevan además «posibles_fugas» en la cabecera y, al terminar, el resumen lista los documentos con posibles fugas, con un botón «Revisar» para cada uno. Revisa siempre todos los .md antes de usarlos: ninguna detección automática lo encuentra todo.
+• Convertir anonimizando: los nombres, DNI y demás datos personales pasan a códigos, y la correspondencia queda en un registro cifrado en tu ordenador, de modo que una persona recibe siempre el mismo código. Por defecto revisas cada documento antes de guardarlo. En modo automático no se detiene: cada .md lo indica (revisado: no), los que tienen posibles fugas llevan además «posibles_fugas» en la cabecera y, al terminar, el resumen lista los documentos con posibles fugas, con un botón «Revisar» para cada uno. Revisa siempre todos los .md antes de usarlos: ninguna detección automática lo encuentra todo.
 • Las hojas de cálculo, presentaciones, páginas web y correos solo se convierten sin anonimizar, hasta que cada formato tenga sus propias pruebas de fugas.
 
 TODO EN LOCAL, SIN PUERTOS ABIERTOS
@@ -94,8 +94,8 @@ Un .zip dentro de una carpeta también se convierte (solo ese nivel, hasta 2 GiB
 - Títulos también en los PDF: anexos, capítulos y artículos
 - Troceado de documentos largos y estimación de tokens
 - Hojas grandes a un .csv aparte, con solo las columnas en el .md
-- Modo anonimizado con el motor del Anonimizador jurídico
-- Mismo registro cifrado: el mismo código en los dos programas
+- Modo anonimizado: nombres, DNI y demás datos pasan a códigos
+- Registro cifrado en tu ordenador: cada persona, siempre el mismo código
 - Revisión de cada documento por defecto, o automático
 - Avisos claros en el modo sin anonimizar
 - Sin servidor ni puertos abiertos
@@ -143,7 +143,7 @@ PENSADO PARA GASTAR MENOS TOKENS
 
 CON OU SEN ANONIMIZAR
 • Converter sen anonimizar: o .md conserva os datos persoais e o programa avísao con claridade, porque ao pasalo a unha IA en liña eses datos saen do equipo.
-• Converter anonimizando: usa o mesmo motor ca o Anonimizador jurídico (nomes, DNI e demais datos persoais pasan a códigos) e o mesmo rexistro cifrado, de modo que unha persoa recibe o mesmo código nos dous programas. Por defecto revisas cada documento antes de gardalo. En modo automático non se detén: cada .md indícao (revisado: non), os que teñen posibles fugas levan ademais «posibles_fugas» na cabeceira e, ao rematar, o resumo lista os documentos con posibles fugas, cun botón «Revisar» para cada un. Revisa sempre todos os .md antes de usalos: ningunha detección automática o atopa todo.
+• Converter anonimizando: os nomes, DNI e demais datos persoais pasan a códigos, e a correspondencia queda nun rexistro cifrado no teu ordenador, de modo que unha persoa recibe sempre o mesmo código. Por defecto revisas cada documento antes de gardalo. En modo automático non se detén: cada .md indícao (revisado: non), os que teñen posibles fugas levan ademais «posibles_fugas» na cabeceira e, ao rematar, o resumo lista os documentos con posibles fugas, cun botón «Revisar» para cada un. Revisa sempre todos os .md antes de usalos: ningunha detección automática o atopa todo.
 • As follas de cálculo, presentacións, páxinas web e correos só se converten sen anonimizar, ata que cada formato teña as súas propias probas de fugas.
 
 TODO EN LOCAL, SEN PORTOS ABERTOS
@@ -165,8 +165,8 @@ Un .zip dentro dun cartafol tamén se converte (só ese nivel, ata 2 GiB descomp
 - Títulos tamén nos PDF: anexos, capítulos e artigos
 - Troceado de documentos longos e estimación de tokens
 - Follas grandes a un .csv á parte, cos nomes das columnas no .md
-- Modo anonimizado co motor do Anonimizador jurídico
-- O mesmo rexistro cifrado: o mesmo código nos dous programas
+- Modo anonimizado: nomes, DNI e demais datos pasan a códigos
+- Rexistro cifrado no teu ordenador: cada persoa, sempre o mesmo código
 - Revisión de cada documento por defecto, ou automático
 - Avisos claros no modo sen anonimizar
 - Sen servidor nin portos abertos

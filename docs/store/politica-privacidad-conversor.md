@@ -35,14 +35,14 @@ En el modo **sin anonimizar**, el `.md` conserva los datos personales del docume
 La aplicación lee únicamente los archivos, carpetas y `.zip` que el usuario le indica y guarda:
 
 - **Los `.md`**, junto al original o en la carpeta de salida que elija el usuario. El documento original nunca se modifica ni se borra.
-- En la carpeta **`Documentos\Anonimizador`** del usuario, la misma que usa el Anonimizador jurídico:
+- En la carpeta **`Documentos\Anonimizador`** del usuario:
   - `preferencias.json`: el idioma elegido y si el modo anonimizado revisa cada documento o es automático.
-  - Solo si se usa el modo anonimizado, `datos_rexistro`: el **registro de correspondencias** entre cada código y la persona real y su **auditoría**, **cifrados**, compartidos con el Anonimizador jurídico para que una persona reciba el mismo código en los dos programas.
+  - Solo si se usa el modo anonimizado, `datos_rexistro`: el **registro de correspondencias** entre cada código y la persona real y su **auditoría**, **cifrados**. Otra aplicación del mismo desarrollador instalada en el equipo puede usar esa misma carpeta y la misma clave, de modo que una persona reciba en ella el mismo código.
 - La **clave de cifrado** del registro, en el **Administrador de credenciales de Windows**, separada de lo que cifra.
 
 Si la carpeta Documentos del usuario se sincroniza con OneDrive u otro servicio en la nube, ese servicio copiará también estos archivos: lo hace el sistema, no la aplicación, y el registro viaja cifrado (la clave no está en esa carpeta).
 
-Estos datos **no se borran al desinstalar** la aplicación, a propósito: el registro lo usa también el Anonimizador jurídico, y sin él ya no se podría saber a quién corresponde cada código. Para eliminarlos, el usuario puede borrar la carpeta `Documentos\Anonimizador` y, en el Administrador de credenciales de Windows (Credenciales de Windows), las entradas que llevan «anonimizador-xuridico» en el nombre.
+Estos datos **no se borran al desinstalar** la aplicación, a propósito: sin el registro ya no se podría saber a quién corresponde cada código. Para eliminarlos, el usuario puede borrar la carpeta `Documentos\Anonimizador` y, en el Administrador de credenciales de Windows (Credenciales de Windows), las entradas que llevan «anonimizador-xuridico» en el nombre.
 
 Para leer un `.zip`, y para preparar los `.csv` de las hojas grandes, el programa usa una carpeta temporal del sistema que borra al terminar. Si en una carpeta elegida hay un `.zip`, se abre también (solo ese nivel: un `.zip` dentro de otro no se abre, y una conversión descomprime como mucho 2 GiB), y sus `.md` se guardan en una carpeta `<nombre del zip>-md` a su lado.
 
@@ -97,14 +97,14 @@ No modo **sen anonimizar**, o `.md` conserva os datos persoais do documento orix
 A aplicación le unicamente os ficheiros, cartafoles e `.zip` que o usuario lle indica e garda:
 
 - **Os `.md`**, canda o orixinal ou no cartafol de saída que escolla o usuario. O documento orixinal nunca se modifica nin se borra.
-- No cartafol **`Documentos\Anonimizador`** do usuario, o mesmo que usa o Anonimizador jurídico:
+- No cartafol **`Documentos\Anonimizador`** do usuario:
   - `preferencias.json`: o idioma escollido e se o modo anonimizado revisa cada documento ou é automático.
-  - Só se se usa o modo anonimizado, `datos_rexistro`: o **rexistro de correspondencias** entre cada código e a persoa real e a súa **auditoría**, **cifrados**, compartidos co Anonimizador jurídico para que unha persoa reciba o mesmo código nos dous programas.
+  - Só se se usa o modo anonimizado, `datos_rexistro`: o **rexistro de correspondencias** entre cada código e a persoa real e a súa **auditoría**, **cifrados**. Outra aplicación do mesmo desenvolvedor instalada no equipo pode usar ese mesmo cartafol e a mesma clave, de modo que unha persoa reciba nela o mesmo código.
 - A **clave de cifrado** do rexistro, no **Administrador de credenciais de Windows**, separada do que cifra.
 
 Se o cartafol Documentos do usuario se sincroniza con OneDrive ou outro servizo na nube, ese servizo copiará tamén estes ficheiros: faino o sistema, non a aplicación, e o rexistro viaxa cifrado (a clave non está nese cartafol).
 
-Estes datos **non se borran ao desinstalar** a aplicación, a propósito: o rexistro úsao tamén o Anonimizador jurídico, e sen el xa non se podería saber a quen corresponde cada código. Para eliminalos, o usuario pode borrar o cartafol `Documentos\Anonimizador` e, no Administrador de credenciais de Windows (Credenciais de Windows), as entradas que levan «anonimizador-xuridico» no nome.
+Estes datos **non se borran ao desinstalar** a aplicación, a propósito: sen o rexistro xa non se podería saber a quen corresponde cada código. Para eliminalos, o usuario pode borrar o cartafol `Documentos\Anonimizador` e, no Administrador de credenciais de Windows (Credenciais de Windows), as entradas que levan «anonimizador-xuridico» no nome.
 
 Para ler un `.zip`, e para preparar os `.csv` das follas grandes, o programa usa un cartafol temporal do sistema que borra ao rematar. Se nun cartafol escollido hai un `.zip`, ábrese tamén (só ese nivel: un `.zip` dentro doutro non se abre, e unha conversión descomprime como moito 2 GiB), e os seus `.md` gárdanse nun cartafol `<nome do zip>-md` ao seu carón.
 

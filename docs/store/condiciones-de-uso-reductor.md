@@ -42,13 +42,13 @@ Mientras se conserve el registro de correspondencias, los `.md` anonimizados est
 
 ## 6. Custodia del registro, de la clave y de los `.md`
 
-El modo anonimizado usa el mismo registro de correspondencias y la misma clave de cifrado que el Anonimizador jurídico (en la carpeta Documentos\Anonimizador y en el Administrador de credenciales de Windows). Quien tenga a la vez el registro y su clave puede reidentificar a todas las personas de los `.md` anonimizados. Corresponde al usuario:
+El modo anonimizado guarda el registro de correspondencias y su clave de cifrado en este ordenador (en la carpeta Documentos\Anonimizador y en el Administrador de credenciales de Windows), y otra aplicación del mismo desarrollador instalada en el equipo puede compartirlos. Quien tenga a la vez el registro y su clave puede reidentificar a todas las personas de los `.md` anonimizados. Corresponde al usuario:
 
 - controlar quién accede al ordenador, a la carpeta del registro y al Administrador de credenciales de Windows;
 - hacer copias de seguridad del registro y guardarlas de forma segura;
 - custodiar los `.md` sin anonimizar con el mismo cuidado que los documentos originales, y borrarlos cuando ya no hagan falta.
 
-El Reductor de tokens no revierte la anonimización: para saber qué persona hay detrás de un código hace falta el Anonimizador jurídico. Si se pierden el registro o su clave, ya no se puede saber. El desarrollador no tiene copia de ninguno de ellos y no puede recuperarlos.
+El Reductor de tokens no revierte la anonimización: no muestra qué persona hay detrás de cada código. Si se pierden el registro o su clave, ya no se puede saber a quién corresponde cada código. El desarrollador no tiene copia de ninguno de ellos y no puede recuperarlos.
 
 ## 7. Responsabilidad
 
@@ -102,13 +102,13 @@ Mentres se conserve o rexistro de correspondencias, os `.md` anonimizados están
 
 ## 6. Custodia do rexistro, da clave e dos `.md`
 
-O modo anonimizado usa o mesmo rexistro de correspondencias e a mesma clave de cifrado ca o Anonimizador jurídico (no cartafol Documentos\Anonimizador e no Administrador de credenciais de Windows). Quen teña á vez o rexistro e a súa clave pode reidentificar todas as persoas dos `.md` anonimizados. Correspóndelle ao usuario:
+O modo anonimizado garda o rexistro de correspondencias e a súa clave de cifrado neste ordenador (no cartafol Documentos\Anonimizador e no Administrador de credenciais de Windows), e outra aplicación do mesmo desenvolvedor instalada no equipo pode compartilos. Quen teña á vez o rexistro e a súa clave pode reidentificar todas as persoas dos `.md` anonimizados. Correspóndelle ao usuario:
 
 - controlar quen accede ao ordenador, ao cartafol do rexistro e ao Administrador de credenciais de Windows;
 - facer copias de seguridade do rexistro e gardalas de forma segura;
 - custodiar os `.md` sen anonimizar co mesmo coidado ca os documentos orixinais, e borralos cando xa non fagan falta.
 
-O Reductor de tokens non reverte a anonimización: para saber que persoa hai detrás dun código fai falta o Anonimizador jurídico. Se se perden o rexistro ou a súa clave, xa non se pode saber. O desenvolvedor non ten copia de ningún deles e non pode recuperalos.
+O Reductor de tokens non reverte a anonimización: non amosa que persoa hai detrás de cada código. Se se perden o rexistro ou a súa clave, xa non se pode saber a quen corresponde cada código. O desenvolvedor non ten copia de ningún deles e non pode recuperalos.
 
 ## 7. Responsabilidade
 
