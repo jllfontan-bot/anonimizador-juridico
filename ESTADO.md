@@ -37,6 +37,26 @@ Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
 - O rexistro de persoas gárdase en `Documentos\Anonimizador`.
 - Non mover nin renomear `docs/store/*`: a Store e o código enlazan a esas rutas.
 
+## Plan de publicación (15/11/2026)
+
+Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de «feito».
+
+1. **Fase 0 · Explorador do Anonimizador** (esta sesión; Sonnet · medio): `explorador.py` usa as carpetas
+   reais de Windows. Feito = suite en verde + commit en `correcciones-fugas-reductor`.
+2. **Fase 1 · Valoración xurídica nova** (Opus · alto): modelo = a do Anonimizador (condicións de uso
+   revisadas por un avogado o 15/10/2026, só esas). Feito = informe fóra do repositorio público, cos puntos ⚖️
+   para o avogado e as propostas de texto sen aplicar ás condicións aprobadas.
+3. **Fase 1b · Mesmo motor Markdown nos dous programas** (Opus · alto; cartafol de traballo propio): hoxe a copia
+   `.md` do Anonimizador usa `copia_md.xerar`, pero NON aplica `titulos_pdf.marcar_titulos_md` nin `aforro_ia`
+   (cabeceiras repetidas, liñas unidas) coma o Reductor. Feito = a mesma función serve aos dous camiños (con proba
+   que o garanta), tests de fugas en verde e sen cambios na anonimización do texto.
+4. **Fase 2 · Preparar versións** (Sonnet · medio): fusionar a rama en `main` (só local), subir versións,
+   fichas, manuais e paquetes MSIX de ambos programas. Feito = tests en verde, paquetes montados e lista do
+   que sube o usuario ao Partner Center. Sen push nin etiquetas `msix-v*` sen permiso do usuario.
+5. **Fase 3 · Limpeza dos rastros de proba** (Haiku · baixo): só o que creou Claude no portátil
+   (rexistros temporais, scripts, instaladores e cartafoles de `C:\Users\Public\Documents`). Os cartafoles do
+   escritorio decide o usuario cales quedan.
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.

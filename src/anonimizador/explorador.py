@@ -53,19 +53,66 @@ def _e_oculto(entrada: os.DirEntry) -> bool:
     return False
 
 
+# Identificadores das carpetas de usuario de Windows (KNOWNFOLDERID).
+_GUIDS_CARPETAS = {
+    "escritorio": "B4BFCC3A-DB2C-424C-B029-7FE99A87C641",
+    "documentos": "FDD39AD0-238F-46AF-ADB4-6C85480369C7",
+    "descargas": "374DE290-123F-4565-9164-39C4925E467B",
+}
+
+
+def _carpeta_conocida(clave: str) -> Path | None:
+    """A carpeta REAL de usuario que di Windows (`SHGetKnownFolderPath`).
+    Cando Escritorio ou Documentos están redirixidos a outro disco
+    (`D:\\Escritorio`), `~/Desktop` e `~/Documents` seguen a existir pero
+    baleiras: abrir o explorador nelas parece que non funciona. Fóra de
+    Windows, ou se a API falla, devolve `None` e usaranse as de `~`."""
+    guid = _GUIDS_CARPETAS.get(clave)
+    if sys.platform != "win32" or guid is None:
+        return None
+    try:
+        import ctypes
+        import uuid
+        from ctypes import wintypes
+
+        class _Guid(ctypes.Structure):
+            _fields_ = [("Data1", wintypes.DWORD), ("Data2", wintypes.WORD),
+                        ("Data3", wintypes.WORD), ("Data4", ctypes.c_ubyte * 8)]
+
+        u = uuid.UUID(guid)
+        identificador = _Guid(u.time_low, u.time_mid, u.time_hi_version, (ctypes.c_ubyte * 8)(*u.bytes[8:]))
+        ruta = ctypes.c_wchar_p()
+        buscar = ctypes.windll.shell32.SHGetKnownFolderPath
+        buscar.argtypes = [ctypes.POINTER(_Guid), wintypes.DWORD, wintypes.HANDLE, ctypes.POINTER(ctypes.c_wchar_p)]
+        buscar.restype = ctypes.HRESULT
+        try:
+            buscar(ctypes.byref(identificador), 0, None, ctypes.byref(ruta))
+            return Path(ruta.value) if ruta.value else None
+        finally:
+            ctypes.windll.ole32.CoTaskMemFree(ruta)
+    except (OSError, ValueError, AttributeError):
+        return None
+
+
+def _carpeta_de_usuario(clave: str, *nomes_en_casa: str) -> Path | None:
+    """A carpeta de usuario `clave` que existe: primeiro a que di Windows e,
+    se non, a primeira de `~/<nome>`."""
+    conocida = _carpeta_conocida(clave)
+    candidatos = ([conocida] if conocida else []) + [Path.home() / nome for nome in nomes_en_casa]
+    return next((c for c in candidatos if c.is_dir()), None)
+
+
 def _atallos() -> list[dict]:
     """Sitios habituais para saltar dun golpe (só os que existen)."""
-    casa = Path.home()
     candidatos = [
-        (idioma.t("exp.inicio"), casa),
-        (idioma.t("exp.documentos"), casa / "Documents"),
-        (idioma.t("exp.documentos"), casa / "Documentos"),
-        (idioma.t("exp.escritorio"), casa / "Desktop"),
-        (idioma.t("exp.descargas"), casa / "Downloads"),
+        (idioma.t("exp.inicio"), Path.home()),
+        (idioma.t("exp.documentos"), _carpeta_de_usuario("documentos", "Documents", "Documentos")),
+        (idioma.t("exp.escritorio"), _carpeta_de_usuario("escritorio", "Desktop", "Escritorio")),
+        (idioma.t("exp.descargas"), _carpeta_de_usuario("descargas", "Downloads", "Descargas")),
     ]
     atallos, vistos = [], set()
     for nome, ruta in candidatos:
-        if ruta.is_dir() and str(ruta) not in vistos:
+        if ruta is not None and ruta.is_dir() and str(ruta) not in vistos:
             vistos.add(str(ruta))
             atallos.append({"nome": nome, "ruta": str(ruta)})
     atallos.append({"nome": idioma.t("exp.este_equipo") if sys.platform == "win32" else idioma.t("exp.raiz"), "ruta": EQUIPO})
@@ -73,11 +120,7 @@ def _atallos() -> list[dict]:
 
 
 def _ruta_inicial() -> Path:
-    casa = Path.home()
-    for candidato in (casa / "Documents", casa / "Documentos", casa):
-        if candidato.is_dir():
-            return candidato
-    return casa
+    return _carpeta_de_usuario("documentos", "Documents", "Documentos") or Path.home()
 
 
 def _pai(ruta: Path) -> str | None:
