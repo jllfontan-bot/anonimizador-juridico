@@ -8,6 +8,7 @@ Uso:
 import argparse
 import getpass
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -19,6 +20,17 @@ _DESCRICION_ORIXE_CLAVE = {
     "ficheiro": "ficheiro local (clave.key)",
     "chaveiro_sistema": "chaveiro do sistema operativo",
 }
+
+
+def _mesmo_ficheiro(a: str, b: str) -> bool:
+    """`a` e `b` son o mesmo ficheiro (mesma ruta, ou ligazóns, ou só cambia
+    maiúsculas nun disco que non as distingue)."""
+    if Path(a).resolve() == Path(b).resolve():
+        return True
+    try:
+        return os.path.samefile(a, b)
+    except OSError:  # `a` aínda non existe
+        return False
 
 
 def main():
@@ -92,6 +104,11 @@ def main():
         # se o usuario indicou `--saida` a man, respétase tal cal.
         saida_explicita = args.saida is not None
         saida = args.saida or ruta_saida_por_defecto(args.entrada)
+        if saida_explicita and _mesmo_ficheiro(saida, args.entrada):
+            # O anonimizado substituiría ao orixinal (que se perdería).
+            print("Erro: --saida non pode ser o mesmo ficheiro ca a entrada (perderíase o orixinal).",
+                  file=sys.stderr)
+            sys.exit(2)
 
         if Path(args.entrada).suffix.lower() == ".zip":
             try:

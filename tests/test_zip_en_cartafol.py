@@ -563,6 +563,19 @@ class TestCliZip(unittest.TestCase):
         self.assertIn("danado", erros)
         self.assertEqual(list(self.dir.glob("*.anonimizado*")), [])
 
+    def test_saida_igual_a_entrada_rexeitase_sen_tocar_o_orixinal(self):
+        entrada = _zip(self.dir / "mesmo.zip", {"nota.txt": TEXTO_XOSE})
+        solto = self.dir / "nota.txt"
+        solto.write_text(TEXTO_XOSE, encoding="utf-8")
+        for ruta, saida in ((entrada, entrada), (solto, solto), (solto, self.dir / "." / "nota.txt")):
+            with self.subTest(ruta=ruta.name, saida=str(saida)):
+                antes = ruta.read_bytes()
+                codigo, _, erros = self._cli("anonimizar", str(ruta), "--saida", str(saida),
+                                             "--rexistro", str(self.dir / "rex"))
+                self.assertNotEqual(codigo, 0)
+                self.assertIn("--saida", erros)
+                self.assertEqual(ruta.read_bytes(), antes)
+
 
 def PurePath_parent(nome: str) -> str:
     return nome.rsplit("/", 1)[0] if "/" in nome else ""
