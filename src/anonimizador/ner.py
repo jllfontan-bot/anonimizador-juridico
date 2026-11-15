@@ -12,7 +12,7 @@ from functools import lru_cache
 
 import spacy
 
-from . import lugares_oficiais, nomes_ine, recognizers
+from . import etapas, lugares_oficiais, nomes_ine, recognizers
 from .recognizers import DOCUMENTOS_DE_IDENTIDADE, Entidade
 
 _MODELO = "es_core_news_md"
@@ -3593,7 +3593,9 @@ def _detectar(texto: str, celas: list | None = None):
         for i in range(entidade.inicio, entidade.fin):
             ocupado[i] = True
 
-    for inicio_anaco, anaco in _anacos_para_ner(texto):
+    anacos = _anacos_para_ner(texto)
+    for n_anaco, (inicio_anaco, anaco) in enumerate(anacos):
+        etapas.etapa("detectar", n_anaco, len(anacos))  # só indica o avance (`etapas`): non cambia nada
         anaco_suavizado = _suavizar_ordinais_para_deteccion(_suavizar_maiusculas_para_deteccion(anaco))
         doc = nlp(anaco_suavizado)
         if doc_referencia is None:
@@ -3687,6 +3689,7 @@ def _detectar(texto: str, celas: list | None = None):
             for i in range(inicio, fin):
                 ocupado[i] = True
 
+    etapas.etapa("axustar")
     _estender_apelido_na_liña_seguinte(entidades, ocupado, texto, texto_suavizado_completo)
 
     # Rede de seguridade: NINGUNHA persoa pode cruzar un salto de liña/páxina,

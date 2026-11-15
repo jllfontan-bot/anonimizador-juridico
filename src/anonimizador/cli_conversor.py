@@ -20,6 +20,47 @@ from pathlib import Path
 from . import aforro_ia, conversor, idioma
 
 
+class _ProgresoCli:
+    """Progreso pola saída de erros (a saída normal segue sendo só o resultado):
+    o documento en curso e, despois de ler as páxinas, a etapa (`etapas`).
+    Nun terminal, a etapa e o seu avance reescríbense na mesma liña."""
+
+    def __init__(self, saida=None):
+        self.saida = saida or sys.stderr
+        self.terminal = getattr(self.saida, "isatty", lambda: False)()
+        self.clave = None
+        self.ancho = 0  # liña a medio escribir (terminal)
+
+    def documento(self, feito: int, total: int, nome: str) -> None:
+        if nome:
+            self._liña(idioma.t("conversor.cli.documento", feito=feito + 1, total=total, nome=nome))
+        self.clave = None
+
+    def etapa(self, clave: str, feito, total) -> None:
+        texto = idioma.t("conversor.etapa." + clave)
+        if self.terminal:
+            if total and total > 1:
+                texto = idioma.t("conversor.cli.etapa_n", etapa=texto, feito=min(feito + 1, total), total=total)
+            else:
+                texto = idioma.t("conversor.cli.etapa", etapa=texto)
+            self.saida.write("\r" + texto.ljust(self.ancho))
+            self.saida.flush()
+            self.ancho = len(texto)
+        elif clave != self.clave:
+            self._liña(idioma.t("conversor.cli.etapa", etapa=texto))
+        self.clave = clave
+
+    def rematar(self) -> None:
+        self._liña(None)
+
+    def _liña(self, texto) -> None:
+        if self.ancho:
+            self.saida.write("\n")
+            self.ancho = 0
+        if texto is not None:
+            print(texto, file=self.saida, flush=True)
+
+
 def main(argv: list | None = None) -> int:
     t = idioma.t
     parser = argparse.ArgumentParser(prog="conversor", description=t("conversor.cli.descricion"))
@@ -55,11 +96,16 @@ def main(argv: list | None = None) -> int:
     else:
         print(t("conversor.cli.aviso_sen_anonimizar"))
 
-    resultado = conversor.converter(
-        args.entrada, anonimizar=args.anonimizar, un_so_md=args.un_so_md, saida=args.saida, rexistro=rexistro,
-        aforro=args.aforro, csv_aparte=args.csv_aparte,
-        caracteres_por_parte=round(args.trocear * aforro_ia.CARACTERES_POR_TOKEN) if args.trocear else None,
-    )
+    progreso = _ProgresoCli()
+    try:
+        resultado = conversor.converter(
+            args.entrada, anonimizar=args.anonimizar, un_so_md=args.un_so_md, saida=args.saida, rexistro=rexistro,
+            aforro=args.aforro, csv_aparte=args.csv_aparte,
+            caracteres_por_parte=round(args.trocear * aforro_ia.CARACTERES_POR_TOKEN) if args.trocear else None,
+            progreso=progreso.documento, progreso_etapa=progreso.etapa,
+        )
+    finally:
+        progreso.rematar()
 
     for ruta in resultado.saidas:
         print(t("conversor.cli.saida", ruta=ruta))

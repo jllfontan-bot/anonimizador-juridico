@@ -13,6 +13,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
+from . import etapas
 from .recognizers import DOCUMENTOS_DE_IDENTIDADE, Entidade
 
 _CONTEXTO_RE = re.compile(
@@ -89,7 +90,8 @@ def _emparellar(persoas: list, dnis: list, texto: str) -> list:
     É unha penalización e non unha prohibición: nun formulario ("DNI: X",
     e na liña seguinte "Nome: Y") esa é a única mención, e debe emparellarse."""
     pares = []
-    for m in persoas:
+    for n_mencion, m in enumerate(persoas):
+        etapas.etapa("agrupar", n_mencion, len(persoas))  # só indica o avance (`etapas`): non cambia nada
         for d in dnis:
             distancia = min(abs(d.inicio - m.fin), abs(m.inicio - d.fin))
             # Un encabezado "ANEXO" entre os dous: o DNI é doutra sección (lote 6,

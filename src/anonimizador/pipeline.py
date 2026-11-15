@@ -25,7 +25,7 @@ from odf.meta import UserDefined as PersonalizadoMetaOdt
 from odf.office import Annotation as AnotacionOdt
 from odf.text import P as ParagrafoOdt
 
-from . import codigos, idioma, imaxes, mosaic, ner, resolution
+from . import codigos, etapas, idioma, imaxes, mosaic, ner, resolution
 from .categoria_especial import escanear_categoria_especial
 from .risco_residual import escanear_risco_residual
 from .pdf_estrutura import _limites_paxinas, gardar_pdf_estruturado
@@ -596,7 +596,9 @@ def anonimizar_texto_detallado(
     `contexto`, calquera substitución que cruce unha fronteira de
     parágrafo/páxina pártese en anacos (`_clamp_substitucions_a_limites`)
     para non desaliñar a estrutura do documento xa desde aquí."""
+    etapas.etapa("detectar")
     entidades, doc = ner.detectar(texto, celas=(contexto or {}).get("celas_datos_persoais"))
+    etapas.etapa("agrupar")
     grupos = resolution.agrupar(entidades, texto)
     # Cada aparición física dun documento ten UN só titular aquí (A16: se
     # recibise dúas substitucións coas mesmas coordenadas, a segunda
@@ -608,6 +610,7 @@ def anonimizar_texto_detallado(
     substitucions = []  # (inicio, fin, texto_substituto)
     informe_persoas = []
 
+    etapas.etapa("codigos")
     for grupo in grupos:
         codigo, marcado, motivo, posibles_coincidencias = rexistro.resolver_ou_crear(grupo)
         # O rexistro garda PERSOA_n; o documento e a pantalla levan o prefixo do idioma.
@@ -653,6 +656,7 @@ def anonimizar_texto_detallado(
 
     texto_anonimizado = _aplicar_substitucions_a_texto(texto, substitucions)
 
+    etapas.etapa("riscos")
     riscos_mosaico = mosaic.analizar(texto_anonimizado, ner.cargar_modelo(), ficheiro_config)
 
     # Rede de seguridade final: NON é un recoñecedor máis, é un escaneo

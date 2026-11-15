@@ -284,8 +284,9 @@ async function converter(anonimizar) {
   amosar("progreso");
 }
 
-// Progreso: documento a documento (`progreso`) e, dentro dun PDF, páxina a páxina (`paxina`).
-let ultimoProgreso = null, ultimaPaxina = null;
+// Progreso: documento a documento (`progreso`), dentro dun PDF páxina a páxina (`paxina`) e,
+// despois de ler, a etapa en curso (`etapa`: detectar datos persoais, asociar DNI, Markdown...).
+let ultimoProgreso = null, ultimaPaxina = null, ultimaEtapa = null;
 function pintarProgreso() {
   const datos = ultimoProgreso;
   if (!datos) return;
@@ -301,7 +302,11 @@ function pintarProgreso() {
     ? t("progreso_doc", {feito: Math.min(datos.feito + 1, datos.total), total: datos.total})
       + (datos.entradas > 1 ? " · " + t("progreso_entrada", {i: datos.entrada + 1, n: datos.entradas}) : "")
     : "";
-  if (ultimaPaxina && ultimaPaxina.paxinas > 1) {
+  if (ultimaEtapa) {
+    detalle += (detalle ? " · " : "") + (ultimaEtapa.total > 1
+      ? t("progreso_etapa", {etapa: ultimaEtapa.texto, feito: Math.min(ultimaEtapa.feito + 1, ultimaEtapa.total), total: ultimaEtapa.total})
+      : ultimaEtapa.texto + "…");
+  } else if (ultimaPaxina && ultimaPaxina.paxinas > 1) {
     detalle += (detalle ? " · " : "") + t("progreso_paxina", {pagina: ultimaPaxina.pagina + 1, paxinas: ultimaPaxina.paxinas});
   }
   $("detalle-progreso").textContent = detalle;
@@ -311,8 +316,9 @@ function pintarProgreso() {
 // Eventos que manda Python (`Api._emitir`).
 function recibir(evento, datos) {
   if (evento === "soltadas") { engadirEntradas(datos); return; }
-  if (evento === "progreso") { ultimoProgreso = datos; ultimaPaxina = null; pintarProgreso(); return; }
-  if (evento === "paxina") { ultimaPaxina = datos; pintarProgreso(); return; }
+  if (evento === "progreso") { ultimoProgreso = datos; ultimaPaxina = null; ultimaEtapa = null; pintarProgreso(); return; }
+  if (evento === "paxina") { ultimaPaxina = datos; ultimaEtapa = null; pintarProgreso(); return; }
+  if (evento === "etapa") { ultimaEtapa = datos; pintarProgreso(); return; }
   if (evento === "revisar") { ultimaRevision = datos; pintarRevision(datos); amosar("revision"); return; }
   ultimaRevision = null;
   ultimoEvento = evento; ultimoResultado = datos;

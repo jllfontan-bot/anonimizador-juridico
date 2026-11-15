@@ -310,8 +310,15 @@ class Api:
                     self._emitir("paxina", {"entrada": i, "entradas": len(rutas), "pagina": feita,
                                             "paxinas": n_paxinas})
 
+                def etapa(clave, feito, total, i=i):
+                    # Despois das páxinas: detección, asociación de DNI, Markdown... (`etapas`).
+                    self._emitir("etapa", {"entrada": i, "entradas": len(rutas), "clave": clave,
+                                           "texto": idioma.t("conversor.etapa." + clave), "feito": feito,
+                                           "total": total})
+
                 resultado = conversor.converter(
-                    ruta, rexistro=self._rexistro, progreso=progreso, progreso_paxina=paxina, cancelar=self._cancelado.is_set,
+                    ruta, rexistro=self._rexistro, progreso=progreso, progreso_paxina=paxina, progreso_etapa=etapa,
+                    cancelar=self._cancelado.is_set,
                     revisar=self._revisar if anonimizar else None, **argumentos,
                 )
                 _sumar(total, resultado, prefixo=Path(ruta).name if len(rutas) > 1 else "")
