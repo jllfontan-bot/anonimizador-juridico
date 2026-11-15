@@ -30,8 +30,8 @@ ficha para cada uno.
 - URL de la política de privacidad:
   `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/politica-privacidad-conversor.md`
   (existirá en esa dirección cuando el conversor esté en `main`).
-- Condiciones de uso: las del anonimizador sirven igual (mismo autor, misma licencia, sin garantía):
-  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md`.
+- Condiciones de uso propias del Reductor (es y gl en el mismo archivo), aprobadas por el usuario el 15/11/2026:
+  `https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso-reductor.md`.
 - Sitio web: https://github.com/jllfontan-bot/anonimizador-juridico
 - Contacto de soporte: jllfontan@gmail.com
 - La aplicación trata en local los datos personales de los documentos (no los recoge ni los envía): en Partner Center, «Sí» a información personal y la URL de la política, como en el Anonimizador. No requiere cuenta; no tiene publicidad.
@@ -80,7 +80,7 @@ No hay cuentas, ni publicidad, ni analítica. El programa no se conecta a intern
 
 Interfaz en castellano o gallego. Software libre con doble licencia, a tu elección: EUPL v1.2 o AGPL-3.0, con el código fuente publicado. Se distribuye sin garantía: revisa siempre el resultado antes de usarlo.
 
-Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic.
+Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic. Claude y Anthropic son marcas de Anthropic, PBC.
 
 **Novedades de esta versión (1.2.0):**
 Un .zip dentro de una carpeta también se convierte (solo ese nivel, hasta 2 GiB descomprimidos por conversión), y sus .md quedan en una carpeta «<nombre>-md» a su lado. En modo anonimizado automático la conversión ya no se detiene: al final verás los documentos con posibles fugas y podrás revisarlos uno a uno con el botón «Revisar». Correcciones en la detección de datos personales (por ejemplo, en las tablas de titulares del Catastro).
@@ -112,7 +112,7 @@ progreso, resultado anonimizado, resultado y revisión. Se generan con
 
 **Información de copyright:** © 2026 José Luis López Fontán. Doble licencia EUPL-1.2 o AGPL-3.0. Datos: INE (CC BY 4.0) y Nomenclátor de Galicia de la Xunta de Galicia (CC BY-SA 4.0).
 
-**Términos de licencia adicionales:** Licencia Pública de la Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — o GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, a elección del usuario; el paquete, por sus componentes, se distribuye con la AGPL-3.0. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso.md
+**Términos de licencia adicionales:** Licencia Pública de la Unión Europea (EUPL) v1.2 — https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12 — o GNU Affero General Public License v3.0 — https://www.gnu.org/licenses/agpl-3.0.html, a elección del usuario; el paquete, por sus componentes, se distribuye con la AGPL-3.0. Condiciones de uso: https://github.com/jllfontan-bot/anonimizador-juridico/blob/main/docs/store/condiciones-de-uso-reductor.md
 
 ## Store listing (gl-ES)
 
@@ -151,7 +151,7 @@ Non hai contas, nin publicidade, nin analítica. O programa non se conecta a int
 
 Interface en castelán ou galego. Software libre con dobre licenza, á túa escolla: EUPL v1.2 ou AGPL-3.0, co código fonte publicado. Distribúese sen garantía: revisa sempre o resultado antes de usalo.
 
-Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic.
+Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic. Claude e Anthropic son marcas de Anthropic, PBC.
 
 **Novidades desta versión (1.2.0):**
 Un .zip dentro dun cartafol tamén se converte (só ese nivel, ata 2 GiB descomprimidos por conversión), e os seus .md quedan nun cartafol «<nome>-md» ao seu carón. En modo anonimizado automático a conversión xa non se detén: ao final verás os documentos con posibles fugas e poderás revisalos un a un co botón «Revisar». Correccións na detección de datos persoais (por exemplo, nas táboas de titulares do Catastro).
