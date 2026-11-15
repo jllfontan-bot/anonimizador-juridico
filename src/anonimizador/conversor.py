@@ -14,7 +14,10 @@ mesmo motor có anonimizador, nunca unha copia:
   anonimizador (`tests/test_markdown_ia.py`). Os nomes de ficheiro e
   de cartafol anonimízanse coma no zip do anonimizador. Sen o enganche
   `revisar` (a liña de comandos) non hai revisión humana: quen chama debe
-  avisalo, e o .md leva `revisado: non`.
+  avisalo, e o .md leva `revisado: non`; se a detección atopou posibles
+  fugas (risco residual alto), tamén `posibles_fugas: N`, que se quita ao
+  revisalo (`substituir_revisado`). Co .md único, a cabeceira leva o total
+  e a sección de cada documento afectado, a súa liña.
 
 Nomes de saída: `demanda.pdf.md` sen anonimizar e
 `<nome anonimizado>.anonimizado.pdf.md` anonimizando (o criterio da copia
@@ -141,6 +144,7 @@ class _Convertido:
     paxinas: int | None
     avisos: list = field(default_factory=list)
     revisado: bool = False
+    fugas: int = 0  # posibles fugas (risco residual alto) sen revisar: van á cabeceira (`posibles_fugas: N`)
     csv: list = field(default_factory=list)  # .csv á parte que o lector deixou nun cartafol temporal
     orixe: str = ""  # str(_Documento.nome)
     ruta: Path | None = None  # o .md principal escrito (sen `un_so_md`)
@@ -353,14 +357,22 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         if revisado is not None:
             texto_anon, substitucions = revisado
     md = _corpo_anonimizado(sufixo, contexto, texto_anon, substitucions, aforro)
+    # En automático, as posibles fugas quedan marcadas no propio .md: se a
+    # persoa non pulsa «Revisar», o ficheiro segue avisando (valoración R1).
+    fugas = 0 if revisado is not None else _contar_fugas(informe)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
     nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
     cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
     nome_visible = str(cartafol / nome_ficheiro)
     stem = PurePosixPath(nome_ficheiro).stem
     return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, md.texto, paxinas,
-                       revisado=revisado is not None, orixe=str(doc.nome),
+                       revisado=revisado is not None, fugas=fugas, orixe=str(doc.nome),
                        tokens_antes=md.tokens_antes, tokens_despois=md.tokens_despois), informe
+
+
+def _contar_fugas(informe: dict) -> int:
+    """As posibles fugas que o resumo final lista (risco residual de confianza alta)."""
+    return sum(1 for r in informe.get("risco_residual", []) if r.get("confianza") == "alta")
 
 
 def _corpo_anonimizado(sufixo: str, contexto, texto_anon: str, substitucions, aforro: bool) -> aforro_ia.Resultado:
@@ -388,7 +400,7 @@ def _valor_yaml(valor: str) -> str:
 
 
 def _cabeceira(orixe: str, anonimizado: bool, data: datetime.date, paxinas: int | None = None,
-               ficheiros: int | None = None, revisado: bool = False) -> str:
+               ficheiros: int | None = None, revisado: bool = False, posibles_fugas: int = 0) -> str:
     liñas = ["---", f"{idioma.t('conversor.orixe')}: {_valor_yaml(orixe)}"]
     if paxinas:
         liñas.append(f"{idioma.t('conversor.paxinas')}: {paxinas}")
@@ -397,12 +409,18 @@ def _cabeceira(orixe: str, anonimizado: bool, data: datetime.date, paxinas: int 
     liñas.append(f"anonimizado: {idioma.t('conversor.si' if anonimizado else 'conversor.non')}")
     if anonimizado:
         liñas.append(f"{idioma.t('conversor.revisado')}: {idioma.t('conversor.si' if revisado else 'conversor.non')}")
+        if posibles_fugas:
+            liñas.append(_liña_fugas(posibles_fugas))
     liñas.append(f"{idioma.t('conversor.convertido')}: {data.isoformat()}, {idioma.t('conversor.nome')} {VERSION}")
     return "\n".join(liñas) + "\n---\n"
 
 
 _TITULO = re.compile(r"(#{1,5})(\s)")
 _VALADO = re.compile(r"(```|~~~)")
+
+
+def _liña_fugas(n: int) -> str:
+    return f"{idioma.t('conversor.posibles_fugas')}: {n}"
 
 
 def _baixar_titulos(corpo: str) -> str:
@@ -435,7 +453,8 @@ def _un_so_md(convertidos: list, corpos: list, omitidos: list) -> str:
     partes.append("\n".join(indice))
     for c, corpo in zip(convertidos, corpos):
         corpo = _baixar_titulos(corpo).strip("\n")
-        partes.append(f"# {c.nome_visible}" + ("\n\n" + corpo if corpo else ""))
+        aviso = "\n\n" + _liña_fugas(c.fugas) if c.fugas else ""
+        partes.append(f"# {c.nome_visible}" + aviso + ("\n\n" + corpo if corpo else ""))
     return "\n\n".join(partes) + "\n"
 
 
@@ -602,7 +621,8 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
             _colocar_csv(c, destino, usados_csv, resultado)
         corpos = [_corpo_final(c, resultado) for c in convertidos]
         cabeceira = _cabeceira(nome_entrada, anonimizar, data, ficheiros=len(convertidos),
-                               revisado=bool(convertidos) and all(c.revisado for c in convertidos))
+                               revisado=bool(convertidos) and all(c.revisado for c in convertidos),
+                               posibles_fugas=sum(c.fugas for c in convertidos))
         _escribir(ruta, cabeceira, _un_so_md(convertidos, corpos, omitidos), caracteres_por_parte, resultado.saidas)
         paquete.ruta_unico, paquete.omitidos, paquete.saidas_unico = ruta, omitidos, list(resultado.saidas)
         for c in convertidos:
@@ -628,7 +648,8 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
         usadas.add(ruta)
         ruta.parent.mkdir(parents=True, exist_ok=True)
         _colocar_csv(c, ruta.parent, usados_csv, resultado)
-        cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado)
+        cabeceira = _cabeceira(c.nome_visible, anonimizar, data, paxinas=c.paxinas, revisado=c.revisado,
+                               posibles_fugas=c.fugas)
         antes = len(resultado.saidas)
         _escribir(ruta, cabeceira, _corpo_final(c, resultado), caracteres_por_parte, resultado.saidas)
         c.ruta = ruta
@@ -650,14 +671,15 @@ def substituir_revisado(resultado: Resultado, orixe: str, texto_anon: str, subst
     c = lote.convertidos[orixe]
     md = _corpo_anonimizado(PurePosixPath(orixe).suffix.lower(), contexto, texto_anon, substitucions, lote.aforro)
     c.corpo, c.tokens_antes, c.tokens_despois = md.texto, md.tokens_antes, md.tokens_despois
-    c.revisado = True
+    c.revisado, c.fugas = True, 0  # revisado por unha persoa: fóra a marca de posibles fugas
     marcador = Resultado()  # a estimación dos tokens non se conta dúas veces
     if lote.un_so_md:
         antigas = list(lote.saidas_unico)
         convertidos = list(lote.convertidos.values())
         corpos = [_corpo_final(x, marcador) for x in convertidos]
         cabeceira = _cabeceira(lote.nome_entrada, lote.anonimizar, lote.data, ficheiros=len(convertidos),
-                               revisado=all(x.revisado for x in convertidos))
+                               revisado=all(x.revisado for x in convertidos),
+                               posibles_fugas=sum(x.fugas for x in convertidos))
         novas: list = []
         _borrar(antigas)
         _escribir(lote.ruta_unico, cabeceira, _un_so_md(convertidos, corpos, lote.omitidos),

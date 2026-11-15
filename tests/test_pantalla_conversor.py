@@ -394,6 +394,36 @@ class TestAnonimizando(_Base):
         datos = self._automatico(_docx(self.dir / "limpo.docx", "O xulgado de Lugo cita ás partes."))
         self.assertEqual(datos["fugas_docs"], [])
 
+    def test_automatico_marca_as_posibles_fugas_no_propio_md(self):
+        # Valoración xurídica R1: se a persoa non pulsa «Revisar», o .md segue avisando.
+        datos = self._automatico(self._expediente_con_un_risco())
+        n = len(datos["fugas_docs"][0]["fugas"])
+        _, md = self._md_de(datos, "con_risco")
+        self.assertIn(f"revisado: non\nposibles_fugas: {n}\n", md.split("\n---\n")[0] + "\n")
+        _, limpo = self._md_de(datos, "limpo")
+        self.assertNotIn("posibles_fugas", limpo)
+
+    def test_revisar_quita_a_marca_de_posibles_fugas(self):
+        datos = self._automatico(self._expediente_con_un_risco())
+        revision = self.api.revisar_documento(datos["fugas_docs"][0]["id"])["revision"]
+        resumo = self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
+                                              "fragmentos": "34867809 => [NÚMERO]"})["resumo"]
+        _, md = self._md_de(resumo, "con_risco")
+        self.assertIn("revisado: si\n", md)
+        self.assertNotIn("posibles_fugas", md)
+
+    def test_modo_revisar_non_marca_posibles_fugas(self):
+        # Unha persoa xa viu os avisos na revisión: o .md leva «revisado: si» e sen marca.
+        ficheiro = _docx(self.dir / "con_risco.docx", self._RISCO)
+        self.api.converter({"rutas": [str(ficheiro)], "anonimizar": True, "modo": "revisar"})
+        revision = self._agardar("revisar")
+        self.assertIn("34867809", [f["texto"] for f in revision["fugas"]])
+        self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]], "fragmentos": ""})
+        _, datos = self._final()
+        md = self._md(datos)
+        self.assertIn("revisado: si\n", md)
+        self.assertNotIn("posibles_fugas", md)
+
     def test_revisar_substitúe_o_md_e_marca_revisado(self):
         raiz = self._expediente_con_un_risco()
         datos = self._automatico(raiz)
@@ -447,7 +477,11 @@ class TestAnonimizando(_Base):
         datos = self._automatico(raiz, un_so_md=True)
         self.assertEqual(len(datos["saidas"]), 1)
         ruta = Path(datos["saidas"][0])
-        self.assertIn("34867809", ruta.read_text(encoding="utf-8"))
+        antes = ruta.read_text(encoding="utf-8")
+        self.assertIn("34867809", antes)
+        n = len(datos["fugas_docs"][0]["fugas"])
+        self.assertIn(f"posibles_fugas: {n}\n", antes.split("\n---\n")[0] + "\n")  # o total, na cabeceira
+        self.assertEqual(antes.count(f"posibles_fugas: {n}"), 2)  # e na sección do documento
         revision = self.api.revisar_documento(datos["fugas_docs"][0]["id"])["revision"]
         resumo = self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
                                               "fragmentos": "34867809 => [NÚMERO]"})["resumo"]
@@ -457,6 +491,7 @@ class TestAnonimizando(_Base):
         self.assertIn("ficheiros: 2\n", md)
         self.assertIn("Lugo", md)  # o outro documento segue aí
         self.assertIn("revisado: non\n", md)  # un só dos dous revisado: a cabeceira non o di
+        self.assertNotIn("posibles_fugas", md)
 
     def test_varias_entradas_cada_documento_revisase_na_sua(self):
         a = _docx(self.dir / "a" / "primeiro.docx", self._RISCO)

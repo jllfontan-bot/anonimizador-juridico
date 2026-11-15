@@ -294,6 +294,7 @@
  "conversor.non": "no",
  "conversor.convertido": "convertido",
  "conversor.revisado": "revisado",
+ "conversor.posibles_fugas": "posibles_fugas",
  "conversor.indice": "Índice",
  "conversor.unha_paxina": "1 página",
  "conversor.n_paxinas": "{n} páginas",
