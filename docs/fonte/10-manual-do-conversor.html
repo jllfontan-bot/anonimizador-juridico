@@ -13,7 +13,7 @@
 <div class="portada">
   <span class="chip">Manual de uso · Reductor de tokens</span>
   <h1>Como pasar documentos a Markdown para unha IA, paso a paso</h1>
-  <p class="lede">Guía práctica do programa, con capturas reais de cada pantalla (con datos inventados): como escoller os documentos, que opcións hai para gastar menos tokens, que leva cada .md e como convertelos anonimizando, coa mesma revisión ca o Anonimizador jurídico.</p>
+  <p class="lede">Guía práctica do programa, con capturas reais de cada pantalla (con datos inventados): como escoller os documentos, que opcións hai para gastar menos tokens, que leva cada .md e como convertelos anonimizando, revisando cada documento antes de gardalo.</p>
   <div class="meta">
     <div><span>Interface</span>Xanela propia do programa<br>(sen servidor nin portos abertos)</div>
     <div><span>Idioma</span>Castelán ou galego<br>(escóllese arriba á dereita)</div>
@@ -87,10 +87,10 @@ Xulgado de Primeira Instancia. Notificación. Por medio da presente comunícase�
 <p>A cabeceira do xulgado, que se repetía en cada páxina, aparece unha soa vez ao principio. Nos documentos dixitalizados o texto é o que le o recoñecemento de texto (OCR), con algún erro posible.</p>
 
 <h2 class="sec">06 · Converter anonimizando</h2>
-<p>O botón <strong>«Converter anonimizando»</strong> usa o mesmo motor ca o <strong>Anonimizador jurídico</strong>: os nomes, DNI, teléfonos, enderezos e demais datos persoais pasan a códigos (<code>PERSOA_000001</code>, <code>[TELEFONO]</code>…) antes de escribir o <code>.md</code>. Usa tamén o <strong>mesmo rexistro cifrado</strong> (<code>Documentos\Anonimizador</code>), de modo que unha persoa recibe o mesmo código nos dous programas.</p>
+<p>O botón <strong>«Converter anonimizando»</strong> detecta os datos persoais: os nomes, DNI, teléfonos, enderezos e demais datos persoais pasan a códigos (<code>PERSOA_000001</code>, <code>[TELEFONO]</code>…) antes de escribir o <code>.md</code>. A correspondencia entre cada código e a persoa real queda nun <strong>rexistro cifrado</strong> no teu ordenador (<code>Documentos\Anonimizador</code>), de modo que unha persoa recibe sempre o mesmo código.</p>
 <div class="paso"><div class="n">1</div><div class="corpo">
   <p class="t">Revisar cada documento (recomendado, por defecto)</p>
-  <p>Antes de gardar cada <code>.md</code> aparece a pantalla de revisión, coma no anonimizador: as persoas detectadas (desmarca as que non son unha persoa) e un recadro para tapar o que se escapase ou xeneralizar un dato.</p>
+  <p>Antes de gardar cada <code>.md</code> aparece a pantalla de revisión: as persoas detectadas (desmarca as que non son unha persoa) e un recadro para tapar o que se escapase ou xeneralizar un dato.</p>
 </div></div>
 <figure><img src="img/conversor/revision.png" alt="Revisión" style="max-width:380px"><figcaption>Revisión dun documento: cada persoa co seu código e un recadro para engadir ou xeneralizar.</figcaption></figure>
 <div class="paso"><div class="n">2</div><div class="corpo">
@@ -111,7 +111,7 @@ Declaración de PERSOA_000001
 PERSOA_000001, con DNI PERSOA_000001 e teléfono [TELEFONO], veciña de Lugo, declara que coñecía a PERSOA_000002 desde había dez anos…</pre>
 <div class="nota">
   <h4>Ningún sistema automático o detecta todo</h4>
-  <p>Revisa sempre o <code>.md</code> antes de pasalo a unha IA externa. Mentres se conserve o rexistro, o resultado está seudonimizado, non anonimizado de forma irreversible: a correspondencia entre cada código e a persoa real pódese consultar co Anonimizador jurídico (reversión con contrasinal e motivo).</p>
+  <p>Revisa sempre o <code>.md</code> antes de pasalo a unha IA externa. Mentres se conserve o rexistro, o resultado está seudonimizado, non anonimizado de forma irreversible: quen teña o rexistro e a súa clave pode saber a quen corresponde cada código.</p>
 </div>
 
 <h2 class="sec">07 · Formatos</h2>
@@ -133,7 +133,7 @@ PERSOA_000001, con DNI PERSOA_000001 e teléfono [TELEFONO], veciña de Lugo, de
 <h2 class="sec">08 · Privacidade e datos que garda</h2>
 <ul>
   <li>Todo se fai no ordenador: nin os documentos nin os <code>.md</code> saen a internet, e o programa non abre ningún porto.</li>
-  <li>En <code>Documentos\Anonimizador</code> (o mesmo cartafol ca o anonimizador) gárdase <code>preferencias.json</code> (idioma e modo de revisión) e, só se convertes anonimizando, o rexistro cifrado <code>datos_rexistro</code>, coa clave no Administrador de credenciais de Windows. Nada diso se borra ao desinstalar: sen o rexistro non se podería saber a quen corresponde cada código.</li>
+  <li>En <code>Documentos\Anonimizador</code> gárdase <code>preferencias.json</code> (idioma e modo de revisión) e, só se convertes anonimizando, o rexistro cifrado <code>datos_rexistro</code>, coa clave no Administrador de credenciais de Windows. Nada diso se borra ao desinstalar: sen o rexistro non se podería saber a quen corresponde cada código.</li>
   <li>A ligazón <strong>«Acerca de»</strong>, debaixo, amosa a versión, a autoría, a dobre licenza (EUPL v1.2 ou AGPL-3.0, cos textos completos) e a ligazón ao código fonte.</li>
 </ul>
 <figure><img src="img/conversor/acerca.png" alt="Acerca de" style="max-width:340px"><figcaption>«Acerca de»: versión, licenzas, autoría e código fonte.</figcaption></figure>
@@ -145,10 +145,9 @@ PERSOA_000001, con DNI PERSOA_000001 e teléfono [TELEFONO], veciña de Lugo, de
     <tr><td>Por que Markdown e non texto simple?</td><td>Porque conserva a estrutura (títulos, listas, táboas) con moi poucos caracteres, e as IA lena moi ben. Un PDF ou un Word costan moitos máis tokens por converter.</td></tr>
     <tr><td>O .md ocupa o mesmo ca o texto do orixinal?</td><td>Algo menos co «Aforro para IA», sobre todo nos PDF con cabeceiras e pés repetidos. O resumo final dá a estimación de tokens antes e despois.</td></tr>
     <tr><td>Que pasa se convirto o mesmo documento dúas veces?</td><td>Sobrescríbese o <code>.md</code> anterior. Anonimizando, a mesma persoa recibe o mesmo código.</td></tr>
-    <tr><td>O programa le os .md que xa xerou?</td><td>Non: os <code>.md</code> doutras conversións e os documentos <code>.anonimizado</code> do anonimizador quedan fóra, listados coma «resultado dunha conversión ou anonimización anterior».</td></tr>
+    <tr><td>O programa le os .md que xa xerou?</td><td>Non: os <code>.md</code> doutras conversións e os documentos xa anonimizados (<code>.anonimizado</code>) quedan fóra, listados coma «resultado dunha conversión ou anonimización anterior».</td></tr>
     <tr><td>Os anexos dun correo convértense?</td><td>Non: o <code>.md</code> do correo lista os anexos co seu nome e tamaño, e un aviso lémbrache gardalos e convertelos á parte.</td></tr>
     <tr><td>Podo cambiar o idioma?</td><td>Si, cos botóns «Galego | Español» de arriba á dereita. Lémbrase ao pechar o programa e cambia tamén as etiquetas da cabeceira dos .md.</td></tr>
-    <tr><td>Necesito o Anonimizador jurídico?</td><td>Non para converter: os dous programas son independentes. Para consultar a identidade real detrás dun código (reversión), si.</td></tr>
   </tbody>
 </table>
 

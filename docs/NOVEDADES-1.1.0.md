@@ -15,7 +15,7 @@
 
 ## Otros cambios
 - Tests del conversor con un DNI inventado en vez del de un caso real.
-- Estudios previos en `docs/estudios/` y `ESTADO.md` con el estado de los dos programas.
+- Estudios previos en `docs/estudios/`.
 
 ## Versiones
-Reductor de tokens: 1.1.0 (paquete MSIX 1.1.0.0). Anonimizador jurídico: sin cambios (1.1.1).
+Reductor de tokens: 1.1.0 (paquete MSIX 1.1.0.0).
