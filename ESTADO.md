@@ -157,6 +157,15 @@ Traballo apuntado para a versión seguinte, non para esta:
   (`~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`), e unha **valoración xurídica
   nova** antes de enviar á Store.
 
+## Anonimizador: `.zip` dentro dun cartafol (rama `anon-zip-en-carpetas`, 15/11/2026, en curso)
+
+Deseño (o cartafol procesábase sen os `.zip`; e a xanela tampouco abría un `.zip` dado directamente: só a CLI):
+- Un `.zip` (directo ou dentro do cartafol) sae coma `<nome anonimizado>.anonimizado.zip` onde saen os demais ficheiros, coa mesma estrutura de subcartafoles e a copia `.md` de cada documento se está activada. Tamén en modo «revisar»: un zip non ten revisión documento a documento, así que se anonimiza en automático e a pantalla dio.
+- Dúas fases: (1) no seu sitio da orde do cartafol anonimízase o CONTIDO de cada documento do zip a un temporal; (2) ao rematar o lote (tamén se se cancela) ponse nome ás entradas, aos cartafoles internos e ao propio zip, coas persoas de todos os documentos dese zip, e escríbese o zip de saída. Así un nome no nome do zip ou dun cartafol interno nunca crea antes un código no rexistro: os códigos e o aviso de posible homónimo dos documentos saen igual ca sen o zip.
+- Seguridade coma no Reductor (código propio en `pipeline.py`, sen importar `conversor.py`): rutas sen `..`/raíz/unidade; 2 GiB descomprimidos por lote como máximo (cabeceiras e conta real ao descomprimir: zip bomb); `.zip` dentro de `.zip` non se abre; zip con contrasinal, danado ou demasiado grande omítese enteiro, listado, sen escribir nada e sen parar o lote; `__MACOSX`/`._*` omitidos; nomes repetidos tras anonimizar levan contador.
+- O que non se pode analizar nunca entra no zip de saída: a pantalla de resultado e a CLI listan, por zip, os omitidos co motivo. Un `.anonimizado.zip` anterior non se volve procesar.
+- Mesmo rexistro para cartafol e zips (os códigos dunha persoa con DNI coinciden).
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.
