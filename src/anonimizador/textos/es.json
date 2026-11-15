@@ -418,5 +418,6 @@
  "zip.documentos": "{n} documento(s) anonimizado(s) dentro del .zip.",
  "zip.revisar_fugas": "{n} documento(s) del .zip con posibles fugas sin detectar: ábrelos en el .zip anonimizado y léelos enteros antes de darlos por buenos (un .zip no tiene el botón «Revisar este documento»):",
  "zip.omitidos": "No van en el .zip anonimizado ({n}), para no arriesgar que quede algo sin revisar:",
- "zip.en_automatico": "{n} archivo(s) .zip anonimizado(s) en automático: un .zip no admite la revisión documento a documento."
+ "zip.en_automatico": "{n} archivo(s) .zip anonimizado(s) en automático: un .zip no admite la revisión documento a documento.",
+ "zip.temporal_sen_borrar": "No se pudo borrar la carpeta temporal {ruta} (otro programa tenía un archivo abierto): puede contener una copia de un documento del .zip, original o ya anonimizado. Se borrará sola la próxima vez que anonimices un .zip, o bórrala a mano. El .zip anonimizado está bien."
 }

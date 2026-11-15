@@ -8,6 +8,9 @@
   <ul>{% for d in r.documentos_con_fugas %}<li><code>{{ d.orixe }}</code> → <code>{{ d.saida }}</code></li>{% endfor %}</ul>
 </div>
 {%- endif %}
+{%- if r.temporal_sen_borrar %}
+<div class="mencions"><strong>{{ r.temporal_sen_borrar }}</strong></div>
+{%- endif %}
 {%- if r.omitidos_zip %}
 <div class="mencions">{{ t("zip.omitidos", n=r.omitidos_zip|length) }}
   <ul>{% for o in r.omitidos_zip %}<li><code>{{ o.nome }}</code> — {{ o.motivo }}</li>{% endfor %}</ul>

@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import tempfile
+import threading
 import time
 import zipfile
 from pathlib import Path, PurePosixPath
@@ -976,6 +977,11 @@ def _escribir_no_zip(zip_saida: zipfile.ZipFile, orixe: Path, nome: str) -> None
 # escribe o zip).
 _PREFIXO_TEMPORAL = "anonimizador-zip-"
 _PREFIXO_SAIDA_TEMPORAL = ".anonimizando-"
+# Temporais de zip que este proceso está a usar agora (os do propio proceso
+# que non estean aquí xa son órfos: un borrado que fallou antes). O bloqueo
+# evita borrar un recén creado por outro fío antes de que se apunte.
+_TEMPORAIS_EN_USO: set = set()
+_BLOQUEO_TEMPORAIS = threading.Lock()
 
 
 def _proceso_vivo(pid: int) -> bool:
@@ -1029,16 +1035,35 @@ def limpar_temporais_orfos(cartafol: Path, prefixo: str) -> None:
         entradas = list(cartafol.iterdir())
     except OSError:
         return
-    for ruta in entradas:
-        coincide = patron.match(ruta.name)
-        if not coincide or _proceso_vivo(int(coincide.group(1))):
-            continue
+    with _BLOQUEO_TEMPORAIS:
+        for ruta in entradas:
+            coincide = patron.match(ruta.name)
+            if not coincide:
+                continue
+            pid = int(coincide.group(1))
+            if pid == os.getpid():
+                # Do propio proceso: só os temporais de zip que xa non se usan
+                # (un borrado que fallou antes); nunca un zip a medio escribir.
+                if prefixo != _PREFIXO_TEMPORAL or str(ruta) in _TEMPORAIS_EN_USO:
+                    continue
+            elif _proceso_vivo(pid):
+                continue
+            try:
+                if ruta.is_dir() and not ruta.is_symlink():
+                    shutil.rmtree(ruta, ignore_errors=True)
+                else:
+                    ruta.unlink(missing_ok=True)
+            except OSError:
+                pass
+
+
+def _pechar_contexto(contexto) -> None:
+    """Pecha o documento de PyMuPDF dun contexto (PDF), se o hai. Nunca falla."""
+    documento = contexto.get("documento") if isinstance(contexto, dict) else None
+    if documento is not None and type(documento).__module__.split(".")[0] in ("pymupdf", "fitz"):
         try:
-            if ruta.is_dir() and not ruta.is_symlink():
-                shutil.rmtree(ruta, ignore_errors=True)
-            else:
-                ruta.unlink(missing_ok=True)
-        except OSError:
+            documento.close()
+        except Exception:  # noqa: BLE001
             pass
 
 
@@ -1082,8 +1107,10 @@ def _anonimizar_entrada_zip(preparado, zip_entrada, info, ruta, numero, rexistro
         preparado.omitir(nome, "documento_ilexible")
         return
     finally:
-        # Soltar o documento (PyMuPDF ten o PDF aberto: en Windows non se
-        # podería borrar) e borrar o orixinal xa.
+        # Pechar o documento (PyMuPDF ten o PDF aberto: en Windows non se
+        # podería borrar, WinError 32) e borrar o orixinal xa. Se aínda así
+        # non se pode, queda para `limpar()`: nunca é un erro do zip.
+        _pechar_contexto(contexto)
         contexto = None
         _borrar_con_reintentos(tmp_entrada)
     preparado.entradas.append((nome, ruta, extension, tmp_saida, tmp_md, informe))
@@ -1096,8 +1123,10 @@ class ZipPreparado:
     def __init__(self, ruta_entrada: str):
         self.ruta_entrada = ruta_entrada
         # Prefixo co PID: `limpar_temporais_orfos` recoñéceo se o proceso morre.
-        self._tmp = DirectorioTemporal(prefix=f"{_PREFIXO_TEMPORAL}{os.getpid()}-")
-        self.dir = Path(self._tmp.name)
+        with _BLOQUEO_TEMPORAIS:
+            self._tmp = DirectorioTemporal(prefix=f"{_PREFIXO_TEMPORAL}{os.getpid()}-")
+            self.dir = Path(self._tmp.name)
+            _TEMPORAIS_EN_USO.add(str(self.dir))
         self.entradas = []  # (nome orixinal, ruta segura, extensión de saída, ficheiro anonimizado, copia .md ou None, informe)
         self.omitidos = []  # nomes orixinais das entradas que NON van no zip de saída
         self.motivos = {}  # nome orixinal -> motivo da omisión
@@ -1131,8 +1160,16 @@ class ZipPreparado:
         """Persoas de todos os documentos do zip (para os nomes)."""
         return [p for *_, informe in self.entradas for p in informe["persoas"]]
 
-    def limpar(self) -> None:
+    def limpar(self) -> bool:
+        """Borra os temporais (con reintentos, sen lanzar nunca:
+        `DirectorioTemporal`). Devolve False se o cartafol `dir` non se
+        puido borrar enteiro: quen chama debe dicilo (pode levar o orixinal
+        que se estaba a procesar ou documentos xa anonimizados); bórrao
+        `limpar_temporais_orfos` noutra execución."""
         self._tmp.cleanup()
+        with _BLOQUEO_TEMPORAIS:
+            _TEMPORAIS_EN_USO.discard(str(self.dir))
+        return not self.dir.exists()
 
 
 def preparar_zip(

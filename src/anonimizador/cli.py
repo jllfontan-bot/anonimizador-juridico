@@ -126,7 +126,8 @@ def main():
                         args.entrada, rexistro=rexistro, persoas_do_documento=preparado.persoas())
                 resultado = gardar_zip_preparado(preparado, saida, rexistro)
             finally:
-                preparado.limpar()
+                if not preparado.limpar():
+                    print(idioma.t("zip.temporal_sen_borrar", ruta=str(preparado.dir)), file=sys.stderr)
             print(f"Arquivo anonimizado -> {saida}")
             if args.informe:
                 Path(args.informe).write_text(

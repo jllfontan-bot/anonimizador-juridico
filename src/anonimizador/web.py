@@ -581,13 +581,23 @@ class _ZipsDoLote:
             ruta, preparado = self.pendentes.pop(0)
             if ao_empezar:
                 ao_empezar(ruta)
+            resultado = None
             try:
-                resultados.append(self._gardar(ruta, preparado))
+                resultado = self._gardar(ruta, preparado)
             except Exception as e:  # noqa: BLE001 -- o zip a medias xa se borrou; o resto segue
                 traceback.print_exc()
                 self.erros.append({"ruta": ruta, "mensaxe": _mensaxe_erro(e)})
             finally:
-                preparado.limpar()
+                # Un temporal que non se pode borrar (Windows: ficheiro aínda
+                # aberto) NUNCA converte en erro un zip ben anonimizado: avísase.
+                if not preparado.limpar():
+                    aviso = idioma.t("zip.temporal_sen_borrar", ruta=str(preparado.dir))
+                    if resultado is not None:
+                        resultado["temporal_sen_borrar"] = aviso
+                    else:
+                        self.erros.append({"ruta": ruta, "mensaxe": aviso})
+            if resultado is not None:
+                resultados.append(resultado)
         return resultados
 
     def _gardar(self, ruta: str, preparado) -> dict:

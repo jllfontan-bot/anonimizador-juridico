@@ -16,6 +16,7 @@ os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import contextlib
 import io
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -658,6 +659,85 @@ class TestFasesDoZip(unittest.TestCase):
         self.assertEqual(traballo["estado"], "rematado")
         self.assertEqual([Path(e["ruta"]).name for e in traballo["erros"]], ["a.zip"])
         self.assertEqual(sorted(p.name for p in saida.iterdir()), ["b.anonimizado.txt"])
+
+
+class TestTemporaisEnWindows(_Base):
+    """Caso real (portátil Windows, 15/11/2026): un zip cun PDF dentro
+    fallaba enteiro con `PermissionError: [WinError 32] ... documento.pdf`
+    ao borrar o orixinal extraído (PyMuPDF aínda o tiña aberto). Un fallo ao
+    BORRAR un temporal nunca pode converter en erro un zip ben anonimizado."""
+
+    def _zip_con_pdf(self):
+        return _zip(self.cartafol / "demanda presentada.zip", {
+            "Justificante presentacion demanda.pdf": _pdf_bytes(TEXTO_MANUEL, "Manuel Ferrándiz Salcedo"),
+            "nota.txt": TEXTO_XOSE,
+        })
+
+    def test_permissionerror_ao_borrar_o_orixinal_extraido_non_fai_fallar_o_zip(self):
+        self._zip_con_pdf()
+        orixinal = Path.unlink
+
+        def unlink_bloqueado(ruta, *a, **k):
+            if ruta.name.startswith("documento."):
+                raise PermissionError(32, "O proceso non ten acceso ao ficheiro porque está sendo utilizado por outro proceso")
+            return orixinal(ruta, *a, **k)
+
+        with mock.patch.object(Path, "unlink", unlink_bloqueado), mock.patch("time.sleep"):
+            html = self.procesar()
+        zips = self.zips_de_saida()
+        self.assertEqual(len(zips), 1, html[-3000:])
+        textos = _textos_do_zip(zips[0])
+        self.assertTrue(any(n.endswith(".anonimizado.pdf") for n in textos), sorted(textos))
+        self.assertSenDatosReais("".join(textos.values()) + "".join(textos), "o zip")
+        self.assertNotIn("PermissionError", html)
+
+    def test_se_o_temporal_non_se_pode_borrar_avisa_e_o_zip_vale(self):
+        self._zip_con_pdf()
+        rmtree_real = shutil.rmtree
+        quedan = []
+
+        def rmtree_bloqueado(ruta, ignore_errors=False, **k):
+            if Path(ruta).name.startswith("anonimizador-zip-"):
+                quedan.append(Path(ruta))
+                if ignore_errors:
+                    return
+                raise PermissionError(32, "usado por outro proceso")
+            return rmtree_real(ruta, ignore_errors=ignore_errors, **k)
+
+        try:
+            with mock.patch("anonimizador.temporales.shutil.rmtree", rmtree_bloqueado), mock.patch("time.sleep"):
+                html = self.procesar()
+            self.assertEqual(len(self.zips_de_saida()), 1)
+            self.assertTrue(quedan)
+            self.assertTrue(quedan[0].exists())
+            self.assertIn("Non se puido borrar o cartafol temporal", html)
+            self.assertIn(str(quedan[0]), html)
+            # O seguinte zip, no MESMO proceso (a xanela segue aberta), bórrao.
+            seguinte = _zip(self.dir / "seguinte.zip", {"a.txt": TEXTO_MANUEL})
+            preparar_zip(str(seguinte), RexistroCorrespondencias(self.rexistro_dir)).limpar()
+            self.assertFalse(quedan[0].exists())
+        finally:
+            for ruta in quedan:
+                rmtree_real(ruta, ignore_errors=True)
+
+    def test_o_pdf_queda_pechado_ao_rematar_cada_documento(self):
+        entrada = self._zip_con_pdf()
+        orixinal = pipeline.cargar_documento_estruturado
+        documentos = []
+
+        def cargar(ruta):
+            texto, contexto = orixinal(ruta)
+            if contexto and contexto.get("tipo") == "pdf":
+                documentos.append(contexto["documento"])
+            return texto, contexto
+
+        with mock.patch.object(pipeline, "cargar_documento_estruturado", cargar):
+            preparado = preparar_zip(str(entrada), RexistroCorrespondencias(self.rexistro_dir))
+        try:
+            self.assertEqual(len(documentos), 1)
+            self.assertTrue(documentos[0].is_closed)
+        finally:
+            preparado.limpar()
 
 
 class TestCliZip(unittest.TestCase):
