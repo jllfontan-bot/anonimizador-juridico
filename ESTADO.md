@@ -195,6 +195,42 @@ OK (1 omitido). `tests/test_escritura_incremental.py`: 52 tests.
   cada documento dunha carpeta anonimiza o seu cartafol cos seus códigos (xa era así). Manual e fichas non din aínda
   «cada .md gárdase ao converterse».
 
+## Progreso e rendemento da fase final (rama `progreso-fase-final`, 15/11/2026)
+
+Caso real (Windows, 4 núcleos): PDF de 351 páxinas anonimizado, uns 4-5 min despois de que o contador de
+páxinas chegase ao final, sen indicador, cun núcleo ao 100 % e ~766 MB; planos de 22 páxinas, moi lentos.
+
+Feito:
+- Indicador (`etapas.py`, `conversor.converter(progreso_etapa=...)`): despois das páxinas, a pantalla (es/gl) e a CLI
+  (saída de erros) din a etapa: detectar (co avance por anacos do NER), axustar, agrupar (co avance por mención),
+  codigos, riscos, markdown, gardar. Como moito un aviso por cada 1 %; un aviso que falla non para nada. O motor só
+  chama a `etapas.etapa` (sen aviso non fai nada). Saídas de referencia byte a byte idénticas (Reductor e Anonimizador).
+- `resolution._emparellar` (commit separado e revertible): a distancia mírase antes de buscar un ANEXO entre
+  persoa e DNI; mesmo resultado (test de equivalencia coa versión anterior, 3.000 casos e bordos; saídas de
+  referencia idénticas nos dous programas, mesmos códigos de persoa). Beneficia aos dous programas.
+
+Medicións (Mac, PDF sintético con texto inventado, modo anonimizado, s; sen anonimizar todo é lineal: 350 páxinas
+= 28 s de lectura + 3 s despois):
+
+| páxinas | lectura | NER (`ner.detectar`) | `resolution.agrupar` antes → agora | mosaico | copia_md | total antes → agora |
+|---|---|---|---|---|---|---|
+| 50  | 4 | 37  | ~51 → 0,08  | 5  | 3 | 104 → 50 |
+| 100 | 8 | 102 | ~416 → 0,26 | 11 | 6 | 557 → 129 |
+
+- Superlineal e SEN tocar (motor de detección, risco de fugas): `ner._detectar` (~cuadrático: 37 s → 102 s ao dobrar
+  as páxinas), sobre todo `_estender_entidade_persoa` (`doc.char_span` por entidade) e `_estender_cara_atras`
+  (`texto[:inicio].rstrip()` e percorrer `doc.ents` por cada palabra). Mellora futura, con test de equivalencia
+  coma o de `_emparellar`: unha estimación de 350 páxinas densas en persoas é de ~20 min só de NER.
+- Planos: sen texto vectorizado, o tamaño de folla non importa (A1 = A4). Con rótulos vectorizados entra o OCR das
+  zonas de trazos densos a 300 ppp e crece coa área: A4 2,5 s/páx. e ~315 MB, A1 8,6 s/páx. e ~1 GB de memoria. Iso vai
+  na lectura (o contador de páxinas avanza), non na fase final. Un tope de ppp ou de píxeles cambiaría o texto
+  recoñecido: non se puxo (validalo antes con planos reais). Con moitas cotas curtas, a fase final é ~1 s/páx.
+  (NER, mosaico, e `find_tables` de copia_md, o dobre en A1).
+- Paralelizar o OCR por páxinas (pool de procesos): non se fixo; o OCR non é o que pesa na fase final e en Windows
+  (spawn, pythonw, MSIX) o risco é alto. Proposta só se as medicións en Windows o xustifican.
+- Sen probar en Windows nin na xanela real: o indicador e os tempos son do Mac.
+- Tests: `tests/test_progreso_etapas.py`, `tests/test_resolucion_emparellar.py`; suite completa: 1254 tests OK (1 omitido).
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.
