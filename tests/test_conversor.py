@@ -519,14 +519,17 @@ class TestCsvAparte(_Base):
         self.assertEqual(list(raiz.glob("*.datos.csv")), [])
         self.assertEqual(resultado.csv, [])
 
-    def test_cancelar_non_deixa_csv(self):
+    def test_cancelar_conserva_o_csv_do_xa_convertido_e_non_toca_o_resto(self):
+        # Escritura incremental: `a` xa estaba convertido (o seu .md e o seu .csv quedan); `b`, non.
         raiz = self.dir / "expediente"
         self._folla(raiz / "a.csv")
         self._folla(raiz / "b.csv")
         chamadas = iter([False, True])
         with self.assertRaises(conversor.Cancelado):
             conversor.converter(str(raiz), cancelar=lambda: next(chamadas, True))
-        self.assertEqual(sorted(p.name for p in raiz.glob("*.csv")), ["a.csv", "b.csv"])
+        self.assertEqual(sorted(p.name for p in raiz.glob("*.csv")), ["a.csv", "a.datos.csv", "b.csv"])
+        self.assertTrue((raiz / "a.csv.md").is_file())
+        self.assertFalse((raiz / "b.csv.md").exists())
 
     def test_anonimizando_non_escribe_csv(self):
         raiz = self.dir / "expediente"
@@ -756,12 +759,19 @@ class TestProgresoCancelarRevisar(_Base):
                                 cancelar=lambda: len(paxinas) >= 1)
         self.assertEqual(len(paxinas), 1)
 
-    def test_cancelar_non_escribe_nada(self):
-        chamadas = []
+    def test_cancelar_antes_do_primeiro_non_escribe_nada(self):
         with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(self.raiz), cancelar=lambda: True)
+        self.assertEqual(sorted(p.name for p in self.raiz.iterdir()), ["a.docx", "b.odt"])
+
+    def test_cancelar_conserva_o_xa_escrito(self):
+        """Escritura incremental: cancelar non borra o que xa se gardou."""
+        chamadas = []
+        with self.assertRaises(conversor.Cancelado) as c:
             conversor.converter(str(self.raiz), progreso=lambda *a: chamadas.append(a),
                                 cancelar=lambda: len(chamadas) > 0)
-        self.assertEqual(sorted(p.name for p in self.raiz.iterdir()), ["a.docx", "b.odt"])
+        self.assertEqual(sorted(p.name for p in self.raiz.iterdir()), ["a.docx", "a.docx.md", "b.odt"])
+        self.assertEqual(c.exception.resultado_parcial.saidas, [str(self.raiz / "a.docx.md")])
 
     def test_automatico_revisado_non_e_sen_anonimizar_sen_liña(self):
         resultado = conversor.converter(str(self.raiz / "a.docx"), anonimizar=True, rexistro=self.rexistro)
