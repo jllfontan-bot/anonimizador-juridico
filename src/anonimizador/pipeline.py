@@ -955,14 +955,31 @@ class ZipPreparado:
         self.entradas = []  # (nome orixinal, ruta segura, extensión de saída, ficheiro anonimizado, copia .md ou None, informe)
         self.omitidos = []  # nomes orixinais das entradas que NON van no zip de saída
         self.motivos = {}  # nome orixinal -> motivo da omisión
+        self.omisions = []  # (nome orixinal, motivo), unha por entrada omitida
 
     def omitir(self, nome: str, motivo: str) -> None:
         self.omitidos.append(nome)
         self.motivos[nome] = motivo
+        self.omisions.append((nome, motivo))
 
     @property
     def informes(self) -> dict:
-        return {nome: informe for nome, _, _, _, _, informe in self.entradas}
+        """Informe de cada documento, por nome. Un zip pode ter dúas
+        entradas co MESMO nome: a segunda e seguintes levan " (2)", " (3)"...
+        para que ningún informe (nin o seu aviso de fugas) tape a outro."""
+        return {clave: informe for clave, (*_, informe) in zip(self.claves(), self.entradas)}
+
+    def claves(self) -> list:
+        """Nome único de cada entrada (ver `informes`), na orde do zip."""
+        usadas, claves = set(), []
+        for nome, *_ in self.entradas:
+            clave, n = nome, 1
+            while clave in usadas:  # tamén se xa hai unha entrada chamada "x (2)"
+                n += 1
+                clave = f"{nome} ({n})"
+            usadas.add(clave)
+            claves.append(clave)
+        return claves
 
     def persoas(self) -> list:
         """Persoas de todos os documentos do zip (para os nomes)."""
@@ -1116,7 +1133,7 @@ def gardar_zip_preparado(
 
     persoas_zip = preparado.persoas()
     usados = set()
-    saidas = {}
+    saidas = []  # nome no zip de saída de cada entrada, na orde de `preparado.entradas`
     destino = Path(ruta_saida)
     descritor, nome_tmp = tempfile.mkstemp(prefix=".anonimizando-", suffix=".zip.tmp", dir=destino.parent)
     os.close(descritor)
@@ -1134,7 +1151,7 @@ def gardar_zip_preparado(
                     contador += 1
                 usados.add(nome_saida.casefold())
                 zip_saida.write(str(tmp_saida), arcname=nome_saida)
-                saidas[nome] = nome_saida
+                saidas.append(nome_saida)
                 nome_copia = modulo_copia_md.ruta_copia(nome_saida)
                 if tmp_md is not None and nome_copia:
                     zip_saida.write(str(tmp_md), arcname=nome_copia)
@@ -1143,11 +1160,18 @@ def gardar_zip_preparado(
     except BaseException:
         _borrar_con_reintentos(tmp_zip)
         raise
+    claves = preparado.claves()
     return {
-        "ficheiros": preparado.informes,
+        # Un por entrada, na orde do zip (tamén se hai nomes repetidos).
+        "documentos": [
+            {"nome": nome, "saida": saida, "informe": informe}
+            for (nome, *_, informe), saida in zip(preparado.entradas, saidas)
+        ],
+        "ficheiros": preparado.informes,  # por nome único (`ZipPreparado.claves`)
+        "saidas": dict(zip(claves, saidas)),
         "omitidos": list(preparado.omitidos),
         "motivos": dict(preparado.motivos),
-        "saidas": saidas,
+        "omisions": list(preparado.omisions),  # (nome, motivo), tamén con nomes repetidos
     }
 
 

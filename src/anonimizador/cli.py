@@ -116,7 +116,8 @@ def main():
                     json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8"
                 )
                 print(f"Informe de revision -> {args.informe}")
-            for nome, informe in resultado["ficheiros"].items():
+            for documento in resultado["documentos"]:
+                nome, informe = documento["nome"], documento["informe"]
                 n_marcados = sum(1 for p in informe["persoas"] if p["marcado_para_revision"])
                 n_risco = sum(1 for r in informe.get("risco_residual", []) if r["confianza"] == "alta")
                 aviso_risco = f" -- ⚠ {n_risco} posible(s) fuga(s) sen detectar" if n_risco else ""
@@ -125,8 +126,8 @@ def main():
                 print(f"  {nome}: {len(informe['persoas'])} persoa(s) ({n_marcados} marcadas){aviso_risco}{aviso_especial}")
             if resultado["omitidos"]:
                 print("Ficheiros OMITIDOS do zip de saida (non se puideron revisar):")
-                for nome in resultado["omitidos"]:
-                    print(f"  {nome} -- {idioma.t('zip.motivo.' + resultado['motivos'][nome])}")
+                for nome, motivo in resultado["omisions"]:
+                    print(f"  {nome} -- {idioma.t('zip.motivo.' + motivo)}")
             return
 
         texto_anon, informe = anonimizar_e_gardar(args.entrada, saida, rexistro, copia_md=args.markdown)

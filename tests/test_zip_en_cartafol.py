@@ -19,6 +19,7 @@ import re
 import sys
 import tempfile
 import unittest
+import warnings
 import zipfile
 from pathlib import Path
 from unittest import mock
@@ -44,6 +45,8 @@ REAIS = ["Xosé", "Carballo", "Portela", "12345678", "600123456", "xose.carballo
 TEXTO_XOSE = ("Comparece Xosé Carballo Portela, con DNI 12345678Z, teléfono 600123456 "
               "e correo xose.carballo@example.com, e presenta a demanda.")
 TEXTO_MANUEL = "Manuel Ferrándiz Salcedo, con DNI 30014811-Z, declarou como testemuña."
+# Dá un aviso de posible fuga sen detectar (ver test_automatico_revisar).
+TEXTO_FUGA = "Comparece don Xoán Páez Veiga. Referencia 34867809 do expediente."
 
 
 def _docx_bytes(texto: str, autor: str) -> bytes:
@@ -205,6 +208,24 @@ class TestZipEnCartafol(_Base):
         self.assertSenDatosReais(zip_saida.name, "o nome do zip")
         for nome in _textos_do_zip(zip_saida):
             self.assertSenDatosReais(nome, "o nome dunha entrada")
+
+    def test_entradas_duplicadas_conservan_cada_informe_e_aviso(self):
+        """Dúas entradas co mesmo nome no zip: o aviso de posibles fugas da
+        primeira non pode perderse tapado polo informe da segunda."""
+        with zipfile.ZipFile(self.cartafol / "dup.zip", "w") as z, warnings.catch_warnings():
+            warnings.simplefilter("ignore")  # zipfile avisa do nome duplicado
+            z.writestr("nota.txt", TEXTO_FUGA)
+            z.writestr("nota.txt", "Documento sen nomes.")
+        html = self.procesar()
+        self.assertIn("2 documento(s) anonimizado(s) dentro do .zip", html)
+        self.assertIn("1 documento(s) do .zip con posibles fugas", html)
+        textos = _textos_do_zip(self.zips_de_saida()[0])
+        self.assertEqual(len([n for n in textos if not n.endswith(".md")]), 2)
+        resultado = pipeline.anonimizar_zip(
+            str(self.cartafol / "dup.zip"), str(self.dir / "s.zip"), RexistroCorrespondencias(str(self.dir / "r2")))
+        self.assertEqual([d["nome"] for d in resultado["documentos"]], ["nota.txt", "nota.txt"])
+        self.assertEqual(len(resultado["ficheiros"]), 2)
+        self.assertEqual(len(set(resultado["saidas"].values())), 2)
 
     def test_zip_danado_ou_con_contrasinal_omitese_e_o_lote_segue(self):
         (self.cartafol / "roto.zip").write_bytes(b"isto non e un zip")

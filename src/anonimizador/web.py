@@ -590,7 +590,8 @@ class _ZipsDoLote:
         ruta_saida = ruta_saida_por_defecto(ruta, self.cartafol_saida, self.rexistro, preparado.persoas())
         Path(ruta_saida).parent.mkdir(parents=True, exist_ok=True)
         resultado = gardar_zip_preparado(preparado, ruta_saida, self.rexistro)
-        informes = list(resultado["ficheiros"].values())
+        documentos = resultado["documentos"]  # un por entrada, tamén con nomes repetidos
+        informes = [d["informe"] for d in documentos]
         return {
             "e_zip": True,
             "sid_revision": None,
@@ -604,13 +605,13 @@ class _ZipsDoLote:
             "n_exentos_cargo_publico": sum(len(i.get("exentos_cargo_publico", [])) for i in informes),
             "n_categoria_especial": sum(len(i.get("categoria_especial", [])) for i in informes),
             "documentos_con_fugas": [
-                {"orixe": nome, "saida": resultado["saidas"][nome]}
-                for nome, i in resultado["ficheiros"].items()
-                if any(r["confianza"] == "alta" for r in i.get("risco_residual", []))
+                {"orixe": d["nome"], "saida": d["saida"]}
+                for d in documentos
+                if any(r["confianza"] == "alta" for r in d["informe"].get("risco_residual", []))
             ],
             "omitidos_zip": [
-                {"nome": nome, "motivo": idioma.t(f"zip.motivo.{resultado['motivos'][nome]}")}
-                for nome in resultado["omitidos"]
+                {"nome": nome, "motivo": idioma.t(f"zip.motivo.{motivo}")}
+                for nome, motivo in resultado["omisions"]
             ],
         }
 
