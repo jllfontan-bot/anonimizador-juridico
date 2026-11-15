@@ -116,9 +116,10 @@ class TestHtml(_Base):
             textos = pantalla_conversor.textos_da_pantalla(lingua)
             for clave in ("subtitulo",):
                 self.assertNotRegex(textos[clave], r"(?i)s[ei]n gastar tokens")
-                self.assertIn("mínimos tokens", textos[clave])
+                self.assertIn("menos tokens", textos[clave])
+                self.assertNotIn("mínimos", textos[clave])  # superlativo que non se pode demostrar (valoración F2)
             self.assertNotRegex(idioma.t("conversor.cli.descricion", lingua), r"(?i)s[ei]n que gaste")
-            self.assertIn("mínimos tokens", idioma.t("conversor.cli.descricion", lingua))
+            self.assertIn("menos tokens", idioma.t("conversor.cli.descricion", lingua))
         self.assertNotRegex(conversor.__doc__, r"(?i)non gaste tokens")
 
     def test_html_ten_a_lista_de_fugas_e_o_boton_revisar(self):

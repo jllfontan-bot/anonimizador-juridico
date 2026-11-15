@@ -1,7 +1,7 @@
 """Conversor de ficheiros a .md para IA (ESTUDIO-CONVERSOR-MD, fase 2).
 
 Converte en local un ficheiro, un cartafol ou un .zip a Markdown, para que
-a IA non teña que convertelos e gaste os mínimos tokens ao lelos. Usa o
+a IA non teña que convertelos e gaste menos tokens ao lelos. Usa o
 mesmo motor có anonimizador, nunca unha copia:
 
 - **Sen anonimizar**: `lectura.cargar_documento_estruturado` +
