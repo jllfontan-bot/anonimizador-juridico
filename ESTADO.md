@@ -109,6 +109,37 @@ Traballo apuntado para a versión seguinte, non para esta:
   (`~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`), e unha **valoración xurídica
   nova** antes de enviar á Store.
 
+## Escritura incremental do Reductor (rama `escritura-incremental`, 15/11/2026)
+
+Motivo: no portátil de probas un lote longo (.zip e centos de folios) non gardou nada porque os `.md` se
+escribían todos ao final (`conversor._converter`); un fallo tardío deixou a carpeta de saída baleira.
+
+Deseño elixido (sen tocar detectores, `markdown_ia` nin o texto anonimizado):
+1. Cada documento escríbese en canto se converte (con e sen anonimizar); un documento roto, ou que non se pode
+   escribir, vai a `omitidos`/`erros` e o lote segue. Escritura atómica (`.tmp` + `os.replace`): nunca un `.md` a medias.
+2. O destino (`usadas`, `usados_csv`, sufixo `-2`, `_colocar_csv`, partes e índice) calcúlase por documento, no
+   mesmo orde ca antes, co estado que ten o rexistro nese momento: o cartafol e o nome de cada saída fíxanse
+   ao anonimizar ese documento e xa non cambian (`substituir_revisado` non renomea).
+3. Anonimizando, o nome do `.zip` (cartafol `<nome>-md` ou `.md` único) NON se anonimiza antes do primeiro
+   documento (rexistraría a persoa antes do contido e cambiaría o seu «posible homónimo»/código): calcúlase
+   unha soa vez ao gardar o primeiro documento, con `informe["persoas"]` dese documento (A17: mesmo código se a
+   persoa sae no contido), e queda fixo no `_Lote`. Os nomes dos omitidos do índice do `.md` único seguen
+   anonimizándose ao final, coma antes.
+4. `un_so_md`: o índice vai ao principio, así que non se pode engadir ao `.md` final. Mentres se converte, cada
+   sección engádese a `<nome>.md.parcial` (cabeceira con `conversión: incompleta`, sen índice; mesmo texto
+   anonimizado ca o final). Ao rematar, ou ao cancelar ou fallar, constrúese o `.md` definitivo (cabeceira, índice
+   e seccións, con partes se cómpre) e bórrase o `.parcial`. Se o proceso morre sen poder rematar (apagado,
+   kill), queda en disco `<nome>.md.parcial` con todo o convertido ata aí e NINGÚN `.md` definitivo: non hai un
+   ficheiro a medias que pareza completo (un `.md` de execucións anteriores non se toca ata o final).
+5. Cancelar (ou calquera erro que pare o lote): consérvase o gardado. Sen `un_so_md`, os `.md` xa escritos
+   quedan; con `un_so_md`, péchase o `.md` único só cos documentos convertidos e `conversión: incompleta` na cabeceira.
+   `Cancelado` (e calquera excepción) leva `resultado_parcial`, e a pantalla suma o que xa estaba gardado ao
+   resumo («Quedan gardados…») e mantén o botón «Revisar» dos documentos con posibles fugas ata aí.
+6. Modo manual con paradas: igual; o documento escríbese ao devolver `revisar` e, se se cancela nunha
+   parada, os anteriores quedan. A revisión posterior (`substituir_revisado`) reescribe os `.md` xa escritos,
+   quita `posibles_fugas` e agora escribe o novo antes de borrar o vello (nunca perde o ficheiro).
+7. Memoria: sen `un_so_md`, o corpo de cada documento solta ao gardalo.
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.
