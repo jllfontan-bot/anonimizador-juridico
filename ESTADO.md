@@ -7,7 +7,7 @@ Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
 ## Anonimizador xurídico
 
 - Microsoft Store: **publicado**, Store ID `9PK1J429MNN5`.
-- Versión vixente: **1.1.1** (ficheiro `VERSION`), tamén publicada na Store.
+- Publicado na Store: **1.1.1.0**. Preparada, sen publicar: **1.1.2** (`VERSION`; paquete 1.1.2.0): correccións de fugas, explorador con carpetas reais de Windows e copia `.md` co mesmo motor ca o Reductor.
 - Política de privacidade: `docs/store/politica-privacidad.md`; condicións de uso: `docs/store/condiciones-de-uso.md`.
 - Só Windows 10/11 na Store. As versións de Mac e Linux quitáronse da oferta do Anonimizador;
   hai instaladores clásicos de Mac nas ramas `instalador-mac-*`.
@@ -15,11 +15,11 @@ Este ficheiro é un resumo curto. Non leva datos reais nin notas persoais.
 
 ## Reductor de tokens (antes «Conversor de arquivos para IA»)
 
-- Microsoft Store: **publicado**, Store ID `9NMM4DRL6FCC`, paquete 1.0.0.0.
+- Microsoft Store: **publicado**, Store ID `9NMM4DRL6FCC`, paquete 1.1.0.0. Preparada, sen publicar: **1.2.0** (`conversor.VERSION`; paquete 1.2.0.0).
 - Política de privacidade: `docs/store/politica-privacidad-conversor.md`; ficha: `docs/store/ficha-store-conversor.md`.
 - Instaladores clásicos sen asinar para Windows e Mac (`instalador/crear-paquetes.sh windows-conversor|mac-conversor`).
 - Notas de deseño e límites en `src/anonimizador/formatos/ESCONDITES.md` e estudos previos en `docs/estudios/`.
-- Rama `correcciones-fugas-reductor` (sen fusionar): en automático nunca se detén e o resumo final lista os
+- Rama `motor-md-unico` (inclúe `correcciones-fugas-reductor`; sen publicar): en automático nunca se detén e o resumo final lista os
   «Documentos con posibles fugas» cun botón «Revisar» (`conversor.substituir_revisado`); un `.zip` dentro dun
   cartafol ábrese en `<nome do zip>-md` (un `.zip` dentro dun `.zip`, non; límite de 2 GiB descomprimidos);
   subtítulo novo. Falta probar a xanela real (pywebview) con «Revisar» no portátil Windows.
@@ -53,9 +53,27 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
 4. **Fase 2 · Preparar versións** (Sonnet · medio): fusionar a rama en `main` (só local), subir versións,
    fichas, manuais e paquetes MSIX de ambos programas. Feito = tests en verde, paquetes montados e lista do
    que sube o usuario ao Partner Center. Sen push nin etiquetas `msix-v*` sen permiso do usuario.
+   **Condición previa á entrega:** o usuario está probando no portátil Windows o Reductor e o Anonimizador
+   (explorador, modo automático sen paradas, lista final con «Revisar», `.zip` en cartafoles). A fase 2 pode
+   preparar todo, pero nada se dá por listo para publicar sen o resultado desas probas; calquera fallo que saia
+   volve á fase 0/1b antes de montar os paquetes definitivos.
 5. **Fase 3 · Limpeza dos rastros de proba** (Haiku · baixo): só o que creou Claude no portátil
    (rexistros temporais, scripts, instaladores e cartafoles de `C:\Users\Public\Documents`). Os cartafoles do
    escritorio decide o usuario cales quedan.
+
+### Estado das fases (15/11/2026, tarde)
+
+- Feitas: 0 (explorador), 1 (informe en `~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`, fóra
+  do repositorio), 1b (`markdown_ia.xerar`) e a parte de «versións e textos» da 2 (commits en `motor-md-unico`).
+- Para enviar á Store (etiquetas, sen poñer): `msix-v1.1.2` (Anonimizador) e `msix-conversor-v1.2.0` (Reductor), sobre
+  o commit final de `main`. Subir a `main` e etiquetar require permiso do usuario; as políticas e condicións enlazadas
+  polas fichas tamén teñen que estar en `main` antes do envío.
+- Decisións do usuario: R1 do informe (marcar os `.md` con posibles fugas: recomendación «a», liña `posibles_fugas: N`
+  na cabeceira; sen facer) e probas en Windows (condición previa).
+- ⚖️ Agardan ao avogado: diferenzas A e B das condicións de uso (a do Reductor é un ficheiro novo), parágrafo P1 das
+  políticas, subtítulo do Reductor, atribución a Claude e outros puntos da táboa do informe. O Anonimizador
+  podería enviarse antes que o Reductor (o informe explica por que); o Reductor debería agardar polas súas condicións.
+- Pendente menor: recapturar a pantalla de resultado do manual do Reductor (o texto cambiou) e a copia `NOVEDADES`.
 
 ## Ramas vivas
 
