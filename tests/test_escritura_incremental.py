@@ -634,5 +634,120 @@ class TestNomeDoZipSenAlterarOContido(_Base):
         self.assertEqual(rexistro_visto, [1])
 
 
+class TestEscrituraRobusta(_Base):
+    def setUp(self):
+        super().setUp()
+        espera = mock.patch.object(conversor, "_ESPERA_SUBSTITUIR", 0)
+        espera.start()
+        self.addCleanup(espera.stop)
+
+    def test_windows_permissionerror_no_replace_escribe_directamente_sen_tmp(self):
+        _txt(self.raiz / "a.txt", "contido novo")
+        _txt(self.raiz / "a.txt.md", "vello")
+
+        def bloqueado(*args, **kwargs):
+            raise PermissionError("WinError 5")
+
+        with mock.patch.object(conversor.os, "replace", bloqueado):
+            resultado = conversor.converter(str(self.raiz / "a.txt"))
+        self.assertEqual(resultado.omitidos, [])
+        self.assertIn("contido novo", (self.raiz / "a.txt.md").read_text(encoding="utf-8"))
+        self.assertFalse([n for n in self._nomes(self.raiz) if n.endswith(".tmp")])
+
+    def test_windows_md_bloqueado_non_deixa_tmp_e_vai_a_erros(self):
+        _txt(self.raiz / "a.txt", "contido novo")
+        _txt(self.raiz / "a.txt.md", "vello")
+        orixinal = Path.write_text
+
+        def bloqueado(*args, **kwargs):
+            raise PermissionError("WinError 32")
+
+        def write_text(ruta, *args, **kwargs):
+            if ruta.name == "a.txt.md":
+                raise PermissionError("WinError 32: aberto en Word")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(conversor.os, "replace", bloqueado), mock.patch.object(Path, "write_text", write_text):
+            resultado = conversor.converter(str(self.raiz / "a.txt"))
+        self.assertEqual(resultado.omitidos, [("a.txt", "erro_escritura")])
+        self.assertEqual((self.raiz / "a.txt.md").read_text(encoding="utf-8"), "vello")
+        self.assertFalse([n for n in self._nomes(self.raiz) if n.endswith(".tmp")])
+
+    def test_replace_que_falla_un_momento_reinténtase(self):
+        _txt(self.raiz / "a.txt", "contido novo")
+        orixinal = os.replace
+        fallos = [PermissionError("antivirus")]
+
+        def replace(*args, **kwargs):
+            if fallos:
+                raise fallos.pop()
+            return orixinal(*args, **kwargs)
+
+        with mock.patch.object(conversor.os, "replace", replace):
+            conversor.converter(str(self.raiz / "a.txt"))
+        self.assertIn("contido novo", (self.raiz / "a.txt.md").read_text(encoding="utf-8"))
+
+    def _partes(self):
+        return sorted(p for p in self.raiz.glob("a.txt.*.md"))
+
+    def test_fallo_a_metade_dun_troceado_non_estraga_as_partes_anteriores(self):
+        _txt(self.raiz / "a.txt", _longo().replace("proba", "VELLO"))
+        conversor.converter(str(self.raiz / "a.txt"), caracteres_por_parte=1500)
+        antes = {p.name: p.read_text(encoding="utf-8") for p in self._partes()}
+        self.assertGreaterEqual(len(antes), 3)
+        _txt(self.raiz / "a.txt", _longo().replace("proba", "NOVO"))
+        orixinal = Path.write_text
+
+        def write_text(ruta, *args, **kwargs):
+            if ruta.name.startswith("a.txt.parte-02.md"):
+                raise OSError("disco cheo")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(Path, "write_text", write_text):
+            resultado = conversor.converter(str(self.raiz / "a.txt"), caracteres_por_parte=1500)
+        self.assertEqual(resultado.omitidos, [("a.txt", "erro_escritura")])
+        self.assertEqual({p.name: p.read_text(encoding="utf-8") for p in self._partes()}, antes)
+        self.assertFalse([n for n in self._nomes(self.raiz) if n.endswith(".tmp")])
+
+    def test_fallo_a_metade_ao_revisar_un_troceado_conserva_o_anterior(self):
+        _docx(self.raiz / "r.docx", _RISCO + "\n\n" + _longo())
+        capturas = {}
+        resultado = conversor.converter(
+            str(self.raiz), anonimizar=True, rexistro=self.rexistro, caracteres_por_parte=1500,
+            revisar=lambda nome, t, ctx, ta, inf, sub: capturas.update({nome: (ctx, ta, sub)}))
+        antes = {Path(s).name: Path(s).read_text(encoding="utf-8") for s in resultado.saidas}
+        self.assertGreaterEqual(len(antes), 3)
+        ctx, ta, sub = capturas["r.docx"]
+        orixinal = Path.write_text
+
+        def write_text(ruta, *args, **kwargs):
+            if ".parte-02." in ruta.name:
+                raise OSError("disco cheo")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(Path, "write_text", write_text):
+            with self.assertRaises(OSError):
+                conversor.substituir_revisado(resultado, "r.docx", ta.replace("34867809", "[NÚMERO]"), sub, ctx)
+        despois = {p.name: p.read_text(encoding="utf-8") for p in self.raiz.glob("*.md")}
+        self.assertEqual(despois, antes)
+        self.assertFalse([n for n in self._nomes(self.raiz) if n.endswith(".tmp")])
+
+    def test_erros_de_escritura_non_seguidos_non_paran_o_lote(self):
+        for n in "abcdefg":
+            _txt(self.raiz / f"{n}.txt", n)
+        orixinal = conversor._escribir
+
+        def escribir(ruta, *args, **kwargs):
+            if ruta.name[0] in "bcef":  # dous e dous: nunca tres seguidos
+                raise OSError("disco cheo")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(conversor, "_escribir", escribir):
+            resultado = conversor.converter(str(self.raiz))
+        self.assertEqual(sorted(n for n, m in resultado.omitidos if m == "erro_escritura"),
+                         ["b.txt", "c.txt", "e.txt", "f.txt"])
+        self.assertEqual(sorted(Path(s).name for s in resultado.saidas), ["a.txt.md", "d.txt.md", "g.txt.md"])
+
+
 if __name__ == "__main__":
     unittest.main()

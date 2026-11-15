@@ -78,6 +78,7 @@ import json
 import os
 import re
 import shutil
+import time
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
@@ -213,6 +214,7 @@ def _e_saida_anterior(nome: str) -> bool:
 
 MAX_DESCOMPRIMIDO = 2 * 1024**3  # bytes que unha execución descomprime en total dos .zip (contra zip bombs)
 SUFIXO_CARTAFOL_ZIP = "-md"  # un .zip nun cartafol sae no subcartafol `<nome do zip sen .zip>-md`
+_ESPERA_SUBSTITUIR = 0.2  # segundos entre intentos de `os.replace` (Windows: antivirus ou indexador co ficheiro aberto)
 
 
 class _ZipRexeitado(Exception):
@@ -508,27 +510,46 @@ def _colocar_csv(c: _Convertido, destino: Path, usados: set, resultado: Resultad
         resultado.csv.append(str(final))
 
 
-def _gardar_texto(destino: Path, texto: str) -> None:
-    """Escribe `destino` dunha vez: primeiro un `.tmp` e despois substitúe o
-    ficheiro, así que nunca queda un .md a medias que pareza completo. Se o
-    sistema non deixa substituír (Windows con o ficheiro aberto noutro
-    programa), escribe directamente."""
+def _escribir_tmp(destino: Path, texto: str) -> Path:
+    """`destino` + `.tmp`, enteiro; se falla, sen deixar o `.tmp`."""
     tmp = destino.with_name(destino.name + ".tmp")
     try:
         tmp.write_text(texto, encoding="utf-8")
-        os.replace(tmp, destino)
-    except PermissionError:
-        destino.write_text(texto, encoding="utf-8")
-        tmp.unlink(missing_ok=True)
     except BaseException:
         tmp.unlink(missing_ok=True)
         raise
+    return tmp
+
+
+def _substituir(tmp: Path, destino: Path, texto: str) -> None:
+    """Pon `tmp` no lugar de `destino` (`os.replace`: nunca un .md a medias).
+    En Windows pode fallar un intre (antivirus, indexador): reinténtase; se
+    segue sen deixar (o .md aberto noutro programa), escríbese directamente,
+    que xa non é atómico. O `.tmp` non queda nunca, nin se isto falla."""
+    try:
+        for intento in range(3):
+            try:
+                os.replace(tmp, destino)
+                return
+            except PermissionError:
+                if intento < 2:
+                    time.sleep(_ESPERA_SUBSTITUIR)
+        destino.write_text(texto, encoding="utf-8")
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+def _gardar_texto(destino: Path, texto: str) -> None:
+    _substituir(_escribir_tmp(destino, texto), destino, texto)
 
 
 def _escribir(ruta: Path, cabeceira: str, corpo: str, caracteres_por_parte: int | None, saidas: list) -> None:
     """Escribe `ruta` ou, se o corpo pasa de `caracteres_por_parte`, as súas
-    partes e o índice no mesmo cartafol, todos coa cabeceira. Se falla a
-    metade, quita o que escribira nesta chamada."""
+    partes e o índice no mesmo cartafol, todos coa cabeceira. Primeiro todos
+    os `.tmp` e despois as substitucións: se falla un `.tmp`, os ficheiros de
+    antes (doutra execución, ou o .md que se revisa) quedan intactos. Un fallo
+    xa substituíndo (moi raro) pode deixar partes novas e vellas mesturadas,
+    pero non se borra ningunha. `saidas` só recibe as rutas se todo vai ben."""
     textos = [(ruta, corpo)]
     if caracteres_por_parte and len(corpo) > caracteres_por_parte:
         so_trocear = aforro_ia.Opcions(quitar_repetidas=False, unir_liñas=False, limpar_espazos=False,
@@ -537,14 +558,18 @@ def _escribir(ruta: Path, cabeceira: str, corpo: str, caracteres_por_parte: int 
         if troceado.partes:
             textos = [(ruta.with_name(p.nome), p.texto) for p in troceado.partes]
             textos.append((ruta.with_name(troceado.nome_indice), troceado.indice))
-    escritos = []
+    preparados = []
     try:
         for destino, texto in textos:
-            _gardar_texto(destino, cabeceira + "\n" + _con_salto_final(texto))
+            contido = cabeceira + "\n" + _con_salto_final(texto)
+            preparados.append((destino, _escribir_tmp(destino, contido), contido))
+        escritos = []
+        for destino, tmp, contido in preparados:
+            _substituir(tmp, destino, contido)
             escritos.append(str(destino))
-    except Exception:
-        _borrar(escritos)
-        raise
+    finally:
+        for _, tmp, _ in preparados:
+            tmp.unlink(missing_ok=True)
     saidas.extend(escritos)
 
 
@@ -813,6 +838,15 @@ def substituir_revisado(resultado: Resultado, orixe: str, texto_anon: str, subst
     `Resultado` non se corrixe."""
     lote: _Lote = resultado._lote
     c = lote.convertidos[orixe]
+    antes = (c.corpo, c.tokens_antes, c.tokens_despois, c.revisado, c.fugas)
+    try:
+        return _substituir_revisado(resultado, lote, c, orixe, texto_anon, substitucions, contexto)
+    except BaseException:
+        c.corpo, c.tokens_antes, c.tokens_despois, c.revisado, c.fugas = antes  # o .md segue sendo o de antes
+        raise
+
+
+def _substituir_revisado(resultado, lote, c, orixe, texto_anon, substitucions, contexto) -> tuple[list, list]:
     md = _corpo_anonimizado(PurePosixPath(orixe).suffix.lower(), contexto, texto_anon, substitucions, lote.aforro)
     c.corpo, c.tokens_antes, c.tokens_despois = md.texto, md.tokens_antes, md.tokens_despois
     c.revisado, c.fugas = True, 0  # revisado por unha persoa: fóra a marca de posibles fugas
