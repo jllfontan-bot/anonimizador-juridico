@@ -140,6 +140,21 @@ Deseño elixido (sen tocar detectores, `markdown_ia` nin o texto anonimizado):
    quita `posibles_fugas` e agora escribe o novo antes de borrar o vello (nunca perde o ficheiro).
 7. Memoria: sen `un_so_md`, o corpo de cada documento solta ao gardalo.
 
+Estado (15/11/2026): FEITO na rama `escritura-incremental` (sen mergear en `motor-md-unico`; decide o usuario).
+- Código: `conversor._Escritor` (garda por documento, `.parcial`, `finalizar`), `_gardar_texto` atómico,
+  `resultado_parcial` en `Cancelado` e en calquera excepción, `pantalla_conversor._recoller_parcial`, textos es/gl
+  (`conversor.conversion`, `conversor.incompleta`, `motivo.erro_escritura`, `cancelado_con_saidas` novo).
+- Tests: `tests/test_escritura_incremental.py` (36) + `test_conversor` e `test_pantalla_conversor` axustados (cancelar
+  xa non «non escribe nada»: conserva o gardado). Suite completa (1223 tests): OK, 1 omitido.
+- Cambios para o usuario: cada `.md` queda en disco ao converterse; cancelar ou un erro fatal non borra o feito; con
+  `.md` único, durante o lote só existe `<nome>.md.parcial`; un `.md` que non se pode gardar sae en «omitidos» («convertido,
+  pero non se puido gardar o .md») e tres seguidos paran o lote; a pantalla final inclúe o gardado tamén ao cancelar ou fallar.
+- Non feito / riscos: manual e fichas non din aínda «cada .md gárdase ao converterse» (o dito segue sendo certo); sen probar
+  coa xanela real nin en Windows (`os.replace` cun `.md` aberto noutro programa cae a escritura directa); o nome do
+  `.zip` anonimizado calcúlase tras o primeiro documento (con persoas dese documento), non ao final coma antes, e nun cartafol
+  (sen `.md` único) xa non se anonimiza o nome da carpeta de entrada (só se usaba na cabeceira do `.md` único); cada documento
+  dunha mesma carpeta de entrada anonimiza o seu cartafol cos seus propios códigos (xa era así: pode dar cartafoles distintos).
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.
