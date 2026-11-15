@@ -69,7 +69,7 @@ No hay cuentas, ni publicidad, ni analítica. El programa no se conecta a intern
 
 Interfaz en castellano o gallego. Software libre con doble licencia, a tu elección: EUPL v1.2 o AGPL-3.0, con el código fuente publicado. Se distribuye sin garantía: no sustituye la revisión profesional del documento ni el asesoramiento jurídico.
 
-Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic.
+Desarrollado con la ayuda de Claude, la inteligencia artificial de Anthropic. El programa no está afiliado a Anthropic. Claude y Anthropic son marcas de Anthropic, PBC.
 
 AGRADECIMIENTOS
 A José Manuel Piñeiro, por sus ideas, aportaciones y correcciones para llevar a buen término esta aplicación.
@@ -153,7 +153,7 @@ Non hai contas, nin publicidade, nin analítica. O programa non se conecta a int
 
 Interface en castelán ou galego. Software libre con dobre licenza, á túa escolla: EUPL v1.2 ou AGPL-3.0, co código fonte publicado. Distribúese sen garantía: non substitúe a revisión profesional do documento nin o asesoramento xurídico.
 
-Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic.
+Desenvolvido coa axuda de Claude, a intelixencia artificial de Anthropic. O programa non está afiliado a Anthropic. Claude e Anthropic son marcas de Anthropic, PBC.
 
 AGRADECEMENTOS
 A José Manuel Piñeiro, polas súas ideas, achegas e correccións para levar a bo termo esta aplicación.
