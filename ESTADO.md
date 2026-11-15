@@ -73,10 +73,18 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
   rexenerados) din o mesmo. Fóra: o aviso ao pechar a xanela con documentos sen revisar (só se o usuario o pide;
   hai que probalo en Windows).
 - Decisión do usuario: probas en Windows (condición previa), agora tamén coa marca `posibles_fugas`.
-- ⚖️ Agardan ao avogado: diferenzas A e B das condicións de uso (a do Reductor é un ficheiro novo), parágrafo P1 das
-  políticas, subtítulo do Reductor, atribución a Claude e outros puntos da táboa do informe. O Anonimizador
-  podería enviarse antes que o Reductor (o informe explica por que); o Reductor debería agardar polas súas condicións.
-- Pendente menor: recapturar a pantalla de resultado do manual do Reductor (o texto cambiou) e a copia `NOVEDADES`.
+- Textos ⚖️ do informe APROBADOS POLO USUARIO o 15/11/2026, sen revisión do avogado (que só revisou as condicións
+  do Anonimizador do 15/10/2026), e aplicados (`ab69492`..`e8e1720`): diferenza A (condicións do Anonimizador),
+  diferenza B (condicións propias do Reductor, `docs/store/condiciones-de-uso-reductor.md`, enlazadas na súa ficha),
+  P1 das políticas (correos e datos de Microsoft), subtítulo e CLI («menos tokens», «O programa non envía nada fóra
+  do equipo»), frase das marcas de Anthropic (fichas e «Acerca de») e artigo 5 da EUPL fóra de AVISOS e README.
+  Quedan para o avogado, se se quere: confirmar eses textos e os puntos de só verificación do informe (L3 LGPL,
+  L4 termos de Microsoft, D2 TXUE, D3 Regulamento de IA).
+- Capturas rexeneradas (`4987588`, `237e2d2`, PDF en `e83944a`): todas as do manual do Reductor (o subtítulo sae en
+  todas) e «Acerca de» do Anonimizador. Capturas da ficha do Reductor 1.2.0, fóra do repo:
+  `~/Documents/anonimizador-xuridico/store-reductor-1.2.0/capturas/{gl,es}`. As da ficha do Anonimizador (con
+  `lenzos.py` no pendrive) non se refixeron: a de «Acerca de» non leva a frase das marcas.
+- Pendente menor: a copia `NOVEDADES`.
 
 ## Para a seguinte versión: anonimizar os formatos novos do Reductor (decidido 15/11/2026)
 
