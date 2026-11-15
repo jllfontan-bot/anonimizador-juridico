@@ -8,7 +8,7 @@
 
 ## Resumen
 
-La aplicación **no recoge, no envía y no vende datos personales**. No tiene cuentas de usuario, ni publicidad, ni analítica, ni telemetría, y no se conecta a internet. El desarrollador no recibe ningún dato de quien la usa ni de los documentos que procesa.
+La aplicación **no recoge, no envía y no vende datos personales**. No tiene cuentas de usuario, ni publicidad, ni analítica, ni telemetría, y no se conecta a internet. La aplicación no envía al desarrollador ningún dato de quien la usa ni de los documentos que procesa (ver «Datos que puede recibir el desarrollador»).
 
 ## Qué hace la aplicación
 
@@ -18,6 +18,13 @@ Sustituye los nombres, DNI y demás datos personales de los documentos que el us
 - La interfaz es una ventana propia del programa (componente Microsoft Edge WebView2 de Windows) que solo muestra páginas del propio programa, servidas por un servidor interno que escucha únicamente en `127.0.0.1`: no es accesible desde otros equipos.
 - La aplicación no envía a internet ni los documentos, ni su contenido, ni los resultados, ni ningún otro dato.
 - Lo único que se abre fuera del programa, y solo si el usuario lo pulsa, es el enlace al código fuente de la página «Acerca de», en su navegador (esa visita se rige por las condiciones del sitio web), y el manual de uso (un PDF del propio paquete), en el visor de PDF del sistema.
+
+## Datos que puede recibir el desarrollador
+
+La aplicación no envía nada al desarrollador. Solo puede recibir:
+
+- **Lo que el usuario le escriba** al correo de contacto: la dirección y el contenido del mensaje. Se usan solo para responder y se borran cuando ya no hacen falta para ello. Quien escribe puede pedir en ese mismo correo el acceso, la rectificación o la supresión de sus datos, oponerse a su tratamiento o pedir que se limite, y puede reclamar ante la Agencia Española de Protección de Datos (www.aepd.es). Por favor, no envíe documentos ni datos de otras personas.
+- **Lo que Microsoft facilita a quien publica en la Microsoft Store:** estadísticas de conjunto (descargas, países, valoraciones y reseñas públicas) e informes de errores que recoge Windows según la configuración de diagnóstico de cada equipo. Los recoge y trata Microsoft según su declaración de privacidad; la aplicación no añade nada a esos informes.
 
 ## Qué se guarda en el ordenador
 
@@ -64,7 +71,7 @@ Cualquier cambio de esta política se publicará en esta misma dirección, con s
 
 ## Resumo
 
-A aplicación **non recolle, non envía e non vende datos persoais**. Non ten contas de usuario, nin publicidade, nin analítica, nin telemetría, e non se conecta a internet. O desenvolvedor non recibe ningún dato de quen a usa nin dos documentos que procesa.
+A aplicación **non recolle, non envía e non vende datos persoais**. Non ten contas de usuario, nin publicidade, nin analítica, nin telemetría, e non se conecta a internet. A aplicación non lle envía ao desenvolvedor ningún dato de quen a usa nin dos documentos que procesa (ver «Datos que pode recibir o desenvolvedor»).
 
 ## Que fai a aplicación
 
@@ -74,6 +81,13 @@ Substitúe os nomes, DNI e demais datos persoais dos documentos que o usuario es
 - A interface é unha xanela propia do programa (compoñente Microsoft Edge WebView2 de Windows) que só amosa páxinas do propio programa, servidas por un servidor interno que escoita unicamente en `127.0.0.1`: non é accesible dende outros equipos.
 - A aplicación non envía a internet nin os documentos, nin o seu contido, nin os resultados, nin ningún outro dato.
 - O único que se abre fóra do programa, e só se o usuario o preme, é a ligazón ao código fonte da páxina «Acerca de», no seu navegador (esa visita réxese polas condicións do sitio web), e o manual de uso (un PDF do propio paquete), no visor de PDF do sistema.
+
+## Datos que pode recibir o desenvolvedor
+
+A aplicación non lle envía nada ao desenvolvedor. Só pode recibir:
+
+- **O que o usuario lle escriba** ao correo de contacto: o enderezo e o contido da mensaxe. Úsanse só para responder e bórranse cando xa non fan falta para iso. Quen escribe pode pedir nese mesmo correo o acceso, a rectificación ou a supresión dos seus datos, oporse ao seu tratamento ou pedir que se limite, e pode reclamar ante a Axencia Española de Protección de Datos (www.aepd.es). Por favor, non envíe documentos nin datos doutras persoas.
+- **O que Microsoft facilita a quen publica na Microsoft Store:** estatísticas de conxunto (descargas, países, valoracións e recensións públicas) e informes de erros que recolle Windows segundo a configuración de diagnóstico de cada equipo. Recólleos e trátaos Microsoft segundo a súa declaración de privacidade; a aplicación non engade nada a eses informes.
 
 ## Que se garda no ordenador
 
