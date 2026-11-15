@@ -155,6 +155,8 @@ class TestEnderezoAbreviado(unittest.TestCase):
             "Unha botella de 5 cl",
             "o informe av o 3 de maio",
             "tomou 33 cl de auga e 5 de viño",
+            "Bebeu 33 CL de auga e 2 de viño.",
+            "(Referencia 1/2026 CL y 2/2026 CL), de la Universitat",
         ):
             with self.subTest(texto=texto):
                 self.assertNotIn("ENDEREZO", [e for _, e in _etiquetas(texto)])

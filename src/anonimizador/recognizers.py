@@ -431,8 +431,10 @@ _ENDEREZO = re.compile(
     # Abreviaturas curtas do Catastro e doutros rexistros ("AV ROSALIA CASTRO
     # 43", "CL NOVA 5", "PZA. MAIOR 2"). Sen punto, só en MAIÚSCULAS (ou
     # "Av"/"Avd"/"Pza"): "33 cl de agua y 2 de vino" non é un enderezo. Co
-    # punto, en calquera caixa ("av. Rosalía de Castro 43").
-    r"(?-i:AVD?|CL|PZA|Avd?|Pza)\.?|(?:avd?|cl|pza)\.)[ \t]+"
+    # punto, en calquera caixa ("av. Rosalía de Castro 43"). En ambos casos
+    # a palabra seguinte ten que empezar por maiúscula: "(Referencia 1/2026
+    # CL y 2/2026 CL)" casaba coma "CL y 2" (corpus web, nov. 2026).
+    r"(?:(?-i:AVD?|CL|PZA|Avd?|Pza)\.?|(?:avd?|cl|pza)\.)(?=[ \t]+(?-i:[A-ZÁÉÍÓÚÑ])))[ \t]+"
     r"(?:d[eoa]s?[ \t]+)?[\wáéíóúñÁÉÍÓÚÑ.'-]+(?:[ \t]+[\wáéíóúñÁÉÍÓÚÑ.'-]+){0,4}"
     r"(?:,?[ \t]*" + _N_ORDINAL + r"[ \t]*" + _NUMERO_PORTAL
     + r"|,?[ \t]*n[uú]mero[ \t]*" + _NUMERO_PORTAL
