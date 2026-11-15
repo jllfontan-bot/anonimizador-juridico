@@ -354,10 +354,62 @@ class TestZipEnCartafol(_Base):
 
 
 class TestTraballoConZips(_Base):
-    def _traballo(self, modo="automatico"):
-        traballo, erro = web._preparar_traballo(str(self.cartafol), self.rexistro_dir, str(self.saida), modo)
+    def _traballo(self, modo="automatico", ruta=None):
+        traballo, erro = web._preparar_traballo(str(ruta or self.cartafol), self.rexistro_dir, str(self.saida), modo)
         self.assertIsNone(erro)
         return traballo
+
+    def _resultado(self, traballo) -> str:
+        web._executar_traballo(traballo)
+        web.TRABALLOS[traballo["id"]] = traballo
+        r = self.client.get(f"/traballo/{traballo['id']}/resultado")
+        self.assertEqual(r.status_code, 200)
+        return r.get_data(as_text=True)
+
+    def test_revisar_en_segundo_plano_con_zip(self):
+        _zip(self.cartafol / "a.zip", {"Xosé Carballo Portela.txt": TEXTO_XOSE})
+        (self.cartafol / "b.txt").write_text(TEXTO_MANUEL, encoding="utf-8")
+        traballo = self._traballo("revisar")
+        html = self._resultado(traballo)
+        self.assertEqual((len(traballo["sids"]), len(traballo["zips"])), (1, 1))
+        self.assertIn("1 ficheiro(s) .zip anonimizado(s) en automático", html)
+        self.assertIn("1 documento(s) procesado(s)", html)
+        self.assertEqual(len(self.zips_de_saida()), 1)
+
+    def test_zip_directo_en_segundo_plano(self):
+        ruta = _zip(self.dir / "Expediente Xosé Carballo Portela.zip", {"nota.txt": TEXTO_XOSE})
+        for modo in ("automatico", "revisar"):
+            with self.subTest(modo=modo):
+                for vello in self.saida.glob("*"):
+                    vello.unlink()
+                html = self._resultado(self._traballo(modo, ruta))
+                zips = self.zips_de_saida()
+                self.assertEqual(len(zips), 1)
+                self.assertSenDatosReais(zips[0].name, "o nome do zip")
+                self.assertIn("1 documento(s) anonimizado(s) dentro do .zip", html)
+                self.assertNotIn("0 documento(s) procesado(s)", html)
+
+    def test_revisar_zip_directo_rexeitado_so_amosa_o_erro(self):
+        ruta = self.dir / "roto.zip"
+        ruta.write_bytes(b"non e un zip")
+        html = self._resultado(self._traballo("revisar", ruta))
+        self.assertIn("non se puido abrir o .zip (danado)", html)
+        self.assertNotIn("documento(s) procesado(s)", html)
+
+    def test_ao_escribir_os_zips_a_barra_amosa_cada_un(self):
+        _zip(self.cartafol / "a.zip", {"a.txt": TEXTO_MANUEL})
+        _zip(self.cartafol / "b.zip", {"b.txt": TEXTO_MANUEL})
+        traballo = self._traballo()
+        vistos = []
+        orixinal = web._ZipsDoLote._gardar
+
+        def gardar(zips, ruta, preparado):
+            vistos.append((Path(ruta).name, Path(traballo["actual"]).name))
+            return orixinal(zips, ruta, preparado)
+
+        with mock.patch.object(web._ZipsDoLote, "_gardar", gardar):
+            web._executar_traballo(traballo)
+        self.assertEqual(vistos, [("a.zip", "a.zip"), ("b.zip", "b.zip")])
 
     def test_barra_de_progreso_con_zip(self):
         _zip(self.cartafol / "a.zip", {"Xosé Carballo Portela.txt": TEXTO_XOSE})

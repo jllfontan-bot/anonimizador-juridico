@@ -573,10 +573,14 @@ class _ZipsDoLote:
         except ZipRexeitado as e:
             self.erros.append({"ruta": ruta, "mensaxe": idioma.t(f"zip.motivo.{e.motivo}")})
 
-    def pechar(self) -> list:
+    def pechar(self, ao_empezar=None) -> list:
+        """`ao_empezar(ruta)`, se se pasa, antes de escribir cada zip (a barra
+        de progreso amosa cal se está a escribir)."""
         resultados = []
         while self.pendentes:
             ruta, preparado = self.pendentes.pop(0)
+            if ao_empezar:
+                ao_empezar(ruta)
             try:
                 resultados.append(self._gardar(ruta, preparado))
             except Exception as e:  # noqa: BLE001 -- o zip a medias xa se borrou; o resto segue
@@ -727,8 +731,7 @@ def _pechar_zips(traballo: dict, zips: _ZipsDoLote) -> None:
     """Escribe os .zip do lote, ao final (ver `_ZipsDoLote`)."""
     if not zips.pendentes:
         return
-    traballo["actual"] = zips.pendentes[0][0]
-    pechados = zips.pechar()
+    pechados = zips.pechar(ao_empezar=lambda ruta: traballo.__setitem__("actual", ruta))
     if traballo["modo"] == "automatico":
         traballo["resultados"].extend(pechados)
     else:
@@ -848,7 +851,7 @@ def resultado_traballo(jid):
 def _render_revisar_con_zips(rexistro_dir: str, sids: list, zips: list, erros: list, omitidos: int):
     """Resultado do modo «revisar» cando houbo erros ou .zip (estes
     anonimizáronse en automático: lístanse aquí, cos seus omitidos)."""
-    aviso = idioma.t("web.procesados_pendentes", n=len(sids)) if sids or not zips else ""
+    aviso = idioma.t("web.procesados_pendentes", n=len(sids)) if sids else ""
     if omitidos:
         aviso += " " + idioma.t("comun.omitidos", n=omitidos)
     detalle = "; ".join(f"{os.path.basename(e['ruta'])} ({e['mensaxe']})" for e in erros)
