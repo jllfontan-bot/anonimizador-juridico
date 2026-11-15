@@ -4,8 +4,8 @@ O código do Anonimizador de expedientes xurídicos ten **dobre licenza**, á es
 recibe: **Licenza Pública da Unión Europea (EUPL) v1.2** (ver `LICENCIA-EUPL-1.2.txt`) ou
 **GNU Affero General Public License v3.0** (ver `LICENSE`); SPDX `EUPL-1.2 OR AGPL-3.0-only`.
 Os paquetes xa montados (Microsoft Store e instaladores) levan dentro PyMuPDF (AGPL-3.0) e o
-modelo `es_core_news_md` (GPL-3.0): o paquete completo distribúese coa AGPL-3.0, como permite o
-artigo 5 da EUPL. Inclúe ou usa os compoñentes seguintes, cada un baixo a súa propia licenza:
+modelo `es_core_news_md` (GPL-3.0): o paquete completo distribúese coa AGPL-3.0, unha das dúas
+licenzas do programa. Inclúe ou usa os compoñentes seguintes, cada un baixo a súa propia licenza:
 
 | Compoñente | Licenza |
 |---|---|

@@ -109,7 +109,7 @@ la AGPL-3.0.
 
 Los paquetes ya montados (Microsoft Store e instaladores) llevan dentro PyMuPDF (AGPL-3.0) y el
 modelo `es_core_news_md` (GPL-3.0), así que el paquete completo se distribuye con la AGPL-3.0,
-como permite la cláusula de compatibilidad de la EUPL (artículo 5 y anexo). La elección entre
+una de las dos licencias del programa. La elección entre
 las dos licencias es para el código de este repositorio.
 
 Se distribuye con la esperanza de que sea útil, pero **SIN NINGUNA
