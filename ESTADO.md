@@ -260,3 +260,7 @@ Feitas polo usuario co meu apoio por SSH (só lectura e copia de ficheiros compr
   - Rastro do usuario/meu no portátil a limpar ao final: RT7, RT8, RT9, AN3 (Escritorio), `C:\Users\Public\Documents\prueba-final` (copia
     da instalación + RT10), `copia-antes-arreglo-20261115`, `Iniciar-Anonimizador-prueba.vbs`, carpeta de nome estragado «Demanda rǧa…» (10:06).
 - **Non probado aínda en Windows**: `progreso-fase-final`, `anon-zip-en-carpetas`, o paquete MSIX, o rexistro propio do Reductor (fase B).
+
+## Suite sobre o resultado integrado (15/11/2026, noite)
+`motor-md-unico` fda1f53 (escritura incremental + `.zip` dentro de cartafoles + textos da valoración xurídica): **1277 tests, OK (skipped=1)**, 24 min.
+Probado en Windows: ver «Probas en Windows» (AN6: `.zip` en cartafol 5/5; RT8/RT9 escritura incremental). `progreso-fase-final` (a944329) NON integrada.
