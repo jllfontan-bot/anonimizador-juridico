@@ -157,6 +157,44 @@ Traballo apuntado para a versión seguinte, non para esta:
   (`~/Documents/anonimizador-xuridico/VALORACION-JURIDICA-20261115.md`), e unha **valoración xurídica
   nova** antes de enviar á Store.
 
+## Escritura incremental do Reductor (rama `escritura-incremental`, 15/11/2026)
+
+Motivo: no portátil de probas un lote longo (.zip e centos de folios) non gardou nada porque os `.md` se
+escribían todos ao final (`conversor._converter`); un fallo tardío deixou a carpeta de saída baleira.
+
+Deseño (sen tocar detectores, `markdown_ia` nin o texto anonimizado):
+1. Cada documento escríbese en canto se converte (con e sen anonimizar); un documento roto, ou que non se pode
+   escribir (`erro_escritura`), vai a `omitidos`/`erros` e o lote segue; tres erros de escritura seguidos páranlo.
+   Escritura atómica: primeiro todos os `.tmp` (tamén as partes) e despois `os.replace`, con reintentos en Windows e
+   escritura directa como último recurso; o `.tmp` non queda nunca. Un fallo a metade non borra partes anteriores.
+2. Destino por documento (`usadas`, `usados_csv`, `-2`, `_colocar_csv`, partes), no mesmo orde ca antes; o nome e o
+   cartafol de cada documento fíxanse ao anonimizalo. Un `.csv` á parte non queda se o seu `.md` non se garda.
+3. Anonimizando, o nome do `.zip` (cartafol `-md` ou `.md` único) e o dun cartafol co `.md` único anonimízanse AO
+   PECHAR, con `nome_ficheiro_anonimizado` sen persoas, coma antes (facelo antes rexistraba a persoa do nome antes
+   do documento que a nomeaba: outro código e un «posible homónimo» falso). Ata pechar, o `.parcial` e o cartafol
+   `-md` levan un nome neutro `conversion-en-curso-<data>` (`NOME_PROVISIONAL`); ao pechar renoméanse (ou, se o
+   final xa existe, fúndense sen perder ficheiros alleos). Os nomes de cada documento e dos seus cartafoles non cambian.
+4. `un_so_md`: as seccións engádense a `<nome>.md.parcial` (sen índice, `conversión: incompleta`); ao rematar
+   constrúese `<nome>.md` e bórrase o `.parcial`. Se o lote para (cancelar, erro), o convertido vai a
+   `<nome>.incompleto.md` (`conversión: incompleta`): o nome de sempre só o leva unha conversión completa e unha
+   anterior non se pisa. Se o proceso morre (kill, apagado), queda só o `.parcial`. Se falla o peche dun lote
+   rematado, queda o `.parcial` (non se marca incompleto); se só falla borrar o `.parcial`, o lote remata ben.
+5. `Cancelado` e calquera excepción levan `resultado_parcial`; a pantalla suma o gardado ao resumo e mantén «Revisar».
+6. Modo manual: igual; cada documento escríbese ao devolver `revisar`. `substituir_revisado` reescribe os `.md` xa
+   escritos, quita `posibles_fugas`, escribe o novo antes de borrar o vello e, se falla, o documento queda coma estaba.
+
+Estado: FEITO na rama `escritura-incremental` (sen mergear en `motor-md-unico`; decide o usuario). Revisión
+independente aplicada (1 nome do .zip, 2 incompleto, 3 Windows, 4 partes, 5 peche, 7 .csv). Suite completa: 1239 tests
+OK (1 omitido). `tests/test_escritura_incremental.py`: 52 tests.
+- Non feito: a cabeceira do `.parcial` non leva o total de `posibles_fugas` (cada sección leva o seu; o total
+  obrigaría a reescribir o ficheiro en cada documento, e o `.parcial` non é un produto final).
+- Sen probar en Windows nin na xanela real (pywebview): reintentos de `os.replace`, renomeado do cartafol `-md` con
+  ficheiros abertos (se non se pode, as saídas quedan no provisional, coas rutas reais no resumo).
+- Riscos menores: un `.csv` á parte que substituíra outro do mesmo nome e despois se retira (fallou o seu `.md`) non
+  recupera o anterior; nun cartafol sen `.md` único xa non se anonimiza o nome da carpeta de entrada (non se usaba);
+  cada documento dunha carpeta anonimiza o seu cartafol cos seus códigos (xa era así). Manual e fichas non din aínda
+  «cada .md gárdase ao converterse».
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.

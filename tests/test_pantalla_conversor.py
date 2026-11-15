@@ -274,8 +274,11 @@ class TestSenAnonimizar(_Base):
             self.api.converter({"rutas": [str(raiz)]})
             evento, datos = self._final()
         self.assertEqual(evento, "cancelado")
-        self.assertEqual(datos["saidas"], [])
-        self.assertEqual(sorted(p.name for p in raiz.iterdir()), ["a.docx", "b.docx", "c.docx"])
+        # O que xa estaba gardado queda e consta no resumo (escritura incremental).
+        # (a cancelación pídese ao empezar `b` e vale antes de `c`: `a` e `b` xa estaban convertidos)
+        self.assertEqual(datos["saidas"], [str(raiz / "a.docx.md"), str(raiz / "b.docx.md")])
+        self.assertEqual(sorted(p.name for p in raiz.iterdir()),
+                         ["a.docx", "a.docx.md", "b.docx", "b.docx.md", "c.docx"])
 
     def test_non_arrinca_dúas_veces(self):
         ficheiro = _docx(self.dir / "a.docx")
@@ -467,6 +470,36 @@ class TestAnonimizando(_Base):
         self.assertFalse(resumo["fugas_docs"][0]["revisado"])
         # E pódese volver abrir.
         self.assertIn("revision", self.api.revisar_documento(resumo["fugas_docs"][0]["id"]))
+
+    def test_cancelar_en_automatico_conserva_os_md_e_deixa_revisar_os_que_teñen_fugas(self):
+        """Escritura incremental: ao cancelar, o resumo lista os .md xa escritos e
+        o seu «Revisar» segue valendo (a revisión reescribe o .md xa gardado)."""
+        raiz = self._expediente_con_un_risco()  # con_risco.docx vai antes ca limpo.docx
+        orixinal = conversor.converter
+
+        def converter_e_cancelar(*args, progreso=None, **kwargs):
+            def progreso_e_cancelar(feito, total, nome):
+                progreso(feito, total, nome)
+                if feito == 0:  # cancela mentres se converte o primeiro: o segundo xa non se fai
+                    self.api.cancelar()
+            return orixinal(*args, progreso=progreso_e_cancelar, **kwargs)
+
+        with mock.patch.object(conversor, "converter", converter_e_cancelar):
+            self.api.converter({"rutas": [str(raiz)], "anonimizar": True, "modo": "automatico"})
+            evento, datos = self._final()
+        self.assertEqual(evento, "cancelado")
+        self.assertEqual(len(datos["saidas"]), 1)
+        ruta, md = self._md_de(datos, "con_risco")
+        self.assertIn("34867809", md)
+        self.assertEqual(len(datos["fugas_docs"]), 1)
+        revision = self.api.revisar_documento(datos["fugas_docs"][0]["id"])["revision"]
+        self.api.confirmar_revision({"anonimizar": [p["codigo"] for p in revision["persoas"]],
+                                     "fragmentos": "34867809 => [NÚMERO]"})
+        md = ruta.read_text(encoding="utf-8")
+        self.assertIn("revisado: si\n", md)
+        self.assertNotIn("posibles_fugas", md)
+        self.assertNotIn("34867809", md)
+        self.assertEqual(sorted(p.name for p in raiz.glob("*.md")), [ruta.name])
 
     def test_revisar_un_documento_inexistente(self):
         self._automatico(self._expediente_con_un_risco())
