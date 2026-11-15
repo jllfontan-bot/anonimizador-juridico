@@ -5,7 +5,11 @@ inxesta -> deteccion -> resolucion de identidade -> rexistro -> substitucion
 
 from __future__ import annotations
 
+import gc
+import os
 import re
+import tempfile
+import time
 import zipfile
 from pathlib import Path, PurePosixPath
 
@@ -31,7 +35,7 @@ from .risco_residual import escanear_risco_residual
 from .pdf_estrutura import _limites_paxinas, gardar_pdf_estruturado
 from .recognizers import Entidade
 from .temporales import DirectorioTemporal
-from .registry import RexistroCorrespondencias
+from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
 # A lectura vive en `lectura.py` (sen NER). Os nomes que aquí non se usan
 # reexpórtanse para quen os importa de `pipeline` (web, cli, tests...).
@@ -1072,6 +1076,22 @@ def preparar_zip(
     return preparado
 
 
+def _borrar_con_reintentos(ruta: Path) -> bool:
+    """Borra `ruta` reintentando un pouco: en Windows un antivirus ou o
+    indexador poden telo aberto un instante (PermissionError). Devolve se
+    xa non existe."""
+    for intento in range(6):
+        try:
+            ruta.unlink(missing_ok=True)
+            return True
+        except OSError:
+            if intento == 5:
+                return False
+            gc.collect()
+            time.sleep(0.25)
+    return False
+
+
 def gardar_zip_preparado(
     preparado: ZipPreparado,
     ruta_saida: str,
@@ -1083,16 +1103,26 @@ def gardar_zip_preparado(
     nomes úsanse as persoas de todos os documentos do zip (primeiro as do
     propio documento): un cartafol "Cliente Xosé Carballo/" recibe o
     código co que Xosé Carballo aparece dentro. Dous nomes que quedan
-    iguais despois de anonimizar levan contador (nunca se pisan). Se algo
-    falla ao escribir, bórrase o zip a medias. Non borra os temporais
-    (`preparado.limpar()`)."""
+    iguais despois de anonimizar levan contador (nunca se pisan).
+
+    Escríbese primeiro a un temporal de nome neutro no mesmo cartafol
+    (`.anonimizando-*.zip.tmp`) e só ao rematar enteiro substitúe a
+    `ruta_saida` (`substituir_con_reintentos`: PermissionError transitorio
+    en Windows). Se algo falla (tamén esa substitución), bórrase o temporal
+    e un `ruta_saida` que xa existise queda tal cal: nunca un zip a medias
+    nin un completo anterior pisado por un incompleto. Non borra os
+    temporais do contido (`preparado.limpar()`)."""
     from . import copia_md as modulo_copia_md
 
     persoas_zip = preparado.persoas()
     usados = set()
     saidas = {}
+    destino = Path(ruta_saida)
+    descritor, nome_tmp = tempfile.mkstemp(prefix=".anonimizando-", suffix=".zip.tmp", dir=destino.parent)
+    os.close(descritor)
+    tmp_zip = Path(nome_tmp)
     try:
-        with zipfile.ZipFile(ruta_saida, "w", zipfile.ZIP_DEFLATED) as zip_saida:
+        with zipfile.ZipFile(tmp_zip, "w", zipfile.ZIP_DEFLATED) as zip_saida:
             for nome, ruta, extension, tmp_saida, tmp_md, informe in preparado.entradas:
                 persoas = persoas_zip + informe["persoas"]  # as propias, as últimas: gañan
                 stem = PurePosixPath(nome_ficheiro_anonimizado(ruta.name, rexistro, persoas)).stem
@@ -1109,8 +1139,9 @@ def gardar_zip_preparado(
                 if tmp_md is not None and nome_copia:
                     zip_saida.write(str(tmp_md), arcname=nome_copia)
                     usados.add(nome_copia.casefold())
+        substituir_con_reintentos(tmp_zip, destino)
     except BaseException:
-        Path(ruta_saida).unlink(missing_ok=True)
+        _borrar_con_reintentos(tmp_zip)
         raise
     return {
         "ficheiros": preparado.informes,

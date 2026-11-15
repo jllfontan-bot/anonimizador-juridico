@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 from . import copia_md, idioma
-from .pipeline import ZipRexeitado, anonimizar_e_gardar, anonimizar_zip, ruta_saida_por_defecto
+from .pipeline import ZipRexeitado, anonimizar_e_gardar, gardar_zip_preparado, preparar_zip, ruta_saida_por_defecto
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
 _DESCRICION_ORIXE_CLAVE = {
@@ -95,18 +95,21 @@ def main():
 
         if Path(args.entrada).suffix.lower() == ".zip":
             try:
-                resultado = anonimizar_zip(args.entrada, saida, rexistro, copia_md=args.markdown)
+                preparado = preparar_zip(args.entrada, rexistro, copia_md=args.markdown)
             except ZipRexeitado as e:
                 # Non se escribiu nada (nin a medias).
                 print(f"Non se anonimizou {args.entrada}: {idioma.t('zip.motivo.' + e.motivo)}", file=sys.stderr)
                 sys.exit(1)
-            if not saida_explicita:
-                # Coas persoas do contido do zip: o mesmo código ca dentro (A17).
-                persoas = [p for informe in resultado["ficheiros"].values() for p in informe["persoas"]]
-                saida_final = ruta_saida_por_defecto(args.entrada, rexistro=rexistro, persoas_do_documento=persoas)
-                if saida_final != saida:
-                    substituir_con_reintentos(Path(saida), Path(saida_final))
-                    saida = saida_final
+            try:
+                if not saida_explicita:
+                    # O nome final ANTES de escribir (nunca un provisional co
+                    # nome real) e coas persoas do contido: o mesmo código ca
+                    # dentro (A17).
+                    saida = ruta_saida_por_defecto(
+                        args.entrada, rexistro=rexistro, persoas_do_documento=preparado.persoas())
+                resultado = gardar_zip_preparado(preparado, saida, rexistro)
+            finally:
+                preparado.limpar()
             print(f"Arquivo anonimizado -> {saida}")
             if args.informe:
                 Path(args.informe).write_text(

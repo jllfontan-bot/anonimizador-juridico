@@ -369,6 +369,7 @@ class TestFasesDoZip(unittest.TestCase):
             preparado.limpar()
         self.assertFalse(saida.exists())
         self.assertFalse(preparado.dir.exists())
+        self.assertEqual(list(self.dir.glob(".anonimizando-*")), [])
 
     def test_cabeceira_mentirosa_rexeitase(self):
         """O directorio central di 10 bytes e hai 5000: non se descomprime
@@ -404,6 +405,100 @@ class TestFasesDoZip(unittest.TestCase):
         resultado = pipeline.anonimizar_zip(str(entrada), str(self.dir / "s.zip"), self.rexistro)
         saidas = list(resultado["saidas"].values())
         self.assertEqual(len({s.casefold() for s in saidas}), 2, saidas)
+
+    def test_persoa_que_aparece_no_segundo_documento_do_zip(self):
+        """k>1 dentro do zip: o cartafol interno nomea a unha persoa que só
+        aparece no SEGUNDO documento. Se os nomes se fixasen tras o primeiro
+        documento, o escrito levaría un código novo marcado coma posible
+        homónimo; debe saír igual ca o mesmo escrito solto."""
+        entrada = _zip(self.dir / "Expediente Xosé Carballo Portela.zip", {
+            "Xosé Carballo Portela/1 indice.txt": "Índice do expediente, sen nomes.",
+            "Xosé Carballo Portela/2 escrito.txt": TEXTO_XOSE,
+        })
+        resultado = pipeline.anonimizar_zip(str(entrada), str(self.dir / "s.zip"), self.rexistro)
+        informe = resultado["ficheiros"]["Xosé Carballo Portela/2 escrito.txt"]
+        self.assertEqual([p["marcado_para_revision"] for p in informe["persoas"]], [False])
+        with zipfile.ZipFile(self.dir / "s.zip") as z:
+            textos = {n: z.read(n).decode("utf-8") for n in z.namelist()}
+        escrito = next(t for n, t in textos.items() if n.endswith("2 escrito.anonimizado.txt"))
+        solto_rexistro = RexistroCorrespondencias(str(self.dir / "rex_solto"))
+        solto = self.dir / "escrito.txt"
+        solto.write_text(TEXTO_XOSE, encoding="utf-8")
+        texto_solto, informe_solto = pipeline.anonimizar_e_gardar(
+            str(solto), str(self.dir / "escrito.anonimizado.txt"), solto_rexistro)
+        self.assertEqual(escrito, texto_solto)
+        self.assertEqual([p["marcado_para_revision"] for p in informe_solto["persoas"]], [False])
+        codigo = re.search(r"PERSOA_\d+", escrito).group(0)
+        self.assertEqual({n.split("/")[0] for n in textos}, {codigo})
+
+    def test_fallo_ao_escribir_non_pisa_un_zip_completo_anterior(self):
+        entrada = _zip(self.dir / "e.zip", {"a.txt": TEXTO_XOSE})
+        saida = self.dir / "e.anonimizado.zip"
+        saida.write_bytes(b"ZIP COMPLETO ANTERIOR")
+        preparado = preparar_zip(str(entrada), self.rexistro)
+        try:
+            with mock.patch.object(pipeline, "_anonimizar_cartafoles_ruta", side_effect=RuntimeError("proba")):
+                with self.assertRaises(RuntimeError):
+                    gardar_zip_preparado(preparado, str(saida), self.rexistro)
+        finally:
+            preparado.limpar()
+        self.assertEqual(saida.read_bytes(), b"ZIP COMPLETO ANTERIOR")
+        self.assertEqual(sorted(p.name for p in self.dir.iterdir() if p.is_file()), ["e.anonimizado.zip", "e.zip"])
+
+    def test_permissionerror_ao_substituir_non_deixa_temporal_nin_pisa_o_anterior(self):
+        """Windows: o zip anterior está aberto noutro programa e o
+        renomeamento falla con PermissionError (tamén despois dos reintentos)."""
+        entrada = _zip(self.dir / "e.zip", {"a.txt": TEXTO_XOSE})
+        saida = self.dir / "e.anonimizado.zip"
+        saida.write_bytes(b"ZIP COMPLETO ANTERIOR")
+        preparado = preparar_zip(str(entrada), self.rexistro)
+        try:
+            with mock.patch.object(pipeline, "substituir_con_reintentos",
+                                   side_effect=PermissionError(13, "aberto noutro programa")):
+                with self.assertRaises(PermissionError):
+                    gardar_zip_preparado(preparado, str(saida), self.rexistro)
+        finally:
+            preparado.limpar()
+        self.assertEqual(saida.read_bytes(), b"ZIP COMPLETO ANTERIOR")
+        self.assertEqual(list(self.dir.glob(".anonimizando-*")), [])
+
+    def test_borrar_o_temporal_reintenta_tras_permissionerror(self):
+        entrada = _zip(self.dir / "e.zip", {"a.txt": TEXTO_XOSE})
+        preparado = preparar_zip(str(entrada), self.rexistro)
+        orixinal = Path.unlink
+        fallos = []
+
+        def unlink_que_falla_unha_vez(ruta, *a, **k):
+            if ruta.name.startswith(".anonimizando-") and not fallos:
+                fallos.append(ruta)
+                raise PermissionError(32, "usado por outro proceso")
+            return orixinal(ruta, *a, **k)
+
+        try:
+            with mock.patch.object(pipeline, "substituir_con_reintentos", side_effect=PermissionError(32, "x")), \
+                    mock.patch.object(Path, "unlink", unlink_que_falla_unha_vez), \
+                    mock.patch.object(pipeline.time, "sleep"):
+                with self.assertRaises(PermissionError):
+                    gardar_zip_preparado(preparado, str(self.dir / "s.zip"), self.rexistro)
+        finally:
+            preparado.limpar()
+        self.assertEqual(len(fallos), 1)
+        self.assertEqual(list(self.dir.glob(".anonimizando-*")), [])
+        self.assertFalse((self.dir / "s.zip").exists())
+
+    def test_permissionerror_no_lote_da_xanela_avisa_e_segue(self):
+        cartafol = self.dir / "c"
+        cartafol.mkdir()
+        _zip(cartafol / "a.zip", {"a.txt": TEXTO_XOSE})
+        (cartafol / "b.txt").write_text(TEXTO_MANUEL, encoding="utf-8")
+        saida = self.dir / "saida"
+        traballo, _ = web._preparar_traballo(str(cartafol), str(self.dir / "rex"), str(saida), "automatico")
+        with mock.patch.object(pipeline, "substituir_con_reintentos",
+                               side_effect=PermissionError(13, "aberto noutro programa")):
+            web._executar_traballo(traballo)
+        self.assertEqual(traballo["estado"], "rematado")
+        self.assertEqual([Path(e["ruta"]).name for e in traballo["erros"]], ["a.zip"])
+        self.assertEqual(sorted(p.name for p in saida.iterdir()), ["b.anonimizado.txt"])
 
 
 class TestCliZip(unittest.TestCase):
