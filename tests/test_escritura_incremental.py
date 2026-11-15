@@ -268,6 +268,25 @@ class TestUnSoMd(_Base):
         self.assertIn("# a.txt\n", parcial)
         self.assertIn("# b.txt\n", parcial)
 
+    def test_un_parcial_dunha_execucion_que_morreu_non_se_continua(self):
+        self._tres_txt()
+        _txt(self.dir / "expediente.md.parcial", "RESTOS DUNHA EXECUCIÓN ANTERIOR")
+        with mock.patch.object(conversor._Escritor, "pechar_incompleto", lambda self: None):
+            with self.assertRaises(_Fallo):
+                self._converter_vixiando(self.raiz, lambda f: None, fallar_en=1, un_so_md=True)
+        parcial = (self.dir / "expediente.md.parcial").read_text(encoding="utf-8")
+        self.assertNotIn("RESTOS", parcial)
+        self.assertIn("# a.txt\n", parcial)
+
+    def test_un_so_md_sen_ningun_documento_escribe_o_indice_cos_omitidos_e_crea_a_saida(self):
+        _txt(self.raiz / "plano.dwg", "?")
+        saida = self.dir / "non" / "existe"
+        resultado = conversor.converter(str(self.raiz), un_so_md=True, saida=str(saida))
+        md = (saida / "expediente.md").read_text(encoding="utf-8")
+        self.assertIn("ficheiros: 0\n", md)
+        self.assertIn("plano.dwg", md)
+        self.assertEqual(resultado.saidas, [str(saida / "expediente.md")])
+
     def test_cancelar_pecha_o_md_unico_cos_documentos_convertidos(self):
         self._tres_txt()
         chamadas = []

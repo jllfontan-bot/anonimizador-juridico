@@ -614,6 +614,7 @@ class _Escritor:
         self.ruta_parcial: Path | None = None
         self.finalizado = False
         self._fixado = False
+        self._parcial_iniciado = False
 
     def fixar_nomes(self, informe: dict | None) -> None:
         """Nome da entrada tal como pode saír (anonimizado DESPOIS do contido)
@@ -677,13 +678,14 @@ class _Escritor:
         self.paquete.convertidos[c.orixe] = c
 
     def _engadir_ao_parcial(self, c: _Convertido) -> None:
-        novo = not self.ruta_parcial.exists()
+        novo = not self._parcial_iniciado  # un .parcial doutra execución que morreu non se continúa: substitúese
         texto = ""
         if novo:
             texto = _cabeceira(self.paquete.nome_entrada, self.anonimizar, self.data, incompleto=True)
         texto += "\n" + _seccion_unica(c, c.corpo) + "\n"
         with self.ruta_parcial.open("w" if novo else "a", encoding="utf-8") as f:
             f.write(texto)
+        self._parcial_iniciado = True
 
     def finalizar(self, incompleto: bool = False) -> None:
         """Constrúe o .md único definitivo (co índice) e quita o .parcial.
@@ -700,6 +702,7 @@ class _Escritor:
                                revisado=bool(convertidos) and all(c.revisado for c in convertidos),
                                posibles_fugas=sum(c.fugas for c in convertidos), incompleto=incompleto)
         saidas: list = []
+        self.destino.mkdir(parents=True, exist_ok=True)
         _escribir(self.ruta_unico, cabeceira, _un_so_md(convertidos, [c.corpo for c in convertidos], omitidos),
                   self.caracteres_por_parte, saidas)
         self.finalizado = True
