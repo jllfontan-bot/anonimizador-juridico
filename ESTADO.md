@@ -115,7 +115,15 @@ se integre en `motor-md-unico` e pase a suite completa):
 4. Pór na ficha do Reductor as URL do repo novo (política, condicións e sitio web).
 5. Crear o repo en GitHub e subilo faino ou autorízao o usuario á parte (contido público).
 
-**Fase C:** valoración xurídica nova do Reductor xa co seu repositorio e o seu rexistro, e probas en Windows.
+**Fase C (decidida 15/11/2026, o usuario aceptou a versión curta):**
+- **Valoración xurídica CURTA, non completa:** ninguén a esixe; case todo o texto do Reductor xa se valorou nesta rolda
+  (condicións propias, políticas, ficha, marcas). Só comparar os textos do repo novo cos xa valorados e mirar o que
+  cambie (URL, descrición do rexistro propio). Opcional, decisión do usuario: enviar ao avogado as condicións e a política
+  do Reductor e os textos ⚖️ aprobados sen avogado (el só revisou as condicións do Anonimizador, versión AGPL do 15/10/2026).
+- **Probas en Windows OBRIGATORIAS** (non se poden verificar no Mac: escritura incremental, rexistro propio e migración,
+  paquete MSIX sen abrir aínda). Eu preparo a instalación no portátil e comprobo hashes; o usuario fai unha pasada curta:
+  abrir; converter un cartafol cun `.zip` sen anonimizar; converter anonimizando; comprobar que se crea o rexistro novo
+  e que sae o aviso de migración. Mesma comprobación co Anonimizador despois de quitar o exclusivo do Reductor.
 
 **Conflito asumido (decisión do usuario):** deixa de cumprirse «o motor .md do Anonimizador = o do Reductor» coma un
 único código (fase 1b, `markdown_ia.xerar`): quedan dúas copias coa mesma versión inicial, que evolucionan por
