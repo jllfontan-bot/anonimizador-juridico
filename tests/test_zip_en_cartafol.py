@@ -16,6 +16,7 @@ os.environ.setdefault("ANONIMIZADOR_IDIOMA", "gl")
 import contextlib
 import io
 import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -426,7 +427,17 @@ class TestFasesDoZip(unittest.TestCase):
         entrada.write_bytes(bytes(datos))
         with self.assertRaises(ZipRexeitado) as e:
             preparar_zip(str(entrada), self.rexistro, limite=LimiteDescompresion(1000))
-        self.assertIn(e.exception.motivo, ("zip_demasiado_grande", "zip_ilexible"))
+        # CPython non entrega máis do declarado: remata en CRC mal.
+        self.assertEqual(e.exception.motivo, "zip_ilexible")
+
+    def test_conta_real_ao_descomprimir_corta_se_pasa_do_limite(self):
+        """Defensa por se a libraría entregase máis bytes ca os declarados
+        (CPython non o fai: simúlase)."""
+        entrada = _zip(self.dir / "e.zip", {"a.txt": "x" * 10})
+        with mock.patch.object(zipfile.ZipFile, "open", lambda *a, **k: io.BytesIO(b"x" * 5000)):
+            with self.assertRaises(ZipRexeitado) as e:
+                preparar_zip(str(entrada), self.rexistro, limite=LimiteDescompresion(1000))
+        self.assertEqual(e.exception.motivo, "zip_demasiado_grande")
 
     def test_cabeceira_maior_co_limite_rexeitase_sen_descomprimir(self):
         entrada = _zip(self.dir / "e.zip", {"a.txt": "x" * 5000})
@@ -435,6 +446,57 @@ class TestFasesDoZip(unittest.TestCase):
             preparar_zip(str(entrada), self.rexistro, limite=limite)
         self.assertEqual(e.exception.motivo, "zip_demasiado_grande")
         self.assertEqual(limite.queda, 1000)
+
+    def test_no_temporal_hai_como_moito_un_orixinal_a_vez(self):
+        """Se o programa morre a medias, no temporal do sistema non pode
+        quedar o zip enteiro descomprimido: cada orixinal extráese xusto
+        antes de procesalo e bórrase despois."""
+        entrada = _zip(self.dir / "e.zip", {f"d{i}.txt": TEXTO_XOSE for i in range(4)})
+        orixinal = pipeline.cargar_documento_estruturado
+        vistos = []
+
+        def cargar(ruta):
+            vistos.append(len(list(Path(ruta).parent.parent.glob("*/documento.*"))))
+            return orixinal(ruta)
+
+        with mock.patch.object(pipeline, "cargar_documento_estruturado", cargar):
+            preparado = preparar_zip(str(entrada), self.rexistro)
+        try:
+            self.assertEqual(vistos, [1, 1, 1, 1])
+            self.assertEqual(list(preparado.dir.glob("*/documento.*")), [])
+        finally:
+            preparado.limpar()
+
+    def test_limpa_os_temporais_orfos_propios_dun_proceso_morto(self):
+        proceso = subprocess.run([sys.executable, "-c", "import os; print(os.getpid())"],
+                                 capture_output=True, text=True, check=True)
+        morto = int(proceso.stdout)
+        raiz = self.dir / "tmp"
+        raiz.mkdir()
+        orfo = raiz / f"anonimizador-zip-{morto}-abc"
+        (orfo / "0").mkdir(parents=True)
+        (orfo / "0" / "documento.txt").write_text(TEXTO_XOSE, encoding="utf-8")
+        vivo = raiz / f"anonimizador-zip-{os.getppid()}-def"  # outra instancia aínda aberta
+        vivo.mkdir()
+        alleo = raiz / "outro-programa-xyz"
+        alleo.mkdir()
+        saida = self.dir / "saida"
+        saida.mkdir()
+        (saida / f".anonimizando-{morto}-q.zip.tmp").write_bytes(b"PK")
+        (saida / f".anonimizando-{os.getppid()}-r.zip.tmp").write_bytes(b"PK")
+        entrada = _zip(self.dir / "e.zip", {"a.txt": TEXTO_MANUEL})
+        with mock.patch.object(tempfile, "tempdir", str(raiz)):
+            preparado = preparar_zip(str(entrada), self.rexistro)
+            try:
+                self.assertTrue(preparado.dir.name.startswith(f"anonimizador-zip-{os.getpid()}-"))
+                gardar_zip_preparado(preparado, str(saida / "e.anonimizado.zip"), self.rexistro)
+            finally:
+                preparado.limpar()
+        self.assertFalse(orfo.exists())
+        self.assertTrue(vivo.exists())
+        self.assertTrue(alleo.exists())
+        self.assertEqual(sorted(p.name for p in saida.iterdir()),
+                         sorted([f".anonimizando-{os.getppid()}-r.zip.tmp", "e.anonimizado.zip"]))
 
     def test_documento_roto_dentro_queda_fora_e_os_demais_saen(self):
         entrada = _zip(self.dir / "e.zip", {"roto.pdf": b"%PDF-1.4 roto", "nota.txt": TEXTO_MANUEL})

@@ -969,13 +969,134 @@ def _escribir_no_zip(zip_saida: zipfile.ZipFile, orixe: Path, nome: str) -> None
         shutil.copyfileobj(entrada, saida, 1 << 20)
 
 
+# Temporais propios, co PID do proceso que os creou detrás do prefixo:
+# "anonimizador-zip-1234-xxxx" (no temporal do sistema: o orixinal que se
+# está a procesar e os anonimizados á espera dos nomes) e
+# ".anonimizando-1234-xxxx.zip.tmp" (no cartafol de saída, mentres se
+# escribe o zip).
+_PREFIXO_TEMPORAL = "anonimizador-zip-"
+_PREFIXO_SAIDA_TEMPORAL = ".anonimizando-"
+
+
+def _proceso_vivo(pid: int) -> bool:
+    """Se o proceso `pid` segue vivo. Na dúbida (sen permiso para
+    preguntar, erro calquera), vivo: nunca se borra o temporal doutro
+    proceso aberto. Un PID reutilizado por outro programa tamén conta coma
+    vivo (o temporal queda para máis adiante: o lado seguro)."""
+    if pid == os.getpid():
+        return True
+    try:
+        if os.name == "nt":
+            return _proceso_vivo_windows(pid)
+        os.kill(pid, 0)  # POSIX: o sinal 0 só pregunta (en Windows mataría o proceso)
+    except ProcessLookupError:
+        return False
+    except Exception:  # noqa: BLE001
+        return True
+    return True
+
+
+def _proceso_vivo_windows(pid: int) -> bool:
+    import ctypes
+    from ctypes import wintypes
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel32.OpenProcess.restype = wintypes.HANDLE
+    kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+    kernel32.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
+    kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+    manexo = kernel32.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+    if not manexo:
+        return ctypes.get_last_error() != 87  # ERROR_INVALID_PARAMETER: non hai tal proceso
+    try:
+        codigo = wintypes.DWORD()
+        if not kernel32.GetExitCodeProcess(manexo, ctypes.byref(codigo)):
+            return True
+        return codigo.value == 259  # STILL_ACTIVE
+    finally:
+        kernel32.CloseHandle(manexo)
+
+
+def limpar_temporais_orfos(cartafol: Path, prefixo: str) -> None:
+    """Borra en `cartafol` os temporais propios (`prefixo` + PID) dun proceso
+    que xa non existe: se o programa morreu a medias (pechar a xanela,
+    apagar), alí pode quedar un orixinal dun zip ou un zip a medio escribir.
+    Os doutra instancia aberta (ou do propio proceso) non se tocan; os que
+    non levan o prefixo, tampouco. Nunca falla: o que non se poida borrar
+    queda para a próxima vez."""
+    patron = re.compile(re.escape(prefixo) + r"(\d+)-")
+    try:
+        entradas = list(cartafol.iterdir())
+    except OSError:
+        return
+    for ruta in entradas:
+        coincide = patron.match(ruta.name)
+        if not coincide or _proceso_vivo(int(coincide.group(1))):
+            continue
+        try:
+            if ruta.is_dir() and not ruta.is_symlink():
+                shutil.rmtree(ruta, ignore_errors=True)
+            else:
+                ruta.unlink(missing_ok=True)
+        except OSError:
+            pass
+
+
+def _anonimizar_entrada_zip(preparado, zip_entrada, info, ruta, numero, rexistro, ficheiro_config, copia_md) -> None:
+    """Extrae UN documento do zip ao temporal (nome neutro), anonimízao e
+    borra o orixinal. Se non se pode ler ou anonimizar, queda omitido
+    (`documento_ilexible`): nunca entra no zip de saída."""
+    from . import markdown_ia
+
+    nome = info.filename
+    sufixo = ruta.suffix.lower()
+    cartafol = preparado.dir / str(numero)
+    cartafol.mkdir()
+    tmp_entrada = cartafol / ("documento" + sufixo)
+    contexto = None
+    try:
+        with zip_entrada.open(info) as orixe, tmp_entrada.open("wb") as saida:
+            shutil.copyfileobj(orixe, saida, 1 << 20)
+        texto, contexto = cargar_documento_estruturado(str(tmp_entrada))
+        texto_anon, informe, substitucions = anonimizar_texto_detallado(
+            texto, rexistro, ficheiro_config, contexto=contexto
+        )
+        # ANTES de gardar: gardar un PDF redacta `contexto["documento"]` no sitio.
+        texto_md = markdown_ia.copia_do_anonimizador(
+            contexto, texto_anon, substitucions, sufixo) if copia_md else None
+        if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
+            extension = ".anonimizado" + sufixo
+            tmp_saida = cartafol / ("anonimizado" + sufixo)
+            gardar_documento_estruturado(contexto, texto_anon, str(tmp_saida), substitucions)
+        else:
+            extension = ".anonimizado.md" if sufixo == ".md" else ".anonimizado.txt"
+            tmp_saida = cartafol / "anonimizado.txt"
+            tmp_saida.write_text(texto_anon, encoding="utf-8")
+        tmp_md = None
+        if texto_md is not None:  # a disco: un lote pode ter moitos zips grandes
+            tmp_md = cartafol / "copia.md"
+            tmp_md.write_text(texto_md, encoding="utf-8")
+    except Exception:  # noqa: BLE001 -- un documento roto non entra no zip nin para os demais
+        import traceback
+        traceback.print_exc()
+        preparado.omitir(nome, "documento_ilexible")
+        return
+    finally:
+        # Soltar o documento (PyMuPDF ten o PDF aberto: en Windows non se
+        # podería borrar) e borrar o orixinal xa.
+        contexto = None
+        _borrar_con_reintentos(tmp_entrada)
+    preparado.entradas.append((nome, ruta, extension, tmp_saida, tmp_md, informe))
+
+
 class ZipPreparado:
     """Contido xa anonimizado dun .zip, en temporais, á espera dos nomes
     (`gardar_zip_preparado`). `limpar()` borra os temporais."""
 
     def __init__(self, ruta_entrada: str):
         self.ruta_entrada = ruta_entrada
-        self._tmp = DirectorioTemporal()
+        # Prefixo co PID: `limpar_temporais_orfos` recoñéceo se o proceso morre.
+        self._tmp = DirectorioTemporal(prefix=f"{_PREFIXO_TEMPORAL}{os.getpid()}-")
         self.dir = Path(self._tmp.name)
         self.entradas = []  # (nome orixinal, ruta segura, extensión de saída, ficheiro anonimizado, copia .md ou None, informe)
         self.omitidos = []  # nomes orixinais das entradas que NON van no zip de saída
@@ -1032,9 +1153,11 @@ def preparar_zip(
     motivo), sen parar os demais. Non van nunca no zip de saída: o que non
     se pode analizar (`formato`), os metadatos de macOS (`__MACOSX/`,
     `._*`) e un .zip dentro do zip (`zip_dentro_de_zip`: só se abre un
-    nivel)."""
-    from . import markdown_ia
+    nivel).
 
+    Antes de nada bórranse os temporais órfos que deixase este programa se
+    morreu a medias noutra execución (`limpar_temporais_orfos`)."""
+    limpar_temporais_orfos(Path(tempfile.gettempdir()), _PREFIXO_TEMPORAL)
     limite = limite or LimiteDescompresion()
     preparado = ZipPreparado(ruta_entrada)
     try:
@@ -1062,56 +1185,31 @@ def preparar_zip(
                     candidatos.append((info, ruta))
             if sum(info.file_size for info, _ in candidatos) > limite.queda:
                 raise ZipRexeitado("zip_demasiado_grande")
+            # 1) Comprobar o zip enteiro SEN escribir nada a disco: CRC e
+            # tamaño real. Un zip danado ou que mente rexéitase antes de
+            # anonimizar nada.
             usados = 0
-            extraidos = []
             try:
-                for numero, (info, ruta) in enumerate(candidatos):
-                    # Nome neutro no temporal: só conta a extensión.
-                    destino = preparado.dir / str(numero) / ("documento" + ruta.suffix.lower())
-                    destino.parent.mkdir()
-                    with zip_entrada.open(info) as orixe, destino.open("wb") as saida:
+                for info, _ in candidatos:
+                    with zip_entrada.open(info) as orixe:
                         while bloque := orixe.read(1 << 20):
                             usados += len(bloque)
-                            if usados > limite.queda:  # a cabeceira do zip mentía sobre o tamaño
+                            # Defensa por se a libraría entregase máis do declarado
+                            # (CPython non: corta no `file_size` e dá CRC mal).
+                            if usados > limite.queda:
                                 raise ZipRexeitado("zip_demasiado_grande")
-                            saida.write(bloque)
-                    extraidos.append((info.filename, ruta, destino))
             except ZipRexeitado:
                 raise
             except Exception as e:  # noqa: BLE001 -- CRC mal, datos truncados...: zip danado
                 raise ZipRexeitado("zip_ilexible") from e
             limite.queda -= usados
 
-        for nome, ruta, tmp_entrada in extraidos:
-            sufixo = ruta.suffix.lower()
-            try:
-                texto, contexto = cargar_documento_estruturado(str(tmp_entrada))
-                texto_anon, informe, substitucions = anonimizar_texto_detallado(
-                    texto, rexistro, ficheiro_config, contexto=contexto
-                )
-                # ANTES de gardar: gardar un PDF redacta `contexto["documento"]` no sitio.
-                texto_md = markdown_ia.copia_do_anonimizador(
-                    contexto, texto_anon, substitucions, sufixo) if copia_md else None
-                if contexto and sufixo in FORMATOS_CON_ESTRUTURA:
-                    extension = ".anonimizado" + sufixo
-                    tmp_saida = tmp_entrada.parent / ("anonimizado" + sufixo)
-                    gardar_documento_estruturado(contexto, texto_anon, str(tmp_saida), substitucions)
-                else:
-                    extension = ".anonimizado.md" if sufixo == ".md" else ".anonimizado.txt"
-                    tmp_saida = tmp_entrada.parent / "anonimizado.txt"
-                    tmp_saida.write_text(texto_anon, encoding="utf-8")
-                tmp_md = None
-                if texto_md is not None:  # a disco: un lote pode ter moitos zips grandes
-                    tmp_md = tmp_entrada.parent / "copia.md"
-                    tmp_md.write_text(texto_md, encoding="utf-8")
-            except Exception:  # noqa: BLE001 -- un documento roto non entra no zip nin para os demais
-                import traceback
-                traceback.print_exc()
-                preparado.omitir(nome, "documento_ilexible")
-                continue
-            finally:
-                tmp_entrada.unlink(missing_ok=True)
-            preparado.entradas.append((nome, ruta, extension, tmp_saida, tmp_md, informe))
+            # 2) Cada orixinal extráese xusto antes de procesalo e bórrase
+            # despois: se o programa morre a medias, no temporal queda como
+            # moito un orixinal (con nome neutro), non o zip enteiro.
+            for numero, (info, ruta) in enumerate(candidatos):
+                _anonimizar_entrada_zip(
+                    preparado, zip_entrada, info, ruta, numero, rexistro, ficheiro_config, copia_md)
     except BaseException:
         preparado.limpar()
         raise
@@ -1160,7 +1258,9 @@ def gardar_zip_preparado(
     usados = set()
     saidas = []  # nome no zip de saída de cada entrada, na orde de `preparado.entradas`
     destino = Path(ruta_saida)
-    descritor, nome_tmp = tempfile.mkstemp(prefix=".anonimizando-", suffix=".zip.tmp", dir=destino.parent)
+    limpar_temporais_orfos(destino.parent, _PREFIXO_SAIDA_TEMPORAL)
+    descritor, nome_tmp = tempfile.mkstemp(
+        prefix=f"{_PREFIXO_SAIDA_TEMPORAL}{os.getpid()}-", suffix=".zip.tmp", dir=destino.parent)
     os.close(descritor)
     tmp_zip = Path(nome_tmp)
     try:
