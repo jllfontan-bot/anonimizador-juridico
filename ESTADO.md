@@ -224,5 +224,12 @@ Feitas polo usuario co meu apoio por SSH (só lectura e copia de ficheiros compr
   por traballar repetidamente cos mesmos documentos (rexistro compartido con persoas de execucións anteriores).
 - Lentitude medida: PDF de 351 páxinas ~11 min (fase posterior ao OCR ~4-5 min); planos (22 páxinas) varios minutos cada un.
   Rama `progreso-fase-final` (indicador de progreso + optimización de `resolution._emparellar`) en curso.
-- **Non probado aínda en Windows**: o código das correccións de revisión posteriores (as que non están na copia de proba),
-  `progreso-fase-final`, `anon-zip-en-carpetas`, o paquete MSIX, o rexistro propio do Reductor (fase B).
+- **Reductor con escritura incremental + correccións da revisión (rama `escritura-incremental`, HEAD 7d29f6a; xa unida en `motor-md-unico`)**:
+  - RT9 (`.md` único, anonimizando): `.parcial` durante o traballo, `RT9.anonimizado.md` ao lado da carpeta (non dentro), 6 arquivos,
+    `posibles_fugas: 16` (suma das seccións), sen `.parcial` ao rematar.
+  - RT9 cancelado co `.md` único: sae `RT9.incompleto.anonimizado.md` (`conversión: incompleta`, 2 arquivos) SEN pisar o completo anterior.
+  - `.md` bloqueado (CLI no portátil, sen anonimizar, ficheiro aberto en exclusiva): os outros documentos gárdanse, o bloqueado sae como
+    «convertido, pero non se puido gardar o .md» co PermissionError, queda intacto e non hai `.tmp`/`.parcial` orfos. NON probado co bloqueo en modo anonimizado.
+  - Rastro do usuario/meu no portátil a limpar ao final: RT7, RT8, RT9, AN3 (Escritorio), `C:\Users\Public\Documents\prueba-final` (copia
+    da instalación + RT10), `copia-antes-arreglo-20261115`, `Iniciar-Anonimizador-prueba.vbs`, carpeta de nome estragado «Demanda rǧa…» (10:06).
+- **Non probado aínda en Windows**: `progreso-fase-final`, `anon-zip-en-carpetas`, o paquete MSIX, o rexistro propio do Reductor (fase B).
