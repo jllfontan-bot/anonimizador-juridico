@@ -89,33 +89,42 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
 
 ## Separar Anonimizador e Reductor (decidido 15/11/2026)
 
-O usuario non quere que os dous programas se mesturen nin en GitHub nin na Microsoft Store.
+O usuario non quere que os dous programas se mesturen nin en GitHub nin na Microsoft Store. O repositorio propio
+do Reductor faise **antes** de publicar o Reductor 1.2.0 (o Anonimizador 1.1.2 non depende disto).
 
-**Feito agora (só textos e ligazóns, antes de publicar 1.1.2 / 1.2.0):** `8222d5b`, `03fc30a`, `b701228`. Ficha,
-política, condicións, manual (e PDF) e NOVEDADES do Reductor sen nomear o Anonimizador, e ficha do Anonimizador sen
-nomear o Reductor. O rexistro compartido descríbese sen nomear o outro programa («outra aplicación do mesmo
-desenvolvedor pode compartilo»), para que a política siga sendo exacta.
-
-**Queda (non se tocou por ser `src/`, que edita outra sesión, ou o instalador clásico):**
+**Fase A · Textos e ligazóns (feita):** `8222d5b`, `03fc30a`, `b701228`. Ficha, política, condicións, manual (e PDF)
+e NOVEDADES do Reductor sen nomear o Anonimizador, e ficha do Anonimizador sen nomear o Reductor. O rexistro
+compartido descríbese sen nomear o outro programa («outra aplicación do mesmo desenvolvedor pode compartilo»), para
+que a política siga sendo exacta mentres o rexistro sexa compartido. Quedou sen tocar, para facelo cando remate a
+sesión «escritura-incremental» (edita `src/`) ou na fase B:
 - Textos da app: `conversor.cli.axuda_anonimizar`, `conversor.cli.axuda_rexistro`, `conversor.cli.axuda_chaveiro`,
-  `conversor.cli.rexistro` e `pantalla_conversor.modo_revisar_axuda` (es e gl) nomean «o anonimizador». Despois,
-  rexenerar as capturas do manual do Reductor (a de inicio amosa `modo_revisar_axuda`) e da súa ficha.
-- Instalador clásico do Reductor (`instalador/windows/instalador-conversor.nsi`, textos do desinstalador
-  `TXT_UN_FIN` e `TXT_UN_BENVIDA`): «compartidos co anonimizador».
-- As tres URL da ficha do Reductor (política, condicións e sitio web) levan o nome do repositorio actual
-  (`anonimizador-juridico`), e o sitio web é o README do Anonimizador.
+  `conversor.cli.rexistro` e `pantalla_conversor.modo_revisar_axuda` (es e gl) nomean «o anonimizador»; despois,
+  rexenerar as capturas do manual do Reductor e da súa ficha (a de inicio amosa `modo_revisar_axuda`).
+- Instalador clásico do Reductor (`instalador/windows/instalador-conversor.nsi`, `TXT_UN_FIN` e `TXT_UN_BENVIDA`):
+  «compartidos co anonimizador».
 
-**Obxectivo seguinte (non agora; Opus · alto, unha fase por punto):**
-1. Repositorio de GitHub propio para o Reductor: o seu código (ou o motor compartido como dependencia), política,
-   condicións, manual, `AVISOS-TERCEIROS.md`, workflow MSIX e etiquetas propios; cambiar as tres URL da ficha.
-2. Rexistro cifrado propio do Reductor (o seu cartafol e a súa entrada no Administrador de credenciais), sen
-   compartir o do Anonimizador.
-3. Workflow e etiquetas separados (`msix-conversor-v*` deixa de vivir no repo do Anonimizador).
+**Fase B · Repositorio propio do Reductor** (sesión nova, Opus · alto; despois de que remate «escritura-incremental»,
+se integre en `motor-md-unico` e pase a suite completa):
+1. Crear en local `~/proyectos/reductor-de-tokens` (repo `jllfontan-bot/reductor-de-tokens`) cun **commit inicial**
+   co do Reductor e unha **copia do motor**, sen o historial nin o exclusivo do Anonimizador: README, política,
+   condicións, ficha, manual, `AVISOS-TERCEIROS.md`, licenzas, workflow MSIX só do Reductor coa etiqueta `msix-v*`,
+   `VERSION` propia.
+2. **Rexistro cifrado propio** do Reductor: cartafol de datos propio e entrada propia no Administrador de credenciais;
+   migración ou aviso para quen xa usou o rexistro compartido (copiar, non mover).
+3. Quitar do repo do Anonimizador o exclusivo do Reductor, o seu workflow e as etiquetas `msix-conversor-v*`.
+4. Pór na ficha do Reductor as URL do repo novo (política, condicións e sitio web).
+5. Crear o repo en GitHub e subilo faino ou autorízao o usuario á parte (contido público).
 
-**Riscos:** migrar o rexistro sen perder correspondencias de quen xa usou o Reductor anonimizando (copiar, non
-mover; os códigos deixarán de coincidir entre programas); URL da ficha: publicar primeiro no repo novo e cambiar a
-ficha despois, sen deixar ligazóns rotas; o cambio altera a política e as condicións do Reductor, así que fai falta
-unha valoración xurídica nova antes de envialo á Store.
+**Fase C:** valoración xurídica nova do Reductor xa co seu repositorio e o seu rexistro, e probas en Windows.
+
+**Conflito asumido (decisión do usuario):** deixa de cumprirse «o motor .md do Anonimizador = o do Reductor» coma un
+único código (fase 1b, `markdown_ia.xerar`): quedan dúas copias coa mesma versión inicial, que evolucionan por
+separado. Unha corrección de fugas nunha non chega soa á outra.
+
+**Riscos:** migración do rexistro (os códigos deixarán de coincidir entre programas; non perder as correspondencias
+de quen xa anonimizou co Reductor); URL da ficha (publicar primeiro no repo novo e cambiar a ficha despois, sen
+ligazóns rotas); política e condicións cambian, así que a fase C vai antes de enviar á Store; dúas copias do motor
+que poden separarse en calidade.
 
 ## Para a seguinte versión: anonimizar os formatos novos do Reductor (decidido 15/11/2026)
 
