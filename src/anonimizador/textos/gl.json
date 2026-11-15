@@ -378,7 +378,7 @@
  "pantalla_conversor.rematado_titulo": "Conversión rematada",
  "pantalla_conversor.cancelado_titulo": "Conversión cancelada",
  "pantalla_conversor.cancelado_sen_saidas": "Non se gardou nada.",
- "pantalla_conversor.cancelado_con_saidas": "Quedan gardados os .md dos documentos que xa estaban convertidos antes de cancelar; os demais non se converteron. Con un só .md, o ficheiro leva «conversión: incompleta».",
+ "pantalla_conversor.cancelado_con_saidas": "Quedan gardados os .md dos documentos que xa estaban convertidos antes de cancelar; os demais non se converteron. Con un só .md, o convertido vai a «<nome>.incompleto.md» (non substitúe un .md completo anterior).",
  "pantalla_conversor.erro_titulo": "A conversión parou cun erro",
  "pantalla_conversor.nada": "Non se converteu ningún ficheiro.",
  "pantalla_conversor.resultado_sen_anon": "Sen anonimizar: estes .md conservan todos os datos persoais.",
