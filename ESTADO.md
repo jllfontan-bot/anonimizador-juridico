@@ -68,8 +68,11 @@ Orde das fases; cada unha cabe nunha sesión curta e termina co seu criterio de 
 - Para enviar á Store (etiquetas, sen poñer): `msix-v1.1.2` (Anonimizador) e `msix-conversor-v1.2.0` (Reductor), sobre
   o commit final de `main`. Subir a `main` e etiquetar require permiso do usuario; as políticas e condicións enlazadas
   polas fichas tamén teñen que estar en `main` antes do envío.
-- Decisións do usuario: R1 do informe (marcar os `.md` con posibles fugas: recomendación «a», liña `posibles_fugas: N`
-  na cabeceira; sen facer) e probas en Windows (condición previa).
+- R1 do informe, feito (`535fd0f`, `93248fb`): en automático, os `.md` con posibles fugas levan `posibles_fugas: N`
+  na cabeceira (co .md único, tamén na sección de cada documento), que se quita ao revisar; ficha e manual (PDF
+  rexenerados) din o mesmo. Fóra: o aviso ao pechar a xanela con documentos sen revisar (só se o usuario o pide;
+  hai que probalo en Windows).
+- Decisión do usuario: probas en Windows (condición previa), agora tamén coa marca `posibles_fugas`.
 - ⚖️ Agardan ao avogado: diferenzas A e B das condicións de uso (a do Reductor é un ficheiro novo), parágrafo P1 das
   políticas, subtítulo do Reductor, atribución a Claude e outros puntos da táboa do informe. O Anonimizador
   podería enviarse antes que o Reductor (o informe explica por que); o Reductor debería agardar polas súas condicións.
