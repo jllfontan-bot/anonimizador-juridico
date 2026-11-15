@@ -1255,8 +1255,13 @@ def _detectar_persoas_por_taboa(texto: str, texto_suavizado: str, ocupado: list,
 #  - dúas palabras que son apelidos da táboa do INE + unha que é nome de pía
 #    da táboa (+ un segundo nome de pía opcional), todas na MESMA liña e sen
 #    conectores nin puntuación polo medio;
-#  - o tramo remata a fin de liña, ante `| , ; )`, un díxito ou `-`, e non vai
-#    seguido doutra palabra capitalizada (se non, é un título ou unha frase);
+#  - o tramo remata a fin de liña, ante `| , ; )`, un díxito ou `-`, OU ante
+#    unha palabra capitalizada que NON continuaría o nome (non é apelido nin
+#    nome da táboa, nin "SL"/"SA"): caso real, fila dunha táboa de titulares
+#    "<DNI> APELIDO APELIDO NOME Propiedad Plena 100,00" (a regra anterior,
+#    "ningunha palabra capitalizada despois", deixaba o nome enteiro á vista
+#    con "Usufructo"). Os tipos de dereito habituais (`_TIPOS_DEREITO`) pechan
+#    o nome aínda que estean na táboa de apelidos ("Heredero");
 #  - mesmos filtros ca o recoñecedor por táboa: palabra anterior de vía/centro
 #    (`_PREFIXOS_LUGAR`), `_NON_APELIDOS`, palabras funcionais/de prosa, cargos
 #    e `_EXCEPCIONS_NOME_TABOA`.
@@ -1265,6 +1270,17 @@ _RACHA_CAPITALIZADA_MESMA_LIÑA_RE = re.compile(
 )
 _PALABRA_SOLTA_RE = re.compile(_PALABRA_CAPITALIZADA_RE)
 _REMATE_NOME_SEN_COMA_RE = re.compile(r"[ \t]*(?:\Z|\n|\r|[|,;)\-]|\d)")
+# Tipos de dereito das táboas do Catastro e do Rexistro (normalizados coma o
+# INE: maiúsculas e sen acentos).
+_TIPOS_DEREITO = frozenset("""
+PROPIEDAD PROPIEDADE PLENA PLENO NUDA ESPIDA USUFRUCTO USUFRUTO USUFRUCTUARIO
+USUFRUCTUARIA USUFRUTUARIO USUFRUTUARIA COPROPIEDAD COPROPIEDADE COPROPIETARIO
+COPROPIETARIA PROPIETARIO PROPIETARIA MITAD METADE INDIVISA TITULAR TITULARIDAD
+TITULARIDADE HEREDERO HEREDERA HEREDEROS HERDEIRO HERDEIRA HERDEIROS CONYUGE
+CONXUXE DOMINIO DERECHO DEREITO SUPERFICIE ARRENDATARIO ARRENDATARIA
+CONCESION CONCESIONARIO CONCESIONARIA
+""".split())
+_PALABRA_TRAS_NOME_RE = re.compile(r"[ \t]+(" + _PALABRA_CAPITALIZADA_RE + r")")
 
 
 def _palabra_valida_para_nome_sen_coma(palabra: str) -> bool:
@@ -1294,17 +1310,32 @@ def _detectar_persoas_apelidos_nome_sen_coma(texto: str, texto_suavizado: str, o
                 and nomes_ine.normalizar(nome) in nomes_validos
             ):
                 continue
-            ultima = palabras[i + 2]
-            if i + 3 < len(palabras):
-                # Segundo nome de pía: só se é a última palabra da racha.
-                if i + 4 != len(palabras):
-                    continue
-                if not (_palabra_valida_para_nome_sen_coma(palabras[i + 3][1])
-                        and nomes_ine.normalizar(palabras[i + 3][1]) in nomes_validos):
-                    continue
-                ultima = palabras[i + 3]
+            seguinte = i + 3
+            if seguinte < len(palabras):
+                normalizada = nomes_ine.normalizar(palabras[seguinte][1])
+                # Segundo nome de pía.
+                if (normalizada not in _TIPOS_DEREITO and normalizada in nomes_validos
+                        and _palabra_valida_para_nome_sen_coma(palabras[seguinte][1])):
+                    seguinte += 1
+            ultima = palabras[seguinte - 1]
             fin = ultima[0] + len(ultima[1])
-            if not _REMATE_NOME_SEN_COMA_RE.match(texto_suavizado, fin):
+            if _SOCIEDADE_DESPOIS_RE.match(texto_suavizado, fin):
+                continue
+            if seguinte < len(palabras):
+                # Palabra capitalizada despois: pecha o nome se é un tipo de
+                # dereito, ou se cambia de caixa ("Propiedad", non "MOTOR":
+                # en maiúsculas pode ser o resto dun título ou dunha razón
+                # social) e non o continuaría (apelido ou nome da táboa -> non
+                # se adiviña).
+                posicion, palabra = palabras[seguinte]
+                normalizada = nomes_ine.normalizar(palabra)
+                orixinal = texto[posicion:posicion + len(palabra)]
+                if normalizada not in _TIPOS_DEREITO and (
+                    orixinal == orixinal.upper()
+                    or normalizada in nomes_ine.nomes() or _e_apelido_da_taboa(palabra)
+                ):
+                    continue
+            elif not _REMATE_NOME_SEN_COMA_RE.match(texto_suavizado, fin):
                 continue
             tramo = texto[inicio:fin]
             if tramo != tramo.upper():
@@ -2385,6 +2416,14 @@ def _unir_con_persoa_existente(entidades, ocupado, ocupado_directas, texto, suav
         cargo = exento
     if cargo:
         fin = max(persoa.fin, cargo.start())
+    # Nin nun tipo de dereito dunha táboa de titulares ("<DNI> RIOS LEIRA LUIS
+    # Propiedad Plena 100,00": spaCy devolve "LUIS Propiedad Plena"). Agás se
+    # tamén é apelido ("Heredero", "Derecho"): "Juan García Heredero" non pode
+    # deixar o segundo apelido á vista.
+    dereito = _PALABRA_TRAS_NOME_RE.match(suavizado, persoa.fin)
+    if (fin > persoa.fin and dereito and nomes_ine.normalizar(dereito.group(1)) in _TIPOS_DEREITO
+            and not _e_apelido_da_taboa(dereito.group(1))):
+        fin = persoa.fin
     if inicio < persoa.inicio and _tramo_de_nome(suavizado[inicio:persoa.inicio]):
         novo_inicio = inicio
     if fin > persoa.fin and _tramo_de_nome(suavizado[persoa.fin:fin]):

@@ -82,6 +82,64 @@ class TestNomeApelidosNomeSenComa(unittest.TestCase):
                 self.assertIn("VILAR QUINTAS MARTIN", _persoas(f"(VILAR QUINTAS MARTIN{remate}"))
 
 
+class TestNomeSeguidoDoTipoDeDereito(unittest.TestCase):
+    """Fila real dunha táboa de titulares do Catastro (texto do PDF sen celas): tras o nome
+    vai o tipo de dereito ("Propiedad Plena", "Usufructo"...). A regra "tras o tramo non
+    pode ir outra palabra capitalizada" bloqueábao: spaCy collía "LUIS Propiedad Plena" e
+    deixaba "RIOS" á vista, e con "Usufructo" o nome enteiro quedaba sen tapar."""
+
+    CABECEIRA = ("NIF/NIE APELLIDOS Y NOMBRE O RAZÓN SOCIAL DERECHO SOBRE EL BIEN INMUEBLE "
+                 "PORCENTAJE (46)\n")
+    DEREITOS = ("Propiedad Plena", "Nuda propiedad", "Usufructo", "Copropiedad", "Mitad indivisa",
+                "Titular", "Heredero", "Cónyuge", "PROPIEDAD PLENA", "USUFRUCTO", "NUDA PROPIEDAD")
+
+    def test_nome_enteiro_tapado_e_dereito_visible(self):
+        for nome in NOMES_QUE_FALLAN + (NOME_CONTROL,):
+            for dereito in self.DEREITOS:
+                with self.subTest(nome=nome, dereito=dereito):
+                    texto = f"{self.CABECEIRA}33344455A {nome} {dereito} 100,00\n"
+                    saida = _anonimizar(texto)
+                    for palabra in nome.split():
+                        self.assertNotIn(palabra, saida)
+                    if dereito == "Heredero":
+                        # Tamén é apelido da táboa: non se impide que spaCy estenda a persoa
+                        # sobre el (mellor tapar de máis ca deixar un 2º apelido á vista).
+                        continue
+                    self.assertIn(nome, _persoas(texto))
+                    self.assertIn(f" {dereito} 100,00", saida)
+
+    def test_casos_do_informe(self):
+        saida = _anonimizar(self.CABECEIRA + "33344455A RIOS LEIRA LUIS Propiedad Plena 100,00\n")
+        self.assertNotIn("RIOS", saida)
+        self.assertIn("Propiedad Plena 100,00", saida)
+        saida = _anonimizar("33344455A CAMPOS VILAR PABLO Usufructo 50,00\n")
+        self.assertNotIn("CAMPOS", saida)
+        self.assertIn("Usufructo 50,00", saida)
+
+    def test_apelido_que_tamen_e_tipo_de_dereito_non_queda_a_vista(self):
+        for texto in ("Comparece D. Juan García Heredero, vecino de Lugo.",
+                      "Comparece don Pablo Campos Derecho, vecino de Lugo."):
+            with self.subTest(texto=texto):
+                saida = _anonimizar(texto)
+                for palabra in texto.split()[2:5]:
+                    self.assertNotIn(palabra.strip(","), saida)
+
+    def test_palabra_seguinte_que_continua_o_nome_bloquea(self):
+        # "CAMPOS VILAR PABLO GARCIA": PABLO podería ser un apelido máis; non se adiviña.
+        texto = "CAMPOS VILAR PABLO GARCIA Propiedad\n"
+        detectadas = ner._detectar_persoas_apelidos_nome_sen_coma(
+            texto, ner._suavizar_maiusculas_para_deteccion(texto), [False] * len(texto), ner.cargar_modelo())
+        self.assertEqual([e.texto for e in detectadas], [])
+
+    def test_sociedade_despois_non_e_persoa(self):
+        for texto in ("CAMPOS VILAR PABLO SL\n", "CAMPOS VILAR PABLO SA 100,00\n", "CAMPOS VILAR PABLO S.L.\n"):
+            with self.subTest(texto=texto):
+                detectadas = ner._detectar_persoas_apelidos_nome_sen_coma(
+                    texto, ner._suavizar_maiusculas_para_deteccion(texto), [False] * len(texto),
+                    ner.cargar_modelo())
+                self.assertEqual(detectadas, [])
+
+
 class TestNegativosNomeSenComa(unittest.TestCase):
     """O que non é un nome (ou non vai nesa orde) segue igual."""
 
