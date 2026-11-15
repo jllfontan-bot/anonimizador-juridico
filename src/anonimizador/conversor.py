@@ -66,13 +66,13 @@ import datetime
 import json
 import re
 import shutil
-import tempfile
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
 from . import aforro_ia, formatos, idioma, lectura, markdown_ia, pdf_estrutura
+from .temporales import DirectorioTemporal
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
 if TYPE_CHECKING:
@@ -518,7 +518,7 @@ def converter(
     en `Resultado.csv` e nos avisos) e o `.md` leva só a cabeceira de
     columnas; sen el a táboa sae enteira, cun aviso. Só afecta aos formatos
     novos, que só se converten sen anonimizar."""
-    with tempfile.TemporaryDirectory() as tmp_csv:  # os .csv viven aquí ata a fase de escritura
+    with DirectorioTemporal() as tmp_csv:  # os .csv viven aquí ata a fase de escritura
         return _converter(entrada, Path(tmp_csv), anonimizar, un_so_md, saida, rexistro, data, aforro,
                           caracteres_por_parte, progreso, cancelar, revisar, csv_aparte,
                           progreso_paxina)
@@ -540,7 +540,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
     if anonimizar:  # só se pode revisar despois o que se anonimizou
         resultado._lote = paquete
 
-    with tempfile.TemporaryDirectory() as tmp:
+    with DirectorioTemporal() as tmp:
         documentos, resultado.omitidos = _documentos(entrada, Path(tmp), anonimizar)
         convertidos = []
         for i, doc in enumerate(documentos):

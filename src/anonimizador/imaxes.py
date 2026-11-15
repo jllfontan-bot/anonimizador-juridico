@@ -21,13 +21,13 @@ extensións).
 from __future__ import annotations
 
 import io
-import tempfile
 from pathlib import Path
 
 import fitz  # PyMuPDF
 from PIL import Image, ImageOps, ImageSequence
 
 from .pdf import _DPI_OCR
+from .temporales import DirectorioTemporal
 from .pdf_estrutura import cargar_pdf_estruturado, gardar_pdf_estruturado
 
 # sufixo -> formato de Pillow
@@ -78,7 +78,7 @@ def conserva_formato(contexto: dict, ruta_saida: str) -> bool:
 
 def gardar(contexto: dict, texto_final: str, ruta_saida: str, substitucions: list | None) -> None:
     info = contexto["imaxe"]
-    with tempfile.TemporaryDirectory() as directorio:
+    with DirectorioTemporal() as directorio:
         pdf = str(Path(directorio) / "imaxe.pdf")
         gardar_pdf_estruturado(contexto, texto_final, pdf, substitucions)
         fotogramas = []

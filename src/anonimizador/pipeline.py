@@ -6,7 +6,6 @@ inxesta -> deteccion -> resolucion de identidade -> rexistro -> substitucion
 from __future__ import annotations
 
 import re
-import tempfile
 import zipfile
 from pathlib import Path, PurePosixPath
 
@@ -31,6 +30,7 @@ from .categoria_especial import escanear_categoria_especial
 from .risco_residual import escanear_risco_residual
 from .pdf_estrutura import _limites_paxinas, gardar_pdf_estruturado
 from .recognizers import Entidade
+from .temporales import DirectorioTemporal
 from .registry import RexistroCorrespondencias
 
 # A lectura vive en `lectura.py` (sen NER). Os nomes que aquí non se usan
@@ -935,7 +935,7 @@ def anonimizar_zip(
 
     with zipfile.ZipFile(ruta_entrada) as zip_entrada, \
          zipfile.ZipFile(ruta_saida, "w", zipfile.ZIP_DEFLATED) as zip_saida, \
-         tempfile.TemporaryDirectory() as tmp:
+         DirectorioTemporal() as tmp:
         for info in zip_entrada.infolist():
             if info.is_dir():
                 continue
