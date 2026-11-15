@@ -23,7 +23,7 @@ Var RutaPS1
   !define VERSION "dev"
 !endif
 !ifndef VERSION_NUM
-  !define VERSION_NUM "1.1.0.0"
+  !define VERSION_NUM "1.2.0.0"
 !endif
 !ifndef RECURSOS
   !define RECURSOS "."
