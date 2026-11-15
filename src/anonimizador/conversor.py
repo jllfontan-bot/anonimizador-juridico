@@ -57,9 +57,13 @@ seu documento, non ao final do lote; un lote longo que falla ou se cancela
 non perde o xa convertido. Sen `un_so_md`, cada .md é un ficheiro completo
 (escrito dunha vez, `.tmp` + `os.replace`). Con `un_so_md`, as seccións
 engádense a `<nome>.md.parcial` (sen índice, con `conversión: incompleta`) e,
-ao rematar, ao cancelar ou ao fallar, constrúese o `.md` definitivo e bórrase
-o `.parcial`; se o proceso morre sen poder pechar, queda só o `.parcial`.
-`Cancelado` e calquera excepción que pare o lote levan `resultado_parcial`.
+ao rematar, constrúese o `.md` definitivo e bórrase o `.parcial`; se o lote
+para (cancelar, erro), o que hai vai a `<nome>.incompleto.md` (o nome de
+sempre só o leva unha conversión completa); se o proceso morre sen poder
+pechar, queda só o `.parcial`. Anonimizando, o nome do .zip (ou do cartafol co
+.md único) anonimízase ao pechar, coma antes: ata entón o `.parcial` e o
+cartafol `-md` levan un nome neutro (`NOME_PROVISIONAL`). `Cancelado` e
+calquera excepción que pare o lote levan `resultado_parcial`.
 
 Enganches da pantalla (`pantalla_conversor.py`, fase 2b), argumentos de
 `converter`: `progreso(feito, total, nome)` antes de cada documento e ao
@@ -214,6 +218,7 @@ def _e_saida_anterior(nome: str) -> bool:
 
 MAX_DESCOMPRIMIDO = 2 * 1024**3  # bytes que unha execución descomprime en total dos .zip (contra zip bombs)
 SUFIXO_CARTAFOL_ZIP = "-md"  # un .zip nun cartafol sae no subcartafol `<nome do zip sen .zip>-md`
+NOME_PROVISIONAL = "conversion-en-curso"  # nome neutro do .md único e do cartafol `-md` anonimizando, ata pechar
 _ESPERA_SUBSTITUIR = 0.2  # segundos entre intentos de `os.replace` (Windows: antivirus ou indexador co ficheiro aberto)
 
 
@@ -622,82 +627,110 @@ class _Escritor:
     """Garda cada documento en canto se converte (ver o comezo do módulo).
 
     Sen `un_so_md`, un .md por documento no seu sitio de sempre. Con
-    `un_so_md`, as seccións van a `<nome>.md.parcial` e `finalizar` constrúe o
-    definitivo. O nome da entrada (un .zip anonimizando) fíxase unha vez, ao
-    gardar o primeiro documento, e non cambia en todo o lote."""
+    `un_so_md`, as seccións van a un `.parcial` e `finalizar` constrúe o
+    definitivo (`<nome>.incompleto...md` se o lote parou: o nome de sempre só o
+    leva unha conversión completa, e unha anterior non se pisa).
+
+    Anonimizando, o nome do .zip (o cartafol `<nome>-md` ou o .md único) e o
+    dun cartafol co .md único anonimízanse AO PECHAR, coma antes da escritura
+    incremental: facelo antes rexistraría a persoa do nome antes do contido
+    que a nomea (outro código e un aviso de homónimo falso). Mentres tanto, o
+    `.parcial` e o cartafol `-md` levan un nome neutro (`NOME_PROVISIONAL`),
+    que se renomea ao pechar; se o proceso morre, queda ese nome, sen datos."""
 
     def __init__(self, entrada: Path, e_zip: bool, anonimizar: bool, un_so_md: bool, saida: str | None, rexistro,
                  data: datetime.date, caracteres_por_parte: int | None, resultado: Resultado, paquete: _Lote):
         self.entrada, self.e_zip, self.anonimizar, self.un_so_md = entrada, e_zip, anonimizar, un_so_md
         self.saida, self.rexistro, self.data, self.caracteres_por_parte = saida, rexistro, data, caracteres_por_parte
         self.resultado, self.paquete = resultado, paquete
+        # O nome da entrada só sae no cartafol `-md` dun .zip e no .md único.
+        self.provisional = anonimizar and (e_zip or (un_so_md and entrada.is_dir()))
         self.usadas: set = set()
         self.usados_csv: set = set()
         self.convertidos: list = []  # os gardados, en orde (o .md único sae deles)
         self.destino: Path | None = None
-        self.ruta_unico: Path | None = None
         self.ruta_parcial: Path | None = None
+        self.nome_parcial = ""  # `orixe` da cabeceira do .parcial
         self.finalizado = False
-        self._fixado = False
         self._parcial_iniciado = False
+        self._base: str | None = None
 
-    def fixar_nomes(self, informe: dict | None) -> None:
-        """Nome da entrada tal como pode saír (anonimizado DESPOIS do contido)
-        e destino, unha soa vez. Co `informe` do primeiro documento, un nome
-        de persoa do .zip que tamén sae no contido recibe o seu mesmo código
-        (A17); non se pode facer antes de converter ese documento: rexistraría
-        a persoa antes do contido e cambiaría o seu código e o aviso de homónimo."""
-        if self._fixado:
+    def _cola_unica(self) -> str:
+        return (".anonimizado" if self.anonimizar else "") + (".zip" if self.e_zip else "") + ".md"
+
+    def _preparar(self) -> None:
+        """Destino (e .parcial) dende o primeiro documento, co nome neutro se cómpre."""
+        if self.destino is not None:
             return
-        entrada, e_zip, anonimizar = self.entrada, self.e_zip, self.anonimizar
-        nome_entrada = entrada.name
-        if anonimizar and (e_zip or (self.un_so_md and entrada.is_dir())):
-            from . import pipeline
-
-            nome_entrada = pipeline.nome_ficheiro_anonimizado(
-                entrada.name, self.rexistro, informe["persoas"] if informe else None)
-        base_entrada = PurePosixPath(nome_entrada).stem if e_zip else nome_entrada
+        entrada = self.entrada
+        base = f"{NOME_PROVISIONAL}-{datetime.datetime.now():%Y%m%d-%H%M%S}" if self.provisional else None
         if self.un_so_md:
-            cola = (".anonimizado" if anonimizar else "") + (".zip" if e_zip else "") + ".md"
             self.destino = Path(self.saida) if self.saida else entrada.parent
-            self.ruta_unico = self.destino / (base_entrada + cola)
-            self.ruta_parcial = self.ruta_unico.with_name(self.ruta_unico.name + ".parcial")
+            if base is None:
+                base = PurePosixPath(entrada.name).stem if self.e_zip else entrada.name
+            self.nome_parcial = base
+            self.ruta_parcial = _sen_usar(lambda n: self.destino / f"{base}{n}{self._cola_unica()}.parcial",
+                                          so_provisional=self.provisional)
         elif self.saida:
             self.destino = Path(self.saida)
         elif entrada.is_dir():
             self.destino = entrada
-        elif e_zip:
-            self.destino = entrada.parent / (base_entrada + (".anonimizado" if anonimizar else "") + "-md")
+        elif self.e_zip:
+            if base is None:
+                base = PurePosixPath(entrada.name).stem
+                self.destino = entrada.parent / (base + SUFIXO_CARTAFOL_ZIP)
+            else:
+                self.destino = _sen_usar(lambda n: entrada.parent / f"{base}{n}.anonimizado{SUFIXO_CARTAFOL_ZIP}")
         else:
             self.destino = entrada.parent
-        self.paquete.nome_entrada = nome_entrada
-        self._fixado = True
+
+    def _base_definitiva(self) -> str:
+        """Nome da entrada tal como sae, anonimizado DESPOIS de todo o contido (coma antes)."""
+        if self._base is None:
+            nome_entrada = self.entrada.name
+            if self.provisional:
+                from . import pipeline
+
+                nome_entrada = pipeline.nome_ficheiro_anonimizado(self.entrada.name, self.rexistro)
+            self.paquete.nome_entrada = nome_entrada
+            self._base = PurePosixPath(nome_entrada).stem if self.e_zip else nome_entrada
+        return self._base
 
     def gardar(self, c: _Convertido) -> None:
-        """Escribe o documento `c` (despois de `fixar_nomes`). Se falla, non queda rexistrado."""
+        """Escribe o documento `c`. Se falla, non queda rexistrado nin deixa .csv á parte."""
         resultado = self.resultado
-        if self.un_so_md:
-            self.destino.mkdir(parents=True, exist_ok=True)
-            _colocar_csv(c, self.destino, self.usados_csv, resultado)
-            self._engadir_ao_parcial(c)
-            self.convertidos.append(c)
-        else:
-            ruta = self.destino / c.cartafol / (c.stem + c.cola)
-            contador = 2
-            while ruta in self.usadas:
-                ruta = self.destino / c.cartafol / (f"{c.stem}-{contador}" + c.cola)
-                contador += 1
-            ruta.parent.mkdir(parents=True, exist_ok=True)
-            _colocar_csv(c, ruta.parent, self.usados_csv, resultado)
-            cabeceira = _cabeceira(c.nome_visible, self.anonimizar, self.data, paxinas=c.paxinas,
-                                   revisado=c.revisado, posibles_fugas=c.fugas)
-            saidas: list = []
-            _escribir(ruta, cabeceira, c.corpo, self.caracteres_por_parte, saidas)
-            self.usadas.add(ruta)
-            c.ruta = ruta
-            resultado.saidas.extend(saidas)
-            resultado.documentos[c.orixe].saidas = saidas
-            c.corpo = ""  # xa está en disco: `substituir_revisado` pon o novo
+        self._preparar()
+        antes_csv = len(resultado.csv)
+        try:
+            if self.un_so_md:
+                self.destino.mkdir(parents=True, exist_ok=True)
+                _colocar_csv(c, self.destino, self.usados_csv, resultado)
+                self._engadir_ao_parcial(c)
+                self.convertidos.append(c)
+            else:
+                ruta = self.destino / c.cartafol / (c.stem + c.cola)
+                contador = 2
+                while ruta in self.usadas:
+                    ruta = self.destino / c.cartafol / (f"{c.stem}-{contador}" + c.cola)
+                    contador += 1
+                ruta.parent.mkdir(parents=True, exist_ok=True)
+                _colocar_csv(c, ruta.parent, self.usados_csv, resultado)
+                cabeceira = _cabeceira(c.nome_visible, self.anonimizar, self.data, paxinas=c.paxinas,
+                                       revisado=c.revisado, posibles_fugas=c.fugas)
+                saidas: list = []
+                _escribir(ruta, cabeceira, c.corpo, self.caracteres_por_parte, saidas)
+                self.usadas.add(ruta)
+                c.ruta = ruta
+                resultado.saidas.extend(saidas)
+                resultado.documentos[c.orixe].saidas = saidas
+                c.corpo = ""  # xa está en disco: `substituir_revisado` pon o novo
+        except BaseException:
+            # Sen o .md, o seu .csv á parte (só sen anonimizar) sobraría e non o nomearía ninguén.
+            for ruta_csv in resultado.csv[antes_csv:]:
+                Path(ruta_csv).unlink(missing_ok=True)
+                self.usados_csv.discard(Path(ruta_csv))
+            del resultado.csv[antes_csv:]
+            raise
         resultado.tokens_antes += c.tokens_antes
         resultado.tokens_despois += c.tokens_despois
         self.paquete.convertidos[c.orixe] = c
@@ -706,19 +739,30 @@ class _Escritor:
         novo = not self._parcial_iniciado  # un .parcial doutra execución que morreu non se continúa: substitúese
         texto = ""
         if novo:
-            texto = _cabeceira(self.paquete.nome_entrada, self.anonimizar, self.data, incompleto=True)
+            texto = _cabeceira(self.nome_parcial, self.anonimizar, self.data, incompleto=True)
         texto += "\n" + _seccion_unica(c, c.corpo) + "\n"
         with self.ruta_parcial.open("w" if novo else "a", encoding="utf-8") as f:
             f.write(texto)
         self._parcial_iniciado = True
 
     def finalizar(self, incompleto: bool = False) -> None:
-        """Constrúe o .md único definitivo (co índice) e quita o .parcial.
-        `incompleto`: o lote parou; sen documentos gardados non hai nada que pechar."""
-        if not self.un_so_md or self.finalizado or (incompleto and not self.convertidos):
+        """Pecha o lote: o .md único definitivo (co índice) ou, anonimizando un
+        .zip, o cartafol `-md` co seu nome. `incompleto`: o lote parou."""
+        if self.finalizado:
             return
+        if self.un_so_md:
+            if incompleto and not self.convertidos:
+                return  # nada que pechar
+            self._pechar_unico(incompleto)
+        elif self.provisional and self.destino is not None:
+            self._renomear_cartafol()
+        self.finalizado = True
+
+    def _pechar_unico(self, incompleto: bool) -> None:
         resultado, paquete = self.resultado, self.paquete
-        self.fixar_nomes(None)
+        self._preparar()
+        base = self._base_definitiva()
+        ruta = self.destino / (base + (".incompleto" if incompleto else "") + self._cola_unica())
         omitidos = resultado.omitidos
         if self.anonimizar:
             omitidos = [(_nome_omitido_visible(n, self.rexistro), m) for n, m in omitidos]
@@ -728,24 +772,83 @@ class _Escritor:
                                posibles_fugas=sum(c.fugas for c in convertidos), incompleto=incompleto)
         saidas: list = []
         self.destino.mkdir(parents=True, exist_ok=True)
-        _escribir(self.ruta_unico, cabeceira, _un_so_md(convertidos, [c.corpo for c in convertidos], omitidos),
+        _escribir(ruta, cabeceira, _un_so_md(convertidos, [c.corpo for c in convertidos], omitidos),
                   self.caracteres_por_parte, saidas)
-        self.finalizado = True
         resultado.saidas.extend(saidas)
-        paquete.ruta_unico, paquete.omitidos, paquete.saidas_unico = self.ruta_unico, omitidos, list(saidas)
+        paquete.ruta_unico, paquete.omitidos, paquete.saidas_unico = ruta, omitidos, list(saidas)
         paquete.incompleto = incompleto
         for c in convertidos:
             resultado.documentos[c.orixe].saidas = paquete.saidas_unico
-        self.ruta_parcial.unlink(missing_ok=True)
+        try:
+            self.ruta_parcial.unlink(missing_ok=True)
+        except OSError:  # Windows: en uso un intre. O .md está ben; o .parcial substitúese na seguinte
+            pass
+
+    def _renomear_cartafol(self) -> None:
+        """O cartafol `-md` provisional pasa a chamarse coma sempre. Se o
+        definitivo xa existe (outra conversión), móvense dentro os ficheiros
+        (os do mesmo nome substitúense, os demais quedan). Se o sistema non
+        deixa (Windows), o que non se moveu segue no provisional: as rutas
+        do `Resultado` son sempre as reais."""
+        orixe = self.destino
+        final = self.entrada.parent / (self._base_definitiva() + ".anonimizado" + SUFIXO_CARTAFOL_ZIP)
+        movidos: dict = {}
+        try:
+            if not final.exists():
+                os.replace(orixe, final)
+                self.destino = final
+                movidos = None
+            else:
+                for ficheiro in sorted(orixe.rglob("*")):
+                    if ficheiro.is_file():
+                        novo = final / ficheiro.relative_to(orixe)
+                        novo.parent.mkdir(parents=True, exist_ok=True)
+                        os.replace(ficheiro, novo)
+                        movidos[ficheiro] = novo
+                for cartafol in sorted((d for d in orixe.rglob("*") if d.is_dir()), reverse=True):
+                    cartafol.rmdir()
+                orixe.rmdir()
+        except OSError:
+            pass
+
+        def trocar(ruta):
+            ruta = Path(ruta)
+            if movidos is None:
+                return final / ruta.relative_to(orixe) if ruta.is_relative_to(orixe) else ruta
+            return movidos.get(ruta, ruta)
+
+        resultado = self.resultado
+        resultado.saidas[:] = [str(trocar(r)) for r in resultado.saidas]
+        resultado.csv[:] = [str(trocar(r)) for r in resultado.csv]
+        for doc in resultado.documentos.values():
+            doc.saidas[:] = [str(trocar(r)) for r in doc.saidas]
+        for c in self.paquete.convertidos.values():
+            if c.ruta is not None:
+                c.ruta = trocar(c.ruta)
 
     def pechar_incompleto(self) -> None:
-        """O lote para (cancelado ou erro): péchase o .md único co que hai. Se nin
-        así se pode, queda o .parcial, que se anota en `saidas`."""
+        """O lote para (cancelado ou erro): péchase co que hai. Se nin así se
+        pode, queda o .parcial, que se anota en `saidas`."""
         try:
             self.finalizar(incompleto=True)
         except Exception:  # noqa: BLE001 -- xa hai outro erro en marcha; non o tapamos con este
-            if self.ruta_parcial is not None and self.ruta_parcial.exists():
-                self.resultado.saidas.append(str(self.ruta_parcial))
+            self.anotar_parcial()
+
+    def anotar_parcial(self) -> None:
+        if self.ruta_parcial is not None and self.ruta_parcial.exists() \
+                and str(self.ruta_parcial) not in self.resultado.saidas:
+            self.resultado.saidas.append(str(self.ruta_parcial))
+
+
+def _sen_usar(ruta_con, so_provisional: bool = True) -> Path:
+    """`ruta_con("")`, ou con `-2`, `-3`... se xa existe (dúas conversións
+    provisionais á vez no mesmo cartafol). Sen `so_provisional`, a ruta de sempre."""
+    ruta = ruta_con("")
+    contador = 2
+    while so_provisional and ruta.exists():
+        ruta = ruta_con(f"-{contador}")
+        contador += 1
+    return ruta
 
 
 def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, aforro, caracteres_por_parte,
@@ -796,7 +899,6 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
                     resultado.omitidos.append((str(doc.nome), "erro"))
                     resultado.erros[str(doc.nome)] = f"{type(e).__name__}: {e}"
                     continue
-                escritor.fixar_nomes(informe)  # un fallo aquí para o lote: afecta a todos os documentos
                 resultado.documentos[convertido.orixe] = DocumentoSaida(
                     convertido.orixe, convertido.nome_visible, informe)
                 try:
@@ -816,9 +918,14 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
                     resultado.informes[convertido.nome_visible] = informe
                 if convertido.revisado:
                     resultado.revisados.append(convertido.nome_visible)
-            escritor.finalizar()
         except BaseException as e:
             escritor.pechar_incompleto()
+            e.resultado_parcial = resultado
+            raise
+        try:
+            escritor.finalizar()
+        except BaseException as e:  # o lote rematou: non se pecha coma «incompleto»; queda o .parcial
+            escritor.anotar_parcial()
             e.resultado_parcial = resultado
             raise
         if progreso is not None:

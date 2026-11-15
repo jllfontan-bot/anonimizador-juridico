@@ -246,13 +246,15 @@ class TestUnSoMd(_Base):
         self._tres_txt()
         with self.assertRaises(_Fallo) as c:
             self._converter_vixiando(self.raiz, lambda f: None, fallar_en=2, un_so_md=True)
-        md = self._md_unico().read_text(encoding="utf-8")
+        incompleto = self.dir / "expediente.incompleto.md"
+        md = incompleto.read_text(encoding="utf-8")
         self.assertIn("conversión: incompleta\n", md)
         self.assertIn("ficheiros: 2\n", md)
         self.assertIn("1. a.txt\n2. b.txt\n", md)
         self.assertNotIn("c.txt", md)
+        self.assertFalse(self._md_unico().exists())  # o nome de sempre só o leva unha conversión completa
         self.assertFalse((self.dir / "expediente.md.parcial").exists())
-        self.assertEqual(c.exception.resultado_parcial.saidas, [str(self._md_unico())])
+        self.assertEqual(c.exception.resultado_parcial.saidas, [str(incompleto)])
 
     def test_se_o_proceso_morre_queda_so_o_parcial_e_ningun_md_definitivo(self):
         """Un kill ou un apagado: non hai ocasión de pechar. Non debe quedar
@@ -293,10 +295,53 @@ class TestUnSoMd(_Base):
         with self.assertRaises(conversor.Cancelado) as c:
             conversor.converter(str(self.raiz), un_so_md=True, progreso=lambda *a: chamadas.append(a),
                                 cancelar=lambda: len(chamadas) > 1)
-        md = self._md_unico().read_text(encoding="utf-8")
+        incompleto = self.dir / "expediente.incompleto.md"
+        md = incompleto.read_text(encoding="utf-8")
         self.assertIn("conversión: incompleta\n", md)
         self.assertIn("ficheiros: 2\n", md)
-        self.assertEqual(c.exception.resultado_parcial.saidas, [str(self._md_unico())])
+        self.assertEqual(c.exception.resultado_parcial.saidas, [str(incompleto)])
+
+    def test_cancelar_non_sobrescribe_o_md_unico_completo_doutra_conversion(self):
+        self._tres_txt()
+        _txt(self._md_unico(), "CONVERSIÓN COMPLETA ANTERIOR")
+        chamadas = []
+        with self.assertRaises(conversor.Cancelado):
+            conversor.converter(str(self.raiz), un_so_md=True, progreso=lambda *a: chamadas.append(a),
+                                cancelar=lambda: len(chamadas) > 1)
+        self.assertEqual(self._md_unico().read_text(encoding="utf-8"), "CONVERSIÓN COMPLETA ANTERIOR")
+        self.assertIn("conversión: incompleta\n",
+                      (self.dir / "expediente.incompleto.md").read_text(encoding="utf-8"))
+
+    def test_fallo_ao_escribir_o_definitivo_non_o_marca_incompleto_e_deixa_o_parcial(self):
+        self._tres_txt()
+        orixinal = conversor._escribir
+
+        def escribir(ruta, *args, **kwargs):
+            if ruta.name == "expediente.md":
+                raise OSError("disco cheo ao pechar")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(conversor, "_escribir", escribir):
+            with self.assertRaises(OSError) as c:
+                conversor.converter(str(self.raiz), un_so_md=True)
+        parcial = self.dir / "expediente.md.parcial"
+        self.assertIn("# c.txt\n", parcial.read_text(encoding="utf-8"))  # todo o convertido está aí
+        self.assertFalse((self.dir / "expediente.incompleto.md").exists())  # o lote rematou: non é «incompleto»
+        self.assertEqual(c.exception.resultado_parcial.saidas, [str(parcial)])
+
+    def test_se_non_se_pode_borrar_o_parcial_o_lote_remata_ben(self):
+        self._tres_txt()
+        orixinal = Path.unlink
+
+        def unlink(ruta, *args, **kwargs):
+            if ruta.name.endswith(".parcial"):
+                raise PermissionError("en uso polo antivirus")
+            return orixinal(ruta, *args, **kwargs)
+
+        with mock.patch.object(Path, "unlink", unlink):
+            resultado = conversor.converter(str(self.raiz), un_so_md=True)
+        self.assertEqual(resultado.saidas, [str(self._md_unico())])
+        self.assertNotIn("conversión", self._md_unico().read_text(encoding="utf-8"))
 
     def test_cancelar_sen_ningun_documento_non_escribe_nada(self):
         self._tres_txt()
@@ -341,11 +386,14 @@ class TestUnSoMdAnonimizando(_Base):
             un_so_md=True, anonimizar=True, rexistro=self.rexistro, saida=str(saida))
         parcial = vistos[1]
         self.assertEqual(len(parcial), 1)
+        # Mentres se converte, un nome neutro (o do .zip aínda non se anonimizou: ver A17 e homónimos).
+        self.assertTrue(parcial[0].startswith(conversor.NOME_PROVISIONAL), parcial)
         self.assertTrue(parcial[0].endswith(".anonimizado.zip.md.parcial"), parcial)
         self._sen_datos(parcial[0])
-        self.assertEqual(vistos[2], parcial)  # o mesmo nome, sen cambiar
+        self.assertEqual(vistos[2], parcial)  # o mesmo nome durante todo o lote
         final = Path(resultado.saidas[0])
-        self.assertEqual(final.name + ".parcial", parcial[0])
+        self.assertTrue(final.name.endswith(".anonimizado.zip.md"), final.name)
+        self.assertTrue(final.name.startswith("Expediente PERSOA_"), final.name)
         self.assertEqual(self._nomes(saida), [final.name])
         self._sen_datos(final.read_text(encoding="utf-8"))
 
@@ -410,12 +458,20 @@ class TestZips(_Base):
         resultado = self._converter_vixiando(ruta_zip, vixiar, anonimizar=True, rexistro=self.rexistro)
         self.assertEqual(vistos[0], [])
         self.assertEqual(len(vistos[1]), 1)
-        self.assertEqual(vistos[2], vistos[1])
-        self.assertEqual(vistos[3], vistos[1])
+        self.assertEqual(vistos[2], vistos[1])  # carpeta provisional fixa durante o lote
+        self.assertTrue(vistos[1][0].startswith(conversor.NOME_PROVISIONAL), vistos[1])
         self.assertTrue(vistos[1][0].endswith(".anonimizado-md"), vistos[1])
         self._sen_datos(vistos[1][0])
-        self.assertEqual({Path(s).parent.name for s in resultado.saidas}, {vistos[1][0]})
+        # Ao pechar, o nome de sempre (`nome_ficheiro_anonimizado` do .zip, despois de todo o contido).
+        self.assertEqual(len(vistos[3]), 1)
+        self.assertTrue(vistos[3][0].startswith("Expediente PERSOA_"), vistos[3])
+        self.assertTrue(vistos[3][0].endswith(".anonimizado-md"), vistos[3])
+        self._sen_datos(vistos[3][0])
+        self.assertEqual({Path(s).parent.name for s in resultado.saidas}, {vistos[3][0]})
         self.assertEqual(len(resultado.saidas), 3)
+        self.assertTrue(all(Path(s).is_file() for s in resultado.saidas))
+        self.assertTrue(all(Path(s) in [Path(x) for d in resultado.documentos.values() for x in d.saidas]
+                            for s in resultado.saidas))
 
     def test_colisions_de_nome_levan_contador_segundo_se_escriben(self):
         ruta_zip = self.dir / "caso.zip"
@@ -634,6 +690,91 @@ class TestNomeDoZipSenAlterarOContido(_Base):
         self.assertEqual(rexistro_visto, [1])
 
 
+class TestNomeProvisionalAnonimizando(_Base):
+    """O nome do .zip (cartafol `-md` ou .md único) anonimízase ao pechar, coma
+    antes da escritura incremental; mentres tanto, un nome neutro."""
+
+    _SOUTO = "Xoán Pérez Souto"
+
+    def _zip_homonimo(self) -> Path:
+        ruta_zip = self.dir / f"Expediente {self._SOUTO}.zip"
+        with zipfile.ZipFile(ruta_zip, "w") as z:
+            z.write(_docx(self.dir / "orixe" / "a.docx", "O xulgado de Lugo cita ás partes para o día dez."), "a.docx")
+            z.write(_docx(self.dir / "orixe" / "b.docx", f"Comparece don {self._SOUTO} ante o xulgado."), "b.docx")
+        return ruta_zip
+
+    def _comprobar_coma_antes(self, resultado, nome_final: str):
+        informe = resultado.informes["b.docx"]
+        self.assertEqual(len(informe["persoas"]), 1)
+        persoa = informe["persoas"][0]
+        # Coma na base: a persoa do contido é a primeira e sen aviso de homónimo...
+        self.assertFalse(persoa["marcado_para_revision"], persoa)
+        self.assertEqual(persoa["codigo"], "PERSOA_000001")
+        # ... e o nome do .zip recibe outro código despois, sen datos.
+        self.assertIn("PERSOA_000002", nome_final)
+        for dato in ("Pérez", "Souto"):
+            self.assertNotIn(dato, nome_final)
+
+    def test_persoa_do_nome_do_zip_que_aparece_no_segundo_documento_md_unico(self):
+        resultado = conversor.converter(str(self._zip_homonimo()), anonimizar=True, un_so_md=True,
+                                        rexistro=self.rexistro)
+        self._comprobar_coma_antes(resultado, Path(resultado.saidas[0]).name)
+
+    def test_persoa_do_nome_do_zip_que_aparece_no_segundo_documento_cartafol_md(self):
+        resultado = conversor.converter(str(self._zip_homonimo()), anonimizar=True, rexistro=self.rexistro)
+        self.assertEqual(len({Path(s).parent for s in resultado.saidas}), 1)
+        self._comprobar_coma_antes(resultado, Path(resultado.saidas[0]).parent.name)
+
+    def test_fallo_a_metade_tamén_renomea_a_carpeta(self):
+        ruta_zip = self._zip_homonimo()
+        with self.assertRaises(_Fallo) as c:
+            self._converter_vixiando(ruta_zip, lambda f: None, fallar_en=1, anonimizar=True, rexistro=self.rexistro)
+        saidas = c.exception.resultado_parcial.saidas
+        self.assertEqual(len(saidas), 1)
+        self.assertTrue(Path(saidas[0]).is_file())
+        self.assertFalse(Path(saidas[0]).parent.name.startswith(conversor.NOME_PROVISIONAL))
+        self.assertFalse(list(self.dir.glob(conversor.NOME_PROVISIONAL + "*")))
+
+    def test_se_o_proceso_morre_queda_a_carpeta_provisional_sen_datos(self):
+        ruta_zip = self._zip_homonimo()
+        with mock.patch.object(conversor._Escritor, "pechar_incompleto", lambda self: None):
+            with self.assertRaises(_Fallo):
+                self._converter_vixiando(ruta_zip, lambda f: None, fallar_en=1, anonimizar=True,
+                                         rexistro=self.rexistro)
+        provisionais = list(self.dir.glob(conversor.NOME_PROVISIONAL + "*-md"))
+        self.assertEqual(len(provisionais), 1)
+        self.assertEqual(len(list(provisionais[0].glob("*.md"))), 1)
+
+    def test_a_carpeta_final_xa_existe_fusionase_sen_perder_o_doutros(self):
+        ruta_zip = self._zip_homonimo()
+        primeiro = conversor.converter(str(ruta_zip), anonimizar=True, rexistro=self.rexistro)
+        final = Path(primeiro.saidas[0]).parent
+        _txt(final / "nota-propia.txt", "do usuario")
+        segundo = conversor.converter(str(ruta_zip), anonimizar=True,
+                                      rexistro=RexistroCorrespondencias(str(self.dir / "rexistro2")))
+        self.assertEqual(Path(segundo.saidas[0]).parent, final)
+        self.assertEqual((final / "nota-propia.txt").read_text(encoding="utf-8"), "do usuario")
+        self.assertEqual(len(list(final.glob("*.md"))), 2)
+        self.assertFalse(list(self.dir.glob(conversor.NOME_PROVISIONAL + "*")))
+
+    def test_revisar_despois_de_renomear_reescribe_o_md_no_sitio_final(self):
+        ruta_zip = self.dir / f"Expediente {_NOME}.zip"
+        with zipfile.ZipFile(ruta_zip, "w") as z:
+            z.write(_docx(self.dir / "orixe" / "r.docx", _RISCO), "r.docx")
+        capturas = {}
+        resultado = conversor.converter(
+            str(ruta_zip), anonimizar=True, rexistro=self.rexistro,
+            revisar=lambda nome, t, ctx, ta, inf, sub: capturas.update({nome: (ctx, ta, sub)}))
+        ruta = Path(resultado.saidas[0])
+        ctx, ta, sub = capturas["r.docx"]
+        antigas, novas = conversor.substituir_revisado(resultado, "r.docx", ta.replace("34867809", "[NÚMERO]"),
+                                                       sub, ctx)
+        self.assertEqual(novas, [str(ruta)])
+        md = ruta.read_text(encoding="utf-8")
+        self.assertNotIn("posibles_fugas", md)
+        self.assertNotIn("34867809", md)
+
+
 class TestEscrituraRobusta(_Base):
     def setUp(self):
         super().setUp()
@@ -747,6 +888,20 @@ class TestEscrituraRobusta(_Base):
         self.assertEqual(sorted(n for n, m in resultado.omitidos if m == "erro_escritura"),
                          ["b.txt", "c.txt", "e.txt", "f.txt"])
         self.assertEqual(sorted(Path(s).name for s in resultado.saidas), ["a.txt.md", "d.txt.md", "g.txt.md"])
+
+    def test_csv_aparte_non_queda_orfo_se_non_se_pode_gardar_o_md(self):
+        _txt(self.raiz / "libro.csv", "id;importe\n" + "".join(f"{i};{i * 2}\n" for i in range(600)))
+        orixinal = conversor._escribir
+
+        def escribir(ruta, *args, **kwargs):
+            raise OSError("disco cheo")
+
+        with mock.patch.object(conversor, "_escribir", escribir):
+            resultado = conversor.converter(str(self.raiz))
+        self.assertEqual(resultado.omitidos, [("libro.csv", "erro_escritura")])
+        self.assertEqual(resultado.csv, [])
+        self.assertEqual(self._nomes(self.raiz), ["libro.csv"])
+        self.assertTrue(orixinal)
 
 
 if __name__ == "__main__":
