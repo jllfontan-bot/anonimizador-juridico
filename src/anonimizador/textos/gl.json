@@ -271,6 +271,7 @@
  "web.traballo_fallou": "O traballo non se puido completar: {erro}",
  "web.ficheiro_danado": "o ficheiro está estragado ou non é do tipo que indica a súa extensión",
  "inicio.migracion.texto": "Copiouse a <code>Documentos\\Anonimizador</code> o rexistro cifrado da versión anterior do programa (<code>{ruta}</code>, que queda intacto). Usa de agora en diante só esta versión: se segues anonimizando tamén coa anterior, os dous rexistros deixarán de coincidir. Cando comprobes que todo está ben, desinstala a versión anterior.",
+ "inicio.rexistro_antigo.texto": "Hai <strong>dous rexistros cifrados distintos</strong>: o que se usa, en <code>Documentos\\Anonimizador</code>, e outro antigo en <code>{ruta}</code> que NON se está a usar (non se fusiona nin se borra). Se ese rexistro antigo tiña persoas que che interesan, non traballes con documentos novos ata revisalo: os códigos de persoa poden non coincidir. Este aviso non volve mentres o antigo non cambie.",
  "inicio.migracion.entendido": "Entendido",
  "inicio.manual": "Manual de uso (PDF)",
  "inicio.acerca": "Acerca deste programa",

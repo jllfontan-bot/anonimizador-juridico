@@ -281,6 +281,15 @@ def _aviso_migracion() -> str | None:
         return None
 
 
+def _aviso_rexistro_antigo() -> str | None:
+    """Ruta do rexistro antigo DISTINTO que non se usa (ver `arranque_windows`)."""
+    from .arranque_windows import AVISO_REXISTRO_ANTIGO
+    try:
+        return Path(AVISO_REXISTRO_ANTIGO).read_text(encoding="utf-8").splitlines()[0].strip() or None
+    except (OSError, IndexError):
+        return None
+
+
 def _abrir_fora(destino: str) -> None:
     """Abre unha ligazón ou un ficheiro co programa do sistema (navegador,
     visor de PDF), fóra da xanela do programa."""
@@ -303,6 +312,7 @@ def _render_index(**kwargs):
     kwargs.setdefault("clave", _estado_da_clave(rexistro_dir))
     kwargs.setdefault("aviso_modelo", ner.aviso_compatibilidade_modelo())
     kwargs.setdefault("aviso_migracion", _aviso_migracion())
+    kwargs.setdefault("aviso_rexistro_antigo", _aviso_rexistro_antigo())
     kwargs.setdefault("hai_manual", _manual_de_uso() is not None)
     kwargs.setdefault("copia_md", bool(idioma.ler_preferencia("copia_md")))
     return render_template("index.html", **kwargs)
@@ -361,6 +371,21 @@ def cambiar_idioma():
 def pechar_aviso_migracion():
     from .arranque_windows import AVISO_MIGRACION
     Path(AVISO_MIGRACION).unlink(missing_ok=True)
+    return redirect(url_for("index"))
+
+
+@app.route("/aviso-rexistro-antigo/pechar", methods=["POST"])
+def pechar_aviso_rexistro_antigo():
+    """Pecha o aviso e lembra a pegada vista (non volve ata que o antigo cambie)."""
+    from .arranque_windows import AVISO_REXISTRO_ANTIGO, AVISO_REXISTRO_ANTIGO_VISTO
+    aviso = Path(AVISO_REXISTRO_ANTIGO)
+    try:
+        liñas = aviso.read_text(encoding="utf-8").splitlines()
+        if len(liñas) > 1:
+            Path(AVISO_REXISTRO_ANTIGO_VISTO).write_text(liñas[1], encoding="utf-8")
+    except OSError:
+        pass
+    aviso.unlink(missing_ok=True)
     return redirect(url_for("index"))
 
 

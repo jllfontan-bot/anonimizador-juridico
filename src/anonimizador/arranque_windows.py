@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import os
 import shutil
+import hashlib
 import sys
 from pathlib import Path
 
@@ -32,6 +33,10 @@ NOME_CARTAFOL = "Anonimizador"
 # Ficheiro que deixa a copia do rexistro antigo; a pantalla de inicio amósao
 # ata que o usuario o pecha. Leva dentro a ruta da que se copiou.
 AVISO_MIGRACION = "aviso-rexistro-copiado.txt"
+# Aviso (nunca fusión) cando existen DOUS rexistros distintos: o de Documentos (o que se usa) e o antigo
+# de %LOCALAPPDATA%. Dúas liñas: ruta do antigo e a súa pegada; o `visto` garda a pegada xa avisada.
+AVISO_REXISTRO_ANTIGO = "aviso-rexistro-antigo-sen-usar.txt"
+AVISO_REXISTRO_ANTIGO_VISTO = "aviso-rexistro-antigo-visto.txt"
 _COPIAR = ("datos_rexistro", "preferencias.json")
 
 
@@ -88,6 +93,37 @@ def copiar_rexistro_antigo(datos: Path, antigo: Path) -> bool:
     return True
 
 
+def pegada_rexistro(carpeta: Path) -> str:
+    """Pegada do contido dun cartafol de rexistro (nomes e bytes)."""
+    h = hashlib.sha256()
+    for f in sorted(p for p in carpeta.rglob("*") if p.is_file()):
+        h.update(str(f.relative_to(carpeta)).encode("utf-8"))
+        h.update(f.read_bytes())
+    return h.hexdigest()
+
+
+def avisar_se_rexistro_antigo_difire(datos: Path, antigo: Path) -> bool:
+    """Se hai rexistro en `datos` E un antigo DISTINTO que non se usa, deixa un
+    aviso visible (nunca fusiona nin toca ningún dos dous). Non repite o aviso
+    para unha pegada xa vista. Devolve `True` se deixou o aviso."""
+    novo, vello = datos / "datos_rexistro", antigo / "datos_rexistro"
+    aviso = datos / AVISO_REXISTRO_ANTIGO
+    if not novo.is_dir() or not vello.is_dir():
+        aviso.unlink(missing_ok=True)
+        return False
+    pegada = pegada_rexistro(vello)
+    if pegada == pegada_rexistro(novo):
+        aviso.unlink(missing_ok=True)
+        return False
+    try:
+        if (datos / AVISO_REXISTRO_ANTIGO_VISTO).read_text(encoding="utf-8").strip() == pegada:
+            return False
+    except OSError:
+        pass
+    aviso.write_text(f"{vello}\n{pegada}", encoding="utf-8")
+    return True
+
+
 def main() -> None:
     raiz = raiz_instalacion()
     preparar_entorno(raiz)
@@ -97,6 +133,7 @@ def main() -> None:
     if local:
         try:
             copiar_rexistro_antigo(datos, Path(local) / NOME_CARTAFOL)
+            avisar_se_rexistro_antigo_difire(datos, Path(local) / NOME_CARTAFOL)
         except OSError as e:
             print(f"Non se puido copiar o rexistro da versión anterior: {e!r}")
     # ANTES de importar `desktop`: ao importarse abre o log no cartafol de traballo
