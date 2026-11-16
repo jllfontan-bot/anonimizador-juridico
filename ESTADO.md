@@ -354,3 +354,9 @@ Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesserac
 - Decisión do usuario (16/11/2026): déixase para a seguinte versión; non se toca código agora.
 - Que falta: a copia `.md` do Anonimizador (`copia_md.escribir`, `markdown_ia.copia_do_anonimizador`) non leva cabeceira nin a liña `posibles_fugas: N`; o aviso só sae na páxina de resultado (`n_risco_alto` en `web.py`). O Reductor si a leva (`conversor._cabeceira`, `_liña_fugas`).
 - Proposta: engadir só a liña `posibles_fugas: N` (cando N > 0) á copia, co mesmo texto do Reductor; non cambia a detección. Ir co resto de cambios da 1.1.3, sen versión propia.
+
+## DECISIÓN (16/11/2026): publicar xa e deixar a Fase B para unha nova versión
+- O usuario decide publicar xa: Anonimizador 1.1.2 e Reductor 1.2.0 (MSIX das etiquetas `msix-v1.1.2` e `msix-conversor-v1.2.0`, en `~/Documents/anonimizador-xuridico/msix-20261116/*/store/`; os sobe o usuario ao Partner Center).
+- A **Fase B** (repo `jllfontan-bot/reductor-de-tokens` con historial limpo e rexistro cifrado propio; ~5-6 h, brief en `~/Documents/anonimizador-xuridico/FASE-B-brief.md`) vai nunha versión posterior. Ata entón o Reductor 1.2.0 comparte repositorio e rexistro co Anonimizador (o usuario aceptouno ao decidir publicar).
+- Os MSIX NON levan os commits posteriores a `6a09af6` (lanzador clásico, aviso de dous rexistros, nota ESTADO): isto só afecta ao `.exe` clásico e á seguinte versión.
+- Para a seguinte versión: Fase B; anonimizar xlsx/pptx/html/eml; `posibles_fugas` na copia `.md` do Anonimizador; modo revisión manual con zips; peche de xanela a metade de lote.
