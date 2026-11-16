@@ -195,41 +195,41 @@ OK (1 omitido). `tests/test_escritura_incremental.py`: 52 tests.
   cada documento dunha carpeta anonimiza o seu cartafol cos seus códigos (xa era así). Manual e fichas non din aínda
   «cada .md gárdase ao converterse».
 
-## Progreso e rendemento da fase final (rama `progreso-fase-final`, 15/11/2026)
+## Progreso e rendemento da fase final (rama `progreso-fase-final`, 15-16/11/2026)
 
-Caso real (Windows, 4 núcleos): PDF de 351 páxinas anonimizado, uns 4-5 min despois de que o contador de
-páxinas chegase ao final, sen indicador, cun núcleo ao 100 % e ~766 MB; planos de 22 páxinas, moi lentos.
+Caso real (Windows, 4 núcleos): PDF de 351 páxinas anonimizado, ~11 min (4-5 min despois do contador de páxinas, sen
+indicador); perfil real do usuario (847 s con perfilador): copia_md/`find_tables` 32 %, lectura e OCR 37 %, NER 26 %.
 
-Feito:
-- Indicador (`etapas.py`, `conversor.converter(progreso_etapa=...)`): despois das páxinas, a pantalla (es/gl) e a CLI
-  (saída de erros) din a etapa: detectar (co avance por anacos do NER), axustar, agrupar (co avance por mención),
-  codigos, riscos, markdown, gardar. Como moito un aviso por cada 1 %; un aviso que falla non para nada. O motor só
-  chama a `etapas.etapa` (sen aviso non fai nada). Saídas de referencia byte a byte idénticas (Reductor e Anonimizador).
-- `resolution._emparellar` (commit separado e revertible): a distancia mírase antes de buscar un ANEXO entre
-  persoa e DNI; mesmo resultado (test de equivalencia coa versión anterior, 3.000 casos e bordos; saídas de
-  referencia idénticas nos dous programas, mesmos códigos de persoa). Beneficia aos dous programas.
+Feito (un commit por cambio; cada optimización con test de equivalencia coa versión anterior e saídas de referencia
+byte a byte idénticas no Anonimizador, incluída a súa copia .md, e no Reductor; mesmos códigos de persoa):
+- Indicador (`etapas.py`, `converter(progreso_etapa=...)`): pantalla (es/gl) e CLI (stderr) din a etapa despois das
+  páxinas: detectar (avance por anacos), axustar, agrupar (avance por mención), codigos, riscos, markdown, gardar.
+- `resolution._emparellar`: distancia antes da busca do ANEXO (era cúbico).
+- `copia_md`: non chama a `find_tables` en páxinas sen `get_drawings()` (coa estratexia «lines» non pode haber
+  táboa); só con PyMuPDF 1.26/1.28 (lido o código; os paquetes levan 1.26.0) e sen `pymupdf.layout`.
+- `ner._detectar`: `doc.text`/`doc.ents` unha vez por doc (spaCy reconstrúeos en cada acceso; era cuadrático).
+- CLI (`consola.saida_utf8`, en `cli_conversor` e `cli`): stdout/stderr en UTF-8 con `errors=replace` (en Windows, con
+  saída redirixida en cp1252, «⚠» facía saír cun erro despois de escribir o .md).
 
-Medicións (Mac, PDF sintético con texto inventado, modo anonimizado, s; sen anonimizar todo é lineal: 350 páxinas
-= 28 s de lectura + 3 s despois):
+Medicións (Mac, PDF sintéticos con texto inventado, anonimizando, s):
 
-| páxinas | lectura | NER (`ner.detectar`) | `resolution.agrupar` antes → agora | mosaico | copia_md | total antes → agora |
-|---|---|---|---|---|---|---|
-| 50  | 4 | 37  | ~51 → 0,08  | 5  | 3 | 104 → 50 |
-| 100 | 8 | 102 | ~416 → 0,26 | 11 | 6 | 557 → 129 |
+| documento | NER | `resolution.agrupar` | copia_md | total: inicio → agora |
+|---|---|---|---|---|
+| escrito 50 páx.  | 37 → 7    | ~51 → 0,1  | 3 → 0,03 | 104 → 17 |
+| escrito 100 páx. | 102 → 16  | ~416 → 0,3 | 6 → 0,05 | 557 → 35 |
+| táboas 100 páx. (filetes e táboas) | 104 → 14 | 0,8 | 4,3 → 2,4 | 123 → 32 |
 
-- Superlineal e SEN tocar (motor de detección, risco de fugas): `ner._detectar` (~cuadrático: 37 s → 102 s ao dobrar
-  as páxinas), sobre todo `_estender_entidade_persoa` (`doc.char_span` por entidade) e `_estender_cara_atras`
-  (`texto[:inicio].rstrip()` e percorrer `doc.ents` por cada palabra). Mellora futura, con test de equivalencia
-  coma o de `_emparellar`: unha estimación de 350 páxinas densas en persoas é de ~20 min só de NER.
-- Planos: sen texto vectorizado, o tamaño de folla non importa (A1 = A4). Con rótulos vectorizados entra o OCR das
-  zonas de trazos densos a 300 ppp e crece coa área: A4 2,5 s/páx. e ~315 MB, A1 8,6 s/páx. e ~1 GB de memoria. Iso vai
-  na lectura (o contador de páxinas avanza), non na fase final. Un tope de ppp ou de píxeles cambiaría o texto
-  recoñecido: non se puxo (validalo antes con planos reais). Con moitas cotas curtas, a fase final é ~1 s/páx.
-  (NER, mosaico, e `find_tables` de copia_md, o dobre en A1).
-- Paralelizar o OCR por páxinas (pool de procesos): non se fixo; o OCR non é o que pesa na fase final e en Windows
-  (spawn, pythonw, MSIX) o risco é alto. Proposta só se as medicións en Windows o xustifican.
-- Sen probar en Windows nin na xanela real: o indicador e os tempos son do Mac.
-- Tests: `tests/test_progreso_etapas.py`, `tests/test_resolucion_emparellar.py`; suite completa: 1254 tests OK (1 omitido).
+- Sen tocar (só documentado): o OCR (Tesseract, proceso aparte) e a lectura de PyMuPDF; `find_tables` de
+  `taboas_pdf` na lectura (camiño de detección; só nas páxinas con pista de cabeceira); `mosaic.analizar` (~linear,
+  7-11 s/100 páx.); spaCy (linear).
+- Planos: sen texto vectorizado, A1 = A4. Con rótulos vectorizados, o OCR das zonas de trazos densos a 300 ppp crece
+  coa área (A4 2,5 s/páx. e ~315 MB; A1 8,6 s/páx. e ~1 GB); vai na lectura. Un tope de ppp cambiaría o texto lido: non se
+  puxo. Paralelizar o OCR (pool de procesos): non; risco alto en Windows (spawn, pythonw, MSIX) e non é o que pesa despois.
+- Sen probar en Windows nin na xanela real: tempos do Mac; no PDF real o aforro de copia_md depende de cantas páxinas
+  non teñen ningún debuxo (filetes e logotipos vectoriais contan coma debuxo).
+- Tests novos: `test_progreso_etapas`, `test_resolucion_emparellar`, `test_copia_md_sen_debuxos`, `test_ner_texto_do_doc`,
+  `test_consola`. Suite completa (16/11/2026): 1264 tests OK (1 omitido), en 6 min (antes ~24 min: a propia suite
+  vaise máis rápida co NER).
 
 ## Ramas vivas
 
