@@ -349,3 +349,8 @@ Pendente en Windows: reprobar co código integrado (copia en prueba-prog xa leva
 Coinciden os avisos (total 5), os códigos e o corpo. **Diferenza: o `.md` da copia do Anonimizador NON leva cabeceira** (nin `posibles_fugas`, nin `paginas`, nin `anonimizado`): 144 bytes menos en 4 de 5 docs (e 125 no doc02); `copia_md.xerar` só devolve o corpo e a cabeceira (`conversor._cabeceira`) escríbena só o Reductor.
 O aviso de fugas do Anonimizador vive só na páxina de resultado (`n_risco_alto`), así que quen lea o `.md` solto non o ve. Non é un fallo de detección; si unha laguna de deseño: se se quere paridade, engadir cabeceira ou liña `posibles_fugas` á copia (decide o usuario; non tocado).
 Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesseract (`TesseractNonInstalado`) se non se fixan `PATH` e `TESSDATA_PREFIX`; o lanzador real xa o fai. Tempos: Reductor 28 s, Anonimizador 45 s.
+
+## Para a seguinte versión (1.1.3): `posibles_fugas` na copia `.md` do Anonimizador
+- Decisión do usuario (16/11/2026): déixase para a seguinte versión; non se toca código agora.
+- Que falta: a copia `.md` do Anonimizador (`copia_md.escribir`, `markdown_ia.copia_do_anonimizador`) non leva cabeceira nin a liña `posibles_fugas: N`; o aviso só sae na páxina de resultado (`n_risco_alto` en `web.py`). O Reductor si a leva (`conversor._cabeceira`, `_liña_fugas`).
+- Proposta: engadir só a liña `posibles_fugas: N` (cando N > 0) á copia, co mesmo texto do Reductor; non cambia a detección. Ir co resto de cambios da 1.1.3, sen versión propia.
