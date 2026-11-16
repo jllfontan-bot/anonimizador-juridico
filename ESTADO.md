@@ -370,3 +370,8 @@ Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesserac
 - Submission 5 (9PK1J429MNN5): paquete `Anonimizador-juridico-1.1.2.0-x64.msix` (o 1.1.1.0 quitado do borrador), novidades 1.1.2 en es-ES e gl-ES, enviado polo usuario; estado «In certification / Pre-processing». Aviso `runFullTrust` (restricted capability), sen erro.
 - A Store segue a servir o Submission 4 (31/10/2026) ata pasar a certificación (horas a 3 días hábiles).
 - Pendente: Reductor 1.2.0 (9NMM4DRL6FCC, `Conversor-archivos-IA-1.2.0.0-x64.msix`) e, cando se publiquen, a data para Joinup.
+
+## Store: Reductor 1.2.0 en borrador e Anonimizador 1.1.2 reaberto (16/11/2026, noite)
+- Reductor (9NMM4DRL6FCC), envío 3 en borrador: MSIX 1.2.0.0 validado (1.1.0.0 quitado), novidades 1.2.0 e as 7 capturas novas en es e gl (comprobadas por hash contra `store-reductor-1.2.0/capturas`), pés de foto conservados. Palabras clave do es-ES baleiras (non tocado; revisar). Aínda NON enviado a certificación: decide o usuario.
+- Anonimizador (9PK1J429MNN5): a certificación do envío 5 cancelouse co OK do usuario (estaba en «Certification»). Motivo: a ficha da Store tiña a captura 01 vella (sen a copia .md) e as capturas 2-6 do es-ES eran as de galego. Substituídas as 6 de es-ES e as 6 de gl-ES polas de `store-anonimizador-1.1.2/capturas` (comprobadas por hash) e escritos os pés (es e gl) porque se perderon ao substituír. Envío 5 en borrador e gardado; hai que reenviar a certificación (usuario).
+- Pendente: o usuario envía os dous a certificación; despois, data de publicación para Joinup e merge a `main`.
