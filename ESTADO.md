@@ -365,3 +365,8 @@ Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesserac
 - Rama `motor-md-unico` subida a `origin` (sen merge a `main`; `main` e etiquetas `msix-*` seguen en 6a09af6). Recomendado: merge a `main` ao pechar a actualización de Joinup ou ao preparar a 1.1.3.
 - Joinup: as tres solucións (Reductor, Anonimizador, conector BOE) están validadas dende o 03/11/2026; hai que ACTUALIZAR as dúas primeiras. Sesión «Proyectos validados en portal» (local_6bccb267-50d0-47c7-bd2f-3e43572d50f9) ten os datos (versións 1.1.2/1.2.0, repo, fichas en `docs/store/`, capturas, licenza dobre EUPL-1.2 OU AGPL-3.0); amosará cada cambio ao usuario antes de gardar. Falta a data de publicación na Store e, se Joinup o pide, texto en inglés.
 - Pendente: subir MSIX ao Partner Center (usuario), Fase B, mellora 1.1.3 (`posibles_fugas` na copia `.md`), limpeza do portátil (só rastros propios, con permiso).
+
+## Store: Anonimizador 1.1.2 enviado a certificación (16/11/2026, tarde)
+- Submission 5 (9PK1J429MNN5): paquete `Anonimizador-juridico-1.1.2.0-x64.msix` (o 1.1.1.0 quitado do borrador), novidades 1.1.2 en es-ES e gl-ES, enviado polo usuario; estado «In certification / Pre-processing». Aviso `runFullTrust` (restricted capability), sen erro.
+- A Store segue a servir o Submission 4 (31/10/2026) ata pasar a certificación (horas a 3 días hábiles).
+- Pendente: Reductor 1.2.0 (9NMM4DRL6FCC, `Conversor-archivos-IA-1.2.0.0-x64.msix`) e, cando se publiquen, a data para Joinup.
