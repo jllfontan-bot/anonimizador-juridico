@@ -25,6 +25,9 @@ import sys
 from pathlib import Path
 
 PORTO = 5050
+# INVARIANTE (16/11/2026): o rexistro cifrado vive en Documentos\Anonimizador\datos_rexistro
+# na Store E no instalador clásico, e ningunha actualización nin desinstalación o move ou borra.
+# Cambialo fai que as persoas reciban códigos distintos (ver tests/test_rexistro_ubicacion_estable.py).
 NOME_CARTAFOL = "Anonimizador"
 # Ficheiro que deixa a copia do rexistro antigo; a pantalla de inicio amósao
 # ata que o usuario o pecha. Leva dentro a ruta da que se copiou.

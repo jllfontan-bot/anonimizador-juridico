@@ -268,6 +268,14 @@ Medicións (Mac, PDF sintéticos con texto inventado, anonimizando, s):
 O historial de decisións e medicións de 09–10/2026 e os datos reais viven nun repositorio privado
 (non público). Para consultalo, contactar co titular.
 
+## INVARIANTE: onde vive o rexistro cifrado (fixado o 16/11/2026) — MOI IMPORTANTE
+O rexistro de correspondencias (código ↔ nome real) vive **sempre** en `Documentos\Anonimizador\datos_rexistro`, na Store e no instalador clásico (o lanzador clásico usa agora
+`anonimizador.arranque_windows`, a mesma entrada ca a Store). As actualizacións e desinstalacións **non o moven nin o borran**: o desinstalador clásico non toca Documentos e só pregunta polos datos
+ANTIGOS de `%LOCALAPPDATA%\Anonimizador`; a Store non borra Documentos. Se o rexistro cambia de sitio, as persoas reciben códigos distintos e non se pode reverter nin manter a coherencia.
+Protexido por `tests/test_rexistro_ubicacion_estable.py` (nome do cartafol, lanzador clásico, entrada MSIX, desinstalador) e un comentario en `arranque_windows.py`.
+Se algún día cambia (fase B: rexistro propio do Reductor) fágase con migración que COPIE (nunca mova) e aviso, e cámbiense eses tests deliberadamente no mesmo commit. Caso real que o motivou: o `.exe` clásico
+traballaba en `%LOCALAPPDATA%\Anonimizador` (rexistro distinto, `PERSONA_000001` de novo) mentres a Store usaba Documentos.
+
 ## Regra de ouro
 
 Non engadir nunca ao repositorio datos reais (nomes, DNI, expedientes). Ver `docs/estudios/` e `medicion/README.md`.
