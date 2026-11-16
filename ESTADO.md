@@ -273,3 +273,9 @@ Feitas polo usuario co meu apoio por SSH (só lectura e copia de ficheiros compr
 ## Suite sobre o resultado integrado (15/11/2026, noite)
 `motor-md-unico` fda1f53 (escritura incremental + `.zip` dentro de cartafoles + textos da valoración xurídica): **1277 tests, OK (skipped=1)**, 24 min.
 Probado en Windows: ver «Probas en Windows» (AN6: `.zip` en cartafol 5/5; RT8/RT9 escritura incremental). `progreso-fase-final` (a944329) NON integrada.
+
+## Perfil real del doc de 351 páxinas en Windows (16/11/2026, cProfile, anonimizando, prueba-prog = progreso-fase-final a944329)
+859 s con profiler (734 s sen el). Reparto acumulado: **copia_md (crear o .md) ~278 s (32 %)**, case todo `pymupdf find_tables` (351 páxinas, 0,77 s/páx); lectura de páxinas ~315 s (37 %) con OCR Tesseract 146 s (384 chamadas);
+**NER `_detectar` 227 s (26 %)**, 84,6 s de tempo propio + spaCy 60 s. `resolution._emparellar` xa non pesa. Pedido á sesión de rendemento (Opus): propoñer arranxos SÓ se son seguros (saída idéntica byte a byte,
+sen cambiar detección): reutilizar/saltar `find_tables`, o bucle propio de `ner._detectar`; o demais documentar. Fallo atopado: a CLI do Reductor rebenta en consolas cp1252 de Windows ao imprimir «⚠» (`cli_conversor.py:123`,
+despois de escribir o .md); arranxo pedido (stdout/stderr a utf-8 con errors=replace) con test. Non integrado nada.
