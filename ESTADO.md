@@ -331,3 +331,8 @@ O hash SHA-256 difire só por esa data. Probado só neste documento; a suite do 
 ## Suite sobre motor-md-unico con progreso-fase-final integrado (16/11/2026)
 `motor-md-unico` 442b29c (escritura incremental + `.zip` en cartafoles + progreso-fase-final): **1302 tests, OK (skipped=1)**, 6 min. Conflicto resolto en `cli.py` (imports: `consola, copia_md, idioma` + `ZipRexeitado, gardar_zip_preparado, preparar_zip`).
 Pendente en Windows: reprobar co código integrado (copia en prueba-prog xa leva progreso a44329+4 commits; prueba-zip leva a rama .zip). Fase B e decisións do usuario seguen abertas (ver RETOMA-20261115.md).
+
+## Probas do .exe clásico co aviso (16/11/2026, tarde)
+- Suite completa tras o aviso de dous rexistros: **1315 OK** (1 omitida). `.exe` reconstruído (`Anonimizador-Xuridico-Instalador-20261116-de262bb.exe`, sha256 e1ea7125…da83d), copiado ao portátil con hash igual e instalado en silencio.
+- No portátil: o lanzador usa `anonimizador.arranque_windows`; a pantalla inicial mostra o aviso «dous rexistros cifrados distintos» (hai un rexistro de proba en `%LOCALAPPDATA%\Anonimizador`) e crea o ficheiro de aviso en Documentos. Captura para o manual: `~/Documents/anonimizador-xuridico/capturas-manual/`.
+- Pendente: comparar os `posibles_fugas` do Reductor co Anonimizador (copia a `.md`) sobre os mesmos documentos (petición do usuario; só se comparaban tamaños e códigos).
