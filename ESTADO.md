@@ -360,3 +360,8 @@ Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesserac
 - A **Fase B** (repo `jllfontan-bot/reductor-de-tokens` con historial limpo e rexistro cifrado propio; ~5-6 h, brief en `~/Documents/anonimizador-xuridico/FASE-B-brief.md`) vai nunha versión posterior. Ata entón o Reductor 1.2.0 comparte repositorio e rexistro co Anonimizador (o usuario aceptouno ao decidir publicar).
 - Os MSIX NON levan os commits posteriores a `6a09af6` (lanzador clásico, aviso de dous rexistros, nota ESTADO): isto só afecta ao `.exe` clásico e á seguinte versión.
 - Para a seguinte versión: Fase B; anonimizar xlsx/pptx/html/eml; `posibles_fugas` na copia `.md` do Anonimizador; modo revisión manual con zips; peche de xanela a metade de lote.
+
+## Cierre da sesión (16/11/2026, tarde)
+- Rama `motor-md-unico` subida a `origin` (sen merge a `main`; `main` e etiquetas `msix-*` seguen en 6a09af6). Recomendado: merge a `main` ao pechar a actualización de Joinup ou ao preparar a 1.1.3.
+- Joinup: as tres solucións (Reductor, Anonimizador, conector BOE) están validadas dende o 03/11/2026; hai que ACTUALIZAR as dúas primeiras. Sesión «Proyectos validados en portal» (local_6bccb267-50d0-47c7-bd2f-3e43572d50f9) ten os datos (versións 1.1.2/1.2.0, repo, fichas en `docs/store/`, capturas, licenza dobre EUPL-1.2 OU AGPL-3.0); amosará cada cambio ao usuario antes de gardar. Falta a data de publicación na Store e, se Joinup o pide, texto en inglés.
+- Pendente: subir MSIX ao Partner Center (usuario), Fase B, mellora 1.1.3 (`posibles_fugas` na copia `.md`), limpeza do portátil (só rastros propios, con permiso).
