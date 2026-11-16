@@ -10,7 +10,7 @@ import getpass
 import json
 from pathlib import Path
 
-from . import copia_md
+from . import consola, copia_md
 from .pipeline import anonimizar_e_gardar, anonimizar_zip, ruta_saida_por_defecto
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
@@ -21,6 +21,7 @@ _DESCRICION_ORIXE_CLAVE = {
 
 
 def main():
+    consola.saida_utf8()  # Windows: a saída redirixida usa cp1252 e non todo cabe nela
     parser = argparse.ArgumentParser(prog="anonimizador")
     sub = parser.add_subparsers(dest="comando", required=True)
 

@@ -17,7 +17,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import aforro_ia, conversor, idioma
+from . import aforro_ia, consola, conversor, idioma
 
 
 class _ProgresoCli:
@@ -62,6 +62,7 @@ class _ProgresoCli:
 
 
 def main(argv: list | None = None) -> int:
+    consola.saida_utf8()  # Windows: «⚠» e outros non caben en cp1252 coa saída redirixida
     t = idioma.t
     parser = argparse.ArgumentParser(prog="conversor", description=t("conversor.cli.descricion"))
     parser.add_argument("entrada", help=t("conversor.cli.axuda_entrada"))
