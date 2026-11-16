@@ -279,3 +279,7 @@ Probado en Windows: ver «Probas en Windows» (AN6: `.zip` en cartafol 5/5; RT8/
 **NER `_detectar` 227 s (26 %)**, 84,6 s de tempo propio + spaCy 60 s. `resolution._emparellar` xa non pesa. Pedido á sesión de rendemento (Opus): propoñer arranxos SÓ se son seguros (saída idéntica byte a byte,
 sen cambiar detección): reutilizar/saltar `find_tables`, o bucle propio de `ner._detectar`; o demais documentar. Fallo atopado: a CLI do Reductor rebenta en consolas cp1252 de Windows ao imprimir «⚠» (`cli_conversor.py:123`,
 despois de escribir o .md); arranxo pedido (stdout/stderr a utf-8 con errors=replace) con test. Non integrado nada.
+
+## Medición final de `progreso-fase-final` (ac49dc9) co doc real de 351 páxinas en Windows (16/11/2026)
+Anonimizando, mesmo PDF e mesma máquina: **483 s** (antes 738 s: −35 %). `.md` de 22960 liñas **idéntico ao anterior agás a data da cabeceira** (liña 7, `convertido: 2026-11-15` → `2026-11-16`); 121 persoas (48 marcadas), igual.
+O hash SHA-256 difire só por esa data. Probado só neste documento; a suite do Mac (1264 OK) e os tests de equivalencia da rama cubren o resto. Rama NON integrada (decide o usuario).
