@@ -375,3 +375,8 @@ Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesserac
 - Reductor (9NMM4DRL6FCC), envío 3 en borrador: MSIX 1.2.0.0 validado (1.1.0.0 quitado), novidades 1.2.0 e as 7 capturas novas en es e gl (comprobadas por hash contra `store-reductor-1.2.0/capturas`), pés de foto conservados. Palabras clave do es-ES baleiras (non tocado; revisar). Aínda NON enviado a certificación: decide o usuario.
 - Anonimizador (9PK1J429MNN5): a certificación do envío 5 cancelouse co OK do usuario (estaba en «Certification»). Motivo: a ficha da Store tiña a captura 01 vella (sen a copia .md) e as capturas 2-6 do es-ES eran as de galego. Substituídas as 6 de es-ES e as 6 de gl-ES polas de `store-anonimizador-1.1.2/capturas` (comprobadas por hash) e escritos os pés (es e gl) porque se perderon ao substituír. Envío 5 en borrador e gardado; hai que reenviar a certificación (usuario).
 - Pendente: o usuario envía os dous a certificación; despois, data de publicación para Joinup e merge a `main`.
+
+## Store: ambos enviados a certificación (16/11/2026, noite)
+- Anonimizador 1.1.2 (9PK1J429MNN5), envío 5 reenviado con capturas e pés corrixidos: «In certification / Pre-processing». Reductor 1.2.0 (9NMM4DRL6FCC), envío 3: «In certification» (enviado polo usuario antes).
+- A Store segue a servir os envíos anteriores (4 e 2) ata pasar a certificación (horas a 3 días hábiles).
+- Pendente: cando se publiquen, pasar a data a Joinup (sesión «Proyectos validados en portal») e merge a `main`; palabras clave do es-ES do Reductor baleiras (revisar na seguinte versión).
