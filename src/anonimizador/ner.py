@@ -874,7 +874,7 @@ _PARTICULAS_APELIDO = _CONECTORES_NOME | {"der", "den", "di", "du", "le", "ten",
 _MINUSCULAS_INICIAIS_RE = re.compile(r"(?:[a-záéíóúñü][\wáéíóúñü'’-]*[ \t]+)+")
 
 
-def _estender_entidade_persoa(ent):
+def _estender_entidade_persoa(ent, texto_doc: str | None = None):
     """Caso oposto ao de `_recortar_entidade_persoa`: o modelo ás veces
     corta unha entidade PER DEMASIADO curta, deixando fóra apelidos que
     veñen despois (ex. detecta só "Leandro" en "Leandro del Valle Resua",
@@ -884,7 +884,8 @@ def _estender_entidade_persoa(ent):
     encaixa nese padrón (non ten maiúscula inicial nin é unha inicial
     solta precedida de conector)."""
     doc = ent.doc
-    match = _CONTINUACION_NOME_PERSOA.match(doc.text, ent.end_char)
+    # `texto_doc`: `doc.text` xa calculado (spaCy reconstrúeo enteiro en cada acceso).
+    match = _CONTINUACION_NOME_PERSOA.match(doc.text if texto_doc is None else texto_doc, ent.end_char)
     if not match:
         return ent
     span = doc.char_span(ent.start_char, match.end(), alignment_mode="expand")
@@ -1364,14 +1365,17 @@ _POS_NON_NOME = {"VERB", "AUX", "ADP", "DET", "PRON", "CCONJ", "SCONJ", "NUM", "
 _MAX_PALABRAS_CARA_ATRAS = 2
 
 
-def _estender_cara_atras(doc, inicio: int) -> int:
+def _estender_cara_atras(doc, inicio: int, texto: str | None = None, ents: tuple | None = None) -> int:
     """Caso oposto a `_estender_entidade_persoa`: spaCy deixa ás veces o
     PRIMEIRO nome de pía fóra da entidade ("Xosé" en "Xosé Manuel Carballo
     Portela", ou etiquetado á parte coma LOC). Estende cara atrás sobre
     ata `_MAX_PALABRAS_CARA_ATRAS` palabras capitalizadas contiguas (só
     espazo/tabulador polo medio, nunca salto de liña nin puntuación) que
-    non sexan palabras funcionais, de prosa coñecida, cargos nin verbos."""
-    texto = doc.text
+    non sexan palabras funcionais, de prosa coñecida, cargos nin verbos.
+    `texto` e `ents`: `doc.text` e `doc.ents` xa calculados (spaCy reconstrúe
+    os dous en cada acceso: chamalos aquí por cada entidade era cuadrático)."""
+    texto = doc.text if texto is None else texto
+    ents = doc.ents if ents is None else ents
     for _ in range(_MAX_PALABRAS_CARA_ATRAS):
         m = _PALABRA_ANTERIOR_RE.search(texto, max(0, inicio - 80), inicio)
         if m is None:
@@ -1386,10 +1390,14 @@ def _estender_cara_atras(doc, inicio: int) -> int:
         span = doc.char_span(w_inicio, m.end(1), alignment_mode="expand")
         if span is None or any(t.pos_ in _POS_NON_NOME for t in span):
             break
-        anterior = texto[:w_inicio].rstrip(" \t")
-        inicio_frase = anterior == "" or anterior[-1] in ".!?:;\n"
+        # O último carácter antes da palabra sen contar espazos nin tabuladores
+        # (o mesmo ca `texto[:w_inicio].rstrip(" \t")[-1:]`, sen copiar o texto).
+        k = w_inicio
+        while k > 0 and texto[k - 1] in " \t":
+            k -= 1
+        inicio_frase = k == 0 or texto[k - 1] in ".!?:;\n"
         noutra_entidade = any(
-            e.start_char <= w_inicio < e.end_char and e.label_ != "PER" for e in doc.ents
+            e.start_char <= w_inicio < e.end_char and e.label_ != "PER" for e in ents
         )
         if (inicio_frase or noutra_entidade) and baixa not in _NOMES_PIA:
             break
@@ -3608,6 +3616,17 @@ def _detectar(texto: str, celas: list | None = None):
             _ents_sen_persoas_multilinea(nlp, doc, anaco),
             key=lambda par: _MAPA_SPACY.get(par[0].label_) != "PERSOA",
         )
+        # spaCy reconstrúe `doc.text` e `doc.ents` enteiros en cada acceso: calculados
+        # unha vez por doc (o do anaco ou o dunha liña), non unha vez por entidade
+        # (cuadrático en documentos longos; perfil real de 351 páxinas, 16/11/2026).
+        datos_doc: dict = {}
+
+        def _datos_do_doc(d):
+            datos = datos_doc.get(id(d))
+            if datos is None or datos[0] is not d:
+                datos = datos_doc[id(d)] = (d, d.text, d.ents)
+            return datos
+
         for ent, desprazamento in ents_ordenadas:
             etiqueta = _MAPA_SPACY.get(ent.label_)
             if etiqueta is None:
@@ -3616,16 +3635,17 @@ def _detectar(texto: str, celas: list | None = None):
             if etiqueta == "PERSOA":
                 # `ent` pode vir dun doc dunha SOA LIÑA (desprazamento > 0):
                 # tódalas funcións traballan en coordenadas dese doc.
-                base = anaco[desprazamento:desprazamento + len(ent.doc.text)]
-                recortada = _recortar_entidade_persoa(_estender_entidade_persoa(ent), base)
+                _, texto_doc, ents_doc = _datos_do_doc(ent.doc)
+                base = anaco[desprazamento:desprazamento + len(texto_doc)]
+                recortada = _recortar_entidade_persoa(_estender_entidade_persoa(ent, texto_doc), base)
                 if recortada is None:
                     continue
                 inicio_local, fin_local, _ = recortada
-                sen_tratamentos = _recortar_tratamentos(base, ent.doc.text, inicio_local, fin_local)
+                sen_tratamentos = _recortar_tratamentos(base, texto_doc, inicio_local, fin_local)
                 if sen_tratamentos is None:
                     continue
                 inicio_local, fin_local = sen_tratamentos
-                inicio_local = _estender_cara_atras(ent.doc, inicio_local)
+                inicio_local = _estender_cara_atras(ent.doc, inicio_local, texto_doc, ents_doc)
                 inicio_local += desprazamento
                 fin_local += desprazamento
                 texto_ent = anaco[inicio_local:fin_local]
