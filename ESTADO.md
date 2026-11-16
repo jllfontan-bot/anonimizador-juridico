@@ -336,3 +336,17 @@ Pendente en Windows: reprobar co código integrado (copia en prueba-prog xa leva
 - Suite completa tras o aviso de dous rexistros: **1315 OK** (1 omitida). `.exe` reconstruído (`Anonimizador-Xuridico-Instalador-20261116-de262bb.exe`, sha256 e1ea7125…da83d), copiado ao portátil con hash igual e instalado en silencio.
 - No portátil: o lanzador usa `anonimizador.arranque_windows`; a pantalla inicial mostra o aviso «dous rexistros cifrados distintos» (hai un rexistro de proba en `%LOCALAPPDATA%\Anonimizador`) e crea o ficheiro de aviso en Documentos. Captura para o manual: `~/Documents/anonimizador-xuridico/capturas-manual/`.
 - Pendente: comparar os `posibles_fugas` do Reductor co Anonimizador (copia a `.md`) sobre os mesmos documentos (petición do usuario; só se comparaban tamaños e códigos).
+
+## Comparación de `posibles_fugas` Reductor vs Anonimizador (16/11/2026, portátil Windows)
+5 PDF pequenos (>30 KB) do Escritorio real (copiados; nada tocado), mesma máquina, rexistros de proba novos, borrados despois.
+| doc | Reductor `posibles_fugas` | Anonimizador (resultado web, risco alto) | códigos de persoa (R / A) | tamaño .md R / A |
+|---|---|---|---|---|
+| 01 | 1 | 1 | 11 / 11 | 3984 / 3840 |
+| 02 | 0 (sen liña) | 0 | 4 / 4 | 3084 / 2959 |
+| 03 | 1 | 1 | 7 / 7 | 18255 / 18111 |
+| 04 | 2 | 2 | 7 / 7 | 14422 / 14278 |
+| 05 | 1 | 1 | 10 / 10 | 4038 / 3894 |
+Coinciden os avisos (total 5), os códigos e o corpo. **Diferenza: o `.md` da copia do Anonimizador NON leva cabeceira** (nin `posibles_fugas`, nin `paginas`, nin `anonimizado`): 144 bytes menos en 4 de 5 docs (e 125 no doc02); `copia_md.xerar` só devolve o corpo e a cabeceira (`conversor._cabeceira`) escríbena só o Reductor.
+O aviso de fugas do Anonimizador vive só na páxina de resultado (`n_risco_alto`), así que quen lea o `.md` solto non o ve. Non é un fallo de detección; si unha laguna de deseño: se se quere paridade, engadir cabeceira ou liña `posibles_fugas` á copia (decide o usuario; non tocado).
+Detalle: a CLI do Reductor lanzada á man (fóra do lanzador) non atopa Tesseract (`TesseractNonInstalado`) se non se fixan `PATH` e `TESSDATA_PREFIX`; o lanzador real xa o fai. Tempos: Reductor 28 s, Anonimizador 45 s.
+Captura neutra para o manual (sen conta nova): Anonimizador lanzado con `LOCALAPPDATA`/Documentos de proba en `C:\Users\Public\Usuario`, porto 5051, só a ventá (`PrintWindow`): `capturas-manual/anonimizador-aviso-dous-rexistros-neutro-20261116.png` (a antiga co `C:\Users\admin` segue aí, sen borrar).
