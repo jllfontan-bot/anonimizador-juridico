@@ -88,7 +88,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Callable
 
-from . import aforro_ia, formatos, idioma, lectura, markdown_ia, pdf_estrutura
+from . import aforro_ia, etapas, formatos, idioma, lectura, markdown_ia, pdf_estrutura
 from .temporales import DirectorioTemporal
 from .arranque_windows import NOME_CARTAFOL, cartafol_documentos
 
@@ -350,6 +350,7 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         lido = LECTORES_EXTRA[sufixo](str(doc.ruta), **opcions_lector)
         corpo, avisos, ficheiros = (lido, [], []) if isinstance(lido, str) else (
             lido.markdown, list(lido.avisos), list(lido.ficheiros))
+        etapas.etapa("markdown")
         md = markdown_ia.xerar(None, corpo, aforro=opcions, xa_markdown=True, posprocesados=POSPROCESADOS)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
                            str(doc.nome), md.texto, None, avisos, csv=ficheiros, orixe=str(doc.nome),
@@ -362,6 +363,7 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
 
     if not anonimizar:
         # Un .md de entrada xa é Markdown: tal cal (`copia_md.xerar` escaparía os seus títulos).
+        etapas.etapa("markdown")
         md = markdown_ia.xerar(contexto, texto, aforro=opcions, xa_markdown=sufixo == ".md",
                                posprocesados=POSPROCESADOS)
         return _Convertido(doc.nome.parent, PurePosixPath(doc.nome.name).stem, sufixo_orixinal + ".md",
@@ -376,13 +378,15 @@ def _converter_documento(doc: _Documento, anonimizar: bool, rexistro, revisar=No
         revisado = revisar(str(doc.nome), texto, contexto, texto_anon, informe, substitucions)
         if revisado is not None:
             texto_anon, substitucions = revisado
+    etapas.etapa("markdown")
     md = _corpo_anonimizado(sufixo, contexto, texto_anon, substitucions, aforro)
     # En automático, as posibles fugas quedan marcadas no propio .md: se a
     # persoa non pulsa «Revisar», o ficheiro segue avisando (valoración R1).
     fugas = 0 if revisado is not None else _contar_fugas(informe)
     # O nome DESPOIS do contido, cos seus códigos (A17, ver `nome_ficheiro_anonimizado`).
-    nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
-    cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
+    with etapas.avisar(None):  # a detección dun nome de ficheiro é un intre: non volve a «detectando» na pantalla
+        nome_ficheiro = pipeline.nome_ficheiro_anonimizado(doc.nome.name, rexistro, informe["persoas"])
+        cartafol = pipeline._anonimizar_cartafoles_ruta(doc.nome.parent, rexistro, informe["persoas"])
     nome_visible = str(cartafol / nome_ficheiro)
     stem = PurePosixPath(nome_ficheiro).stem
     return _Convertido(cartafol, stem, ".anonimizado" + sufixo_orixinal + ".md", nome_visible, md.texto, paxinas,
@@ -595,6 +599,7 @@ def converter(
     revisar: Callable | None = None,
     csv_aparte: bool = True,
     progreso_paxina: Callable[[int, int], None] | None = None,
+    progreso_etapa: Callable[[str, int | None, int | None], None] | None = None,
 ) -> Resultado:
     """Converte `entrada` (ficheiro, cartafol ou .zip) a .md.
 
@@ -607,7 +612,10 @@ def converter(
       canda a entrada.
     Anonimizando, os nomes de cartafoles e ficheiros de saída tamén van
     anonimizados. `rexistro` é obrigatorio para anonimizar. `progreso`,
-    `cancelar` e `revisar`: ver o comezo do módulo.
+    `cancelar` e `revisar`: ver o comezo do módulo. `progreso_etapa(clave,
+    feito, total)`: a etapa do documento despois de ler as páxinas
+    (`etapas.ETAPAS`: detectar, agrupar, markdown, gardar...), como moito un
+    aviso por cada 1 % dentro dunha etapa; só informa, non cambia a saída.
 
     `csv_aparte` (por defecto si): as follas de máis de `follas.MAX_FILAS`
     filas van a un `.csv` canda o seu `.md` (no mesmo cartafol; a ruta sae
@@ -617,7 +625,30 @@ def converter(
     with DirectorioTemporal() as tmp_csv:  # os .csv viven aquí ata a fase de escritura
         return _converter(entrada, Path(tmp_csv), anonimizar, un_so_md, saida, rexistro, data, aforro,
                           caracteres_por_parte, progreso, cancelar, revisar, csv_aparte,
-                          progreso_paxina)
+                          progreso_paxina, progreso_etapa)
+
+
+class _AvisoEtapa:
+    """Pasa a `progreso_etapa` cada cambio de etapa e, dentro dunha etapa,
+    como moito un aviso por cada 1 % (o motor avisa unha vez por persoa ou
+    por anaco). Chámase no medio do motor: un erro do aviso non o para."""
+
+    def __init__(self, destino):
+        self.destino = destino
+        self._ultimo = None
+
+    def reiniciar(self) -> None:
+        self._ultimo = None
+
+    def __call__(self, clave: str, feito: int | None = None, total: int | None = None) -> None:
+        paso = (clave, (100 * (feito or 0)) // total if total else None)
+        if self.destino is None or paso == self._ultimo:
+            return
+        self._ultimo = paso
+        try:
+            self.destino(clave, feito, total)
+        except Exception:  # noqa: BLE001 -- o indicador nunca pode tumbar a conversión
+            pass
 
 
 _ERROS_SEGUIDOS_DE_ESCRITURA = 3  # tres documentos seguidos sen poder gardarse: a saída non vale, para o lote
@@ -691,7 +722,8 @@ class _Escritor:
             if self.provisional:
                 from . import pipeline
 
-                nome_entrada = pipeline.nome_ficheiro_anonimizado(self.entrada.name, self.rexistro)
+                with etapas.avisar(None):
+                    nome_entrada = pipeline.nome_ficheiro_anonimizado(self.entrada.name, self.rexistro)
             self.paquete.nome_entrada = nome_entrada
             self._base = PurePosixPath(nome_entrada).stem if self.e_zip else nome_entrada
         return self._base
@@ -699,6 +731,7 @@ class _Escritor:
     def gardar(self, c: _Convertido) -> None:
         """Escribe o documento `c`. Se falla, non queda rexistrado nin deixa .csv á parte."""
         resultado = self.resultado
+        etapas.etapa("gardar")
         self._preparar()
         antes_csv = len(resultado.csv)
         try:
@@ -760,12 +793,14 @@ class _Escritor:
 
     def _pechar_unico(self, incompleto: bool) -> None:
         resultado, paquete = self.resultado, self.paquete
+        etapas.etapa("gardar")
         self._preparar()
         base = self._base_definitiva()
         ruta = self.destino / (base + (".incompleto" if incompleto else "") + self._cola_unica())
         omitidos = resultado.omitidos
         if self.anonimizar:
-            omitidos = [(_nome_omitido_visible(n, self.rexistro), m) for n, m in omitidos]
+            with etapas.avisar(None):
+                omitidos = [(_nome_omitido_visible(n, self.rexistro), m) for n, m in omitidos]
         convertidos = self.convertidos
         cabeceira = _cabeceira(paquete.nome_entrada, self.anonimizar, self.data, ficheiros=len(convertidos),
                                revisado=bool(convertidos) and all(c.revisado for c in convertidos),
@@ -852,7 +887,7 @@ def _sen_usar(ruta_con, so_provisional: bool = True) -> Path:
 
 
 def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, aforro, caracteres_por_parte,
-               progreso, cancelar, revisar, csv_aparte, progreso_paxina=None) -> Resultado:
+               progreso, cancelar, revisar, csv_aparte, progreso_paxina=None, progreso_etapa=None) -> Resultado:
     entrada = Path(entrada)
     if anonimizar and rexistro is None:
         raise ValueError("Para anonimizar fai falta o rexistro de correspondencias")
@@ -869,7 +904,8 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
     escritor = _Escritor(entrada, e_zip, anonimizar, un_so_md, saida, rexistro, data, caracteres_por_parte,
                          resultado, paquete)
 
-    with DirectorioTemporal() as tmp:
+    aviso_etapa = _AvisoEtapa(progreso_etapa)
+    with DirectorioTemporal() as tmp, etapas.avisar(aviso_etapa if progreso_etapa is not None else None):
         documentos, resultado.omitidos = _documentos(entrada, Path(tmp), anonimizar)
         try:
             erros_de_escritura = 0
@@ -878,6 +914,7 @@ def _converter(entrada, tmp_csv, anonimizar, un_so_md, saida, rexistro, data, af
                     raise Cancelado
                 if progreso is not None:
                     progreso(i, len(documentos), str(doc.nome))
+                aviso_etapa.reiniciar()
                 dir_csv = None
                 if csv_aparte and not anonimizar:
                     dir_csv = tmp_csv / str(i)

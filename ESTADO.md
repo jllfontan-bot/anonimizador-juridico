@@ -222,6 +222,42 @@ Queda:
 - B7: os tracebacks de documentos que fallan van ao `anonimizador.log` (texto plano); os vistos levan rutas temporais neutras, pero un PermissionError ao escribir leva a ruta de saída (cartafol real + nome xa anonimizado), coma cos documentos soltos.
 - Non tratado: nomes reservados de Windows (`CON`, `NUL`...) dentro do zip (non é fuga: só fallaría ao descomprimir en Windows).
 
+## Progreso e rendemento da fase final (rama `progreso-fase-final`, 15-16/11/2026)
+
+Caso real (Windows, 4 núcleos): PDF de 351 páxinas anonimizado, ~11 min (4-5 min despois do contador de páxinas, sen
+indicador); perfil real do usuario (847 s con perfilador): copia_md/`find_tables` 32 %, lectura e OCR 37 %, NER 26 %.
+
+Feito (un commit por cambio; cada optimización con test de equivalencia coa versión anterior e saídas de referencia
+byte a byte idénticas no Anonimizador, incluída a súa copia .md, e no Reductor; mesmos códigos de persoa):
+- Indicador (`etapas.py`, `converter(progreso_etapa=...)`): pantalla (es/gl) e CLI (stderr) din a etapa despois das
+  páxinas: detectar (avance por anacos), axustar, agrupar (avance por mención), codigos, riscos, markdown, gardar.
+- `resolution._emparellar`: distancia antes da busca do ANEXO (era cúbico).
+- `copia_md`: non chama a `find_tables` en páxinas sen `get_drawings()` (coa estratexia «lines» non pode haber
+  táboa); só con PyMuPDF 1.26/1.28 (lido o código; os paquetes levan 1.26.0) e sen `pymupdf.layout`.
+- `ner._detectar`: `doc.text`/`doc.ents` unha vez por doc (spaCy reconstrúeos en cada acceso; era cuadrático).
+- CLI (`consola.saida_utf8`, en `cli_conversor` e `cli`): stdout/stderr en UTF-8 con `errors=replace` (en Windows, con
+  saída redirixida en cp1252, «⚠» facía saír cun erro despois de escribir o .md).
+
+Medicións (Mac, PDF sintéticos con texto inventado, anonimizando, s):
+
+| documento | NER | `resolution.agrupar` | copia_md | total: inicio → agora |
+|---|---|---|---|---|
+| escrito 50 páx.  | 37 → 7    | ~51 → 0,1  | 3 → 0,03 | 104 → 17 |
+| escrito 100 páx. | 102 → 16  | ~416 → 0,3 | 6 → 0,05 | 557 → 35 |
+| táboas 100 páx. (filetes e táboas) | 104 → 14 | 0,8 | 4,3 → 2,4 | 123 → 32 |
+
+- Sen tocar (só documentado): o OCR (Tesseract, proceso aparte) e a lectura de PyMuPDF; `find_tables` de
+  `taboas_pdf` na lectura (camiño de detección; só nas páxinas con pista de cabeceira); `mosaic.analizar` (~linear,
+  7-11 s/100 páx.); spaCy (linear).
+- Planos: sen texto vectorizado, A1 = A4. Con rótulos vectorizados, o OCR das zonas de trazos densos a 300 ppp crece
+  coa área (A4 2,5 s/páx. e ~315 MB; A1 8,6 s/páx. e ~1 GB); vai na lectura. Un tope de ppp cambiaría o texto lido: non se
+  puxo. Paralelizar o OCR (pool de procesos): non; risco alto en Windows (spawn, pythonw, MSIX) e non é o que pesa despois.
+- Sen probar en Windows nin na xanela real: tempos do Mac; no PDF real o aforro de copia_md depende de cantas páxinas
+  non teñen ningún debuxo (filetes e logotipos vectoriais contan coma debuxo).
+- Tests novos: `test_progreso_etapas`, `test_resolucion_emparellar`, `test_copia_md_sen_debuxos`, `test_ner_texto_do_doc`,
+  `test_consola`. Suite completa (16/11/2026): 1264 tests OK (1 omitido), en 6 min (antes ~24 min: a propia suite
+  vaise máis rápida co NER).
+
 ## Ramas vivas
 
 - `follas-csv-aparte`: traballo en curso.

@@ -12,7 +12,7 @@ import os
 import sys
 from pathlib import Path
 
-from . import copia_md, idioma
+from . import consola, copia_md, idioma
 from .pipeline import ZipRexeitado, anonimizar_e_gardar, gardar_zip_preparado, preparar_zip, ruta_saida_por_defecto
 from .registry import RexistroCorrespondencias, substituir_con_reintentos
 
@@ -34,6 +34,7 @@ def _mesmo_ficheiro(a: str, b: str) -> bool:
 
 
 def main():
+    consola.saida_utf8()  # Windows: a saída redirixida usa cp1252 e non todo cabe nela
     parser = argparse.ArgumentParser(prog="anonimizador")
     sub = parser.add_subparsers(dest="comando", required=True)
 
