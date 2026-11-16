@@ -538,10 +538,42 @@ class _Desprazamentos:
         return pos + (self.acumulado[k - 1] if k else 0)
 
 
+def _pode_ter_taboas(pagina) -> bool:
+    """`find_tables` (estratexia «lines», a por defecto) constrúe as táboas só
+    coas liñas e rectángulos de `pagina.get_drawings()`: sen ningún debuxo non
+    hai aristas, nin cruces, nin celas, e devolve sempre unha lista baleira
+    (`_VERSIONS_COMPROBADAS`; noutra versión búscase sempre). A excepción é o analizador de
+    maquetación opcional (`pymupdf.layout`, PyMuPDF >= 1.27), que pode atopar
+    táboas sen liñas: se está cargado, sempre se busca. Saltar as páxinas sen
+    debuxos aforra a parte cara de `find_tables` (os caracteres da páxina):
+    0,77 s/páxina nun PDF real de 351 páxinas (16/11/2026)."""
+    import pymupdf  # `fitz` non reexporta `_get_layout`
+
+    if _version_pymupdf(pymupdf) not in _VERSIONS_COMPROBADAS:
+        return True  # outra versión: non sabemos se segue así, búscase sempre
+    if getattr(pymupdf, "_get_layout", None) is not None:
+        return True
+    return bool(pagina.get_drawings())
+
+
+# Lido o código de `find_tables` en 1.26.0 (a dos paquetes) e 1.28.2: as aristas
+# só saen de `get_drawings()` (ou de `add_lines`/`add_boxes`, que non se usan).
+_VERSIONS_COMPROBADAS = {(1, 26), (1, 28)}
+
+
+def _version_pymupdf(pymupdf) -> tuple:
+    try:
+        return tuple(int(x) for x in str(pymupdf.VersionBind).split(".")[:2])
+    except (AttributeError, ValueError):
+        return (0, 0)
+
+
 def _paxina_pdf(pagina, info, anon: str, locais: list | None) -> str:
     if pagina is None or locais is None or pagina.rotation:
         return _limpar_bloque(anon)
     try:
+        if not _pode_ter_taboas(pagina):
+            return _limpar_bloque(anon)  # o mesmo ca con `taboas` baleiro (abaixo)
         taboas = pagina.find_tables().tables
     except Exception:  # noqa: BLE001 -- unha táboa rara non pode tumbar a copia
         return _limpar_bloque(anon)
