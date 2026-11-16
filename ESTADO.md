@@ -319,3 +319,7 @@ despois de escribir o .md); arranxo pedido (stdout/stderr a utf-8 con errors=rep
 ## Medición final de `progreso-fase-final` (ac49dc9) co doc real de 351 páxinas en Windows (16/11/2026)
 Anonimizando, mesmo PDF e mesma máquina: **483 s** (antes 738 s: −35 %). `.md` de 22960 liñas **idéntico ao anterior agás a data da cabeceira** (liña 7, `convertido: 2026-11-15` → `2026-11-16`); 121 persoas (48 marcadas), igual.
 O hash SHA-256 difire só por esa data. Probado só neste documento; a suite do Mac (1264 OK) e os tests de equivalencia da rama cubren o resto. Rama NON integrada (decide o usuario).
+
+## Suite sobre motor-md-unico con progreso-fase-final integrado (16/11/2026)
+`motor-md-unico` 442b29c (escritura incremental + `.zip` en cartafoles + progreso-fase-final): **1302 tests, OK (skipped=1)**, 6 min. Conflicto resolto en `cli.py` (imports: `consola, copia_md, idioma` + `ZipRexeitado, gardar_zip_preparado, preparar_zip`).
+Pendente en Windows: reprobar co código integrado (copia en prueba-prog xa leva progreso a44329+4 commits; prueba-zip leva a rama .zip). Fase B e decisións do usuario seguen abertas (ver RETOMA-20261115.md).
